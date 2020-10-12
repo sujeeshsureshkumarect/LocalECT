@@ -81,7 +81,7 @@
                                  <hr />
                                   <div class="alert alert-info" role="alert" style="font-size: x-large" runat="server" id="alertsearch" visible="false">
 
-                            <h2>Search Result - <asp:Label runat="server" ID="lbl_Count" Font-Size="16px" ClientIDMode="Static" Text="27 entries found"></asp:Label></h2>
+                            <h2>Search Result - <asp:Label runat="server" ID="lbl_Count" Font-Size="16px" ClientIDMode="Static"></asp:Label></h2>
                             
                         </div>
                                  <div id="divResult" runat="server" class="table-responsive">
