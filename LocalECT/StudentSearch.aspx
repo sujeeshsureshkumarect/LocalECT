@@ -91,10 +91,10 @@
                                                  <thead>
                                                      <tr class='headings'>
                                                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >ID</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >Name</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >Major</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >Status</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">ID</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Name</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Major</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
                                                  </thead>
@@ -103,8 +103,8 @@
                                              <tr>
                                                  <td align='center'><%# Container.ItemIndex+1 %></td>
                                                  <td><%#Eval("lngStudentNumber")%></td>
-                                                 <td ><%#Eval("strLastDescEn")%></td>
-                                                 <td ><%#Eval("strCaption")%></td>
+                                                 <td><%#Eval("strLastDescEn")%></td>
+                                                 <td><%#Eval("strCaption")%></td>
                                                  <td><%#Eval("strReasonDesc")%></td>
                                                  <td>
                                                      <div class="btn-group">
@@ -119,7 +119,7 @@
                                                              <a class="dropdown-item" href="#">Action Name 5</a>
                                                          </div>
                                                      </div>
-                                                 </td>                               
+                                                 </td>
                                              </tr>
                                          </ItemTemplate>
                                          <FooterTemplate>
@@ -128,7 +128,7 @@
                                      </asp:Repeater>
                                  </div>
 
-                                 </div>
+                             </div>
                             
                         </div>
                     </div>
