@@ -3632,8 +3632,8 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
 .btn-success {
     /* background: #26B99A;
     border: 1px solid #169F85*/
-    background: #2a3f54;
-    border: 1px solid #2a3f54;
+    background: #3f658c;
+    border: 1px solid #3f658c;
 }
 
     .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
@@ -5694,9 +5694,9 @@ ul.verticle_bars {
 }
 
 .alert-info {
-    color: #E9EDEF;
-    background-color: rgba(52,152,219,0.88);
-    border-color: rgba(52,152,219,0.88)
+    color: #fff;
+    background-color: #3f658c;
+    border-color: #3f658c
 }
 
 .alert-warning {

@@ -23,8 +23,16 @@ namespace LocalECT
                 Generate_Menu();
             }
         }
+
         public void Generate_Menu()
         {
+            int RoleId = 0;
+
+            if (Session["CurrentRole"] != null)
+            {
+                RoleId = (int)Session["CurrentRole"];
+            }
+
             var Menu = new DAL.DAL();
             Menus = Menu.GetMenuData();
             DataView view = new DataView(Menus);
@@ -47,13 +55,13 @@ namespace LocalECT
                         // DataRow[] rows = Menus.Select("ParentID=" + ID);
                         if (rows.Length > 0)
                         {
-
                             StringBuilder sb = new StringBuilder();
                             sb.Append("<ul class='nav child_menu'>");
                             foreach (var item in rows)
                             {
                                 string parentId = item["ObjectID"].ToString();
                                 string parentTitle = item["DisplayObjectName"].ToString();
+
 
                                 DataRow[] parentRow = Menus.Select("ParentID=" + parentId);
 
@@ -64,7 +72,9 @@ namespace LocalECT
                                 }
                                 else
                                 {
-                                    sb.Append("<li><a href='" + item["sURL"] + "'>" + item["DisplayObjectName"] + "</a>");
+                                    string strUrl = item["sURL"].ToString().Replace(".aspx", "");
+                                    //sb.Append("<li><a href='" + item["sURL"] + "'>" + item["DisplayObjectName"] + "</a>"); old with aspx
+                                    sb.Append("<li><a href='" + strUrl + "'>" + item["DisplayObjectName"] + "</a>");
                                     //sb.Append("</li>");
                                 }
                                 sb = CreateChild(sb, parentId, parentTitle, parentRow);
@@ -97,7 +107,9 @@ namespace LocalECT
                     }
                     else
                     {
-                        sb.Append("<li  class='sub_menu'><a href='" + item["sURL"] + "'>" + item["DisplayObjectName"] + "</a>");
+                        //sb.Append("<li  class='sub_menu'><a href='" + item["sURL"] + "'>" + item["DisplayObjectName"] + "</a>"); old with aspx
+                        string strUrl = item["sURL"].ToString().Replace(".aspx", "");
+                        sb.Append("<li  class='sub_menu'><a href='" + strUrl + "'>" + item["DisplayObjectName"] + "</a>");
                         // sb.Append("</li>");
                     }
                     CreateChild(sb, childId, childTitle, childRow);
@@ -107,7 +119,6 @@ namespace LocalECT
             }
             return sb;
         }
-
         protected void lnk_Logout_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login");
