@@ -16,13 +16,22 @@ namespace LocalECT
     {
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
         DataTable Menus = new DataTable();
+        InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.ECTNew;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["CurrentRole"] != null)
             {
-                getcurrentterm();
-                Generate_Menu();
+                if (!IsPostBack)
+                {
+                    getcurrentterm();
+                    Generate_Menu();
+                }
             }
+            else
+            {
+                Session.RemoveAll();
+                Response.Redirect("Login.aspx");
+            }        
         }
 
         public void getcurrentterm()
@@ -34,8 +43,10 @@ namespace LocalECT
 
             string sYear = iCYear.ToString() + " / " + (iCYear + 1).ToString();
             string sSem = LibraryMOD.GetSemesterString(iCSem);
-            lbl_term.Text = sYear + " " + sSem;
+            lbl_term.Text = sYear + " " + sSem;            
+            getprofilepic();
         }
+
         public void Generate_Menu()
         {
             int RoleId = 0;
@@ -139,7 +150,21 @@ namespace LocalECT
         protected void lnk_Logout_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
-            Response.Redirect("Login");
+            Response.Redirect("Login.aspx");
+        }
+
+        public void getprofilepic()
+        {
+            Connection_StringCLS connstr = new Connection_StringCLS(Campus);
+            string employeeid = Session["EmployeeID"].ToString();
+            var services = new DAL.DAL();
+            DataTable dtEmployeeProfile = services.GetEmployeeProfilePic(employeeid, connstr.Conn_string);
+            if (dtEmployeeProfile.Rows.Count > 0)
+            {
+                Session["ProfilePIc"] = dtEmployeeProfile.Rows[0]["PIC"].ToString();
+                lblUser.Text = dtEmployeeProfile.Rows[0]["Name"].ToString();
+                //lblUser1.Text = dtEmployeeProfile.Rows[0]["Name"].ToString();
+            }
         }
     }
 }
