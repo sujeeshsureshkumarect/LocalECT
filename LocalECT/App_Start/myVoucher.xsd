@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="myVoucher" targetNamespace="http://tempuri.org/myVoucher.xsd" xmlns:mstns="http://tempuri.org/myVoucher.xsd" xmlns="http://tempuri.org/myVoucher.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="myVoucher" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="myVoucher" msprop:Generator_DataSetName="myVoucher">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tblVoucher" msprop:Generator_UserTableName="tblVoucher" msprop:Generator_RowDeletedName="tblVoucherRowDeleted" msprop:Generator_RowChangedName="tblVoucherRowChanged" msprop:Generator_RowClassName="tblVoucherRow" msprop:Generator_RowChangingName="tblVoucherRowChanging" msprop:Generator_RowEvArgName="tblVoucherRowChangeEvent" msprop:Generator_RowEvHandlerName="tblVoucherRowChangeEventHandler" msprop:Generator_TableClassName="tblVoucherDataTable" msprop:Generator_TableVarName="tabletblVoucher" msprop:Generator_RowDeletingName="tblVoucherRowDeleting" msprop:Generator_TablePropName="tblVoucher">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_UserColumnName="iSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="sVoucher" msprop:Generator_UserColumnName="sVoucher" msprop:Generator_ColumnPropNameInRow="sVoucher" msprop:Generator_ColumnVarNameInTable="columnsVoucher" msprop:Generator_ColumnPropNameInTable="sVoucherColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sVoucherDate" msprop:Generator_UserColumnName="sVoucherDate" msprop:Generator_ColumnPropNameInRow="sVoucherDate" msprop:Generator_ColumnVarNameInTable="columnsVoucherDate" msprop:Generator_ColumnPropNameInTable="sVoucherDateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sAccount" msprop:Generator_UserColumnName="sAccount" msprop:Generator_ColumnPropNameInRow="sAccount" msprop:Generator_ColumnVarNameInTable="columnsAccount" msprop:Generator_ColumnPropNameInTable="sAccountColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sName" msprop:Generator_UserColumnName="sName" msprop:Generator_ColumnPropNameInRow="sName" msprop:Generator_ColumnVarNameInTable="columnsName" msprop:Generator_ColumnPropNameInTable="sNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sID" msprop:Generator_UserColumnName="sID" msprop:Generator_ColumnPropNameInRow="sID" msprop:Generator_ColumnVarNameInTable="columnsID" msprop:Generator_ColumnPropNameInTable="sIDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="dAmount" msprop:Generator_UserColumnName="dAmount" msprop:Generator_ColumnPropNameInRow="dAmount" msprop:Generator_ColumnVarNameInTable="columndAmount" msprop:Generator_ColumnPropNameInTable="dAmountColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="iWay" msprop:Generator_UserColumnName="iWay" msprop:Generator_ColumnPropNameInRow="iWay" msprop:Generator_ColumnVarNameInTable="columniWay" msprop:Generator_ColumnPropNameInTable="iWayColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="sWay" msprop:Generator_UserColumnName="sWay" msprop:Generator_ColumnPropNameInRow="sWay" msprop:Generator_ColumnVarNameInTable="columnsWay" msprop:Generator_ColumnPropNameInTable="sWayColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCheque" msprop:Generator_UserColumnName="sCheque" msprop:Generator_ColumnPropNameInRow="sCheque" msprop:Generator_ColumnVarNameInTable="columnsCheque" msprop:Generator_ColumnPropNameInTable="sChequeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sDueDate" msprop:Generator_UserColumnName="sDueDate" msprop:Generator_ColumnPropNameInRow="sDueDate" msprop:Generator_ColumnVarNameInTable="columnsDueDate" msprop:Generator_ColumnPropNameInTable="sDueDateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sBank" msprop:Generator_UserColumnName="sBank" msprop:Generator_ColumnPropNameInRow="sBank" msprop:Generator_ColumnVarNameInTable="columnsBank" msprop:Generator_ColumnPropNameInTable="sBankColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sRemark" msprop:Generator_UserColumnName="sRemark" msprop:Generator_ColumnPropNameInRow="sRemark" msprop:Generator_ColumnVarNameInTable="columnsRemark" msprop:Generator_ColumnPropNameInTable="sRemarkColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCash" msprop:Generator_UserColumnName="sCash" msprop:Generator_ColumnPropNameInRow="sCash" msprop:Generator_ColumnVarNameInTable="columnsCash" msprop:Generator_ColumnPropNameInTable="sCashColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sUser" msprop:Generator_UserColumnName="sUser" msprop:Generator_ColumnPropNameInRow="sUser" msprop:Generator_ColumnVarNameInTable="columnsUser" msprop:Generator_ColumnPropNameInTable="sUserColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:tblVoucher" />
+      <xs:field xpath="mstns:iSerial" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

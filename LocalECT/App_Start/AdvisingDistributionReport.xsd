@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AdvisingDistributionReport" targetNamespace="http://tempuri.org/AdvisingDistributionReport.xsd" xmlns:mstns="http://tempuri.org/AdvisingDistributionReport.xsd" xmlns="http://tempuri.org/AdvisingDistributionReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AdvisingDistributionReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="AdvisingDistributionReport" msprop:Generator_UserDSName="AdvisingDistributionReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AdvisingDistribution" msprop:Generator_TableClassName="AdvisingDistributionDataTable" msprop:Generator_TableVarName="tableAdvisingDistribution" msprop:Generator_RowChangedName="AdvisingDistributionRowChanged" msprop:Generator_TablePropName="AdvisingDistribution" msprop:Generator_RowDeletingName="AdvisingDistributionRowDeleting" msprop:Generator_RowChangingName="AdvisingDistributionRowChanging" msprop:Generator_RowEvHandlerName="AdvisingDistributionRowChangeEventHandler" msprop:Generator_RowDeletedName="AdvisingDistributionRowDeleted" msprop:Generator_RowClassName="AdvisingDistributionRow" msprop:Generator_UserTableName="AdvisingDistribution" msprop:Generator_RowEvArgName="AdvisingDistributionRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_UserColumnName="StudentID" type="xs:string" minOccurs="0" />
+              <xs:element name="Major" msprop:Generator_ColumnVarNameInTable="columnMajor" msprop:Generator_ColumnPropNameInRow="Major" msprop:Generator_ColumnPropNameInTable="MajorColumn" msprop:Generator_UserColumnName="Major" type="xs:string" minOccurs="0" />
+              <xs:element name="AdvisingType" msprop:Generator_ColumnVarNameInTable="columnAdvisingType" msprop:Generator_ColumnPropNameInRow="AdvisingType" msprop:Generator_ColumnPropNameInTable="AdvisingTypeColumn" msprop:Generator_UserColumnName="AdvisingType" type="xs:string" minOccurs="0" />
+              <xs:element name="sAdvisingDept" msprop:Generator_ColumnVarNameInTable="columnsAdvisingDept" msprop:Generator_ColumnPropNameInRow="sAdvisingDept" msprop:Generator_ColumnPropNameInTable="sAdvisingDeptColumn" msprop:Generator_UserColumnName="sAdvisingDept" type="xs:string" minOccurs="0" />
+              <xs:element name="cWeight" msprop:Generator_ColumnVarNameInTable="columncWeight" msprop:Generator_ColumnPropNameInRow="cWeight" msprop:Generator_ColumnPropNameInTable="cWeightColumn" msprop:Generator_UserColumnName="cWeight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="iOrder" msprop:Generator_ColumnVarNameInTable="columniOrder" msprop:Generator_ColumnPropNameInRow="iOrder" msprop:Generator_ColumnPropNameInTable="iOrderColumn" msprop:Generator_UserColumnName="iOrder" type="xs:int" minOccurs="0" />
+              <xs:element name="intLecturer" msprop:Generator_ColumnVarNameInTable="columnintLecturer" msprop:Generator_ColumnPropNameInRow="intLecturer" msprop:Generator_ColumnPropNameInTable="intLecturerColumn" msprop:Generator_UserColumnName="intLecturer" type="xs:string" minOccurs="0" />
+              <xs:element name="Advisor" msprop:Generator_ColumnVarNameInTable="columnAdvisor" msprop:Generator_ColumnPropNameInRow="Advisor" msprop:Generator_ColumnPropNameInTable="AdvisorColumn" msprop:Generator_UserColumnName="Advisor" type="xs:string" minOccurs="0" />
+              <xs:element name="AdvisorDepartment" msprop:Generator_ColumnVarNameInTable="columnAdvisorDepartment" msprop:Generator_ColumnPropNameInRow="AdvisorDepartment" msprop:Generator_ColumnPropNameInTable="AdvisorDepartmentColumn" msprop:Generator_UserColumnName="AdvisorDepartment" type="xs:string" minOccurs="0" />
+              <xs:element name="LecturerCampus" msprop:Generator_ColumnVarNameInTable="columnLecturerCampus" msprop:Generator_ColumnPropNameInRow="LecturerCampus" msprop:Generator_ColumnPropNameInTable="LecturerCampusColumn" msprop:Generator_UserColumnName="LecturerCampus" type="xs:string" minOccurs="0" />
+              <xs:element name="StudentName" msprop:Generator_ColumnVarNameInTable="columnStudentName" msprop:Generator_ColumnPropNameInRow="StudentName" msprop:Generator_ColumnPropNameInTable="StudentNameColumn" msprop:Generator_UserColumnName="StudentName" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="CGPA" msprop:Generator_ColumnVarNameInTable="columnCGPA" msprop:Generator_ColumnPropNameInRow="CGPA" msprop:Generator_ColumnPropNameInTable="CGPAColumn" msprop:Generator_UserColumnName="CGPA" type="xs:string" minOccurs="0" />
+              <xs:element name="Hours" msprop:Generator_ColumnVarNameInTable="columnHours" msprop:Generator_ColumnPropNameInRow="Hours" msprop:Generator_ColumnPropNameInTable="HoursColumn" msprop:Generator_UserColumnName="Hours" type="xs:string" minOccurs="0" />
+              <xs:element name="Points" msprop:Generator_ColumnVarNameInTable="columnPoints" msprop:Generator_ColumnPropNameInRow="Points" msprop:Generator_ColumnPropNameInTable="PointsColumn" msprop:Generator_UserColumnName="Points" type="xs:string" minOccurs="0" />
+              <xs:element name="LTR" msprop:Generator_ColumnVarNameInTable="columnLTR" msprop:Generator_ColumnPropNameInRow="LTR" msprop:Generator_ColumnPropNameInTable="LTRColumn" msprop:Generator_UserColumnName="LTR" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

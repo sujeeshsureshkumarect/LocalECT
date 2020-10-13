@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AdvisingList" targetNamespace="http://tempuri.org/AdvisingList.xsd" xmlns:mstns="http://tempuri.org/AdvisingList.xsd" xmlns="http://tempuri.org/AdvisingList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AdvisingList" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="AdvisingList" msprop:Generator_UserDSName="AdvisingList">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AdvisingList" msprop:Generator_TableClassName="AdvisingListDataTable" msprop:Generator_TableVarName="tableAdvisingList" msprop:Generator_TablePropName="_AdvisingList" msprop:Generator_RowDeletingName="AdvisingListRowDeleting" msprop:Generator_RowChangingName="AdvisingListRowChanging" msprop:Generator_RowEvHandlerName="AdvisingListRowChangeEventHandler" msprop:Generator_RowDeletedName="AdvisingListRowDeleted" msprop:Generator_UserTableName="AdvisingList" msprop:Generator_RowChangedName="AdvisingListRowChanged" msprop:Generator_RowEvArgName="AdvisingListRowChangeEvent" msprop:Generator_RowClassName="AdvisingListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_UserColumnName="StudentID" type="xs:string" minOccurs="0" />
+              <xs:element name="StudentName" msprop:Generator_ColumnVarNameInTable="columnStudentName" msprop:Generator_ColumnPropNameInRow="StudentName" msprop:Generator_ColumnPropNameInTable="StudentNameColumn" msprop:Generator_UserColumnName="StudentName" type="xs:string" minOccurs="0" />
+              <xs:element name="Major" msprop:Generator_ColumnVarNameInTable="columnMajor" msprop:Generator_ColumnPropNameInRow="Major" msprop:Generator_ColumnPropNameInTable="MajorColumn" msprop:Generator_UserColumnName="Major" type="xs:string" minOccurs="0" />
+              <xs:element name="AdvisingType" msprop:Generator_ColumnVarNameInTable="columnAdvisingType" msprop:Generator_ColumnPropNameInRow="AdvisingType" msprop:Generator_ColumnPropNameInTable="AdvisingTypeColumn" msprop:Generator_UserColumnName="AdvisingType" type="xs:string" minOccurs="0" />
+              <xs:element name="CGPA" msprop:Generator_ColumnVarNameInTable="columnCGPA" msprop:Generator_ColumnPropNameInRow="CGPA" msprop:Generator_ColumnPropNameInTable="CGPAColumn" msprop:Generator_UserColumnName="CGPA" type="xs:string" default=" " minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="sAdvisingDept" msprop:Generator_ColumnVarNameInTable="columnsAdvisingDept" msprop:Generator_ColumnPropNameInRow="sAdvisingDept" msprop:Generator_ColumnPropNameInTable="sAdvisingDeptColumn" msprop:Generator_UserColumnName="sAdvisingDept" type="xs:string" default="-" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

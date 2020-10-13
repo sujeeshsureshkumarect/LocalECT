@@ -46,13 +46,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ECTGlobalDll">
+      <HintPath>..\..\..\Support Files\Old Version\ECTLocal_Sujeesh\ECTLocal_Sujeesh\Bin\ECTGlobalDll.dll</HintPath>
+    </Reference>
+    <Reference Include="HRLibrary">
+      <HintPath>..\..\..\Support Files\Old Version\ECTLocal_Sujeesh\ECTLocal_Sujeesh\Bin\HRLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\..\..\Support Files\Old Version\ECTLocal_Sujeesh\ECTLocal_Sujeesh\Bin\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -108,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -5826,6 +5846,351 @@
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="App_Start\ACCBalance.xsd" />
+    <Content Include="App_Start\ACCBalance.xss">
+      <DependentUpon>ACCBalance.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ACCBalanceTracking.xsd" />
+    <Content Include="App_Start\ACCBalanceTracking.xss">
+      <DependentUpon>ACCBalanceTracking.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ACCDailyReceipt.xsd" />
+    <Content Include="App_Start\ACCDailyReceipt.xss">
+      <DependentUpon>ACCDailyReceipt.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ACCDiscount.xsd" />
+    <Content Include="App_Start\ACCDiscount.xss">
+      <DependentUpon>ACCDiscount.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ACCFees.xsd" />
+    <Content Include="App_Start\ACCFees.xss">
+      <DependentUpon>ACCFees.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ACMSAttendance.xsd" />
+    <Content Include="App_Start\ACMSAttendance.xss">
+      <DependentUpon>ACMSAttendance.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AdjDiscountsDs.xsd" />
+    <Content Include="App_Start\AdjDiscountsDs.xss">
+      <DependentUpon>AdjDiscountsDs.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AdjFeesDs.xsd" />
+    <Content Include="App_Start\AdjFeesDs.xss">
+      <DependentUpon>AdjFeesDs.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Admission.xsd" />
+    <Content Include="App_Start\Admission.xss">
+      <DependentUpon>Admission.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AdvisingDistributionReport.xsd" />
+    <Content Include="App_Start\AdvisingDistributionReport.xss">
+      <DependentUpon>AdvisingDistributionReport.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AdvisingList.xsd" />
+    <Content Include="App_Start\AdvisingList.xss">
+      <DependentUpon>AdvisingList.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AdvisorSuggestion.xsd" />
+    <Content Include="App_Start\AdvisorSuggestion.xss">
+      <DependentUpon>AdvisorSuggestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AllStudentsAtRisk.xsd" />
+    <Content Include="App_Start\AllStudentsAtRisk.xss">
+      <DependentUpon>AllStudentsAtRisk.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AllStudentsAtRiskWithCourses.xsd" />
+    <Content Include="App_Start\AllStudentsAtRiskWithCourses.xss">
+      <DependentUpon>AllStudentsAtRiskWithCourses.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AllStudentsAtRiskWithExtraActivities.xsd" />
+    <Content Include="App_Start\AllStudentsAtRiskWithExtraActivities.xss">
+      <DependentUpon>AllStudentsAtRiskWithExtraActivities.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\All_Courses.xsd" />
+    <Content Include="App_Start\All_Courses.xss">
+      <DependentUpon>All_Courses.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ApplicantsTracker.xsd" />
+    <Content Include="App_Start\ApplicantsTracker.xss">
+      <DependentUpon>ApplicantsTracker.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\AttReport.xsd" />
+    <Content Include="App_Start\AttReport.xss">
+      <DependentUpon>AttReport.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Att_Summary.xsd" />
+    <Content Include="App_Start\Att_Summary.xss">
+      <DependentUpon>Att_Summary.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Start\AVGs.xsd.exclude" />
+    <Content Include="App_Start\AVGs.xss.exclude" />
+    <None Include="App_Start\CalculatedCRSDs.xsd" />
+    <Content Include="App_Start\CalculatedCRSDs.xss">
+      <DependentUpon>CalculatedCRSDs.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CGPADemo.xsd" />
+    <Content Include="App_Start\CGPADemo.xss">
+      <DependentUpon>CGPADemo.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CGPAs.xsd" />
+    <Content Include="App_Start\CGPAs.xss">
+      <DependentUpon>CGPAs.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CheckPc.xsd" />
+    <Content Include="App_Start\CheckPc.xss">
+      <DependentUpon>CheckPc.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Start\ClassDiagram.cd" />
+    <None Include="App_Start\ClassList.xsd" />
+    <Content Include="App_Start\ClassList.xss">
+      <DependentUpon>ClassList.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Cohort.xsd" />
+    <Content Include="App_Start\Cohort.xss">
+      <DependentUpon>Cohort.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CompletionDS.xsd" />
+    <Content Include="App_Start\CompletionDS.xss">
+      <DependentUpon>CompletionDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CRM_DailyCalls.xsd" />
+    <Content Include="App_Start\CRM_DailyCalls.xss">
+      <DependentUpon>CRM_DailyCalls.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CRM_TrackingDS.xsd" />
+    <Content Include="App_Start\CRM_TrackingDS.xss">
+      <DependentUpon>CRM_TrackingDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CrossDS.xsd" />
+    <Content Include="App_Start\CrossDS.xss">
+      <DependentUpon>CrossDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CrossDS2.xsd" />
+    <Content Include="App_Start\CrossDS2.xss">
+      <DependentUpon>CrossDS2.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\CurrentTimeTableDS.xsd" />
+    <Content Include="App_Start\CurrentTimeTableDS.xss">
+      <DependentUpon>CurrentTimeTableDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\DailyRegDetail.xsd" />
+    <Content Include="App_Start\DailyRegDetail.xss">
+      <DependentUpon>DailyRegDetail.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\DailyRegSummary.xsd" />
+    <Content Include="App_Start\DailyRegSummary.xss">
+      <DependentUpon>DailyRegSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\DataSet1.xsd" />
+    <Content Include="App_Start\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\DSLibReports.xsd" />
+    <Content Include="App_Start\DSLibReports.xss">
+      <DependentUpon>DSLibReports.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\DSWarrning.xsd" />
+    <Content Include="App_Start\DSWarrning.xss">
+      <DependentUpon>DSWarrning.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\EmailsDS.xsd" />
+    <Content Include="App_Start\EmailsDS.xss">
+      <DependentUpon>EmailsDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\EmpProfile.xsd" />
+    <Content Include="App_Start\EmpProfile.xss">
+      <DependentUpon>EmpProfile.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\ENGExamListDS.xsd" />
+    <Content Include="App_Start\ENGExamListDS.xss">
+      <DependentUpon>ENGExamListDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\EnrolledStudents_forEmbassy.xsd" />
+    <Content Include="App_Start\EnrolledStudents_forEmbassy.xss">
+      <DependentUpon>EnrolledStudents_forEmbassy.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FacultyLoads_CHEDS.xsd" />
+    <Content Include="App_Start\FacultyLoads_CHEDS.xss">
+      <DependentUpon>FacultyLoads_CHEDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FacultyLoads_Details.xsd" />
+    <Content Include="App_Start\FacultyLoads_Details.xss">
+      <DependentUpon>FacultyLoads_Details.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FacultyLoads_Summary.xsd" />
+    <Content Include="App_Start\FacultyLoads_Summary.xss">
+      <DependentUpon>FacultyLoads_Summary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FinalExamConflicts.xsd" />
+    <Content Include="App_Start\FinalExamConflicts.xss">
+      <DependentUpon>FinalExamConflicts.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FinalExamCourseConflicts.xsd" />
+    <Content Include="App_Start\FinalExamCourseConflicts.xss">
+      <DependentUpon>FinalExamCourseConflicts.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FinalExamCoursesCounts.xsd" />
+    <Content Include="App_Start\FinalExamCoursesCounts.xss">
+      <DependentUpon>FinalExamCoursesCounts.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\FinalExam_EW_List.xsd" />
+    <Content Include="App_Start\FinalExam_EW_List.xss">
+      <DependentUpon>FinalExam_EW_List.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\GradesAudit.xsd" />
+    <Content Include="App_Start\GradesAudit.xss">
+      <DependentUpon>GradesAudit.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\GradesDis.xsd" />
+    <Content Include="App_Start\GradesDis.xss">
+      <DependentUpon>GradesDis.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\GradesDS.xsd" />
+    <Content Include="App_Start\GradesDS.xss">
+      <DependentUpon>GradesDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\GradesList.xsd" />
+    <Content Include="App_Start\GradesList.xss">
+      <DependentUpon>GradesList.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Graduated_CertificateSystem.xsd" />
+    <Content Include="App_Start\Graduated_CertificateSystem.xss">
+      <DependentUpon>Graduated_CertificateSystem.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\LecturerOfficeHours.xsd" />
+    <Content Include="App_Start\LecturerOfficeHours.xss">
+      <DependentUpon>LecturerOfficeHours.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\LibBorrowedBooks.xsd" />
+    <Content Include="App_Start\LibBorrowedBooks.xss">
+      <DependentUpon>LibBorrowedBooks.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\LibRepPurchaseInvoice.xsd" />
+    <Content Include="App_Start\LibRepPurchaseInvoice.xss">
+      <DependentUpon>LibRepPurchaseInvoice.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\LibRepStudentSemBooks.xsd" />
+    <Content Include="App_Start\LibRepStudentSemBooks.xss">
+      <DependentUpon>LibRepStudentSemBooks.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\MirrorDT.xsd" />
+    <Content Include="App_Start\MirrorDT.xss">
+      <DependentUpon>MirrorDT.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\MissingDocuments.xsd" />
+    <Content Include="App_Start\MissingDocuments.xss">
+      <DependentUpon>MissingDocuments.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\myVoucher.xsd" />
+    <Content Include="App_Start\myVoucher.xss">
+      <DependentUpon>myVoucher.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\PcCheckDetails.xsd" />
+    <Content Include="App_Start\PcCheckDetails.xss">
+      <DependentUpon>PcCheckDetails.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\PhoneExtensions.xsd" />
+    <Content Include="App_Start\PhoneExtensions.xss">
+      <DependentUpon>PhoneExtensions.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\RecommendedDS.xsd" />
+    <Content Include="App_Start\RecommendedDS.xss">
+      <DependentUpon>RecommendedDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Registered.xsd" />
+    <Content Include="App_Start\Registered.xss">
+      <DependentUpon>Registered.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\RegTracker.xsd" />
+    <Content Include="App_Start\RegTracker.xss">
+      <DependentUpon>RegTracker.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Roles_Permissions.xsd" />
+    <Content Include="App_Start\Roles_Permissions.xss">
+      <DependentUpon>Roles_Permissions.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Role_Users.xsd" />
+    <Content Include="App_Start\Role_Users.xss">
+      <DependentUpon>Role_Users.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\SemesterTarget.xsd" />
+    <Content Include="App_Start\SemesterTarget.xss">
+      <DependentUpon>SemesterTarget.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\SMSDS.xsd" />
+    <Content Include="App_Start\SMSDS.xss">
+      <DependentUpon>SMSDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\STDBalanceDS.xsd" />
+    <Content Include="App_Start\STDBalanceDS.xss">
+      <DependentUpon>STDBalanceDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\STProfile.xsd" />
+    <Content Include="App_Start\STProfile.xss">
+      <DependentUpon>STProfile.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\StudentChangedMajor.xsd" />
+    <Content Include="App_Start\StudentChangedMajor.xss">
+      <DependentUpon>StudentChangedMajor.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Start\StudentPicCls.cs.exclude" />
+    <None Include="App_Start\StudentsAttendanceDetails.xsd" />
+    <Content Include="App_Start\StudentsAttendanceDetails.xss">
+      <DependentUpon>StudentsAttendanceDetails.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\StudentsAttendanceSummery.xsd" />
+    <Content Include="App_Start\StudentsAttendanceSummery.xss">
+      <DependentUpon>StudentsAttendanceSummery.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\StudentsBooksDS.xsd" />
+    <Content Include="App_Start\StudentsBooksDS.xss">
+      <DependentUpon>StudentsBooksDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\StudentsReceivedBooks.xsd" />
+    <Content Include="App_Start\StudentsReceivedBooks.xss">
+      <DependentUpon>StudentsReceivedBooks.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\StudentTimeTableDS.xsd" />
+    <Content Include="App_Start\StudentTimeTableDS.xss">
+      <DependentUpon>StudentTimeTableDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Student_Center.xsd" />
+    <Content Include="App_Start\Student_Center.xss">
+      <DependentUpon>Student_Center.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Testimonies.xsd" />
+    <Content Include="App_Start\Testimonies.xss">
+      <DependentUpon>Testimonies.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\TimeSheetRpt.xsd" />
+    <Content Include="App_Start\TimeSheetRpt.xss">
+      <DependentUpon>TimeSheetRpt.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Start\TimeTable.xsd.2.exclude" />
+    <Content Include="App_Start\TimeTable.xsd.exclude" />
+    <Content Include="App_Start\TimeTable.xss.2.exclude" />
+    <Content Include="App_Start\TimeTable.xss.exclude" />
+    <None Include="App_Start\TOEFL_IELTS_Exams.xsd" />
+    <Content Include="App_Start\TOEFL_IELTS_Exams.xss">
+      <DependentUpon>TOEFL_IELTS_Exams.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Track_View_DS.xsd" />
+    <Content Include="App_Start\Track_View_DS.xss">
+      <DependentUpon>Track_View_DS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\Transcript.xsd" />
+    <Content Include="App_Start\Transcript.xss">
+      <DependentUpon>Transcript.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Start\UnderProbationDS.xsd" />
+    <Content Include="App_Start\UnderProbationDS.xss">
+      <DependentUpon>UnderProbationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Start\vbcode\vssver2.scc" />
+    <None Include="App_Start\WeeklyCalendar.xsd" />
+    <Content Include="App_Start\WeeklyCalendar.xss">
+      <DependentUpon>WeeklyCalendar.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login_v9\css\main.css" />
     <Content Include="Login_v9\css\util.css" />
@@ -5913,6 +6278,20 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AcademicAdvisingCls.cs" />
+    <Compile Include="App_Start\AcademicAdvising_RecommendedCoursesCls.cs" />
+    <Compile Include="App_Start\AcceptedStudentsCls.cs" />
+    <Compile Include="App_Start\AdmissionRequirments.cs" />
+    <Compile Include="App_Start\Advising.cs" />
+    <Compile Include="App_Start\Advising_CGPA_Tracking.cs" />
+    <Compile Include="App_Start\ApplicationsCls.cs" />
+    <Compile Include="App_Start\AttendanceCLS.cs" />
+    <Compile Include="App_Start\AttStatusesCLS.cs" />
+    <Compile Include="App_Start\Att_StatusCls.cs" />
+    <Compile Include="App_Start\Available_CoursesCls.cs" />
+    <Compile Include="App_Start\Available_Courses_HoursCls.cs" />
+    <Compile Include="App_Start\BookStockCls.cs" />
+    <Compile Include="App_Start\BookStudentCls.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -5921,7 +6300,155 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\calcMark.cs" />
+    <Compile Include="App_Start\CertificatesCls.cs" />
+    <Compile Include="App_Start\CitiesCls.cs" />
+    <Compile Include="App_Start\ClassesCLS.cs" />
+    <Compile Include="App_Start\ClsMoodleAPI.cs" />
+    <Compile Include="App_Start\CollegesCls.cs" />
+    <Compile Include="App_Start\CommitteeCls.cs" />
+    <Compile Include="App_Start\CommitteeMembersCls.cs" />
+    <Compile Include="App_Start\Connection_StringsCLS.cs" />
+    <Compile Include="App_Start\CountriesCls.cs" />
+    <Compile Include="App_Start\CourseBookCls.cs" />
+    <Compile Include="App_Start\CourseLeaderCls.cs" />
+    <Compile Include="App_Start\CoursesCls.cs" />
+    <Compile Include="App_Start\CourseTime_ScheduleCls.cs" />
+    <Compile Include="App_Start\Course_DetailCls.cs" />
+    <Compile Include="App_Start\Course_HeaderCls.cs" />
+    <Compile Include="App_Start\CurrencyCls.cs" />
+    <Compile Include="App_Start\DegreesCls.cs" />
+    <Compile Include="App_Start\DelegationsCls.cs" />
+    <Compile Include="App_Start\DepartmentCls.cs" />
+    <Compile Include="App_Start\DownloadsCls.cs" />
+    <Compile Include="App_Start\EctNewAttendanceStatusCls.cs" />
+    <Compile Include="App_Start\EctNewCertificateCls.cs" />
+    <Compile Include="App_Start\EctNewCityCls.cs" />
+    <Compile Include="App_Start\EctNewCountryCls.cs" />
+    <Compile Include="App_Start\EctNewNationalityCls.cs" />
+    <Compile Include="App_Start\EctNewTitlesCls.cs" />
+    <Compile Include="App_Start\Emails.cs" />
+    <Compile Include="App_Start\EmoloyeeSkillsCls.cs" />
+    <Compile Include="App_Start\EmployeeCls.cs" />
+    <Compile Include="App_Start\EmployeeExperiencesCls.cs" />
+    <Compile Include="App_Start\EmployeeGradesCls.cs" />
+    <Compile Include="App_Start\EmployeeLanguageSkillsCls.cs" />
+    <Compile Include="App_Start\EmployeeQualificationsCls.cs" />
+    <Compile Include="App_Start\EmployeeSkillsCls.cs" />
+    <Compile Include="App_Start\EncryptionCls.cs" />
+    <Compile Include="App_Start\EngCertificate_ExamCenterCls.cs" />
+    <Compile Include="App_Start\Exam_CheckerCls.cs" />
+    <Compile Include="App_Start\FacultyCls.cs" />
+    <Compile Include="App_Start\Faculty_TypeCls.cs" />
+    <Compile Include="App_Start\FianlExam_StudentSchedule_DCls.cs" />
+    <Compile Include="App_Start\FianlExam_StudentSchedule_HCls.cs" />
+    <Compile Include="App_Start\FinalExam_ProctorsCls.cs" />
+    <Compile Include="App_Start\FinalExam_StudentSchedule_DCls.cs" />
+    <Compile Include="App_Start\FinalExam_StudentSchedule_HCls.cs" />
+    <Compile Include="App_Start\Final_GroupCls.cs" />
+    <Compile Include="App_Start\FirmCls.cs" />
+    <Compile Include="App_Start\Followup.cs" />
+    <Compile Include="App_Start\Form_TypesCls.cs" />
+    <Compile Include="App_Start\G12_StreamCls.cs" />
+    <Compile Include="App_Start\Grades.cs" />
+    <Compile Include="App_Start\GradesHistoryCls.cs" />
+    <Compile Include="App_Start\Grades_Taype_CoursesCls.cs" />
+    <Compile Include="App_Start\Grade_DetailCls.cs" />
+    <Compile Include="App_Start\Grade_HeaderCls.cs" />
+    <Compile Include="App_Start\Grade_TypesCls.cs" />
+    <Compile Include="App_Start\HallsCls.cs" />
+    <Compile Include="App_Start\HRGradesCls.cs" />
+    <Compile Include="App_Start\ID_TypesCls.cs" />
+    <Compile Include="App_Start\IESOL_EquivalencyCls.cs" />
+    <Compile Include="App_Start\InitializeModule.cs" />
+    <Compile Include="App_Start\InputBox.cs" />
+    <Compile Include="App_Start\InstitutionTypeCls.cs" />
+    <Compile Include="App_Start\InsuranceCategoriesCls.cs" />
+    <Compile Include="App_Start\InsuraneCompanyCls.cs" />
+    <Compile Include="App_Start\JobTitleCls.cs" />
+    <Compile Include="App_Start\JournalsCls.cs" />
+    <Compile Include="App_Start\Journals_DetailsCls.cs" />
+    <Compile Include="App_Start\Journals_FrequenciesCls.cs" />
+    <Compile Include="App_Start\LanguagesCls.cs" />
+    <Compile Include="App_Start\LecturersCls.cs" />
+    <Compile Include="App_Start\Lecturer_Office_HoursCls.cs" />
+    <Compile Include="App_Start\LibAuthorCls.cs" />
+    <Compile Include="App_Start\LibAuthorRoleCls.cs" />
+    <Compile Include="App_Start\LibBookAuthorsCls.cs" />
+    <Compile Include="App_Start\LibBookDetailCls.cs" />
+    <Compile Include="App_Start\LibBookHeaderCls.cs" />
+    <Compile Include="App_Start\LibBookMaterialsCls.cs" />
+    <Compile Include="App_Start\LibBookPublishersCls.cs" />
+    <Compile Include="App_Start\LibBooksStatusesCls.cs" />
+    <Compile Include="App_Start\LibBookSubjectCls.cs" />
+    <Compile Include="App_Start\LibClassificationsCls.cs" />
+    <Compile Include="App_Start\LibMaterialTypeCls.cs" />
+    <Compile Include="App_Start\LibPersonRoleCls.cs" />
+    <Compile Include="App_Start\LibPlacesCls.cs" />
+    <Compile Include="App_Start\LibPublishersCls.cs" />
+    <Compile Include="App_Start\LibraryMOD.cs" />
+    <Compile Include="App_Start\LibSeriesCls.cs" />
+    <Compile Include="App_Start\LibSubjectTypeCls.cs" />
+    <Compile Include="App_Start\LibSuppliersCls.cs" />
+    <Compile Include="App_Start\LibTransactionDetailsCls.cs" />
+    <Compile Include="App_Start\LibTransactionsCls.cs" />
+    <Compile Include="App_Start\LibTransTypesCls.cs" />
+    <Compile Include="App_Start\LogHistoryCls.cs" />
+    <Compile Include="App_Start\LookupDetailsCls.cs" />
+    <Compile Include="App_Start\LookupHeaderCls.cs" />
+    <Compile Include="App_Start\Lookups.cs" />
+    <Compile Include="App_Start\MainReasonsCls.cs" />
+    <Compile Include="App_Start\Majors_ProioritiesCls.cs" />
+    <Compile Include="App_Start\MirrorCLS.cs" />
+    <Compile Include="App_Start\NationalitiesCls.cs" />
+    <Compile Include="App_Start\NationalityCls.cs" />
+    <Compile Include="App_Start\NewHallsCls.cs" />
+    <Compile Include="App_Start\NewLecturersCls.cs" />
+    <Compile Include="App_Start\OfficialCertificatesRequestCls.cs" />
+    <Compile Include="App_Start\PhonesExtensionsCls.cs" />
+    <Compile Include="App_Start\Plans.cs" />
+    <Compile Include="App_Start\PrerequisitesCls.cs" />
+    <Compile Include="App_Start\PrivilegeCls.cs" />
+    <Compile Include="App_Start\PrivilegeObjectsCls.cs" />
+    <Compile Include="App_Start\ProgramsCls.cs" />
+    <Compile Include="App_Start\Programs_AdvisorsCls.cs" />
+    <Compile Include="App_Start\ReasonsCls.cs" />
+    <Compile Include="App_Start\RecommendationCls.cs" />
+    <Compile Include="App_Start\RegStatus.cs" />
+    <Compile Include="App_Start\RegValidation.cs" />
+    <Compile Include="App_Start\Reg_HistoryCls.cs" />
+    <Compile Include="App_Start\Requested_FormsCls.cs" />
+    <Compile Include="App_Start\RoleCls.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SearchCLS.cs" />
+    <Compile Include="App_Start\SectionCls.cs" />
+    <Compile Include="App_Start\SectorCls.cs" />
+    <Compile Include="App_Start\SemesterCls.cs" />
+    <Compile Include="App_Start\SemestersCls.cs" />
+    <Compile Include="App_Start\SemesterTargetHistoryCls.cs" />
+    <Compile Include="App_Start\SpecializationsCls.cs" />
+    <Compile Include="App_Start\Specialization_CoursesCls.cs" />
+    <Compile Include="App_Start\Specialization_ElectiveCls.cs" />
+    <Compile Include="App_Start\SponsorsCls.cs" />
+    <Compile Include="App_Start\StocksCls.cs" />
+    <Compile Include="App_Start\StudentMissingDocumentsCls.cs" />
+    <Compile Include="App_Start\Students_DataCls.cs" />
+    <Compile Include="App_Start\Students_RequestCls.cs" />
+    <Compile Include="App_Start\StudentTimeTable.cs" />
+    <Compile Include="App_Start\Student_AtRisk_DCls.cs" />
+    <Compile Include="App_Start\Student_AtRisk_HCls.cs" />
+    <Compile Include="App_Start\Student_Courses_AtRiskCls.cs" />
+    <Compile Include="App_Start\Student_DocumentsCls.cs" />
+    <Compile Include="App_Start\Student_QualificationsCls.cs" />
+    <Compile Include="App_Start\Student_Search.cs" />
+    <Compile Include="App_Start\St_SessionCls.cs" />
+    <Compile Include="App_Start\SubReasonsCls.cs" />
+    <Compile Include="App_Start\SuppliersCls.cs" />
+    <Compile Include="App_Start\TimeTable.cs" />
+    <Compile Include="App_Start\TitlesCls.cs" />
+    <Compile Include="App_Start\UserCls.cs" />
+    <Compile Include="App_Start\Work_PlacesCls.cs" />
+    <Compile Include="App_Start\XLS.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6010,6 +6537,20 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="gentelella-master\vendors\moment\moment.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FinalExamCoursesCounts" targetNamespace="http://tempuri.org/FinalExamCoursesCounts.xsd" xmlns:mstns="http://tempuri.org/FinalExamCoursesCounts.xsd" xmlns="http://tempuri.org/FinalExamCoursesCounts.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FinalExamCoursesCounts" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="FinalExamCoursesCounts" msprop:Generator_DataSetName="FinalExamCoursesCounts">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FinalExamCoursesCounts" msprop:Generator_UserTableName="FinalExamCoursesCounts" msprop:Generator_RowDeletedName="FinalExamCoursesCountsRowDeleted" msprop:Generator_RowChangedName="FinalExamCoursesCountsRowChanged" msprop:Generator_RowClassName="FinalExamCoursesCountsRow" msprop:Generator_RowChangingName="FinalExamCoursesCountsRowChanging" msprop:Generator_RowEvArgName="FinalExamCoursesCountsRowChangeEvent" msprop:Generator_RowEvHandlerName="FinalExamCoursesCountsRowChangeEventHandler" msprop:Generator_TableClassName="FinalExamCoursesCountsDataTable" msprop:Generator_TableVarName="tableFinalExamCoursesCounts" msprop:Generator_RowDeletingName="FinalExamCoursesCountsRowDeleting" msprop:Generator_TablePropName="_FinalExamCoursesCounts">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="strUnified" msprop:Generator_UserColumnName="strUnified" msprop:Generator_ColumnVarNameInTable="columnstrUnified" msprop:Generator_ColumnPropNameInRow="strUnified" msprop:Generator_ColumnPropNameInTable="strUnifiedColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sDispalyUnified" msprop:Generator_UserColumnName="sDispalyUnified" msprop:Generator_ColumnVarNameInTable="columnsDispalyUnified" msprop:Generator_ColumnPropNameInRow="sDispalyUnified" msprop:Generator_ColumnPropNameInTable="sDispalyUnifiedColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strCourseDescEn" msprop:Generator_UserColumnName="strCourseDescEn" msprop:Generator_ColumnVarNameInTable="columnstrCourseDescEn" msprop:Generator_ColumnPropNameInRow="strCourseDescEn" msprop:Generator_ColumnPropNameInTable="strCourseDescEnColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NumofSections" msprop:Generator_UserColumnName="NumofSections" msprop:Generator_ColumnVarNameInTable="columnNumofSections" msprop:Generator_ColumnPropNameInRow="NumofSections" msprop:Generator_ColumnPropNameInTable="NumofSectionsColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalNumofStudents" msprop:Generator_UserColumnName="TotalNumofStudents" msprop:Generator_ColumnVarNameInTable="columnTotalNumofStudents" msprop:Generator_ColumnPropNameInRow="TotalNumofStudents" msprop:Generator_ColumnPropNameInTable="TotalNumofStudentsColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strCollegeDescEn" msprop:Generator_UserColumnName="strCollegeDescEn" msprop:Generator_ColumnVarNameInTable="columnstrCollegeDescEn" msprop:Generator_ColumnPropNameInRow="strCollegeDescEn" msprop:Generator_ColumnPropNameInTable="strCollegeDescEnColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Sem" msprop:Generator_UserColumnName="Sem" msprop:Generator_ColumnVarNameInTable="columnSem" msprop:Generator_ColumnPropNameInRow="Sem" msprop:Generator_ColumnPropNameInTable="SemColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="iYear" msprop:Generator_UserColumnName="iYear" msprop:Generator_ColumnVarNameInTable="columniYear" msprop:Generator_ColumnPropNameInRow="iYear" msprop:Generator_ColumnPropNameInTable="iYearColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCampus" msprop:Generator_UserColumnName="sCampus" msprop:Generator_ColumnPropNameInRow="sCampus" msprop:Generator_ColumnVarNameInTable="columnsCampus" msprop:Generator_ColumnPropNameInTable="sCampusColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

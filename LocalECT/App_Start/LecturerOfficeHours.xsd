@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="LecturerOfficeHoursDS" targetNamespace="http://tempuri.org/LecturerOfficeHours.xsd" xmlns:mstns="http://tempuri.org/LecturerOfficeHours.xsd" xmlns="http://tempuri.org/LecturerOfficeHours.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="LecturerOfficeHoursDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="LecturerOfficeHoursDS" msprop:Generator_DataSetName="LecturerOfficeHoursDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LecturerOfficeHoursDT" msprop:Generator_UserTableName="LecturerOfficeHoursDT" msprop:Generator_RowDeletedName="LecturerOfficeHoursDTRowDeleted" msprop:Generator_RowChangedName="LecturerOfficeHoursDTRowChanged" msprop:Generator_RowClassName="LecturerOfficeHoursDTRow" msprop:Generator_RowChangingName="LecturerOfficeHoursDTRowChanging" msprop:Generator_RowEvArgName="LecturerOfficeHoursDTRowChangeEvent" msprop:Generator_RowEvHandlerName="LecturerOfficeHoursDTRowChangeEventHandler" msprop:Generator_TableClassName="LecturerOfficeHoursDTDataTable" msprop:Generator_TableVarName="tableLecturerOfficeHoursDT" msprop:Generator_RowDeletingName="LecturerOfficeHoursDTRowDeleting" msprop:Generator_TablePropName="LecturerOfficeHoursDT">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Lecturer" msprop:Generator_UserColumnName="Lecturer" msprop:Generator_ColumnPropNameInRow="Lecturer" msprop:Generator_ColumnVarNameInTable="columnLecturer" msprop:Generator_ColumnPropNameInTable="LecturerColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Campus" msprop:Generator_UserColumnName="Campus" msprop:Generator_ColumnVarNameInTable="columnCampus" msprop:Generator_ColumnPropNameInRow="Campus" msprop:Generator_ColumnPropNameInTable="CampusColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sDays" msprop:Generator_UserColumnName="sDays" msprop:Generator_ColumnPropNameInRow="sDays" msprop:Generator_ColumnVarNameInTable="columnsDays" msprop:Generator_ColumnPropNameInTable="sDaysColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Hall" msprop:Generator_UserColumnName="Hall" msprop:Generator_ColumnPropNameInRow="Hall" msprop:Generator_ColumnVarNameInTable="columnHall" msprop:Generator_ColumnPropNameInTable="HallColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Course" msprop:Generator_UserColumnName="Course" msprop:Generator_ColumnPropNameInRow="Course" msprop:Generator_ColumnVarNameInTable="columnCourse" msprop:Generator_ColumnPropNameInTable="CourseColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="FromTime" msprop:Generator_UserColumnName="FromTime" msprop:Generator_ColumnPropNameInRow="FromTime" msprop:Generator_ColumnVarNameInTable="columnFromTime" msprop:Generator_ColumnPropNameInTable="FromTimeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ToTime" msprop:Generator_UserColumnName="ToTime" msprop:Generator_ColumnPropNameInRow="ToTime" msprop:Generator_ColumnVarNameInTable="columnToTime" msprop:Generator_ColumnPropNameInTable="ToTimeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCourse" msprop:Generator_UserColumnName="sCourse" msprop:Generator_ColumnVarNameInTable="columnsCourse" msprop:Generator_ColumnPropNameInRow="sCourse" msprop:Generator_ColumnPropNameInTable="sCourseColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sTime" msprop:Generator_UserColumnName="sTime" msprop:Generator_ColumnVarNameInTable="columnsTime" msprop:Generator_ColumnPropNameInRow="sTime" msprop:Generator_ColumnPropNameInTable="sTimeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="RowNumber" msprop:Generator_UserColumnName="RowNumber" msprop:Generator_ColumnPropNameInRow="RowNumber" msprop:Generator_ColumnVarNameInTable="columnRowNumber" msprop:Generator_ColumnPropNameInTable="RowNumberColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LecturerWorkingHoursDT" msprop:Generator_UserTableName="LecturerWorkingHoursDT" msprop:Generator_RowDeletedName="LecturerWorkingHoursDTRowDeleted" msprop:Generator_RowChangedName="LecturerWorkingHoursDTRowChanged" msprop:Generator_RowClassName="LecturerWorkingHoursDTRow" msprop:Generator_RowChangingName="LecturerWorkingHoursDTRowChanging" msprop:Generator_RowEvArgName="LecturerWorkingHoursDTRowChangeEvent" msprop:Generator_RowEvHandlerName="LecturerWorkingHoursDTRowChangeEventHandler" msprop:Generator_TableClassName="LecturerWorkingHoursDTDataTable" msprop:Generator_TableVarName="tableLecturerWorkingHoursDT" msprop:Generator_RowDeletingName="LecturerWorkingHoursDTRowDeleting" msprop:Generator_TablePropName="LecturerWorkingHoursDT">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sDays" msprop:Generator_UserColumnName="sDays" msprop:Generator_ColumnPropNameInRow="sDays" msprop:Generator_ColumnVarNameInTable="columnsDays" msprop:Generator_ColumnPropNameInTable="sDaysColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sTime" msprop:Generator_UserColumnName="sTime" msprop:Generator_ColumnPropNameInRow="sTime" msprop:Generator_ColumnVarNameInTable="columnsTime" msprop:Generator_ColumnPropNameInTable="sTimeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sLecturer" msprop:Generator_UserColumnName="sLecturer" msprop:Generator_ColumnPropNameInRow="sLecturer" msprop:Generator_ColumnVarNameInTable="columnsLecturer" msprop:Generator_ColumnPropNameInTable="sLecturerColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Lecturer" msprop:Generator_UserTableName="Lecturer" msprop:Generator_RowDeletedName="LecturerRowDeleted" msprop:Generator_RowChangedName="LecturerRowChanged" msprop:Generator_RowClassName="LecturerRow" msprop:Generator_RowChangingName="LecturerRowChanging" msprop:Generator_RowEvArgName="LecturerRowChangeEvent" msprop:Generator_RowEvHandlerName="LecturerRowChangeEventHandler" msprop:Generator_TableClassName="LecturerDataTable" msprop:Generator_TableVarName="tableLecturer" msprop:Generator_RowDeletingName="LecturerRowDeleting" msprop:Generator_TablePropName="Lecturer">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Lecturer" msprop:Generator_UserColumnName="Lecturer" msprop:Generator_ColumnPropNameInRow="Lecturer" msprop:Generator_ColumnVarNameInTable="columnLecturer" msprop:Generator_ColumnPropNameInTable="LecturerColumn" type="xs:string" />
+              <xs:element name="Email" msprop:Generator_UserColumnName="Email" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInTable="EmailColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Email2" msprop:Generator_UserColumnName="Email2" msprop:Generator_ColumnVarNameInTable="columnEmail2" msprop:Generator_ColumnPropNameInRow="Email2" msprop:Generator_ColumnPropNameInTable="Email2Column" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="LecturerKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Lecturer" />
+      <xs:field xpath="mstns:Lecturer" />
+    </xs:unique>
+    <xs:keyref name="FK_Lecturer_LecturerWorkingHoursDT" refer="LecturerKey1" msprop:rel_Generator_UserRelationName="FK_Lecturer_LecturerWorkingHoursDT" msprop:rel_Generator_RelationVarName="relationFK_Lecturer_LecturerWorkingHoursDT" msprop:rel_Generator_UserChildTable="LecturerWorkingHoursDT" msprop:rel_Generator_UserParentTable="Lecturer" msprop:rel_Generator_ParentPropName="LecturerRow" msprop:rel_Generator_ChildPropName="GetLecturerWorkingHoursDTRows">
+      <xs:selector xpath=".//mstns:LecturerWorkingHoursDT" />
+      <xs:field xpath="mstns:sLecturer" />
+    </xs:keyref>
+    <xs:keyref name="FK_Lecturer_LecturerOfficeHoursDT" refer="LecturerKey1" msprop:rel_Generator_UserRelationName="FK_Lecturer_LecturerOfficeHoursDT" msprop:rel_Generator_RelationVarName="relationFK_Lecturer_LecturerOfficeHoursDT" msprop:rel_Generator_UserChildTable="LecturerOfficeHoursDT" msprop:rel_Generator_UserParentTable="Lecturer" msprop:rel_Generator_ParentPropName="LecturerRow" msprop:rel_Generator_ChildPropName="GetLecturerOfficeHoursDTRows">
+      <xs:selector xpath=".//mstns:LecturerOfficeHoursDT" />
+      <xs:field xpath="mstns:Lecturer" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

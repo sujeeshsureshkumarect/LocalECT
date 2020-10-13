@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AVGs" targetNamespace="http://tempuri.org/AVGs.xsd" xmlns:mstns="http://tempuri.org/AVGs.xsd" xmlns="http://tempuri.org/AVGs.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AVGs" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="AVGs" msprop:Generator_DataSetName="AVGs">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AVGs_tbl" msprop:Generator_UserTableName="AVGs_tbl" msprop:Generator_RowDeletedName="AVGs_tblRowDeleted" msprop:Generator_RowChangedName="AVGs_tblRowChanged" msprop:Generator_RowClassName="AVGs_tblRow" msprop:Generator_RowChangingName="AVGs_tblRowChanging" msprop:Generator_RowEvArgName="AVGs_tblRowChangeEvent" msprop:Generator_RowEvHandlerName="AVGs_tblRowChangeEventHandler" msprop:Generator_TableClassName="AVGs_tblDataTable" msprop:Generator_TableVarName="tableAVGs_tbl" msprop:Generator_RowDeletingName="AVGs_tblRowDeleting" msprop:Generator_TablePropName="AVGs_tbl">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iTerm" msprop:Generator_UserColumnName="iTerm" msprop:Generator_ColumnVarNameInTable="columniTerm" msprop:Generator_ColumnPropNameInRow="iTerm" msprop:Generator_ColumnPropNameInTable="iTermColumn" type="xs:int" />
+              <xs:element name="sTerm" msprop:Generator_UserColumnName="sTerm" msprop:Generator_ColumnVarNameInTable="columnsTerm" msprop:Generator_ColumnPropNameInRow="sTerm" msprop:Generator_ColumnPropNameInTable="sTermColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="dCount" msprop:Generator_UserColumnName="dCount" msprop:Generator_ColumnVarNameInTable="columndCount" msprop:Generator_ColumnPropNameInRow="dCount" msprop:Generator_ColumnPropNameInTable="dCountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dCourses" msprop:Generator_UserColumnName="dCourses" msprop:Generator_ColumnVarNameInTable="columndCourses" msprop:Generator_ColumnPropNameInRow="dCourses" msprop:Generator_ColumnPropNameInTable="dCoursesColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sCampus" msprop:Generator_UserColumnName="sCampus" msprop:Generator_ColumnPropNameInRow="sCampus" msprop:Generator_ColumnVarNameInTable="columnsCampus" msprop:Generator_ColumnPropNameInTable="sCampusColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AVGs_tbl" />
+      <xs:field xpath="mstns:iTerm" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

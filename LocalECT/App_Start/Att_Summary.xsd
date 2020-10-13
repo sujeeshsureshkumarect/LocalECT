@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Att_Summary" targetNamespace="http://tempuri.org/Att_Summary.xsd" xmlns:mstns="http://tempuri.org/Att_Summary.xsd" xmlns="http://tempuri.org/Att_Summary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Att_Summary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Att_Summary" msprop:Generator_UserDSName="Att_Summary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Att_Summary_tbl" msprop:Generator_TableClassName="Att_Summary_tblDataTable" msprop:Generator_RowEvArgName="Att_Summary_tblRowChangeEvent" msprop:Generator_TableVarName="tableAtt_Summary_tbl" msprop:Generator_TablePropName="Att_Summary_tbl" msprop:Generator_RowDeletingName="Att_Summary_tblRowDeleting" msprop:Generator_UserTableName="Att_Summary_tbl" msprop:Generator_RowChangingName="Att_Summary_tblRowChanging" msprop:Generator_RowDeletedName="Att_Summary_tblRowDeleted" msprop:Generator_RowChangedName="Att_Summary_tblRowChanged" msprop:Generator_RowEvHandlerName="Att_Summary_tblRowChangeEventHandler" msprop:Generator_RowClassName="Att_Summary_tblRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" msprop:Generator_UserColumnName="iSerial" type="xs:int" minOccurs="0" />
+              <xs:element name="sSno" msprop:Generator_ColumnVarNameInTable="columnsSno" msprop:Generator_ColumnPropNameInRow="sSno" msprop:Generator_ColumnPropNameInTable="sSnoColumn" msprop:Generator_UserColumnName="sSno" type="xs:string" minOccurs="0" />
+              <xs:element name="sName" msprop:Generator_ColumnVarNameInTable="columnsName" msprop:Generator_ColumnPropNameInRow="sName" msprop:Generator_ColumnPropNameInTable="sNameColumn" msprop:Generator_UserColumnName="sName" type="xs:string" minOccurs="0" />
+              <xs:element name="sSessions" msprop:Generator_ColumnVarNameInTable="columnsSessions" msprop:Generator_ColumnPropNameInRow="sSessions" msprop:Generator_ColumnPropNameInTable="sSessionsColumn" msprop:Generator_UserColumnName="sSessions" type="xs:string" minOccurs="0" />
+              <xs:element name="sAll" msprop:Generator_ColumnVarNameInTable="columnsAll" msprop:Generator_ColumnPropNameInRow="sAll" msprop:Generator_ColumnPropNameInTable="sAllColumn" msprop:Generator_UserColumnName="sAll" type="xs:string" minOccurs="0" />
+              <xs:element name="sPer" msprop:Generator_ColumnVarNameInTable="columnsPer" msprop:Generator_ColumnPropNameInRow="sPer" msprop:Generator_ColumnPropNameInTable="sPerColumn" msprop:Generator_UserColumnName="sPer" type="xs:string" minOccurs="0" />
+              <xs:element name="sWarningType" msprop:Generator_ColumnVarNameInTable="columnsWarningType" msprop:Generator_ColumnPropNameInRow="sWarningType" msprop:Generator_ColumnPropNameInTable="sWarningTypeColumn" msprop:Generator_UserColumnName="sWarningType" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DailyRegSummary" targetNamespace="http://tempuri.org/DailyRegSummary.xsd" xmlns:mstns="http://tempuri.org/DailyRegSummary.xsd" xmlns="http://tempuri.org/DailyRegSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DailyRegSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DailyRegSummary" msprop:Generator_UserDSName="DailyRegSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DailyRegSummaryDT" msprop:Generator_TableClassName="DailyRegSummaryDTDataTable" msprop:Generator_TableVarName="tableDailyRegSummaryDT" msprop:Generator_TablePropName="DailyRegSummaryDT" msprop:Generator_RowDeletingName="DailyRegSummaryDTRowDeleting" msprop:Generator_RowChangingName="DailyRegSummaryDTRowChanging" msprop:Generator_RowEvHandlerName="DailyRegSummaryDTRowChangeEventHandler" msprop:Generator_RowDeletedName="DailyRegSummaryDTRowDeleted" msprop:Generator_UserTableName="DailyRegSummaryDT" msprop:Generator_RowChangedName="DailyRegSummaryDTRowChanged" msprop:Generator_RowEvArgName="DailyRegSummaryDTRowChangeEvent" msprop:Generator_RowClassName="DailyRegSummaryDTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Serial" msprop:Generator_ColumnVarNameInTable="columnSerial" msprop:Generator_ColumnPropNameInRow="Serial" msprop:Generator_ColumnPropNameInTable="SerialColumn" msprop:Generator_UserColumnName="Serial" type="xs:int" />
+              <xs:element name="RegDate" msprop:Generator_ColumnVarNameInTable="columnRegDate" msprop:Generator_ColumnPropNameInRow="RegDate" msprop:Generator_ColumnPropNameInTable="RegDateColumn" msprop:Generator_UserColumnName="RegDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:int" minOccurs="0" />
+              <xs:element name="Current" msprop:Generator_ColumnVarNameInTable="columnCurrent" msprop:Generator_ColumnPropNameInRow="Current" msprop:Generator_ColumnPropNameInTable="CurrentColumn" msprop:Generator_UserColumnName="Current" type="xs:int" minOccurs="0" />
+              <xs:element name="Postponed" msprop:Generator_ColumnVarNameInTable="columnPostponed" msprop:Generator_ColumnPropNameInRow="Postponed" msprop:Generator_ColumnPropNameInTable="PostponedColumn" msprop:Generator_UserColumnName="Postponed" type="xs:int" minOccurs="0" />
+              <xs:element name="ESLPassed" msprop:Generator_ColumnVarNameInTable="columnESLPassed" msprop:Generator_ColumnPropNameInRow="ESLPassed" msprop:Generator_ColumnPropNameInTable="ESLPassedColumn" msprop:Generator_UserColumnName="ESLPassed" type="xs:int" minOccurs="0" />
+              <xs:element name="ESLFaild" msprop:Generator_ColumnVarNameInTable="columnESLFaild" msprop:Generator_ColumnPropNameInRow="ESLFaild" msprop:Generator_ColumnPropNameInTable="ESLFaildColumn" msprop:Generator_UserColumnName="ESLFaild" type="xs:int" minOccurs="0" />
+              <xs:element name="UnregESL" msprop:Generator_ColumnVarNameInTable="columnUnregESL" msprop:Generator_ColumnPropNameInRow="UnregESL" msprop:Generator_ColumnPropNameInTable="UnregESLColumn" msprop:Generator_UserColumnName="UnregESL" type="xs:int" minOccurs="0" />
+              <xs:element name="Extended" msprop:Generator_ColumnVarNameInTable="columnExtended" msprop:Generator_ColumnPropNameInRow="Extended" msprop:Generator_ColumnPropNameInTable="ExtendedColumn" msprop:Generator_UserColumnName="Extended" type="xs:int" minOccurs="0" />
+              <xs:element name="New" msprop:Generator_ColumnVarNameInTable="columnNew" msprop:Generator_ColumnPropNameInRow="New" msprop:Generator_ColumnPropNameInTable="NewColumn" msprop:Generator_UserColumnName="New" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DailyRegSummaryDT" />
+      <xs:field xpath="mstns:Serial" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

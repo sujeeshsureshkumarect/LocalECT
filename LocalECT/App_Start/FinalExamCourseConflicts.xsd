@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FinalExamCourseConflicts" targetNamespace="http://tempuri.org/ConflictsInDay.xsd" xmlns:mstns="http://tempuri.org/ConflictsInDay.xsd" xmlns="http://tempuri.org/ConflictsInDay.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FinalExamCourseConflicts" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="FinalExamCourseConflicts" msprop:Generator_UserDSName="FinalExamCourseConflicts">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ConflictsDT" msprop:Generator_TableClassName="ConflictsDTDataTable" msprop:Generator_TableVarName="tableConflictsDT" msprop:Generator_TablePropName="ConflictsDT" msprop:Generator_RowDeletingName="ConflictsDTRowDeleting" msprop:Generator_UserTableName="ConflictsDT" msprop:Generator_RowChangingName="ConflictsDTRowChanging" msprop:Generator_RowEvHandlerName="ConflictsDTRowChangeEventHandler" msprop:Generator_RowDeletedName="ConflictsDTRowDeleted" msprop:Generator_RowEvArgName="ConflictsDTRowChangeEvent" msprop:Generator_RowChangedName="ConflictsDTRowChanged" msprop:Generator_RowClassName="ConflictsDTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sCourse" msprop:Generator_ColumnVarNameInTable="columnsCourse" msprop:Generator_ColumnPropNameInRow="sCourse" msprop:Generator_ColumnPropNameInTable="sCourseColumn" msprop:Generator_UserColumnName="sCourse" type="xs:string" minOccurs="0" />
+              <xs:element name="iDay" msprop:Generator_ColumnVarNameInTable="columniDay" msprop:Generator_ColumnPropNameInRow="iDay" msprop:Generator_ColumnPropNameInTable="iDayColumn" msprop:Generator_UserColumnName="iDay" type="xs:int" minOccurs="0" />
+              <xs:element name="iGroup" msprop:Generator_ColumnVarNameInTable="columniGroup" msprop:Generator_ColumnPropNameInRow="iGroup" msprop:Generator_ColumnPropNameInTable="iGroupColumn" msprop:Generator_UserColumnName="iGroup" type="xs:int" minOccurs="0" />
+              <xs:element name="iConflicts" msprop:Generator_ColumnVarNameInTable="columniConflicts" msprop:Generator_ColumnPropNameInRow="iConflicts" msprop:Generator_ColumnPropNameInTable="iConflictsColumn" msprop:Generator_UserColumnName="iConflicts" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

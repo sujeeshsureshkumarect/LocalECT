@@ -20,10 +20,22 @@ namespace LocalECT
         {
             if (!IsPostBack)
             {
+                getcurrentterm();
                 Generate_Menu();
             }
         }
 
+        public void getcurrentterm()
+        {
+            int iCSem = 0;
+            int iCYear = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out iCSem);
+            Session["CurrentYear"] = iCYear;
+            Session["CurrentSemester"] = iCSem;
+
+            string sYear = iCYear.ToString() + " / " + (iCYear + 1).ToString();
+            string sSem = LibraryMOD.GetSemesterString(iCSem);
+            lbl_term.Text = sYear + " " + sSem;
+        }
         public void Generate_Menu()
         {
             int RoleId = 0;

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CGPADemo" targetNamespace="http://tempuri.org/CGPADemo.xsd" xmlns:mstns="http://tempuri.org/CGPADemo.xsd" xmlns="http://tempuri.org/CGPADemo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CGPADemo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="CGPADemo" msprop:Generator_DataSetName="CGPADemo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Grades" msprop:Generator_TableClassName="GradesDataTable" msprop:Generator_TableVarName="tableGrades" msprop:Generator_TablePropName="Grades" msprop:Generator_RowDeletingName="GradesRowDeleting" msprop:Generator_RowChangingName="GradesRowChanging" msprop:Generator_RowEvHandlerName="GradesRowChangeEventHandler" msprop:Generator_RowDeletedName="GradesRowDeleted" msprop:Generator_UserTableName="Grades" msprop:Generator_RowChangedName="GradesRowChanged" msprop:Generator_RowEvArgName="GradesRowChangeEvent" msprop:Generator_RowClassName="GradesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" msprop:Generator_UserColumnName="iSerial" type="xs:int" />
+              <xs:element name="sCourse" msprop:Generator_ColumnVarNameInTable="columnsCourse" msprop:Generator_ColumnPropNameInRow="sCourse" msprop:Generator_ColumnPropNameInTable="sCourseColumn" msprop:Generator_UserColumnName="sCourse" type="xs:string" minOccurs="0" />
+              <xs:element name="iCredits" msprop:Generator_ColumnVarNameInTable="columniCredits" msprop:Generator_ColumnPropNameInRow="iCredits" msprop:Generator_ColumnPropNameInTable="iCreditsColumn" msprop:Generator_UserColumnName="iCredits" type="xs:int" minOccurs="0" />
+              <xs:element name="sGrade" msprop:Generator_ColumnVarNameInTable="columnsGrade" msprop:Generator_ColumnPropNameInRow="sGrade" msprop:Generator_ColumnPropNameInTable="sGradeColumn" msprop:Generator_UserColumnName="sGrade" type="xs:string" minOccurs="0" />
+              <xs:element name="dPoints" msprop:Generator_ColumnVarNameInTable="columndPoints" msprop:Generator_ColumnPropNameInRow="dPoints" msprop:Generator_ColumnPropNameInTable="dPointsColumn" msprop:Generator_UserColumnName="dPoints" type="xs:double" minOccurs="0" />
+              <xs:element name="dSum" msprop:Generator_ColumnVarNameInTable="columndSum" msprop:Generator_ColumnPropNameInRow="dSum" msprop:Generator_ColumnPropNameInTable="dSumColumn" msprop:Generator_UserColumnName="dSum" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Grades" />
+      <xs:field xpath="mstns:iSerial" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

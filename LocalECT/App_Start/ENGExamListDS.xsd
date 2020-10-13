@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ENGExamListDS" targetNamespace="http://tempuri.org/ENGExamListDS.xsd" xmlns:mstns="http://tempuri.org/ENGExamListDS.xsd" xmlns="http://tempuri.org/ENGExamListDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ENGExamListDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ENGExamListDS" msprop:Generator_DataSetName="ENGExamListDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ENGExamListDT" msprop:Generator_UserTableName="ENGExamListDT" msprop:Generator_RowDeletedName="ENGExamListDTRowDeleted" msprop:Generator_TableClassName="ENGExamListDTDataTable" msprop:Generator_RowChangedName="ENGExamListDTRowChanged" msprop:Generator_RowClassName="ENGExamListDTRow" msprop:Generator_RowChangingName="ENGExamListDTRowChanging" msprop:Generator_RowEvArgName="ENGExamListDTRowChangeEvent" msprop:Generator_RowEvHandlerName="ENGExamListDTRowChangeEventHandler" msprop:Generator_TablePropName="ENGExamListDT" msprop:Generator_TableVarName="tableENGExamListDT" msprop:Generator_RowDeletingName="ENGExamListDTRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Serial" msprop:Generator_UserColumnName="Serial" msprop:Generator_ColumnPropNameInRow="Serial" msprop:Generator_ColumnVarNameInTable="columnSerial" msprop:Generator_ColumnPropNameInTable="SerialColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="No" msprop:Generator_UserColumnName="No" msprop:Generator_ColumnPropNameInRow="No" msprop:Generator_ColumnVarNameInTable="columnNo" msprop:Generator_ColumnPropNameInTable="NoColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInTable="NameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone1" msprop:Generator_UserColumnName="Phone1" msprop:Generator_ColumnPropNameInRow="Phone1" msprop:Generator_ColumnVarNameInTable="columnPhone1" msprop:Generator_ColumnPropNameInTable="Phone1Column" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone2" msprop:Generator_UserColumnName="Phone2" msprop:Generator_ColumnPropNameInRow="Phone2" msprop:Generator_ColumnVarNameInTable="columnPhone2" msprop:Generator_ColumnPropNameInTable="Phone2Column" type="xs:string" minOccurs="0" />
+              <xs:element name="Voucher" msprop:Generator_UserColumnName="Voucher" msprop:Generator_ColumnPropNameInRow="Voucher" msprop:Generator_ColumnVarNameInTable="columnVoucher" msprop:Generator_ColumnPropNameInTable="VoucherColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="VDate" msprop:Generator_UserColumnName="VDate" msprop:Generator_ColumnPropNameInRow="VDate" msprop:Generator_ColumnVarNameInTable="columnVDate" msprop:Generator_ColumnPropNameInTable="VDateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="VAmount" msprop:Generator_UserColumnName="VAmount" msprop:Generator_ColumnPropNameInRow="VAmount" msprop:Generator_ColumnVarNameInTable="columnVAmount" msprop:Generator_ColumnPropNameInTable="VAmountColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="VYear" msprop:Generator_UserColumnName="VYear" msprop:Generator_ColumnPropNameInRow="VYear" msprop:Generator_ColumnVarNameInTable="columnVYear" msprop:Generator_ColumnPropNameInTable="VYearColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="VSem" msprop:Generator_UserColumnName="VSem" msprop:Generator_ColumnPropNameInRow="VSem" msprop:Generator_ColumnVarNameInTable="columnVSem" msprop:Generator_ColumnPropNameInTable="VSemColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Account" msprop:Generator_UserColumnName="Account" msprop:Generator_ColumnPropNameInRow="Account" msprop:Generator_ColumnVarNameInTable="columnAccount" msprop:Generator_ColumnPropNameInTable="AccountColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ENG" msprop:Generator_UserColumnName="ENG" msprop:Generator_ColumnPropNameInRow="ENG" msprop:Generator_ColumnVarNameInTable="columnENG" msprop:Generator_ColumnPropNameInTable="ENGColumn" type="xs:string" minOccurs="0" />              
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

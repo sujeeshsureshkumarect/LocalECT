@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FinalExam_EW_List" targetNamespace="http://tempuri.org/FinalExam_EW_List.xsd" xmlns:mstns="http://tempuri.org/FinalExam_EW_List.xsd" xmlns="http://tempuri.org/FinalExam_EW_List.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FinalExam_EW_List" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="FinalExam_EW_List" msprop:Generator_DataSetName="FinalExam_EW_List">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FinalExam_EW_List" msprop:Generator_UserTableName="FinalExam_EW_List" msprop:Generator_RowDeletedName="FinalExam_EW_ListRowDeleted" msprop:Generator_RowChangedName="FinalExam_EW_ListRowChanged" msprop:Generator_RowDeletingName="FinalExam_EW_ListRowDeleting" msprop:Generator_RowChangingName="FinalExam_EW_ListRowChanging" msprop:Generator_RowEvArgName="FinalExam_EW_ListRowChangeEvent" msprop:Generator_RowClassName="FinalExam_EW_ListRow" msprop:Generator_RowEvHandlerName="FinalExam_EW_ListRowChangeEventHandler" msprop:Generator_TableClassName="FinalExam_EW_ListDataTable" msprop:Generator_TableVarName="tableFinalExam_EW_List" msprop:Generator_TablePropName="_FinalExam_EW_List">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="lngStudentNumber" msprop:Generator_UserColumnName="lngStudentNumber" msprop:Generator_ColumnVarNameInTable="columnlngStudentNumber" msprop:Generator_ColumnPropNameInRow="lngStudentNumber" msprop:Generator_ColumnPropNameInTable="lngStudentNumberColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sName" msprop:Generator_UserColumnName="sName" msprop:Generator_ColumnVarNameInTable="columnsName" msprop:Generator_ColumnPropNameInRow="sName" msprop:Generator_ColumnPropNameInTable="sNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strCourse" msprop:Generator_UserColumnName="strCourse" msprop:Generator_ColumnVarNameInTable="columnstrCourse" msprop:Generator_ColumnPropNameInRow="strCourse" msprop:Generator_ColumnPropNameInTable="strCourseColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strCourseDescEn" msprop:Generator_UserColumnName="strCourseDescEn" msprop:Generator_ColumnVarNameInTable="columnstrCourseDescEn" msprop:Generator_ColumnPropNameInRow="strCourseDescEn" msprop:Generator_ColumnPropNameInTable="strCourseDescEnColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strGrade" msprop:Generator_UserColumnName="strGrade" msprop:Generator_ColumnVarNameInTable="columnstrGrade" msprop:Generator_ColumnPropNameInRow="strGrade" msprop:Generator_ColumnPropNameInTable="strGradeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCampus" msprop:Generator_UserColumnName="sCampus" msprop:Generator_ColumnVarNameInTable="columnsCampus" msprop:Generator_ColumnPropNameInRow="sCampus" msprop:Generator_ColumnPropNameInTable="sCampusColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="iDay" msprop:Generator_UserColumnName="iDay" msprop:Generator_ColumnVarNameInTable="columniDay" msprop:Generator_ColumnPropNameInRow="iDay" msprop:Generator_ColumnPropNameInTable="iDayColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="dTime" msprop:Generator_UserColumnName="dTime" msprop:Generator_ColumnVarNameInTable="columndTime" msprop:Generator_ColumnPropNameInRow="dTime" msprop:Generator_ColumnPropNameInTable="dTimeColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="dateLastSave" msprop:Generator_UserColumnName="dateLastSave" msprop:Generator_ColumnVarNameInTable="columndateLastSave" msprop:Generator_ColumnPropNameInRow="dateLastSave" msprop:Generator_ColumnPropNameInTable="dateLastSaveColumn" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -122,7 +122,9 @@
                                         <asp:LinkButton ID="lnk_Logout" runat="server" CssClass="dropdown-item" OnClick="lnk_Logout_Click"><i class="fa fa-sign-out pull-right"></i> Log Out</asp:LinkButton>                                        
                                     </div>
                                 </li>
-
+                                <li role="presentation" class="nav-item dropdown open">
+                                    <h2><asp:Label id="lbl_term" runat="server"></asp:Label></h2>                                   
+                                </li>
 
                             </ul>
                         </nav>

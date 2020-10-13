@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StudentChangedMajor" targetNamespace="http://tempuri.org/StudentChangedMajor.xsd" xmlns:mstns="http://tempuri.org/StudentChangedMajor.xsd" xmlns="http://tempuri.org/StudentChangedMajor.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StudentChangedMajor" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="StudentChangedMajor" msprop:Generator_UserDSName="StudentChangedMajor">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StudentChangedMajor" msprop:Generator_TableClassName="StudentChangedMajorDataTable" msprop:Generator_TableVarName="tableStudentChangedMajor" msprop:Generator_TablePropName="_StudentChangedMajor" msprop:Generator_RowDeletingName="StudentChangedMajorRowDeleting" msprop:Generator_UserTableName="StudentChangedMajor" msprop:Generator_RowChangingName="StudentChangedMajorRowChanging" msprop:Generator_RowEvHandlerName="StudentChangedMajorRowChangeEventHandler" msprop:Generator_RowDeletedName="StudentChangedMajorRowDeleted" msprop:Generator_RowEvArgName="StudentChangedMajorRowChangeEvent" msprop:Generator_RowChangedName="StudentChangedMajorRowChanged" msprop:Generator_RowClassName="StudentChangedMajorRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" msprop:Generator_UserColumnName="iSerial" type="xs:int" minOccurs="0" />
+              <xs:element name="sStudentID" msprop:Generator_ColumnVarNameInTable="columnsStudentID" msprop:Generator_ColumnPropNameInRow="sStudentID" msprop:Generator_ColumnPropNameInTable="sStudentIDColumn" msprop:Generator_UserColumnName="sStudentID" type="xs:string" minOccurs="0" />
+              <xs:element name="sName" msprop:Generator_ColumnVarNameInTable="columnsName" msprop:Generator_ColumnPropNameInRow="sName" msprop:Generator_ColumnPropNameInTable="sNameColumn" msprop:Generator_UserColumnName="sName" type="xs:string" minOccurs="0" />
+              <xs:element name="sDegreeFrom" msprop:Generator_ColumnVarNameInTable="columnsDegreeFrom" msprop:Generator_ColumnPropNameInRow="sDegreeFrom" msprop:Generator_ColumnPropNameInTable="sDegreeFromColumn" msprop:Generator_UserColumnName="sDegreeFrom" type="xs:string" minOccurs="0" />
+              <xs:element name="sMajorFrom" msprop:Generator_ColumnVarNameInTable="columnsMajorFrom" msprop:Generator_ColumnPropNameInRow="sMajorFrom" msprop:Generator_ColumnPropNameInTable="sMajorFromColumn" msprop:Generator_UserColumnName="sMajorFrom" type="xs:string" minOccurs="0" />
+              <xs:element name="sDegreeTo" msprop:Generator_ColumnVarNameInTable="columnsDegreeTo" msprop:Generator_ColumnPropNameInRow="sDegreeTo" msprop:Generator_ColumnPropNameInTable="sDegreeToColumn" msprop:Generator_UserColumnName="sDegreeTo" type="xs:string" minOccurs="0" />
+              <xs:element name="sMajorTo" msprop:Generator_ColumnVarNameInTable="columnsMajorTo" msprop:Generator_ColumnPropNameInRow="sMajorTo" msprop:Generator_ColumnPropNameInTable="sMajorToColumn" msprop:Generator_UserColumnName="sMajorTo" type="xs:string" minOccurs="0" />
+              <xs:element name="sShift" msprop:Generator_ColumnVarNameInTable="columnsShift" msprop:Generator_ColumnPropNameInRow="sShift" msprop:Generator_ColumnPropNameInTable="sShiftColumn" msprop:Generator_UserColumnName="sShift" type="xs:string" minOccurs="0" />
+              <xs:element name="sTerm" msprop:Generator_ColumnVarNameInTable="columnsTerm" msprop:Generator_ColumnPropNameInRow="sTerm" msprop:Generator_ColumnPropNameInTable="sTermColumn" msprop:Generator_UserColumnName="sTerm" type="xs:string" minOccurs="0" />
+              <xs:element name="sTermTo" msprop:Generator_ColumnVarNameInTable="columnsTermTo" msprop:Generator_ColumnPropNameInRow="sTermTo" msprop:Generator_ColumnPropNameInTable="sTermToColumn" msprop:Generator_UserColumnName="sTermTo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

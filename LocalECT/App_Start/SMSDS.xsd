@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SMSDS" targetNamespace="http://tempuri.org/SMSDS.xsd" xmlns:mstns="http://tempuri.org/SMSDS.xsd" xmlns="http://tempuri.org/SMSDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SMSDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="SMSDS" msprop:Generator_DataSetName="SMSDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SMSTB" msprop:Generator_TableClassName="SMSTBDataTable" msprop:Generator_TableVarName="tableSMSTB" msprop:Generator_TablePropName="SMSTB" msprop:Generator_RowDeletingName="SMSTBRowDeleting" msprop:Generator_RowChangingName="SMSTBRowChanging" msprop:Generator_RowEvHandlerName="SMSTBRowChangeEventHandler" msprop:Generator_RowDeletedName="SMSTBRowDeleted" msprop:Generator_UserTableName="SMSTB" msprop:Generator_RowChangedName="SMSTBRowChanged" msprop:Generator_RowEvArgName="SMSTBRowChangeEvent" msprop:Generator_RowClassName="SMSTBRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sID" msprop:Generator_ColumnVarNameInTable="columnsID" msprop:Generator_ColumnPropNameInRow="sID" msprop:Generator_ColumnPropNameInTable="sIDColumn" msprop:Generator_UserColumnName="sID" type="xs:string" />
+              <xs:element name="sPhone" msprop:Generator_ColumnVarNameInTable="columnsPhone" msprop:Generator_ColumnPropNameInRow="sPhone" msprop:Generator_ColumnPropNameInTable="sPhoneColumn" msprop:Generator_UserColumnName="sPhone" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SMSTB" />
+      <xs:field xpath="mstns:sID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

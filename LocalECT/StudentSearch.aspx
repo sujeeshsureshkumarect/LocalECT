@@ -19,7 +19,7 @@
                         list-style: none;
                         background-color: #ededed;
                         border-radius: 4px;
-                        font-size: 14px;
+                        font-size: 13px;
                     }
 
                     .page-title .title_left {

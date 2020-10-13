@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PcCheckDetails" targetNamespace="http://tempuri.org/PcCheckDetails.xsd" xmlns:mstns="http://tempuri.org/PcCheckDetails.xsd" xmlns="http://tempuri.org/PcCheckDetails.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PcCheckDetails" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="PcCheckDetails" msprop:Generator_UserDSName="PcCheckDetails">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="WeekDetails" msprop:Generator_TableClassName="WeekDetailsDataTable" msprop:Generator_TableVarName="tableWeekDetails" msprop:Generator_TablePropName="WeekDetails" msprop:Generator_RowDeletingName="WeekDetailsRowDeleting" msprop:Generator_RowChangingName="WeekDetailsRowChanging" msprop:Generator_RowEvHandlerName="WeekDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekDetailsRowDeleted" msprop:Generator_UserTableName="WeekDetails" msprop:Generator_RowChangedName="WeekDetailsRowChanged" msprop:Generator_RowEvArgName="WeekDetailsRowChangeEvent" msprop:Generator_RowClassName="WeekDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="_x0023_" msprop:Generator_ColumnVarNameInTable="_column_" msprop:Generator_ColumnPropNameInRow="__" msprop:Generator_ColumnPropNameInTable="__Column" msprop:Generator_UserColumnName="#" type="xs:int" />
+              <xs:element name="Campus" msprop:Generator_ColumnVarNameInTable="columnCampus" msprop:Generator_ColumnPropNameInRow="Campus" msprop:Generator_ColumnPropNameInTable="CampusColumn" msprop:Generator_UserColumnName="Campus" type="xs:string" minOccurs="0" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
+              <xs:element name="Pc" msprop:Generator_ColumnVarNameInTable="columnPc" msprop:Generator_ColumnPropNameInRow="Pc" msprop:Generator_ColumnPropNameInTable="PcColumn" msprop:Generator_UserColumnName="Pc" type="xs:string" minOccurs="0" />
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
+              <xs:element name="Day" msprop:Generator_ColumnVarNameInTable="columnDay" msprop:Generator_ColumnPropNameInRow="Day" msprop:Generator_ColumnPropNameInTable="DayColumn" msprop:Generator_UserColumnName="Day" type="xs:string" minOccurs="0" />
+              <xs:element name="User" msprop:Generator_ColumnVarNameInTable="columnUser" msprop:Generator_ColumnPropNameInRow="User" msprop:Generator_ColumnPropNameInTable="UserColumn" msprop:Generator_UserColumnName="User" type="xs:string" minOccurs="0" />
+              <xs:element name="Hardware" msprop:Generator_ColumnVarNameInTable="columnHardware" msprop:Generator_ColumnPropNameInRow="Hardware" msprop:Generator_ColumnPropNameInTable="HardwareColumn" msprop:Generator_UserColumnName="Hardware" type="xs:string" minOccurs="0" />
+              <xs:element name="Software" msprop:Generator_ColumnVarNameInTable="columnSoftware" msprop:Generator_ColumnPropNameInRow="Software" msprop:Generator_ColumnPropNameInTable="SoftwareColumn" msprop:Generator_UserColumnName="Software" type="xs:string" minOccurs="0" />
+              <xs:element name="Browser" msprop:Generator_ColumnVarNameInTable="columnBrowser" msprop:Generator_ColumnPropNameInRow="Browser" msprop:Generator_ColumnPropNameInTable="BrowserColumn" msprop:Generator_UserColumnName="Browser" type="xs:string" minOccurs="0" />
+              <xs:element name="Internet" msprop:Generator_ColumnVarNameInTable="columnInternet" msprop:Generator_ColumnPropNameInRow="Internet" msprop:Generator_ColumnPropNameInTable="InternetColumn" msprop:Generator_UserColumnName="Internet" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:WeekDetails" />
+      <xs:field xpath="mstns:_x0023_" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

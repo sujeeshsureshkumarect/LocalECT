@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CrossDS" targetNamespace="http://tempuri.org/CrossDS.xsd" xmlns:mstns="http://tempuri.org/CrossDS.xsd" xmlns="http://tempuri.org/CrossDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CrossDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="CrossDS" msprop:Generator_DataSetName="CrossDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CrossTBL" msprop:Generator_UserTableName="CrossTBL" msprop:Generator_RowDeletedName="CrossTBLRowDeleted" msprop:Generator_TableClassName="CrossTBLDataTable" msprop:Generator_RowChangedName="CrossTBLRowChanged" msprop:Generator_RowClassName="CrossTBLRow" msprop:Generator_RowChangingName="CrossTBLRowChanging" msprop:Generator_RowEvArgName="CrossTBLRowChangeEvent" msprop:Generator_RowEvHandlerName="CrossTBLRowChangeEventHandler" msprop:Generator_TablePropName="CrossTBL" msprop:Generator_TableVarName="tableCrossTBL" msprop:Generator_RowDeletingName="CrossTBLRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_UserColumnName="iSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="sRow" msprop:Generator_UserColumnName="sRow" msprop:Generator_ColumnPropNameInRow="sRow" msprop:Generator_ColumnVarNameInTable="columnsRow" msprop:Generator_ColumnPropNameInTable="sRowColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="sCol" msprop:Generator_UserColumnName="sCol" msprop:Generator_ColumnPropNameInRow="sCol" msprop:Generator_ColumnVarNameInTable="columnsCol" msprop:Generator_ColumnPropNameInTable="sColColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="dValue" msprop:Generator_UserColumnName="dValue" msprop:Generator_ColumnPropNameInRow="dValue" msprop:Generator_ColumnVarNameInTable="columndValue" msprop:Generator_ColumnPropNameInTable="dValueColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

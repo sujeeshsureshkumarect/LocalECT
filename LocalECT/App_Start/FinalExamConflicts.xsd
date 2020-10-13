@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FinalExamConflicts" targetNamespace="http://tempuri.org/FinalExamConflicts.xsd" xmlns:mstns="http://tempuri.org/FinalExamConflicts.xsd" xmlns="http://tempuri.org/FinalExamConflicts.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FinalExamConflicts" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="FinalExamConflicts" msprop:Generator_UserDSName="FinalExamConflicts">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FinalExamConflicts" msprop:Generator_UserTableName="FinalExamConflicts" msprop:Generator_RowEvArgName="FinalExamConflictsRowChangeEvent" msprop:Generator_TableVarName="tableFinalExamConflicts" msprop:Generator_TablePropName="_FinalExamConflicts" msprop:Generator_RowDeletingName="FinalExamConflictsRowDeleting" msprop:Generator_RowChangingName="FinalExamConflictsRowChanging" msprop:Generator_RowDeletedName="FinalExamConflictsRowDeleted" msprop:Generator_RowEvHandlerName="FinalExamConflictsRowChangeEventHandler" msprop:Generator_TableClassName="FinalExamConflictsDataTable" msprop:Generator_RowChangedName="FinalExamConflictsRowChanged" msprop:Generator_RowClassName="FinalExamConflictsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Student" msprop:Generator_ColumnVarNameInTable="columnStudent" msprop:Generator_ColumnPropNameInRow="Student" msprop:Generator_ColumnPropNameInTable="StudentColumn" msprop:Generator_UserColumnName="Student" type="xs:string" minOccurs="0" />
+              <xs:element name="strLastDescEn" msprop:Generator_ColumnVarNameInTable="columnstrLastDescEn" msprop:Generator_ColumnPropNameInRow="strLastDescEn" msprop:Generator_ColumnPropNameInTable="strLastDescEnColumn" msprop:Generator_UserColumnName="strLastDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="strPhone1" msprop:Generator_ColumnVarNameInTable="columnstrPhone1" msprop:Generator_ColumnPropNameInRow="strPhone1" msprop:Generator_ColumnPropNameInTable="strPhone1Column" msprop:Generator_UserColumnName="strPhone1" type="xs:string" minOccurs="0" />
+              <xs:element name="Course" msprop:Generator_ColumnVarNameInTable="columnCourse" msprop:Generator_ColumnPropNameInRow="Course" msprop:Generator_ColumnPropNameInTable="CourseColumn" msprop:Generator_UserColumnName="Course" type="xs:string" minOccurs="0" />
+              <xs:element name="strCourseDescEn" msprop:Generator_ColumnVarNameInTable="columnstrCourseDescEn" msprop:Generator_ColumnPropNameInRow="strCourseDescEn" msprop:Generator_ColumnPropNameInTable="strCourseDescEnColumn" msprop:Generator_UserColumnName="strCourseDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="StudentInfo" msprop:Generator_ColumnVarNameInTable="columnStudentInfo" msprop:Generator_ColumnPropNameInRow="StudentInfo" msprop:Generator_ColumnPropNameInTable="StudentInfoColumn" msprop:Generator_UserColumnName="StudentInfo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

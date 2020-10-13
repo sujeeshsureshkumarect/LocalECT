@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RegTracker" targetNamespace="http://tempuri.org/RegTracker.xsd" xmlns:mstns="http://tempuri.org/RegTracker.xsd" xmlns="http://tempuri.org/RegTracker.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RegTracker" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="RegTracker" msprop:Generator_UserDSName="RegTracker">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RegTracker" msprop:Generator_TableClassName="RegTrackerDataTable" msprop:Generator_TableVarName="tableRegTracker" msprop:Generator_TablePropName="_RegTracker" msprop:Generator_RowDeletingName="RegTrackerRowDeleting" msprop:Generator_RowChangingName="RegTrackerRowChanging" msprop:Generator_RowEvHandlerName="RegTrackerRowChangeEventHandler" msprop:Generator_RowDeletedName="RegTrackerRowDeleted" msprop:Generator_UserTableName="RegTracker" msprop:Generator_RowChangedName="RegTrackerRowChanged" msprop:Generator_RowEvArgName="RegTrackerRowChangeEvent" msprop:Generator_RowClassName="RegTrackerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="iSerial" msprop:Generator_ColumnVarNameInTable="columniSerial" msprop:Generator_ColumnPropNameInRow="iSerial" msprop:Generator_ColumnPropNameInTable="iSerialColumn" msprop:Generator_UserColumnName="iSerial" type="xs:int" />
+              <xs:element name="Joined" msprop:Generator_ColumnVarNameInTable="columnJoined" msprop:Generator_ColumnPropNameInRow="Joined" msprop:Generator_ColumnPropNameInTable="JoinedColumn" msprop:Generator_UserColumnName="Joined" type="xs:string" minOccurs="0" />
+              <xs:element name="SID" msprop:Generator_ColumnVarNameInTable="columnSID" msprop:Generator_ColumnPropNameInRow="SID" msprop:Generator_ColumnPropNameInTable="SIDColumn" msprop:Generator_UserColumnName="SID" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Major" msprop:Generator_ColumnVarNameInTable="columnMajor" msprop:Generator_ColumnPropNameInRow="Major" msprop:Generator_ColumnPropNameInTable="MajorColumn" msprop:Generator_UserColumnName="Major" type="xs:string" minOccurs="0" />
+              <xs:element name="WMajor" msprop:Generator_ColumnVarNameInTable="columnWMajor" msprop:Generator_ColumnPropNameInRow="WMajor" msprop:Generator_ColumnPropNameInTable="WMajorColumn" msprop:Generator_UserColumnName="WMajor" type="xs:string" minOccurs="0" />
+              <xs:element name="ENG" msprop:Generator_ColumnVarNameInTable="columnENG" msprop:Generator_ColumnPropNameInRow="ENG" msprop:Generator_ColumnPropNameInTable="ENGColumn" msprop:Generator_UserColumnName="ENG" type="xs:string" minOccurs="0" />
+              <xs:element name="Score" msprop:Generator_ColumnVarNameInTable="columnScore" msprop:Generator_ColumnPropNameInRow="Score" msprop:Generator_ColumnPropNameInTable="ScoreColumn" msprop:Generator_UserColumnName="Score" type="xs:string" minOccurs="0" />
+              <xs:element name="IsReg" msprop:Generator_ColumnVarNameInTable="columnIsReg" msprop:Generator_ColumnPropNameInRow="IsReg" msprop:Generator_ColumnPropNameInTable="IsRegColumn" msprop:Generator_UserColumnName="IsReg" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="STerm" msprop:Generator_ColumnVarNameInTable="columnSTerm" msprop:Generator_ColumnPropNameInRow="STerm" msprop:Generator_ColumnPropNameInTable="STermColumn" msprop:Generator_UserColumnName="STerm" type="xs:string" minOccurs="0" />
+              <xs:element name="Ref" msprop:Generator_ColumnVarNameInTable="columnRef" msprop:Generator_ColumnPropNameInRow="Ref" msprop:Generator_ColumnPropNameInTable="RefColumn" msprop:Generator_UserColumnName="Ref" type="xs:string" minOccurs="0" />
+              <xs:element name="RJoined" msprop:Generator_ColumnVarNameInTable="columnRJoined" msprop:Generator_ColumnPropNameInRow="RJoined" msprop:Generator_ColumnPropNameInTable="RJoinedColumn" msprop:Generator_UserColumnName="RJoined" type="xs:string" minOccurs="0" />
+              <xs:element name="NMajor" msprop:Generator_ColumnVarNameInTable="columnNMajor" msprop:Generator_ColumnPropNameInRow="NMajor" msprop:Generator_ColumnPropNameInTable="NMajorColumn" msprop:Generator_UserColumnName="NMajor" type="xs:string" minOccurs="0" />
+              <xs:element name="EID" msprop:Generator_ColumnVarNameInTable="columnEID" msprop:Generator_ColumnPropNameInRow="EID" msprop:Generator_ColumnPropNameInTable="EIDColumn" msprop:Generator_UserColumnName="EID" type="xs:string" minOccurs="0" />
+              <xs:element name="EMajor" msprop:Generator_ColumnVarNameInTable="columnEMajor" msprop:Generator_ColumnPropNameInRow="EMajor" msprop:Generator_ColumnPropNameInTable="EMajorColumn" msprop:Generator_UserColumnName="EMajor" type="xs:string" minOccurs="0" />
+              <xs:element name="Session" msprop:Generator_ColumnVarNameInTable="columnSession" msprop:Generator_ColumnPropNameInRow="Session" msprop:Generator_ColumnPropNameInTable="SessionColumn" msprop:Generator_UserColumnName="Session" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RegTracker" />
+      <xs:field xpath="mstns:iSerial" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

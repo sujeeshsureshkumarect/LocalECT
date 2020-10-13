@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="All_Courses" targetNamespace="http://tempuri.org/All_Courses.xsd" xmlns:mstns="http://tempuri.org/All_Courses.xsd" xmlns="http://tempuri.org/All_Courses.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="All_Courses" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="All_Courses" msprop:Generator_DataSetName="All_Courses">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="All_Courses" msprop:Generator_TableClassName="All_CoursesDataTable" msprop:Generator_TableVarName="tableAll_Courses" msprop:Generator_TablePropName="_All_Courses" msprop:Generator_RowDeletingName="All_CoursesRowDeleting" msprop:Generator_UserTableName="All_Courses" msprop:Generator_RowChangingName="All_CoursesRowChanging" msprop:Generator_RowEvHandlerName="All_CoursesRowChangeEventHandler" msprop:Generator_RowDeletedName="All_CoursesRowDeleted" msprop:Generator_RowEvArgName="All_CoursesRowChangeEvent" msprop:Generator_RowChangedName="All_CoursesRowChanged" msprop:Generator_RowClassName="All_CoursesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sCollege" msprop:Generator_ColumnVarNameInTable="columnsCollege" msprop:Generator_ColumnPropNameInRow="sCollege" msprop:Generator_ColumnPropNameInTable="sCollegeColumn" msprop:Generator_UserColumnName="sCollege" type="xs:string" minOccurs="0" />
+              <xs:element name="sCourse" msprop:Generator_ColumnVarNameInTable="columnsCourse" msprop:Generator_ColumnPropNameInRow="sCourse" msprop:Generator_ColumnPropNameInTable="sCourseColumn" msprop:Generator_UserColumnName="sCourse" type="xs:string" minOccurs="0" />
+              <xs:element name="sUnified" msprop:Generator_ColumnVarNameInTable="columnsUnified" msprop:Generator_ColumnPropNameInRow="sUnified" msprop:Generator_ColumnPropNameInTable="sUnifiedColumn" msprop:Generator_UserColumnName="sUnified" type="xs:string" minOccurs="0" />
+              <xs:element name="sCourseDesc" msprop:Generator_ColumnVarNameInTable="columnsCourseDesc" msprop:Generator_ColumnPropNameInRow="sCourseDesc" msprop:Generator_ColumnPropNameInTable="sCourseDescColumn" msprop:Generator_UserColumnName="sCourseDesc" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,618 @@
+using Microsoft.VisualBasic;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+
+using System.Data.SqlClient;
+using ECTGlobalDll;
+
+Public Class StudentPicCls
+{
+	//Creation Date: 24/05/2009 10:11:12 AM
+	//Programmer Name : Bahaa Addin Ghaleb Najem
+	//-----Decleration --------------
+	private string m_TableName;
+	private int m_lngCurRow;
+	public System.Data.SqlClient.SqlDataAdapter daStudentPic;
+	private DataSet m_dsStudentPic;
+	public DataRow StudentPicDataRow;
+	private string m_StudentIDFN;
+	private string m_PicFN;
+	private string m_NameFN;
+	private string m_PicPathFN;
+	private string m_IsPrintedFN;
+	private string m_StudentID;
+	private System.Drawing.Image m_Pic;
+	private string m_Name;
+	private string m_PicPath;
+	private int m_IsPrinted;
+	//-----------------------------------------------------
+	public string TableName {
+		get { return m_TableName; }
+		set { m_TableName = value; }
+	}
+	public DataSet dsStudentPic {
+		get { return m_dsStudentPic; }
+		set { m_dsStudentPic = value; }
+	}
+	//-----------------------------------------------------
+	public string StudentIDFN {
+		get { return m_StudentIDFN; }
+		set { m_StudentIDFN = value; }
+	}
+	public string PicFN {
+		get { return m_PicFN; }
+		set { m_PicFN = value; }
+	}
+	public string NameFN {
+		get { return m_NameFN; }
+		set { m_NameFN = value; }
+	}
+	public string PicPathFN {
+		get { return m_PicPathFN; }
+
+		set { m_PicPathFN = value; }
+	}
+
+	public string IsPrintedFN {
+		get { return m_IsPrintedFN; }
+
+		set { m_IsPrintedFN = value; }
+	}
+
+
+	//-----------------------------------------------------
+	public string StudentID {
+		get { return m_StudentID; }
+		set { m_StudentID = value; }
+	}
+
+	public System.Drawing.Image Pic {
+		get { return m_Pic; }
+		set { m_Pic = value; }
+	}
+	public string Name {
+		get { return m_Name; }
+		set { m_Name = value; }
+	}
+	public string PicPath {
+		get { return m_PicPath; }
+		set { m_PicPath = value; }
+	}
+
+	public int IsPrinted {
+		get { return m_IsPrinted; }
+		set { m_IsPrinted = value; }
+	}
+	//-----------------------------------------------------
+	public int lngCurRow {
+		get { return m_lngCurRow; }
+		set { m_lngCurRow = value; }
+	}
+	//================End Properties ===================
+    Public StudentPicCls()
+	{
+		try {
+			this.TableName = "Reg_StudentPic";
+
+			this.StudentIDFN = m_TableName + ".StudentID";
+			this.PicFN = m_TableName + ".Pic";
+			this.NameFN = m_TableName + ".Name";
+			this.PicPathFN = m_TableName + ".PicPath";
+			this.IsPrintedFN = m_TableName + ".IsPrinted";
+
+			dsStudentPic = new DataSet();
+
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+
+		} finally {
+		}
+	}
+	//-----Get SQl Function ---------------------------------
+	public string GetSQL()
+	{
+		string sSQL = "";
+		try {
+			sSQL = "SELECT ";
+			sSQL += StudentIDFN;
+			sSQL += " , " + PicFN;
+			sSQL += " , " + NameFN;
+			sSQL += " , " + PicPathFN;
+			sSQL += " , " + IsPrintedFN;
+			sSQL += "  FROM " + m_TableName;
+
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return sSQL;
+	}
+	//-----Get GetSelectCommand Function -----------------------
+	public string GetSelectCommand()
+	{
+		string sSQL = "";
+		try {
+			sSQL = "SELECT ";
+			sSQL += StudentIDFN;
+			sSQL += " , " + PicFN;
+			sSQL += " , " + NameFN;
+			sSQL += " , " + PicPathFN;
+			sSQL += " , " + IsPrintedFN;
+			sSQL += "  FROM " + m_TableName;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return sSQL;
+	}
+	//-----Get GetUpdateCommand Function -----------------------
+	public string GetUpdateCommand()
+	{
+		string sSQL = "";
+		try {
+			sSQL = "UPDATE " + TableName;
+			sSQL += " SET ";
+			sSQL += GetFieldName(StudentIDFN) + "=@StudentID";
+			sSQL += " , " + GetFieldName(PicFN) + "=@Pic";
+			sSQL += " , " + GetFieldName(NameFN) + "=@Name";
+			sSQL += " , " + GetFieldName(PicPathFN) + "=@PicPath";
+			sSQL += " , " + GetFieldName(IsPrintedFN) + "=@IsPrinted";
+			sSQL += " WHERE ";
+			sSQL += GetFieldName(StudentIDFN) + "=@StudentID";
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return sSQL;
+	}
+	//-----Get GetInsertCommand Function -----------------------
+	public string GetInsertCommand()
+	{
+		string sSQL = "";
+		try {
+			sSQL = "INSERT INTO " + TableName;
+			sSQL += "( ";
+			sSQL += GetFieldName(StudentIDFN);
+			sSQL += " , " + GetFieldName(PicFN);
+			sSQL += " , " + GetFieldName(NameFN);
+			sSQL += " , " + GetFieldName(PicPathFN);
+			sSQL += " , " + GetFieldName(IsPrintedFN);
+			sSQL += ")";
+			sSQL += " VALUES ";
+			sSQL += "( ";
+			sSQL += " @StudentID";
+			sSQL += " ,@Pic";
+			sSQL += " ,@Name";
+			sSQL += " ,@PicPath";
+			sSQL += " ,@IsPrinted";
+			sSQL += ") ";
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return sSQL;
+	}
+	//-----Get GetDeleteCommand Function -----------------------
+	public string GetDeleteCommand()
+	{
+		string sSQL = "";
+		try {
+			sSQL = "DELETE FROM " + TableName;
+			sSQL += " WHERE ";
+			sSQL += GetFieldName(StudentIDFN) + "=@StudentID";
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return sSQL;
+	}
+	//-------Get DataAdapter  -----------------------------
+	public virtual SqlClient.SqlDataAdapter GetStudentPicDataAdapter(SqlConnection con, string sCondition)
+	{
+		string sSQL = null;
+		try {
+			sSQL = GetSQL();
+			sSQL += " " + sCondition;
+			//-----------------------------------------
+			daStudentPic = new System.Data.SqlClient.SqlDataAdapter(sSQL, con);
+			//' Create command builder. This line automatically generates the update commands for you, so you don't
+			//' have to provide or create your own.
+			System.Data.SqlClient.SqlCommandBuilder myDataRowsCommandBuilder = new System.Data.SqlClient.SqlCommandBuilder(daStudentPic);
+			//'Set the MissingSchemaAction property to AddWithKey because Fill will not cause primary
+			//' key & unique key information to be retrieved unless AddWithKey is specified.
+			daStudentPic.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return daStudentPic;
+	}
+	public virtual SqlClient.SqlDataAdapter GetStudentPicDataAdapter(SqlConnection con)
+	{
+		try {
+			daStudentPic = new System.Data.SqlClient.SqlDataAdapter();
+			//'Set the MissingSchemaAction property to AddWithKey because Fill will not cause primary
+			//' key & unique key information to be retrieved unless AddWithKey is specified.
+			daStudentPic.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+			//-----------------------------------------
+			System.Data.SqlClient.SqlParameter Parmeter = null;
+			//[SELECT COMMAND]
+			System.Data.SqlClient.SqlCommand cmdStudentPic = new System.Data.SqlClient.SqlCommand(GetSelectCommand(), con);
+			//cmdRolePermission.Parameters.Add("@StudentID", SqlDbType.Int, 4, "StudentID" )
+			daStudentPic.SelectCommand = cmdStudentPic;
+			//Add Handlers
+			//RowUpdating,RowUpdated
+			AddDAEventHandler();
+			//[UPDATE COMMAND].
+			cmdStudentPic = new System.Data.SqlClient.SqlCommand(GetUpdateCommand(), con);
+			//Delete PK Parameteres from here. b/c its declared below
+
+			cmdStudentPic.Parameters.Add("@Pic", SqlDbType.Image, 0, GetFieldName(PicFN));
+			cmdStudentPic.Parameters.Add("@Name", SqlDbType.NVarChar, 120, GetFieldName(NameFN));
+			cmdStudentPic.Parameters.Add("@PicPath", SqlDbType.NVarChar, 250, GetFieldName(PicPathFN));
+			cmdStudentPic.Parameters.Add("@IsPrinted", SqlDbType.Int, 4, GetFieldName(IsPrintedFN));
+
+			Parmeter = cmdStudentPic.Parameters.Add("@StudentID", SqlDbType.Int, 4, GetFieldName(StudentIDFN));
+			Parmeter.SourceVersion = DataRowVersion.Original;
+			//Its should be none for batch updating
+			//UpdateCommand, InsertCommand, and DeleteCommand 
+			//should be set to None or OutputParameters
+			daStudentPic.UpdateCommand = cmdStudentPic;
+			daStudentPic.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
+			//-------------------------
+			///INSERT COMMAND
+			cmdStudentPic = new System.Data.SqlClient.SqlCommand(GetInsertCommand(), con);
+			cmdStudentPic.Parameters.Add("@StudentID", SqlDbType.NVarChar, 24, GetFieldName(StudentIDFN));
+			cmdStudentPic.Parameters.Add("@Pic", SqlDbType.Image, 0, GetFieldName(PicFN));
+			cmdStudentPic.Parameters.Add("@Name", SqlDbType.NVarChar, 120, GetFieldName(NameFN));
+			cmdStudentPic.Parameters.Add("@PicPath", SqlDbType.NVarChar, 250, GetFieldName(PicPathFN));
+			cmdStudentPic.Parameters.Add("@IsPrinted", SqlDbType.Int, 4, GetFieldName(IsPrintedFN));
+
+			Parmeter.SourceVersion = DataRowVersion.Current;
+			daStudentPic.InsertCommand = cmdStudentPic;
+			daStudentPic.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
+			//------------------------
+			///DELETE COMMAND
+			cmdStudentPic = new System.Data.SqlClient.SqlCommand(GetDeleteCommand(), con);
+			Parmeter = cmdStudentPic.Parameters.Add("@StudentID", SqlDbType.NVarChar, 12, GetFieldName(StudentIDFN));
+			Parmeter.SourceVersion = DataRowVersion.Original;
+			daStudentPic.DeleteCommand = cmdStudentPic;
+			daStudentPic.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
+			//Batch Size
+			// Set the batch size.
+			daStudentPic.UpdateBatchSize = BATCH_SIZE;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+			con.Close();
+		}
+		return daStudentPic;
+	}
+	//-------SaveData  -----------------------------
+	public int SaveData(int lFormMode)
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			switch (lFormMode) {
+				case enumModes.NewMode:
+					System.Data.DataRow dr = null;
+					dr = dsStudentPic.Tables[TableName].NewRow();
+					dr[GetFieldName(StudentIDFN)] = StudentID;
+					byte[] impByte = null;
+					if ((Pic != null)) {
+						System.IO.MemoryStream ms = new System.IO.MemoryStream();
+
+						Pic.Save(ms, Pic.RawFormat);
+
+						impByte = ms.GetBuffer();
+					} else {
+						impByte = null;
+					}
+
+					dr[GetFieldName(PicFN)] = impByte;
+
+					dr[GetFieldName(NameFN)] = Name;
+					dr[GetFieldName(PicPathFN)] = PicPath;
+					dr[GetFieldName(IsPrintedFN)] = IsPrinted;
+
+					//dr(GetFieldName(CreationUserIDFN)) = gUserNo
+					//dr(GetFieldName(CreationDateFN)) = Now ' CreationDate
+					//dr(GetFieldName(LastUpdateUserIDFN)) = gUserNo  'LastUpdateUserID
+					//dr(GetFieldName(LastUpdateDateFN)) = Now 'LastUpdateDate
+					//dr(GetFieldName(PCNameFN)) = gPCName
+					//dr(GetFieldName(NetUserNameFN)) = gNetUserName
+					dsStudentPic.Tables[TableName].Rows.Add(dr);
+					break;
+				case enumModes.EditMode:
+					System.Data.DataRow[] dr = null;
+					dr = dsStudentPic.Tables[TableName].Select(GetFieldName(StudentIDFN) + "='" + StudentID + "'");
+					//its return array of rows and we can access the first by index 0
+					dr[0][GetFieldName(StudentIDFN)] = StudentID;
+					byte[] impByte = null;
+					if ((Pic != null)) {
+						System.IO.MemoryStream ms = new System.IO.MemoryStream();
+
+						Pic.Save(ms, Pic.RawFormat);
+
+						impByte = ms.GetBuffer();
+					} else {
+						impByte = null;
+					}
+					dr[0][GetFieldName(PicFN)] = impByte;
+					dr[0][GetFieldName(NameFN)] = Name;
+					dr[0][GetFieldName(PicPathFN)] = PicPath;
+					dr[0][GetFieldName(IsPrintedFN)] = IsPrinted;
+
+					break;
+				//dr(0)(GetFieldName(LastUpdateUserIDFN)) = gUserNo  'LastUpdateUserID
+				//dr(0)(GetFieldName(LastUpdateDateFN)) = Now 'LastUpdateDate
+				//dr(0)(GetFieldName(PCNameFN)) = gPCName
+				//dr(0)(GetFieldName(NetUserNameFN)) = gNetUserName
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+
+	//-------Commit  -----------------------------
+	public int CommitStudentPic()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			//' Update Database with SqlDataAdapter
+			daStudentPic.Update(dsStudentPic, TableName);
+		//Sent Update to database.
+		} catch (Exception ex) {
+
+			HttpContext.Current.Response.Redirect("ErrorPage.aspx?Err Desc:" + ex.Message + Constants.vbCrLf + "Err Source" + ex.TargetSite.Name.ToString());
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------DeleteRow  -----------------------------
+	public int DeleteRow()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			FindInMultiPKey(StudentID);
+			if ((StudentPicDataRow != null)) {
+				StudentPicDataRow.Delete();
+				CommitStudentPic();
+				if (MoveNext() == FAIL_RET)
+					return functionReturnValue;
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------SynchronizeDataRowToClass  -----------------------------
+	private int SynchronizeDataRowToClass()
+	{
+		try {
+			if (Information.IsDBNull(StudentPicDataRow[GetFieldName(StudentIDFN)])) {
+				StudentID = "";
+			} else {
+				StudentID = Convert.ToString(StudentPicDataRow[GetFieldName(StudentIDFN)]);
+			}
+			if (Information.IsDBNull(StudentPicDataRow[GetFieldName(PicFN)])) {
+				Pic = null;
+
+			}
+
+
+			if (Information.IsDBNull(StudentPicDataRow[GetFieldName(NameFN)])) {
+				Name = "";
+			} else {
+				Name = Convert.ToString(StudentPicDataRow[GetFieldName(NameFN)]);
+			}
+
+			if (Information.IsDBNull(StudentPicDataRow[GetFieldName(PicPathFN)])) {
+				PicPath = "";
+			} else {
+				PicPath = Convert.ToString(StudentPicDataRow[GetFieldName(PicPathFN)]);
+			}
+
+			if (Information.IsDBNull(StudentPicDataRow[GetFieldName(IsPrintedFN)])) {
+				IsPrinted = 0;
+			} else {
+				IsPrinted = Convert.ToInt32(StudentPicDataRow[GetFieldName(IsPrintedFN)]);
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+	}
+	//-------FindInMultiPKey  -----------------------------
+	public int FindInMultiPKey(int PKStudentID)
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			// Create an array for the key values to find.
+			object[] findTheseVals = new object[1];
+			// Set the values of the keys to find.
+			findTheseVals[0] = PKStudentID;
+			StudentPicDataRow = dsStudentPic.Tables[TableName].Rows.Find(findTheseVals);
+			if ((StudentPicDataRow != null)) {
+				lngCurRow = dsStudentPic.Tables[TableName].Rows.IndexOf(StudentPicDataRow);
+				SynchronizeDataRowToClass();
+				functionReturnValue = SUCCESS_RET;
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		return functionReturnValue;
+	}
+	//-------MoveFirst  -----------------------------
+	public int MoveFirst()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			lngCurRow = 0;
+			if (GoToCurrentRow() == FAIL_RET)
+				return functionReturnValue;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------MovePrevious  -----------------------------
+	public int MovePrevious()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			lngCurRow = Math.Max(lngCurRow - 1, 0);
+			if (GoToCurrentRow() == FAIL_RET)
+				return functionReturnValue;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------MoveLast  -----------------------------
+	public int MoveLast()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			lngCurRow = dsStudentPic.Tables[TableName].Rows.Count - 1;
+			//Zero based index
+			if (GoToCurrentRow() == FAIL_RET)
+				return functionReturnValue;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------MoveNext  -----------------------------
+	public int MoveNext()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			lngCurRow = Math.Min(lngCurRow + 1, dsStudentPic.Tables[TableName].Rows.Count - 1);
+			if (GoToCurrentRow() == FAIL_RET)
+				return functionReturnValue;
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------GoToCurrentRow  -----------------------------
+	public int GoToCurrentRow()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			if (lngCurRow >= 0 & dsStudentPic.Tables[TableName].Rows.Count > 0) {
+				StudentPicDataRow = dsStudentPic.Tables[TableName].Rows[lngCurRow];
+				SynchronizeDataRowToClass();
+			} else {
+				return functionReturnValue;
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------AddDAEventHandler  -----------------------------
+	public int AddDAEventHandler()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			daStudentPic.RowUpdating += new System.Data.SqlClient.SqlRowUpdatingEventHandler(OnRowUpdating);
+			daStudentPic.RowUpdated += new System.Data.SqlClient.SqlRowUpdatedEventHandler(OnRowUpdated);
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------RemoveDAEventHandler  -----------------------------
+	public int RemoveDAEventHandler()
+	{
+		int functionReturnValue = 0;
+		functionReturnValue = FAIL_RET;
+		try {
+			daStudentPic.RowUpdating -= new System.Data.SqlClient.SqlRowUpdatingEventHandler(OnRowUpdating);
+			daStudentPic.RowUpdated -= new System.Data.SqlClient.SqlRowUpdatedEventHandler(OnRowUpdated);
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+		functionReturnValue = SUCCESS_RET;
+		return functionReturnValue;
+	}
+	//-------OnRowUpdating  -----------------------------
+	private static void OnRowUpdating(object sender, System.Data.SqlClient.SqlRowUpdatingEventArgs args)
+	{
+		try {
+			if (args.StatementType == StatementType.Delete) {
+				System.IO.TextWriter tw = System.IO.File.AppendText("Delete.log");
+				tw.Close();
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+	}
+	//-------OnRowUpdated  -----------------------------
+	private static void OnRowUpdated(object sender, System.Data.SqlClient.SqlRowUpdatedEventArgs args)
+	{
+		try {
+			if (args.Status == UpdateStatus.ErrorsOccurred) {
+				args.Row.RowError = args.Errors.Message();
+				System.IO.File.AppendText("/Delete.log");
+			}
+		} catch (Exception ex) {
+			ShowErrorMessage(ex);
+		} finally {
+		}
+	}
+	//    '-------Populate  -----------------------------
+	//    Public Function Populate() As DataTable
+	//        Dim sSQL As String
+	//        Dim table As New DataTable()
+	//        Try
+	//            sSQL = "SELECT"
+	//sSQL +=  
+	//            sSQL += " , " & ""
+	//            sSQL += "  FROM " & m_TableName
+	//            Dim adapter As New SqlClient.SqlDataAdapter(sSQL, con)
+	//            'table.Locale = System.Globalization.CultureInfo.InvariantCulture
+	//            adapter.Fill(table)
+	//        Catch ex As Exception
+	//            ShowErrorMessage(ex)
+	//        Finally
+	//        End Try
+	//        Return table
+	//    End Function
+}

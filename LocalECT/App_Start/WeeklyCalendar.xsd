@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WeeklyCalendar" targetNamespace="http://tempuri.org/WeeklyCalendar.xsd" xmlns:mstns="http://tempuri.org/WeeklyCalendar.xsd" xmlns="http://tempuri.org/WeeklyCalendar.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WeeklyCalendar" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="WeeklyCalendar" msprop:Generator_UserDSName="WeeklyCalendar">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Week" msprop:Generator_TableClassName="WeekDataTable" msprop:Generator_TableVarName="tableWeek" msprop:Generator_TablePropName="Week" msprop:Generator_RowDeletingName="WeekRowDeleting" msprop:Generator_RowChangingName="WeekRowChanging" msprop:Generator_RowEvHandlerName="WeekRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekRowDeleted" msprop:Generator_UserTableName="Week" msprop:Generator_RowChangedName="WeekRowChanged" msprop:Generator_RowEvArgName="WeekRowChangeEvent" msprop:Generator_RowClassName="WeekRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Campus" msprop:Generator_ColumnVarNameInTable="columnCampus" msprop:Generator_ColumnPropNameInRow="Campus" msprop:Generator_ColumnPropNameInTable="CampusColumn" msprop:Generator_UserColumnName="Campus" type="xs:string" minOccurs="0" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
+              <xs:element name="Pc" msprop:Generator_ColumnVarNameInTable="columnPc" msprop:Generator_ColumnPropNameInRow="Pc" msprop:Generator_ColumnPropNameInTable="PcColumn" msprop:Generator_UserColumnName="Pc" type="xs:string" minOccurs="0" />
+              <xs:element name="Sun" msprop:Generator_ColumnVarNameInTable="columnSun" msprop:Generator_ColumnPropNameInRow="Sun" msprop:Generator_ColumnPropNameInTable="SunColumn" msprop:Generator_UserColumnName="Sun" type="xs:string" minOccurs="0" />
+              <xs:element name="Mon" msprop:Generator_ColumnVarNameInTable="columnMon" msprop:Generator_ColumnPropNameInRow="Mon" msprop:Generator_ColumnPropNameInTable="MonColumn" msprop:Generator_UserColumnName="Mon" type="xs:string" minOccurs="0" />
+              <xs:element name="Tus" msprop:Generator_ColumnVarNameInTable="columnTus" msprop:Generator_ColumnPropNameInRow="Tus" msprop:Generator_ColumnPropNameInTable="TusColumn" msprop:Generator_UserColumnName="Tus" type="xs:string" minOccurs="0" />
+              <xs:element name="Wed" msprop:Generator_ColumnVarNameInTable="columnWed" msprop:Generator_ColumnPropNameInRow="Wed" msprop:Generator_ColumnPropNameInTable="WedColumn" msprop:Generator_UserColumnName="Wed" type="xs:string" minOccurs="0" />
+              <xs:element name="Thu" msprop:Generator_ColumnVarNameInTable="columnThu" msprop:Generator_ColumnPropNameInRow="Thu" msprop:Generator_ColumnPropNameInTable="ThuColumn" msprop:Generator_UserColumnName="Thu" type="xs:string" minOccurs="0" />
+              <xs:element name="Fri" msprop:Generator_ColumnVarNameInTable="columnFri" msprop:Generator_ColumnPropNameInRow="Fri" msprop:Generator_ColumnPropNameInTable="FriColumn" msprop:Generator_UserColumnName="Fri" type="xs:string" minOccurs="0" />
+              <xs:element name="Sat" msprop:Generator_ColumnVarNameInTable="columnSat" msprop:Generator_ColumnPropNameInRow="Sat" msprop:Generator_ColumnPropNameInTable="SatColumn" msprop:Generator_UserColumnName="Sat" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0023_" msprop:Generator_ColumnVarNameInTable="_column_" msprop:Generator_ColumnPropNameInRow="__" msprop:Generator_ColumnPropNameInTable="__Column" msprop:Generator_UserColumnName="#" type="xs:int" minOccurs="0" />
+              <xs:element name="SunIsVisible" msprop:Generator_ColumnVarNameInTable="columnSunIsVisible" msprop:Generator_ColumnPropNameInRow="SunIsVisible" msprop:Generator_ColumnPropNameInTable="SunIsVisibleColumn" msprop:Generator_UserColumnName="SunIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="MonIsVisible" msprop:Generator_ColumnVarNameInTable="columnMonIsVisible" msprop:Generator_ColumnPropNameInRow="MonIsVisible" msprop:Generator_ColumnPropNameInTable="MonIsVisibleColumn" msprop:Generator_UserColumnName="MonIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TusIsVisible" msprop:Generator_ColumnVarNameInTable="columnTusIsVisible" msprop:Generator_ColumnPropNameInRow="TusIsVisible" msprop:Generator_ColumnPropNameInTable="TusIsVisibleColumn" msprop:Generator_UserColumnName="TusIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="WedIsVisible" msprop:Generator_ColumnVarNameInTable="columnWedIsVisible" msprop:Generator_ColumnPropNameInRow="WedIsVisible" msprop:Generator_ColumnPropNameInTable="WedIsVisibleColumn" msprop:Generator_UserColumnName="WedIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ThuIsVisible" msprop:Generator_ColumnVarNameInTable="columnThuIsVisible" msprop:Generator_ColumnPropNameInRow="ThuIsVisible" msprop:Generator_ColumnPropNameInTable="ThuIsVisibleColumn" msprop:Generator_UserColumnName="ThuIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="FriIsVisible" msprop:Generator_ColumnVarNameInTable="columnFriIsVisible" msprop:Generator_ColumnPropNameInRow="FriIsVisible" msprop:Generator_ColumnPropNameInTable="FriIsVisibleColumn" msprop:Generator_UserColumnName="FriIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SatIsVisible" msprop:Generator_ColumnVarNameInTable="columnSatIsVisible" msprop:Generator_ColumnPropNameInRow="SatIsVisible" msprop:Generator_ColumnPropNameInTable="SatIsVisibleColumn" msprop:Generator_UserColumnName="SatIsVisible" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SunIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnSunIsVisibleNot" msprop:Generator_ColumnPropNameInRow="SunIsVisibleNot" msprop:Generator_ColumnPropNameInTable="SunIsVisibleNotColumn" msprop:Generator_UserColumnName="SunIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="MonIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnMonIsVisibleNot" msprop:Generator_ColumnPropNameInRow="MonIsVisibleNot" msprop:Generator_ColumnPropNameInTable="MonIsVisibleNotColumn" msprop:Generator_UserColumnName="MonIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TusIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnTusIsVisibleNot" msprop:Generator_ColumnPropNameInRow="TusIsVisibleNot" msprop:Generator_ColumnPropNameInTable="TusIsVisibleNotColumn" msprop:Generator_UserColumnName="TusIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="WedIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnWedIsVisibleNot" msprop:Generator_ColumnPropNameInRow="WedIsVisibleNot" msprop:Generator_ColumnPropNameInTable="WedIsVisibleNotColumn" msprop:Generator_UserColumnName="WedIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ThuIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnThuIsVisibleNot" msprop:Generator_ColumnPropNameInRow="ThuIsVisibleNot" msprop:Generator_ColumnPropNameInTable="ThuIsVisibleNotColumn" msprop:Generator_UserColumnName="ThuIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="FriIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnFriIsVisibleNot" msprop:Generator_ColumnPropNameInRow="FriIsVisibleNot" msprop:Generator_ColumnPropNameInTable="FriIsVisibleNotColumn" msprop:Generator_UserColumnName="FriIsVisibleNot" type="xs:boolean" minOccurs="0" />
+              <xs:element name="SatIsVisibleNot" msprop:Generator_ColumnVarNameInTable="columnSatIsVisibleNot" msprop:Generator_ColumnPropNameInRow="SatIsVisibleNot" msprop:Generator_ColumnPropNameInTable="SatIsVisibleNotColumn" msprop:Generator_UserColumnName="SatIsVisibleNot" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

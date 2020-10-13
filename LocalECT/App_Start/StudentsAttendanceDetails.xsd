@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StudentsAttendanceDetails" targetNamespace="http://tempuri.org/DataSet2.xsd" xmlns:mstns="http://tempuri.org/DataSet2.xsd" xmlns="http://tempuri.org/DataSet2.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StudentsAttendanceDetails" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="StudentsAttendanceDetails" msprop:Generator_UserDSName="StudentsAttendanceDetails">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AttendanceDetails" msprop:Generator_UserTableName="AttendanceDetails" msprop:Generator_RowEvArgName="AttendanceDetailsRowChangeEvent" msprop:Generator_TableVarName="tableAttendanceDetails" msprop:Generator_TablePropName="AttendanceDetails" msprop:Generator_RowDeletingName="AttendanceDetailsRowDeleting" msprop:Generator_RowChangingName="AttendanceDetailsRowChanging" msprop:Generator_RowDeletedName="AttendanceDetailsRowDeleted" msprop:Generator_RowEvHandlerName="AttendanceDetailsRowChangeEventHandler" msprop:Generator_TableClassName="AttendanceDetailsDataTable" msprop:Generator_RowChangedName="AttendanceDetailsRowChanged" msprop:Generator_RowClassName="AttendanceDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="lngStudentNumber" msprop:Generator_ColumnVarNameInTable="columnlngStudentNumber" msprop:Generator_ColumnPropNameInRow="lngStudentNumber" msprop:Generator_ColumnPropNameInTable="lngStudentNumberColumn" msprop:Generator_UserColumnName="lngStudentNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="byteDay" msprop:Generator_ColumnVarNameInTable="columnbyteDay" msprop:Generator_ColumnPropNameInRow="byteDay" msprop:Generator_ColumnPropNameInTable="byteDayColumn" msprop:Generator_UserColumnName="byteDay" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="strAttDescEn" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="strAttDescEn" msprop:Generator_ColumnVarNameInTable="columnstrAttDescEn" msprop:Generator_ColumnPropNameInTable="strAttDescEnColumn" msprop:Generator_UserColumnName="strAttDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="strLastDescEn" msprop:Generator_ColumnVarNameInTable="columnstrLastDescEn" msprop:Generator_ColumnPropNameInRow="strLastDescEn" msprop:Generator_ColumnPropNameInTable="strLastDescEnColumn" msprop:Generator_UserColumnName="strLastDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="dateAttendance" msprop:Generator_ColumnVarNameInTable="columndateAttendance" msprop:Generator_ColumnPropNameInRow="dateAttendance" msprop:Generator_ColumnPropNameInTable="dateAttendanceColumn" msprop:Generator_UserColumnName="dateAttendance" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="curHours" msprop:Generator_ColumnVarNameInTable="columncurHours" msprop:Generator_ColumnPropNameInRow="curHours" msprop:Generator_ColumnPropNameInTable="curHoursColumn" msprop:Generator_UserColumnName="curHours" type="xs:decimal" minOccurs="0" />
+              <xs:element name="strCourse" msprop:Generator_ColumnVarNameInTable="columnstrCourse" msprop:Generator_ColumnPropNameInRow="strCourse" msprop:Generator_ColumnPropNameInTable="strCourseColumn" msprop:Generator_UserColumnName="strCourse" type="xs:string" minOccurs="0" />
+              <xs:element name="strCourseDescEn" msprop:Generator_ColumnVarNameInTable="columnstrCourseDescEn" msprop:Generator_ColumnPropNameInRow="strCourseDescEn" msprop:Generator_ColumnPropNameInTable="strCourseDescEnColumn" msprop:Generator_UserColumnName="strCourseDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="intStudyYear" msprop:Generator_ColumnVarNameInTable="columnintStudyYear" msprop:Generator_ColumnPropNameInRow="intStudyYear" msprop:Generator_ColumnPropNameInTable="intStudyYearColumn" msprop:Generator_UserColumnName="intStudyYear" type="xs:int" minOccurs="0" />
+              <xs:element name="byteSemester" msprop:Generator_ColumnVarNameInTable="columnbyteSemester" msprop:Generator_ColumnPropNameInRow="byteSemester" msprop:Generator_ColumnPropNameInTable="byteSemesterColumn" msprop:Generator_UserColumnName="byteSemester" type="xs:short" minOccurs="0" />
+              <xs:element name="strShiftEn" msprop:Generator_ColumnVarNameInTable="columnstrShiftEn" msprop:Generator_ColumnPropNameInRow="strShiftEn" msprop:Generator_ColumnPropNameInTable="strShiftEnColumn" msprop:Generator_UserColumnName="strShiftEn" type="xs:string" minOccurs="0" />
+              <xs:element name="strLecturerDescEn" msprop:Generator_ColumnVarNameInTable="columnstrLecturerDescEn" msprop:Generator_ColumnPropNameInRow="strLecturerDescEn" msprop:Generator_ColumnPropNameInTable="strLecturerDescEnColumn" msprop:Generator_UserColumnName="strLecturerDescEn" type="xs:string" minOccurs="0" />
+              <xs:element name="byteClass" msprop:Generator_ColumnVarNameInTable="columnbyteClass" msprop:Generator_ColumnPropNameInRow="byteClass" msprop:Generator_ColumnPropNameInTable="byteClassColumn" msprop:Generator_UserColumnName="byteClass" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="byteShift" msprop:Generator_ColumnVarNameInTable="columnbyteShift" msprop:Generator_ColumnPropNameInRow="byteShift" msprop:Generator_ColumnPropNameInTable="byteShiftColumn" msprop:Generator_UserColumnName="byteShift" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="byteAttStatus" msprop:Generator_ColumnVarNameInTable="columnbyteAttStatus" msprop:Generator_ColumnPropNameInRow="byteAttStatus" msprop:Generator_ColumnPropNameInTable="byteAttStatusColumn" msprop:Generator_UserColumnName="byteAttStatus" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="sHours" msprop:Generator_ColumnVarNameInTable="columnsHours" msprop:Generator_ColumnPropNameInRow="sHours" msprop:Generator_ColumnPropNameInTable="sHoursColumn" msprop:Generator_UserColumnName="sHours" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sLectures" msprop:Generator_ColumnVarNameInTable="columnsLectures" msprop:Generator_ColumnPropNameInRow="sLectures" msprop:Generator_ColumnPropNameInTable="sLecturesColumn" msprop:Generator_UserColumnName="sLectures" type="xs:decimal" minOccurs="0" />
+              <xs:element name="sAcademicYear" msprop:Generator_ColumnVarNameInTable="columnsAcademicYear" msprop:Generator_ColumnPropNameInRow="sAcademicYear" msprop:Generator_ColumnPropNameInTable="sAcademicYearColumn" msprop:Generator_UserColumnName="sAcademicYear" type="xs:string" minOccurs="0" />
+              <xs:element name="_x005B_W_x002F_EW_x005D_" msprop:Generator_ColumnVarNameInTable="_column_W_EW_" msprop:Generator_ColumnPropNameInRow="__W_EW_" msprop:Generator_ColumnPropNameInTable="__W_EW_Column" msprop:Generator_UserColumnName="[W/EW]" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

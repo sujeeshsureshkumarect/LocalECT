@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MissingDocuments" targetNamespace="http://tempuri.org/MissingDocuments.xsd" xmlns:mstns="http://tempuri.org/MissingDocuments.xsd" xmlns="http://tempuri.org/MissingDocuments.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MissingDocuments" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="MissingDocuments" msprop:Generator_UserDSName="MissingDocuments">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MissingDocuments" msprop:Generator_UserTableName="MissingDocuments" msprop:Generator_RowEvArgName="MissingDocumentsRowChangeEvent" msprop:Generator_TableVarName="tableMissingDocuments" msprop:Generator_TablePropName="_MissingDocuments" msprop:Generator_RowDeletingName="MissingDocumentsRowDeleting" msprop:Generator_RowChangingName="MissingDocumentsRowChanging" msprop:Generator_RowDeletedName="MissingDocumentsRowDeleted" msprop:Generator_RowEvHandlerName="MissingDocumentsRowChangeEventHandler" msprop:Generator_TableClassName="MissingDocumentsDataTable" msprop:Generator_RowChangedName="MissingDocumentsRowChanged" msprop:Generator_RowClassName="MissingDocumentsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_UserColumnName="StudentID" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="StudentInfo" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnStudentInfo" msprop:Generator_ColumnPropNameInRow="StudentInfo" msprop:Generator_ColumnPropNameInTable="StudentInfoColumn" msprop:Generator_UserColumnName="StudentInfo" type="xs:string" minOccurs="0" />
+              <xs:element name="Enrolled" msprop:Generator_ColumnVarNameInTable="columnEnrolled" msprop:Generator_ColumnPropNameInRow="Enrolled" msprop:Generator_ColumnPropNameInTable="EnrolledColumn" msprop:Generator_UserColumnName="Enrolled" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DocumentType" msprop:Generator_ColumnVarNameInTable="columnDocumentType" msprop:Generator_ColumnPropNameInRow="DocumentType" msprop:Generator_ColumnPropNameInTable="DocumentTypeColumn" msprop:Generator_UserColumnName="DocumentType" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone1" msprop:Generator_ColumnVarNameInTable="columnPhone1" msprop:Generator_ColumnPropNameInRow="Phone1" msprop:Generator_ColumnPropNameInTable="Phone1Column" msprop:Generator_UserColumnName="Phone1" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone2" msprop:Generator_ColumnVarNameInTable="columnPhone2" msprop:Generator_ColumnPropNameInRow="Phone2" msprop:Generator_ColumnPropNameInTable="Phone2Column" msprop:Generator_UserColumnName="Phone2" type="xs:string" minOccurs="0" />
+              <xs:element name="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_UserColumnName="IsActive" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="Registered" msprop:Generator_ColumnVarNameInTable="columnRegistered" msprop:Generator_ColumnPropNameInRow="Registered" msprop:Generator_ColumnPropNameInTable="RegisteredColumn" msprop:Generator_UserColumnName="Registered" type="xs:string" minOccurs="0" />
+              <xs:element name="Major" msprop:Generator_ColumnVarNameInTable="columnMajor" msprop:Generator_ColumnPropNameInRow="Major" msprop:Generator_ColumnPropNameInTable="MajorColumn" msprop:Generator_UserColumnName="Major" type="xs:string" minOccurs="0" />
+              <xs:element name="MajorDesc" msprop:Generator_ColumnVarNameInTable="columnMajorDesc" msprop:Generator_ColumnPropNameInRow="MajorDesc" msprop:Generator_ColumnPropNameInTable="MajorDescColumn" msprop:Generator_UserColumnName="MajorDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="LTR" msprop:Generator_ColumnVarNameInTable="columnLTR" msprop:Generator_ColumnPropNameInRow="LTR" msprop:Generator_ColumnPropNameInTable="LTRColumn" msprop:Generator_UserColumnName="LTR" type="xs:string" minOccurs="0" />
+              <xs:element name="isAvailable" msprop:Generator_ColumnVarNameInTable="columnisAvailable" msprop:Generator_ColumnPropNameInRow="isAvailable" msprop:Generator_ColumnPropNameInTable="isAvailableColumn" msprop:Generator_UserColumnName="isAvailable" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="eMail" msprop:Generator_ColumnVarNameInTable="columneMail" msprop:Generator_ColumnPropNameInRow="eMail" msprop:Generator_ColumnPropNameInTable="eMailColumn" msprop:Generator_UserColumnName="eMail" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

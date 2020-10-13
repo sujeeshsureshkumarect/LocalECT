@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TOEFL_IELTS_Exams" targetNamespace="http://tempuri.org/TOEFL_IELTS_Exams.xsd" xmlns:mstns="http://tempuri.org/TOEFL_IELTS_Exams.xsd" xmlns="http://tempuri.org/TOEFL_IELTS_Exams.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TOEFL_IELTS_Exams" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TOEFL_IELTS_Exams" msprop:Generator_DataSetName="TOEFL_IELTS_Exams">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TOEFL_IELTS_Exams" msprop:Generator_UserTableName="TOEFL_IELTS_Exams" msprop:Generator_RowDeletedName="TOEFL_IELTS_ExamsRowDeleted" msprop:Generator_RowChangedName="TOEFL_IELTS_ExamsRowChanged" msprop:Generator_RowClassName="TOEFL_IELTS_ExamsRow" msprop:Generator_RowChangingName="TOEFL_IELTS_ExamsRowChanging" msprop:Generator_RowEvArgName="TOEFL_IELTS_ExamsRowChangeEvent" msprop:Generator_RowEvHandlerName="TOEFL_IELTS_ExamsRowChangeEventHandler" msprop:Generator_TableClassName="TOEFL_IELTS_ExamsDataTable" msprop:Generator_TableVarName="tableTOEFL_IELTS_Exams" msprop:Generator_RowDeletingName="TOEFL_IELTS_ExamsRowDeleting" msprop:Generator_TablePropName="_TOEFL_IELTS_Exams">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="strAccountNo" msprop:Generator_UserColumnName="strAccountNo" msprop:Generator_ColumnVarNameInTable="columnstrAccountNo" msprop:Generator_ColumnPropNameInRow="strAccountNo" msprop:Generator_ColumnPropNameInTable="strAccountNoColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strStudentName" msprop:Generator_UserColumnName="strStudentName" msprop:Generator_ColumnVarNameInTable="columnstrStudentName" msprop:Generator_ColumnPropNameInRow="strStudentName" msprop:Generator_ColumnPropNameInTable="strStudentNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="lngStudentNumber" msprop:Generator_UserColumnName="lngStudentNumber" msprop:Generator_ColumnVarNameInTable="columnlngStudentNumber" msprop:Generator_ColumnPropNameInRow="lngStudentNumber" msprop:Generator_ColumnPropNameInTable="lngStudentNumberColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strLastDescEn" msprop:Generator_UserColumnName="strLastDescEn" msprop:Generator_ColumnVarNameInTable="columnstrLastDescEn" msprop:Generator_ColumnPropNameInRow="strLastDescEn" msprop:Generator_ColumnPropNameInTable="strLastDescEnColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strVoucherNo" msprop:Generator_UserColumnName="strVoucherNo" msprop:Generator_ColumnVarNameInTable="columnstrVoucherNo" msprop:Generator_ColumnPropNameInRow="strVoucherNo" msprop:Generator_ColumnPropNameInTable="strVoucherNoColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="dateVoucher" msprop:Generator_UserColumnName="dateVoucher" msprop:Generator_ColumnVarNameInTable="columndateVoucher" msprop:Generator_ColumnPropNameInRow="dateVoucher" msprop:Generator_ColumnPropNameInTable="dateVoucherColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="strSpecializationDescEn" msprop:Generator_UserColumnName="strSpecializationDescEn" msprop:Generator_ColumnVarNameInTable="columnstrSpecializationDescEn" msprop:Generator_ColumnPropNameInRow="strSpecializationDescEn" msprop:Generator_ColumnPropNameInTable="strSpecializationDescEnColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="strMajor" msprop:Generator_UserColumnName="strMajor" msprop:Generator_ColumnVarNameInTable="columnstrMajor" msprop:Generator_ColumnPropNameInRow="strMajor" msprop:Generator_ColumnPropNameInTable="strMajorColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ShortDesc" msprop:Generator_UserColumnName="ShortDesc" msprop:Generator_ColumnVarNameInTable="columnShortDesc" msprop:Generator_ColumnPropNameInRow="ShortDesc" msprop:Generator_ColumnPropNameInTable="ShortDescColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

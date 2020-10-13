@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FacultyLoads_Summery" targetNamespace="http://tempuri.org/FacultyLoads_Summery.xsd" xmlns:mstns="http://tempuri.org/FacultyLoads_Summery.xsd" xmlns="http://tempuri.org/FacultyLoads_Summery.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FacultyLoads_Summery" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="FacultyLoads_Summery" msprop:Generator_UserDSName="FacultyLoads_Summery">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FacultyLoads_Summery" msprop:Generator_UserTableName="FacultyLoads_Summery" msprop:Generator_RowEvArgName="FacultyLoads_SummeryRowChangeEvent" msprop:Generator_TableVarName="tableFacultyLoads_Summery" msprop:Generator_TablePropName="_FacultyLoads_Summery" msprop:Generator_RowDeletingName="FacultyLoads_SummeryRowDeleting" msprop:Generator_RowChangingName="FacultyLoads_SummeryRowChanging" msprop:Generator_RowDeletedName="FacultyLoads_SummeryRowDeleted" msprop:Generator_RowEvHandlerName="FacultyLoads_SummeryRowChangeEventHandler" msprop:Generator_TableClassName="FacultyLoads_SummeryDataTable" msprop:Generator_RowChangedName="FacultyLoads_SummeryRowChanged" msprop:Generator_RowClassName="FacultyLoads_SummeryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Department" msprop:Generator_ColumnVarNameInTable="columnDepartment" msprop:Generator_ColumnPropNameInRow="Department" msprop:Generator_ColumnPropNameInTable="DepartmentColumn" msprop:Generator_UserColumnName="Department" type="xs:string" minOccurs="0" />
+              <xs:element name="Lecturer" msprop:Generator_ColumnVarNameInTable="columnLecturer" msprop:Generator_ColumnPropNameInRow="Lecturer" msprop:Generator_ColumnPropNameInTable="LecturerColumn" msprop:Generator_UserColumnName="Lecturer" type="xs:string" minOccurs="0" />
+              <xs:element name="Faculty_x0020_Load" msprop:Generator_ColumnVarNameInTable="columnFaculty_Load" msprop:Generator_ColumnPropNameInRow="Faculty_Load" msprop:Generator_ColumnPropNameInTable="Faculty_LoadColumn" msprop:Generator_UserColumnName="Faculty Load" type="xs:string" minOccurs="0" />
+              <xs:element name="Students_x0020_Count" msprop:Generator_ColumnVarNameInTable="columnStudents_Count" msprop:Generator_ColumnPropNameInRow="Students_Count" msprop:Generator_ColumnPropNameInTable="Students_CountColumn" msprop:Generator_UserColumnName="Students Count" type="xs:string" minOccurs="0" />
+              <xs:element name="Courses_x0020_Count" msprop:Generator_ColumnVarNameInTable="columnCourses_Count" msprop:Generator_ColumnPropNameInRow="Courses_Count" msprop:Generator_ColumnPropNameInTable="Courses_CountColumn" msprop:Generator_UserColumnName="Courses Count" type="xs:string" minOccurs="0" />
+              <xs:element name="Faculty_x0020_Load_x0020_Credits" msprop:Generator_ColumnVarNameInTable="columnFaculty_Load_Credits" msprop:Generator_ColumnPropNameInRow="Faculty_Load_Credits" msprop:Generator_ColumnPropNameInTable="Faculty_Load_CreditsColumn" msprop:Generator_UserColumnName="Faculty Load Credits" type="xs:string" minOccurs="0" />
+              <xs:element name="iYear" msprop:Generator_ColumnVarNameInTable="columniYear" msprop:Generator_ColumnPropNameInRow="iYear" msprop:Generator_ColumnPropNameInTable="iYearColumn" msprop:Generator_UserColumnName="iYear" type="xs:int" minOccurs="0" />
+              <xs:element name="Sem" msprop:Generator_ColumnVarNameInTable="columnSem" msprop:Generator_ColumnPropNameInRow="Sem" msprop:Generator_ColumnPropNameInTable="SemColumn" msprop:Generator_UserColumnName="Sem" type="xs:string" minOccurs="0" />
+              <xs:element name="IsPart_timer" msprop:Generator_ColumnVarNameInTable="columnIsPart_timer" msprop:Generator_ColumnPropNameInRow="IsPart_timer" msprop:Generator_ColumnPropNameInTable="IsPart_timerColumn" msprop:Generator_UserColumnName="IsPart_timer" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

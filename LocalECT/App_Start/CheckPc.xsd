@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CheckPc" targetNamespace="http://tempuri.org/CheckPc.xsd" xmlns:mstns="http://tempuri.org/CheckPc.xsd" xmlns="http://tempuri.org/CheckPc.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CheckPc" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="CheckPc" msprop:Generator_UserDSName="CheckPc">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CheckTbl" msprop:Generator_TableClassName="CheckTblDataTable" msprop:Generator_TableVarName="tableCheckTbl" msprop:Generator_TablePropName="CheckTbl" msprop:Generator_RowDeletingName="CheckTblRowDeleting" msprop:Generator_RowChangingName="CheckTblRowChanging" msprop:Generator_RowEvHandlerName="CheckTblRowChangeEventHandler" msprop:Generator_RowDeletedName="CheckTblRowDeleted" msprop:Generator_UserTableName="CheckTbl" msprop:Generator_RowChangedName="CheckTblRowChanged" msprop:Generator_RowEvArgName="CheckTblRowChangeEvent" msprop:Generator_RowClassName="CheckTblRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Campus" msprop:Generator_ColumnVarNameInTable="columnCampus" msprop:Generator_ColumnPropNameInRow="Campus" msprop:Generator_ColumnPropNameInTable="CampusColumn" msprop:Generator_UserColumnName="Campus" type="xs:string" minOccurs="0" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
+              <xs:element name="Pc" msprop:Generator_ColumnVarNameInTable="columnPc" msprop:Generator_ColumnPropNameInRow="Pc" msprop:Generator_ColumnPropNameInTable="PcColumn" msprop:Generator_UserColumnName="Pc" type="xs:string" minOccurs="0" />
+              <xs:element name="Hadware" msprop:Generator_ColumnVarNameInTable="columnHadware" msprop:Generator_ColumnPropNameInRow="Hadware" msprop:Generator_ColumnPropNameInTable="HadwareColumn" msprop:Generator_UserColumnName="Hadware" type="xs:string" minOccurs="0" />
+              <xs:element name="Software" msprop:Generator_ColumnVarNameInTable="columnSoftware" msprop:Generator_ColumnPropNameInRow="Software" msprop:Generator_ColumnPropNameInTable="SoftwareColumn" msprop:Generator_UserColumnName="Software" type="xs:string" minOccurs="0" />
+              <xs:element name="Browser" msprop:Generator_ColumnVarNameInTable="columnBrowser" msprop:Generator_ColumnPropNameInRow="Browser" msprop:Generator_ColumnPropNameInTable="BrowserColumn" msprop:Generator_UserColumnName="Browser" type="xs:string" minOccurs="0" />
+              <xs:element name="Internet" msprop:Generator_ColumnVarNameInTable="columnInternet" msprop:Generator_ColumnPropNameInRow="Internet" msprop:Generator_ColumnPropNameInTable="InternetColumn" msprop:Generator_UserColumnName="Internet" type="xs:string" minOccurs="0" />
+              <xs:element name="IsChecked" msprop:Generator_ColumnVarNameInTable="columnIsChecked" msprop:Generator_ColumnPropNameInRow="IsChecked" msprop:Generator_ColumnPropNameInTable="IsCheckedColumn" msprop:Generator_UserColumnName="IsChecked" type="xs:string" minOccurs="0" />
+              <xs:element name="UserChecked" msprop:Generator_ColumnVarNameInTable="columnUserChecked" msprop:Generator_ColumnPropNameInRow="UserChecked" msprop:Generator_ColumnPropNameInTable="UserCheckedColumn" msprop:Generator_UserColumnName="UserChecked" type="xs:string" minOccurs="0" />
+              <xs:element name="DateChecked" msprop:Generator_ColumnVarNameInTable="columnDateChecked" msprop:Generator_ColumnPropNameInRow="DateChecked" msprop:Generator_ColumnPropNameInTable="DateCheckedColumn" msprop:Generator_UserColumnName="DateChecked" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
