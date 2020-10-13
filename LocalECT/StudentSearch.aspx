@@ -27,6 +27,12 @@
                         float: left;
                         display: block;
                     }
+                    .alert{
+                        padding:5px;
+                    }
+                    .table {
+                        color:#444444;
+                    }
                 </style>
             </div>
             <div class="clearfix"></div>
