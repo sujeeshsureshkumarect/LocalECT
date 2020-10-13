@@ -162,7 +162,7 @@ namespace LocalECT
             if (dtEmployeeProfile.Rows.Count > 0)
             {
                 Session["ProfilePIc"] = dtEmployeeProfile.Rows[0]["PIC"].ToString();
-                lblUser.Text = dtEmployeeProfile.Rows[0]["Name"].ToString();
+                lblUser.Text = dtEmployeeProfile.Rows[0]["Title"].ToString()+" "+ dtEmployeeProfile.Rows[0]["MiddleName"].ToString();
                 //lblUser1.Text = dtEmployeeProfile.Rows[0]["Name"].ToString();
             }
         }

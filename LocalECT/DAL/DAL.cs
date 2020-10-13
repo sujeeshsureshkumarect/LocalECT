@@ -46,7 +46,7 @@ namespace LocalECT.DAL
 
         public DataTable GetEmployeeProfilePic(string employeeid, string connStr)
         {
-            DataTable dt = GetData("SELECT Name,PIC from ACMS_User where ACMS_User.Personnelnr='E" + employeeid + "'", connStr);
+            DataTable dt = GetData("SELECT Name,PIC,Title,MiddleName from ACMS_User where ACMS_User.Personnelnr='E" + employeeid + "'", connStr);
             return dt;
         }
 
