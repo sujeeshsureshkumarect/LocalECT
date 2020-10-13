@@ -39,14 +39,19 @@ namespace LocalECT
         public void Generate_Menu()
         {
             int RoleId = 0;
+            int SystemID = 10;
 
             if (Session["CurrentRole"] != null)
             {
                 RoleId = (int)Session["CurrentRole"];
             }
+            if (Session["CurrentSystem"] != null)
+            {
+                SystemID = (int)Session["CurrentSystem"];
+            }
 
             var Menu = new DAL.DAL();
-            Menus = Menu.GetMenuData();
+            Menus = Menu.GetMenuData(RoleId, SystemID);
             DataView view = new DataView(Menus);
             view.RowFilter = "iLevel=0";
             this.rptCategories.DataSource = view;
@@ -133,6 +138,7 @@ namespace LocalECT
         }
         protected void lnk_Logout_Click(object sender, EventArgs e)
         {
+            Session.RemoveAll();
             Response.Redirect("Login");
         }
     }
