@@ -43,7 +43,7 @@
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
                             <%--<a href="Dashboard" class="site_title"><i class="fa fa-globe"></i><span> ECT SIS</span></a>--%>
-                            <a href="PlainPage" class="site_title">
+                            <a href="Home" class="site_title">
                                 <i>
                                 <img src="https://lms.ectmoodle.ae/theme/image.php/ect/theme/1595326309/favicon"/></i>
                                 <span> LocalECT</span>
@@ -73,7 +73,7 @@
                             <div class="menu_section">
                                 <h3>General</h3>
                                 <ul class="nav side-menu">
-                                    <li><a href="PlainPage"><i class="fa fa-home"></i> Home</a></li>
+                                    <li><a href="Home"><i class="fa fa-home"></i> Home</a></li>
                                     <asp:Repeater ID="rptCategories" runat="server" OnItemDataBound="rptCategories_ItemDataBound">
                                         <ItemTemplate>
                                             <li><a>
@@ -114,7 +114,7 @@
                                         <img src="Handler1.ashx" alt="" onerror="this.src='images/Student.jpg'"><asp:Label ID="lblUser1" runat="server"></asp:Label>
                     </a>
                                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="StudentProfile">My Profile</a>
+                                        <a class="dropdown-item" href="MyProfile">My Profile</a>
                                         <%--<a class="dropdown-item" href="javascript:;">
                                             <span class="badge bg-red pull-right">50%</span>
                                             <span>Settings</span>

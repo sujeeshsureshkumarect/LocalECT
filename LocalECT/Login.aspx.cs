@@ -59,7 +59,7 @@ namespace LocalECT
                         }
                         else
                         {
-                            Response.Redirect("PlainPage");
+                            Response.Redirect("Home");
                         }
                     }
                     else

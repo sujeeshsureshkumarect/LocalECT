@@ -6,7 +6,7 @@
             <div class="page-title">
                 <div class="title_left">
                     <h3 class="breadcrumb">
-                        <a href="PlainPage">Home /</a>
+                        <a href="Home">Home /</a>
                         <a href="#">&nbsp;Registration /</a>
                         <a href="StudentSearch">&nbsp;Student Search</a>
 
