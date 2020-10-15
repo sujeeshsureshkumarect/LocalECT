@@ -36,7 +36,7 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
-                                        <asp:Label ID="lbl_Msg" runat="server" Text="ECT System Created Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
+                                        <asp:Label ID="lbl_Msg" runat="server" Text="ECT System Updated Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                     </div>
                                 </div>
                                             <div class="col-md-6 ">

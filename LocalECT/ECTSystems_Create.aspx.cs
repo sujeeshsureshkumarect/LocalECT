@@ -70,7 +70,7 @@ namespace LocalECT
             cmd.Parameters.AddWithValue("@DescEn", txt_Header.Text.Trim());
             cmd.Parameters.AddWithValue("@DescAr", txt_Detail.Text.Trim());
             cmd.Parameters.AddWithValue("@IsActive", drp_Status.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@CreationUserID", Session["CurrentUserName"].ToString());
+            cmd.Parameters.AddWithValue("@CreationUserID", Session["CurrentUserNo"].ToString());
             cmd.Parameters.AddWithValue("@CreationDate", DateTime.Now);
             try
             {

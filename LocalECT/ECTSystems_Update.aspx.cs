@@ -73,9 +73,9 @@ namespace LocalECT
             cmd.Parameters.AddWithValue("@DescEn", txt_Header.Text.Trim());
             cmd.Parameters.AddWithValue("@DescAr", txt_Detail.Text.Trim());           
             cmd.Parameters.AddWithValue("@isActive", drp_Status.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@LastUpdateUserID", Session["CurrentUserName"].ToString());
+            cmd.Parameters.AddWithValue("@LastUpdateUserID", Session["CurrentUserNo"].ToString());
             cmd.Parameters.AddWithValue("@LastUpdateDate", DateTime.Now);
-            cmd.Parameters.AddWithValue("@SeqID", Request.QueryString["id"]);
+            cmd.Parameters.AddWithValue("@SeqID", Request.QueryString["seqid"]);
             try
             {
                 sc.Open();

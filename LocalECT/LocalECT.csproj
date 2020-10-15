@@ -6277,6 +6277,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Security_Objects.aspx" />
     <Content Include="Site.Master" />
     <Content Include="StudentSearch.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -6541,6 +6542,13 @@
       <DependentUpon>PlainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security_Objects.aspx.cs">
+      <DependentUpon>Security_Objects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Security_Objects.aspx.designer.cs">
+      <DependentUpon>Security_Objects.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
