@@ -136,6 +136,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="ECTSystems_Create.aspx" />
+    <Content Include="ECTSystems_Home.aspx" />
+    <Content Include="ECTSystems_Update.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gentelella-master\build\css\custom.css" />
@@ -6474,6 +6477,27 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ECTSystems_Create.aspx.cs">
+      <DependentUpon>ECTSystems_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ECTSystems_Create.aspx.designer.cs">
+      <DependentUpon>ECTSystems_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ECTSystems_Home.aspx.cs">
+      <DependentUpon>ECTSystems_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ECTSystems_Home.aspx.designer.cs">
+      <DependentUpon>ECTSystems_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ECTSystems_Update.aspx.cs">
+      <DependentUpon>ECTSystems_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ECTSystems_Update.aspx.designer.cs">
+      <DependentUpon>ECTSystems_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -11,88 +11,79 @@ namespace LocalECT
 {
 
 
-    public partial class LocalECT
+    public partial class ECTSystems_Update
     {
 
         /// <summary>
-        /// head control.
+        /// div_msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_msg;
 
         /// <summary>
-        /// form1 control.
+        /// div_Alert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_Alert;
 
         /// <summary>
-        /// lbl_System control.
+        /// lbl_Msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_System;
+        protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// lblUser control.
+        /// txt_Header control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUser;
+        protected global::System.Web.UI.WebControls.TextBox txt_Header;
 
         /// <summary>
-        /// rptCategories control.
+        /// txt_Detail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCategories;
+        protected global::System.Web.UI.WebControls.TextBox txt_Detail;
 
         /// <summary>
-        /// lblUser1 control.
+        /// drp_Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUser1;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Status;
 
         /// <summary>
-        /// lnk_Logout control.
+        /// btn_Create control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Logout;
+        protected global::System.Web.UI.WebControls.Button btn_Create;
 
         /// <summary>
-        /// lbl_term control.
+        /// btn_Cancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_term;
-
-        /// <summary>
-        /// ContentPlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button btn_Cancel;
     }
 }

@@ -40,6 +40,7 @@ namespace LocalECT
             int iCYear = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out iCSem);
             Session["CurrentYear"] = iCYear;
             Session["CurrentSemester"] = iCSem;
+            lbl_System.Text = Session["CurrentSystemName"].ToString();
 
             string sYear = iCYear.ToString() + " / " + (iCYear + 1).ToString();
             string sSem = LibraryMOD.GetSemesterString(iCSem);

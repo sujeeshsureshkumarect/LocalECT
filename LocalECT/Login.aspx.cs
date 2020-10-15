@@ -142,6 +142,7 @@ namespace LocalECT
                         //Session["CurrentCampus"] = CMPS;
                         Session["CurrentRole"] = iRole;
                         Session["CurrentSystem"] = iSystem;
+                        Session["CurrentSystemName"] = SystemsCBO.SelectedItem.Text;
                         Session["CurrentLecturer"] = iLecturer;
                         Session["MarkYear"] = iMarkYear;
                         Session["MarkSemester"] = iMarkSem;

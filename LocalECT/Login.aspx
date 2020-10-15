@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>LocalECT</title>
+    <title>ECT</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@
                     <span class="focus-input100"></span>
                 </div>
                  <div class="wrap-input100 validate-input m-b-25">
-                   <asp:DropDownList ID="SystemsCBO" runat="server" CssClass="input400" Enabled="false"></asp:DropDownList>
+                   <asp:DropDownList ID="SystemsCBO" runat="server" CssClass="input400"></asp:DropDownList>
                 </div>
                 <div class="container-login100-form-btn">
                     <asp:Button ID="Btn_Signin" runat="server" Text="Sign In" CssClass="login100-form-btn" OnClick="Btn_Signin_Click" />                    
