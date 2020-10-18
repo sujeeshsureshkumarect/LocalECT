@@ -12,6 +12,7 @@ namespace LocalECT
 {
     public partial class Security_Objects : System.Web.UI.Page
     {
+        PrivilegeDAL myPrivilegesDAL = new PrivilegeDAL();
         struct myNode
         {
             public TreeNode tn;
@@ -23,6 +24,7 @@ namespace LocalECT
         string myValuePath = "";
         int CurrentRole = 0;
         string sUserName = "";
+        int iObjectID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CurrentRole"] != null)
@@ -347,7 +349,8 @@ namespace LocalECT
                     DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
                     lbl_Msg.Text = "Data Updated Successfully";
                     div_msg.Visible = true;                    
-                    div_Alert.Attributes.Add("class","alert alert-success alert-dismissible");                    
+                    div_Alert.Attributes.Add("class","alert alert-success alert-dismissible");
+                    Retrieve();
                 }
 
 
@@ -428,6 +431,9 @@ namespace LocalECT
            // divMsg.InnerText = myTree.SelectedNode.ValuePath;
             Session["myValuePath"] = myTree.SelectedNode.ValuePath;
             get_Node();
+            iObjectID = int.Parse(IDTXT.Text);
+            lbl_Object.Text = DescTXT.Text;
+            fillObjectPrivilegeslst(true);
         }
 
         private int AddPrivileges(int iObjectID)
@@ -442,7 +448,7 @@ namespace LocalECT
                 Connection_StringCLS sConn = new Connection_StringCLS(iCampus);
 
                 Conn.ConnectionString = sConn.Conn_string;
-                string sCondition = " Where PrivilegeID<6 and DefaultEffect=1";
+                string sCondition = " Where PrivilegeID<5 and DefaultEffect=1";//Where PrivilegeID<6 and DefaultEffect=1
                 myPrivileges = myPrivilegesDAL.GetPrivilege(InitializeModule.EnumCampus.ECTNew, sCondition, false);
                 Conn.Open();
 
@@ -469,7 +475,38 @@ namespace LocalECT
             }
             return r;
         }
+        private void fillObjectPrivilegeslst(bool isFillDefaultOnly)
+        {
+            List<Privilege> myPrivileges = new List<Privilege>();
 
+            try
+            {
+                ObjectPrivilegesLST.Items.Clear();
+
+                //SELECT P.PrivilegeID, P.PriviligeNameEn, P.DefaultEffect";
+                //sSQL += " FROM dbo.Cmn_Privilege AS P INNER JOIN dbo.Cmn_Permissions AS OP ON P.PrivilegeID = OP.PrivilegeID
+
+                myPrivileges = myPrivilegesDAL.GetObjectPrivileges(" Where OP.ObjectID=" + iObjectID);  // + " AND P.DefaultEffect=" + InitializeModule.TRUE_VALUE
+
+                for (int i = 0; i < myPrivileges.Count; i++)
+                {
+                    ObjectPrivilegesLST.Items.Add(new ListItem(myPrivileges[i].PriviligeNameEn, myPrivileges[i].PrivilegeID.ToString()));
+                }
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                div_msg.Visible = true;
+                lbl_Msg.Text = exp.Message;
+            }
+            finally
+            {
+
+                myPrivileges.Clear();
+
+            }
+        }
         private int DeletePrivileges(int iObjectID)
         {
             SqlConnection Conn = new SqlConnection();

@@ -160,6 +160,22 @@
                                             <asp:HiddenField ID="Sel" runat="server" />
                                         </div>
                                     </div>
+
+                                    <hr />
+                                     <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Objects (<asp:Label ID="lbl_Object" runat="server" ForeColor="#444444"></asp:Label>) Privileges</h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                       <asp:ListBox ID="ObjectPrivilegesLST" runat="server" Height="288px" 
+                    Width="300px" SelectionMode="Multiple" ForeColor="#444444" CssClass="select2_multiple form-control"></asp:ListBox>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="x_panel">
@@ -181,14 +197,33 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                           <%-- </div>--%>
+
+                            <%--<div class="row">--%>
+                             <%--        <div class="col-md-6 col-sm-6">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Objects (<asp:Label ID="lbl_Object" runat="server" ForeColor="#444444"></asp:Label>) Privileges</h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                       <asp:ListBox ID="ObjectPrivilegesLST" runat="server" Height="288px" 
+                    Width="300px" SelectionMode="Multiple" ForeColor="#444444" CssClass="select2_multiple form-control"></asp:ListBox>
+                                        </div>
+                                    </div>
+                                </div>--%>
+                            <%--</div>--%>
 
                         </div>
                     </div>
                 </div>
             </div>
- <%--       </div>
-    </div>--%>
+        </div>
+    </div>
    <style>
        .NoData {
     font-weight: bold;

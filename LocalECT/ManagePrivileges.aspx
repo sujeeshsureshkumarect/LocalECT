@@ -43,7 +43,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-dashboard"></i> Manage Objects Privileges</h2>
+                            <h2><i class="fa fa-cog"></i> Manage Objects Privileges</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -89,19 +89,19 @@
         </tr>
         <tr>
             <td align="center" rowspan="5" valign="top">
-                <asp:ListBox ID="PrivilegesLST" runat="server" Width="247px" Height="288px" 
-                    SelectionMode="Multiple" ForeColor="#444444"></asp:ListBox>
+                <asp:ListBox ID="PrivilegesLST" runat="server" Width="300px" Height="288px" 
+                    SelectionMode="Multiple" ForeColor="#444444" CssClass="select2_multiple form-control"></asp:ListBox>
             </td>
             <td>
                 &nbsp;</td>
             <td align="center" rowspan="5" valign="top">
                 <asp:ListBox ID="ObjectPrivilegesLST" runat="server" Height="288px" 
-                    Width="247px" SelectionMode="Multiple" ForeColor="#444444"></asp:ListBox>
+                    Width="300px" SelectionMode="Multiple" ForeColor="#444444" CssClass="select2_multiple form-control"></asp:ListBox>
             </td>
         </tr>
          <tr>
             <td align="center" valign="middle">                        
-                <asp:LinkButton ID="AddCMD" runat="server" ToolTip="Add" CssClass="btn btn-success btn-sm" onclick="AddCMD_Click"><i class="fa fa-arrow-right"></i></asp:LinkButton>
+                <asp:LinkButton ID="AddCMD" runat="server" ToolTip="Add" CssClass="btn btn-success btn-sm" onclick="AddCMD_Click">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;&nbsp;&nbsp;</asp:LinkButton>
                         </td>
         </tr>
          <tr>
@@ -110,7 +110,7 @@
         </tr>
          <tr>
             <td align="center" valign="middle">                      
-                 <asp:LinkButton ID="RemoveCMD" runat="server" ToolTip="Remove" CssClass="btn btn-success btn-sm" onclick="RemoveCMD_Click"><i class="fa fa-arrow-left"></i></asp:LinkButton>
+                 <asp:LinkButton ID="RemoveCMD" runat="server" ToolTip="Remove" CssClass="btn btn-success btn-sm" onclick="RemoveCMD_Click">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;</asp:LinkButton>
                         </td>
         </tr>
          <tr>

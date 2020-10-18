@@ -204,6 +204,24 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.HiddenField Sel;
 
         /// <summary>
+        /// lbl_Object control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Object;
+
+        /// <summary>
+        /// ObjectPrivilegesLST control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ObjectPrivilegesLST;
+
+        /// <summary>
         /// divTree control.
         /// </summary>
         /// <remarks>
