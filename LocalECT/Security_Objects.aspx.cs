@@ -32,6 +32,29 @@ namespace LocalECT
                 {
                     Fill_SystemsCBO();                    
                 }
+                else
+                {
+                    if (Session["ObjectsRoot"] != null)
+                    {
+                        myRoot = (TreeNode)Session["ObjectsRoot"];
+
+                    }
+                    if (Session["myValuePath"] != null)
+                    {
+                        myValuePath = Session["myValuePath"].ToString();
+                        //myTree.FindNode(myValuePath).Select();
+                    }
+
+                    //if (Session["ObjectsArray"] != null)
+                    //{
+                    //    string myObjects = Session["ObjectsArray"].ToString();
+                    //    //SetArgs(sArgs);
+
+                    //}
+                    Show_Data();
+
+
+                }
             }
             else
             {
@@ -152,7 +175,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -196,7 +220,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -206,7 +231,7 @@ namespace LocalECT
 
 
         }
-        protected void NewCMD_Click(object sender, ImageClickEventArgs e)
+        protected void NewCMD_Click(object sender, EventArgs e)
         {
             TreeNode tn = new TreeNode();
             List<PrivilegeObjects> myObjects = new List<PrivilegeObjects>();
@@ -218,7 +243,8 @@ namespace LocalECT
             {
                 if (myValuePath == "")
                 {
-                    //divMsg.InnerText = "Select parent node from the tree";
+                    lbl_Msg.Text = "Select parent node from the tree";
+                    div_msg.Visible = true;
                     return;
                 }
                 myTree.FindNode(myValuePath).Select();
@@ -246,13 +272,16 @@ namespace LocalECT
 
                 OrderCBO.SelectedValue = myMapsDAL.GetNewOrder(iLevel, iSystem).ToString();
 
-
+                //lbl_Msg.Text = "Node Added Successfully";
+                //div_msg.Visible = true;
+                //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
             }
 
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -263,7 +292,7 @@ namespace LocalECT
 
 
         }
-        protected void SaveCMD_Click(object sender, ImageClickEventArgs e)
+        protected void SaveCMD_Click(object sender, EventArgs e)
         {
             PrivilegeObjectsDAL myMapsDAL = new PrivilegeObjectsDAL();
             try
@@ -303,7 +332,9 @@ namespace LocalECT
                         r = AddPrivileges(int.Parse(IDTXT.Text));
                     }
                     DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
-                    //divMsg.InnerText = "Data Updated Successfully";
+                    lbl_Msg.Text = "Data Updated Successfully";
+                    div_msg.Visible = true;                    
+                    div_Alert.Attributes.Add("class","alert alert-success alert-dismissible");                    
                 }
 
 
@@ -313,7 +344,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -323,7 +355,7 @@ namespace LocalECT
 
 
         }
-        protected void DeleteCMD_Click(object sender, ImageClickEventArgs e)
+        protected void DeleteCMD_Click(object sender, EventArgs e)
         {
             PrivilegeObjectsDAL myMapsDAL = new PrivilegeObjectsDAL();
             string sValue = "";
@@ -334,7 +366,8 @@ namespace LocalECT
                 myTree.FindNode(myValuePath).Select();
                 if (myTree.SelectedNode.ChildNodes.Count > 0)
                 {
-                    //divMsg.InnerText = "You must delete children nodes befor deleting this node";
+                    lbl_Msg.Text = "You must delete children nodes before deleting this node";
+                    div_msg.Visible = true;
                 }
                 else
                 {
@@ -352,7 +385,9 @@ namespace LocalECT
                         //myTree.Nodes.Remove(myTree.SelectedNode);
                         Clear_Controls();
                         get_Node();
-                       // divMsg.InnerText = "Node deleted Successfully";
+                        lbl_Msg.Text = "Node Deleted Successfully";
+                        div_msg.Visible = true;
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                     }
 
 
@@ -365,7 +400,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -376,7 +412,7 @@ namespace LocalECT
         }
         protected void myTree_SelectedNodeChanged(object sender, EventArgs e)
         {
-            //divMsg.InnerText = myTree.SelectedNode.ValuePath;
+           // divMsg.InnerText = myTree.SelectedNode.ValuePath;
             Session["myValuePath"] = myTree.SelectedNode.ValuePath;
             get_Node();
         }
@@ -408,7 +444,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -444,7 +481,8 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -463,7 +501,8 @@ namespace LocalECT
             }
             else
             {
-                //divMsg.InnerText = "Select Object First !";
+                lbl_Msg.Text = "Select any Object First !";
+                div_msg.Visible = true;
             }
         }
         private void Clear_Controls()
