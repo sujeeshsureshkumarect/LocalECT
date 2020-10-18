@@ -28,6 +28,19 @@ namespace LocalECT
             if (Session["CurrentRole"] != null)
             {
                 CurrentRole = (int)Session["CurrentRole"];
+                sUserName = Session["CurrentUserName"].ToString();
+                //CurrentRole = (int)Session["CurrentRole"];
+                if (!IsPostBack)
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
+                    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+
+                    }
+                }
+                lbl_Msg.Text = "";
+
                 if (!IsPostBack)
                 {
                     Fill_SystemsCBO();                    

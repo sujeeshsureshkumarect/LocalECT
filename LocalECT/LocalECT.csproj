@@ -128,6 +128,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
+    <Content Include="Authorization.aspx" />
     <Content Include="ChangePwd.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -6247,6 +6248,7 @@
     <Content Include="Login_v9\vendor\select2\select2.js" />
     <Content Include="Login_v9\vendor\select2\select2.min.css" />
     <Content Include="Login_v9\vendor\select2\select2.min.js" />
+    <Content Include="ManagePrivileges.aspx" />
     <Content Include="MyProfile.aspx" />
     <Content Include="PlainPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -6457,6 +6459,13 @@
     <Compile Include="App_Start\UserCls.cs" />
     <Compile Include="App_Start\Work_PlacesCls.cs" />
     <Compile Include="App_Start\XLS.cs" />
+    <Compile Include="Authorization.aspx.cs">
+      <DependentUpon>Authorization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Authorization.aspx.designer.cs">
+      <DependentUpon>Authorization.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangePwd.aspx.cs">
       <DependentUpon>ChangePwd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6526,6 +6535,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePrivileges.aspx.cs">
+      <DependentUpon>ManagePrivileges.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePrivileges.aspx.designer.cs">
+      <DependentUpon>ManagePrivileges.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
