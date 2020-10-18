@@ -172,7 +172,7 @@
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="x_content">
-                                       <asp:ListBox ID="ObjectPrivilegesLST" runat="server" Height="288px" 
+                                       <asp:ListBox ID="ObjectPrivilegesLST" runat="server" 
                     Width="300px" SelectionMode="Multiple" ForeColor="#444444" CssClass="select2_multiple form-control"></asp:ListBox>
                                         </div>
                                     </div>
