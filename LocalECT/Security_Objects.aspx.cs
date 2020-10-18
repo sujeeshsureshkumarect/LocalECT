@@ -30,51 +30,52 @@ namespace LocalECT
             if (Session["CurrentRole"] != null)
             {
                 CurrentRole = (int)Session["CurrentRole"];
-                sUserName = Session["CurrentUserName"].ToString();
-                //CurrentRole = (int)Session["CurrentRole"];
-                if (!IsPostBack)
-                {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
-                    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-
-                    }
-                }
-                lbl_Msg.Text = "";
-
-                if (!IsPostBack)
-                {
-                    Fill_SystemsCBO();                    
-                }
-                else
-                {
-                    if (Session["ObjectsRoot"] != null)
-                    {
-                        myRoot = (TreeNode)Session["ObjectsRoot"];
-
-                    }
-                    if (Session["myValuePath"] != null)
-                    {
-                        myValuePath = Session["myValuePath"].ToString();
-                        //myTree.FindNode(myValuePath).Select();
-                    }
-
-                    //if (Session["ObjectsArray"] != null)
-                    //{
-                    //    string myObjects = Session["ObjectsArray"].ToString();
-                    //    //SetArgs(sArgs);
-
-                    //}
-                    Show_Data();
-
-
-                }
             }
             else
             {
                 Session.RemoveAll();
                 Response.Redirect("Login.aspx");
+            }
+            sUserName = Session["CurrentUserName"].ToString();
+            //CurrentRole = (int)Session["CurrentRole"];
+            if (!IsPostBack)
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
+                InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                {
+                    Server.Transfer("Authorization.aspx");
+
+                }
+            }
+
+
+            lbl_Msg.Text = "";
+            if (!IsPostBack)
+            {
+                Fill_SystemsCBO();
+            }
+            else
+            {
+                if (Session["ObjectsRoot"] != null)
+                {
+                    myRoot = (TreeNode)Session["ObjectsRoot"];
+
+                }
+                if (Session["myValuePath"] != null)
+                {
+                    myValuePath = Session["myValuePath"].ToString();
+                    //myTree.FindNode(myValuePath).Select();
+                }
+
+                //if (Session["ObjectsArray"] != null)
+                //{
+                //    string myObjects = Session["ObjectsArray"].ToString();
+                //    //SetArgs(sArgs);
+
+                //}
+                Show_Data();
+
+
             }
         }
 

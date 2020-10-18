@@ -22,28 +22,30 @@ namespace LocalECT
             if (Session["CurrentRole"] != null)
             {
                 CurrentRole = (int)Session["CurrentRole"];
-                sUserName = Session["CurrentUserName"].ToString();
-                if (!IsPostBack)
-                {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
-                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-
-                    }
-                }
-                iObjectID = int.Parse(Request.QueryString["ObjectID"]);
-                ObjectLBL.Text = Request.QueryString["ObjectName"] + " Privileges";
-                if (!IsPostBack)
-                {
-                    fillPrivilegeslst();
-                    fillObjectPrivilegeslst(true);
-                }
             }
             else
             {
                 Session.RemoveAll();
                 Response.Redirect("Login.aspx");
+            }
+            //int CurrentRole = 0;
+            sUserName = Session["CurrentUserName"].ToString();
+            //CurrentRole = (int)Session["CurrentRole"];
+            if (!IsPostBack)
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
+                InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                {
+                    Server.Transfer("Authorization.aspx");
+
+                }
+            }
+            iObjectID = int.Parse(Request.QueryString["ObjectID"]);
+            ObjectLBL.Text = Request.QueryString["ObjectName"] + " Privileges";
+            if (!IsPostBack)
+            {
+                fillPrivilegeslst();
+                fillObjectPrivilegeslst(true);
             }
         }
         private void fillPrivilegeslst()
