@@ -45,6 +45,8 @@
                         <div class="x_title">
                             <h2><i class="fa fa-cog"></i> Manage Objects Privileges</h2>
                             <ul class="nav navbar-right panel_toolbox">
+                                 <asp:HyperLink ID="HyperLink1" runat="server" 
+                    NavigateUrl="~/Security_Objects.aspx"  CssClass="btn btn-success btn-sm"><i class="fa fa-angle-double-left"></i> Back to Maps Manager</asp:HyperLink>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -69,12 +71,12 @@
             <td colspan="3" class="style8">
                 <div id="divMsg" runat="server" align="center" class="NoData"></div></td>
         </tr>--%>
-        <tr>
+      <%--  <tr>
             <td colspan="3" class="style8">
                 <asp:HyperLink ID="HyperLink1" runat="server" 
                     NavigateUrl="~/Security_Objects.aspx"  CssClass="btn btn-success btn-sm"><i class="fa fa-angle-double-left"></i> Back to Maps Manager</asp:HyperLink>
             </td>
-        </tr>
+        </tr>--%>
         <tr>
             <td align="center">
                 <asp:Label ID="Label1" runat="server" Text="Privileges" 

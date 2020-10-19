@@ -45,6 +45,8 @@
                         <div class="x_title">
                             <h2><i class="fa fa-users"></i> Manage Role Users</h2>
                             <ul class="nav navbar-right panel_toolbox">
+                                 <asp:HyperLink ID="RolesBackLNK" runat="server"
+                                NavigateUrl="~/Security_Roles.aspx" CssClass="btn btn-success btn-sm"><i class="fa fa-angle-double-left"></i> Back to Roles Manager</asp:HyperLink>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -86,8 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2" align="center">
-                                    <asp:HyperLink ID="RolesBackLNK" runat="server"
-                                NavigateUrl="~/Security_Roles.aspx" CssClass="btn btn-success btn-sm"><i class="fa fa-angle-double-left"></i> Back to Roles Manager</asp:HyperLink>
+                                   
                                     <br /><br />
                                     <asp:LinkButton ID="AddUserCMD" runat="server" OnClick="AddUserCMD_Click" CssClass="btn btn-success btn-sm" ToolTip="Add New User"><i class="fa fa-plus"></i> Add New User</asp:LinkButton>
                                     <br /><br /><br /><br />
@@ -110,7 +111,7 @@
                                             <br />
                                             <br />
                                             <div>
-                                                <asp:ListBox ID="RoleUsersLST" runat="server" Height="288px" Width="100%" SelectionMode="Multiple" CssClass="select2_multiple form-control"></asp:ListBox>
+                                                <asp:ListBox ID="RoleUsersLST" runat="server" Height="288px" Width="100%" SelectionMode="Multiple" CssClass="select2_multiple form-control" style="float:right"></asp:ListBox>
                                                 </div>
                                         </div>
                                     </div>

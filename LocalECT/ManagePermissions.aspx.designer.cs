@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class Manage_Users
+    public partial class ManagePermissions
     {
 
         /// <summary>
@@ -22,6 +22,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink RolesBackLNK;
+
+        /// <summary>
+        /// divHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divHeader;
 
         /// <summary>
         /// div_msg control.
@@ -51,75 +60,93 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// UserSerachTXT control.
+        /// divTree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserSerachTXT;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTree;
 
         /// <summary>
-        /// SearchCMD control.
+        /// myTree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SearchCMD;
+        protected global::System.Web.UI.WebControls.TreeView myTree;
 
         /// <summary>
-        /// UsersLST control.
+        /// AddObjCMD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox UsersLST;
+        protected global::System.Web.UI.WebControls.LinkButton AddObjCMD;
 
         /// <summary>
-        /// AddUserCMD control.
+        /// RemoveObjCMD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddUserCMD;
+        protected global::System.Web.UI.WebControls.LinkButton RemoveObjCMD;
 
         /// <summary>
-        /// AddCMD control.
+        /// divTree0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddCMD;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTree0;
 
         /// <summary>
-        /// RemoveCMD control.
+        /// RoleTree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton RemoveCMD;
+        protected global::System.Web.UI.WebControls.TreeView RoleTree;
 
         /// <summary>
-        /// RoleLBL control.
+        /// PermissionsLST control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label RoleLBL;
+        protected global::System.Web.UI.WebControls.ListBox PermissionsLST;
 
         /// <summary>
-        /// RoleUsersLST control.
+        /// AddPermissionCMD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox RoleUsersLST;
+        protected global::System.Web.UI.WebControls.LinkButton AddPermissionCMD;
+
+        /// <summary>
+        /// RemovePermissionCMD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton RemovePermissionCMD;
+
+        /// <summary>
+        /// ObjPermissionLST control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ObjPermissionLST;
     }
 }

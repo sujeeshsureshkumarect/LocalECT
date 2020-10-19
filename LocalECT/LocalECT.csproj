@@ -6248,6 +6248,7 @@
     <Content Include="Login_v9\vendor\select2\select2.js" />
     <Content Include="Login_v9\vendor\select2\select2.min.css" />
     <Content Include="Login_v9\vendor\select2\select2.min.js" />
+    <Content Include="ManagePermissions.aspx" />
     <Content Include="ManagePrivileges.aspx" />
     <Content Include="Manage_Users.aspx" />
     <Content Include="MyProfile.aspx" />
@@ -6537,6 +6538,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePermissions.aspx.cs">
+      <DependentUpon>ManagePermissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePermissions.aspx.designer.cs">
+      <DependentUpon>ManagePermissions.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePrivileges.aspx.cs">
       <DependentUpon>ManagePrivileges.aspx</DependentUpon>
