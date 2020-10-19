@@ -33,7 +33,7 @@ namespace LocalECT
             //CurrentRole = (int)Session["CurrentRole"];
             if (!IsPostBack)
             {
-                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_MapsManager,
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Setting_RolesManager,
                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                 {
                     Server.Transfer("Authorization.aspx");

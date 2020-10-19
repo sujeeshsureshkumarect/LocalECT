@@ -16,6 +16,17 @@ namespace LocalECT
         {
             if (Session["CurrentRole"] != null)
             {
+                int CurrentRole = (int)Session["CurrentRole"];
+                if (!IsPostBack)
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Setting_SystemsManager,
+                    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+
+                    }
+                }
+
                 if (!IsPostBack)
                 {
                     bindcount();

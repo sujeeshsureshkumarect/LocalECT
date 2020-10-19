@@ -819,7 +819,15 @@ public class InitializeModule
         //ACMS
         ECT_Active_Employees = 1241,
         ECT_Access = 1242,
-        ECT_Access_Categories = 1243
+        ECT_Access_Categories = 1243,
+
+        //Setting
+        Setting_Setting = 1264,
+        Setting_SystemsManager=1265,
+        Setting_PrivilegesManager = 1266,
+        Setting_MapsManager = 1267,
+        Setting_RolesManager = 1268,
+        Setting_UsersSetup = 1269
 
     }
 
