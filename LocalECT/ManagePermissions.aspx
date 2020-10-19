@@ -10,7 +10,6 @@
                         <a href="#">&nbsp;Security /</a>
                         <a href="Security_Roles">&nbsp;Roles Manager /</a>
                         <a href="#">&nbsp;Manage Permissions</a>
-
                     </h3>
                 </div>
                 <style>
