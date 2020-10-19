@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="x_content">
                                             <div class="input-group">
-													  <asp:TextBox ID="UserSerachTXT" runat="server" ToolTip="Enter User Name then press Enter" CssClass="form-control"></asp:TextBox>    
+													  <asp:TextBox ID="UserSerachTXT" runat="server" ToolTip="Enter User Name then Click Search" CssClass="form-control"></asp:TextBox>    
 													<span class="input-group-btn">
 														<asp:LinkButton ID="SearchCMD" runat="server" OnClick="SearchCMD_Click" CssClass="btn btn-success btn-sm" style="float: right;" ToolTip="Users Search"><i class="fa fa-search"></i></asp:LinkButton>                                                
 													</span>
@@ -99,7 +99,7 @@
                                 <div class="col-md-5 col-sm-5">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-user"></i> Role Users</h2>
+                                            <h2><i class="fa fa-user"></i> <asp:Label ID="RoleLBL" runat="server" Text="Role Users" ForeColor="#444444"></asp:Label></h2>
                                             <ul class="nav navbar-right panel_toolbox">
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>
