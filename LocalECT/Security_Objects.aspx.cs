@@ -432,9 +432,12 @@ namespace LocalECT
            // divMsg.InnerText = myTree.SelectedNode.ValuePath;
             Session["myValuePath"] = myTree.SelectedNode.ValuePath;
             get_Node();
-            iObjectID = int.Parse(IDTXT.Text);
-            lbl_Object.Text = DescTXT.Text;
-            fillObjectPrivilegeslst(true);
+            if(IDTXT.Text!="" && IDTXT.Text!=null)
+            {
+                iObjectID = int.Parse(IDTXT.Text);
+                lbl_Object.Text = DescTXT.Text;
+                fillObjectPrivilegeslst(true);
+            }
         }
 
         private int AddPrivileges(int iObjectID)

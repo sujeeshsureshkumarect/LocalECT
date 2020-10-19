@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 ">Marks Year*</label>
+                                    <label class="col-form-label col-md-3 col-sm-3 ">Marks Year *</label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <asp:DropDownList ID="TermsCBO" runat="server" CssClass="form-control">
                                         </asp:DropDownList>
@@ -135,8 +135,8 @@
                                                          <div class="dropdown-menu">
                                                              <%--<a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Edit</a>--%>
                                                              <asp:LinkButton ID="lnk_Edit" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("RoleID")%>' oncommand="EditBTN_Command"><i class="fa fa-edit"></i> Edit</asp:LinkButton>
-                                                             <a class="dropdown-item" href="Manage_Users.aspx?RoleID=<%#Eval("RoleID")%>"><i class="fa fa-users"></i> Manage Users</a>
-                                                             <a class="dropdown-item" href="ManagePermissions.aspx?RoleID=<%#Eval("RoleID")%>"><i class="fa fa-users"></i> Manage Permissions</a>
+                                                             <a class="dropdown-item" href="Manage_Users.aspx?RoleID=<%#Eval("RoleID")%>"><i class="fa fa-users"></i> Manage Role Users</a>
+                                                             <a class="dropdown-item" href="ManagePermissions.aspx?RoleID=<%#Eval("RoleID")%>"><i class="fa fa-sitemap"></i> Manage Permissions</a>
                                                          </div>
                                                      </div>
                                                  </td>
@@ -146,8 +146,7 @@
                                              </table>  
                                          </FooterTemplate>
                                      </asp:Repeater>
-                                 </div>
-
+                                 </div>                                                     
                              </div>
 
                         </div>

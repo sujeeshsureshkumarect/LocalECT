@@ -6249,6 +6249,7 @@
     <Content Include="Login_v9\vendor\select2\select2.min.css" />
     <Content Include="Login_v9\vendor\select2\select2.min.js" />
     <Content Include="ManagePrivileges.aspx" />
+    <Content Include="Manage_Users.aspx" />
     <Content Include="MyProfile.aspx" />
     <Content Include="PlainPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -6543,6 +6544,13 @@
     </Compile>
     <Compile Include="ManagePrivileges.aspx.designer.cs">
       <DependentUpon>ManagePrivileges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Users.aspx.cs">
+      <DependentUpon>Manage_Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage_Users.aspx.designer.cs">
+      <DependentUpon>Manage_Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>

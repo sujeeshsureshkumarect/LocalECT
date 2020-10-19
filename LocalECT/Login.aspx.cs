@@ -70,7 +70,7 @@ namespace LocalECT
                 }
                 else
                 {
-                    lblMsg.Text = "You are not authorized to use Local ECT...";
+                    lblMsg.Text = "You are not authorized to use "+SystemsCBO.SelectedItem.Text+"...";
                 }
             }
             catch (Exception ex)
