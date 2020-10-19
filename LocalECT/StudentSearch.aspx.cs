@@ -16,7 +16,24 @@ namespace LocalECT
         string constr = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CurrentRole"] != null)
+            {
+                int CurrentRole = (int)Session["CurrentRole"];
+                if (!IsPostBack)
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentSearch,
+                    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
 
+                    }
+                }
+            }
+            else
+            {
+                Session.RemoveAll();
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void lnk_Search_Click(object sender, EventArgs e)
