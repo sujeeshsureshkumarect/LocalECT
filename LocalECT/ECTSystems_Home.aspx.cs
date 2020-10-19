@@ -23,7 +23,6 @@ namespace LocalECT
                     InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                     {
                         Server.Transfer("Authorization.aspx");
-
                     }
                 }
 

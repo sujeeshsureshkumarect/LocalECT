@@ -188,7 +188,7 @@
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="x_content">
-                                            <div id="divTree" runat="server">
+                                            <div id="divTree" runat="server" style="height:533px;overflow:scroll;">
                                                 <asp:TreeView ID="myTree" runat="server" ShowLines="true" OnSelectedNodeChanged="myTree_SelectedNodeChanged" ParentNodeStyle-Font-Bold="true" RootNodeStyle-Font-Bold="true">
                                                    <%-- <SelectedNodeStyle BackColor="#3f658c" ForeColor="White" BorderStyle="Solid" BorderWidth="1px" BorderColor="#3f658c"/>--%>
                                                     <SelectedNodeStyle CssClass="btn btn-success btn-sm" />

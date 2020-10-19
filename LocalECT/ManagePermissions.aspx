@@ -73,7 +73,7 @@
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="x_content">
-                                                        <div id="divTree" runat="server">
+                                                        <div id="divTree" runat="server" style="height:400px;overflow:scroll;">
                     <asp:TreeView ID="myTree" runat="server" 
                         onselectednodechanged="myTree_SelectedNodeChanged" ShowLines="True" 
                         Width="372px">
@@ -105,7 +105,7 @@
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="x_content">
-                                                        <div id="divTree0" runat="server">
+                                                        <div id="divTree0" runat="server" style="height:400px;overflow:scroll;">
                     <asp:TreeView ID="RoleTree" runat="server" ShowLines="True" Width="372px" 
                         onselectednodechanged="RoleTree_SelectedNodeChanged">
                         <%--<SelectedNodeStyle BackColor="#84A5D6" ForeColor="White" />--%>
