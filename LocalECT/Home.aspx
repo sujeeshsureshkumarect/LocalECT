@@ -5,7 +5,7 @@
                         <div class="">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <h3>Welcome To Emirates College Of Technology (ECT)</h3>
+                                    <h3>Welcome To Emirates College of Technology (ECT)</h3>
                                 </div>
                                 <style>
                                     .page-title .title_left {
