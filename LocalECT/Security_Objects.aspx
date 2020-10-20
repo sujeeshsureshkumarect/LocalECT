@@ -7,7 +7,7 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="#">&nbsp;Security /</a>
+                        <a href="#">&nbsp;Setting /</a>
                         <a href="Security_Objects">&nbsp;Maps Manager</a>
 
                     </h3>

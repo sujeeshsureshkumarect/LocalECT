@@ -6253,6 +6253,7 @@
     <Content Include="Manage_Users.aspx" />
     <Content Include="MyProfile.aspx" />
     <Content Include="PlainPage.aspx" />
+    <Content Include="PrivilegesManager.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -6573,6 +6574,13 @@
     </Compile>
     <Compile Include="PlainPage.aspx.designer.cs">
       <DependentUpon>PlainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrivilegesManager.aspx.cs">
+      <DependentUpon>PrivilegesManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrivilegesManager.aspx.designer.cs">
+      <DependentUpon>PrivilegesManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security_Objects.aspx.cs">

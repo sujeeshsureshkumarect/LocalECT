@@ -7,7 +7,7 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="#">&nbsp;Security /</a>
+                        <a href="#">&nbsp;Setting /</a>
                         <a href="Security_Roles">&nbsp;Roles Manager</a>
 
                     </h3>
@@ -101,12 +101,7 @@
                             </div>
 
                             <div class="col-md-12 col-sm-12">
-                                 <hr />
-                         <%--         <div class="alert alert-info" role="alert" style="font-size: x-large" runat="server" id="alertsearch" visible="false">
-
-                            <h2>Search Result - <asp:Label runat="server" ID="lbl_Count" Font-Size="16px" ClientIDMode="Static"></asp:Label></h2>
-                            
-                        </div>--%>
+                                 <hr />                     
                                  <div id="divResult" runat="server" class="table-responsive">
                                      <asp:Repeater ID="RepterDetails" runat="server">
                                          <HeaderTemplate>
