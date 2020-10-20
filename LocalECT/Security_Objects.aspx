@@ -9,7 +9,6 @@
                         <a href="Home">Home /</a>
                         <a href="#">&nbsp;Setting /</a>
                         <a href="Security_Objects">&nbsp;Maps Manager</a>
-
                     </h3>
                 </div>
                 <style>
