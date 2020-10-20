@@ -43,7 +43,7 @@ namespace LocalECT
             //CurrentRole = Convert.ToInt32 (  Session["CurrentRole"]);
             if (!IsPostBack)
             {
-                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_UsersSetup,
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Setting_UsersSetup,
                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                 {
                     Server.Transfer("Authorization.aspx");
@@ -486,7 +486,7 @@ namespace LocalECT
         }
         protected void SearchTXT_TextChanged(object sender, EventArgs e)
         {
-
+            SearchCMD_Click(null,null);
         }    
 
         protected void SearchCMD_Click(object sender, EventArgs e)

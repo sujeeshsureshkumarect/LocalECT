@@ -195,7 +195,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-4 col-sm-4 ">Females</label>
                                         <div class="col-md-8 col-sm-8 ">
-                                            <asp:DropDownList ID="LecturerFCBO" runat="server" CssClass="form-control" TabIndex="6">
+                                            <asp:DropDownList ID="LecturerFCBO" runat="server" CssClass="form-control" TabIndex="6" Width="100%">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@
                                             <asp:Label ID="lblCookie" runat="server"></asp:Label>
                                         </div>
                                     </div>
-                                    <div class="form-group row" style="float:right">
+                                    <div class="form-group row" <%--style="float:right"--%>>
                                         <div class="col-md-8 col-sm-8 ">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -235,10 +235,10 @@
                                 </div>
                                       <div class="col-md-6 col-sm-6" align="center">
                                           <asp:GridView ID="grdvUserRoles" runat="server" 
-                    AutoGenerateColumns="False" BackColor="LightGoldenrodYellow" BorderColor="Tan" 
+                    AutoGenerateColumns="False" BackColor="#ffffff" BorderColor="#ced4da" 
                     BorderWidth="1px" CellPadding="2" DataSourceID="SqlDataSourceUserRoles" 
-                    ForeColor="Black" GridLines="None" Width="100%">
-                    <AlternatingRowStyle BackColor="PaleGoldenrod" />
+                    ForeColor="#444444" GridLines="None" Width="100%">
+                    <AlternatingRowStyle BackColor="#e9ecef" />
                     <Columns>
                         <asp:BoundField DataField="RoleID" HeaderText="Role ID" 
                             SortExpression="RoleID" />
@@ -246,7 +246,7 @@
                             SortExpression="RoleNameEn" />
                     </Columns>
                     <FooterStyle BackColor="Tan" />
-                    <HeaderStyle BackColor="Tan" Font-Bold="True" />
+                    <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White"/>
                     <PagerStyle BackColor="PaleGoldenrod" ForeColor="DarkSlateBlue" 
                         HorizontalAlign="Center" />
                     <SelectedRowStyle BackColor="DarkSlateBlue" ForeColor="GhostWhite" />
@@ -270,7 +270,7 @@
                                 <div class="x_panel">
                                     <h2 align="center"><i class="fa fa-search"></i> User Search</h2>
                                     <div class="input-group">
-													  <asp:TextBox ID="SearchTXT" runat="server" OnTextChanged="SearchTXT_TextChanged" CssClass="form-control"></asp:TextBox>    
+													  <asp:TextBox ID="SearchTXT" runat="server" OnTextChanged="SearchTXT_TextChanged" CssClass="form-control" AutoPostBack="true"></asp:TextBox>    
 													<span class="input-group-btn">
 														<asp:LinkButton ID="SearchCMD" runat="server" OnClick="SearchCMD_Click" CssClass="btn btn-success btn-sm" style="float: right;" ToolTip="Users Search"><i class="fa fa-search"></i></asp:LinkButton>                                                
 													</span>
@@ -278,7 +278,7 @@
                                     <br />
                                      <asp:ListBox ID="UsersLST" runat="server" Height="180px" Width="100%" 
                     onselectedindexchanged="UsersLST_SelectedIndexChanged" AutoPostBack="True" 
-                    TabIndex="1">
+                    TabIndex="1" CssClass="form-control">
                 </asp:ListBox>
                                     <hr />
                                     <div class="form-group row">
@@ -299,5 +299,23 @@
             </div>
         </div>
     </div>
-    
+   <%-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.searchabledropdown.js"></script>
+        <script type="text/javascript">
+            var $i = jQuery.noConflict();
+            $i(document).ready(function () {
+                $i("select").searchable({
+                    maxListSize: 200, // if list size are less than maxListSize, show them all
+                    maxMultiMatch: 300, // how many matching entries should be displayed
+                    exactMatch: false, // Exact matching on search
+                    wildcards: true, // Support for wildcard characters (*, ?)
+                    ignoreCase: true, // Ignore case sensitivity
+                    latency: 200, // how many millis to wait until starting search
+                    warnMultiMatch: 'top {0} matches ...',
+                    warnNoMatch: 'no matches ...',
+                    zIndex: 'auto'
+                });
+            });
+
+        </script>--%>
 </asp:Content>
