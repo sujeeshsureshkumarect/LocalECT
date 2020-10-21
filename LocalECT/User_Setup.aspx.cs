@@ -13,6 +13,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 
 namespace LocalECT
 {
@@ -546,7 +547,7 @@ namespace LocalECT
             }
         }
         protected void lnkGetPc_Click(object sender, EventArgs e)
-        {
+        {         
             System.Collections.Specialized.NameValueCollection Var = this.Page.Request.ServerVariables;
             string sPCName = LibraryMOD.GetComputerName(Request.UserHostAddress);
             // Var["REMOTE_HOST"] + ";" + Var["REMOTE_ADDR"] + ";" + Var["LOGON_USER"];

@@ -19,8 +19,7 @@ using System.Text.RegularExpressions;
 //using DocumentFormat.OpenXml.Packaging;
 using System.Net;
 using System.Globalization;
-
-
+using System.Net.Sockets;
 
 public class LibraryMOD
 {
@@ -4459,18 +4458,51 @@ public class LibraryMOD
     public static string GetComputerName(string clientIP)
     {
         try
-        {
-            var hostEntry = Dns.GetHostEntry(clientIP);
-           
-            string[] computer_name = hostEntry.HostName.Split(new Char[] { '.' });
-            return "" + computer_name[0].ToString().ToLower();
+        {          
+            //string PCName = Dns.GetHostEntry(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]).HostName;
+            //string[] computer_name = PCName.Split(new Char[] { '.' });
+            //string pcshortname = computer_name[0].ToString().ToLower();
+            //if (pcshortname != null || pcshortname!="")
+            //{
+            //    pcshortname = computer_name[0].ToString().ToLower();
+            //}
+            //else
+            //{
+            //    pcshortname = Environment.MachineName.ToLower();
+            //}
+            string hostname = ReverseLookup(HttpContext.Current.Request.UserHostName);
+            string[] hostname1 = hostname.Split(new Char[] { '.' });
+            string pcshortname = hostname1[0].ToString().ToLower();
+            return "" + pcshortname;
         }
         catch (Exception ex)
         {
             return string.Empty;
         }
     }
+    public static string ReverseLookup(string ip)
+    {
+        if (string.IsNullOrEmpty(ip)) return ip;
+        try
+        {
+            return Dns.GetHostEntry(ip).HostName;//.Select(entry => entry.HostName).FirstOrDefault() ?? ip;
+        }
+        catch (SocketException) { return ip; }
+    }
+    //public static string GetComputerName(string clientIP)
+    //{
+    //    try
+    //    {
+    //        var hostEntry = Dns.GetHostEntry(clientIP);
 
+    //        string[] computer_name = hostEntry.HostName.Split(new Char[] { '.' });
+    //        return "" + computer_name[0].ToString().ToLower();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return string.Empty;
+    //    }
+    //}
     public static string GetCurrentNtUserName()
     {
         try
