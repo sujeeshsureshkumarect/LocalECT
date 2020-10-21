@@ -277,7 +277,7 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="x_panel">
                                     <div class="img_wrap" align="center">
-                                <asp:Image ID="imagePreview" runat="server" CssClass="img-thumbnail" ImageUrl="Handler2.ashx" Width="117" Height="137" ClientIDMode="Static" onerror="this.src='images/noimage.jpg'"/>                               
+                                <asp:Image ID="imagePreview" runat="server" CssClass="img-thumbnail"  Width="117" Height="137" ClientIDMode="Static" onerror="this.src='images/noimage.jpg'"/>                               
                                         <hr />
                             </div>
                                     <h2 align="center"><i class="fa fa-search"></i> User Search</h2>

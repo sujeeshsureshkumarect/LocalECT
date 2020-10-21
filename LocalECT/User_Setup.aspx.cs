@@ -289,10 +289,15 @@ namespace LocalECT
                 if(dt.Rows.Count>0)
                 {
                     employeeid = dt.Rows[0]["EmployeeID"].ToString();
+
+                    byte[] bytes = (byte[])GetData("select EmpPicture from [Hr_Employee] where EmployeeID=" + employeeid).Rows[0]["EmpPicture"];
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    imagePreview.ImageUrl = "data:image/png;base64," + base64String;
                 }
             }
             catch(Exception ex)
             {
+                imagePreview.ImageUrl = "~/images/noimage.jpg";
                 sc.Close();
                 lbl_Msg.Text = ex.Message;
                 div_msg.Visible = true;
@@ -302,18 +307,62 @@ namespace LocalECT
                 sc.Close();
             }
 
-            var services = new DAL.DAL();
-            DataTable dtEmployeeProfile = services.GetEmployeeProfilePic(employeeid, myConnection_String.Conn_string);
-            if (dtEmployeeProfile.Rows.Count > 0)
+            //SqlCommand cmd1 = new SqlCommand("select EmpPicture from [Hr_Employee] where EmployeeID=@EmployeeID", sc);
+            //cmd1.Parameters.AddWithValue("@EmployeeID", employeeid);
+            //DataTable dt1 = new DataTable();
+            //SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            //try
+            //{
+            //    sc.Open();
+            //    da1.Fill(dt1);
+            //    sc.Close();
+
+            //    if (dt1.Rows.Count > 0)
+            //    {
+                    
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    sc.Close();
+            //    lbl_Msg.Text = ex.Message;
+            //    div_msg.Visible = true;
+            //}
+            //finally
+            //{
+            //    sc.Close();
+            //}
+
+            //var services = new DAL.DAL();
+            //DataTable dtEmployeeProfile = services.GetEmployeeProfilePic(employeeid, myConnection_String.Conn_string);
+            //if (dtEmployeeProfile.Rows.Count > 0)
+            //{
+            //    Session["ProfilePIcUsers"] = dtEmployeeProfile.Rows[0]["PIC"].ToString();               
+            //}
+            //else
+            //{
+            //    Session["ProfilePIcUsers"] = "";
+            //}
+        }
+        private DataTable GetData(string query)
+        {
+            DataTable dt = new DataTable();
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
             {
-                Session["ProfilePIcUsers"] = dtEmployeeProfile.Rows[0]["PIC"].ToString();               
-            }
-            else
-            {
-                Session["ProfilePIcUsers"] = "";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Connection = con;
+                        sda.SelectCommand = cmd;
+                        sda.Fill(dt);
+                    }
+                }
+                return dt;
             }
         }
-
         private void GetUser(int iUser)
         {
             List<User> myUsers = new List<User>();
