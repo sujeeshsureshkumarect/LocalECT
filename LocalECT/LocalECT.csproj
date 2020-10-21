@@ -6198,6 +6198,7 @@
       <DependentUpon>WeeklyCalendar.xsd</DependentUpon>
     </Content>
     <Content Include="Handler1.ashx" />
+    <Content Include="Handler2.ashx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login_v9\css\main.css" />
     <Content Include="Login_v9\css\util.css" />
@@ -6520,6 +6521,9 @@
     </Compile>
     <Compile Include="Handler1.ashx.cs">
       <DependentUpon>Handler1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler2.ashx.cs">
+      <DependentUpon>Handler2.ashx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

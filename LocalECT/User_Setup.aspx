@@ -35,6 +35,7 @@
                         <div class="x_title">
                             <h2><i class="fa fa-user"></i> User Setup</h2>
                             <ul class="nav navbar-right panel_toolbox">
+                                <asp:LinkButton ID="NewCMD" runat="server"  onclick="NewCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> Create New User</asp:LinkButton>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -216,7 +217,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row" <%--style="float:right"--%>>
-                                        <div class="col-md-8 col-sm-8 ">
+                                        <div class="col-md-12 col-sm-12 ">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Actions
@@ -229,6 +230,13 @@
                                              <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Security_Roles.aspx" CssClass="dropdown-item"><i class="fa fa-angle-double-left"></i> Goto Roles Manager...</asp:LinkButton>
                                         </div>
                                     </div>
+                                          &nbsp;&nbsp;   
+                                                     <%--<asp:LinkButton ID="NewCMD" runat="server"  onclick="NewCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> New</asp:LinkButton>--%>
+                                                    
+                                                <asp:LinkButton ID="SaveCMD" runat="server"  onclick="SaveCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                                                 
+                                            <asp:LinkButton ID="DeleteCMD" runat="server"  onclick="DeleteCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid" OnClientClick="return confirm('Are you sure you want to delete this User?');"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                                            
                                </div>
                                         </div>
 
@@ -268,6 +276,10 @@
 
                             <div class="col-md-3 col-sm-3">
                                 <div class="x_panel">
+                                    <div class="img_wrap" align="center">
+                                <asp:Image ID="imagePreview" runat="server" CssClass="img-thumbnail" ImageUrl="Handler2.ashx" Width="117" Height="137" ClientIDMode="Static" onerror="this.src='images/noimage.jpg'"/>                               
+                                        <hr />
+                            </div>
                                     <h2 align="center"><i class="fa fa-search"></i> User Search</h2>
                                     <div class="input-group">
 													  <asp:TextBox ID="SearchTXT" runat="server" OnTextChanged="SearchTXT_TextChanged" CssClass="form-control" AutoPostBack="true"></asp:TextBox>    
@@ -276,18 +288,18 @@
 													</span>
 												</div>
                                     <br />
-                                     <asp:ListBox ID="UsersLST" runat="server" Height="180px" Width="100%" 
+                                     <asp:ListBox ID="UsersLST" runat="server" Height="140px" Width="100%" 
                     onselectedindexchanged="UsersLST_SelectedIndexChanged" AutoPostBack="True" 
                     TabIndex="1" CssClass="form-control">
                 </asp:ListBox>
-                                    <hr />
-                                    <div class="form-group row">
+                                   <%-- <hr />--%>
+                                   <%-- <div class="form-group row">
                                                      <asp:LinkButton ID="NewCMD" runat="server"  onclick="NewCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> New</asp:LinkButton>
                                                     
                                                 <asp:LinkButton ID="SaveCMD" runat="server"  onclick="SaveCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
                                                  
                                             <asp:LinkButton ID="DeleteCMD" runat="server"  onclick="DeleteCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
-                                             </div> 
+                                             </div>--%> 
                                     </div>
                             </div>
                             <asp:HiddenField ID="isDataChanged" runat="server" />

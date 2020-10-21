@@ -93,7 +93,7 @@
                                                     
                                                 <asp:LinkButton ID="SaveCMD" runat="server"  onclick="SaveCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
                                                  
-                                            <asp:LinkButton ID="DeleteCMD" runat="server"  onclick="DeleteCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                                            <asp:LinkButton ID="DeleteCMD" runat="server"  onclick="DeleteCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid" OnClientClick="return confirm('Are you sure you want to delete?');"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                                              </div>                                                
                                             </div>
                                             <div class="col-md-6 col-sm-6">

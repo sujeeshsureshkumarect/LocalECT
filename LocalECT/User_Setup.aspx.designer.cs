@@ -15,6 +15,15 @@ namespace LocalECT
     {
 
         /// <summary>
+        /// NewCMD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton NewCMD;
+
+        /// <summary>
         /// div_msg control.
         /// </summary>
         /// <remarks>
@@ -267,6 +276,24 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
+        /// SaveCMD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton SaveCMD;
+
+        /// <summary>
+        /// DeleteCMD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton DeleteCMD;
+
+        /// <summary>
         /// grdvUserRoles control.
         /// </summary>
         /// <remarks>
@@ -283,6 +310,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceUserRoles;
+
+        /// <summary>
+        /// imagePreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imagePreview;
 
         /// <summary>
         /// SearchTXT control.
@@ -310,33 +346,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox UsersLST;
-
-        /// <summary>
-        /// NewCMD control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton NewCMD;
-
-        /// <summary>
-        /// SaveCMD control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SaveCMD;
-
-        /// <summary>
-        /// DeleteCMD control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DeleteCMD;
 
         /// <summary>
         /// isDataChanged control.

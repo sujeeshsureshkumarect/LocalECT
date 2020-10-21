@@ -12,6 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 ////using System.Xml.Linq;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace LocalECT
 {
@@ -31,6 +32,7 @@ namespace LocalECT
             if (Session["CurrentRole"] != null)
             {
                 CurrentRole = (int)Session["CurrentRole"];
+                Session["ProfilePIcUsers"] = "";
             }
             else
             {
@@ -263,9 +265,53 @@ namespace LocalECT
             {
                 iUser = int.Parse(UsersLST.SelectedValue);
                 GetUser(iUser);
+                getprofilepic(iUser);
+            }
+            lbl_Msg.Text = "";
+            div_msg.Visible = false;
+        }
+        public void getprofilepic(int iUser)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("select EmployeeID from [Cmn_User] where UserNo=@UserNo", sc);
+            cmd.Parameters.AddWithValue("@UserNo", iUser);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            string employeeid = "";
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if(dt.Rows.Count>0)
+                {
+                    employeeid = dt.Rows[0]["EmployeeID"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                sc.Close();
             }
 
-
+            var services = new DAL.DAL();
+            DataTable dtEmployeeProfile = services.GetEmployeeProfilePic(employeeid, myConnection_String.Conn_string);
+            if (dtEmployeeProfile.Rows.Count > 0)
+            {
+                Session["ProfilePIcUsers"] = dtEmployeeProfile.Rows[0]["PIC"].ToString();               
+            }
+            else
+            {
+                Session["ProfilePIcUsers"] = "";
+            }
         }
 
         private void GetUser(int iUser)
@@ -660,7 +706,7 @@ namespace LocalECT
 
         protected void DeleteCMD_Click(object sender, EventArgs e)
         {
-            DeleteData();
+           DeleteData();
         }
         private void DeleteData()
         {
