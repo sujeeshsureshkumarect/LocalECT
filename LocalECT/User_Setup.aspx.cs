@@ -64,6 +64,7 @@ namespace LocalECT
                 FillCampusLecturers();
                 FillLecturers();
                 FillRoles();
+                imagePreview.ImageUrl = "~/images/Student.jpg";
             }
 
             if (!string.IsNullOrEmpty(Request.QueryString["RoleID"]))
