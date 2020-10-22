@@ -141,6 +141,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.HiddenField DataStatus;
 
         /// <summary>
+        /// lbl_Count control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Count;
+
+        /// <summary>
         /// divResult control.
         /// </summary>
         /// <remarks>

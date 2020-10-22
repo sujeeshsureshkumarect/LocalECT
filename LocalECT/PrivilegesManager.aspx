@@ -26,7 +26,18 @@
                                         float: left;
                                         display: block;
                                     }                                  
-                                </style>
+                                </style>               
+                                <script>
+                                    setTimeout(explode, 200);
+                                    function explode() {                                       
+                                        var test = document.getElementById('datatable_info').textContent;
+                                        document.getElementById('lbl_Count').textContent = "(" + test + ")";
+                                    }
+                                    $(document).on('keyup', '.dataTables_filter input', function () {                                         
+                                        var test = document.getElementById('datatable_info').textContent;
+                                        document.getElementById('lbl_Count').textContent = "(" + test + ")";
+                                    })
+                                </script>
                             </div>
                             <div class="clearfix"></div>
                             <div class="row">
@@ -96,7 +107,14 @@
                             </div>
 
                                                  <div class="col-md-12 col-sm-12">
-                                 <hr />                     
+                                 <hr />
+                                                     <div class="x_content bs-example-popovers">
+                                                         <div class="alert alert-info alert-dismissible " role="alert">
+                                                             <strong>
+                                                                 <asp:Label runat="server" ID="lbl_Count" ClientIDMode="Static"></asp:Label>
+                                                             </strong>
+                                                         </div>
+                                                     </div>
                                  <div id="divResult" runat="server" class="table-responsive">
                                      <asp:Repeater ID="RepterDetails" runat="server">
                                          <HeaderTemplate>
