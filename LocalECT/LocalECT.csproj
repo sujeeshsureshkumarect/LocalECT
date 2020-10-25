@@ -6255,6 +6255,7 @@
     <Content Include="PlainPage.aspx" />
     <Content Include="PrivilegesManager.aspx" />
     <Content Include="Procurement_LPO_Manager.aspx" />
+    <Content Include="Procurement_LPO_Manager_Create.aspx" />
     <Content Include="Procurement_Supplier_Manager.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -6593,6 +6594,13 @@
     </Compile>
     <Compile Include="Procurement_LPO_Manager.aspx.designer.cs">
       <DependentUpon>Procurement_LPO_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Procurement_LPO_Manager_Create.aspx.cs">
+      <DependentUpon>Procurement_LPO_Manager_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Procurement_LPO_Manager_Create.aspx.designer.cs">
+      <DependentUpon>Procurement_LPO_Manager_Create.aspx</DependentUpon>
     </Compile>
     <Compile Include="Procurement_Supplier_Manager.aspx.cs">
       <DependentUpon>Procurement_Supplier_Manager.aspx</DependentUpon>

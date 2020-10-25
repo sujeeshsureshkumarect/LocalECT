@@ -6,8 +6,7 @@
                             <div class="page-title">
                                 <div class="title_left">
                                  <h3 class="breadcrumb">
-                        <a href="Home">Home /</a>
-                        <a href="#">&nbsp;Setting /</a>
+                        <a href="Home">Home /</a>                       
                         <a href="ChangePwd">&nbsp;Change Password</a>
 
                     </h3>

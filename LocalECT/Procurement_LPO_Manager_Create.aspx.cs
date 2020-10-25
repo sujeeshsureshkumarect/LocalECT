@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace LocalECT
 {
-    public partial class Procurement_LPO_Manager : System.Web.UI.Page
+    public partial class Procurement_LPO_Manager_Create : System.Web.UI.Page
     {
         LibraryMOD myLibrary = new LibraryMOD();
         int CurrentRole = 0;
@@ -40,7 +40,7 @@ namespace LocalECT
 
             if (!IsPostBack)
             {
-                
+
             }
         }
     }

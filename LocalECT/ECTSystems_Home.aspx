@@ -5,9 +5,22 @@
                         <div class="">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <%--<h3>Welcome To Emirates College Of Technology (ECT)</h3>--%>
+                                                  <h3 class="breadcrumb">
+                        <a href="Home">Home /</a>
+                        <a href="#">&nbsp;Setting /</a>
+                        <a href="ECTSystems_Home">&nbsp;Systems Manager</a>
+
+                    </h3>
                                 </div>
                                 <style>
+                                     .breadcrumb {
+                        padding: 8px 15px;
+                        margin-bottom: 20px;
+                        list-style: none;
+                        background-color: #ededed;
+                        border-radius: 4px;
+                        font-size: 13px;
+                    }
                                     .page-title .title_left {
                                         width: 100%;
                                         float: left;
