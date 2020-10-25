@@ -827,7 +827,12 @@ public class InitializeModule
         Setting_PrivilegesManager = 1266,
         Setting_MapsManager = 1267,
         Setting_RolesManager = 1268,
-        Setting_UsersSetup = 1269
+        Setting_UsersSetup = 1269,
+
+        //Procurment
+        Procurment_Procurment=1271,
+        Procurment_SupplierManager = 1272,
+        Procurment_LPOManager = 1273
 
     }
 

@@ -6254,6 +6254,8 @@
     <Content Include="MyProfile.aspx" />
     <Content Include="PlainPage.aspx" />
     <Content Include="PrivilegesManager.aspx" />
+    <Content Include="Procurement_LPO_Manager.aspx" />
+    <Content Include="Procurement_Supplier_Manager.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -6584,6 +6586,20 @@
     </Compile>
     <Compile Include="PrivilegesManager.aspx.designer.cs">
       <DependentUpon>PrivilegesManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Procurement_LPO_Manager.aspx.cs">
+      <DependentUpon>Procurement_LPO_Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Procurement_LPO_Manager.aspx.designer.cs">
+      <DependentUpon>Procurement_LPO_Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Procurement_Supplier_Manager.aspx.cs">
+      <DependentUpon>Procurement_Supplier_Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Procurement_Supplier_Manager.aspx.designer.cs">
+      <DependentUpon>Procurement_Supplier_Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security_Objects.aspx.cs">
