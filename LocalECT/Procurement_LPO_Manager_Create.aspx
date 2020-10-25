@@ -84,15 +84,14 @@
                                            
              <div id="form" align="center">
 
-                                <div class="x_content bs-example-popovers" id="div_msg" runat="server" visible="false">
-
-                                    <div class="alert alert-success alert-dismissible " role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <asp:Label ID="lbl_Msg" runat="server" Text="LPO Created Successfully" Visible="false" Font-Bold="true" Font-Size="16px"></asp:Label>
-                                    </div>
-                                </div>
+            <div class="x_content bs-example-popovers" id="div_msg" runat="server" visible="false">
+                                                <div class="alert alert-danger alert-dismissible" role="alert" runat="server" id="div_Alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <asp:Label ID="lbl_Msg" runat="server" Text="" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
+                                                </div>
+                                            </div>
 
                                 <table style="width: 100%">
                                     <tr>
@@ -116,7 +115,7 @@
                                 <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;">
-                                            <b>Ref :</b>
+                                            <b>Reference # :</b>
                                         </td>
                                         <td align="center">
                                             <asp:Label ID="lbl_Ref" runat="server" Text="ECT/MR/2020000"></asp:Label>
@@ -144,10 +143,11 @@
                                     </tr>
                                       <tr>
                                         <td align="center" style="background-color: #f2f2f2;">
-                                            <b>Dept : </b>
+                                            <b>Department : </b>
                                         </td>
                                         <td align="center">
                                            <asp:DropDownList ID="drp_dept" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            <asp:RequiredFieldValidator  runat="server" ControlToValidate="drp_dept" InitialValue="0" ErrorMessage="*Please select a department to continue" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -159,7 +159,8 @@
                                             <b>To :</b>
                                         </td>
                                         <td align="center">
-                                           <asp:DropDownList ID="drp_Supplier" runat="server" CssClass="form-control"></asp:DropDownList>
+                                           <asp:DropDownList ID="drp_Supplier" runat="server" CssClass="form-control" OnSelectedIndexChanged="drp_Supplier_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                            <asp:RequiredFieldValidator  runat="server" ControlToValidate="drp_Supplier" InitialValue="0" ErrorMessage="*Please select a supplier to continue" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                         </td>
                                         <td align="center" style="background-color: #f2f2f2;">
                                             <b>P.O Box : </b>
@@ -183,8 +184,48 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <hr />                               
-                                <asp:LinkButton ID="lnk_Generate" runat="server" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="lnk_Generate_Click"><i class="fa fa-money"> </i> Save</asp:LinkButton>
+                                <hr />    
+
+                 <div class="GridviewDiv">
+<asp:GridView runat="server" ID="gvDetails" ShowFooter="true" AllowPaging="true" PageSize="10" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" OnRowDeleting="gvDetails_RowDeleting">
+<HeaderStyle CssClass="headerstyle" />
+<Columns>
+<asp:BoundField DataField="rowid" HeaderText="SR No." ReadOnly="true" />
+<asp:TemplateField HeaderText="Description">
+<ItemTemplate>
+<asp:TextBox ID="txtName" runat="server" CssClass="form-control"/>
+</ItemTemplate>
+    <FooterTemplate>
+<asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+</FooterTemplate>
+</asp:TemplateField>
+    <asp:TemplateField HeaderText="Qty">
+<ItemTemplate>
+<asp:TextBox ID="txtQty" runat="server" CssClass="form-control" TextMode="Number" OnTextChanged="txtQty_TextChanged" AutoPostBack="true" Text="0"/>
+</ItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText = "Unit Price">
+<ItemTemplate>
+<asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number" OnTextChanged="txtPrice_TextChanged" AutoPostBack="true" Text="0"/>
+</ItemTemplate>
+</asp:TemplateField>
+    <asp:TemplateField HeaderText="Total">
+<ItemTemplate>
+<asp:TextBox ID="txtTotal" runat="server" CssClass="form-control" ReadOnly="true"/>
+</ItemTemplate>
+</asp:TemplateField>
+<asp:CommandField ShowDeleteButton="true">
+
+</asp:CommandField>
+
+
+</Columns>
+</asp:GridView>
+</div>
+       
+                 <hr />
+                                <asp:LinkButton ID="lnk_Generate" runat="server" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="lnk_Generate_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                  <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-success btn-sm"  OnClick="LinkButton1_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
                             </div>
                                         </div>
                                     </div>
@@ -192,4 +233,9 @@
                             </div>
                         </div>
                     </div>
+   <style>
+       #ContentPlaceHolder1_gvDetails td{
+           width:10%;
+       }
+   </style>
     </asp:Content>
