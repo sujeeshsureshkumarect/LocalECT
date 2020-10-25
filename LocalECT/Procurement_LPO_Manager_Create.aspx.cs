@@ -43,5 +43,14 @@ namespace LocalECT
 
             }
         }
+
+        public void bindsuppliers()
+        {
+
+        }
+        protected void lnk_Generate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
