@@ -185,48 +185,75 @@
                                     </tr>
                                 </table>
                                 <hr />    
+                 <style>
+                     #tbl_Pricing td{
+                         width:10% !important;
+                         border:1px solid #ededed;
+                     }
+                     #tbl_Pricing th{                         
+                         border:1px solid #ededed;
+                     }
+                 </style>
+                 <div class="col-md-8 col-sm-8">
+                 <asp:Repeater ID="RepterDetails" runat="server">
+                                         <HeaderTemplate>
+                          <table style="width: 100%;border:1px solid #ededed;text-align:center;" id="tbl_Pricing">
+                               <thead>
+                                    <tr>
+                                        <th style="width:5% !important"><font color="#fff">SR No.</font></th>
+                                        <th style="width:30% !important"><font color="#fff">Description</font></th>
+                                        <th><font color="#fff">Qty</font></th>
+                                        <th><font color="#fff">Unit Price</font></th>
+                                        <th><font color="#fff">Total</font></th>     
+                                        <%--<th style="width:5% !important"><font color="#fff"></font></th>--%>    
+                                    </tr>
+                                   </thead>
+                                         </HeaderTemplate>
+                                         <ItemTemplate>
+                                    <tr class="row<%# Container.ItemIndex+1 %> <%#Eval("add")%>">   
+                                        <td style="width:5% !important"><asp:Label ID="lbl_srno" runat="server" Text="<%# Container.ItemIndex+1 %>" ClientIDMode="Static"></asp:Label> </td>                                           
+                                        <td style="width:40% !important"><asp:TextBox ID="txt_desc" runat="server" CssClass="form-control" ClientIDMode="Static" EnableViewState="false"></asp:TextBox></td>                                      
+                                        <td><asp:TextBox ID="txt_qty" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;"></asp:TextBox></td>
+                                        <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
+                                        <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
+                                        <%--<td style="width:5% !important"><p class="<%#Eval("add1")%>" ><u>+ Add</u></p></td>--%>
+                                    </tr>
+                                             </ItemTemplate>
+                                         <FooterTemplate>
+                                  <tr class="footer">
+                                        <td bgcolor="#f2f2f2"><font color="#444444"><b>Total</b></font></td>                                        
+                                        <td bgcolor="#f2f2f2"></td>
+                                        <td bgcolor="#f2f2f2"> </td>
+                                        <td bgcolor="#f2f2f2"></td>
+                                        <td bgcolor="#f2f2f2"><asp:Label ID="total1" ClientIDMode="Static" runat="server" Text="0.00" Font-Bold="true" ForeColor="#444444"></asp:Label></td>                                       
+                                        <%--<td bgcolor="#dddddd"></td>--%>
+                                    </tr>
+                              </table>  
+                                         </FooterTemplate>
+                                     </asp:Repeater>
+                     </div>
+                 <div class="col-md-4 col-sm-4">
+                      <div class="x_panel">
+                     <h2><u>Terms & Conditions :</u></h2>
+                     <div class="form-group row">
+                         <label>Invoice</label>
+                         <asp:TextBox ID="txt_Invoice" runat="server" CssClass="form-control"></asp:TextBox>
+                     </div>
+                     <div class="form-group row">
+                         <label>Payment</label>
+                         <asp:TextBox ID="txt_Payment" runat="server" CssClass="form-control"></asp:TextBox>
+                     </div>
+                     <div class="form-group row">
+                         <label>Other Terms</label>
+                         <asp:TextBox ID="txt_other" runat="server" CssClass="form-control" TextMode="MultiLine" Height="70px"></asp:TextBox>
+                     </div>
 
-                 <div class="GridviewDiv">
-<asp:GridView runat="server" ID="gvDetails" ShowFooter="true" AllowPaging="true" PageSize="10" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" OnRowDeleting="gvDetails_RowDeleting">
-<HeaderStyle CssClass="headerstyle" />
-<Columns>
-<asp:BoundField DataField="rowid" HeaderText="SR No." ReadOnly="true" />
-<asp:TemplateField HeaderText="Description">
-<ItemTemplate>
-<asp:TextBox ID="txtName" runat="server" CssClass="form-control"/>
-</ItemTemplate>
-    <FooterTemplate>
-<asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
-</FooterTemplate>
-</asp:TemplateField>
-    <asp:TemplateField HeaderText="Qty">
-<ItemTemplate>
-<asp:TextBox ID="txtQty" runat="server" CssClass="form-control" TextMode="Number" OnTextChanged="txtQty_TextChanged" AutoPostBack="true" Text="0"/>
-</ItemTemplate>
-</asp:TemplateField>
-<asp:TemplateField HeaderText = "Unit Price">
-<ItemTemplate>
-<asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number" OnTextChanged="txtPrice_TextChanged" AutoPostBack="true" Text="0"/>
-</ItemTemplate>
-</asp:TemplateField>
-    <asp:TemplateField HeaderText="Total">
-<ItemTemplate>
-<asp:TextBox ID="txtTotal" runat="server" CssClass="form-control" ReadOnly="true"/>
-</ItemTemplate>
-</asp:TemplateField>
-<asp:CommandField ShowDeleteButton="true">
 
-</asp:CommandField>
-
-
-</Columns>
-</asp:GridView>
-</div>
-       
-                 <hr />
-                                <asp:LinkButton ID="lnk_Generate" runat="server" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="lnk_Generate_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
-                  <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-success btn-sm"  OnClick="LinkButton1_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
-                            </div>
+                     <asp:LinkButton ID="lnk_Generate" runat="server" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="lnk_Generate_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-success btn-sm" OnClick="LinkButton1_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
+                 </div>
+                      </div>
+             </div>
                                         </div>
                                     </div>
                                 </div>
@@ -234,8 +261,95 @@
                         </div>
                     </div>
    <style>
-       #ContentPlaceHolder1_gvDetails td{
-           width:10%;
+       .hide{
+           display:none;
        }
+
    </style>
+  <%--      <script type="text/javascript">
+
+     function GetTotalAmount(obj){
+         var txtbox1id = obj.id.replace('txt_up','txt_qty');
+         var txtbox2id = obj.id.replace('txt_qty','txt_up');
+         var txtbox3id = obj.id.replace('txt_qty', 'txt_total').replace('txt_up','txt_total');
+            var total =parseFloat($('#'+ txtbox1id).val()) * parseFloat($('#'+txtbox2id).val());
+            $('#' + txtbox3id).val(total);
+           }
+
+
+      $(document).ready(function() {
+          $("input[id*=txt_qty]").each(function() {
+            $(this).change(function() {
+              GetTotalAmount(this);
+            });
+          });
+
+          $("input[id*=txt_up]").each(function() {
+            $(this).change(function() {
+              GetTotalAmount(this);
+            });
+          });
+
+    });
+
+        </script>--%>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("[id*=txt_qty]").val("0");
+            $("[id*=txt_up]").val("0");
+        });
+        $("body").on("change keyup", "[id*=txt_qty]", function () {
+            //Check whether Quantity value is valid Float number.            
+            var quantity = $.trim($(this).val());
+            if (isNaN(quantity)) {
+                quantity = 0;
+            }
+            //Update the Quantity TextBox.
+            $(this).val(quantity);
+
+            //Calculate and update Row Total.
+            var row = $(this).closest("tr"); 
+
+            //var up = parseFloat($("[id*=txt_up]", row).val());
+            //if (isNaN(up)) {
+            //    up = 0;
+            //}
+            //alert(up);
+            $("[id*=txt_total]", row).val(parseFloat($("[id*=txt_up]", row).val()) * parseFloat($(this).val()));
+
+            //Calculate and update Grand Total.
+            var grandTotal = 0;
+            $("[id*=txt_total]").each(function () {
+                grandTotal = grandTotal + parseFloat($(this).val());
+            });
+            $("[id*=total1]").html(grandTotal.toString());
+        });
+        $("body").on("change keyup", "[id*=txt_up]", function () {
+            //Check whether Quantity value is valid Float number.            
+            var up = $.trim($(this).val());
+            if (isNaN(up)) {
+                up = 0;
+            }
+            //Update the Quantity TextBox.
+            $(this).val(up);
+
+            //Calculate and update Row Total.
+            var row = $(this).closest("tr");
+
+            //var up = parseFloat($("[id*=txt_up]", row).val());
+            //if (isNaN(up)) {
+            //    up = 0;
+            //}
+            //alert(up);
+            $("[id*=txt_total]", row).val(parseFloat($("[id*=txt_qty]", row).val()) * parseFloat($(this).val()));
+
+            //Calculate and update Grand Total.
+            var grandTotal = 0;
+            $("[id*=txt_total]").each(function () {
+                grandTotal = grandTotal + parseFloat($(this).val());
+            });
+            $("[id*=total1]").html(grandTotal.toString());
+        });
+    </script>
     </asp:Content>

@@ -40,7 +40,34 @@ namespace LocalECT
 
             if (!IsPostBack)
             {
-                
+                bindlpo();
+            }
+        }
+
+        public void bindlpo()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
+            SqlConnection sc = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("SELECT dbo.PRC_LPO_Header.iLPO, dbo.PRC_LPO_Header.sRef, dbo.PRC_LPO_Header.sBRF, dbo.PRC_LPO_Header.sRequester, dbo.PRC_LPO_Header.sInvoice, dbo.PRC_LPO_Header.sPayment, dbo.PRC_LPO_Header.sOtherTerm, dbo.PRC_LPO_Header.iStatus, dbo.PRC_LPO_Header.sPreparedBy, dbo.PRC_LPO_Header.sPreparedByJobDesc, dbo.PRC_LPO_Header.sApprovedBy, dbo.PRC_LPO_Header.sApprovedByJobDesc, dbo.PRC_LPO_Header.dDate, dbo.PRC_Supplier.sSupplierName as Company FROM dbo.PRC_LPO_Header INNER JOIN dbo.PRC_Supplier ON dbo.PRC_LPO_Header.iRequestFrom = dbo.PRC_Supplier.iSupplier order by dbo.PRC_LPO_Header.dDate asc", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                RepterDetails.DataSource = dt;
+                RepterDetails.DataBind();
+            }
+            catch (Exception exp)
+            {
+                sc.Close();
+                throw exp;
+            }
+            finally
+            {
+                sc.Close();
             }
         }
     }

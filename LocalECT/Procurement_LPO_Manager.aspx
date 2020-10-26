@@ -119,9 +119,11 @@
                                                      <tr class='headings'>
                                                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">LPO #</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Created by</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Created on</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Ref #</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Requester</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Company</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Perpared By</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Date</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
                                                  </thead>
@@ -129,12 +131,13 @@
                                          <ItemTemplate>
                                              <tr>
                                                  <td align='center'><%# Container.ItemIndex+1 %></td>
-                                                 <td><%#Eval("DescEn")%></td>
-                                                 <td><%#Eval("IsActive")%></td>
-                                                 <td><%#Eval("CreationUserID")%></td>
-                                                 <td><span style="display: none;"><%#Eval("CreationDate","{0:yyyyMMdd}")%></span><%#Eval("CreationDate","{0:dd/MM/yyyy}")%></td>
-                                                 <td><a href="Procurement_LPO_Manager_Update.aspx?seqid=<%#Eval("SeqID")%>" class="btn btn-success btn-sm">View / Edit</a>
-                                                    <%-- <a href="ECTSystems_Update.aspx?seqid=<%#Eval("SeqID")%>&majorid=<%#Eval("MajorID")%>&minorid=<%#Eval("MinorID")%>" class="btn btn-success btn-sm">Delete</a>--%>
+                                                 <td><%#Eval("iLPO")%></td>
+                                                 <td><%#Eval("sRef")%></td>
+                                                 <td><%#Eval("sRequester")%></td>
+                                                 <td><%#Eval("Company")%></td>
+                                                 <td><%#Eval("sPreparedBy")%></td>
+                                                 <td><span style="display: none;"><%#Eval("dDate","{0:yyyyMMdd}")%></span><%#Eval("dDate","{0:dd/MM/yyyy}")%></td>
+                                                 <td><a href="Procurement_LPO_Manager_Update.aspx?seqid=<%#Eval("iLPO")%>" class="btn btn-success btn-sm">View / Edit</a>                                                   
                                                  </td>
                                              </tr>
                                          </ItemTemplate>

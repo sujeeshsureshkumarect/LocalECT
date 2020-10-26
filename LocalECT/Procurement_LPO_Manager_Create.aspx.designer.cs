@@ -123,13 +123,40 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Fax;
 
         /// <summary>
-        /// gvDetails control.
+        /// RepterDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvDetails;
+        protected global::System.Web.UI.WebControls.Repeater RepterDetails;
+
+        /// <summary>
+        /// txt_Invoice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Invoice;
+
+        /// <summary>
+        /// txt_Payment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Payment;
+
+        /// <summary>
+        /// txt_other control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_other;
 
         /// <summary>
         /// lnk_Generate control.

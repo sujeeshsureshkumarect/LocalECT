@@ -57,113 +57,49 @@ namespace LocalECT
             dt.Columns.Add("price", typeof(string));
             dt.Columns.Add("qty", typeof(string));
             dt.Columns.Add("total", typeof(string));
-            DataRow dr = dt.NewRow();
-            dr["rowid"] = 1;
-            dr["productname"] = string.Empty;
-            dr["price"] = string.Empty;
-            dr["qty"] = string.Empty;
-            dr["total"] = string.Empty;
-            dt.Rows.Add(dr);
-            ViewState["Curtbl"] = dt;
-            gvDetails.DataSource = dt;
-            gvDetails.DataBind();
-        }
-        private void AddNewRow()
-        {
-            int rowIndex = 0;
+            dt.Columns.Add("add", typeof(string));
+            dt.Columns.Add("add1", typeof(string));
 
-            if (ViewState["Curtbl"] != null)
+            for (int i=0;i<10;i++)
             {
-                DataTable dt = (DataTable)ViewState["Curtbl"];
-                DataRow drCurrentRow = null;
-                if (dt.Rows.Count > 0)
+                if(i<10)
                 {
-                    for (int i = 1; i <= dt.Rows.Count; i++)
+                    DataRow dr = dt.NewRow();
+                    dr["rowid"] = i;
+                    dr["productname"] = string.Empty;
+                    dr["price"] = string.Empty;
+                    dr["qty"] = string.Empty;
+                    dr["total"] = string.Empty;
+                    dr["add"] = "show";
+                    if (i<9)
                     {
-                        TextBox txtname = (TextBox)gvDetails.Rows[rowIndex].Cells[1].FindControl("txtName");
-                        TextBox txtprice = (TextBox)gvDetails.Rows[rowIndex].Cells[3].FindControl("txtPrice");
-                        TextBox txtQty = (TextBox)gvDetails.Rows[rowIndex].Cells[2].FindControl("txtQty");
-                        TextBox txtTotal = (TextBox)gvDetails.Rows[rowIndex].Cells[4].FindControl("txtTotal");
-                        drCurrentRow = dt.NewRow();
-                        drCurrentRow["rowid"] = i + 1;
-                        dt.Rows[i - 1]["productname"] = txtname.Text;
-                        dt.Rows[i - 1]["price"] = txtprice.Text;
-                        dt.Rows[i - 1]["qty"] = txtQty.Text;
-                        dt.Rows[i - 1]["total"] = txtTotal.Text;
-                        rowIndex++;
+                        dr["add1"] = "hide";
                     }
-                    dt.Rows.Add(drCurrentRow);
-                    ViewState["Curtbl"] = dt;
-                    gvDetails.DataSource = dt;
-                    gvDetails.DataBind();
+                    else
+                    {
+                        dr["add1"] = "show";
+                    }
+                    dt.Rows.Add(dr);
                 }
-            }
-            else
-            {
-                Response.Write("ViewState Value is Null");
-            }
-            SetOldData();
-        }
-
-        private void SetOldData()
-        {
-            int rowIndex = 0;
-            if (ViewState["Curtbl"] != null)
-            {
-                DataTable dt = (DataTable)ViewState["Curtbl"];
-                if (dt.Rows.Count > 0)
+                else
                 {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        TextBox txtname = (TextBox)gvDetails.Rows[rowIndex].Cells[1].FindControl("txtName");
-                        TextBox txtprice = (TextBox)gvDetails.Rows[rowIndex].Cells[3].FindControl("txtPrice");
-                        TextBox txtQty = (TextBox)gvDetails.Rows[rowIndex].Cells[2].FindControl("txtQty");
-                        TextBox txtTotal = (TextBox)gvDetails.Rows[rowIndex].Cells[4].FindControl("txtTotal");
-
-                        txtname.Text = dt.Rows[i]["productname"].ToString();
-                        txtprice.Text = dt.Rows[i]["price"].ToString();
-                        txtQty.Text = dt.Rows[i]["qty"].ToString();
-                        txtTotal.Text = dt.Rows[i]["total"].ToString();
-                        rowIndex++;
-                    }
+                    DataRow dr = dt.NewRow();
+                    dr["rowid"] = i;
+                    dr["productname"] = string.Empty;
+                    dr["price"] = string.Empty;
+                    dr["qty"] = string.Empty;
+                    dr["total"] = string.Empty;
+                    dr["add"] ="hide";
+                    dr["add1"] = "show";
+                    dt.Rows.Add(dr);
                 }
+
             }
+            //ViewState["Curtbl"] = dt;
+            RepterDetails.DataSource = dt;
+            RepterDetails.DataBind();
         }
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            AddNewRow();
-        }
-        protected void gvDetails_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            if (ViewState["Curtbl"] != null)
-            {
-                DataTable dt = (DataTable)ViewState["Curtbl"];
-                DataRow drCurrentRow = null;
-                int rowIndex = Convert.ToInt32(e.RowIndex);
-                if (dt.Rows.Count > 1)
-                {
-                    dt.Rows.Remove(dt.Rows[rowIndex]);
-                    drCurrentRow = dt.NewRow();
-                    ViewState["Curtbl"] = dt;
-                    gvDetails.DataSource = dt;
-                    gvDetails.DataBind();
-                    for (int i = 0; i < gvDetails.Rows.Count - 1; i++)
-                    {
-                        gvDetails.Rows[i].Cells[0].Text = Convert.ToString(i + 1);
-                    }
-                    SetOldData();
-                }
-            }
-        }
-
-
-
-
-
-
-
-
-
+       
         public void getmaxlponum()
         {
             string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
@@ -183,11 +119,11 @@ namespace LocalECT
   ? 0
   : Convert.ToInt32(dt.Rows[0]["MaxID"]);
                     int maxid = Convert.ToInt32(id);
-                    lbl_lponum.Text = (maxid + 1).ToString();
+                    lbl_lponum.Text = (maxid + 1).ToString().PadLeft(3, '0');
                 }
                 else
                 {
-                    lbl_lponum.Text = "1";
+                    lbl_lponum.Text = "001";
                 }
 
             }
@@ -266,11 +202,7 @@ namespace LocalECT
                 sc.Close();
             }
         }
-        protected void lnk_Generate_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         protected void drp_Supplier_SelectedIndexChanged(object sender, EventArgs e)
         {
             string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
@@ -309,50 +241,91 @@ namespace LocalECT
                 sc.Close();
             }
         }
-
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Response.Redirect("Procurement_LPO_Manager");
         }
 
-        protected void txtQty_TextChanged(object sender, EventArgs e)
+        protected void lnk_Generate_Click(object sender, EventArgs e)
         {
-            TextBox txtQty = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[2].FindControl("txtQty");
-            TextBox txtPrice = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[3].FindControl("txtPrice");
-            TextBox txtTotal = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[4].FindControl("txtTotal");
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
+            SqlConnection sc = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("insert into PRC_LPO_Header values(@iLPO,@sRef,@sBRF,@sRequester,@iRequestFrom,@sInvoice,@sPayment,@sOtherTerm,@iStatus,@sPreparedBy,@sPreparedByJobDesc,@sApprovedBy,@sApprovedByJobDesc,@dDate)", sc);
+            cmd.Parameters.AddWithValue("@iLPO", lbl_lponum.Text);
+            cmd.Parameters.AddWithValue("@sRef", lbl_Ref.Text);
+            cmd.Parameters.AddWithValue("@sBRF", lbl_brf.Text);
+            cmd.Parameters.AddWithValue("@sRequester", drp_dept.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@iRequestFrom", drp_Supplier.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@sInvoice", txt_Invoice.Text);
+            cmd.Parameters.AddWithValue("@sPayment", txt_Payment.Text);
+            cmd.Parameters.AddWithValue("@sOtherTerm", txt_other.Text);
+            cmd.Parameters.AddWithValue("@iStatus", 1);
+            cmd.Parameters.AddWithValue("@sPreparedBy", Session["CurrentUserName"].ToString());
+            cmd.Parameters.AddWithValue("@sPreparedByJobDesc", "Test");
+            cmd.Parameters.AddWithValue("@sApprovedBy", Session["CurrentUserName"].ToString());
+            cmd.Parameters.AddWithValue("@sApprovedByJobDesc", "Test");
+            cmd.Parameters.AddWithValue("@dDate", DateTime.Now);
+            try
+            {
+                sc.Open();
+                cmd.ExecuteNonQuery();
+                sc.Close();
 
-            var qty =
- txtQty.Text.Equals(DBNull.Value) || (txtQty.Text=="")
- ? 0
- : Convert.ToInt32(txtQty.Text);
+                foreach (RepeaterItem item in RepterDetails.Items)
+                {
+                    Label lbl_srno = item.FindControl("lbl_srno") as Label;
+                    TextBox txt_desc = item.FindControl("txt_desc") as TextBox;
+                    TextBox txt_qty = item.FindControl("txt_qty") as TextBox;
+                    TextBox txt_up = item.FindControl("txt_up") as TextBox;
+                    TextBox txt_total = item.FindControl("txt_total") as TextBox;
+                    string desc = txt_desc.Text;
 
-            var price =
-txtPrice.Text.Equals(DBNull.Value) || (txtPrice.Text == "")
-? 0
-: Convert.ToInt32(txtPrice.Text);
+                    if (!string.IsNullOrEmpty(desc))
+                    {
+                        //Perform your insert operation.
+                        SqlConnection sc1 = new SqlConnection(constr);
+                        SqlCommand cmd1 = new SqlCommand("insert into PRC_LPO_Detail values(@iLPO,@iSerial,@sDescription,@cQTY,@cUnitPrice,@sRemark)", sc1);
+                        cmd1.Parameters.AddWithValue("@iLPO", lbl_lponum.Text);
+                        cmd1.Parameters.AddWithValue("@iSerial", Convert.ToInt32(lbl_srno.Text));
+                        cmd1.Parameters.AddWithValue("@sDescription", txt_desc.Text.Trim());
+                        cmd1.Parameters.AddWithValue("@cQTY",txt_qty.Text);
+                        cmd1.Parameters.AddWithValue("@cUnitPrice", txt_up.Text);
+                        cmd1.Parameters.AddWithValue("@sRemark", Math.Round((Convert.ToDouble(txt_qty.Text) * Convert.ToDouble(txt_up.Text)), 2).ToString());
+                        try
+                        {
+                            sc1.Open();
+                            cmd1.ExecuteNonQuery();
+                            sc1.Close();
 
-            int total = Convert.ToInt32(qty) * Convert.ToInt32(price);
-            txtTotal.Text = total.ToString();
-        }
-
-        protected void txtPrice_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtQty = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[2].FindControl("txtQty");
-            TextBox txtPrice = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[3].FindControl("txtPrice");
-            TextBox txtTotal = (TextBox)gvDetails.Rows[((sender as TextBox).NamingContainer as GridViewRow).RowIndex].Cells[4].FindControl("txtTotal");
-
-            var qty =
- txtQty.Text.Equals(DBNull.Value) || (txtQty.Text == "")
- ? 0
- : Convert.ToInt32(txtQty.Text);
-
-            var price =
-txtPrice.Text.Equals(DBNull.Value) || (txtPrice.Text == "")
-? 0
-: Convert.ToInt32(txtPrice.Text);
-
-            int total = Convert.ToInt32(qty) * Convert.ToInt32(price);
-            txtTotal.Text = total.ToString();
+                            lbl_Msg.Text = "LPO (ID: " + lbl_lponum.Text + ") Created Successfully";
+                            div_msg.Visible = true;
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            lnk_Generate.Visible = false;
+                        }
+                        catch(Exception exp)
+                        {
+                            sc.Close();
+                            lbl_Msg.Text = exp.Message;
+                            div_msg.Visible = true;
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+                    }
+                }
+                //Bind Repeater again if required
+            }
+            catch (Exception exp)
+            {
+                sc.Close();
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                sc.Close();
+            }
         }
     }
 }
