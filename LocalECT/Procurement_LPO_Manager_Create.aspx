@@ -212,7 +212,7 @@
                                          <ItemTemplate>
                                     <tr class="row<%# Container.ItemIndex+1 %> <%#Eval("add")%>">   
                                         <td style="width:5% !important"><asp:Label ID="lbl_srno" runat="server" Text="<%# Container.ItemIndex+1 %>" ClientIDMode="Static"></asp:Label> </td>                                           
-                                        <td style="width:40% !important"><asp:TextBox ID="txt_desc" runat="server" CssClass="form-control" ClientIDMode="Static" EnableViewState="false"></asp:TextBox></td>                                      
+                                        <td style="width:30% !important"><asp:TextBox ID="txt_desc" runat="server" CssClass="form-control" ClientIDMode="Static" EnableViewState="false"></asp:TextBox></td>                                      
                                         <td><asp:TextBox ID="txt_qty" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
