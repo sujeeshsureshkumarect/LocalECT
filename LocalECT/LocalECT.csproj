@@ -6215,6 +6215,17 @@
       <DependentUpon>WeeklyCalendar.xsd</DependentUpon>
     </Content>
     <Content Include="Handler1.ashx" />
+    <Content Include="LPOPrint.xsc">
+      <DependentUpon>LPOPrint.xsd</DependentUpon>
+    </Content>
+    <None Include="LPOPrint.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LPOPrint.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="LPOPrint.xss">
+      <DependentUpon>LPOPrint.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Login_v9\css\main.css" />
     <Content Include="Login_v9\css\util.css" />
@@ -6563,6 +6574,11 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LPOPrint.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LPOPrint.xsd</DependentUpon>
     </Compile>
     <Compile Include="ManagePermissions.aspx.cs">
       <DependentUpon>ManagePermissions.aspx</DependentUpon>
