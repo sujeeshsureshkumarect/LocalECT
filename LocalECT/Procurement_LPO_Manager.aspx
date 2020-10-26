@@ -122,7 +122,7 @@
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Ref #</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Requester</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Company</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Perpared By</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Prepared By</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Date</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
@@ -137,8 +137,18 @@
                                                  <td><%#Eval("Company")%></td>
                                                  <td><%#Eval("sPreparedBy")%></td>
                                                  <td><span style="display: none;"><%#Eval("dDate","{0:yyyyMMdd}")%></span><%#Eval("dDate","{0:dd/MM/yyyy}")%></td>
-                                                 <td><a href="Procurement_LPO_Manager_Update.aspx?seqid=<%#Eval("iLPO")%>" class="btn btn-success btn-sm">View / Edit</a>                                                   
-                                                 </td>
+                                                  <td>
+                                                  <div class="btn-group">
+                                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                             Actions
+                                                         </button>
+                                                         <div class="dropdown-menu">
+                                                             <a href="Procurement_LPO_Manager_Update.aspx?seqid=<%#Eval("iLPO")%>" class="dropdown-item"><i class="fa fa-edit"></i> View / Edit</a>
+                                                             <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iLPO")%>'><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                                              <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iLPO")%>'><i class="fa fa-print"></i> Print (with Header & Footer)</asp:LinkButton>
+                                                         </div>
+                                                     </div>
+                                                      </td>
                                              </tr>
                                          </ItemTemplate>
                                          <FooterTemplate>

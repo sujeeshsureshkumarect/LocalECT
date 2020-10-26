@@ -108,7 +108,7 @@ namespace LocalECT
             int i = dt1.Rows.Count;
             if (i < 10)
             {
-                for (int j = i; j < 10; j++)
+                for (int j = i+1; j < 10; j++)
                 {
                     if (j < 10)
                     {

@@ -149,7 +149,7 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <asp:LinkButton ID="lnk_Edit" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iSupplier")%>' oncommand="EditBTN_Command"><i class="fa fa-edit"></i> Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iSupplier")%>' oncommand="EditBTN_Command"><i class="fa fa-edit"></i> View / Edit</asp:LinkButton>
                                                              <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iSupplier")%>' oncommand="DeleteBTN_Command" OnClientClick="return confirm('Are you sure you want to delete?'); "><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                                                          </div>
                                                      </div>
