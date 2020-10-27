@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -45,8 +46,81 @@ namespace LocalECT
         }
         protected void PrintBTN_Command(object sender, CommandEventArgs e)
         {
+            ReportDocument myReport = new ReportDocument();
+            string reportPath = "";
+            reportPath = Server.MapPath("Reports/CrystalReport1.rpt");
             int r = 0;
             r = int.Parse(e.CommandArgument.ToString());
+
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
+            SqlConnection sc = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("SELECT dbo.PRC_LPO_Detail.iSerial, dbo.PRC_LPO_Detail.sDescription, dbo.PRC_LPO_Detail.cQTY, dbo.PRC_LPO_Detail.cUnitPrice, dbo.PRC_LPO_Detail.sRemark, dbo.PRC_LPO_Header.iLPO as iLPO, dbo.PRC_LPO_Header.sRef, dbo.PRC_LPO_Header.sBRF, dbo.PRC_LPO_Header.sRequester, dbo.PRC_LPO_Header.iRequestFrom, dbo.PRC_LPO_Header.sInvoice, dbo.PRC_LPO_Header.sPayment, dbo.PRC_LPO_Header.sOtherTerm, dbo.PRC_LPO_Header.iStatus, dbo.PRC_LPO_Header.sPreparedBy, dbo.PRC_LPO_Header.sPreparedByJobDesc, dbo.PRC_LPO_Header.sApprovedBy, dbo.PRC_LPO_Header.sApprovedByJobDesc, dbo.PRC_LPO_Header.dDate, dbo.PRC_Supplier.sSupplierName, dbo.PRC_Supplier.sPhone, dbo.PRC_Supplier.sFax,dbo.PRC_Supplier.sPOBox FROM dbo.PRC_LPO_Header INNER JOIN dbo.PRC_LPO_Detail ON dbo.PRC_LPO_Header.iLPO = dbo.PRC_LPO_Detail.iLPO INNER JOIN dbo.PRC_Supplier ON dbo.PRC_LPO_Header.iRequestFrom = dbo.PRC_Supplier.iSupplier where dbo.PRC_LPO_Header.iLPO=@iLPO", sc);
+            cmd.Parameters.AddWithValue("@iLPO", r);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                myReport.Load(reportPath);
+                myReport.SetDataSource(dt);
+                myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Page.Response, true, "ECTReport");
+
+            }
+            catch (Exception exp)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", exp.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+        protected void PrintWOFooter_Command(object sender, CommandEventArgs e)
+        {
+            ReportDocument myReport = new ReportDocument();
+            string reportPath = "";
+            reportPath = Server.MapPath("Reports/CrystalReport1.rpt");
+            int r = 0;
+            r = int.Parse(e.CommandArgument.ToString());
+
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
+            SqlConnection sc = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("SELECT dbo.PRC_LPO_Detail.iSerial, dbo.PRC_LPO_Detail.sDescription, dbo.PRC_LPO_Detail.cQTY, dbo.PRC_LPO_Detail.cUnitPrice, dbo.PRC_LPO_Detail.sRemark, dbo.PRC_LPO_Header.iLPO as iLPO, dbo.PRC_LPO_Header.sRef, dbo.PRC_LPO_Header.sBRF, dbo.PRC_LPO_Header.sRequester, dbo.PRC_LPO_Header.iRequestFrom, dbo.PRC_LPO_Header.sInvoice, dbo.PRC_LPO_Header.sPayment, dbo.PRC_LPO_Header.sOtherTerm, dbo.PRC_LPO_Header.iStatus, dbo.PRC_LPO_Header.sPreparedBy, dbo.PRC_LPO_Header.sPreparedByJobDesc, dbo.PRC_LPO_Header.sApprovedBy, dbo.PRC_LPO_Header.sApprovedByJobDesc, dbo.PRC_LPO_Header.dDate, dbo.PRC_Supplier.sSupplierName, dbo.PRC_Supplier.sPhone, dbo.PRC_Supplier.sFax,dbo.PRC_Supplier.sPOBox FROM dbo.PRC_LPO_Header INNER JOIN dbo.PRC_LPO_Detail ON dbo.PRC_LPO_Header.iLPO = dbo.PRC_LPO_Detail.iLPO INNER JOIN dbo.PRC_Supplier ON dbo.PRC_LPO_Header.iRequestFrom = dbo.PRC_Supplier.iSupplier where dbo.PRC_LPO_Header.iLPO=@iLPO", sc);
+            cmd.Parameters.AddWithValue("@iLPO", r);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                myReport.Load(reportPath);
+                myReport.SetDataSource(dt);
+
+                PictureObject pic1;
+                pic1 = (PictureObject)myReport.ReportDefinition.ReportObjects["picLogo"];
+                pic1.ObjectFormat.EnableSuppress = true;
+
+                pic1 = (PictureObject)myReport.ReportDefinition.ReportObjects["picfooter"];
+                pic1.ObjectFormat.EnableSuppress = true;
+
+                myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Page.Response, true, "ECTReport");
+
+            }
+            catch (Exception exp)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", exp.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
         }
         public void bindlpo()
         {

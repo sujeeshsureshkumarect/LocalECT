@@ -145,7 +145,7 @@
                                                          <div class="dropdown-menu">
                                                              <a href="Procurement_LPO_Manager_Update.aspx?seqid=<%#Eval("iLPO")%>" class="dropdown-item"><i class="fa fa-edit"></i> View / Edit</a>
                                                              <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iLPO")%>' oncommand="PrintBTN_Command"><i class="fa fa-print"></i> Print</asp:LinkButton>
-                                                              <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iLPO")%>'><i class="fa fa-print"></i> Print (with Header & Footer)</asp:LinkButton>
+                                                              <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("iLPO")%>' oncommand="PrintWOFooter_Command"><i class="fa fa-print"></i> Print (with Header & Footer)</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                       </td>
