@@ -106,11 +106,25 @@ namespace LocalECT
             dt.Columns.Add("add", typeof(string));
             dt.Columns.Add("add1", typeof(string));
             int i = dt1.Rows.Count;
-            if (i < 10)
+            if (i < 50)
             {
-                for (int j = i+1; j < 10; j++)
+                for(int k=0;k<dt.Rows.Count;k++)
                 {
-                    if (j < 10)
+                    dt.Rows[k]["add"] = "show";
+                    dt.Rows[k]["add1"] = "hide";
+                    if(k>10)
+                    {
+                        if(k==dt.Rows.Count-1)
+                        {
+                            dt.Rows[k]["add"] = "show";
+                            dt.Rows[k]["add1"] = "show";
+                        }
+                    }
+                }
+
+                for (int j = i+1; j <= 50; j++)
+                {
+                    if (j <= 10)
                     {
                         DataRow dr = dt.NewRow();
                         dr["iLPO"] = id;
@@ -121,7 +135,7 @@ namespace LocalECT
                         dr["sRemark"] = string.Empty;
                         dr["Total"] = Convert.ToDecimal(0);
                         dr["add"] = "show";
-                        if (j < 9)
+                        if (j <= 9)
                         {
                             dr["add1"] = "hide";
                         }

@@ -205,7 +205,7 @@
                                         <th><font color="#fff">Qty</font></th>
                                         <th><font color="#fff">Unit Price</font></th>
                                         <th><font color="#fff">Total</font></th>     
-                                        <%--<th style="width:5% !important"><font color="#fff"></font></th>--%>    
+                                        <th style="width:5% !important"><font color="#fff"></font></th>    
                                     </tr>
                                    </thead>
                                          </HeaderTemplate>
@@ -216,7 +216,9 @@
                                         <td><asp:TextBox ID="txt_qty" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
-                                        <%--<td style="width:5% !important"><p class="<%#Eval("add1")%>" ><u>+ Add</u></p></td>--%>
+                                        <td style="width:5% !important">
+                                            <p class="<%#Eval("add1")%>" onclick="toggleRow(this);"><u>+ Add</u></p>
+                                        </td>
                                     </tr>
                                              </ItemTemplate>
                                          <FooterTemplate>
@@ -226,7 +228,7 @@
                                         <td bgcolor="#f2f2f2"> </td>
                                         <td bgcolor="#f2f2f2"></td>
                                         <td bgcolor="#f2f2f2"><asp:Label ID="total1" ClientIDMode="Static" runat="server" Text="0.00" Font-Bold="true" ForeColor="#444444"></asp:Label></td>                                       
-                                        <%--<td bgcolor="#dddddd"></td>--%>
+                                        <td bgcolor="#dddddd"></td>
                                     </tr>
                               </table>  
                                          </FooterTemplate>
@@ -351,5 +353,11 @@
             });
             $("[id*=total1]").html(grandTotal.toString());
         });
+    </script>
+    <script type="text/javascript">
+        function toggleRow(e) {
+            var subRow = e.parentNode.parentNode.nextElementSibling;            
+            subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
+        }
     </script>
     </asp:Content>
