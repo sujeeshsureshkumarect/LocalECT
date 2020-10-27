@@ -580,11 +580,11 @@ namespace LocalECT {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DataTable1Row AddDataTable1Row(
-                        string iLPO, 
-                        string iSerial, 
+                        long iLPO, 
+                        long iSerial, 
                         string sDescription, 
-                        string cQTY, 
-                        string cUnitPrice, 
+                        double cQTY, 
+                        double cUnitPrice, 
                         string sRemark, 
                         string sRef, 
                         string sBRF, 
@@ -598,7 +598,7 @@ namespace LocalECT {
                         string sPreparedByJobDesc, 
                         string sApprovedBy, 
                         string sApprovedByJobDesc, 
-                        string dDate, 
+                        System.DateTime dDate, 
                         string sSupplierName, 
                         string sPhone, 
                         string sFax, 
@@ -678,15 +678,15 @@ namespace LocalECT {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columniLPO = new global::System.Data.DataColumn("iLPO", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columniLPO = new global::System.Data.DataColumn("iLPO", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columniLPO);
-                this.columniSerial = new global::System.Data.DataColumn("iSerial", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columniSerial = new global::System.Data.DataColumn("iSerial", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columniSerial);
                 this.columnsDescription = new global::System.Data.DataColumn("sDescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsDescription);
-                this.columncQTY = new global::System.Data.DataColumn("cQTY", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columncQTY = new global::System.Data.DataColumn("cQTY", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncQTY);
-                this.columncUnitPrice = new global::System.Data.DataColumn("cUnitPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columncUnitPrice = new global::System.Data.DataColumn("cUnitPrice", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncUnitPrice);
                 this.columnsRemark = new global::System.Data.DataColumn("sRemark", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsRemark);
@@ -714,7 +714,7 @@ namespace LocalECT {
                 base.Columns.Add(this.columnsApprovedBy);
                 this.columnsApprovedByJobDesc = new global::System.Data.DataColumn("sApprovedByJobDesc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsApprovedByJobDesc);
-                this.columndDate = new global::System.Data.DataColumn("dDate", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndDate = new global::System.Data.DataColumn("dDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndDate);
                 this.columnsSupplierName = new global::System.Data.DataColumn("sSupplierName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsSupplierName);
@@ -866,10 +866,10 @@ namespace LocalECT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string iLPO {
+            public long iLPO {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.iLPOColumn]));
+                        return ((long)(this[this.tableDataTable1.iLPOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'iLPO\' in table \'DataTable1\' is DBNull.", e);
@@ -882,10 +882,10 @@ namespace LocalECT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string iSerial {
+            public long iSerial {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.iSerialColumn]));
+                        return ((long)(this[this.tableDataTable1.iSerialColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'iSerial\' in table \'DataTable1\' is DBNull.", e);
@@ -914,10 +914,10 @@ namespace LocalECT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string cQTY {
+            public double cQTY {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.cQTYColumn]));
+                        return ((double)(this[this.tableDataTable1.cQTYColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'cQTY\' in table \'DataTable1\' is DBNull.", e);
@@ -930,10 +930,10 @@ namespace LocalECT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string cUnitPrice {
+            public double cUnitPrice {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.cUnitPriceColumn]));
+                        return ((double)(this[this.tableDataTable1.cUnitPriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'cUnitPrice\' in table \'DataTable1\' is DBNull.", e);
@@ -1154,10 +1154,10 @@ namespace LocalECT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string dDate {
+            public System.DateTime dDate {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.dDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableDataTable1.dDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dDate\' in table \'DataTable1\' is DBNull.", e);

@@ -43,7 +43,11 @@ namespace LocalECT
                 bindlpo();
             }
         }
-
+        protected void PrintBTN_Command(object sender, CommandEventArgs e)
+        {
+            int r = 0;
+            r = int.Parse(e.CommandArgument.ToString());
+        }
         public void bindlpo()
         {
             string constr = ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString;
