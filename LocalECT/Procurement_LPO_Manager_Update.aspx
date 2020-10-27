@@ -219,7 +219,8 @@
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text='<%#string.Format("{0:0.00}",Eval("Total")) %>' TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
                                         <td style="width:5% !important"> <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="btn btn-default btn-sm" CommandArgument='<%#Eval("iSerial")%>' CommandName='<%#Eval("iLPO")%>' oncommand="DeleteBTN_Command" OnClientClick="return confirm('Are you sure you want to delete?'); "><i class="fa fa-trash"></i> Delete</asp:LinkButton></td>
                                          <td style="width:5% !important">
-                                            <p class="<%#Eval("add1")%>" onclick="toggleRow(this);"><u>+ Add</u></p>
+                                            <%--<p class="<%#Eval("add1")%>" onclick="toggleRow(this);"><u>+ Add</u></p>--%>
+                                              <p class="<%#Eval("add1")%> btn btn-success btn-sm" onclick="toggleRow(this);"><i class="fa fa-plus"></i> Add</p>
                                         </td>
                                     </tr>
                                              </ItemTemplate>
@@ -268,13 +269,25 @@
    <style>
        .hide{
            display:none;
-       }
+       }  
+       .btn {    
+    border: 1px solid #dddddd;
+}
+       .button {
+  transition-duration: 0.4s;
+}
 
+.btn-default:hover {
+  border: 1px solid #000000;
+  background-color: #f91414; /* Crimson Red */
+  color: white;
+}
    </style>
      <script type="text/javascript">
          function toggleRow(e) {
              var subRow = e.parentNode.parentNode.nextElementSibling;
-             subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
+             //subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
+             subRow.style.display = 'table-row';
          }
      </script>
   <%--      <script type="text/javascript">

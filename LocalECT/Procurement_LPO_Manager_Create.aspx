@@ -217,7 +217,7 @@
                                         <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
                                         <td style="width:5% !important">
-                                            <p class="<%#Eval("add1")%>" onclick="toggleRow(this);"><u>+ Add</u></p>
+                                            <p class="<%#Eval("add1")%> btn btn-success btn-sm" onclick="toggleRow(this);"><i class="fa fa-plus"></i> Add</p>
                                         </td>
                                     </tr>
                                              </ItemTemplate>
@@ -265,8 +265,7 @@
    <style>
        .hide{
            display:none;
-       }
-
+       }   
    </style>
   <%--      <script type="text/javascript">
 
@@ -357,7 +356,7 @@
     <script type="text/javascript">
         function toggleRow(e) {
             var subRow = e.parentNode.parentNode.nextElementSibling;            
-            subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
+            subRow.style.display = 'table-row';
         }
     </script>
     </asp:Content>
