@@ -194,7 +194,7 @@
                          border:1px solid #ededed;
                      }
                  </style>
-                 <div class="col-md-8 col-sm-8">
+                 <div class="col-md-9 col-sm-9">
                  <asp:Repeater ID="RepterDetails" runat="server">
                                          <HeaderTemplate>
                           <table style="width: 100%;border:1px solid #ededed;text-align:center;" id="tbl_Pricing">
@@ -205,7 +205,7 @@
                                         <th><font color="#fff">Qty</font></th>
                                         <th><font color="#fff">Unit Price</font></th>
                                         <th><font color="#fff">Total</font></th>     
-                                        <th style="width:5% !important"><font color="#fff"></font></th>    
+                                        <th style="width:7% !important"><font color="#fff"></font></th>    
                                     </tr>
                                    </thead>
                                          </HeaderTemplate>
@@ -216,7 +216,7 @@
                                         <td><asp:TextBox ID="txt_qty" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text="0.00" TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
-                                        <td style="width:5% !important">
+                                        <td style="width:7% !important">
                                             <p class="<%#Eval("add1")%> btn btn-success btn-sm" onclick="toggleRow(this);"><i class="fa fa-plus"></i> Add</p>
                                         </td>
                                     </tr>
@@ -228,13 +228,13 @@
                                         <td bgcolor="#f2f2f2"> </td>
                                         <td bgcolor="#f2f2f2"></td>
                                         <td bgcolor="#f2f2f2"><asp:Label ID="total1" ClientIDMode="Static" runat="server" Text="0.00" Font-Bold="true" ForeColor="#444444"></asp:Label></td>                                       
-                                        <td bgcolor="#dddddd"></td>
+                                        <td bgcolor="#f2f2f2" style="width:7% !important"></td>
                                     </tr>
                               </table>  
                                          </FooterTemplate>
                                      </asp:Repeater>
                      </div>
-                 <div class="col-md-4 col-sm-4">
+                 <div class="col-md-3 col-sm-3">
                       <div class="x_panel">
                      <h2><u>Terms & Conditions :</u></h2>
                      <div class="form-group row">

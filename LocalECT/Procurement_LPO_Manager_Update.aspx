@@ -206,7 +206,7 @@
                                         <th><font color="#fff">Unit Price</font></th>
                                         <th><font color="#fff">Total</font></th> 
                                         <th><font color="#fff">Action</font></th>
-                                        <th style="width:5% !important"><font color="#fff"></font></th>    
+                                        <th style="width:9% !important"><font color="#fff"></font></th>    
                                     </tr>
                                    </thead>
                                          </HeaderTemplate>
@@ -218,7 +218,7 @@
                                         <td><asp:TextBox ID="txt_up" class="product" runat="server" CssClass="form-control" TextMode="Number" ClientIDMode="Static" Text='<%#string.Format("{0:0.00}",Eval("cUnitPrice")) %>' style="text-align:center;" EnableViewState="false"></asp:TextBox></td>
                                         <td><asp:TextBox ID="txt_total" runat="server" CssClass="form-control" ClientIDMode="Static" Text='<%#string.Format("{0:0.00}",Eval("Total")) %>' TextMode="Number" ReadOnly="true" style="text-align:center;" EnableViewState="false"></asp:TextBox></td>                                     
                                         <td style="width:5% !important"> <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="btn btn-default btn-sm" CommandArgument='<%#Eval("iSerial")%>' CommandName='<%#Eval("iLPO")%>' oncommand="DeleteBTN_Command" OnClientClick="return confirm('Are you sure you want to delete?'); "><i class="fa fa-trash"></i> Delete</asp:LinkButton></td>
-                                         <td style="width:5% !important">
+                                         <td style="width:9% !important">
                                             <%--<p class="<%#Eval("add1")%>" onclick="toggleRow(this);"><u>+ Add</u></p>--%>
                                               <p class="<%#Eval("add1")%> btn btn-success btn-sm" onclick="toggleRow(this);"><i class="fa fa-plus"></i> Add</p>
                                         </td>
@@ -231,8 +231,8 @@
                                         <td bgcolor="#f2f2f2"> </td>
                                         <td bgcolor="#f2f2f2"></td>
                                         <td bgcolor="#f2f2f2"><asp:Label ID="total1" ClientIDMode="Static" runat="server" Font-Bold="true" ForeColor="#444444"></asp:Label></td>                                       
-                                        <td bgcolor="#dddddd"></td>
-                                      <td bgcolor="#dddddd"></td>
+                                        <td bgcolor="#f2f2f2"></td>
+                                      <td bgcolor="#f2f2f2" style="width:9% !important"></td>
                                     </tr>
                               </table>  
                                          </FooterTemplate>
