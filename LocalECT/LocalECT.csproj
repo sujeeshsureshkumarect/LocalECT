@@ -6320,6 +6320,7 @@
     <Content Include="Security_Roles.aspx" />
     <Content Include="Site.Master" />
     <Content Include="StudentSearch.aspx" />
+    <Content Include="Student_Profile.aspx" />
     <Content Include="User_Setup.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -6691,6 +6692,13 @@
     </Compile>
     <Compile Include="StudentSearch.aspx.designer.cs">
       <DependentUpon>StudentSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Profile.aspx.cs">
+      <DependentUpon>Student_Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_Profile.aspx.designer.cs">
+      <DependentUpon>Student_Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="User_Setup.aspx.cs">
       <DependentUpon>User_Setup.aspx</DependentUpon>
