@@ -52,10 +52,38 @@
                                                 </div>
                                             </div>
 
+                                            <div class="x_content bs-example-popovers">
+                                                <div class="alert alert-info alert-dismissible " role="alert">
+                                                    <strong>Student Information</strong>
+                                                </div>
+                                            </div>
+
                                             <%--Column1--%>
                                             <div class="col-md-6 col-sm-6"> 
                                                <%-- <div class="col-md-12 col-sm-12"> --%>
                                                 <div class="x_panel">
+                                                    <div id="img" align="middle">
+                                                        <asp:Label ID="lblIsVerfiedFromRegistrar" runat="server" Text="Verified from the Registrar" style="color: #009933; font-weight: 700"></asp:Label>
+                                                        <asp:HiddenField ID="hdnSerial" runat="server" />
+                                                        <asp:HiddenField ID="Pic" runat="server" />
+                                                        <br />
+                                                        <asp:LinkButton ID="btnGetEID" runat="server" CssClass="btn btn-success btn-sm" OnClick="btnGetEID_Click"><i class="fa fa-download"></i> Read from EID</asp:LinkButton>
+                                                        <br />
+                                                        <asp:Image ID="imgStudent" runat="server" ClientIDMode="Static" Height="130px" 
+                                ImageUrl="~/Images/Students/Student.jpg" Width="110px" />
+                                                        <hr />
+                                                    </div>
+                                                    <style>
+                                                        #imgStudent {
+                                                            padding: .25rem;
+                                                            background-color: #fff;
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: .25rem;
+                                                            max-width: 100%;
+                                                            height: auto;
+                                                        }
+                                                    </style>
+
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-md-3 col-sm-3">Unified No.</label>
                                                     <div class="col-md-9 col-sm-9 ">
@@ -141,7 +169,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-5 col-sm-5">Health Fitness Certificate ?</label>
                                                          <div class="col-md-7 col-sm-7 ">
-                                                             <asp:RadioButtonList ID="RadioButtonList1" runat="server"
+                                                             <asp:RadioButtonList ID="rbnFitnessStatus" runat="server"
                                                                  RepeatDirection="Horizontal" TabIndex="20" CssClass="form-control">
                                                                  <asp:ListItem Value="0">Yes</asp:ListItem>
                                                                  <asp:ListItem Selected="True" Value="1">No</asp:ListItem>
@@ -384,11 +412,155 @@
                                                          </div>
                                                      </div>
                                                      <hr />
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-4 col-sm-4">Employment Status</label>
+                                                         <div class="col-md-8 col-sm-8 ">
+                                                             <asp:RadioButtonList ID="rbnEmploymentStatus" runat="server"
+                                                                 RepeatDirection="Horizontal" TabIndex="35" CssClass="form-control">
+                                                                 <asp:ListItem Value="0" Selected="True">Not Employed</asp:ListItem>
+                                                                 <asp:ListItem Value="1">Employed</asp:ListItem>
+                                                             </asp:RadioButtonList>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Work Place</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlIWork" runat="server" TabIndex="36"
+                                                                 CssClass="form-control" DataTextField="strWorkPlaceEn"
+                                                                 DataValueField="intWorkPlace">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Company Name</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                            <asp:TextBox ID="txtCompany" runat="server"  TabIndex="37" CssClass="form-control">NA</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3" style="color: #FF3300;">Country</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlEmployerCountry" runat="server" TabIndex="38"
+                                                                 CssClass="form-control" DataTextField="strCountryDescEn" DataValueField="byteCountry">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                      <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3" style="color: #FF3300;">Emirate</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlEmployerEmirate" runat="server" TabIndex="39"
+                                                                 CssClass="form-control" DataTextField="strEmirateEn" DataValueField="byteEmirate">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                      <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Sector</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlEmploymentSector" runat="server" TabIndex="40"
+                                                                 CssClass="form-control" DataTextField="SectorNameEn" DataValueField="SectorID">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                      <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Industry</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                            <asp:TextBox ID="txtEmployerIndustry" runat="server"  TabIndex="41" CssClass="form-control">NA</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Work Phone</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:TextBox ID="txtWorkPhone" runat="server" TabIndex="42" CssClass="form-control">999999999</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Job Title</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:TextBox ID="txtJob" runat="server" TabIndex="43" CssClass="form-control">NA</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Visa On</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlVisa" runat="server" TabIndex="44"
+                                                                 CssClass="form-control" DataTextField="strSponsorEn"
+                                                                 DataValueField="intSponsor">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Expiry</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:TextBox ID="txtExpiry" runat="server" TabIndex="45" CssClass="form-control" TextMode="Date" ToolTip="mm/dd/yyyy"></asp:TextBox>
+                                                             <asp:RangeValidator ID="RangeValidator2" runat="server"
+                                                                 ControlToValidate="txtExpiry" Display="Dynamic" ErrorMessage="Date Only"
+                                                                 MaximumValue="01/01/3000" MinimumValue="01/01/1900" SetFocusOnError="True"
+                                                                 Type="Date" ValidationGroup="SD" ForeColor="Red">mm/dd/yyyy</asp:RangeValidator>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-3 col-sm-3">Sponsor</label>
+                                                         <div class="col-md-9 col-sm-9 ">
+                                                             <asp:DropDownList ID="ddlSponsor" runat="server" TabIndex="46"
+                                                                 CssClass="form-control" DataTextField="strDelegationDescEn"
+                                                                 DataValueField="intDelegation">
+                                                             </asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Name(Supervisor)</label>
+                                                         <div class="col-md-7 col-sm-7 ">
+                                                            <asp:TextBox ID="txtEmployerName" runat="server"  TabIndex="47" CssClass="form-control">NA</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Position</label>
+                                                         <div class="col-md-7 col-sm-7 ">
+                                                            <asp:TextBox ID="txtEmployerPos" runat="server"  TabIndex="48" CssClass="form-control">NA</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Phone</label>
+                                                         <div class="col-md-7 col-sm-7 ">
+                                                            <asp:TextBox ID="txtEmployerPhone" runat="server"  TabIndex="48" CssClass="form-control">999999999</asp:TextBox>
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group row">
+                                                         <label class="col-form-label col-md-5 col-sm-5" style="color: #FF3300;">Employer E-Mail</label>
+                                                         <div class="col-md-7 col-sm-7 ">
+                                                             <asp:TextBox ID="txtEmployeremail" runat="server" TabIndex="48" CssClass="form-control">xyz@xyz.com</asp:TextBox>
+                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
+                                                                 ControlToValidate="txtEmployeremail" ErrorMessage="Valid email only."
+                                                                 SetFocusOnError="True"
+                                                                 ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+                                                                 ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Valid email only.</asp:RegularExpressionValidator>
+                                                         </div>
+                                                     </div>
+                                                     <hr />
+                                                     <div align="middle">
+                                                         <asp:LinkButton ID="lnk_Save" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Save Student Info" ValidationGroup="SD" OnClick="lnk_Save_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                                                         <asp:LinkButton ID="lnk_delete" runat="server" CssClass="btn btn-danger btn-sm" ToolTip="Delete Student" ValidationGroup="SD" OnClick="lnk_delete_Click" onclientclick="return DeleteConfirm();"><i class="fa fa-close"></i> Delete</asp:LinkButton>
+                                                         <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Back" OnClick="lnk_Cancel_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
 
+                                                           <asp:Label ID="lblStudentId" runat="server" Font-Size="Small" Width="100px" 
+                                                        CssClass="style11"></asp:Label>
+                                                     </div>
 
                                                      </div>
                                             </div>
             
+                                               <div class="x_content bs-example-popovers">
+                                                <div class="alert alert-info alert-dismissible " role="alert">
+                                                    <strong>Academic Information</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12">
+                                                 <div class="x_panel">
+
+                                                     </div>
+                                                </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -419,4 +591,10 @@
                                         Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
                                 </SelectParameters>
                             </asp:SqlDataSource>
+    <script type="text/javascript">
+        function DeleteConfirm() {
+            var b = confirm('Are you sure want to delete this student ?');
+            return b;
+        }
+    </script>
     </asp:Content>
