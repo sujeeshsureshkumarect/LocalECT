@@ -1855,6 +1855,7 @@ namespace LocalECT
             Response.Redirect("EIDInterface.aspx?CallerID=STD");
         }
 
+        //Start Student Information
         protected void lnk_Save_Click(object sender, EventArgs e)
         {
 
@@ -1870,5 +1871,68 @@ namespace LocalECT
             Session["StudentSerialNo"] = null;
             Response.Redirect("StudentSearch");
         }
+        //End Student Information
+
+        //Start Academic Information
+        protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            try
+            {
+
+                string sSender = e.Item.Value;
+
+                if (sSender != "4")
+                {
+                    if (hdnSerial.Value == "")
+                    {                        
+                        lbl_Msg.Text = "Select or add a student please...";
+                        div_msg.Visible = true;
+                        return;
+                    }
+                }
+                System.Threading.Thread.Sleep(500);
+
+                switch (sSender)
+                {
+                    case "0"://Qualification
+
+                        MultiTabs.ActiveViewIndex = 0;
+
+                        break;
+                    case "1"://Enrollment
+
+                        MultiTabs.ActiveViewIndex = 1;
+
+
+                        break;
+                    case "2"://Document
+
+                        MultiTabs.ActiveViewIndex = 2;
+
+                        break;
+                    case "3"://Marks
+
+                        MultiTabs.ActiveViewIndex = 3;
+
+                        break;
+                    case "4"://Search
+
+                        //ddlCampus.SelectedValue = ((int)Campus).ToString();
+                        MultiTabs.ActiveViewIndex = 4;
+                        //RunSerach();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+        }      
     }
 }

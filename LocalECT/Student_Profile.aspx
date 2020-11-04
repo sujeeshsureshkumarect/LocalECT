@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Student_Profile.aspx.cs" Inherits="LocalECT.Student_Profile" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Student_Profile.aspx.cs" Inherits="LocalECT.Student_Profile" MasterPageFile="~/LocalECT.Master" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -556,10 +556,41 @@
                                             </div>
 
                                             <div class="col-md-12 col-sm-12">
-                                                 <div class="x_panel">
+                                                <div class="x_panel">
+                                                    <div id="divTabs" runat="server">
+                                                        <asp:Menu ID="Menu1" runat="server" OnMenuItemClick="Menu1_MenuItemClick"
+                                                            Orientation="Horizontal" BackColor="#ededed" DynamicHorizontalOffset="2"
+                                                            Font-Bold="True" ForeColor="#284E98"
+                                                            StaticSubMenuIndent="10px" Width="100%">
+                                                            <StaticSelectedStyle BackColor="#3f658c" ForeColor="White" />
+                                                            <StaticMenuItemStyle HorizontalPadding="7px" VerticalPadding="7px" />
+                                                            <DynamicHoverStyle BackColor="#3f658c" ForeColor="White" />
+                                                            <DynamicMenuStyle BackColor="#B5C7DE" />
+                                                            <DynamicSelectedStyle BackColor="#3f658c" ForeColor="White" />
+                                                            <DynamicMenuItemStyle HorizontalPadding="7px" VerticalPadding="7px" />
+                                                            <StaticHoverStyle BackColor="#3f658c" ForeColor="White" />
+                                                            <Items>
+                                                                <asp:MenuItem Text="Qualifications" Value="0"></asp:MenuItem>
+                                                                <asp:MenuItem Text="    |   Enrollment" Value="1"></asp:MenuItem>
+                                                                <asp:MenuItem Text="    |   Documents" Value="2"></asp:MenuItem>
+                                                                <asp:MenuItem Text="    |   Marks" Value="3"></asp:MenuItem>
+                                                                <asp:MenuItem Text="    |   Search" Value="4"></asp:MenuItem>
+                                                            </Items>
+                                                        </asp:Menu>
+                                                    </div>
 
-                                                     </div>
+                                                    <asp:MultiView ID="MultiTabs" runat="server">
+                                                        <%--Start View 1--%>
+
+                                                       <%-- End View 1--%>
+
+                                                        <%--Start View 2--%>
+                                                       
+
+                                                        <%--End View 2--%>
+                                                    </asp:MultiView>
                                                 </div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -597,4 +628,14 @@
             return b;
         }
     </script>
+    <style>
+        .Center
+        {
+            text-align: center;
+        }
+        .style9
+        {
+            width: 50%;
+        }
+    </style>
     </asp:Content>
