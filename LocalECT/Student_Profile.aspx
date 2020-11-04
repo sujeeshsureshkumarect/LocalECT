@@ -190,7 +190,7 @@
                                                             <asp:TextBox ID="txtECTEmail" runat="server" CssClass="form-control" TabIndex="25"
                                                                 Enabled="False" ReadOnly="True"></asp:TextBox>
                                                             <asp:Button ID="btnCreateEmail" runat="server" CssClass="btn btn-success btn-sm"
-                                                                Text="Create Email" />
+                                                                Text="Create Email" Visible="false" onclick="btnCreateEmail_Click" />
                                                         </div>
                                                     </div>
                                                        <div class="form-group row">
@@ -199,6 +199,73 @@
                                                             <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="26">NA</asp:TextBox>
                                                         </div>
                                                     </div>   
+                                                    <hr />
+                                                    
+                                                      <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3">Emirates ID</label>
+                                                        <div class="col-md-9 col-sm-9 ">
+                                                            <asp:TextBox ID="txtIDNo" runat="server" CssClass="form-control" TabIndex="27">999999999999999</asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server"
+                                                                ControlToValidate="txtIDNo" ErrorMessage="EID is required."
+                                                                SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*EID is required.</asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div> 
+                                                     <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3">Passport No</label>
+                                                        <div class="col-md-9 col-sm-9 ">
+                                                            <asp:TextBox ID="txtIdentityNo" runat="server" CssClass="form-control" TabIndex="28">NA</asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
+                                                                ControlToValidate="txtIdentityNo" ErrorMessage="Passport no is required."
+                                                                SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Passport no is required.</asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div> 
+                                                     <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Unified No</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtUnifiedNo" runat="server" CssClass="form-control" TabIndex="29" ToolTip="Passport Unified No or Visa Unified No">NA</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">locals passport or expats visa</label>
+                                                    </div> 
+
+                                                     <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3">Al Ethbara#</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtEthbara" runat="server" CssClass="form-control" TabIndex="30">NA</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from locals only</label>
+                                                    </div> 
+
+                                                      <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">City No</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtCityNo" runat="server" CssClass="form-control" TabIndex="31" >999</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from Family Book</label>
+                                                    </div> 
+
+                                                       <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Family No</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtFamilyNo" runat="server" CssClass="form-control" TabIndex="32" >999</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from Family Book</label>
+                                                    </div>
+                                                       <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Family Book No</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtFamilyBookNo" runat="server" CssClass="form-control" TabIndex="33" >999999</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from locals only</label>
+                                                    </div>
+
+                                                      <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">National No</label>
+                                                        <div class="col-md-4 col-sm-4 ">
+                                                            <asp:TextBox ID="txtNationalNo" runat="server" CssClass="form-control" TabIndex="34" >NA</asp:TextBox>
+                                                        </div>
+                                                          <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from expat passport if founded</label>
+                                                    </div>
+
 
                                                     <%--</div>--%>
                                                     </div>
@@ -316,6 +383,9 @@
                                                              </asp:DropDownList>
                                                          </div>
                                                      </div>
+                                                     <hr />
+
+
                                                      </div>
                                             </div>
             

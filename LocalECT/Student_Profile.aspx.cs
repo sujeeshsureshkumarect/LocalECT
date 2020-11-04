@@ -123,5 +123,45 @@ namespace LocalECT
             }
             return iserial;
         }
+
+        protected void btnCreateEmail_Click(object sender, EventArgs e)
+        {
+            //int iYear = 0;
+            //int iSemester = 0;
+            //iSemester = Convert.ToInt32(Session["CurrentSemester"].ToString());
+            //iYear = Convert.ToInt32(Session["CurrentYear"].ToString());
+
+            //int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, lblStudentId.Text, iYear, iSemester);
+
+            //if (iRegisteredHours == 0)
+            //{
+            //    divMsg.InnerText = "Student must register courses before creating email.";
+            //    return;
+            //}
+            ////======= Generate Student email
+            //CreateStudentEmail();
+            //if (txtECTEmail.Text.Length < 17)
+            //{
+            //    return;
+            //}
+            ////======= Create email in Office365 & AD 
+            //CreateStudentEmailAD(this.Campus, lblStudentId.Text);
+
+            ////======= Create Moodle Account
+            //if (ClsMoodleAPI.CreateUpdateMoodleAccount(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
+            //{
+            //    divMsg.InnerText += " & Moodle";
+            //}
+            ////======== Enroll student in Moodle courses
+            //if (ClsMoodleAPI.EnrollStudentinMoodleCourses(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
+            //{
+            //    divMsg.InnerText += ", Student enrolled in Moodle courses";
+            //}
+            ////======= Create Zoom Account
+            //string sFirstName = txtFNameEn.Text + " " + txtLNameEn.Text;
+            //string sLastName = " - " + lblStudentId.Text;
+            //CreateZoomAccount(txtECTEmail.Text, sFirstName, sLastName);
+
+        }
     }
 }
