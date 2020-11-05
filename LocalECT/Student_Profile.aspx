@@ -580,13 +580,805 @@
 
                                                     <asp:MultiView ID="MultiTabs" runat="server">
                                                         <%--Start View 1--%>
+                                                        <asp:View ID="View1" runat="server" >
+                                                            <div class="col-md-12 col-sm-12">
+                                                                
+                                                                    <h3 style="text-align:center;color:#ff7f50">Qualifications</h3>
+                                                                    <asp:MultiView ID="mtvQualification" runat="server" ActiveViewIndex="0">
+                                                    <table width=100% align="center">
+                                                        <tr>
+                                                            <td align="center">
+                                                            
+                                                                <asp:View ID="View5" runat="server">
+                                                                    <table width=100% align="center">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                            
+                                                                                <asp:GridView ID="grdQualification" runat="server" AutoGenerateColumns="False" 
+                                                                                    CellPadding="4" DataKeyNames="byteQualification" DataSourceID="QualificationDS" 
+                                                                                    ForeColor="#444444" GridLines="None" Width="100%" 
+                                                                                    onselectedindexchanged="grdQualification_SelectedIndexChanged" 
+                                                                                    onrowcommand="grdQualification_RowCommand">
+                                                                                    <RowStyle BackColor="#ffffff" />
+                                                                                    <Columns>
+                                                                                        <asp:ButtonField CommandName="cmdEditQ" HeaderText="Edit" Text="Select" ControlStyle-Font-Underline="true"/>
+                                                                                        <asp:CommandField ShowSelectButton="True" SelectText="Show Audit Info" ControlStyle-Font-Underline="true"/>
+                                                                                        <asp:BoundField DataField="byteQualification" HeaderText="#" 
+                                                                                            SortExpression="byteQualification">
+                                                                                            <HeaderStyle   />
+                                                                                            <ItemStyle  HorizontalAlign="Center" 
+                                                                                                VerticalAlign="Middle" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="Q" HeaderText="Q" ReadOnly="True" SortExpression="Q">
+                                                                                            <HeaderStyle  />
+                                                                                            <ItemStyle   />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="Major" HeaderText="Major" ReadOnly="True" 
+                                                                                            SortExpression="Major">
+                                                                                            <HeaderStyle  />
+                                                                                            <ItemStyle/>
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="intGraduationYear" HeaderText="Year" ReadOnly="True" 
+                                                                                            SortExpression="intGraduationYear">
+                                                                                            <HeaderStyle  />
+                                                                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="Source" HeaderText="Source" ReadOnly="True" 
+                                                                                            SortExpression="Source">
+                                                                                            <HeaderStyle  />
+                                                                                            <ItemStyle  Wrap="True" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="Score" DataFormatString="{0:0.00}" 
+                                                                                            HeaderText="Score" ReadOnly="True" SortExpression="Score">
+                                                                                            <HeaderStyle  />
+                                                                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"  />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="InstitutionTypeDesc" HeaderText="Institution Type" 
+                                                                                            SortExpression="InstitutionTypeDesc" />
+                                                                                        <asp:BoundField DataField="G12_Stream" HeaderText="G12 Stream" 
+                                                                                            SortExpression="G12_Stream" />
+                                                                                        <asp:CheckBoxField DataField="VerifiedByRegistrar" 
+                                                                                            HeaderText="Verified By Registrar" ReadOnly="True" 
+                                                                                            SortExpression="VerifiedByRegistrar">
+                                                                                        <HeaderStyle  HorizontalAlign="Center" 
+                                                                                            VerticalAlign="Middle" />
+                                                                                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                                        </asp:CheckBoxField>
+                                                                                        <asp:BoundField DataField="RegistrarComments" HeaderText="Registrar Comments" 
+                                                                                            ReadOnly="True" SortExpression="RegistrarComments">
+                                                                                        <HeaderStyle  HorizontalAlign="Center" 
+                                                                                            VerticalAlign="Middle" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:CheckBoxField DataField="VerifiedByAdmission" 
+                                                                                            HeaderText="Verfied By Admission" ReadOnly="True" 
+                                                                                            SortExpression="VerifiedByAdmission">
+                                                                                        <HeaderStyle  HorizontalAlign="Center" 
+                                                                                            VerticalAlign="Middle" />
+                                                                                        <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                                                        </asp:CheckBoxField>
+                                                                                        <asp:BoundField DataField="AdmissionComments" HeaderText="Admission Comments" 
+                                                                                            ReadOnly="True" SortExpression="AdmissionComments">
+                                                                                        <HeaderStyle  HorizontalAlign="Center" 
+                                                                                            VerticalAlign="Middle" />
+                                                                                        </asp:BoundField>
+                                                                                    </Columns>
+                                                                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                                                    <HeaderStyle BackColor="#3f658c" Font-Bold="false"  
+                                                                                        ForeColor="White" />
+                                                                                    <EditRowStyle BackColor="#2461BF" />
+                                                                                    <AlternatingRowStyle BackColor="White" />
+                                                                                </asp:GridView>
+                                                                            
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"> 
+                                                                                <asp:DetailsView ID="QDV" runat="server" AutoGenerateRows="False" 
+                                                                                    Caption="Selected Qualification Audit" CaptionAlign="Top" CellPadding="4" 
+                                                                                    DataSourceID="Q_Audit" ForeColor="#333333" GridLines="None" Height="50px" 
+                                                                                    Width="100%" BackColor="#D1DDF1">
+                                                                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                                                    <CommandRowStyle BackColor="#D1DDF1" Font-Bold="True" />
+                                                                                    <RowStyle BackColor="#EFF3FB" />
+                                                                                    <FieldHeaderStyle BackColor="#DEE8F5" Font-Bold="True" />
+                                                                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                                    <Fields>
+                                                                                        <asp:BoundField DataField="strUserCreate" HeaderText="Created By" 
+                                                                                            SortExpression="strUserCreate" />
+                                                                                        <asp:BoundField DataField="dateCreate" HeaderText="Created On" 
+                                                                                            SortExpression="dateCreate" />
+                                                                                    </Fields>
+                                                                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                                                    <EditRowStyle BackColor="#2461BF" />
+                                                                                    <AlternatingRowStyle BackColor="White" />
+                                                                                </asp:DetailsView>
+                                                                                <asp:SqlDataSource ID="Q_Audit" runat="server" 
+                                                                                    ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
+                                                                                    ProviderName="<%$ ConnectionStrings:ECTDataMales.ProviderName %>" 
+                                                                                    SelectCommand="SELECT strUserCreate, dateCreate FROM Reg_Student_Qualifications AS Q WHERE (lngSerial = @Serial) AND (byteQualification = @Qualification) ORDER BY byteQualification">
+                                                                                    <SelectParameters>
+                                                                                        <asp:ControlParameter ControlID="hdnSerial" DefaultValue="1" Name="Serial" 
+                                                                                            PropertyName="Value" />
+                                                                                        <asp:Parameter DefaultValue="1" Name="Qualification" />
+                                                                                    </SelectParameters>
+                                                                                </asp:SqlDataSource>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center">                                                                            
+                                                                                <div style="background-color: #FFFFFF">
+                                                                                    <asp:LinkButton ID="NewQ_btn" runat="server" OnClick="NewQ_btn_Click" CausesValidation="False" CssClass="btn btn-success btn-sm" ToolTip="Add New Qualification"><i class="fa fa-plus"></i> Add New</asp:LinkButton>
+                                                                                    <asp:LinkButton ID="ESLEX_btn" runat="server" OnClick="ESLEX_btn_Click" CssClass="btn btn-success btn-sm" ToolTip="ESL Exemption Calculation"><i class="fa fa-calculator"></i> ESL Exemption Calculation</asp:LinkButton>
+                                                                                     <asp:LinkButton ID="DeleteQ_btn" runat="server" OnClick="DeleteQ_btn_Click" CssClass="btn btn-danger btn-sm" ToolTip="Delete Qualification" onclientclick="return DeleteConfirm();" ><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                                                                                </div>
+                                                                            
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <style>
+                                                                        caption {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    color: #6c757d;
+    text-align: center;
+    caption-side: top;
+    background:#e8eff7;
+    color:#444444;
+    font-weight:bold;
+}
+                                                                        th, td {
+  border: 1px solid #ced4da;
+  border-collapse:collapse;
+}
+                                                                    </style>
+                                                                    <asp:SqlDataSource ID="QualificationDS" runat="server" 
+                                                                        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
+                                                                        DeleteCommand="DELETE FROM Reg_Student_Qualifications WHERE (lngSerial = @Serial) AND (byteQualification = @byteQualification)" 
+                                                                        InsertCommand="INSERT INTO Reg_Student_Qualifications(lngSerial, byteQualification, intCertificate, intMajor, intMinor, intGraduationYear, byteInstituteCountry, sngGrade, strCertificateSource, dateENG, strUserCreate, dateCreate, VerifiedByAdmission, AdmissionComments, VerifiedByRegistrar, RegistrarComments, HS_InstitutionType, HS_InstitutionCity, G12_Stream, ScoreOfMath, IESOL_Grade, ExamCenterID, HSSystem, HSEquivalencyIndicator, HSEquivalencyAppNo, ScoreOfChemistry, ScoreOfBiology, ScoreOfPhysics) VALUES (@lngSerial, @byteQualification, @intCertificate, @intMajor, @intMinor, @intGraduationYear, @byteInstituteCountry, @sngGrade, @strCertificateSource, @dateENG, @strUserCreate, GETDATE(), @VerifiedByAdmission, @AdmissionComments, @VerifiedByRegistrar, @RegistrarComments, @HS_InstitutionType, @HS_InstitutionCity, @G12_Stream, @ScoreOfMath, @IESOL_Grade, @ExamCenterID, @HSSystem, @HSEquivalencyIndicator, @HSEquivalencyAppNo, @ScoreOfChemistry, @ScoreOfBiology, @ScoreOfPhysics)" 
+                                                                        UpdateCommand="UPDATE Reg_Student_Qualifications SET intCertificate = @intCertificate, intMajor = @intMajor, intMinor = @intMinor, intGraduationYear = @intGraduationYear, byteInstituteCountry = @byteInstituteCountry, sngGrade = @sngGrade, strCertificateSource = @strCertificateSource, dateENG = @dateENG, VerifiedByAdmission = @VerifiedByAdmission, AdmissionComments = @AdmissionComments, VerifiedByRegistrar = @VerifiedByRegistrar, RegistrarComments = @RegistrarComments, HS_InstitutionType = @HS_InstitutionType, HS_InstitutionCity = @HS_InstitutionCity, G12_Stream = @G12_Stream, ScoreOfMath = @ScoreOfMath, IESOL_Grade = @IESOL_Grade, ExamCenterID = @ExamCenterID, HSSystem = @HSSystem, HSEquivalencyIndicator = @HSEquivalencyIndicator, HSEquivalencyAppNo = @HSEquivalencyAppNo, ScoreOfChemistry = @ScoreOfChemistry, ScoreOfBiology = @ScoreOfBiology, ScoreOfPhysics = @ScoreOfPhysics WHERE (lngSerial = @lngSerial) AND (byteQualification = @byteQualification)"
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        SelectCommand="SELECT Q.byteQualification, C.strCertificateDescEn AS Q, S1.strSpecializationDescEn AS Major, S2.strSpecializationDescEn AS Minor, Q.intGraduationYear, Q.strCertificateSource AS Source, CO.strCountryDescEn, Q.dateENG, Q.sngGrade AS Score, Q.VerifiedByAdmission, Q.AdmissionComments, Q.VerifiedByRegistrar, Q.RegistrarComments, Q.strUserCreate, Q.dateCreate, Lkp_Cities.strCityDescEn AS City, Lkp_InstitutionType.InstitutionTypeDesc, Lkp_G12_Stream.G12_StreamDesc AS G12_Stream, Q.ScoreOfMath, Lkp_EngCertificate_ExamCenter.ExamcenterName, Q.ScoreOfChemistry, Q.ScoreOfBiology, Q.ScoreOfPhysics FROM Lkp_Specializations AS S1 INNER JOIN Reg_Student_Qualifications AS Q INNER JOIN Lkp_Certificates AS C ON Q.intCertificate = C.intCertificate INNER JOIN Lkp_Countries AS CO ON Q.byteInstituteCountry = CO.byteCountry ON S1.intSpecialization = Q.intMajor INNER JOIN Lkp_Specializations AS S2 ON Q.intMinor = S2.intSpecialization LEFT OUTER JOIN Lkp_EngCertificate_ExamCenter ON Q.ExamCenterID = Lkp_EngCertificate_ExamCenter.ExamCenterID LEFT OUTER JOIN Lkp_G12_Stream ON Q.G12_Stream = Lkp_G12_Stream.G12_StreamID LEFT OUTER JOIN Lkp_InstitutionType ON Q.HS_InstitutionType = Lkp_InstitutionType.InstitutionTypeID LEFT OUTER JOIN Lkp_Cities ON Q.HS_InstitutionCity = Lkp_Cities.byteCity AND Q.byteInstituteCountry = Lkp_Cities.byteCountry WHERE (Q.lngSerial = @Serial) ORDER BY Q.byteQualification" >
+                                                                        
+                                                                        <SelectParameters>
+                                                                            <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="Serial" 
+                                                                                PropertyName="Value" />
+                                                                        </SelectParameters>
+                                                                        <DeleteParameters>
+                                                                            <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="Serial" 
+                                                                                PropertyName="Value" />
+                                                                            <asp:ControlParameter ControlID="grdQualification" DefaultValue="0" 
+                                                                                Name="byteQualification" PropertyName="SelectedValue" />
+                                                                        </DeleteParameters>
+                                                                        <InsertParameters>
+                                                                            <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                                                                PropertyName="Value" />
+                                                                            <asp:ControlParameter ControlID="lblQualification" DefaultValue="0" 
+                                                                                Name="byteQualification" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="ddlQualification" DefaultValue="0" 
+                                                                                Name="intCertificate" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQMajor" DefaultValue="0" Name="intMajor" 
+                                                                                PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQMajor" DefaultValue="0" Name="intMinor" 
+                                                                                PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="txtQYear" DefaultValue="" 
+                                                                                Name="intGraduationYear" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="ddlQCountry" DefaultValue="1" 
+                                                                                Name="byteInstituteCountry" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="txtQScore" DefaultValue="0" Name="sngGrade" 
+                                                                                PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="txtSource" DefaultValue="-" 
+                                                                                Name="strCertificateSource" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="txtQDate" DefaultValue="" Name="dateENG" 
+                                                                                PropertyName="Text" />
+                                                                            <asp:SessionParameter DefaultValue="-" Name="strUserCreate" 
+                                                                                SessionField="CurrentUserName" />
+                                                                            <asp:ControlParameter ControlID="chkAdmissionVerfication" DefaultValue="0" 
+                                                                                Name="VerifiedByAdmission" PropertyName="Checked" />
+                                                                            <asp:ControlParameter ControlID="txtAdmissionComments" DefaultValue="" 
+                                                                                Name="AdmissionComments" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="chkRegistrarVerfication" DefaultValue="0" 
+                                                                                Name="VerifiedByRegistrar" PropertyName="Checked" />
+                                                                            <asp:ControlParameter ControlID="txtRegistrarComments" DefaultValue="-" 
+                                                                                Name="RegistrarComments" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="ddlQInstitutionType" DefaultValue="0" 
+                                                                                Name="HS_InstitutionType" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQCity" DefaultValue="0" 
+                                                                                Name="HS_InstitutionCity" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQG12_Stream" DefaultValue="0" 
+                                                                                Name="G12_Stream" PropertyName="SelectedValue" />
+                                                                          
+                                                                            <asp:ControlParameter ControlID="txtQScoreofMath" DefaultValue="0" 
+                                                                                Name="ScoreOfMath" PropertyName="Text" />
+                                                                            <asp:ControlParameter ControlID="ddlQEngGrade" DefaultValue="-" 
+                                                                                Name="IESOL_Grade" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQEngExamCenter" DefaultValue="0" 
+                                                                                Name="ExamCenterID" PropertyName="SelectedValue" />
+                
+                                                                            <asp:ControlParameter ControlID="ddlHSSystem" DefaultValue="1" Name="HSSystem" 
+                                                                                PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlEquivalencyIndicator" DefaultValue="M" 
+                                                                                Name="HSEquivalencyIndicator" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="txtEquivalencyAppNo" DefaultValue="NA" 
+                                                                                Name="HSEquivalencyAppNo" PropertyName="Text" />
+                                                                            
+                                                                            <asp:ControlParameter ControlID="txtQScoreofChemistry" DefaultValue="0" 
+                                                                                 Name="ScoreOfChemistry" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtQScoreofBiology" DefaultValue="0" 
+                                                                                 Name="ScoreOfBiology" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtQScoreofPhysics" DefaultValue="0" 
+                                                                                 Name="ScoreOfPhysics" PropertyName="Text" />
+                
+                                                                        </InsertParameters>
+                                                                        <UpdateParameters>
 
+                                                                             <asp:ControlParameter ControlID="ddlQualification" DefaultValue="0" 
+                                                                                 Name="intCertificate" PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="ddlQMajor" DefaultValue="0" Name="intMajor" 
+                                                                                 PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="ddlQMajor" DefaultValue="0" Name="intMinor" 
+                                                                                 PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="txtQYear" DefaultValue="" 
+                                                                                 Name="intGraduationYear" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="ddlQCountry" DefaultValue="1" 
+                                                                                 Name="byteInstituteCountry" PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="txtQScore" DefaultValue="0" Name="sngGrade" 
+                                                                                 PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtSource" DefaultValue="-" 
+                                                                                 Name="strCertificateSource" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtQDate" DefaultValue="" Name="dateENG" 
+                                                                                 PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="chkAdmissionVerfication" DefaultValue="0" 
+                                                                                 Name="VerifiedByAdmission" PropertyName="Checked" />
+                                                                             <asp:ControlParameter ControlID="txtAdmissionComments" DefaultValue="" 
+                                                                                 Name="AdmissionComments" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="chkRegistrarVerfication" DefaultValue="0" 
+                                                                                 Name="VerifiedByRegistrar" PropertyName="Checked" />
+                                                                             <asp:ControlParameter ControlID="txtRegistrarComments" DefaultValue="-" 
+                                                                                 Name="RegistrarComments" PropertyName="Text" />
+
+                                                                              <asp:ControlParameter ControlID="ddlQInstitutionType" DefaultValue="0" 
+                                                                                Name="HS_InstitutionType" PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="ddlQCity" DefaultValue="0" 
+                                                                                 Name="HS_InstitutionCity" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQG12_Stream" DefaultValue="0" 
+                                                                                Name="G12_Stream" PropertyName="SelectedValue" />
+
+                                                                             <asp:ControlParameter ControlID="txtQScoreofMath" DefaultValue="0" 
+                                                                                 Name="ScoreOfMath" PropertyName="Text" />
+
+                                                                             <asp:ControlParameter ControlID="ddlQEngGrade" DefaultValue="-" 
+                                                                                Name="IESOL_Grade" PropertyName="SelectedValue" />
+                                                                            <asp:ControlParameter ControlID="ddlQEngExamCenter" DefaultValue="0" 
+                                                                                Name="ExamCenterID" PropertyName="SelectedValue" />
+
+                                                                             <asp:ControlParameter ControlID="ddlHSSystem" DefaultValue="1" Name="HSSystem" 
+                                                                                 PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="ddlEquivalencyIndicator" DefaultValue="M" 
+                                                                                 Name="HSEquivalencyIndicator" PropertyName="SelectedValue" />
+                                                                             <asp:ControlParameter ControlID="txtLHEquivalencyAppNo" DefaultValue="NA" 
+                                                                                 Name="HSEquivalencyAppNo" PropertyName="Text" />
+                                                                            
+                                                                              <asp:ControlParameter ControlID="txtQScoreofChemistry" DefaultValue="0" 
+                                                                                 Name="ScoreOfChemistry" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtQScoreofBiology" DefaultValue="0" 
+                                                                                 Name="ScoreOfBiology" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="txtQScoreofPhysics" DefaultValue="0" 
+                                                                                 Name="ScoreOfPhysics" PropertyName="Text" />
+                                                                             <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                                                                PropertyName="Value" />
+                                                                            <asp:ControlParameter ControlID="lblQualification" DefaultValue="0" 
+                                                                                Name="byteQualification" PropertyName="Text" />
+                                                                        </UpdateParameters>
+                                                                    </asp:SqlDataSource>
+                                                                    <asp:SqlDataSource ID="QCityDS" runat="server" 
+                                                                        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
+                                                                        SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
+                                                                        <SelectParameters>
+                                                                            <asp:ControlParameter ControlID="ddlQCountry" DefaultValue="1" 
+                                                                                Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
+                                                                        </SelectParameters>
+                                                                    </asp:SqlDataSource>
+                                                                </asp:View>
+                                                            
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="right" class="style9">
+                                                                
+                                                                <asp:View ID="View6" runat="server">
+                                                                    <table align="center" width="780">
+                                                                        <tr>
+                                                                            <td align="center" colspan="3">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center" colspan="3">
+                                                                                <asp:ValidationSummary ID="ValidationSummary2" runat="server" 
+                                                                                    ValidationGroup="Q" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label28" runat="server" Font-Size="Small" Text="#" Width="70px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:Label ID="lblQualification" runat="server" Font-Size="Small" Width="70px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label29" runat="server" Font-Size="Small" Height="16px" 
+                                                                                    Text="Qualification" Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQualification" runat="server" 
+                                                                                    DataTextField="strCertificateDescEn" DataValueField="intCertificate" 
+                                                                                    TabIndex="51" Width="120px" 
+                                                                                    onselectedindexchanged="ddlQualification_SelectedIndexChanged" 
+                                                                                    AutoPostBack="True">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label30" runat="server" Font-Size="Small" Text="Major" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQMajor" runat="server" 
+                                                                                    DataTextField="strSpecializationDescEn" DataValueField="intSpecialization" 
+                                                                                    TabIndex="52" Width="120px">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label31" runat="server" Font-Size="Small" Text="Year" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQYear" runat="server" TabIndex="53" ValidationGroup="Q" 
+                                                                                    Width="120px">9999</asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
+                                                                                    ControlToValidate="txtQYear" ErrorMessage="Qualification Year is required." 
+                                                                                    SetFocusOnError="True" ValidationGroup="Q">*</asp:RequiredFieldValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label32" runat="server" Font-Size="Small" Text="Date" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQDate" runat="server" TabIndex="54" 
+                                                                                    Width="100px" ToolTip="yyyy-mm-dd"></asp:TextBox>
+                                                                               
+                                                                                <asp:RangeValidator ID="RangeValidator3" runat="server" 
+                                                                                    ControlToValidate="txtQDate" Display="Dynamic" ErrorMessage="Date Only" 
+                                                                                    MaximumValue="01/01/3000" MinimumValue="01/01/1900" SetFocusOnError="True" 
+                                                                                    Type="Date" ValidationGroup="Q">yyyy-mm-dd</asp:RangeValidator>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
+                                                                                    ControlToValidate="txtQDate" ErrorMessage="Qualification Date is required." 
+                                                                                    SetFocusOnError="True" ValidationGroup="Q">*</asp:RequiredFieldValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label33" runat="server" Font-Size="Small" Text="Source" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtSource" runat="server" TabIndex="55" ValidationGroup="Q" 
+                                                                                    Width="200px">NA</asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
+                                                                                    ControlToValidate="txtSource" ErrorMessage="Qualification Source is required." 
+                                                                                    SetFocusOnError="True" ValidationGroup="Q">*</asp:RequiredFieldValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%" class="style13">
+                                                                                <asp:Label ID="lblExamCenter" runat="server" Font-Size="Small" Text="Exam Center" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%" class="style13">
+                                                                                <asp:DropDownList ID="ddlQEngExamCenter" runat="server" TabIndex="56" 
+                                                                                    Width="120px">
+                                                                                </asp:DropDownList>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label75" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text=" for English certificates"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%" class="style13">
+                                                                                </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label67" runat="server" Font-Size="Small" 
+                                                                                    Text="Institution Type" Width="140px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQInstitutionType" runat="server" 
+                                                                                    DataTextField="InstitutionTypeDesc" DataValueField="InstitutionTypeID" 
+                                                                                    TabIndex="57" Width="120px">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label68" runat="server" Font-Size="Small" 
+                                                                                    Text="12th Grade Stream" Width="140px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQG12_Stream" runat="server" 
+                                                                                    DataTextField="G12_StreamDesc" DataValueField="G12_StreamID" TabIndex="58" 
+                                                                                    Width="120px">
+                                                                                </asp:DropDownList>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label69" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for the UAE Public school graduates"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label85" runat="server" Font-Size="Small" ForeColor="#FF3300" 
+                                                                                    Text="HS System" Width="140px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlHSSystem" runat="server" 
+                                                                                    DataTextField="sSystem" DataValueField="iSerial" TabIndex="59" 
+                                                                                    Width="120px">
+                                                                                </asp:DropDownList>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label86" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for high school"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label87" runat="server" Font-Size="Small" ForeColor="#FF3300" 
+                                                                                    Text="Equivalency Indicator" Width="140px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlEquivalencyIndicator" runat="server" TabIndex="60" 
+                                                                                    Width="200px">
+                                                                                    <asp:ListItem Selected="True" Value="M">UAE-MOE national curriculum</asp:ListItem>
+                                                                                    <asp:ListItem Value="Y">Equivalency has been received</asp:ListItem>
+                                                                                    <asp:ListItem Value="R">Rejected</asp:ListItem>
+                                                                                    <asp:ListItem Value="A">Applied</asp:ListItem>
+                                                                                    <asp:ListItem Value="N">Not Applied Yet</asp:ListItem>
+                                                                                    <asp:ListItem Value="U">Equivalency status unknown</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for high school"></asp:Label>
+                                                                            </td>
+                                                                            <caption>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for high school"></asp:Label>
+                                                                                <tr>
+                                                                                    <td align="left" width="10%">
+                                                                                        &nbsp;</td>
+                                                                                </tr>
+                                                                            </caption>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label88" runat="server" Font-Size="Small" ForeColor="#FF3300" 
+                                                                                    Text="Equivalency App No." Width="140px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtEquivalencyAppNo" runat="server" TabIndex="61" 
+                                                                                    ValidationGroup="Q" Width="120px">NA</asp:TextBox>
+                                                                                    &nbsp;
+                                                                                <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for high school"></asp:Label>
+                                                                            </td>
+
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label34" runat="server" Font-Size="Small" Text="Country" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQCountry" runat="server" 
+                                                                                    DataTextField="strCountryDescEn" DataValueField="byteCountry" TabIndex="62" 
+                                                                                    Width="120px" AutoPostBack="True" 
+                                                                                    onselectedindexchanged="ddlQCountry_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" class="style13" width="40%">
+                                                                                <asp:Label ID="Label66" runat="server" Font-Size="Small" Text="City" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" class="style13" width="50%">
+                                                                                <asp:DropDownList ID="ddlQCity" runat="server" DataTextField="strCityDescEn" 
+                                                                                    DataValueField="byteCity" TabIndex="63" Width="120px" 
+                                                                                    DataSourceID="QCityDS">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                            <td align="left" class="style13" width="10%">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="lblEngCertificateGrade" runat="server" Font-Size="Small" 
+                                                                                    Text="Grade" Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:DropDownList ID="ddlQEngGrade" runat="server" TabIndex="64" 
+                                                                                    Width="120px" onselectedindexchanged="ddlQEngGrade_SelectedIndexChanged" 
+                                                                                    AutoPostBack="True">
+                                                                                </asp:DropDownList>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label76" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text=" for IESOL"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label35" runat="server" Font-Size="Small" Text="Score" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQScore" runat="server" TabIndex="65" Width="115px"></asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
+                                                                                    ControlToValidate="txtQScore" ErrorMessage="Qualification Score is required." 
+                                                                                    SetFocusOnError="True" ValidationGroup="Q">*</asp:RequiredFieldValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label72" runat="server" Font-Size="Small" Text="Score of Math" 
+                                                                                    Width="100px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQScoreofMath" runat="server" TabIndex="66" Width="115px">0</asp:TextBox>
+                                                                                &nbsp;
+                                                                                <asp:Label ID="Label73" runat="server" Font-Size="Small" ForeColor="#993300" 
+                                                                                    Text="only for scientific majors"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofMath" ErrorMessage="Enter numbers only" 
+                                                                                    ValidationExpression="\d+" ValidationGroup="Q">#</asp:RegularExpressionValidator>
+                                                                                <asp:RangeValidator ID="RangeValidator4" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofMath" ErrorMessage="Score must be from 0 to 100" 
+                                                                                    MaximumValue="100" MinimumValue="0" SetFocusOnError="True" Type="Integer" 
+                                                                                    ValidationGroup="Q">#</asp:RangeValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" class="style13" width="40%">
+                                                                                <asp:Label ID="Label101" runat="server" Font-Size="Small" 
+                                                                                    Text="Score of Chemistry" Width="127px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" class="style13" width="50%">
+                                                                                <asp:TextBox ID="txtQScoreofChemistry" runat="server" TabIndex="66" 
+                                                                                    Width="115px">0</asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" class="style13" width="10%">
+                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofChemistry" ErrorMessage="Enter numbers only" 
+                                                                                    ValidationExpression="\d+" ValidationGroup="Q">#</asp:RegularExpressionValidator>
+                                                                                <asp:RangeValidator ID="RangeValidator5" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofChemistry" 
+                                                                                    ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q">#</asp:RangeValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label102" runat="server" Font-Size="Small" 
+                                                                                    Text="Score of Biology" Width="127px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQScoreofBiology" runat="server" TabIndex="66" Width="115px">0</asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofBiology" ErrorMessage="Enter numbers only" 
+                                                                                    ValidationExpression="\d+" ValidationGroup="Q">#</asp:RegularExpressionValidator>
+                                                                                <asp:RangeValidator ID="RangeValidator6" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofBiology" 
+                                                                                    ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q">#</asp:RangeValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="Label103" runat="server" Font-Size="Small" 
+                                                                                    Text="Score of Physics" Width="127px"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtQScoreofPhysics" runat="server" TabIndex="66" Width="115px">0</asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofPhysics" ErrorMessage="Enter numbers only" 
+                                                                                    ValidationExpression="\d+" ValidationGroup="Q">#</asp:RegularExpressionValidator>
+                                                                                <asp:RangeValidator ID="RangeValidator7" runat="server" 
+                                                                                    ControlToValidate="txtQScoreofPhysics" 
+                                                                                    ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q">#</asp:RangeValidator>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center" class="style9" colspan="3">
+                                                                                <hr />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:Label ID="lblRegistrarVerification" runat="server" Font-Size="Medium" 
+                                                                                    ForeColor="#FF9900" Text="Registrar Verification" Width="200px" 
+                                                                                    Visible="False"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:CheckBox ID="chkRegistrarVerfication" runat="server" Font-Size="Small" 
+                                                                                    TabIndex="67" Text="Verified By Registrar" Visible="False" />
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="lblRegistrarComments" runat="server" Font-Size="Small" 
+                                                                                    Text="Registrar Comments" Width="154px" Visible="False"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtRegistrarComments" runat="server" TabIndex="68" 
+                                                                                    Width="410px" Visible="False"></asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="50%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:Label ID="lblAdmissionVerfication" runat="server" Font-Size="Medium" 
+                                                                                    ForeColor="#FF9900" Text="First Audit" Width="200px" Visible="False"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:CheckBox ID="chkAdmissionVerfication" runat="server" Font-Size="Small" 
+                                                                                    TabIndex="69" Text="Student Profile First - Audit" Visible="False" />
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:Label ID="lblAdmissionComments" runat="server" Font-Size="Small" 
+                                                                                    Text="Auditor Comments" Width="169px" Visible="False"></asp:Label>
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                <asp:TextBox ID="txtAdmissionComments" runat="server" TabIndex="70" 
+                                                                                    Width="410px" Visible="False"></asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" width="40%">
+                                                                                <asp:HiddenField ID="HiddenFieldQMode" runat="server" />
+                                                                            </td>
+                                                                            <td align="left" width="50%">
+                                                                                &nbsp;</td>
+                                                                            <td align="left" width="10%">
+                                                                                &nbsp;</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" class="style9" colspan="3">
+                                                                                <hr />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="right" class="style9" colspan="3">
+                                                                                <div align="center" style="background-color: #FFFFFF">
+                                                                                    <asp:ImageButton ID="SaveQ_btn" runat="server" 
+                                                                                        ImageUrl="~/Images/Icons/Save.gif" onclick="SaveQ_btn_Click" 
+                                                                                        ValidationGroup="Q" />
+                                                                                    <asp:ImageButton ID="UndoQ_btn" runat="server" CausesValidation="False" 
+                                                                                        ImageUrl="~/Images/Icons/GoBack.jpg" onclick="UndoQ_btn_Click" ToolTip="Undo" />
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </asp:View>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </asp:MultiView>
+                                                                </div>
+                                                            
+                                                        </asp:View>
                                                        <%-- End View 1--%>
-
+                                                    
                                                         <%--Start View 2--%>
-                                                       
+                                                        <asp:View ID="View2" runat="server">
 
+                                                        </asp:View>
                                                         <%--End View 2--%>
+
+                                                        <%--Start View 3--%>
+                                                        <asp:View ID="View3" runat="server">
+
+                                                        </asp:View>
+                                                        <%--End View 3--%>
+
+                                                         <%--Start View 4--%>
+                                                        <asp:View ID="View4" runat="server">
+
+                                                        </asp:View>
+                                                        <%--End View 4--%>
+
+                                                         <%--Start View 7--%>
+                                                        <asp:View ID="View7" runat="server">
+
+                                                        </asp:View>
+                                                        <%--End View 7--%>
                                                     </asp:MultiView>
                                                 </div>
                                             </div>
@@ -855,7 +1647,7 @@
 
     <script type="text/javascript">
         function DeleteConfirm() {
-            var b = confirm('Are you sure want to delete this student ?');
+            var b = confirm('Are you sure want to delete this ?');
             return b;
         }
     </script>

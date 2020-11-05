@@ -2130,6 +2130,56 @@ namespace LocalECT
             {
 
             }
-        }      
+        }
+
+        protected void UndoQ_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void SaveQ_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grdQualification_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grdQualification_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void NewQ_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ESLEX_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DeleteQ_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlQualification_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlQCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlQEngGrade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
