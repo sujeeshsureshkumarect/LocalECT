@@ -1,13 +1,19 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -77,25 +83,25 @@ namespace LocalECT
                         {
                             bool isAllowed = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                             InitializeModule.enumPrivilege.ChangeActivity, CurrentRole);
-                            //chkActive.Enabled = isAllowed;
-                            //chkMissing.Enabled = isAllowed;                            
+                            chkActive.Enabled = isAllowed;
+                            chkMissing.Enabled = isAllowed;
                         }
                         bResult = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
                         InitializeModule.enumPrivilege.ShowAdmissionVerification, CurrentRole);
-                        //chkAdmissionVerfication.Visible = bResult;
-                        //txtAdmissionComments.Visible = bResult;
-                        //lblAdmissionVerfication.Visible = bResult;
-                        //lblAdmissionComments.Visible = bResult;
+                        chkAdmissionVerfication.Visible = bResult;
+                        txtAdmissionComments.Visible = bResult;
+                        lblAdmissionVerfication.Visible = bResult;
+                        lblAdmissionComments.Visible = bResult;
 
                         bResult = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
                        InitializeModule.enumPrivilege.ShowRegistrarVerification, CurrentRole);
-                        //chkRegistrarVerfication.Visible = bResult;
-                        //txtRegistrarComments.Visible = bResult;
-                        //lblRegistrarVerification.Visible = bResult;
-                        //lblRegistrarComments.Visible = bResult;
+                        chkRegistrarVerfication.Visible = bResult;
+                        txtRegistrarComments.Visible = bResult;
+                        lblRegistrarVerification.Visible = bResult;
+                        lblRegistrarComments.Visible = bResult;
 
                         //Update
-                        if(Request.QueryString["sid"] !=null && Request.QueryString["sid"] !="")
+                        if (Request.QueryString["sid"] !=null && Request.QueryString["sid"] !="")
                         {
                             Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
                             Session["StudentSerialNo"] = GetSerial(Request.QueryString["sid"]);
@@ -148,11 +154,38 @@ namespace LocalECT
                         break;
                 }
 
-                //QCityDS.ConnectionString = sConn;
+                QCityDS.ConnectionString = sConn;
                 BirthCityDS.ConnectionString = sConn;
                 ResidentCityDS.ConnectionString = sConn;
                 HomeCityDS.ConnectionString = sConn;
+                SubReasonDS.ConnectionString = sConn;
+                //SearchDS.ConnectionString = sConn;
+                StudentDS.ConnectionString = sConn;
+                EnrollmentDS.ConnectionString = sConn;
+                QualificationDS.ConnectionString = sConn;
+                Q_Audit.ConnectionString = sConn;
+                //DocumentsDS.ConnectionString = sConn;
+                //DocsEditDS.ConnectionString = sConn;
+                MajorDS.ConnectionString = sConn;
+                //MarksDS.ConnectionString = sConn;
+                WMajorDS.ConnectionString = sConn;
 
+
+                if (Session["CurrentStudent"] == null)//Insert  //string.IsNullOrEmpty(Session["CurrentStudent"].ToString())
+                {
+                    ddlWMajor1.Enabled = true;
+                    ddlWMajor2.Enabled = true;
+                    ddlWMajor3.Enabled = true;
+                }
+                else
+                {
+                    bool isAllowed = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                    InitializeModule.enumPrivilege.ChangePreferredMajor, CurrentRole);
+                    ddlWMajor1.Enabled = isAllowed;
+                    ddlWMajor2.Enabled = isAllowed;
+                    ddlWMajor3.Enabled = isAllowed;
+
+                }
 
                 if (!IsPostBack)
                 {
@@ -160,14 +193,14 @@ namespace LocalECT
                     bool isAllowed = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                            InitializeModule.enumPrivilege.StatusGraduated, CurrentRole);
 
-                    //if (ddlStatus.SelectedValue == "3" && isAllowed == true)
-                    //{
-                    //    chkCompleteBAFromOtherInstitution.Enabled = isAllowed;
-                    //    chkCompleteMasterFromOtherInstitution.Enabled = isAllowed;
-                    //}
+                    if (ddlStatus.SelectedValue == "3" && isAllowed == true)
+                    {
+                        chkCompleteBAFromOtherInstitution.Enabled = isAllowed;
+                        chkCompleteMasterFromOtherInstitution.Enabled = isAllowed;
+                    }
 
 
-                    
+
                     if (Session["StudentSerialNo"] != null)
                     {
                         hdnSerial.Value = Session["StudentSerialNo"].ToString();
@@ -249,7 +282,7 @@ namespace LocalECT
                     div_msg.Visible = true;
                     txtBirthDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
                     txtExpiry.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
-                    //txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
+                    txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
                     return;
                 }
 
@@ -275,51 +308,51 @@ namespace LocalECT
                 SqlDataReader rd = cmd.ExecuteReader();
                 if (!rd.HasRows)
                 {
-                    //ddlReason.SelectedValue = "0";
-                    //SubReasonDS.DataBind();
-                    //ddlSubReason.DataBind();
-                    //ddlType.SelectedValue = "0";
-                    //MajorDS.DataBind();
-                    //ddlMajor.DataBind();
-                    //ddlMajor.SelectedValue = "010120";
-                    //ddlEnrollmentTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
-                    //ddlStatus.SelectedValue = "0";
-                    //ddlStatusTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
-                    //ddlSubReason.SelectedValue = "0";
-                    //ddlAdvisor.SelectedValue = "1000";
-                    //lblDateEnrolled.Text = "";
-                    //lblDateStatus.Text = "";
-                    //lblReference.Text = "";
+                    ddlReason.SelectedValue = "0";
+                    SubReasonDS.DataBind();
+                    ddlSubReason.DataBind();
+                    ddlType.SelectedValue = "0";
+                    MajorDS.DataBind();
+                    ddlMajor.DataBind();
+                    ddlMajor.SelectedValue = "010120";
+                    ddlEnrollmentTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
+                    ddlStatus.SelectedValue = "0";
+                    ddlStatusTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
+                    ddlSubReason.SelectedValue = "0";
+                    ddlAdvisor.SelectedValue = "1000";
+                    lblDateEnrolled.Text = "";
+                    lblDateStatus.Text = "";
+                    lblReference.Text = "";
                     lblStudentId.Text = "";
-                    //lblECTId.Text = "";
-                    //txtNote.Text = "";
-                    //txtReferredBy.Text = "";
-                    //chkActive.Checked = true;
-                    //chkMissing.Checked = false;
+                    lblECTId.Text = "";
+                    txtNote.Text = "";
+                    txtReferredBy.Text = "";
+                    chkActive.Checked = true;
+                    chkMissing.Checked = false;
 
-                    //txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today);
-                    //ChkIsMilitaryService.Checked = false;
+                    txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today);
+                    ChkIsMilitaryService.Checked = false;
 
-                    //ddlWMajor1.SelectedValue = "0";
-                    //ddlWMajor2.SelectedValue = "0";
-                    //ddlWMajor3.SelectedValue = "0";
-                    //chkCompleteBAFromOtherInstitution.Checked = false;
-                    //chkCompleteMasterFromOtherInstitution.Checked = false;
-                    //txtEnrollmentSource.Text = "";
-                    //ddlEnrollmentSource.SelectedValue = "0";
-                    //ddlEnrollmentSource2.SelectedValue = "0";
-                    //ddlRegisteredThrough.SelectedValue = "1";
+                    ddlWMajor1.SelectedValue = "0";
+                    ddlWMajor2.SelectedValue = "0";
+                    ddlWMajor3.SelectedValue = "0";
+                    chkCompleteBAFromOtherInstitution.Checked = false;
+                    chkCompleteMasterFromOtherInstitution.Checked = false;
+                    txtEnrollmentSource.Text = "";
+                    ddlEnrollmentSource.SelectedValue = "0";
+                    ddlEnrollmentSource2.SelectedValue = "0";
+                    ddlRegisteredThrough.SelectedValue = "1";
 
-                    //txtOpportunityID.Text = "0";
-                    //txtContactID.Text = "0";
-                    //ddlAcceptance.SelectedIndex = 0;
-                    //ddlAcceptanceCondition.SelectedIndex = 0;
-                    //ddlAdmissionStatus.SelectedIndex = 0;
+                    txtOpportunityID.Text = "0";
+                    txtContactID.Text = "0";
+                    ddlAcceptance.SelectedIndex = 0;
+                    ddlAcceptanceCondition.SelectedIndex = 0;
+                    ddlAdmissionStatus.SelectedIndex = 0;
 
                     mtvQualification.ActiveViewIndex = 0;
                     MultiTabs.ActiveViewIndex = 0;
-                    //rd.Close();
-                    //return;
+                    rd.Close();
+                    return;
                 }
 
                 int iYear = 0;
@@ -350,28 +383,28 @@ namespace LocalECT
 
                     string sMajor = sKey;
 
-                    //MajorDS.DataBind();
-                    //ddlMajor.DataBind();
-                    //ddlMajor.SelectedValue = sMajor;
+                    MajorDS.DataBind();
+                    ddlMajor.DataBind();
+                    ddlMajor.SelectedValue = sMajor;
 
-                    //ddlType.SelectedValue = rd["byteStudentType"].ToString();
-                    //chkActive.Checked = Convert.ToBoolean(rd["bActive"]);
-                    //chkMissing.Checked = Convert.ToBoolean(rd["bContinue"]);
-                    //if (rd["dateMilitaryService"].ToString() == "")
-                    //{
-                    //    txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today);
-                    //}
-                    //else
-                    //{
-                    //    txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", rd["dateMilitaryService"]);
-                    //}
+                    ddlType.SelectedValue = rd["byteStudentType"].ToString();
+                    chkActive.Checked = Convert.ToBoolean(rd["bActive"]);
+                    chkMissing.Checked = Convert.ToBoolean(rd["bContinue"]);
+                    if (rd["dateMilitaryService"].ToString() == "")
+                    {
+                        txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today);
+                    }
+                    else
+                    {
+                        txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", rd["dateMilitaryService"]);
+                    }
 
-                    //ChkIsMilitaryService.Checked = Convert.ToBoolean(rd["isMilitaryService"]);
+                    ChkIsMilitaryService.Checked = Convert.ToBoolean(rd["isMilitaryService"]);
 
                     iYear = Convert.ToInt32(rd["intStudyYear"]);
                     iSem = Convert.ToInt32(rd["byteSemester"]);
                     iTerm = iYear * 10 + iSem;
-                    //ddlEnrollmentTerm.SelectedValue = iTerm.ToString();
+                    ddlEnrollmentTerm.SelectedValue = iTerm.ToString();
 
                     int iStatus = 0;
 
@@ -381,89 +414,89 @@ namespace LocalECT
                     }
                     if (iStatus > 0)
                     {
-                        //ddlStatus.SelectedValue = iStatus.ToString();
+                        ddlStatus.SelectedValue = iStatus.ToString();
                         iYear = Convert.ToInt32(rd["intGraduationYear"]);
                         iSem = Convert.ToInt32(rd["byteGraduationSemester"]);
                         iTerm = iYear * 10 + iSem;
-                        //ddlStatusTerm.SelectedValue = iTerm.ToString();
+                        ddlStatusTerm.SelectedValue = iTerm.ToString();
 
-                        //ddlReason.SelectedValue = rd["byteMainReason"].ToString();
-                        //SubReasonDS.DataBind();
-                        //ddlSubReason.DataBind();
-                        //ddlSubReason.SelectedValue = rd["byteSubReason"].ToString();
-                        //lblDateStatus.Text = string.Format("{0:yyyy-MM-dd}", rd["dateGraduation2"]);
-                        //if (iStatus == 3)
-                        //{
-                        //    chkCompleteBAFromOtherInstitution.Enabled = true;
-                        //    chkCompleteMasterFromOtherInstitution.Enabled = true;
-                        //}
-                        //chkCompleteBAFromOtherInstitution.Checked = Convert.ToBoolean(rd["IsCompleteBAFromOtherInstitution"]);
-                        //chkCompleteMasterFromOtherInstitution.Checked = Convert.ToBoolean(rd["IsCompleteMasterFromOtherInstitution"]);
+                        ddlReason.SelectedValue = rd["byteMainReason"].ToString();
+                        SubReasonDS.DataBind();
+                        ddlSubReason.DataBind();
+                        ddlSubReason.SelectedValue = rd["byteSubReason"].ToString();
+                        lblDateStatus.Text = string.Format("{0:yyyy-MM-dd}", rd["dateGraduation2"]);
+                        if (iStatus == 3)
+                        {
+                            chkCompleteBAFromOtherInstitution.Enabled = true;
+                            chkCompleteMasterFromOtherInstitution.Enabled = true;
+                        }
+                        chkCompleteBAFromOtherInstitution.Checked = Convert.ToBoolean(rd["IsCompleteBAFromOtherInstitution"]);
+                        chkCompleteMasterFromOtherInstitution.Checked = Convert.ToBoolean(rd["IsCompleteMasterFromOtherInstitution"]);
 
                     }
                     else
                     {
-                        //ddlStatus.SelectedValue = null;
-                        //ddlStatusTerm.SelectedValue = null;
-                        //ddlReason.SelectedValue = "0";
-                        //SubReasonDS.DataBind();
-                        //ddlSubReason.DataBind();
-                        //ddlSubReason.SelectedValue = "0";
-                        //lblDateStatus.Text = "";
-                        //chkCompleteBAFromOtherInstitution.Checked = false;
-                        //chkCompleteMasterFromOtherInstitution.Enabled = false;
+                        ddlStatus.SelectedValue = null;
+                        ddlStatusTerm.SelectedValue = null;
+                        ddlReason.SelectedValue = "0";
+                        SubReasonDS.DataBind();
+                        ddlSubReason.DataBind();
+                        ddlSubReason.SelectedValue = "0";
+                        lblDateStatus.Text = "";
+                        chkCompleteBAFromOtherInstitution.Checked = false;
+                        chkCompleteMasterFromOtherInstitution.Enabled = false;
                     }
 
-                    //ddlEnrollmentSource.SelectedValue = rd["iEnrollmentSource"].ToString();
-                    //ddlEnrollmentSource2.SelectedValue = rd["iEnrollmentSource2"].ToString();
+                    ddlEnrollmentSource.SelectedValue = rd["iEnrollmentSource"].ToString();
+                    ddlEnrollmentSource2.SelectedValue = rd["iEnrollmentSource2"].ToString();
 
-                    //txtEnrollmentSource.Text = rd["sEnrollmentNotes"].ToString();
+                    txtEnrollmentSource.Text = rd["sEnrollmentNotes"].ToString();
 
-                    //ddlRegisteredThrough.SelectedValue = rd["iRegisteredThrough"].ToString();
+                    ddlRegisteredThrough.SelectedValue = rd["iRegisteredThrough"].ToString();
 
-                    //ddlWMajor1.SelectedValue = rd["WantedMajorID"].ToString();
-                    //ddlWMajor2.SelectedValue = rd["WantedMajorID2"].ToString();
-                    //ddlWMajor3.SelectedValue = rd["WantedMajorID3"].ToString();
-                    //ddlAdvisor.SelectedValue = rd["intAdvisor"].ToString();
-                    //lblDateEnrolled.Text = string.Format("{0:yyyy-MM-dd}", rd["dateApplication"]);
+                    ddlWMajor1.SelectedValue = rd["WantedMajorID"].ToString();
+                    ddlWMajor2.SelectedValue = rd["WantedMajorID2"].ToString();
+                    ddlWMajor3.SelectedValue = rd["WantedMajorID3"].ToString();
+                    ddlAdvisor.SelectedValue = rd["intAdvisor"].ToString();
+                    lblDateEnrolled.Text = string.Format("{0:yyyy-MM-dd}", rd["dateApplication"]);
                     sSID = rd["lngStudentNumber"].ToString();
                     lblStudentId.Text = sSID;
-                    //lblReference.Text = rd["sReference"].ToString();
-                    //lblECTId.Text = rd["sECTId"].ToString();
-                    //txtNote.Text = rd["strNotes"].ToString();
+                    lblReference.Text = rd["sReference"].ToString();
+                    lblECTId.Text = rd["sECTId"].ToString();
+                    txtNote.Text = rd["strNotes"].ToString();
 
-                    //txtReferredBy.Text = rd["sReferredBy"].ToString();
+                    txtReferredBy.Text = rd["sReferredBy"].ToString();
 
-                    //if (rd["sLastDegree"].Equals(DBNull.Value))
-                    //{
-                    //    ddlLastDegree.SelectedValue = "0";
-                    //}
-                    //else
-                    //{
-                    //    ddlLastDegree.SelectedValue = rd["sLastDegree"].ToString();
-                    //}
-                    //ddlLastInistitution.SelectedValue = rd["byteLastDegreeInistitution"].ToString();
-                    //ddlLastCountry.SelectedValue = rd["byteLastDegreeCountry"].ToString();
-                    //txtLastCGPA.Text = string.Format("{0:f}", rd["curLastCGPA"]);
-                    //txtLastYear.Text = rd["intLastDegreeYear"].ToString();
+                    if (rd["sLastDegree"].Equals(DBNull.Value))
+                    {
+                        ddlLastDegree.SelectedValue = "0";
+                    }
+                    else
+                    {
+                        ddlLastDegree.SelectedValue = rd["sLastDegree"].ToString();
+                    }
+                    ddlLastInistitution.SelectedValue = rd["byteLastDegreeInistitution"].ToString();
+                    ddlLastCountry.SelectedValue = rd["byteLastDegreeCountry"].ToString();
+                    txtLastCGPA.Text = string.Format("{0:f}", rd["curLastCGPA"]);
+                    txtLastYear.Text = rd["intLastDegreeYear"].ToString();
 
-                    //if (rd["LHEEquivalencyIndicator"].Equals(DBNull.Value))
-                    //{
-                    //    ddlEquivalencyIndicator.SelectedValue = "M";
-                    //}
-                    //else
-                    //{
-                    //    ddlLHEquivalencyIndicator.SelectedValue = rd["LHEEquivalencyIndicator"].ToString();
-                    //}
-                    //txtLHEquivalencyAppNo.Text = rd["LHEEquivalencyAppNo"].ToString();
-                    //txtORCID.Text = rd["Std_ORCID"].ToString();
+                    if (rd["LHEEquivalencyIndicator"].Equals(DBNull.Value))
+                    {
+                        ddlEquivalencyIndicator.SelectedValue = "M";
+                    }
+                    else
+                    {
+                        ddlLHEquivalencyIndicator.SelectedValue = rd["LHEEquivalencyIndicator"].ToString();
+                    }
+                    txtLHEquivalencyAppNo.Text = rd["LHEEquivalencyAppNo"].ToString();
+                    txtORCID.Text = rd["Std_ORCID"].ToString();
 
-                    ////iContactID,iOpportunityID,iAcceptanceType
-                    //txtOpportunityID.Text = rd["iOpportunityID"].ToString();
-                    //txtContactID.Text = rd["iContactID"].ToString();
-                    //ddlAcceptance.SelectedValue = rd["iAcceptanceType"].ToString();
-                    //ddlAcceptanceCondition.SelectedValue = rd["iAcceptanceCondition"].ToString();
-                    //ddlAdmissionStatus.SelectedValue = rd["iAdmissionStatus"].ToString();
+                    //iContactID,iOpportunityID,iAcceptanceType
+                    txtOpportunityID.Text = rd["iOpportunityID"].ToString();
+                    txtContactID.Text = rd["iContactID"].ToString();
+                    ddlAcceptance.SelectedValue = rd["iAcceptanceType"].ToString();
+                    ddlAcceptanceCondition.SelectedValue = rd["iAcceptanceCondition"].ToString();
+                    ddlAdmissionStatus.SelectedValue = rd["iAdmissionStatus"].ToString();
 
                     MultiTabs.ActiveViewIndex = 1;
                     grdQualification.DataBind();
@@ -811,7 +844,7 @@ namespace LocalECT
                 txtEmail.Text = "xyz@xyz.com";
                 txtECTEmail.Text = "";
                 txtExpiry.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
-                //txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
+                txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
 
                 txtFNameAr.Text = "";
                 txtFNameEn.Text = "";
@@ -831,8 +864,8 @@ namespace LocalECT
                 txtFamilyBookNo.Text = "999999";
                 txtFamilyNo.Text = "999";
                 txtCityNo.Text = "999";
-                //txtNote.Text = "";
-                //txtReferredBy.Text = "";
+                txtNote.Text = "";
+                txtReferredBy.Text = "";
                 txtCompany.Text = "NA";
                 txtEmployeremail.Text = "xyz@xyz.com";
                 txtEmployerIndustry.Text = "NA";
@@ -841,23 +874,23 @@ namespace LocalECT
                 txtEmployerPos.Text = "NA";
                 ddlEmployerCountry.SelectedValue = "0";
                 ddlEmployerEmirate.SelectedValue = "0";
-                //ddlLastDegree.SelectedValue = "0";
-                //ddlLastInistitution.SelectedValue = "-1";
-                //ddlLastCountry.SelectedValue = "-1";
-                //txtLastYear.Text = "";
-                //txtLastCGPA.Text = "";
-                //ddlLHEquivalencyIndicator.SelectedIndex = 0;
-                //txtLHEquivalencyAppNo.Text = "";
-                //txtORCID.Text = "NA";
+                ddlLastDegree.SelectedValue = "0";
+                ddlLastInistitution.SelectedValue = "-1";
+                ddlLastCountry.SelectedValue = "-1";
+                txtLastYear.Text = "";
+                txtLastCGPA.Text = "";
+                ddlLHEquivalencyIndicator.SelectedIndex = 0;
+                txtLHEquivalencyAppNo.Text = "";
+                txtORCID.Text = "NA";
 
-                //txtOpportunityID.Text = "0";
-                //txtContactID.Text = "0";
-                //ddlAcceptance.SelectedIndex = 0;
-                //ddlAcceptanceCondition.SelectedIndex = 0;
-                //ddlAdmissionStatus.SelectedIndex = 0;
+                txtOpportunityID.Text = "0";
+                txtContactID.Text = "0";
+                ddlAcceptance.SelectedIndex = 0;
+                ddlAcceptanceCondition.SelectedIndex = 0;
+                ddlAdmissionStatus.SelectedIndex = 0;
 
                 ddlBirthCountry.SelectedValue = "1";
-                //ddlEnrollmentTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
+                ddlEnrollmentTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
 
                 ddlHomeCountry.SelectedValue = "1";
                 //ddlIdentityType.SelectedValue = "0";
@@ -868,12 +901,12 @@ namespace LocalECT
                 ddlMaritalStatus.SelectedValue = "0";
 
                 ddlLanguage.SelectedValue = "1";
-                //ddlType.SelectedValue = "0";
-                //MajorDS.DataBind();
-                //ddlMajor.DataBind();
-                //ddlMajor.SelectedValue = "010120";
+                ddlType.SelectedValue = "0";
+                MajorDS.DataBind();
+                ddlMajor.DataBind();
+                ddlMajor.SelectedValue = "010120";
                 ddlNationality.SelectedValue = "1";
-                //ddlReason.SelectedValue = "0";
+                ddlReason.SelectedValue = "0";
                 ddlResidentCountry.SelectedValue = "1";
 
                 switch (Campus)
@@ -886,29 +919,29 @@ namespace LocalECT
                         break;
                 }
                 ddlSponsor.SelectedValue = "0";
-                //ddlStatus.SelectedIndex = -1;
-                //ddlStatusTerm.SelectedIndex = -1;
-                //SubReasonDS.DataBind();
-                //ddlSubReason.DataBind();
-                //ddlSubReason.SelectedValue = "0";
+                ddlStatus.SelectedIndex = -1;
+                ddlStatusTerm.SelectedIndex = -1;
+                SubReasonDS.DataBind();
+                ddlSubReason.DataBind();
+                ddlSubReason.SelectedValue = "0";
                 ddlVisa.SelectedValue = "0";
-                //ddlAdvisor.SelectedValue = "1000";
-                //lblDateEnrolled.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
-                //lblDateStatus.Text = "";
-                //lblReference.Text = "";
+                ddlAdvisor.SelectedValue = "1000";
+                lblDateEnrolled.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
+                lblDateStatus.Text = "";
+                lblReference.Text = "";
                 lblStudentId.Text = "";
-                //lblECTId.Text = "";
+                lblECTId.Text = "";
 
                 BirthCityDS.DataBind();
                 ddlBirthCity.DataBind();
                 ddlBirthCity.SelectedValue = "1";
                 HomeCityDS.DataBind();
-                //ddlQCity.DataBind();
-                //ddlQEngGrade.DataBind();
-                
+                ddlQCity.DataBind();
+                ddlQEngGrade.DataBind();
 
-                //ddlQEngExamCenter.DataBind();
-                
+
+                ddlQEngExamCenter.DataBind();
+
 
                 ddlHomeCity.DataBind();
                 ddlHomeCity.SelectedValue = "1";
@@ -916,9 +949,9 @@ namespace LocalECT
                 ddlResidentCity.DataBind();
                 ddlResidentCity.SelectedValue = "1";
 
-                //ChkIsMilitaryService.Checked = false;
-                //mtvQualification.ActiveViewIndex = 0;
-                //MultiTabs.ActiveViewIndex = -1;
+                ChkIsMilitaryService.Checked = false;
+                mtvQualification.ActiveViewIndex = 0;
+                MultiTabs.ActiveViewIndex = -1;
             }
             catch (Exception ex)
             {
@@ -1031,11 +1064,11 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlHSSystem.Items.Clear();
+                ddlHSSystem.Items.Clear();
 
                 while (Rd.Read())
                 {
-                    //ddlHSSystem.Items.Add(new ListItem(Rd["sSystem"].ToString(), Rd["iSerial"].ToString()));
+                    ddlHSSystem.Items.Add(new ListItem(Rd["sSystem"].ToString(), Rd["iSerial"].ToString()));
 
                 }
                 Rd.Close();
@@ -1070,11 +1103,11 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlLastDegree.Items.Clear();
+                ddlLastDegree.Items.Clear();
 
                 while (Rd.Read())
                 {
-                    //ddlLastDegree.Items.Add(new ListItem(Rd["strDegreeDescEn"].ToString(), Rd["strDegree"].ToString()));
+                    ddlLastDegree.Items.Add(new ListItem(Rd["strDegreeDescEn"].ToString(), Rd["strDegree"].ToString()));
 
                 }
                 Rd.Close();
@@ -1110,11 +1143,11 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlLastInistitution.Items.Clear();
+                ddlLastInistitution.Items.Clear();
 
                 while (Rd.Read())
                 {
-                    //ddlLastInistitution.Items.Add(new ListItem(Rd["strCollegeDescEn"].ToString(), Rd["byteCollege"].ToString()));
+                    ddlLastInistitution.Items.Add(new ListItem(Rd["strCollegeDescEn"].ToString(), Rd["byteCollege"].ToString()));
 
                 }
                 Rd.Close();
@@ -1149,10 +1182,10 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlStatus.Items.Clear();
+                ddlStatus.Items.Clear();
                 while (Rd.Read())
                 {
-                    //ddlStatus.Items.Add(new ListItem(Rd["Status"].ToString(), Rd["byteReason"].ToString()));
+                    ddlStatus.Items.Add(new ListItem(Rd["Status"].ToString(), Rd["byteReason"].ToString()));
                 }
                 Rd.Close();
 
@@ -1255,10 +1288,10 @@ namespace LocalECT
                 {
                     ddlHomeCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
                     ddlResidentCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
-                    //ddlQCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
+                    ddlQCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
                     ddlBirthCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
                     ddlEmployerCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
-                    //ddlLastCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
+                    ddlLastCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
                 }
 
             }
@@ -1508,7 +1541,7 @@ namespace LocalECT
                 myCertificates = myCertificatesDAL.GetCertificates(Campus, "", false);
                 for (int i = 0; i < myCertificates.Count; i++)
                 {
-                    //ddlQualification.Items.Add(new ListItem(myCertificates[i].strCertificateDescEn, myCertificates[i].intCertificate.ToString()));
+                    ddlQualification.Items.Add(new ListItem(myCertificates[i].strCertificateDescEn, myCertificates[i].intCertificate.ToString()));
                 }
 
             }
@@ -1533,7 +1566,7 @@ namespace LocalECT
                 myInstitutionType = myInstitutionTypeDAL.GetInstitutionType(Campus, "", false);
                 for (int i = 0; i < myInstitutionType.Count; i++)
                 {
-                    //ddlQInstitutionType.Items.Add(new ListItem(myInstitutionType[i].InstitutionTypeDesc, myInstitutionType[i].InstitutionTypeID.ToString()));
+                    ddlQInstitutionType.Items.Add(new ListItem(myInstitutionType[i].InstitutionTypeDesc, myInstitutionType[i].InstitutionTypeID.ToString()));
                 }
 
             }
@@ -1559,7 +1592,7 @@ namespace LocalECT
                 myIESOL_Equivalency = myIESOL_EquivalencyDAL.GetIESOL_Equivalency(Campus, "", false);
                 for (int i = 0; i < myIESOL_Equivalency.Count; i++)
                 {
-                    //ddlQEngGrade.Items.Add(new ListItem(myIESOL_Equivalency[i].GradeDesc, myIESOL_Equivalency[i].GradeID.ToString()));
+                    ddlQEngGrade.Items.Add(new ListItem(myIESOL_Equivalency[i].GradeDesc, myIESOL_Equivalency[i].GradeID.ToString()));
                 }
 
             }
@@ -1585,7 +1618,7 @@ namespace LocalECT
                 myEngCertificate_ExamCenter = myEngCertificate_ExamCenterDAL.GetEngCertificate_ExamCenter(Campus, "", false);
                 for (int i = 0; i < myEngCertificate_ExamCenter.Count; i++)
                 {
-                    //ddlQEngExamCenter.Items.Add(new ListItem(myEngCertificate_ExamCenter[i].ExamcenterName, myEngCertificate_ExamCenter[i].ExamCenterID.ToString()));
+                    ddlQEngExamCenter.Items.Add(new ListItem(myEngCertificate_ExamCenter[i].ExamcenterName, myEngCertificate_ExamCenter[i].ExamCenterID.ToString()));
                 }
             }
             catch (Exception ex)
@@ -1608,7 +1641,7 @@ namespace LocalECT
                 myG12_Stream = myG12_StreamDAL.GetG12_Stream(Campus, "", false);
                 for (int i = 0; i < myG12_Stream.Count; i++)
                 {
-                    //ddlQG12_Stream.Items.Add(new ListItem(myG12_Stream[i].G12_StreamDesc, myG12_Stream[i].G12_StreamID.ToString()));
+                    ddlQG12_Stream.Items.Add(new ListItem(myG12_Stream[i].G12_StreamDesc, myG12_Stream[i].G12_StreamID.ToString()));
                 }
 
             }
@@ -1638,7 +1671,7 @@ namespace LocalECT
 
                 while (Rd.Read())
                 {
-                    //ddlQMajor.Items.Add(new ListItem(Rd["strSpecializationDescEn"].ToString(), Rd["intSpecialization"].ToString()));
+                    ddlQMajor.Items.Add(new ListItem(Rd["strSpecializationDescEn"].ToString(), Rd["intSpecialization"].ToString()));
                     //ddlQMinor.Items.Add(new ListItem(Rd["strSpecializationDescEn"].ToString(), Rd["intSpecialization"].ToString()));
                 }
                 Rd.Close();
@@ -1672,7 +1705,7 @@ namespace LocalECT
 
                 while (Rd.Read())
                 {
-                    //ddlAdvisor.Items.Add(new ListItem(Rd["strLecturerDescEn"].ToString(), Rd["intLecturer"].ToString()));
+                    ddlAdvisor.Items.Add(new ListItem(Rd["strLecturerDescEn"].ToString(), Rd["intLecturer"].ToString()));
 
                 }
                 Rd.Close();
@@ -1739,8 +1772,8 @@ namespace LocalECT
                 myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
                 for (int i = 0; i < myTerms.Count; i++)
                 {
-                    //ddlStatusTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
-                    //ddlEnrollmentTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+                    ddlStatusTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+                    ddlEnrollmentTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
                 }
             }
             catch (Exception ex)
@@ -1764,7 +1797,7 @@ namespace LocalECT
                 myMainReasons = myMainReasonsDAL.GetMainReasons(Campus, "", false);
                 for (int i = 0; i < myMainReasons.Count; i++)
                 {
-                    //ddlReason.Items.Add(new ListItem(myMainReasons[i].strMainReasonEn, myMainReasons[i].byteMainReason.ToString()));
+                    ddlReason.Items.Add(new ListItem(myMainReasons[i].strMainReasonEn, myMainReasons[i].byteMainReason.ToString()));
                 }
             }
             catch (Exception ex)
@@ -1845,44 +1878,393 @@ namespace LocalECT
         #endregion
         protected void btnCreateEmail_Click(object sender, EventArgs e)
         {
-            //int iYear = 0;
-            //int iSemester = 0;
-            //iSemester = Convert.ToInt32(Session["CurrentSemester"].ToString());
-            //iYear = Convert.ToInt32(Session["CurrentYear"].ToString());
+            int iYear = 0;
+            int iSemester = 0;
+            iSemester = Convert.ToInt32(Session["CurrentSemester"].ToString());
+            iYear = Convert.ToInt32(Session["CurrentYear"].ToString());
 
-            //int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, lblStudentId.Text, iYear, iSemester);
+            int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, lblStudentId.Text, iYear, iSemester);
 
-            //if (iRegisteredHours == 0)
-            //{
-            //    divMsg.InnerText = "Student must register courses before creating email.";
-            //    return;
-            //}
-            ////======= Generate Student email
-            //CreateStudentEmail();
-            //if (txtECTEmail.Text.Length < 17)
-            //{
-            //    return;
-            //}
-            ////======= Create email in Office365 & AD 
-            //CreateStudentEmailAD(this.Campus, lblStudentId.Text);
+            if (iRegisteredHours == 0)
+            {                
+                lbl_Msg.Text = "Student must register courses before creating email.";
+                div_msg.Visible = true;
+                return;
+            }
+            //======= Generate Student email
+            CreateStudentEmail();
+            if (txtECTEmail.Text.Length < 17)
+            {
+                return;
+            }
+            //======= Create email in Office365 & AD 
+            CreateStudentEmailAD(this.Campus, lblStudentId.Text);
 
-            ////======= Create Moodle Account
-            //if (ClsMoodleAPI.CreateUpdateMoodleAccount(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
-            //{
-            //    divMsg.InnerText += " & Moodle";
-            //}
-            ////======== Enroll student in Moodle courses
-            //if (ClsMoodleAPI.EnrollStudentinMoodleCourses(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
-            //{
-            //    divMsg.InnerText += ", Student enrolled in Moodle courses";
-            //}
-            ////======= Create Zoom Account
-            //string sFirstName = txtFNameEn.Text + " " + txtLNameEn.Text;
-            //string sLastName = " - " + lblStudentId.Text;
-            //CreateZoomAccount(txtECTEmail.Text, sFirstName, sLastName);
-
+            //======= Create Moodle Account
+            if (ClsMoodleAPI.CreateUpdateMoodleAccount(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
+            {                
+                lbl_Msg.Text += " & Moodle";
+            }
+            //======== Enroll student in Moodle courses
+            if (ClsMoodleAPI.EnrollStudentinMoodleCourses(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
+            {                
+                lbl_Msg.Text += ", Student enrolled in Moodle courses";
+            }
+            //======= Create Zoom Account
+            string sFirstName = txtFNameEn.Text + " " + txtLNameEn.Text;
+            string sLastName = " - " + lblStudentId.Text;
+            CreateZoomAccount(txtECTEmail.Text, sFirstName, sLastName);
+            div_msg.Visible = true;
+            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
         }
+        private void CreateStudentEmail()
+        {
+            //if (txtECTEmail.Text.Length > 17) 
+            //{
+            //    return;
+            //    btnCreateEmail.Enabled = false;
+            //}
+            string sFName = "";
+            string sECTEmail = "";
+            if (txtLNameEn.Text.Trim().Length <= 1)
+            {        
+                lbl_Msg.Text = "Please enter correct name in (Last Name) ";
+                div_msg.Visible = true;
+                return;
+            }
 
+
+            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            //update Unified ID
+            if (iUnifiedID > 0)
+            {
+                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+                //check reference number
+                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(hdnSerial.Value)) == true)
+                {
+                    //Get updated UnifiedID
+                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value));
+                }
+            }
+            else
+            {
+                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+                if (iUnifiedID == 0)
+                {
+                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+                }
+                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+            }
+            //Update student email    
+            sECTEmail = sFName.ToString().Trim().Replace(" ", string.Empty) + iUnifiedID.ToString().PadLeft(6, Convert.ToChar("0")) + "@ect.ac.ae";
+            if (LibraryMOD.UpdateStudentEmail(Campus, Convert.ToInt32(hdnSerial.Value), sECTEmail) == true)
+            {                
+                lbl_Msg.Text = "Student email has been created successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
+                txtECTEmail.Text = sECTEmail;
+            }
+            else
+            {                
+                lbl_Msg.Text = "The student's email has not been created";
+                div_msg.Visible = true;
+            }
+            btnCreateEmail.Enabled = false;
+        }
+        public void CreateStudentEmailAD(InitializeModule.EnumCampus Campus, string sStudentID)
+        {
+            string sSQL = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Con = new SqlConnection(myConnection_String.Conn_string);
+            try
+            {
+                sSQL = "SELECT  SD.strFirstDescEn + ' ' + SD.strSecondDescEn AS [Given_Name]";
+                sSQL += ", ' - ' + REPLACE(A.lngStudentNumber, '.', '') AS Surname";
+                sSQL += ", SD.strFirstDescEn + ' ' + SD.strSecondDescEn AS [Display_Name]";
+                sSQL += ", SD.sECTemail AS [Email_Addresses], LEFT(SD.sECTemail, LEN(SD.sECTemail) - 10) AS [Sam_Account_Name]";
+                sSQL += ", 'ect@12345' AS Password, 'ect@12345' AS [User_Password], 'ect@12345' AS ChangePasswordOnNextLogon";
+                sSQL += ", 'SMTP:' + SD.sECTemail AS [Proxy_Addresses], 'Student' AS [Personal_Title]";
+                sSQL += ", M.strMajor AS Department, (CASE WHEN iCampus = 1 THEN 'Males Campus' ";
+                sSQL += " WHEN iCampus = 2 THEN 'Females Campus' ";
+                sSQL += " WHEN iCampus = 3 AND bSex = 1 THEN 'Media-Males Campus' ";
+                sSQL += " WHEN iCampus = 3 AND bSex = 0 THEN 'Media-Females Campus' END) AS Description";
+                sSQL += ", 'Emirates College of Technology' AS Company ";
+                sSQL += " FROM Reg_Applications AS A INNER JOIN Reg_Students_Data AS SD ";
+                sSQL += " ON A.lngSerial = SD.lngSerial INNER JOIN Reg_Specializations AS M ";
+                sSQL += " ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree ";
+                sSQL += " AND A.strSpecialization = M.strSpecialization LEFT OUTER JOIN Last_Time_Registered ";
+                sSQL += " ON A.lngStudentNumber = Last_Time_Registered.Student LEFT OUTER JOIN Lkp_Reasons ";
+                sSQL += " ON A.byteCancelReason = Lkp_Reasons.byteReason ";
+                sSQL += " WHERE  (SD.sECTemail IS NOT NULL) AND SD.sECTemail <> '' ";
+                //if (sStudentID.Contains("M"))
+                //{
+                //    sSQL += " AND (SD.bSex = 1)";
+                //}
+                //else
+                //{
+                //    sSQL += " AND (SD.bSex = 0)";
+                //}
+                sSQL += " AND (SD.IsEmailCreationRequired = 1) ";
+                sSQL += " AND A.lngStudentNumber ='" + sStudentID + "'";
+                sSQL += " ORDER BY SD.iUnifiedID";
+
+                SqlCommand cmd = new SqlCommand(sSQL, Con);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                Con.Open();
+                da.Fill(dt);
+                Con.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    //for (int i = 0; i < dt.Rows.Count; i++)
+                    //{  
+                    int i = 0;
+                    CreateUserEmailAD(dt.Rows[i]["Given_Name"].ToString(), dt.Rows[i]["Surname"].ToString(), dt.Rows[i]["Display_Name"].ToString(), dt.Rows[i]["Description"].ToString(), dt.Rows[i]["Email_Addresses"].ToString(), dt.Rows[i]["Sam_Account_Name"].ToString(), dt.Rows[i]["Department"].ToString(), dt.Rows[i]["Company"].ToString(), true);
+                    //}
+                    UpdateEmailCreationRequired(Con, Convert.ToInt32(hdnSerial.Value));                   
+                    lbl_Msg.Text = "Students Email Created Successfully in Office365";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    div_msg.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Con.Close();
+                throw ex;
+            }
+            finally
+            {
+                Con.Close();
+            }
+        }
+        public void UpdateEmailCreationRequired(SqlConnection Con, int iSerialNo)
+        {
+
+            string sSQL = "";
+
+            try
+            {
+                sSQL = "UPDATE Reg_Students_Data set IsEmailCreationRequired = 0";
+                sSQL += " WHERE IsEmailCreationRequired = 1";
+                sSQL += " AND lngSerial=" + iSerialNo;
+
+                SqlCommand cmd = new SqlCommand(sSQL, Con);
+                Con.Open();
+                cmd.ExecuteNonQuery();
+                Con.Close();
+            }
+            catch (Exception ex)
+            {
+                Con.Close();
+                throw ex;
+            }
+            finally
+            {
+                Con.Close();
+            }
+        }
+        public int CreateUserEmailAD(string firstName, string lastName, string displayname, string description, string emailAddress, string userLogonName, string department, string company, bool enabled)
+        {
+            string Ounames = "Females";
+            if (description == "Females Campus")
+            {
+                Ounames = "Females";
+            }
+            else
+            {
+                Ounames = "Males";
+            }
+            // Creating the PrincipalContext
+            PrincipalContext principalContext = null;
+            string adminusername = "ets.services.admin";
+            string adminpassword = "Ser71ces@328";
+            string userdomainLdappath = "OU=" + Ounames + ",OU=ECT Students,OU=Emirates College of Technology,DC=ectuae,DC=com";
+            string Server = "ectuae";
+            try
+            {
+                principalContext = new PrincipalContext(ContextType.Domain, Server, userdomainLdappath, adminusername, adminpassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Check if user object already exists in the AD
+            UserPrincipal usr = UserPrincipal.FindByIdentity(principalContext, userLogonName);
+            if (usr != null)
+            {
+                //User Already Exists
+            }
+            else
+            {
+                //Create New User
+                DirectoryEntry myLdapConnection = DirectEntry(Ounames);
+                DirectoryEntry user = myLdapConnection.Children.Add("CN=" + userLogonName + " ", "user");
+
+                // User name (Domain-Based)   
+                user.Properties["userprincipalname"].Add(userLogonName + "@" + "ectuae.com");
+
+                // User name (Older-Systems)  
+                user.Properties["samaccountname"].Add(userLogonName);
+
+                // Surname  
+                user.Properties["sn"].Add(lastName);
+
+                // Given-Name  
+                user.Properties["givenname"].Add(firstName);
+
+                // Display-Name  
+                user.Properties["displayname"].Add(displayname);
+
+                // Description  
+                user.Properties["description"].Add(description);
+
+                // E-mail  
+                user.Properties["mail"].Add(emailAddress);
+
+                // Department  
+                user.Properties["department"].Add(department);
+
+                // Company  
+                user.Properties["company"].Add(company);
+
+                // Personal-Title  
+                user.Properties["personalTitle"].Add("Student");
+
+                // Proxy-Addresses  
+                user.Properties["proxyAddresses"].Add("SMTP:" + emailAddress + "");
+
+                // User-Password  
+                user.Properties["userPassword"].Add("ect@12345");
+
+                user.CommitChanges();
+                user.Invoke("SetPassword", "ect@12345");
+
+                //Force Password Change on Next Login
+                //user.Properties["pwdLastSet"].Value = 0;
+
+                if (enabled)
+                    user.Invoke("Put", new object[] { "userAccountControl", "544" });
+
+                user.CommitChanges();
+
+                //AddUserToGroup(userLogonName, "Males");
+                AddUserToGroup(userLogonName, Ounames);
+            }
+            return 0;
+        }
+        public static DirectoryEntry DirectEntry(string ouname)
+        {
+            DirectoryEntry ldapConnection = new DirectoryEntry("rch");
+            //ldapConnection.Path = "LDAP://OU=Males,OU=ECT Students,OU=Emirates College of Technology,DC=ectuae,DC=com";
+            ldapConnection.Path = "LDAP://OU=" + ouname + ",OU=ECT Students,OU=Emirates College of Technology,DC=ectuae,DC=com";
+            ldapConnection.Username = "ets.services.admin";
+            ldapConnection.Password = "Ser71ces@328";
+            return ldapConnection;
+        }
+        public static void AddUserToGroup(string userId, string groupName)
+        {
+            string adminusername = "ets.services.admin";
+            string adminpassword = "Ser71ces@328";
+            string Server = "ectuae";
+            //string userdomainLdappath = "OU=Males,OU=ECT Students,OU=Emirates College of Technology,DC=ectuae,DC=com";
+            string userdomainLdappath = "OU=" + groupName + ",OU=ECT Students,OU=Emirates College of Technology,DC=ectuae,DC=com";
+            try
+            {
+                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, Server, userdomainLdappath, adminusername, adminpassword))
+                {
+                    GroupPrincipal group = GroupPrincipal.FindByIdentity(pc, groupName);
+                    group.Members.Add(pc, IdentityType.SamAccountName, userId);
+                    group.Save();
+                }
+            }
+            catch (System.DirectoryServices.DirectoryServicesCOMException E)
+            {
+                //doSomething with E.Message.ToString(); 
+            }
+        }
+        public void CreateZoomAccount(string email, string firstname, string lastname)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            string userid = "";
+
+            string JWTaccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IktUUUpsM1ZiU0k2aVBPNDl0VmVma1EiLCJleHAiOjE3MzU3MTEyMDAsImlhdCI6MTYwMDI0NDY5MX0.GgRVMlmMsmf0j_d5TUY4jKKO-4xZfSt7u5hmQb9QFks";
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api.zoom.us/v2/users"))
+                {
+                    request.Headers.TryAddWithoutValidation("authorization", "Bearer " + JWTaccessToken + "");
+
+                    request.Content = new StringContent("{\"action\":\"create\",\"user_info\":{\"email\":\"" + email + "\",\"type\":1,\"first_name\":\"" + firstname + "\",\"last_name\":\"" + lastname + "\"}}");
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                    var task = httpClient.SendAsync(request);
+                    task.Wait();
+                    var response = task.Result;
+                    string s = response.Content.ReadAsStringAsync().Result;
+                    var x = JObject.Parse(s);
+                    var uID = x["id"];
+                    if (uID != null) //added by bahaa 25-09-2020 //
+                    {
+                        userid = uID.ToString();
+                    }
+
+
+                }
+            }
+
+            if (userid != "" && userid != null)
+            {
+                string groupid = "OU8bD5WPTxSpMLMvtG5H4w";//Group Name-Student
+                string emailID = email;
+
+                AddZoomGroupMemebers(groupid, emailID, userid, JWTaccessToken);
+
+                //string IMGroupID = "W6jUNfWfSuC-vY7VqWpwOQ";//Default IM Group - Restricted 
+                //if (Gender == "Males")
+                //{
+                //    IMGroupID = "seOLrQ4DQFWA7WMZzqwZhQ";//Males Studnets         
+                //}
+                //else if (Gender == "Females")
+                //{
+                //    IMGroupID = "1ShdTaaERVKs3KZmgO6JuQ";//Females Studnet
+                //}
+                //else
+                //{
+                //    IMGroupID = "W6jUNfWfSuC-vY7VqWpwOQ";//Default IM Group - Restricted 
+                //}
+                //addZoomIMGroupMembers(IMGroupID, emailID, userid);
+
+                //deleteZoomIMGroupMemeber("W6jUNfWfSuC-vY7VqWpwOQ", userid);//Remove the User from Default IM Group - Restricted 
+            }
+        }
+        public void AddZoomGroupMemebers(string groupid, string email, string userid, string JWTaccessToken)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api.zoom.us/v2/groups/" + groupid + "/members"))
+                {
+                    request.Headers.TryAddWithoutValidation("authorization", "Bearer " + JWTaccessToken + "");
+
+                    request.Content = new StringContent("{\"members\":[{\"id\":\"" + userid + "\",\"email\":\"" + email + "\"}]}");
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+
+                    var task = httpClient.SendAsync(request);
+                    task.Wait();
+                    var response = task.Result;
+                    string s = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+        }
         protected void btnGetEID_Click(object sender, EventArgs e)
         {
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
@@ -2177,7 +2559,7 @@ namespace LocalECT
 
         protected void ESLEX_btn_Click(object sender, EventArgs e)
         {
-
+            ESL_Exemption();
         }
 
         protected void DeleteQ_btn_Click(object sender, EventArgs e)
@@ -2202,12 +2584,126 @@ namespace LocalECT
 
         protected void chkActive_CheckedChanged(object sender, EventArgs e)
         {
+            if (chkActive.Checked)
+            {
+                chkActive.Text = "Active";
+                chkActive.ForeColor = System.Drawing.Color.Blue;
+            }
+            else
+            {
+                chkActive.Text = "In Active";
+                chkActive.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+        private void ESL_Exemption()
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            try
+            {
+                if (lblStudentId.Text == "")
+                {
+                    return;
+                }
+
+                string sSQL = "SELECT M.intCertificate, M.Mark, A.strDegree, A.strSpecialization";
+                sSQL += " FROM MaxEngCertMark AS M INNER JOIN Reg_Applications AS A ON M.lngStudentNumber = A.lngStudentNumber";
+                sSQL += " WHERE  (M.lngStudentNumber = '" + lblStudentId.Text + "')";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                int iCert = 0;
+                double dScore = 0;
+                string sMajor = "";
+                string sDegree = "";
+
+                while (Rd.Read())
+                {
+                    iCert = Convert.ToInt32(Rd["intCertificate"]);
+                    dScore = Convert.ToDouble(Rd["Mark"]);
+                    sDegree = Rd["strDegree"].ToString();
+                    sMajor = Rd["strSpecialization"].ToString();
+                }
+                Rd.Close();
+                bool isArabic = false;
+                if ((sDegree == "1" && (sMajor == "24" || sMajor == "25")) || (sDegree == "3" && (sMajor == "4" || sMajor == "5" || sMajor == "6" || sMajor == "21")))
+                {
+                    isArabic = true;
+                }
+
+                if (isArabic == true)
+                {
+                    switch (iCert)//Arabic Pass Score
+                    {
+                        case 6://TOEFL
+                            dScore = (dScore * 500) / 450;
+                            break;
+                        case 7://IELTS
+                            dScore = (dScore * 5) / 4;
+                            break;
+                        case 8://TOEFL CBT
+                            dScore = (dScore * 173) / 133;
+                            break;
+                        case 9://TOEFL iBT
+                            dScore = (dScore * 61) / 45;
+                            break;
+                        case 10://TOEIC
+                            dScore = (dScore * 550) / 480;
+                            break;
+                    }
+
+                }
+
+                sSQL = "Select byteLevel From Reg_Levels";
+                sSQL += " Where intCert=" + iCert;
+                sSQL += " And curMin<=" + dScore;
+                sSQL += " And curMax>=" + dScore;
+
+                Cmd.CommandText = sSQL;
+                int iLevel = Convert.ToInt32("0" + Cmd.ExecuteScalar().ToString());
+                sSQL = "Insert Into Reg_Grade_Header";
+                sSQL += " (intStudyYear, byteSemester,lngStudentNumber,byteRefCollege, strCourse, byteClass, byteShift, strGrade, strUserCreate, dateCreate,curUseMark, bDisActivated,bCanceled)";
+                sSQL += "SELECT 0,0,'" + lblStudentId.Text + "',-1,CL.strCourse,1,1,'EX','LocalECT',GETDATE(),333,0,0 FROM Reg_Course_Levels AS CL LEFT OUTER JOIN ";
+                sSQL += " (SELECT strCourse FROM Reg_Grade_Header AS GH";
+                sSQL += " WHERE (strGrade = N'NC' OR strGrade = N'EX') AND (lngStudentNumber = '" + lblStudentId.Text + "')) AS DT ON CL.strCourse = DT.strCourse";
+                sSQL += " Where intCert=" + iCert;
+                sSQL += " And byteLevel=" + iLevel;
+                sSQL += " And bReg=0";
+                sSQL += " And DT.strCourse IS NULL";
+
+                Cmd.CommandText = sSQL;
+
+                int iEffected = 0;
+                iEffected = Cmd.ExecuteNonQuery();
+                
+                lbl_Msg.Text = iEffected.ToString() + " ESL Courses Calculated";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
 
         }
-
         protected void chkMissing_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkMissing.Checked)
+            {
+                chkMissing.Text = "File Not Complete";
+                chkMissing.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                chkMissing.Text = "Is File Not Complete";
+                chkMissing.ForeColor = System.Drawing.Color.Black;
+            }
         }
         protected void lnkGet_Command(object sender, CommandEventArgs e)
         {

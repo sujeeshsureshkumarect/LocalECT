@@ -27,7 +27,137 @@
                                         display: block;
                                     }                                  
                                 </style>
+
+                                <%--<script src="Includes/jQuery/jquery-1.4.1.min.js" type="text/javascript"></script>--%>
+<%--<script src="Scripts/jquery-1.10.2.min.js"></script>--%>
+                                <script src="Scripts/jquery-1.4.1.min.js"></script>
+                                <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#divConfirmation").hide();
+
+            //            $('#btnContact').click(getContact()); //btnContact
+
+            //            $('#btnOpportunity').click(); //btnOpportunity
+
+
+
+        });   //$(document).ready
+
+        function getContact() {
+
+            var sid = $("#<%=lblStudentId.ClientID %>").val();
+            //alert(sid);
+            var authorization = '<%=InitializeModule.CxPwd%>'
+            $("#<%=txtContactID.ClientID %>").val('');
+
+                        alert(sid + ' ' + authorization);
+            var surl = 'https://ect.custhelp.com/services/rest/connect/v1.4/contacts?q=customFields.c.ect_student_id%3D%27' + sid + '%27';
+            //                alert(surl);
+
+            $.ajax({
+                type: 'GET',
+
+                url: surl,
+                dataType: 'json',
+
+                headers: {
+                    'Authorization': authorization,
+                    'OSvC-CREST-Application-Context': 'application/x-www-form-urlencoded'
+                },
+                success: function (data) {
+                    alert('success');
+                    //ulStudents.empty();
+                    //                        alert(JSON.stringify(data));
+                    $.each(data.items, function (index, val) {
+                        var id = val.id;
+                        var fullName = val.lookupName;
+                        $("#<%=txtContactID.ClientID %>").val(id);
+                        //ulStudents.append('<li>' + id + ' (' + fullName + ')</li>')
+                    });
+
+                    //alert($("#<%=txtContactID.ClientID %>").val());
+                },
+                complete: function (jqXHR) {
+                    //                    alert(jqXHR.status + ':' + jqXHR.statusText);
+                    if (jqXHR.status == '200') {
+                        alert('CRM Contact ID Pulled from the CRM,Save it please.');
+                    }
+                }
+            });
+        }
+
+        function setOpportunity() {
+
+            var sid = $("#<%=lblStudentId.ClientID %>").text();
+            var oid = $("#<%=txtOpportunityID.ClientID %>").val();
+            var authorization = '<%=InitializeModule.CxPwd%>'
+            //                $("#<%=txtContactID.ClientID %>").val('');
+
+//            alert(oid + ' ' + authorization);
+            var surl = 'https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/' + oid;
+//            alert(surl);
+
+            $.ajax({
+                type: 'PATCH',
+
+                url: surl,
+                dataType: 'json',
+
+                headers: {
+                    'Authorization': authorization,
+                    'OSvC-CREST-Application-Context': 'application/x-www-form-urlencoded'
+                },
+                data: "{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n\"id\": 1094,\n\"lookupName\": \"Payment Succeeded\"\n}\n\t\t}\n\t},\n\t\"statusWithType\": {\n\"status\": {\n\"id\": 11\n}\n}\n}",
+                success: function (data) {
+                    //                    alert('success');
+                    //ulStudents.empty();
+                    //                    alert(JSON.stringify(data));
+                    //                        $.each(data.items, function (index, val) {
+                    //                            var id = val.id;
+                    //                            var fullName = val.lookupName;
+                    //                            $("#<%=txtContactID.ClientID %>").val(id);
+                    //                            //ulStudents.append('<li>' + id + ' (' + fullName + ')</li>')
+                    //                        });
+
+                    //alert($("#<%=txtContactID.ClientID %>").val());
+                },
+                complete: function (jqXHR) {
+                    //                    alert(jqXHR.status + ':' + jqXHR.statusText);
+                    if (jqXHR.status == '200') {
+                        alert('CRM Opportunity Updated.');
+                        UpdateOpportunitySet(sid);
+                    }
+                }
+
+            });
+
+        }
+
+        function DeleteConfirm() {
+            var b = confirm('Are you sure want to delete this ?');
+            return b;
+        }
+
+        function UpdateOpportunitySet(sid) {
+            PageMethods.SetOpportunity(sid, OnOpportunitySuccess);
+        }
+
+        function OnOpportunitySuccess(response, userContext, methodName) {
+            if (response == true) {
+                alert('Opportunity updated.');
+            }
+            else {
+                alert('Opportunity not updated.');
+            }
+        }
+
+    </script> 
+
                             </div>
+                                <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
                             <div class="clearfix"></div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
@@ -2305,12 +2435,12 @@
                             </asp:SqlDataSource>
 
 
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
         function DeleteConfirm() {
             var b = confirm('Are you sure want to delete this ?');
             return b;
         }
-    </script>
+    </script>--%>
     <style>
         .Center
         {
