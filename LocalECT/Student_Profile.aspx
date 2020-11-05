@@ -554,14 +554,13 @@
                                                     <strong>Academic Information</strong>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="x_panel">
                                                     <div id="divTabs" runat="server">
                                                         <asp:Menu ID="Menu1" runat="server" OnMenuItemClick="Menu1_MenuItemClick"
                                                             Orientation="Horizontal" BackColor="#ededed" DynamicHorizontalOffset="2"
                                                             Font-Bold="True" ForeColor="#284E98"
-                                                            StaticSubMenuIndent="10px" Width="100%">
+                                                            StaticSubMenuIndent="10px" Width="100%" >
                                                             <StaticSelectedStyle BackColor="#3f658c" ForeColor="White" />
                                                             <StaticMenuItemStyle HorizontalPadding="7px" VerticalPadding="7px" />
                                                             <DynamicHoverStyle BackColor="#3f658c" ForeColor="White" />
@@ -570,7 +569,7 @@
                                                             <DynamicMenuItemStyle HorizontalPadding="7px" VerticalPadding="7px" />
                                                             <StaticHoverStyle BackColor="#3f658c" ForeColor="White" />
                                                             <Items>
-                                                                <asp:MenuItem Text="Qualifications" Value="0"></asp:MenuItem>
+                                                                <asp:MenuItem Text="Qualifications" Value="0" ></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Enrollment" Value="1"></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Documents" Value="2"></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Marks" Value="3"></asp:MenuItem>
@@ -598,30 +597,262 @@
                             </div>
                         </div>
                     </div>
-     <asp:SqlDataSource ID="BirthCityDS" runat="server" 
+    <asp:SqlDataSource ID="BirthCityDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+        SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlBirthCountry" DefaultValue="1"
+                Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="ResidentCityDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+        SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlResidentCountry" DefaultValue="1"
+                Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="HomeCityDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+        SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlHomeCountry" DefaultValue="1"
+                Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+                            <asp:SqlDataSource ID="StudentDS" runat="server" 
                                 ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
-                                <SelectParameters>
+                                InsertCommand="AddStudent" 
+                                
+                                UpdateCommand="UPDATE Reg_Students_Data SET strFirstDescEn = @strFirstDescEn, strSecondDescEn = @strSecondDescEn, strLastDescEn = @strLastDescEn, strFirstDescAr = @strFirstDescAr, strSecondDescAr = @strSecondDescAr, strLastDescAr = @strLastDescAr, bSex = @bSex, dateBirth = @dateBirth, byteBirthCountry = @byteBirthCountry, byteBirthCity = @byteBirthCity, byteNationality = @byteNationality, byteIDType = @byteIDType, strID = @strID, byteHomeCountry = @byteHomeCountry, byteHomeCity = @byteHomeCity, byteOriginCountry = @byteOriginCountry, byteOriginCity = @byteOriginCity, strPhone1 = @strPhone1, strPhone2 = @strPhone2, strEmail = @strEmail, strAddress = @strAddress, byteShift = @byteShift, strNationalID = @strNationalID, intWorkPlace = @intWorkPlace, strWorkPhone = @strWorkPhone, strJopTitle = @strJopTitle, intDelegation = @intDelegation, intSponsor = @intSponsor, dateEndSponsorship = @dateEndSponsorship, strUserSave = @strUserSave, dateLastSave = GETDATE(), strNUser = @strUserSave, byteReligion = @byteReligion, isWorking = @isWorking, EthbaraNo = @EthbaraNo, FitnessStatus = @FitnessStatus, MaritalStatus = @MaritalStatus, NationalityofMother = @NationalityofMother, EmploymentSector = @EmploymentSector, strNationalNumber = @strNationalNumber, FamilyBookNumber = @FamilyBookNumber, FamilyID = @FamilyID, CityNumber = @CityNumber, PUnifiedID = @PUnifiedID, EmployerName = @EmployerName, EmployerEmail = @EmployerEmail, EmployerPhone = @EmployerPhone, EmployerPosition = @EmployerPosition, EmployerIndustry = @EmployerIndustry, EmployerCompanyName = @EmployerCompanyName, EmployerCountry = @EmployerCountry, EmployerEmirate = @EmployerEmirate, iACMSCategory = @iACMSCategory, strStudentPic = @strStudentPic WHERE (lngSerial = @lngSerial)" 
+                                InsertCommandType="StoredProcedure" oninserted="StudentDS_Inserted" 
+                                
+                                SelectCommand="SELECT Reg_Students_Data.lngSerial, Reg_Applications.lngStudentNumber, Reg_Students_Data.strLastDescEn, Reg_Students_Data.dateCreate FROM Reg_Applications RIGHT OUTER JOIN Reg_Students_Data ON Reg_Applications.lngSerial = Reg_Students_Data.lngSerial ORDER BY Reg_Students_Data.dateCreate DESC" 
+                                
+                                
+                                
+                                DeleteCommand="DELETE FROM Reg_Students_Data WHERE (lngSerial = @lngSerial)">
+                                <DeleteParameters>
+                                    <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                        PropertyName="Value" />
+                                </DeleteParameters>
+                                <UpdateParameters>
+                                    <asp:ControlParameter ControlID="txtFNameEn" DefaultValue="-" 
+                                        Name="strFirstDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLNameEn" DefaultValue="-" 
+                                        Name="strSecondDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtNameEn" DefaultValue="-" 
+                                        Name="strLastDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtFNameAr" DefaultValue="-" 
+                                        Name="strFirstDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLNameAr" DefaultValue="-" 
+                                        Name="strSecondDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtNameAr" DefaultValue="-" 
+                                        Name="strLastDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="rbnGender" DefaultValue="1" Name="bSex" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtBirthDate" DefaultValue="'1977-01-01'" Name="dateBirth" 
+                                        PropertyName="Text" DbType="Date" />
                                     <asp:ControlParameter ControlID="ddlBirthCountry" DefaultValue="1" 
-                                        Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-      <asp:SqlDataSource ID="ResidentCityDS" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
-                                <SelectParameters>
+                                        Name="byteBirthCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlBirthCity" DefaultValue="1" 
+                                        Name="byteBirthCity" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlNationality" DefaultValue="1" 
+                                        Name="byteNationality" PropertyName="SelectedValue" />
+                                    <asp:Parameter DefaultValue="2" Name="byteIDType" />
+                                    <asp:ControlParameter ControlID="txtIdentityNo" DefaultValue="0" Name="strID" 
+                                        PropertyName="Text" />
                                     <asp:ControlParameter ControlID="ddlResidentCountry" DefaultValue="1" 
-                                        Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-                            <asp:SqlDataSource ID="HomeCityDS" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                SelectCommand="SELECT [byteCity], [strCityDescEn] FROM [Lkp_Cities] WHERE ([byteCountry] = @byteCountry) ORDER BY [strCityDescEn]">
-                                <SelectParameters>
+                                        Name="byteHomeCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlResidentCity" DefaultValue="1" 
+                                        Name="byteHomeCity" PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="ddlHomeCountry" DefaultValue="1" 
-                                        Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
-                                </SelectParameters>
+                                        Name="byteOriginCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlHomeCity" DefaultValue="1" 
+                                        Name="byteOriginCity" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtPhone1" DefaultValue="-" Name="strPhone1" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtPhone2" DefaultValue="-" Name="strPhone2" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmail" DefaultValue="default@ectuae.com" 
+                                        Name="strEmail" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtAddress" DefaultValue="-" Name="strAddress" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlSession" DefaultValue="1" Name="byteShift" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtIDNo" DefaultValue="0" Name="strNationalID" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtWorkPhone" DefaultValue="" 
+                                        Name="strWorkPhone" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtJob" DefaultValue="-" Name="strJopTitle" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlSponsor" DefaultValue="0" 
+                                        Name="intDelegation" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlVisa" DefaultValue="0" Name="intSponsor" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtExpiry" DefaultValue="'1977-01-01'" 
+                                        Name="dateEndSponsorship" PropertyName="Text" DbType="Date" />
+                                    <asp:SessionParameter DefaultValue="-" Name="strUserSave" 
+                                        SessionField="CurrentUserName" />
+                                    <asp:ControlParameter ControlID="ddlLanguage" DefaultValue="1" 
+                                        Name="byteReligion" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="rbnEmploymentStatus" DefaultValue="0" Name="isWorking" 
+                                        PropertyName="SelectedValue" />
+                                     <asp:ControlParameter ControlID="txtEthbara" DefaultValue="0" Name="EthbaraNo" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="rbnFitnessStatus" DefaultValue="1" Name="FitnessStatus" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlMaritalStatus" DefaultValue="0" Name="MaritalStatus" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlNationalityofMother" DefaultValue="1" Name="NationalityofMother" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlEmploymentSector" DefaultValue="0" Name="EmploymentSector" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="hdnSerial" DefaultValue="" Name="lngSerial" 
+                                        PropertyName="Value" />
+                                    <asp:ControlParameter ControlID="txtNationalNo" DefaultValue="NA" 
+                                        Name="strNationalNumber" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtFamilyBookNo" DefaultValue="999999" 
+                                        Name="FamilyBookNumber" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtFamilyNo" DefaultValue="999" 
+                                        Name="FamilyID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtCityNo" DefaultValue="999" 
+                                        Name="CityNumber" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtUnifiedNo" DefaultValue="NA" 
+                                        Name="PUnifiedID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmployerName" DefaultValue="NA" 
+                                        Name="EmployerName" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmployeremail" DefaultValue="xxyy@xyz.com" 
+                                        Name="EmployerEmail" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmployerPhone" DefaultValue="9999999999" 
+                                        Name="EmployerPhone" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmployerPos" DefaultValue="NA" 
+                                        Name="EmployerPosition" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmployerIndustry" DefaultValue="NA" 
+                                        Name="EmployerIndustry" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtCompany" DefaultValue="NA" 
+                                        Name="EmployerCompanyName" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlEmployerCountry" DefaultValue="1" 
+                                        Name="EmployerCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlEmployerEmirate" DefaultValue="1" 
+                                        Name="EmployerEmirate" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlAccess" DefaultValue="0" 
+                                        Name="iACMSCategory" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="Pic" DefaultValue="" Name="strStudentPic" 
+                                        PropertyName="Value" />
+                                </UpdateParameters>
+                                <InsertParameters>
+                                    <asp:Parameter DefaultValue="" Direction="ReturnValue" 
+                                        Name="RETURN_VALUE" Type="Int32" />
+                                    <asp:ControlParameter ControlID="txtFNameEn" DefaultValue="-" 
+                                        Name="strFirstDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLNameEn" DefaultValue="-" 
+                                        Name="strSecondDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtNameEn" DefaultValue="-" 
+                                        Name="strLastDescEn" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtFNameAr" DefaultValue="-" 
+                                        Name="strFirstDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLNameAr" DefaultValue="-" 
+                                        Name="strSecondDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtNameAr" DefaultValue="-" 
+                                        Name="strLastDescAr" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="rbnGender" DefaultValue="1" Name="bSex" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtBirthDate" DefaultValue="getdate()" Name="dateBirth" 
+                                        PropertyName="Text" DbType="Date" />
+                                    <asp:ControlParameter ControlID="ddlBirthCountry" DefaultValue="1" 
+                                        Name="byteBirthCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlBirthCity" DefaultValue="1" 
+                                        Name="byteBirthCity" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlNationality" DefaultValue="1" 
+                                        Name="byteNationality" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLanguage" DefaultValue="1" Name="byteReligion" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:Parameter DefaultValue="2" Name="byteIDType" />
+                                    <asp:ControlParameter ControlID="txtIdentityNo" DefaultValue="0" Name="strID" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlResidentCountry" DefaultValue="1" 
+                                        Name="byteHomeCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlResidentCity" DefaultValue="1" 
+                                        Name="byteHomeCity" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlHomeCountry" DefaultValue="1" 
+                                        Name="byteOriginCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlHomeCity" DefaultValue="1" 
+                                        Name="byteOriginCity" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtPhone1" DefaultValue="-" Name="strPhone1" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtPhone2" DefaultValue="-" Name="strPhone2" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtEmail" DefaultValue="default@ectuae.com" 
+                                        Name="strEmail" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtAddress" DefaultValue="-" Name="strAddress" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlSession" DefaultValue="1" Name="byteShift" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtIDNo" DefaultValue="0" Name="strNationalID" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtWorkPhone" DefaultValue="" Name="strWorkPhone" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtJob" DefaultValue="-" Name="strJopTitle" 
+                                        PropertyName="Text" />
+                                     <asp:ControlParameter ControlID="rbnEmploymentStatus" DefaultValue="0" Name="isWorking" 
+                                        PropertyName="SelectedValue" />
+                                     <asp:ControlParameter ControlID="txtEthbara" DefaultValue="0" Name="EthbaraNo" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="rbnFitnessStatus" DefaultValue="1" Name="FitnessStatus" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlMaritalStatus" DefaultValue="0" Name="MaritalStatus" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlNationalityofMother" DefaultValue="1" Name="NationalityofMother" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlEmploymentSector" DefaultValue="0" Name="EmploymentSector" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlSponsor" DefaultValue="0" Name="intDelegation" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlVisa" DefaultValue="0" Name="intSponsor" 
+                                        PropertyName="SelectedValue" />
+
+                                    <asp:ControlParameter ControlID="txtExpiry" DefaultValue="getdate()" Name="dateEndSponsorship" 
+                                        PropertyName="Text" DbType="Date" />
+                                    <asp:SessionParameter Name="strUserCreate" SessionField="CurrentUserName" />
+                                    <asp:ControlParameter ControlID="txtNationalNo" DefaultValue="999999" 
+                                        Name="NationalNumber" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtFamilyBookNo" DefaultValue="999999" 
+                                        Name="FamilyBookNumber" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtFamilyNo" DefaultValue="999" 
+                                        Name="FamilyID" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtCityNo" DefaultValue="999" 
+                                        Name="CityNumber" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtUnifiedNo" DefaultValue="NA" 
+                                        Name="PUnifiedID" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtEmployerName" DefaultValue="NA" 
+                                        Name="EmployerName" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtEmployeremail" DefaultValue="xxyy@xyz.com" 
+                                        Name="EmployerEmail" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtEmployerPhone" DefaultValue="9999999999" 
+                                        Name="EmployerPhone" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtEmployerPos" DefaultValue="NA" 
+                                        Name="EmployerPosition" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtEmployerIndustry" DefaultValue="NA" 
+                                        Name="EmployerIndustry" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="txtCompany" DefaultValue="NA" 
+                                        Name="EmployerCompanyName" PropertyName="Text" Type="String" />
+                                    <asp:ControlParameter ControlID="ddlEmployerCountry" DefaultValue="1" 
+                                        Name="EmployerCountry" PropertyName="SelectedValue" Type="Int32" />
+                                    <asp:ControlParameter ControlID="ddlEmployerEmirate" DefaultValue="1" 
+                                        Name="EmployerEmirate" PropertyName="SelectedValue" Type="Int32" />
+                                    <asp:ControlParameter ControlID="ddlAccess" DefaultValue="0" 
+                                        Name="iACMSCategory" PropertyName="SelectedValue" Type="Int32" />
+                                    <asp:ControlParameter ControlID="Pic" DefaultValue="" Name="strStudentPic" 
+                                        PropertyName="Value" Type="String" />
+                                </InsertParameters>
                             </asp:SqlDataSource>
+
     <script type="text/javascript">
         function DeleteConfirm() {
             var b = confirm('Are you sure want to delete this student ?');

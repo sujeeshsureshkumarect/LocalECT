@@ -53,7 +53,7 @@
                         <div class="x_title">
                             <h2><i class="fa fa-search"></i> Student Search</h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <a href="Student_Profile.aspx" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Student</a>
+                                <a href="Student_Profile.aspx" class="btn btn-success btn-sm" id="lnk_add" runat="server"><i class="glyphicon glyphicon-plus"></i> Create New Student</a>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -136,7 +136,7 @@
                                                              <a class="dropdown-item" href="#">Change Major</a>
                                                              <a class="dropdown-item" href="#">Change Status</a>
                                                              <a class="dropdown-item" href="#">Testimonies</a>
-                                                             <a class="dropdown-item" href="#">Marks</a>
+                                                             <%--<a class="dropdown-item" href="#">Marks</a>--%>
                                                          </div>
                                                      </div>
                                                  </td>

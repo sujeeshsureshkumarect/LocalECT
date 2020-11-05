@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
@@ -75,16 +76,37 @@ namespace LocalECT
                         //lblRegistrarVerification.Visible = bResult;
                         //lblRegistrarComments.Visible = bResult;
 
+                        //Update
                         if(Request.QueryString["sid"] !=null && Request.QueryString["sid"] !="")
                         {
                             Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
                             Session["StudentSerialNo"] = GetSerial(Request.QueryString["sid"]);
-                            lnk_delete.Visible = true;
+                            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
+                            {
+                                lnk_delete.Visible = false;
+                            }
+                            else
+                            {
+                                lnk_delete.Visible = true;
+                            }
+                            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                            {
+                                lnk_Save.Visible = false;
+                            }
+                            else
+                            {
+                                lnk_Save.Visible = true;
+                            }
                         }
+                        //New Student
                         else
                         {
                             lnk_delete.Visible = false;
                             Session["StudentSerialNo"] = null;
+                            New();
+                            lnk_Save.Visible = true;
                         }
                     }
                 }
@@ -93,7 +115,7 @@ namespace LocalECT
                     Session.RemoveAll();
                     Response.Redirect("Login.aspx");
                 }
-                lbl_Msg.Text = "";
+               lbl_Msg.Text = "";
                Connection_StringCLS ConnectionString;
 
                 switch (Campus)
@@ -1858,18 +1880,193 @@ namespace LocalECT
         //Start Student Information
         protected void lnk_Save_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                int iEffected = 0;
+                TimeSpan difference = DateTime.Today - Convert.ToDateTime(txtBirthDate.Text);
+
+                var days = difference.TotalDays;
+
+                if (days / 365 < 16)
+                {                    
+                    lbl_Msg.Text = "Invalid birth date - Age less than 16 years";
+                    div_msg.Visible = true;
+                    return;
+                }    
+
+                if (txtIDNo.Text.Length < 15)
+                {
+                    txtIDNo.Text = "999999999999999";
+                    lbl_Msg.Text = "EID need to be scanned";
+                    div_msg.Visible = true;
+                }
+                else if (txtIDNo.Text.Length > 15)
+                {
+                    txtIDNo.Text = txtIDNo.Text.Replace("-", "");
+                }
+
+                if (txtPhone1.Text.Length < 10)
+                {
+                    lbl_Msg.Text = "Invalid Phone number, shold be at least 10 numbers: [0001234567]";
+                    div_msg.Visible = true;
+                    return;
+                }
+                txtPhone1.Text = LibraryMOD.CleanPhone(txtPhone1.Text);
+                txtPhone2.Text = LibraryMOD.CleanPhone(txtPhone2.Text);
+
+                if (hdnSerial.Value == "")//New
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                    {
+                        lbl_Msg.Text = "Sorry you cannot add students";
+                        div_msg.Visible = true;
+                        return;
+                    }
+                    iEffected = StudentDS.Insert();
+                    if (iEffected > 0)
+                    {
+                        lbl_Msg.Text = "Student Added Successfully";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
+                        //QualificationDS.DataBind();
+                        //grdQualification.DataBind();
+                        //DocumentsDS.DataBind();
+                        //grdDocs.DataBind();
+                        //DocsEditDS.DataBind();
+                        //EnrollmentDS.DataBind();
+                        Session["StudentSerialNo"] = hdnSerial.Value;
+                    }
+
+                }
+                else//Update
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                    {
+                        lbl_Msg.Text = "Sorry you cannot update students";
+                        div_msg.Visible = true;
+                        return;
+                    }
+
+                    iEffected = StudentDS.Update();
+                    if (iEffected > 0)
+                    {
+                        lbl_Msg.Text = "Student Saved Successfully";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
         }
+        protected void StudentDS_Inserted(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            try
+            {
+                DbCommand command = e.Command;
+                hdnSerial.Value = command.Parameters["@RETURN_VALUE"].Value.ToString();
+                Session["StudentSerialNo"] = int.Parse(hdnSerial.Value);
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
 
+            }
+        }
         protected void lnk_delete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
+                {                    
+                    lbl_Msg.Text = "Sorry you cannot delete students";
+                    div_msg.Visible = true;
+                    return;
+                }
 
+                if (hdnSerial.Value != "")
+                {
+                    int iEffected = 0;
+
+                    //iEffected = Delete_Marks(lblStudentId.Text);
+                    //iEffected += EnrollmentDS.Delete();
+                    //iEffected += DocsEditDS.Delete();
+
+                    //iEffected += QualificationDS.Delete();
+
+                    iEffected += StudentDS.Delete();
+
+                    Empty_Controls();
+
+                    lbl_Msg.Text = "Student Deleted Successfully";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    div_msg.Visible = true;
+
+
+                }
+                else
+                {
+                    lbl_Msg.Text = "Select a Student Please";
+                    div_msg.Visible = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
         }
 
         protected void lnk_Cancel_Click(object sender, EventArgs e)
         {
             Session["StudentSerialNo"] = null;
             Response.Redirect("StudentSearch");
+        }
+        public void New()
+        {
+            try
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                {
+                    //Server.Transfer("Authorization.aspx");
+                    //return;
+                }
+                Empty_Controls();
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
         }
         //End Student Information
 

@@ -29,8 +29,17 @@ namespace LocalECT
                     InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                     {
                         Server.Transfer("Authorization.aspx");
-
                     }
+
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                    //    InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                    //{
+                    //    lnk_add.Visible = false;
+                    //}
+                    //else
+                    //{
+                    //    lnk_add.Visible = true;
+                    //}
                 }
             }
             else
