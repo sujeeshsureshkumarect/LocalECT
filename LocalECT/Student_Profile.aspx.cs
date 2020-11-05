@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -10,7 +11,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+class ENGCourse
+{
+    string sCourse;
 
+    public string SCourse
+    {
+        get { return sCourse; }
+        set { sCourse = value; }
+    }
+    string sGrade;
+
+    public string SGrade
+    {
+        get { return sGrade; }
+        set { sGrade = value; }
+    }
+
+}
 namespace LocalECT
 {
     public partial class Student_Profile : System.Web.UI.Page
@@ -226,7 +244,7 @@ namespace LocalECT
             {
                 if (iSerial == 0)
                 {
-                    //MultiTabs.ActiveViewIndex = 4;                    
+                    MultiTabs.ActiveViewIndex = 4;
                     lbl_Msg.Text = "Sorry this student has no ID yet (Not Enrolled),Use the following search , Then Select it.";
                     div_msg.Visible = true;
                     txtBirthDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today.Date);
@@ -298,8 +316,8 @@ namespace LocalECT
                     //ddlAcceptanceCondition.SelectedIndex = 0;
                     //ddlAdmissionStatus.SelectedIndex = 0;
 
-                    //mtvQualification.ActiveViewIndex = 0;
-                    //MultiTabs.ActiveViewIndex = 0;
+                    mtvQualification.ActiveViewIndex = 0;
+                    MultiTabs.ActiveViewIndex = 0;
                     //rd.Close();
                     //return;
                 }
@@ -447,8 +465,8 @@ namespace LocalECT
                     //ddlAcceptanceCondition.SelectedValue = rd["iAcceptanceCondition"].ToString();
                     //ddlAdmissionStatus.SelectedValue = rd["iAdmissionStatus"].ToString();
 
-                    //MultiTabs.ActiveViewIndex = 1;
-                    //grdQualification.DataBind();
+                    MultiTabs.ActiveViewIndex = 1;
+                    grdQualification.DataBind();
                     //grdDocs.DataBind();
                 }
 
@@ -2174,12 +2192,1364 @@ namespace LocalECT
 
         protected void ddlQCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ddlQCity.DataBind();
         }
 
         protected void ddlQEngGrade_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void chkActive_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void chkMissing_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void lnkGet_Command(object sender, CommandEventArgs e)
+        {
+            this.ClientScript.RegisterStartupScript(this.GetType(), "test", "getContact();", true);
+        }
+        protected void lnkOpportunity_Command(object sender, CommandEventArgs e)
+        {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                      InitializeModule.enumPrivilege.UpdateCRMOpportunity, CurrentRole) != true)
+            {
+                lbl_Msg.Text = "Sorry you cannot update CRM Opportunity";
+                div_msg.Visible = true;
+                return;
+            }
+
+            string sSID = lblStudentId.Text;
+            int iOpportunity = 0;
+            if (!isPaid(sSID))
+            {
+                lbl_Msg.Text = "Opportunity must be set after the student payment.";
+                div_msg.Visible = true;
+                return;
+            }
+            if (isOpportunitySet(sSID, out iOpportunity))
+            {
+                lbl_Msg.Text = "Opportunity must be set one time only.";
+                div_msg.Visible = true;
+            }
+            else
+            {
+                if (iOpportunity > 0 && iOpportunity.ToString() == txtOpportunityID.Text)
+                {
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                }
+                else
+                {
+                    lbl_Msg.Text = "Opportunity ID must be saved first.";
+                    div_msg.Visible = true;
+                }
+            }
+        }
+        private bool isPaid(string sSID)
+        {
+            bool isIt = false;
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(this.Campus);
+            SqlConnection conn = new SqlConnection(myConnection_String.Conn_string);
+            conn.Open();
+            try
+            {
+                double iPaid = 0;
+                string sSQL = "SELECT SA.lngStudentNumber, SUM(VD.curCredit) AS Paid";
+                sSQL += " FROM Acc_Voucher_Header AS VH INNER JOIN Acc_Voucher_Detail AS VD ON VH.intFy = VD.intFy AND VH.byteFSemester = VD.byteFSemester";
+                sSQL += " AND VH.strVoucherNo = VD.strVoucherNo INNER JOIN Reg_Student_Accounts AS SA ON VH.strAccountNo = SA.strAccountNo";
+                sSQL += " WHERE (VD.byteStatus < 2)";
+                sSQL += " GROUP BY SA.lngStudentNumber";
+                sSQL += " HAVING (SA.lngStudentNumber = '" + sSID + "')";
+
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read())
+                {
+                    iPaid = Convert.ToDouble(rd["Paid"].ToString());
+                }
+                rd.Close();
+
+                isIt = (iPaid >= 1000);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
+            return isIt;
+        }
+        private bool isOpportunitySet(string sSID, out int iOpportunity)
+        {
+            bool isSet = false;
+            iOpportunity = 0;
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+
+                string sSQL = "SELECT iOpportunityID, isOpportunitySet";
+                sSQL += " FROM Reg_Applications";
+                sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+
+                while (Rd.Read())
+                {
+                    iOpportunity = Convert.ToInt32(Rd["iOpportunityID"].ToString());
+                    isSet = Convert.ToBoolean(Rd["isOpportunitySet"].ToString());
+                }
+                Rd.Close();
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return isSet;
+        }
+        [System.Web.Services.WebMethod]//to call it from the client side + u must add also EnablePageMethods="true" to ScriptManager
+        public static bool SetOpportunity(string sSID)
+        {
+            bool isSet = false;
+            //U cannot use var from out of the scope. (Campus)
+            InitializeModule.EnumCampus campus = InitializeModule.EnumCampus.Males;
+            if (sSID.Contains("AF") || sSID.Contains("ESF"))
+            {
+                campus = InitializeModule.EnumCampus.Females;
+            }
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+
+                string sSQL = "UPDATE Reg_Applications SET isOpportunitySet=1";
+                sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                isSet = (Cmd.ExecuteNonQuery() > 0);
+
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                //divMsg.InnerText = ex.Message;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return isSet;
+        }
+
+        protected void ddlMajor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlWMajor1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Change student advisor to the Dean of faculty
+
+            ddlAdvisor.SelectedValue = SetAdvisorAsWantedMajor(Convert.ToInt32(ddlWMajor1.SelectedValue)).ToString();
+            ddlWMajor2.Focus();
+        }
+        private int SetAdvisorAsWantedMajor(int iWantedMajor)
+        {
+            int iFacultyID = 0;
+            int iAdvisor = 0;
+            iFacultyID = LibraryMOD.GetFacultyIDFromWantedMjor(iWantedMajor);
+            int iDean = LibraryMOD.GetDeanofFacultyID(iFacultyID);
+            switch (Campus)
+            {
+                case InitializeModule.EnumCampus.Males:
+                    iAdvisor = LibraryMOD.GetLecturerMaleID(iDean);
+                    break;
+                case InitializeModule.EnumCampus.Females:
+                    iAdvisor = LibraryMOD.GetLecturerFemaleID(iDean);
+                    break;
+            }
+            return iAdvisor;
+        }
+        private int SetAdvisorAsCurrentMajor(string sDegreeID, string sMajorID)
+        {
+            int iFacultyID = 0;
+            int iAdvisor = 0;
+            iFacultyID = LibraryMOD.GetFacultyIDFromMjor(sDegreeID, Convert.ToInt32(sMajorID.Substring(4, 2)).ToString());
+            int iDean = LibraryMOD.GetDeanofFacultyID(iFacultyID);
+            switch (Campus)
+            {
+                case InitializeModule.EnumCampus.Males:
+                    iAdvisor = LibraryMOD.GetLecturerMaleID(iDean);
+                    break;
+                case InitializeModule.EnumCampus.Females:
+                    iAdvisor = LibraryMOD.GetLecturerFemaleID(iDean);
+                    break;
+            }
+            return iAdvisor;
+        }
+
+        protected void btnSetAdvisor_Click(object sender, EventArgs e)
+        {
+            ddlAdvisor.SelectedValue = SetAdvisorAsCurrentMajor(ddlType.SelectedValue, ddlMajor.SelectedValue).ToString();
+            txtNote.Focus();
+        }
+
+        protected void ddlEnrollmentSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //switch (ddlEnrollmentSource.SelectedValue)
+            //{ 
+            //    case "2":
+            //        txtEnrollmentSource.Text = "";
+            //        txtEnrollmentSource.Visible = true;
+            //        lblotherSource.Visible = true; 
+            //        lblotherSource.Text = "Exhibition Name & Year";
+            //        break;
+            //    case "7":
+
+            //        //txtEnrollmentSource.Text = "";
+            //        txtEnrollmentSource.Visible = true ;
+            //        lblotherSource.Visible = true;
+            //        lblotherSource.Text = "Other Source";
+            //        txtEnrollmentSource.Focus();
+
+            //        break ;
+            //    default:
+            //       // txtEnrollmentSource.Text = "-"; 
+            //        txtEnrollmentSource.Visible = false;
+            //        lblotherSource.Visible = false ; 
+            //        break;
+            //}
+        }
+
+        protected void txtEnrollmentSource_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ChkIsMilitaryService_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkIsMilitaryService.Checked)
+            {
+                txtMilitaryServiceDate.Text = string.Format("{0:yyyy-MM-dd}", DateTime.Today);
+            }
+            //else
+            //{
+            //    txtMilitaryServiceDate.Text = ""; 
+            //}
+            ChkIsMilitaryService.Focus();
+        }
+        private void CreateNewId(int iType, int iYear, int iSem)
+        {
+
+            try
+            {
+                //SidDS.SelectParameters.Clear(); 
+                SidDS.ConnectionString = sConn;
+                SidDS.SelectParameters["iType"].DefaultValue = iType.ToString();
+                SidDS.SelectParameters["iYear"].DefaultValue = iYear.ToString();
+                SidDS.SelectParameters["iSem"].DefaultValue = iSem.ToString();
+                SidDS.SelectParameters["iCampus"].DefaultValue = ((int)Campus).ToString();
+                SidDS.Select(DataSourceSelectArguments.Empty);
+                lblECTId.Text = LibraryMOD.GetECTId("", Campus);
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+
+            }
+
+        }
+        private bool isMajorAvailable(string sKey)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            bool isIt = false;
+            try
+            {
+
+                string sSQL = "SELECT bAvailable FROM Reg_Specializations Where strKey='" + sKey + "'";
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    isIt = Convert.ToBoolean(Rd["bAvailable"]);
+                }
+                Rd.Close();
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+            return isIt;
+
+        }
+        protected void SidDS_Selected(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            DbCommand command = e.Command;
+            lblStudentId.Text = command.Parameters["@RETURN_VALUE"].Value.ToString();
+        }
+        public bool is_EmSAT_Required(string sDegree, string sMajorID)
+        {
+            bool isRequired = false;
+
+            try
+            {
+                if (sDegree == "3")
+                {
+                    switch (sMajorID)  //BA_PRA,BA_RTV,BA_JOR
+                    {
+                        case "4":
+                        case "5":
+                        case "6":
+                            isRequired = true;
+                            break;
+                    }
+                }
+                if (sDegree == "1" && sMajorID == "24") //Diploma of public relation
+                {
+                    isRequired = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                isRequired = true;
+            }
+            finally
+            {
+
+            }
+            return isRequired;
+        }
+        private bool isQualified(int iSerial, string sDegree, string sMajor)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            bool isIt = false;
+            try
+            {
+                int iHSPassed = 0;
+                int iEmSAT_Passed = 0;
+                bool isFNDPassed = false;
+                bool isDiplomaTC = false;
+                bool isBscTC = false;
+                int iCert = 0;
+
+                string sSQL = "SELECT intCertificate FROM  dbo.Reg_Student_Qualifications AS Q WHERE (intCertificate = 12 or intCertificate = 2 or intCertificate = 3 ) AND (lngSerial =" + iSerial + ")";
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    iCert = Convert.ToInt32(Rd["intCertificate"].ToString());
+                    switch (iCert)
+                    {
+                        case 2:
+                            isDiplomaTC = true;
+                            break;
+                        case 3:
+                            isBscTC = true;
+                            break;
+                        case 12:
+                            isFNDPassed = true;
+                            break;
+
+                    }
+
+                }
+                Rd.Close();
+
+
+                sSQL = "Select isDiploma from HS Where lngSerial=" + iSerial;
+                Cmd.CommandText = sSQL;
+                iHSPassed = (int)Cmd.ExecuteScalar();
+
+                if ((sDegree == "1" || sDegree == "3" || (sDegree == "2" && (sMajor == "1" || sMajor == "5" || sMajor == "6" || sMajor == "7"))) && (iHSPassed == 1 || iCert > 0))
+                {
+                    isIt = true;
+                }
+                else if (sDegree == "2" && iHSPassed == 2 && iCert == 0)
+                {
+                    isIt = true;
+                }
+                else
+                {
+                    isIt = false;
+                }
+
+                //======================================================
+                if (is_EmSAT_Required(sDegree, sMajor) && isIt == true)
+                {
+                    //check if EmSAt Arabic test entered in the system and get score>=1000
+
+                    Rd.Close();
+
+                    sSQL = "SELECT  (CASE WHEN SQ.sngGrade >= C.curPassed THEN 1 ELSE 2 END) AS isPass_EmSAT ";
+                    sSQL += " FROM Reg_Student_Qualifications AS SQ INNER JOIN ";
+                    sSQL += " Lkp_Certificates AS C ON SQ.intCertificate = C.intCertificate";
+                    sSQL += " Where SQ.lngSerial=" + iSerial;
+                    sSQL += " AND SQ.intCertificate = 26";
+
+                    Cmd.CommandText = sSQL;
+
+                    Rd = Cmd.ExecuteReader();
+
+                    while (Rd.Read())
+                    {
+                        iEmSAT_Passed = Convert.ToInt32("0" + Rd["isPass_EmSAT"].ToString());
+                    }
+                    if (iEmSAT_Passed == 1)
+                    {
+                        isIt = true;
+                    }
+                    else
+                    {
+                        isIt = false;
+                    }
+                }
+                if (isIt == true)//Check ENG
+                {
+                    sSQL = "SELECT strCert,Mark FROM MaxEngCertMark WHERE lngSerial=" + iSerial;
+                    Cmd.CommandText = sSQL;
+                    Rd = Cmd.ExecuteReader();
+
+                    string sCert = "";
+                    float fScore = 0;
+
+                    while (Rd.Read())
+                    {
+                        sCert = Rd["strCert"].ToString();
+                        fScore = float.Parse(Rd["Mark"].ToString());
+
+                    }
+                    Rd.Close();
+
+                    bool isGeneral = false;
+                    sSQL = "SELECT isGeneral FROM Reg_Specializations WHERE strDegree='" + sDegree + "' AND strSpecialization='" + sMajor + "'";
+                    Cmd.CommandText = sSQL;
+                    Rd = Cmd.ExecuteReader();
+                    while (Rd.Read())
+                    {
+                        isGeneral = bool.Parse(Rd["isGeneral"].ToString());
+                    }
+                    Rd.Close();
+                    bool isPassed = LibraryMOD.isENGPassed(fScore, sCert, sDegree, sMajor);
+                    isIt = (isPassed || isGeneral);
+                }
+
+
+                //check if its Literary HS and student want to reg in HIM program
+                //if (isIt == true && sDegree == "3" && sMajor == "11")//check HS for HIM
+                //{
+                //    
+                //    //must finish MTH001,CHEM001 & BIOL001 before enter HIM program
+                //    string sQuery = "SELECT intMajor,ScoreOfMath FROM  dbo.Reg_Student_Qualifications AS Q WHERE (intCertificate = 1 ) AND (lngSerial =" + iSerial + ")";
+                //    int iMajor = 0;
+                //    Cmd.CommandText = sQuery; 
+                //    Rd = Cmd.ExecuteReader();
+                //    while (Rd.Read())
+                //    {
+                //        iMajor = int.Parse("0" + Rd["intMajor"].ToString());
+                //    }
+                //    Rd.Close();
+                //    //check if finished MTH001,CHEM001 & BIOL001
+                //    if (iMajor == 4 && isMTH001_CHEM001_BIOL001_Passed() == false)
+                //    {
+                //        isIt = false;
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+            return isIt;
+
+        }
+        protected void SaveE_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (hdnSerial.Value == "")
+                {                    
+                    lbl_Msg.Text = "Select or Add Student Please ...";
+                    div_msg.Visible = true;
+                    return;
+                }
+                int iEffected = 0;
+
+
+                if (ddlEnrollmentSource.SelectedValue == "0")
+                {
+                    lbl_Msg.Text = "Please choose how did you hear about ECT?";
+                    div_msg.Visible = true;
+                    ddlEnrollmentSource.Focus();
+                    return;
+                }
+
+                if (ddlEnrollmentSource.SelectedValue == "51")
+                {
+                    if (txtEnrollmentSource.Text == "-")
+                    {
+                        lbl_Msg.Text = "Please Enter the Other Source?";
+                        div_msg.Visible = true;
+                        txtEnrollmentSource.Focus();
+                        return;
+                    }
+                }
+                else
+                {
+                    txtEnrollmentSource.Text = "-";
+                }
+
+                if (Session["CurrentStudent"] == null)
+                {
+                    Session["CurrentStudent"] = "";
+                }
+                if (Session["CurrentStudent"].ToString() == "") //Insert //string.IsNullOrEmpty(Session["CurrentStudent"].ToString ()
+                {
+
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
+                    {
+                        lbl_Msg.Text = "Sorry you cannot enrolled a students";
+                        div_msg.Visible = true;
+                        return;
+                    }
+
+                    string sKey = ddlMajor.SelectedValue;
+
+                    if (isMajorAvailable(sKey) == false)
+                    {
+                        lbl_Msg.Text = "The selected major is not available !";
+                        div_msg.Visible = true;
+                        return;
+                    }
+
+                    if (ddlWMajor1.SelectedValue == "0")
+                    {
+                        lbl_Msg.Text = "Select the First Preferred Major Please.";
+                        div_msg.Visible = true;
+                        ddlWMajor1.Focus();
+                        return;
+                    }
+
+                    if (ddlWMajor2.SelectedValue == "0")
+                    {                        
+                        lbl_Msg.Text = "Select the Second Preferred Major Please.";
+                        div_msg.Visible = true;
+                        ddlWMajor2.Focus();
+                        return;
+                    }
+
+                    if (ddlWMajor3.SelectedValue == "0")
+                    {                  
+                        lbl_Msg.Text = "Select the Third Preferred Major Please.";
+                        div_msg.Visible = true;
+                        ddlWMajor3.Focus();
+                        return;
+                    }
+
+
+                    string sCollege, sDegree, sMajor;
+                    int iHours = 0;
+                    sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
+                    sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
+                    sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+
+                    bool isLegal = true;
+
+                    if (sDegree == "2" && sMajor == "3")
+                    {
+                        isLegal = true;
+                    }
+                    else
+                    {
+
+                        if (sMajor != "99")//Visiting
+                        {
+                            //Check HS if it is meeting the major requirement
+                            isLegal = isQualified(int.Parse(hdnSerial.Value), sDegree, sMajor);
+                        }
+                        else
+                        {
+                            sMajor = "999";
+                        }
+                    }
+                    if (isLegal)
+                    {
+                        SpecializationsDAL mySpecDAL = new SpecializationsDAL();
+                        iHours = mySpecDAL.GetHours(Campus, sCollege, sDegree, sMajor);
+                        int iEnTerm = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);
+
+                        int iRegTerm = iRegYear * 10 + iRegSem;
+
+                        if (iEnTerm < iRegTerm)
+                        {                            
+                            lbl_Msg.Text = "Sorry you cannot enrolled a students on old term ...";
+                            div_msg.Visible = true;
+                            return;
+
+                        }
+
+                        int iEnYear = 0;
+                        int iEnSem = 0;
+                        iEnYear = LibraryMOD.SeperateTerm(iEnTerm, out iEnSem);
+
+
+                     
+                        CreateNewId(int.Parse(ddlType.SelectedValue), iEnYear, iEnSem);
+                        if (lblStudentId.Text != "")
+                        {
+
+                            EnrollmentDS.InsertParameters["intStudyYear"].DefaultValue = iEnYear.ToString();
+                            EnrollmentDS.InsertParameters["byteSemester"].DefaultValue = iEnSem.ToString();
+                            EnrollmentDS.InsertParameters["strCollege"].DefaultValue = sCollege;
+                            EnrollmentDS.InsertParameters["strDegree"].DefaultValue = sDegree;
+                            EnrollmentDS.InsertParameters["strSpecialization"].DefaultValue = sMajor;
+                            EnrollmentDS.InsertParameters["intRemind"].DefaultValue = iHours.ToString();
+
+                            iEffected = EnrollmentDS.Insert();
+                            if (iEffected > 0)
+                            {                                
+                                lbl_Msg.Text = "Student Enrolled Successfully ...";
+                                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                div_msg.Visible = true;
+                                //grdMarks.DataBind();
+                                FillCourses(sCollege, sDegree, sMajor);
+                                Session["CurrentStudent"] = lblStudentId.Text;
+                            }
+                        }
+                        else
+                        {                           
+                            lbl_Msg.Text = "Student not Enrolled !";
+                            div_msg.Visible = true;
+                        }
+                    }
+                    else
+                    {                        
+                        lbl_Msg.Text = "HS AVG or ENG Score doesn’t meet the major requirement …!";
+                        div_msg.Visible = true;
+                        MultiTabs.ActiveViewIndex = 0;
+                    }
+                }
+                else//Update
+                {
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                    {                        
+                        lbl_Msg.Text = "Sorry you cannot update students";
+                        div_msg.Visible = true;
+                        return;
+                    }
+
+                    if (ddlWMajor1.SelectedValue == "0")
+                    {                        
+                        lbl_Msg.Text = "Select the First Preferred Major Please.";
+                        div_msg.Visible = true;
+                        ddlWMajor1.Focus();
+                        return;
+                    }
+
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                    //    InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
+                    //{
+                    //    divMsg.InnerText = "Sorry you cannot update enrollment data";
+                    //    return;
+                    //}
+
+                    int iTerm, iGraduationYear, iGraduationSem;
+                    iTerm = int.Parse(ddlStatusTerm.SelectedValue);
+                    iGraduationYear = LibraryMOD.SeperateTerm(iTerm, out iGraduationSem);
+
+                    //EnrollmentDS.UpdateParameters.Add("@intGraduationYear", iGraduationYear.ToString());
+                    //EnrollmentDS.UpdateParameters.Add("@byteGraduationSemester", iGraduationSem.ToString());
+
+                    iEffected = EnrollmentDS.Update();
+                    if (iEffected > 0)
+                    {                        
+                        lbl_Msg.Text = "Student Enrollment Updated Successfully ...";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
+                    }
+                    LibraryMOD.UpdateCRM_StudentID(lblStudentId.Text, txtPhone1.Text);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+        }
+
+        protected void AddESLs_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(lblStudentId.Text))
+            {
+                lbl_Msg.Text = "Select or Enroll a Student First";
+                div_msg.Visible = true;
+                return;
+            }
+            int iCalculated = Calc_ESLs(lblStudentId.Text);
+            lbl_Msg.Text = "( " + iCalculated + " ) ESLs Courses Exempted Successfully ...";
+            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+            div_msg.Visible = true;
+
+            //mtvMarks.ActiveViewIndex = 0;
+            //grdMarks.DataBind();
+
+            MultiTabs.ActiveViewIndex = 3;
+        }
+        private int Calc_ESLs(string sID)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            int iCalc = 0;
+            try
+            {
+                string sSQL = "SELECT  ENG.lngStudentNumber, ENG.intCertificate, ENG.strCert, ENG.Mark, L.byteLevel";
+                sSQL += " FROM MaxEngCertMark AS ENG INNER JOIN Reg_Levels AS L ON ENG.intCertificate = L.intCert AND ENG.Mark >= L.curMin AND ENG.Mark <= L.curMax";
+                sSQL += " WHERE ENG.lngStudentNumber='" + sID + "'";
+
+                int iCert = 0;
+                double iMark = 0;
+                int iLevel = 0;
+
+                bool isArabic = false;
+                ApplicationsDAL theStudentApplication = new ApplicationsDAL();
+
+                InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
+
+                Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+
+                string sMajorID = theStudentApplication.GetMajor(Campus, sID);
+
+                if (sMajorID == "24" || sMajorID == "25")
+                {
+                    isArabic = true;
+                }
+                else
+                {
+                    isArabic = false;
+                }
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    iCert = int.Parse(Rd["intCertificate"].ToString());
+                    iMark = double.Parse(Rd["Mark"].ToString());
+                    iLevel = int.Parse(Rd["byteLevel"].ToString());
+                }
+                Rd.Close();
+
+                sSQL = " SELECT strCourse FROM Reg_Course_Levels";
+                sSQL += " WHERE intCert=" + iCert + " AND byteLevel=" + iLevel + " AND bReg=0";
+
+                Cmd.CommandText = sSQL;
+
+                Rd = Cmd.ExecuteReader();
+                List<ENGCourse> myENGs = new List<ENGCourse>();
+                ENGCourse myENG;
+                while (Rd.Read())
+                {
+                    myENG = new ENGCourse();
+                    if (isArabic)
+                    {
+                        if ((Rd["strCourse"].ToString() == "ESL100") || (Rd["strCourse"].ToString() == "ESL101")) //|| (Rd["strCourse"].ToString() == "ESL102")
+                        {
+                            myENG.SCourse = "ESL101A";
+                        }
+                        else
+                        {
+                            myENG.SCourse = "ESL102A";
+                        }
+
+                    }
+                    else
+                    {
+                        myENG.SCourse = Rd["strCourse"].ToString();
+                    }
+                    myENG.SGrade = "EX";
+                    myENGs.Add(myENG);
+                }
+                Rd.Close();
+
+                string sUser = Session["CurrentUserName"].ToString();
+                bool isPassed = false;
+                for (int i = 0; i < myENGs.Count; i++)
+                {
+                    isPassed = false;
+                    sSQL = "SELECT GS.bPassIt FROM Reg_Grade_Header AS GH INNER JOIN Reg_Grade_System AS GS ON GH.strGrade = GS.strGrade";
+                    sSQL += " WHERE GH.strCourse ='" + myENGs[i].SCourse + "' AND GH.lngStudentNumber ='" + sID + "'";
+
+                    Cmd.CommandText = sSQL;
+                    isPassed = Convert.ToBoolean(Cmd.ExecuteScalar());
+                    if (!isPassed)
+                    {
+                        sSQL = "Insert Into Reg_Grade_Header";
+                        sSQL += " (lngStudentNumber, intStudyYear, byteSemester, strCourse, byteClass, byteShift, strGrade, strUserCreate, dateCreate, curUseMark, bDisActivated)";
+                        sSQL += " Values('" + sID + "',0,0,'" + myENGs[i].SCourse + "',1,1,'" + myENGs[i].SGrade + "',";
+                        sSQL += "'" + sUser + "',GETDATE(),333,0)";
+                        Cmd.CommandText = sSQL;
+                        iCalc += Cmd.ExecuteNonQuery();
+                    }
+                }
+
+                myENGs.Clear();
+                //iCalc = Cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+            return iCalc;
+
+        }
+
+        protected void Print_btn_Click(object sender, EventArgs e)
+        {
+            if (CurrentRole == 169 && ddlPrinting.SelectedValue != "4")//Staff Part time
+            {              
+                lbl_Msg.Text = "Sorry you cannot print " + ddlPrinting.SelectedItem.Text;
+                div_msg.Visible = true;
+                return;
+            }
+            Retrieve(Convert.ToInt32(ddlPrinting.SelectedValue));
+            Export(Convert.ToInt32(ddlPrinting.SelectedValue));
+        }
+        private void Retrieve(int iReport)
+        {
+            DataSet Ds = new DataSet();
+            try
+            {
+
+                string sSno = lblStudentId.Text;
+
+                if (iReport != 2)//Admission Form
+                {
+
+                    Ds = Prepare_Report(sSno);
+                }
+                else
+                {
+                    Ds = Prepare_Admission(sSno);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+
+                Session["ReportDS"] = Ds;
+
+            }
+
+        }
+        private DataSet Prepare_Admission(string sSno)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            DataTable dt = new DataTable();
+            DataRow dr;
+            DataSet ds = new DataSet();
+            try
+            {
+                DataColumn dc;
+
+                dc = new DataColumn("No", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SYear", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SSem", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SSession", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Gender", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SProgram", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SMajor", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Title", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("FName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("LName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("FullName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("BirthDate", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Nationality", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EID", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Language", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Phone1", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Phone2", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Fax", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("eMail", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sECTemail", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Address", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EPhone1", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EPhone2", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Degree", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("Institute", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("DegreeDate", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EUser", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("EDate", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sRegisteredThrough", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("iImage", Type.GetType("System.Byte[]"));
+                dt.Columns.Add(dc);
+
+                string sSQL = "";
+                sSQL += "SELECT A.lngStudentNumber AS No, CONVERT(varchar(4), A.intStudyYear) + '/' + CONVERT(varchar(4), A.intStudyYear + 1) AS SYear, S.strSemesterDescEn AS SSem,";
+                sSQL += " SE.strShiftEn AS SSession, (CASE WHEN bSex = 0 THEN 'Female' ELSE 'Male' END) AS Gender, D.strDegreeDescEn AS SProgram, M.strDisplay AS SMajor, '' AS Title,";
+                sSQL += " SD.strFirstDescEn AS FName, '' AS SName, SD.strSecondDescEn AS LName, SD.strLastDescEn AS FullName, SD.dateBirth AS BirthDate,";
+                sSQL += " N.strNationalityDescEn AS Nationality, SD.strNationalID AS EID, L.strLanguageDescEn AS Language, dbo.CleanPhone(SD.strPhone1) AS Phone1,";
+                sSQL += " dbo.CleanPhone(SD.strPhone2) AS Phone2, SD.strFax AS Fax, SD.strEmail AS eMail,sECTemail, SD.strAddress AS Address, '' AS EName, '' AS EPhone1, '' AS EPhone2,";
+                sSQL += " '' AS Degree, '' AS Institute, '' AS DegreeDate, SD.strUserCreate AS EUser, SD.dateCreate AS EDate,Lkp_RegisteredThrough.RegisteredThroughDesc AS sRegisteredThrough";
+
+                sSQL += " , FM1.MajorDescEn AS FMajor1, FC.FacultyName AS Faculty, FM2.MajorDescEn AS FMajor2,FM3.MajorDescEn AS FMajor3,A.sReference AS Ref";
+
+                sSQL += " FROM Lkp_Languages AS L RIGHT OUTER JOIN Lkp_FoundationMajors AS FM2 RIGHT OUTER JOIN Reg_Applications AS A INNER JOIN";
+                sSQL += " Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial INNER JOIN Reg_Specializations AS M ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization INNER JOIN";
+                sSQL += " Lkp_Semesters AS S ON A.byteSemester = S.byteSemester INNER JOIN Reg_Shifts AS SE ON SD.byteShift = SE.byteShift INNER JOIN";
+                sSQL += " Reg_Degrees AS D ON M.strCollege = D.strCollege AND M.strDegree = D.strDegree INNER JOIN Lkp_FoundationMajors AS FM1 ON A.WantedMajorID = FM1.MajorID LEFT OUTER JOIN";
+                sSQL += " Reg_Faculty AS FC ON FM1.FacultyID = FC.FacultyID LEFT OUTER JOIN Lkp_FoundationMajors AS FM3 ON A.WantedMajorID3 = FM3.MajorID ON FM2.MajorID = A.WantedMajorID2 LEFT OUTER JOIN";
+                sSQL += " Lkp_RegisteredThrough ON A.iRegisteredThrough = Lkp_RegisteredThrough.ID ON L.byteLanguage = SD.byteReligion LEFT OUTER JOIN Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality";
+
+                //sSQL += " FROM Reg_Applications AS A INNER JOIN Reg_Students_Data AS SD ";
+                //sSQL += " ON A.lngSerial = SD.lngSerial INNER JOIN";
+                //sSQL += " Reg_Specializations AS M ON A.strCollege = M.strCollege ";
+                //sSQL += " AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization";
+                //sSQL += " INNER JOIN Lkp_Semesters AS S ON A.byteSemester = S.byteSemester ";
+                //sSQL += " INNER JOIN Reg_Shifts AS SE ON SD.byteShift = SE.byteShift ";
+                //sSQL += " INNER JOIN Reg_Degrees AS D ON M.strCollege = D.strCollege AND M.strDegree = D.strDegree ";
+                //sSQL += " LEFT OUTER JOIN  Lkp_RegisteredThrough ON A.iRegisteredThrough = dbo.lkp_RegisteredThrough.ID ";
+                //sSQL += " LEFT OUTER JOIN Lkp_Languages AS L ON SD.byteReligion = L.byteLanguage ";
+                //sSQL += " LEFT OUTER JOIN Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality";
+
+                sSQL += " Where A.lngStudentNumber='" + sSno + "'";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                string sGender = "";
+                string sTile = "";
+                string sEmp = "";
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    dr = dt.NewRow();
+                    dr["No"] = Rd["No"].ToString().Replace(".", "");
+                    dr["SYear"] = Rd["SYear"].ToString();
+                    dr["SSem"] = Rd["SSem"].ToString();
+                    dr["SSession"] = Rd["SSession"].ToString();
+                    sGender = Rd["Gender"].ToString();
+                    dr["Gender"] = sGender;
+                    dr["SProgram"] = Rd["FMajor1"].ToString();
+                    dr["SMajor"] = Rd["SMajor"].ToString();
+                    if (sGender == "Male")
+                    {
+                        sTile = "MR";
+                    }
+                    else
+                    {
+                        sTile = "MS/MRS";
+                    }
+                    dr["Title"] = sTile;
+                    dr["FName"] = Rd["FName"].ToString();
+                    dr["SName"] = "-";//Rd["SName"].ToString();
+                    dr["LName"] = Rd["LName"].ToString();
+                    dr["FullName"] = Rd["FullName"].ToString();
+                    dr["BirthDate"] = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(Rd["BirthDate"]));
+                    dr["Nationality"] = Rd["Nationality"].ToString();
+                    dr["EID"] = Rd["EID"].ToString();
+                    dr["Language"] = Rd["FMajor2"].ToString();
+                    dr["Phone1"] = Rd["Phone1"].ToString();
+                    if (Rd["Phone2"].ToString() == "0")
+                    {
+                        dr["Phone2"] = "-";
+                    }
+                    else
+                    {
+                        dr["Phone2"] = Rd["Phone2"].ToString();
+                    }
+                    dr["Fax"] = Rd["Ref"].ToString();
+                    dr["eMail"] = Rd["eMail"].ToString();
+                    dr["sECTemail"] = Rd["sECTemail"].ToString();
+                    dr["Address"] = Rd["Address"].ToString();
+                    dr["EName"] = Rd["FMajor3"].ToString();
+                    dr["EPhone1"] = Rd["EPhone1"].ToString();
+                    dr["EPhone2"] = Rd["EPhone2"].ToString();
+                    dr["Degree"] = Rd["Degree"].ToString();
+                    dr["Institute"] = Rd["Faculty"].ToString();
+                    dr["DegreeDate"] = Rd["DegreeDate"].ToString();
+                    sEmp = LibraryMOD.GetTheUserEmpName(Rd["EUser"].ToString());
+                    dr["EUser"] = sEmp;
+                    dr["EDate"] = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(Rd["EDate"]));
+                    dr["sRegisteredThrough"] = Rd["sRegisteredThrough"].ToString();
+
+                    //if (File.Exists(Server.MapPath(imgStudent.ImageUrl)))
+                    //{
+                    //    FileStream fstr = new FileStream(Server.MapPath(imgStudent.ImageUrl), FileMode.Open);
+                    //    BinaryReader br = new BinaryReader(fstr);
+                    //    dr["iImage"] = br.ReadBytes((int)br.BaseStream.Length);
+                    //    fstr.Close();
+                    //    br.Close();
+                    //}
+                    if (imgStudent.ImageUrl != "~/Images/Students/Student.jpeg" && imgStudent.ImageUrl != "~/Images/Students/PIC999999999999999.jpeg")
+                    {
+                        if (File.Exists(Server.MapPath(imgStudent.ImageUrl)))
+                        {
+                            FileStream fstr = new FileStream(Server.MapPath(imgStudent.ImageUrl), FileMode.Open);
+                            BinaryReader br = new BinaryReader(fstr);
+                            dr["iImage"] = br.ReadBytes((int)br.BaseStream.Length);
+                            fstr.Close();
+                            br.Close();
+                        }
+                    }
+                    dt.Rows.Add(dr);
+                }
+                Rd.Close();
+                dt.TableName = "Admission";
+                dt.AcceptChanges();
+                ds.Tables.Add(dt);
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return ds;
+        }
+        private DataSet Prepare_Report(string sSno)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            DataTable dt = new DataTable();
+            DataRow dr;
+            DataSet ds = new DataSet();
+            try
+            {
+                DataColumn dc;
+
+                dc = new DataColumn("sSno", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sName", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sPeriod", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sMajor", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sWMajor", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sWMajor2", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sWMajor3", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("dHS", Type.GetType("System.Decimal"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sENG", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("dScore", Type.GetType("System.Decimal"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sPhone1", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sPhone2", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("dEntered", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sEntered", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("dEnrolled", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sYear", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sSem", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sHSType", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sHSSource", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sPwd", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sEmail", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("sECTemail", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+
+
+
+                string sSQL = "SELECT A.lngStudentNumber AS sSno, SD.strLastDescEn AS sName, P.strShiftEn AS sPeriod,";
+                sSQL += "M.strSpecializationDescEn AS sMajor, HS.sngGrade AS dHS,E.strCert AS sENG, E.Mark AS dScore,";
+                sSQL += "SD.strPhone1 AS sPhone1, SD.strPhone2 AS sPhone2, A.dateCreate AS dEntered, A.strUserCreate AS sEntered, SD.strEmail AS sEmail,sECTemail, AC.strOnlinePWD AS sPWD";
+                sSQL += ",A.dateApplication AS dEnrolled, A.intStudyYear AS iYear, S.strSemesterDescEn AS sSem, SP.strSpecializationDescEn AS sHSType, Q.strCertificateSource AS sHSSource,sECTId";
+
+                sSQL += " FROM Reg_Student_Accounts AS AC RIGHT OUTER JOIN Reg_Applications AS A INNER JOIN";
+                sSQL += " Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial INNER JOIN Reg_Shifts AS P ON SD.byteShift = P.byteShift INNER JOIN";
+                sSQL += " Reg_Specializations AS M ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization INNER JOIN";
+                sSQL += " Lkp_Semesters AS S ON A.byteSemester = S.byteSemester ON AC.lngStudentNumber = A.lngStudentNumber LEFT OUTER JOIN";
+                sSQL += " Reg_Student_Qualifications AS Q LEFT OUTER JOIN Lkp_Specializations AS SP ON Q.intMajor = SP.intSpecialization RIGHT OUTER JOIN";
+                sSQL += " HS ON Q.lngSerial = HS.lngSerial AND Q.intCertificate = HS.intCertificate ON SD.lngSerial = HS.lngSerial LEFT OUTER JOIN MaxEngCertMark AS E ON A.lngStudentNumber = E.lngStudentNumber";
+
+                sSQL += " Where A.lngStudentNumber='" + sSno + "'";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                int iYear = 0;
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    dr = dt.NewRow();
+                    if (ddlPrinting.SelectedValue == "0")
+                    {
+                        dr["sSno"] = Rd["sECTId"].ToString();
+                    }
+                    else
+                    {
+                        dr["sSno"] = Rd["sSno"].ToString().Replace(".", "");
+                    }
+                    dr["sName"] = Rd["sName"].ToString();
+                    dr["sPeriod"] = Rd["sPeriod"].ToString();
+                    dr["sMajor"] = Rd["sMajor"].ToString();
+                    dr["sWMajor"] = ddlWMajor1.SelectedItem.Text;
+                    dr["sWMajor2"] = ddlWMajor2.SelectedItem.Text;
+                    dr["sWMajor3"] = ddlWMajor3.SelectedItem.Text;
+                    if (!Rd["dHS"].Equals(DBNull.Value))
+                    {
+                        dr["dHS"] = Convert.ToDecimal(Rd["dHS"].ToString());
+                    }
+                    if (!Rd["dScore"].Equals(DBNull.Value))
+                    {
+                        dr["dScore"] = Convert.ToDecimal(Rd["dScore"].ToString());
+                        dr["sENG"] = Rd["sENG"].ToString();
+                    }
+                    dr["sPhone1"] = Rd["sPhone1"].ToString();
+                    dr["sPhone2"] = Rd["sPhone2"].ToString();
+                    dr["dEntered"] = Rd["dEntered"].ToString();
+                    dr["sEntered"] = Rd["sEntered"].ToString();
+                    dr["dEnrolled"] = Rd["dEnrolled"].ToString();
+                    iYear = Convert.ToInt32(Rd["iYear"].ToString());
+                    dr["sYear"] = iYear.ToString() + " / " + (iYear + 1).ToString();
+                    dr["sSem"] = Rd["sSem"].ToString();
+                    dr["sHSType"] = Rd["sHSType"].ToString();
+                    dr["sHSSource"] = Rd["sHSSource"].ToString();
+                    dr["sPwd"] = Rd["sPWD"].ToString();
+                    dr["sEmail"] = sSno.Replace(".", "") + "@ect.ac.ae";//Rd["sEmail"].ToString();
+                    dr["sECTemail"] = Rd["sECTemail"].ToString();
+                    dt.Rows.Add(dr);
+
+                }
+                Rd.Close();
+                dt.TableName = "Profile";
+                dt.AcceptChanges();
+                ds.Tables.Add(dt);
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return ds;
+        }
+        private void Export(int iType)
+        {
+            ReportDocument myReport = new ReportDocument();
+
+            try
+            {
+                DataSet rptDS = new DataSet();
+
+                rptDS = (DataSet)Session["ReportDS"];
+                string reportPath = "";
+                TextObject txt;
+                switch (iType)
+                {
+                    case 0://Welcome Letter
+                        reportPath = Server.MapPath("Reports/ST_Welcome.rpt");
+                        break;
+                    case 1://Admission Letter
+                        if (LibraryMOD.IsFileVerifiedFromRegistrar(lblStudentId.Text, Campus) == InitializeModule.FALSE_VALUE)
+                        {                            
+                            lbl_Msg.Text = "Please contact the Registrar to verfiy student file";
+                            div_msg.Visible = true;
+                            myReport.Close();
+                            myReport.Dispose();
+                            return;
+                        }
+                        if (lblStudentId.Text.StartsWith("ESM") || lblStudentId.Text.StartsWith("ESF"))
+                        {
+                            reportPath = Server.MapPath("Reports/ST_Admission_ESL.rpt");
+                        }
+                        else
+                        {
+                            reportPath = Server.MapPath("Reports/ST_Admission_Regular.rpt");
+                        }
+                        break;
+                    case 2://Admission From
+                        reportPath = Server.MapPath("Reports/ST_Admission_Form.rpt");
+
+                        break;
+                    case 3://Profile Cover
+                        reportPath = Server.MapPath("Reports/ST_Profile.rpt");
+
+                        break;
+                    case 4://PWD
+                        reportPath = Server.MapPath("Reports/ST_Pwds.rpt");
+
+                        break;
+
+                }
+                myReport.Load(reportPath);
+                myReport.SetDataSource(rptDS);
+
+                //if (iType == 2)
+                //{
+                //    txt = (TextObject)myReport.ReportDefinition.ReportObjects["txtYears"];
+                //    switch (ddlType.SelectedIndex)
+                //    {
+                //        case 0:
+                //            txt.Text = " to the ECT foundation certificate program";
+                //            break;
+                //        case 1:
+                //            txt.Text = " to the ECT two-year diploma program in ";
+                //            break;
+                //        case 2:
+                //            txt.Text = " to the ECT four-year bachelor program in";
+                //            break;
+                //        case 3:
+                //            txt.Text = " as visiting student";
+                //            txt = (TextObject)myReport.ReportDefinition.ReportObjects["txtMajor"];
+                //            txt.ObjectFormat.EnableSuppress = true;
+                //            break;
+                //        case 4:
+                //            txt.Text = " as language center student";
+                //            txt = (TextObject)myReport.ReportDefinition.ReportObjects["txtMajor"];
+                //            txt.ObjectFormat.EnableSuppress = true;
+                //            break;
+                //    }
+                //}                 
+
+
+                //txt.Text = GetCaption();
+                if (iType != 2)
+                {
+                    txt = (TextObject)myReport.ReportDefinition.ReportObjects["UserTXT"];
+                    string sUserName = Session["CurrentUserName"].ToString();
+                    txt.Text = sUserName;
+                }
+
+                myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Page.Response, true, "ECTReport");
+
+            }
+            catch (Exception exp)
+            {
+                //Console.WriteLine("{0} Exception caught.", exp);
+                //divMsg.InnerText = exp.Message;
+            }
+            finally
+            {
+                myReport.Close();
+                myReport.Dispose();
+            }
         }
     }
 }

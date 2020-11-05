@@ -542,8 +542,8 @@
                                                          <asp:LinkButton ID="lnk_delete" runat="server" CssClass="btn btn-danger btn-sm" ToolTip="Delete Student" ValidationGroup="SD" OnClick="lnk_delete_Click" onclientclick="return DeleteConfirm();"><i class="fa fa-close"></i> Delete</asp:LinkButton>
                                                          <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Back" OnClick="lnk_Cancel_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
 
-                                                           <asp:Label ID="lblStudentId" runat="server" Font-Size="Small" Width="100px" 
-                                                        CssClass="style11"></asp:Label>
+                                                           <%--<asp:Label ID="lblStudentId" runat="server" Font-Size="Small" Width="100px" 
+                                                        CssClass="style11"></asp:Label>--%>
                                                      </div>
 
                                                      </div>
@@ -1358,7 +1358,474 @@
                                                     
                                                         <%--Start View 2--%>
                                                         <asp:View ID="View2" runat="server">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <h3 style="text-align: center; color: #ff7f50">Enrollment</h3>
+                                                                <br />
+                                                                <asp:ValidationSummary ID="ValidationSummary3" runat="server" 
+                                                        ValidationGroup="E" />
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="x_panel">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Term</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:DropDownList ID="ddlEnrollmentTerm" runat="server"
+                                                                                DataTextField="LongDesc" DataValueField="Term" TabIndex="71" CssClass="form-control">
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </div>
+                                                                           <div class="form-group row">
+                                                                               &nbsp;&nbsp; &nbsp;
+                                                                    <asp:CheckBox ID="chkActive" runat="server" Checked="True" Text="&nbsp;&nbsp;Active"
+                                                                        TabIndex="72"  ForeColor="Blue"
+                                                                        AutoPostBack="True" OnCheckedChanged="chkActive_CheckedChanged" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <asp:CheckBox ID="chkMissing" runat="server" Text="&nbsp;&nbsp;Is File Not Complete"
+                                                                        TabIndex="73"  ForeColor="Black" OnCheckedChanged="chkMissing_CheckedChanged" />
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Opportunity ID</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:TextBox ID="txtOpportunityID" runat="server" TabIndex="75"
+                                                                                ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
+                                                                            <asp:LinkButton ID="lnkOpportunity" runat="server" 
+                                                                            Font-Underline="True" OnCommand="lnkOpportunity_Command"
+                                                                            ToolTip="Do that after you save please.">Set CRM Opportunity</asp:LinkButton>
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server"
+                                                                                ControlToValidate="txtOpportunityID" Display="Dynamic"
+                                                                                ErrorMessage="Opportunity ID is required" SetFocusOnError="True"
+                                                                                ToolTip="Provided by CX" ValidationGroup="E">*</asp:RequiredFieldValidator>
+                                                                            <asp:RangeValidator ID="RangeValidator9" runat="server"
+                                                                                ControlToValidate="txtOpportunityID" Display="Dynamic"
+                                                                                ErrorMessage="Numeric Only" MaximumValue="1000000" MinimumValue="0"
+                                                                                SetFocusOnError="True" ToolTip="Provided by CX" Type="Integer"
+                                                                                ValidationGroup="E">*</asp:RangeValidator>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Contact ID</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:TextBox ID="txtContactID" runat="server" TabIndex="75"
+                                                                                ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
+                                                                            <asp:LinkButton ID="lnkGet" runat="server" OnCommand="lnkGet_Command"
+                                                                             Font-Strikeout="False" Font-Underline="True"
+                                                                            ToolTip="Get current student CX contact ID.">Get from CRM</asp:LinkButton>
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server"
+                                                                                ControlToValidate="txtContactID" Display="Dynamic"
+                                                                                ErrorMessage="Contact ID is required" SetFocusOnError="True"
+                                                                                ToolTip="Provided by CX" ValidationGroup="E">*</asp:RequiredFieldValidator>
+                                                                            <asp:RangeValidator ID="RangeValidator10" runat="server"
+                                                                                ControlToValidate="txtContactID" Display="Dynamic" ErrorMessage="Numeric Only"
+                                                                                MaximumValue="1000000" MinimumValue="0" SetFocusOnError="True"
+                                                                                ToolTip="Provided by CX" Type="Integer" ValidationGroup="E">*</asp:RangeValidator>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Acceptance Type</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:DropDownList ID="ddlAcceptance" runat="server" DataSourceID="AcceptanceDs"
+                                                                                DataTextField="sAcceptanceTypeEn" DataValueField="iAcceptanceType"
+                                                                                TabIndex="71" ToolTip="Can be changed by Admission and Head of Registration"
+                                                                                CssClass="form-control">
+                                                                            </asp:DropDownList>
+                                                                            <asp:SqlDataSource ID="AcceptanceDs" runat="server"
+                                                                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+                                                                                SelectCommand="SELECT [iAcceptanceType], [sAcceptanceTypeEn] FROM [Lkp_Acceptance_Type] ORDER BY [iAcceptanceType]"></asp:SqlDataSource>
+                                                                        </div>
+                                                                    </div>
+                                                                        <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Acceptance Condition</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:DropDownList ID="ddlAcceptanceCondition" runat="server"
+                                                                                DataSourceID="AcceptanceConditionDs" DataTextField="sAcceptanceConditionEn"
+                                                                                DataValueField="iAcceptanceCondition" TabIndex="71"
+                                                                                ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control">
+                                                                            </asp:DropDownList>
+                                                                            <asp:SqlDataSource ID="AcceptanceConditionDs" runat="server"
+                                                                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+                                                                                SelectCommand="SELECT [iAcceptanceCondition], [sAcceptanceConditionEn] FROM [Lkp_Acceptance_Condition] ORDER BY [iAcceptanceCondition]"></asp:SqlDataSource>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Admission Status</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:DropDownList ID="ddlAdmissionStatus" runat="server"
+                                                                                DataSourceID="AdmissionStatusDs" DataTextField="sAdmissionStatusEn"
+                                                                                DataValueField="iAdmissionStatus" TabIndex="71"
+                                                                                ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control">
+                                                                            </asp:DropDownList>
+                                                                            <asp:SqlDataSource ID="AdmissionStatusDs" runat="server"
+                                                                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+                                                                                SelectCommand="SELECT [iAdmissionStatus], [sAdmissionStatusEn] FROM [Lkp_Admission_Status] ORDER BY [iAdmissionStatus]"></asp:SqlDataSource>
+                                                                        </div>
+                                                                    </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Application No</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="lblECTId" runat="server" ReadOnly="true"
+                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Student ID</label>
+                                                                        <div class="col-md-8 col-sm-8 ">
+                                                                            <asp:TextBox ID="lblStudentId" runat="server" ReadOnly="true"
+                                                                                CssClass="form-control"></asp:TextBox>
+                                                                        </div>
+                                                                    </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Date</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="lblDateEnrolled" runat="server" ReadOnly="true"
+                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Reference ID</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="lblReference" runat="server" ReadOnly="true"
+                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                           <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Type</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True"
+                                                                                    TabIndex="74" CssClass="form-control">
+                                                                                    <asp:ListItem Value="2">Foundation</asp:ListItem>
+                                                                                    <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
+                                                                                    <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
+                                                                                    <asp:ListItem Value="3">Bachelor</asp:ListItem>
+                                                                                    <asp:ListItem Value="1">Visiting</asp:ListItem>
+                                                                                    <asp:ListItem Value="4">Language Center</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                         <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4" style="color:#FF3300">ORCID</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtORCID" runat="server"  TabIndex="75"
+                                                                                    CssClass="form-control">NA</asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                            <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Is Military Service</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:CheckBox ID="ChkIsMilitaryService" runat="server" AutoPostBack="True"
+                                                                                    OnCheckedChanged="ChkIsMilitaryService_CheckedChanged" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Date of Military Service</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtMilitaryServiceDate" runat="server" TabIndex="45"
+                                                                                    ToolTip="mm/dd/yyyy" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                                                                <asp:RangeValidator ID="RangeValidator8" runat="server"
+                                                                                    ControlToValidate="txtMilitaryServiceDate" Display="Dynamic"
+                                                                                    ErrorMessage="Date Only" MaximumValue="01/01/3000" MinimumValue="01/01/1900"
+                                                                                    SetFocusOnError="True" Type="Date" ValidationGroup="E">mm/dd/yyyy</asp:RangeValidator>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                        <p class="text-muted well well-sm no-shadow" style="margin-top: 5px;">
+                                                                            Status
+                                                                        </p>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Status</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlStatus" runat="server" DataTextField="strReasonDesc"
+                                                                                    DataValueField="byteReason" Enabled="False" TabIndex="87" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Term</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlStatusTerm" runat="server" DataTextField="LongDesc"
+                                                                                    DataValueField="Term" Enabled="False" TabIndex="88" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Major Reason</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlReason" runat="server" AutoPostBack="True"
+                                                                                    DataTextField="strMainReasonEn" DataValueField="byteMainReason" Enabled="False"
+                                                                                    TabIndex="89" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Minor Reason</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlSubReason" runat="server" DataSourceID="SubReasonDS"
+                                                                                    DataTextField="strSubReasonEn" DataValueField="byteSubReson" Enabled="False"
+                                                                                    TabIndex="90" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Date</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="lblDateStatus" runat="server" ReadOnly="true"
+                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4"></label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:CheckBox ID="chkCompleteBAFromOtherInstitution" runat="server"
+                                                                                    Enabled="False" Style="color: #0000FF; font-weight: bold" TabIndex="91"
+                                                                                    Text="&nbsp;&nbsp;Is complete BA from other  institution" />
+                                                                            </div>
+                                                                        </div>
+                                                                          <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4"></label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:CheckBox ID="chkCompleteMasterFromOtherInstitution" runat="server" 
+                                                        Enabled="False" style="color: #CC6600; font-weight: bold" TabIndex="92" 
+                                                        Text="&nbsp;&nbsp;Is complete Master from other  institution" />
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                </div>
 
+                                                                <style>
+                                                                    .well {
+    min-height: 20px;
+    padding: 0px;
+    margin-bottom: 20px;
+    background-color: #3f658c;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+                                                                    .text-muted {
+    color: #ffffff!important;
+    font-size: large;
+    text-align: center;
+}
+                                                                </style>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="x_panel">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Current Major</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlMajor" runat="server" DataSourceID="MajorDS"
+                                                                                    DataTextField="strMajor" DataValueField="strKey" TabIndex="76"
+                                                                                    CssClass="form-control" OnSelectedIndexChanged="ddlMajor_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Preferred Major 1</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlWMajor1" runat="server" DataSourceID="WMajorDS"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="77"
+                                                                                    CssClass="form-control" AutoPostBack="True"
+                                                                                    OnSelectedIndexChanged="ddlWMajor1_SelectedIndexChanged">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Preferred Major 2</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlWMajor2" runat="server" DataSourceID="WMajorDS"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="78"
+                                                                                    CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Preferred Major 3</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlWMajor3" runat="server" DataSourceID="WMajorDS"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="79"
+                                                                                    CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Advisor</label>
+                                                                            <div class="col-md-6 col-sm-6 ">
+                                                                                <asp:DropDownList ID="ddlAdvisor" runat="server"
+                                                                                    DataTextField="strLecturerDescEn" DataValueField="intLecturer" TabIndex="80"
+                                                                                    CssClass="form-control" Enabled="False">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                            <div class="col-md-2 col-sm-2 ">
+                                                                                <asp:Button ID="btnSetAdvisor" runat="server" OnClick="btnSetAdvisor_Click"
+                                                                                    Text="Set" CssClass="btn btn-success btn-sm"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Note</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtNote" runat="server" Height="90px" TabIndex="81"
+                                                                                    TextMode="MultiLine" CssClass="form-control">-</asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <hr />
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Referred By</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtReferredBy" runat="server" TabIndex="82"
+                                                                                    ToolTip="The ID of the studet that referred the current" CssClass="form-control">NA</asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">How did you hear about ECT (Source)?</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlEnrollmentSource" runat="server" CssClass="form-control"
+                                                                                    OnSelectedIndexChanged="ddlEnrollmentSource_SelectedIndexChanged"
+                                                                                    DataSourceID="SourcesDS"
+                                                                                    DataTextField="DescEn" DataValueField="MinorID" TabIndex="83">
+                                                                                </asp:DropDownList>
+                                                                                <asp:SqlDataSource ID="SourcesDS" runat="server"
+                                                                                    ConnectionString="<%$ ConnectionStrings:ECTDataNew %>"
+                                                                                    SelectCommand="SELECT MinorID, DescEn FROM Cmn_LookupDetails WHERE (MajorID = @MajorID) ORDER BY DescEn">
+                                                                                    <SelectParameters>
+                                                                                        <asp:Parameter DefaultValue="3004" Name="MajorID" Type="Int32" />
+                                                                                    </SelectParameters>
+                                                                                </asp:SqlDataSource>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Other Source</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtEnrollmentSource" runat="server" OnTextChanged="txtEnrollmentSource_TextChanged"
+                                                                                    CssClass="form-control" TabIndex="84">-</asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server"
+                                                                                    ControlToValidate="txtEnrollmentSource"
+                                                                                    ErrorMessage="Please enter the other source" ValidationGroup="E">*</asp:RequiredFieldValidator>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">How did you hear about ECT (Second Source)?</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlEnrollmentSource2" runat="server"
+                                                                                    DataSourceID="SourcesDS" DataTextField="DescEn" DataValueField="MinorID"
+                                                                                    OnSelectedIndexChanged="ddlEnrollmentSource_SelectedIndexChanged"
+                                                                                    CssClass="form-control" TabIndex="85">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Registered through</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlRegisteredThrough" runat="server"
+                                                                                    CssClass="form-control" TabIndex="86">
+                                                                                    <asp:ListItem Selected="True" Value="1">General</asp:ListItem>
+                                                                                    <asp:ListItem Value="2">Corporate agreements</asp:ListItem>
+                                                                                    <asp:ListItem Value="3">Schools Visits</asp:ListItem>
+                                                                                    <asp:ListItem Value="4">Ana Wasadeeqi</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                    <%--    <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Is Military Service</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:CheckBox ID="ChkIsMilitaryService" runat="server" AutoPostBack="True"
+                                                                                    OnCheckedChanged="ChkIsMilitaryService_CheckedChanged" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Date of Military Service</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtMilitaryServiceDate" runat="server" TabIndex="45"
+                                                                                    ToolTip="mm/dd/yyyy" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                                                                <asp:RangeValidator ID="RangeValidator8" runat="server"
+                                                                                    ControlToValidate="txtMilitaryServiceDate" Display="Dynamic"
+                                                                                    ErrorMessage="Date Only" MaximumValue="01/01/3000" MinimumValue="01/01/1900"
+                                                                                    SetFocusOnError="True" Type="Date" ValidationGroup="E">mm/dd/yyyy</asp:RangeValidator>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />--%>
+                                                                        <p class="text-muted well well-sm no-shadow" style="margin-top: 5px;">
+                                                                            Last Degree
+                                                                        </p>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Last Degree</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlLastDegree" runat="server"
+                                                                                    DataTextField="strDegreeDescEn" DataValueField="strDegree"
+                                                                                    TabIndex="93" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Institution</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlLastInistitution" runat="server" DataTextField="strCollegeDescEn"
+                                                                                    DataValueField="byteCollege" TabIndex="94" CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Country</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlLastCountry" runat="server" AutoPostBack="True" DataTextField="strCountryDescEn"
+                                                                                    DataValueField="byteCountry"
+                                                                                    OnSelectedIndexChanged="ddlQCountry_SelectedIndexChanged" TabIndex="95"
+                                                                                    CssClass="form-control">
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Year</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                 <asp:TextBox ID="txtLastYear" runat="server" TabIndex="96" CssClass="form-control">9999</asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">CGPA</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                 <asp:TextBox ID="txtLastCGPA" runat="server" TabIndex="97" CssClass="form-control"></asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Equivalency Indicator</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlLHEquivalencyIndicator" runat="server" TabIndex="98"
+                                                                                    CssClass="form-control">
+                                                                                    <asp:ListItem Selected="True" Value="T">CAA accredited UAE universities</asp:ListItem>
+                                                                                    <asp:ListItem Value="Y">Equivalency has been received</asp:ListItem>
+                                                                                    <asp:ListItem Value="R">Rejected</asp:ListItem>
+                                                                                    <asp:ListItem Value="A">Applied</asp:ListItem>
+                                                                                    <asp:ListItem Value="N">Not Applied Yet</asp:ListItem>
+                                                                                    <asp:ListItem Value="U">Equivalency status unknown</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Equivalency App No.</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:TextBox ID="txtLHEquivalencyAppNo" runat="server" TabIndex="99"
+                                                                                    CssClass="form-control">NA</asp:TextBox>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                        <br />
+                                                                        <div class="form-group row">
+                                                                            <asp:LinkButton ID="SaveE_btn" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Save Enrollment" ValidationGroup="E" OnClick="SaveE_btn_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                                                                            <asp:LinkButton ID="UndoE_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Undo" ValidationGroup="None" OnClick="UndoQ_btn_Click"><i class="fa fa-reply"></i> Undo</asp:LinkButton>
+                                                                            <asp:LinkButton ID="AddESLs" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Add ESLs" OnClick="AddESLs_Click"><i class="fa fa-plus"></i> Add ESLs</asp:LinkButton>
+                                                                            <asp:LinkButton ID="Print_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Print as PDF" OnClick="Print_btn_Click"><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                                                            <asp:DropDownList ID="ddlPrinting" runat="server" TabIndex="100" Height="30px">
+                                                                                <asp:ListItem Value="0">Welcome letter</asp:ListItem>
+                                                                                <asp:ListItem Value="1">Admission Letter</asp:ListItem>
+                                                                                <asp:ListItem Value="2">Admission Form</asp:ListItem>
+                                                                                <asp:ListItem Value="3">Profile Cover</asp:ListItem>
+                                                                                <asp:ListItem Value="4" Selected="True">Pwd</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
                                                         </asp:View>
                                                         <%--End View 2--%>
 
@@ -1413,6 +1880,26 @@
                 Name="byteCountry" PropertyName="SelectedValue" Type="Int16" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="WMajorDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>"
+        SelectCommand="SELECT [MajorID], [MajorDescEn] FROM [Lkp_FoundationMajors] ORDER BY [MajorID]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="MajorDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+        SelectCommand="SELECT [strKey], [strMajor] FROM [Reg_Specializations] WHERE ([intCenter] = @intCenter) ORDER BY [intSerial]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlType" DefaultValue="0" Name="intCenter"
+                PropertyName="SelectedValue" Type="Int16" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SubReasonDS" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
+        SelectCommand="SELECT [byteSubReson], [strSubReasonEn] FROM [Lkp_SubReasons] WHERE ([byteMainReason] = @byteMainReason) ORDER BY [strSubReasonEn]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlReason" DefaultValue="0"
+                Name="byteMainReason" PropertyName="SelectedValue" Type="Int16" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+   
                             <asp:SqlDataSource ID="StudentDS" runat="server" 
                                 ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
                                 InsertCommand="AddStudent" 
@@ -1644,6 +2131,179 @@
                                         PropertyName="Value" Type="String" />
                                 </InsertParameters>
                             </asp:SqlDataSource>
+
+                            <asp:SqlDataSource ID="EnrollmentDS" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
+                                InsertCommand="INSERT INTO Reg_Applications(intStudyYear, byteSemester, strApplicationNumber, lngStudentNumber, dateApplication, lngSerial, strCollege, strDegree, strSpecialization, bAccepted, dateAccepted, strNotes, bActive, bContinue, bOtherCollege, intAdvisor, byteStudentType, IsCompleteBAFromOtherInstitution, IsCompleteMasterFromOtherInstitution, strUserCreate, dateCreate, strNUser, sReference, intRemind, WantedMajorID, sReferredBy, iEnrollmentSource, sEnrollmentNotes, iRegisteredThrough, sECTId, iEnrollmentSource2, WantedMajorID2, WantedMajorID3, byteLastDegreeInistitution, byteLastDegreeCountry, curLastCGPA, intLastDegreeYear, sLastDegree, LHEEquivalencyIndicator, LHEEquivalencyAppNo, Std_ORCID, isMilitaryService, dateMilitaryService, iContactID, iOpportunityID, iAcceptanceType, iAcceptanceCondition, iAdmissionStatus) VALUES (@intStudyYear, @byteSemester, @lngStudentNumber, @lngStudentNumber, GETDATE(), @lngSerial, @strCollege, @strDegree, @strSpecialization, 1, GETDATE(), @strNotes, @bActive, @bContinue, 0, @intAdvisor, @byteStudentType, @IsCompleteBAFromOtherInstitution, @IsCompleteMasterFromOtherInstitution, @strUserCreate, GETDATE(), @strUserCreate, @sReference, @intRemind, @WMajor, @sReferredBy, @iEnrollmentSource, @sEnrollmentNotes, @iRegisteredThrough, @sECTId, @iEnrollmentSource2, @WMajor2, @WMajor3, @byteLastDegreeInistitution, @byteLastDegreeCountry, @curLastCGPA, @intLastDegreeYear, @sLastDegree, @LHEEquivalencyIndicator, @LHEEquivalencyAppNo, @Std_ORCID, @isMilitaryService, @dateMilitaryService, @iContactID, @iOpportunityID, @iAcceptanceType, @iAcceptanceCondition, @iAdmissionStatus)" 
+                                ProviderName="<%$ ConnectionStrings:ECTDataMales.ProviderName %>" 
+                                
+                                UpdateCommand="UPDATE Reg_Applications SET strNotes = @strNotes, intAdvisor = @intAdvisor, IsCompleteBAFromOtherInstitution = @IsCompleteBAFromOtherInstitution, IsCompleteMasterFromOtherInstitution = @IsCompleteMasterFromOtherInstitution, iEnrollmentSource = @iEnrollmentSource, sEnrollmentNotes = @sEnrollmentNotes, iRegisteredThrough = @iRegisteredThrough, strUserSave = @strUserSave, dateLastSave = GETDATE(), strNUser = @strUserSave, bActive = @bActive, bContinue = @bContinue, WantedMajorID = @WMajor, sReferredBy = @sReferredBy, iEnrollmentSource2 = @iEnrollmentSource2, WantedMajorID2 = @WMajor2, WantedMajorID3 = @WMajor3, byteLastDegreeInistitution = @byteLastDegreeInistitution, byteLastDegreeCountry = @byteLastDegreeCountry, curLastCGPA = @curLastCGPA, intLastDegreeYear = @intLastDegreeYear, sLastDegree = @sLastDegree, LHEEquivalencyIndicator = @LHEEquivalencyIndicator, LHEEquivalencyAppNo = @LHEEquivalencyAppNo, Std_ORCID = @Std_ORCID, isMilitaryService = @isMilitaryService, dateMilitaryService = @dateMilitaryService, iContactID = @iContactID, iOpportunityID = @iOpportunityID, iAcceptanceType = @iAcceptanceType, iAcceptanceCondition = @iAcceptanceCondition, iAdmissionStatus = @iAdmissionStatus WHERE (lngStudentNumber = @lngStudentNumber) AND (lngSerial = @lngSerial)" 
+                                
+                                
+                                
+                                DeleteCommand="DELETE FROM Reg_Applications WHERE (lngSerial = @lngSerial)">
+                                <DeleteParameters>
+                                    <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                        PropertyName="Value" />
+                                </DeleteParameters>
+                                <UpdateParameters>
+                                    <asp:ControlParameter ControlID="ddlAdvisor" DefaultValue="1000" 
+                                        Name="intAdvisor" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtNote" Name="strNotes" PropertyName="Text" />
+                                    <asp:SessionParameter DefaultValue="-" Name="strUserSave" 
+                                        SessionField="CurrentUserName" />
+                                    <asp:ControlParameter ControlID="lblStudentId" DefaultValue="-" 
+                                        Name="lngStudentNumber" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                        PropertyName="Value" />
+                                    <asp:ControlParameter ControlID="chkActive" DefaultValue="1" Name="bActive" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="chkMissing" DefaultValue="0" Name="bContinue" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="ddlWMajor1" DefaultValue="0" Name="WMajor" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtReferredBy" DefaultValue="-" 
+                                        Name="sReferredBy" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="chkCompleteBAFromOtherInstitution" DefaultValue="1" Name="IsCompleteBAFromOtherInstitution" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="chkCompleteMasterFromOtherInstitution" DefaultValue="1" Name="IsCompleteMasterFromOtherInstitution" 
+                                        PropertyName="Checked" />
+                                     <asp:ControlParameter ControlID="ddlEnrollmentSource" DefaultValue="-1" 
+                                        Name="iEnrollmentSource" PropertyName="SelectedValue" />
+                                      <asp:ControlParameter ControlID="txtEnrollmentSource" DefaultValue="-" 
+                                        Name="sEnrollmentNotes" PropertyName="Text" />  
+                                        <asp:ControlParameter ControlID="ddlRegisteredThrough" DefaultValue="-1" 
+                                        Name="iRegisteredThrough" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlEnrollmentSource2" DefaultValue="0" 
+                                        Name="iEnrollmentSource2" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlWMajor2" DefaultValue="0" Name="WMajor2" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlWMajor3" DefaultValue="0" Name="WMajor3" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLastInistitution" DefaultValue="-1" 
+                                        Name="byteLastDegreeInistitution" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLastCountry" DefaultValue="1" 
+                                        Name="byteLastDegreeCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtLastCGPA" DefaultValue="0" 
+                                        Name="curLastCGPA" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLastYear" DefaultValue="999999" 
+                                        Name="intLastDegreeYear" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlLastDegree" DefaultValue="0" 
+                                        Name="sLastDegree" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLHEquivalencyIndicator" DefaultValue="0" 
+                                        Name="LHEEquivalencyIndicator" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtLHEquivalencyAppNo" DefaultValue="NA" 
+                                        Name="LHEEquivalencyAppNo" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtORCID" DefaultValue="NA" Name="Std_ORCID" 
+                                        PropertyName="Text" />
+                                     <asp:ControlParameter ControlID="ChkIsMilitaryService" DefaultValue="1" Name="isMilitaryService" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="txtMilitaryServiceDate" DefaultValue="'1977-01-01'" 
+                                        Name="dateMilitaryService" PropertyName="Text" DbType="Date"/>
+                                    <asp:ControlParameter ControlID="txtContactID" DefaultValue="0" 
+                                        Name="iContactID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtOpportunityID" DefaultValue="0" 
+                                        Name="iOpportunityID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlAcceptance" DefaultValue="1" 
+                                        Name="iAcceptanceType" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlAcceptanceCondition" DefaultValue="1" 
+                                        Name="iAcceptanceCondition" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlAdmissionStatus" DefaultValue="1" 
+                                        Name="iAdmissionStatus" PropertyName="SelectedValue" />
+                                </UpdateParameters>
+                                <InsertParameters>
+                                    <asp:Parameter DefaultValue="0" Name="intStudyYear" />
+                                    <asp:Parameter DefaultValue="0" Name="byteSemester" />
+                                    <asp:Parameter Name="strCollege" DefaultValue="1" />
+                                    <asp:Parameter Name="strDegree" DefaultValue="1" />
+                                    <asp:Parameter Name="strSpecialization" DefaultValue="20" />
+                                    <asp:Parameter Name="intRemind" DefaultValue="80" />
+                                    <asp:ControlParameter ControlID="lblStudentId" DefaultValue="-" 
+                                        Name="lngStudentNumber" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                        PropertyName="Value" />
+                                    <asp:ControlParameter ControlID="txtNote" DefaultValue="-" Name="strNotes" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlType" DefaultValue="0" 
+                                        Name="byteStudentType" PropertyName="SelectedValue" />
+                                    <asp:SessionParameter DefaultValue="-" Name="strUserCreate" 
+                                        SessionField="CurrentUserName" />
+                                    <asp:ControlParameter ControlID="lblReference" DefaultValue="" 
+                                        Name="sReference" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlAdvisor" DefaultValue="1000" 
+                                        Name="intAdvisor" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="chkActive" DefaultValue="1" Name="bActive" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="chkMissing" DefaultValue="0" Name="bContinue" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="ddlWMajor1" DefaultValue="0" Name="WMajor" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtReferredBy" DefaultValue="-" 
+                                        Name="sReferredBy" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="chkCompleteBAFromOtherInstitution" DefaultValue="1" Name="IsCompleteBAFromOtherInstitution" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="chkCompleteMasterFromOtherInstitution" DefaultValue="1" Name="IsCompleteMasterFromOtherInstitution" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="ddlEnrollmentSource" DefaultValue="0" 
+                                        Name="iEnrollmentSource" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtEnrollmentSource" DefaultValue="-" 
+                                        Name="sEnrollmentNotes" PropertyName="Text" />  
+                                         <asp:ControlParameter ControlID="ddlRegisteredThrough" DefaultValue="0" 
+                                        Name="iRegisteredThrough" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="lblECTId" DefaultValue="0" Name="sECTId" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlEnrollmentSource2" DefaultValue="0" 
+                                        Name="iEnrollmentSource2" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlWMajor2" DefaultValue="0" Name="WMajor2" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlWMajor3" DefaultValue="0" Name="WMajor3" 
+                                        PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLastInistitution" DefaultValue="-1" 
+                                        Name="byteLastDegreeInistitution" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLastCountry" DefaultValue="1" 
+                                        Name="byteLastDegreeCountry" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtLastCGPA" DefaultValue="0" 
+                                        Name="curLastCGPA" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtLastYear" DefaultValue="999999" 
+                                        Name="intLastDegreeYear" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlLastDegree" DefaultValue="0" 
+                                        Name="sLastDegree" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlLHEquivalencyIndicator" DefaultValue="M" 
+                                        Name="LHEEquivalencyIndicator" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="txtLHEquivalencyAppNo" DefaultValue="NA" 
+                                        Name="LHEEquivalencyAppNo" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtORCID" DefaultValue="NA" Name="Std_ORCID" 
+                                        PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ChkIsMilitaryService" DefaultValue="1" Name="isMilitaryService" 
+                                        PropertyName="Checked" />
+                                    <asp:ControlParameter ControlID="txtMilitaryServiceDate" DefaultValue="getdate()" 
+                                        Name="dateMilitaryService" PropertyName="Text" DbType="Date"/>
+                                    <asp:ControlParameter ControlID="txtContactID" DefaultValue="0" 
+                                        Name="iContactID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="txtOpportunityID" DefaultValue="0" 
+                                        Name="iOpportunityID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="ddlAcceptance" DefaultValue="1" 
+                                        Name="iAcceptanceType" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlAcceptanceCondition" DefaultValue="1" 
+                                        Name="iAcceptanceCondition" PropertyName="SelectedValue" />
+                                    <asp:ControlParameter ControlID="ddlAdmissionStatus" DefaultValue="1" 
+                                        Name="iAdmissionStatus" PropertyName="SelectedValue" />
+                                </InsertParameters>
+                            </asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SidDS" runat="server" 
+                                ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>" 
+                                onselected="SidDS_Selected" 
+                                ProviderName="<%$ ConnectionStrings:ECTDataFemales.ProviderName %>" 
+                                SelectCommand="GetNew_StId" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="String" />
+                                    <asp:Parameter DefaultValue="0" Name="iType" Type="Int32" />
+                                    <asp:Parameter DefaultValue="2019" Name="iYear" Type="Int32" />
+                                    <asp:Parameter DefaultValue="2" Name="iSem" Type="Int32" />
+                                    <asp:Parameter DefaultValue="1" Name="iCampus" Type="Int32" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+
 
     <script type="text/javascript">
         function DeleteConfirm() {
