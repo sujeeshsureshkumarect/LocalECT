@@ -347,8 +347,8 @@
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtECTEmail" runat="server" CssClass="form-control" TabIndex="25"
                                                                 Enabled="False" ReadOnly="True"></asp:TextBox>
-                                                            <asp:Button ID="btnCreateEmail" runat="server" CssClass="btn btn-success btn-sm"
-                                                                Text="Create Email" Visible="false" onclick="btnCreateEmail_Click" />
+                                                            <asp:LinkButton ID="btnCreateEmail" runat="server" ForeColor="blue"
+                                                                Text="Create Email" Visible="true" onclick="btnCreateEmail_Click" />
                                                         </div>
                                                     </div>
                                                        <div class="form-group row">
@@ -1518,7 +1518,7 @@
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
                                                                             <asp:LinkButton ID="lnkOpportunity" runat="server" 
                                                                             Font-Underline="True" OnCommand="lnkOpportunity_Command"
-                                                                            ToolTip="Do that after you save please.">Set CRM Opportunity</asp:LinkButton>
+                                                                            ToolTip="Do that after you save please." ForeColor="Blue">Set CRM Opportunity</asp:LinkButton>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server"
                                                                                 ControlToValidate="txtOpportunityID" Display="Dynamic"
                                                                                 ErrorMessage="Opportunity ID is required" SetFocusOnError="True"
@@ -1537,7 +1537,7 @@
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
                                                                             <asp:LinkButton ID="lnkGet" runat="server" OnCommand="lnkGet_Command"
                                                                              Font-Strikeout="False" Font-Underline="True"
-                                                                            ToolTip="Get current student CX contact ID.">Get from CRM</asp:LinkButton>
+                                                                            ToolTip="Get current student CX contact ID." ForeColor="Blue">Get from CRM</asp:LinkButton>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server"
                                                                                 ControlToValidate="txtContactID" Display="Dynamic"
                                                                                 ErrorMessage="Contact ID is required" SetFocusOnError="True"
@@ -1943,7 +1943,7 @@
                                                                             <asp:LinkButton ID="UndoE_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Undo" ValidationGroup="None" OnClick="UndoQ_btn_Click"><i class="fa fa-reply"></i> Undo</asp:LinkButton>
                                                                             <asp:LinkButton ID="AddESLs" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Add ESLs" OnClick="AddESLs_Click"><i class="fa fa-plus"></i> Add ESLs</asp:LinkButton>
                                                                             <asp:LinkButton ID="Print_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Print as PDF" OnClick="Print_btn_Click"><i class="fa fa-print"></i> Print</asp:LinkButton>
-                                                                            <asp:DropDownList ID="ddlPrinting" runat="server" TabIndex="100" Height="30px">
+                                                                            <asp:DropDownList ID="ddlPrinting" runat="server" TabIndex="100" CssClass="form-control" Width="27%">
                                                                                 <asp:ListItem Value="0">Welcome letter</asp:ListItem>
                                                                                 <asp:ListItem Value="1">Admission Letter</asp:ListItem>
                                                                                 <asp:ListItem Value="2">Admission Form</asp:ListItem>

@@ -122,7 +122,7 @@ namespace LocalECT
                             else
                             {
                                 lnk_Save.Visible = true;
-                            }
+                            }                           
                         }
                         //New Student
                         else
@@ -242,21 +242,24 @@ namespace LocalECT
                     iVerificationResult = LibraryMOD.IsFileVerifiedFromRegistrar(lblStudentId.Text, Campus);
                     if (iVerificationResult == InitializeModule.FALSE_VALUE)
                     {
-                        lblIsVerfiedFromRegistrar.Text = "Warning: UnVerfied from the Registrar";
+                        lblIsVerfiedFromRegistrar.Text = "Warning: UnVerified from the Registrar";
                         lblIsVerfiedFromRegistrar.ForeColor = Color.Red;
                     }
                     if (iVerificationResult == InitializeModule.TRUE_VALUE)
                     {
-                        lblIsVerfiedFromRegistrar.Text = "Verfied from the Registrar";
+                        lblIsVerfiedFromRegistrar.Text = "Verified from the Registrar";
                         lblIsVerfiedFromRegistrar.ForeColor = Color.Green;  //#009933
                     }
                     if (iVerificationResult == 2)
                     {
-                        lblIsVerfiedFromRegistrar.Text = "verification not mandatory for current file";
+                        lblIsVerfiedFromRegistrar.Text = "Verification not mandatory for current file";
                         lblIsVerfiedFromRegistrar.ForeColor = Color.Green;  //#009933
                     }
 
-
+                    if (txtECTEmail.Text != "" && txtECTEmail.Text != null)
+                    {
+                        btnCreateEmail.Visible = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -2707,7 +2710,26 @@ namespace LocalECT
         }
         protected void lnkGet_Command(object sender, CommandEventArgs e)
         {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "test", "getContact();", true);
+            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "getContact();", true);
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            string accessToken = InitializeModule.CxPwd;
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts?q=customFields.c.ect_student_id%3D%27"+ lblStudentId .Text+ "%27"))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                    var task = httpClient.SendAsync(request);
+                    task.Wait();
+                    var response = task.Result;
+                    string s = response.Content.ReadAsStringAsync().Result;
+                    var x = JObject.Parse(s);
+                    var id = x["items"][0]["id"];
+                    txtContactID.Text = id.ToString();
+                }
+            }
         }
         protected void lnkOpportunity_Command(object sender, CommandEventArgs e)
         {
@@ -2736,7 +2758,32 @@ namespace LocalECT
             {
                 if (iOpportunity > 0 && iOpportunity.ToString() == txtOpportunityID.Text)
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                    //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.DefaultConnectionLimit = 9999;
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                    string accessToken = "Basic bG9jYWxlY3Q6RWN0QDIwMjA=";
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/"+ txtOpportunityID.Text + ""))
+                        {
+                            request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                            request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                            request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                            request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                            var task = httpClient.SendAsync(request);
+                            task.Wait();
+                            var response = task.Result;
+                            string s = response.Content.ReadAsStringAsync().Result;
+                            //If Status 200
+                            if(response.IsSuccessStatusCode==true)
+                            {
+                                SetOpportunity(sSID);
+                            }
+                        }
+                    }                   
                 }
                 else
                 {
