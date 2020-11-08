@@ -2762,7 +2762,7 @@ namespace LocalECT
                     ServicePointManager.Expect100Continue = true;
                     ServicePointManager.DefaultConnectionLimit = 9999;
                     ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                    string accessToken = "Basic bG9jYWxlY3Q6RWN0QDIwMjA=";
+                    string accessToken = InitializeModule.CxPwd;
 
                     using (var httpClient = new HttpClient())
                     {
