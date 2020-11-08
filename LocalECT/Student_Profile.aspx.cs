@@ -594,7 +594,8 @@ namespace LocalECT
                     ddlIWork.SelectedValue = Rd["intWorkPlace"].ToString();
                     txtWorkPhone.Text = Rd["strWorkPhone"].ToString();
                     txtJob.Text = Rd["strJopTitle"].ToString();
-                    ddlSponsor.SelectedValue = Rd["intDelegation"].ToString();
+                    //ddlSponsor.SelectedValue = Rd["intDelegation"].ToString();
+                    drp_determination.SelectedValue = Rd["intDelegation"].ToString();
                     ddlVisa.SelectedValue = Rd["intSponsor"].ToString();
                     txtExpiry.Text = string.Format("{0:yyyy-MM-dd}", Rd["dateEndSponsorship"]);
 
@@ -922,6 +923,7 @@ namespace LocalECT
                         break;
                 }
                 ddlSponsor.SelectedValue = "0";
+                drp_determination.SelectedValue = "0";
                 ddlStatus.SelectedIndex = -1;
                 ddlStatusTerm.SelectedIndex = -1;
                 SubReasonDS.DataBind();
@@ -1533,6 +1535,30 @@ namespace LocalECT
                 myDelegations.Clear();
             }
 
+            string constr = ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString;
+            SqlConnection sc = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("select * from Lkp_Determination_Type", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_determination.DataTextField = "DeterminationType";
+                drp_determination.DataValueField = "iSerial";
+                drp_determination.DataSource = dt;
+                drp_determination.DataBind();
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+            }
+            finally
+            {
+                sc.Close();
+            }
         }
 
         private void FillCertificates()
@@ -2547,12 +2573,296 @@ namespace LocalECT
 
         protected void grdQualification_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int Q = Convert.ToInt32("0" + grdQualification.SelectedDataKey["byteQualification"].ToString());
+            Q_Audit.SelectParameters["Qualification"].DefaultValue = Q.ToString();
+            QDV.DataBind();
         }
+        private void enable_disable_Q()
+        {
+            bool IsAllowEditHS = false;
+            bool IsAllowEditEnCertificates = false;
+            bool isAdd = false;
 
+
+            isAdd = (txtQScore.Text == "");
+            IsAllowEditHS = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+            InitializeModule.enumPrivilege.HSCertificateEdit, CurrentRole);
+
+
+
+            IsAllowEditEnCertificates = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+            InitializeModule.enumPrivilege.EnglishCertificateEdit, CurrentRole);
+
+            ddlQMajor.Enabled = false;
+            ddlQCountry.Enabled = false;
+            ddlQualification.Enabled = false;
+            ddlQInstitutionType.Enabled = false;
+            ddlQCity.Enabled = false;
+            ddlQG12_Stream.Enabled = false;
+            ddlQEngGrade.Enabled = false;
+            ddlQEngExamCenter.Enabled = false;
+            txtQScoreofMath.Enabled = false;
+            txtQScoreofChemistry.Enabled = false;
+            txtQScoreofBiology.Enabled = false;
+            txtQScoreofPhysics.Enabled = false;
+            txtQScore.Enabled = false;
+            txtSource.Enabled = false;
+            txtQYear.Enabled = false;
+            txtQDate.Enabled = false;
+            ddlHSSystem.Enabled = false;
+            ddlEquivalencyIndicator.Enabled = false;
+            txtEquivalencyAppNo.Enabled = false;
+
+
+            ddlQEngGrade.SelectedValue = "-";
+
+            switch (ddlQualification.SelectedValue)
+            {
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "15":
+
+                    if (IsAllowEditEnCertificates || isAdd)
+                    {
+                        if (txtQScore.Text == "")
+                        {
+                            ddlQMajor.SelectedValue = "5";
+                        }
+                        ddlQMajor.Enabled = true;
+                        ddlQCountry.Enabled = true;
+                        ddlQualification.Enabled = true;
+                        ddlQInstitutionType.Enabled = false;
+                        ddlQCity.Enabled = true;
+                        ddlQG12_Stream.Enabled = false;
+                        ddlQEngGrade.Enabled = true;
+                        ddlQEngExamCenter.Enabled = true;
+                        txtQScoreofMath.Enabled = false;
+                        txtQScoreofChemistry.Enabled = false;
+                        txtQScoreofBiology.Enabled = false;
+                        txtQScoreofPhysics.Enabled = false;
+                        txtQScore.Enabled = true;
+                        txtSource.Enabled = true;
+                        txtQYear.Enabled = true;
+                        txtQDate.Enabled = true;
+                        ddlHSSystem.Enabled = false;
+                        ddlEquivalencyIndicator.Enabled = false;
+                        txtEquivalencyAppNo.Enabled = false;
+                        if (ddlQualification.SelectedValue == "15")
+                        {
+                            ddlQEngGrade.Enabled = true;
+                            txtQScore.Enabled = false;
+                            txtSource.Text = "City & Guilds";
+                            txtSource.Enabled = false;
+                        }
+                        else
+                        {
+                            ddlQEngGrade.Enabled = false;
+                            txtQScore.Enabled = true;
+                            txtSource.Enabled = true;
+                        }
+
+                    }
+                    break;
+                case "1":
+                    if (IsAllowEditHS || isAdd)
+                    {
+                        if (txtQScore.Text == "")
+                        {
+                            ddlQMajor.SelectedValue = "21";
+                        }
+                        ddlQMajor.Enabled = true;
+                        ddlQCountry.Enabled = true;
+                        ddlQualification.Enabled = true;
+                        ddlQInstitutionType.Enabled = true;
+                        ddlQCity.Enabled = true;
+                        ddlQG12_Stream.Enabled = true;
+                        ddlQEngGrade.Enabled = false;
+                        ddlQEngExamCenter.Enabled = false;
+                        txtQScoreofMath.Enabled = true;
+                        txtQScoreofChemistry.Enabled = true;
+                        txtQScoreofBiology.Enabled = true;
+                        txtQScoreofPhysics.Enabled = true;
+                        txtQScore.Enabled = true;
+                        txtSource.Enabled = true;
+                        txtQYear.Enabled = true;
+                        txtQDate.Enabled = true;
+                        ddlHSSystem.Enabled = true;
+                        ddlEquivalencyIndicator.Enabled = true;
+                        txtEquivalencyAppNo.Enabled = true;
+                        ddlQEngGrade.SelectedValue = "-";
+                    }
+                    break;
+                default:
+                    if (txtQScore.Text == "")
+                    {
+                        ddlQMajor.SelectedIndex = 0;
+                    }
+                    ddlQMajor.Enabled = true;
+                    ddlQCountry.Enabled = true;
+                    ddlQualification.Enabled = true;
+                    ddlQInstitutionType.Enabled = false;
+                    ddlQCity.Enabled = true;
+                    ddlQG12_Stream.Enabled = false;
+                    ddlQEngGrade.Enabled = false;
+                    ddlQEngExamCenter.Enabled = false;
+                    txtQScoreofMath.Enabled = false;
+                    txtQScoreofChemistry.Enabled = false;
+                    txtQScoreofBiology.Enabled = false;
+                    txtQScoreofPhysics.Enabled = false;
+                    txtQScore.Enabled = true;
+                    txtSource.Enabled = true;
+                    txtQYear.Enabled = true;
+                    txtQDate.Enabled = true;
+                    ddlHSSystem.Enabled = false;
+                    ddlEquivalencyIndicator.Enabled = true;
+                    txtEquivalencyAppNo.Enabled = true;
+
+                    break;
+
+            }
+            ddlQualification.Focus();
+        }
+        private void GetStudentQualification(int iSerialNo, int iQualificationNo)
+        {
+            //List<Student_Qualifications> myStudentQualification = new List<Student_Qualifications>();
+            //Student_QualificationsDAL myStudentQualificationDAL = new Student_QualificationsDAL();
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+                string sSQL = "SELECT lngSerial, byteQualification, intCertificate, intMajor,";
+                sSQL += "intGraduationYear, byteInstituteCountry, sngGrade, strCertificateSource,";
+                sSQL += "dateENG, strUserCreate, dateCreate, VerifiedByAdmission, AdmissionComments,";
+                sSQL += "VerifiedByRegistrar, RegistrarComments, HS_InstitutionType,";
+                sSQL += "HS_InstitutionCity,G12_Stream, ScoreOfMath, IESOL_Grade, ExamCenterID, HSSystem,";
+                sSQL += "HSEquivalencyIndicator,HSEquivalencyAppNo,ScoreOfChemistry,ScoreOfBiology,ScoreOfPhysics";
+                sSQL += " FROM Reg_Student_Qualifications";
+
+
+
+                string sCond = " WHERE lngSerial =" + iSerialNo + " AND byteQualification =" + iQualificationNo;
+
+                sSQL += sCond;
+
+                SqlCommand cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read())
+                {
+
+                    ddlQMajor.SelectedValue = rd["intMajor"].ToString();
+                    ddlQCountry.SelectedValue = rd["byteInstituteCountry"].ToString();
+                    ddlQualification.SelectedValue = rd["intCertificate"].ToString();
+
+                    ddlQInstitutionType.SelectedValue = rd["HS_InstitutionType"].ToString();
+                    ddlQCity.SelectedValue = rd["HS_InstitutionCity"].ToString();
+                    ddlQG12_Stream.SelectedValue = rd["G12_Stream"].ToString();
+                    txtQScoreofMath.Text = rd["ScoreOfMath"].ToString();
+                    txtQScoreofChemistry.Text = rd["ScoreOfChemistry"].ToString();
+                    txtQScoreofBiology.Text = rd["ScoreOfBiology"].ToString();
+                    txtQScoreofPhysics.Text = rd["ScoreOfPhysics"].ToString();
+
+                    txtQScore.Text = rd["sngGrade"].ToString();
+                    txtSource.Text = rd["strCertificateSource"].ToString();
+                    txtQYear.Text = rd["intGraduationYear"].ToString();
+
+                    txtQDate.Text = string.Format("{0:yyyy-MM-dd}", rd["dateENG"]);
+
+                    if (rd["HSSystem"].Equals(DBNull.Value))
+                    {
+                        ddlHSSystem.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        ddlHSSystem.SelectedValue = rd["HSSystem"].ToString();
+                    }
+
+
+                    if (rd["HSEquivalencyIndicator"].Equals(DBNull.Value))
+                    {
+                        ddlEquivalencyIndicator.SelectedValue = "M";
+                    }
+                    else
+                    {
+                        ddlEquivalencyIndicator.SelectedValue = rd["HSEquivalencyIndicator"].ToString();
+                    }
+
+                    txtEquivalencyAppNo.Text = rd["HSEquivalencyAppNo"].ToString();
+
+
+                    //enable / disable
+
+                    enable_disable_Q();
+
+
+
+                    chkRegistrarVerfication.Checked = Convert.ToBoolean(rd["VerifiedByregistrar"]);
+                    txtRegistrarComments.Text = rd["RegistrarComments"].ToString();
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
+                                 InitializeModule.enumPrivilege.ShowRegistrarVerification, CurrentRole) != true)
+                    {
+                        chkRegistrarVerfication.Enabled = false;
+                        txtRegistrarComments.Enabled = false;
+                    }
+                    chkAdmissionVerfication.Checked = Convert.ToBoolean(rd["VerifiedByAdmission"]);
+                    txtAdmissionComments.Text = rd["AdmissionComments"].ToString();
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
+                                 InitializeModule.enumPrivilege.ShowAdmissionVerification, CurrentRole) != true)
+                    {
+                        chkAdmissionVerfication.Enabled = false;
+                        txtAdmissionComments.Enabled = false;
+                    }
+                    // this.ddlQEngGrade.SelectedIndex = ddlQEngGrade.Items.IndexOf( ddlQEngGrade.Items.FindByText(myStudentQualification[0].IESOL_Grade.ToString()));
+                    this.ddlQEngGrade.SelectedValue = rd["IESOL_Grade"].ToString().Trim();
+                    this.ddlQEngExamCenter.SelectedValue = rd["ExamCenterID"].ToString();
+
+
+                }
+
+                rd.Close();
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+        }
         protected void grdQualification_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "cmdEditQ")
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.AddQualification, CurrentRole) != true)
+                {
+                    lbl_Msg.Text = "Sorry you cannot edit student qualification";
+                    div_msg.Visible = true;
+                    return;
+                }
 
+                // Convert the row index stored in the CommandArgument
+
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow selectedRow = grdQualification.Rows[index];
+                int iQ = int.Parse("0" + grdQualification.Rows[index].Cells[2].Text);
+                lblQualification.Text = iQ.ToString();
+
+                string sStudentID = lblStudentId.Text;
+                int iSerial = Convert.ToInt32(hdnSerial.Value); //LibraryMOD.GetStudentSerialNo(sStudentID,(int) Campus);
+
+                GetStudentQualification(iSerial, iQ);
+                HiddenFieldQMode.Value = InitializeModule.enumModes.EditMode.ToString();
+                mtvQualification.ActiveViewIndex = 1;
+            }
         }
 
         protected void NewQ_btn_Click(object sender, EventArgs e)
@@ -2572,7 +2882,12 @@ namespace LocalECT
 
         protected void ddlQualification_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlQEngGrade.SelectedValue = "-";
+            switch (ddlQualification.SelectedValue)
+            {
 
+            }
+            enable_disable_Q();
         }
 
         protected void ddlQCountry_SelectedIndexChanged(object sender, EventArgs e)
@@ -2582,7 +2897,29 @@ namespace LocalECT
 
         protected void ddlQEngGrade_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ddlQualification.SelectedValue == "15")
+            {
+                switch (ddlQEngGrade.SelectedValue)
+                {
+                    case "B1":
+                        txtQScore.Text = "500";
 
+                        break;
+                    case "B2":
+                        txtQScore.Text = "550";
+                        break;
+                    case "-":
+                        txtQScore.Text = "0";
+                        break;
+                }
+
+                txtQScore.Enabled = false;
+            }
+            else
+            {
+                txtQScore.Enabled = true;
+
+            }
         }
 
         protected void chkActive_CheckedChanged(object sender, EventArgs e)
@@ -2726,8 +3063,15 @@ namespace LocalECT
                     var response = task.Result;
                     string s = response.Content.ReadAsStringAsync().Result;
                     var x = JObject.Parse(s);
-                    var id = x["items"][0]["id"];
-                    txtContactID.Text = id.ToString();
+                    if(x["items"].HasValues)
+                    {
+                        var id = x["items"][0]["id"];
+                        txtContactID.Text = id.ToString();
+                    }
+                    else
+                    {
+                        lbl_contacterror.Text = "No Contact ID found in CX.";
+                    }
                 }
             }
         }

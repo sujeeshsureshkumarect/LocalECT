@@ -249,13 +249,13 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.RadioButtonList rbnFitnessStatus;
 
         /// <summary>
-        /// DropDownList1 control.
+        /// drp_determination control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList drp_determination;
 
         /// <summary>
         /// txtPhone1 control.
@@ -1615,6 +1615,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkGet;
+
+        /// <summary>
+        /// lbl_contacterror control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_contacterror;
 
         /// <summary>
         /// RequiredFieldValidator17 control.

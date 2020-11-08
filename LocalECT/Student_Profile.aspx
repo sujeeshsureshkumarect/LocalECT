@@ -309,9 +309,9 @@
                                                     <div class="form-group row">
                                                     <label class="col-form-label col-md-5 col-sm-5">People of Determination ?</label>
                                                     <div class="col-md-7 col-sm-7 ">
-                                                        <asp:DropDownList ID="DropDownList1" runat="server" TabIndex="21"
-                                                            DataTextField="strShiftEn"
-                                                            DataValueField="byteShift" CssClass="form-control">
+                                                        <asp:DropDownList ID="drp_determination" runat="server" TabIndex="21"
+                                                            DataTextField="DeterminationType"
+                                                            DataValueField="iSerial" CssClass="form-control">
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
@@ -628,7 +628,7 @@
                                                                  Type="Date" ValidationGroup="SD" ForeColor="Red">mm/dd/yyyy</asp:RangeValidator>
                                                          </div>
                                                      </div>
-                                                     <div class="form-group row">
+                                                     <div class="form-group row" runat="server" visible="false">
                                                          <label class="col-form-label col-md-3 col-sm-3">Sponsor</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlSponsor" runat="server" TabIndex="46"
@@ -670,7 +670,7 @@
                                                      <div align="middle">
                                                          <asp:LinkButton ID="lnk_Save" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Save Student Info" ValidationGroup="SD" OnClick="lnk_Save_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
                                                          <asp:LinkButton ID="lnk_delete" runat="server" CssClass="btn btn-danger btn-sm" ToolTip="Delete Student" ValidationGroup="SD" OnClick="lnk_delete_Click" onclientclick="return DeleteConfirm();"><i class="fa fa-close"></i> Delete</asp:LinkButton>
-                                                         <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Back" OnClick="lnk_Cancel_Click"><i class="fa fa-close"></i> Cancel</asp:LinkButton>
+                                                         <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Back" OnClick="lnk_Cancel_Click"><i class="fa fa-reply"></i> Back</asp:LinkButton>
 
                                                            <%--<asp:Label ID="lblStudentId" runat="server" Font-Size="Small" Width="100px" 
                                                         CssClass="style11"></asp:Label>--%>
@@ -840,7 +840,7 @@
                                                                             <td align="center">                                                                            
                                                                                 <div style="background-color: #FFFFFF">
                                                                                     <asp:LinkButton ID="NewQ_btn" runat="server" OnClick="NewQ_btn_Click" CausesValidation="False" CssClass="btn btn-success btn-sm" ToolTip="Add New Qualification"><i class="fa fa-plus"></i> Add New</asp:LinkButton>
-                                                                                    <asp:LinkButton ID="ESLEX_btn" runat="server" OnClick="ESLEX_btn_Click" CssClass="btn btn-success btn-sm" ToolTip="ESL Exemption Calculation"><i class="fa fa-calculator"></i> ESL Exemption Calculation</asp:LinkButton>
+                                                                                    <asp:LinkButton ID="ESLEX_btn" runat="server" OnClick="ESLEX_btn_Click" CssClass="btn btn-success btn-sm" ToolTip="ESL Exemption Calculation" Visible="false"><i class="fa fa-calculator"></i> ESL Exemption Calculation</asp:LinkButton>
                                                                                      <asp:LinkButton ID="DeleteQ_btn" runat="server" OnClick="DeleteQ_btn_Click" CssClass="btn btn-danger btn-sm" ToolTip="Delete Qualification" onclientclick="return DeleteConfirm();" ><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                                                                                 </div>
                                                                             
@@ -1538,6 +1538,7 @@
                                                                             <asp:LinkButton ID="lnkGet" runat="server" OnCommand="lnkGet_Command"
                                                                              Font-Strikeout="False" Font-Underline="True"
                                                                             ToolTip="Get current student CX contact ID." ForeColor="Blue">Get from CRM</asp:LinkButton>
+                                                                            <asp:Label ID="lbl_contacterror" runat="server" ForeColor="Red"></asp:Label>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server"
                                                                                 ControlToValidate="txtContactID" Display="Dynamic"
                                                                                 ErrorMessage="Contact ID is required" SetFocusOnError="True"
@@ -1941,7 +1942,7 @@
                                                                         <div class="form-group row">
                                                                             <asp:LinkButton ID="SaveE_btn" runat="server" CssClass="btn btn-success btn-sm" ToolTip="Save Enrollment" ValidationGroup="E" OnClick="SaveE_btn_Click"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
                                                                             <asp:LinkButton ID="UndoE_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Undo" ValidationGroup="None" OnClick="UndoQ_btn_Click"><i class="fa fa-reply"></i> Undo</asp:LinkButton>
-                                                                            <asp:LinkButton ID="AddESLs" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Add ESLs" OnClick="AddESLs_Click"><i class="fa fa-plus"></i> Add ESLs</asp:LinkButton>
+                                                                            <asp:LinkButton ID="AddESLs" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Add ESLs" OnClick="AddESLs_Click" Visible="false"><i class="fa fa-plus"></i> Add ESLs</asp:LinkButton>
                                                                             <asp:LinkButton ID="Print_btn" runat="server" CssClass="btn btn-success btn-sm" CausesValidation="False" ToolTip="Print as PDF" OnClick="Print_btn_Click"><i class="fa fa-print"></i> Print</asp:LinkButton>
                                                                             <asp:DropDownList ID="ddlPrinting" runat="server" TabIndex="100" CssClass="form-control" Width="27%">
                                                                                 <asp:ListItem Value="0">Welcome letter</asp:ListItem>
@@ -2098,7 +2099,7 @@
                                         Name="strWorkPhone" PropertyName="Text" />
                                     <asp:ControlParameter ControlID="txtJob" DefaultValue="-" Name="strJopTitle" 
                                         PropertyName="Text" />
-                                    <asp:ControlParameter ControlID="ddlSponsor" DefaultValue="0" 
+                                    <asp:ControlParameter ControlID="drp_determination" DefaultValue="0" 
                                         Name="intDelegation" PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="ddlVisa" DefaultValue="0" Name="intSponsor" 
                                         PropertyName="SelectedValue" />
@@ -2221,7 +2222,7 @@
                                         PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="ddlEmploymentSector" DefaultValue="0" Name="EmploymentSector" 
                                         PropertyName="SelectedValue" />
-                                    <asp:ControlParameter ControlID="ddlSponsor" DefaultValue="0" Name="intDelegation" 
+                                    <asp:ControlParameter ControlID="drp_determination" DefaultValue="0" Name="intDelegation" 
                                         PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="ddlVisa" DefaultValue="0" Name="intSponsor" 
                                         PropertyName="SelectedValue" />
