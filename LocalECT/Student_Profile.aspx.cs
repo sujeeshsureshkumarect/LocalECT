@@ -159,7 +159,7 @@ namespace LocalECT
                 ResidentCityDS.ConnectionString = sConn;
                 HomeCityDS.ConnectionString = sConn;
                 SubReasonDS.ConnectionString = sConn;
-                //SearchDS.ConnectionString = sConn;
+                SearchDS.ConnectionString = sConn;
                 StudentDS.ConnectionString = sConn;
                 EnrollmentDS.ConnectionString = sConn;
                 QualificationDS.ConnectionString = sConn;
@@ -3010,9 +3010,9 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.AddQualification, CurrentRole) != true)
                 {
-                    //lbl_Msg.Text = "Sorry you cannot edit student qualification";
-                    //div_msg.Visible = true;
-                    //return;
+                    lbl_Msg.Text = "Sorry you cannot edit student qualification";
+                    div_msg.Visible = true;
+                    return;
                 }
 
                 // Convert the row index stored in the CommandArgument
@@ -3995,7 +3995,7 @@ namespace LocalECT
                                 lbl_Msg.Text = "Student Enrolled Successfully ...";
                                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                                 div_msg.Visible = true;
-                                //grdMarks.DataBind();
+                                grdMarks.DataBind();
                                 FillCourses(sCollege, sDegree, sMajor);
                                 Session["CurrentStudent"] = lblStudentId.Text;
                             }
@@ -4808,7 +4808,7 @@ namespace LocalECT
             {
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.ESLCalc, CurrentRole) != true)
-                {                 
+                {
                     lbl_Msg.Text = "Sorry you cannot add mark to students";
                     div_msg.Visible = true;
                     return;
@@ -4847,6 +4847,7 @@ namespace LocalECT
                 if (iEffected > 0)
                 {                    
                     lbl_Msg.Text = "Mark Added Successfully ...";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                     div_msg.Visible = true;
                     grdMarks.DataBind();
                     mtvMarks.ActiveViewIndex = 0;
@@ -4871,6 +4872,93 @@ namespace LocalECT
             mtvMarks.ActiveViewIndex = 0;
             ddlMark.SelectedValue = "EX";
             ddlCourses.SelectedValue = null;
+        }
+        protected void lnkSelect_Command(object sender, CommandEventArgs e)
+        {
+            int iKey = int.Parse(e.CommandArgument.ToString());
+            GetStudent(iKey);
+        }
+        protected void Search_Print_Command(object sender, CommandEventArgs e)
+        {
+            DataSet Ds = new DataSet();
+            try
+            {
+
+                string sSno = e.CommandArgument.ToString();
+
+                Ds = Prepare_Report(sSno);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+
+                Session["ReportDS"] = Ds;
+                Export(0);
+            }
+
+        }
+
+        protected void RunCMD_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RunSearch();
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+        }
+        private void RunSearch()
+        {
+            try
+            {
+                string sSQL = "SELECT  SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate";
+                sSQL += " FROM Reg_Applications AS A RIGHT OUTER JOIN Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial";
+                if (!string.IsNullOrEmpty(txtSearchID.Text) || !string.IsNullOrEmpty(txtSearchName.Text))
+                {
+
+                    sSQL += " Where 1=1";
+                    if (!string.IsNullOrEmpty(txtSearchID.Text))
+                    {
+                        sSQL += " And A.lngStudentNumber LIKE '%" + txtSearchID.Text + "%'";
+                    }
+                    if (!string.IsNullOrEmpty(txtSearchName.Text))
+                    {
+                        sSQL += " And SD.strLastDescEn LIKE '%" + txtSearchName.Text + "%'";
+                    }
+                }
+                else
+                {
+                    sSQL += " Where 1<>1";
+                }
+                sSQL += " ORDER BY SD.dateCreate DESC";
+
+                SearchDS.SelectCommand = sSQL;
+                SearchDS.DataBind();
+                grdSearch.DataBind();
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+
+            }
         }
     }
 }

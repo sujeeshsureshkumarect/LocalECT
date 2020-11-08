@@ -713,7 +713,8 @@
                                                         <asp:View ID="View1" runat="server" >
                                                             <div class="col-md-12 col-sm-12">
                                                                 
-                                                                    <h3 style="text-align:center;color:#ff7f50">Qualifications</h3>
+                                                                    <h3 style="text-align:center;color:#ff7f50"><i class="fa fa-graduation-cap"></i> Qualifications</h3>
+                                                                <hr />
                                                                     <asp:MultiView ID="mtvQualification" runat="server" ActiveViewIndex="0">
                                                     <table width=100% align="center">
                                                         <tr>
@@ -731,8 +732,8 @@
                                                                                     onrowcommand="grdQualification_RowCommand">
                                                                                     <RowStyle BackColor="#ffffff" />
                                                                                     <Columns>
-                                                                                        <asp:ButtonField CommandName="cmdEditQ" HeaderText="Edit" Text="Select" ControlStyle-Font-Underline="true"/>
-                                                                                        <asp:CommandField ShowSelectButton="True" SelectText="Show Audit Info" ControlStyle-Font-Underline="true"/>
+                                                                                        <asp:ButtonField CommandName="cmdEditQ" HeaderText="Edit" Text="Select" ControlStyle-Font-Underline="true" ControlStyle-ForeColor="Blue"/>
+                                                                                        <asp:CommandField ShowSelectButton="True" SelectText="Show Audit Info" ControlStyle-Font-Underline="true" ControlStyle-ForeColor="Blue"/>
                                                                                         <asp:BoundField DataField="byteQualification" HeaderText="#" 
                                                                                             SortExpression="byteQualification">
                                                                                             <HeaderStyle   />
@@ -794,7 +795,7 @@
                                                                                     </Columns>
                                                                                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#444444" />
                                                                                     <HeaderStyle BackColor="#3f658c" Font-Bold="false"  
                                                                                         ForeColor="White" />
                                                                                     <EditRowStyle BackColor="#2461BF" />
@@ -1344,8 +1345,8 @@
                                                         <%--Start View 2--%>
                                                         <asp:View ID="View2" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50">Enrollment</h3>
-                                                                <br />
+                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-flag-checkered"></i> Enrollment</h3>
+                                                                <hr />
                                                                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" 
                                                         ValidationGroup="E" />
                                                                 <div class="col-md-6 col-sm-6">
@@ -1818,8 +1819,8 @@
                                                         <%--Start View 3--%>
                                                         <asp:View ID="View3" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50">Documents</h3>
-                                                                <br />
+                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-folder-open"></i> Documents</h3>
+                                                                <hr />
                                                                  <table  align="center">
                                     <tr>
                                         <td align="center">
@@ -1833,7 +1834,7 @@
                                                                 
                                                                     <asp:GridView ID="grdDocs" runat="server" AutoGenerateColumns="False" 
                                                                         CellPadding="4" DataKeyNames="intDocument" DataSourceID="DocumentsDS" 
-                                                                        ForeColor="#333333" GridLines="None" 
+                                                                        ForeColor="#444444" GridLines="None" 
                                                                         onselectedindexchanged="grdDocs_SelectedIndexChanged">
                                                                         <RowStyle BackColor="#EFF3FB" />
                                                                         <Columns>
@@ -1867,7 +1868,7 @@
                                                                             <asp:LinkButton ID="btnAddDocs" runat="server" onclick="btnAddDocs_Click" 
                                                                                 ToolTip="Initiate Documents" ValidationGroup="SD"><i class="fa fa-plus"></i> Add Docs</asp:LinkButton>
                                                                         </EmptyDataTemplate>
-                                                                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#444444" />
                                                                         <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
                                                                         <EditRowStyle BackColor="White" />
                                                                         <AlternatingRowStyle BackColor="White" />
@@ -1956,8 +1957,8 @@
                                                          <%--Start View 4--%>
                                                         <asp:View ID="View4" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50">Marks</h3>
-                                                                <br />
+                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-table"></i> Marks</h3>
+                                                                <hr />
 
                                                                  <div>
                                                 <asp:MultiView ID="mtvMarks" runat="server" ActiveViewIndex="0">
@@ -1969,7 +1970,7 @@
                                                                         <tr>
                                                                             <td align="center">
                                                                                 <asp:GridView ID="grdMarks" runat="server" AutoGenerateColumns="False" 
-                                                                                    CellPadding="4" DataSourceID="MarksDS" ForeColor="#333333" GridLines="None">
+                                                                                    CellPadding="4" DataSourceID="MarksDS" ForeColor="#444444" GridLines="None">
                                                                                     <RowStyle BackColor="#EFF3FB" />
                                                                                     <Columns>
                                                                                         <asp:BoundField DataField="lngStudentNumber" HeaderText="lngStudentNumber" 
@@ -1985,7 +1986,7 @@
                                                                                     </Columns>
                                                                                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                                     <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#444444" />
                                                                                     <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
                                                                                     <EditRowStyle BackColor="#2461BF" />
                                                                                     <AlternatingRowStyle BackColor="White" />
@@ -2129,7 +2130,136 @@
 
                                                          <%--Start View 7--%>
                                                         <asp:View ID="View7" runat="server">
-
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-search"></i> Search</h3>
+                                                                <hr />
+                                                                  <div>
+                                    <table align="center">
+                                        <%-- <tr>
+                                            <td align="right" width="40%">
+                                                &nbsp;</td>
+                                            <td align="left" width="50%">
+                                                &nbsp;</td>
+                                            <td align="left" width="10%">
+                                                &nbsp;</td>
+                                        </tr>--%>
+                                        <tr>
+                                            <td align="right" width="40%">
+                                                <asp:LinkButton ID="lnkAdvanced" runat="server" CausesValidation="False" 
+                                                    PostBackUrl="~/StudentSearch.aspx" CssClass="btn btn-success btn-sm"><i class="fa fa-search"></i> Advanced Search</asp:LinkButton>
+                                            </td>
+                                            <td align="left" width="50%">
+                                                &nbsp;</td>
+                                            <td align="left" width="10%">
+                                                &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" width="40%">
+                                                <asp:Label ID="Label58" runat="server" Font-Size="Small" Text="Student ID" 
+                                                    Width="100px"></asp:Label>
+                                            </td>
+                                            <td align="left" width="50%">
+                                                <asp:TextBox ID="txtSearchID" runat="server" Width="250px" TabIndex="104" CssClass="form-control"></asp:TextBox>
+                                            </td>
+                                            <td align="left" width="10%">
+                                                &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" width="40%">
+                                                <asp:Label ID="Label59" runat="server" Font-Size="Small" Text="Student Name" 
+                                                    Width="100px"></asp:Label>
+                                            </td>
+                                            <td align="left" width="50%">
+                                                <asp:TextBox ID="txtSearchName" runat="server" Width="250px" TabIndex="105" CssClass="form-control"></asp:TextBox>
+                                            </td>
+                                            <td align="left" width="10%">
+                                                &nbsp;</td>
+                                        </tr>
+                                              <tr>
+                                            <td align="right" class="style9" colspan="3">
+                                                <div align="center" style="background-color: #FFFFFF">
+                                                    <asp:LinkButton ID="RunCMD" runat="server" CausesValidation="False" 
+                                                        onclick="RunCMD_Click" 
+                                                        CssClass="btn btn-success btn-sm"
+                                                        ToolTip="Run"><i class="fa fa-search"></i> Search</asp:LinkButton>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" class="style9" colspan="3">
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" class="style9" colspan="3">
+                                                <asp:GridView ID="grdSearch" runat="server" AutoGenerateColumns="False" 
+                                                    CellPadding="4" DataKeyNames="lngSerial" DataSourceID="SearchDS" 
+                                                    ForeColor="#444444" GridLines="None">
+                                                    <RowStyle BackColor="#EFF3FB" />
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="#" InsertVisible="False" 
+                                                            SortExpression="lngSerial">
+                                                            <EditItemTemplate>
+                                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("lngSerial") %>'></asp:Label>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="lnkSelect" runat="server" CausesValidation="False" 
+                                                                    CommandArgument='<%# Bind("lngSerial") %>' oncommand="lnkSelect_Command" Font-Underline="true" ForeColor="Blue">Select</asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <ItemStyle  Width="100px" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="lngStudentNumber" HeaderText="ID" 
+                                                            SortExpression="lngStudentNumber">
+                                                            <ItemStyle  Width="150px" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="strLastDescEn" HeaderText="Name" 
+                                                            SortExpression="strLastDescEn">
+                                                            <ItemStyle  Width="250px" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="dateCreate" DataFormatString="{0:dd/MM/yyyy}" 
+                                                            HeaderText="Created" SortExpression="dateCreate">
+                                                            <ItemStyle  Width="100px" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="Print">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="Search_Print" runat="server" 
+                                                                    CommandArgument='<%# Eval("lngStudentNumber") %>' 
+                                                                     oncommand="Search_Print_Command" 
+                                                                    CssClass="btn btn-success btn-sm"
+                                                                    ToolTip="Audit Form Print"><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <ItemStyle  Width="50px" />
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                    <FooterStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
+                                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#444444" />
+                                                    <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
+                                                    <EditRowStyle BackColor="#2461BF" />
+                                                    <AlternatingRowStyle BackColor="White" />
+                                                </asp:GridView>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" width="40%">
+                                                &nbsp;</td>
+                                            <td align="left" width="50%">
+                                                <asp:SqlDataSource ID="SearchDS" runat="server" 
+                                                    ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
+                                                    SelectCommand="SELECT SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate FROM Reg_Applications AS A RIGHT OUTER JOIN Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial WHERE (1 &lt;&gt; 1)">
+                                                </asp:SqlDataSource>
+                                            </td>
+                                            <td align="left" width="10%">
+                                                &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" class="style9" colspan="3">
+                                                <hr />
+                                            </td>
+                                        </tr>                                  
+                                    </table>
+                                </div>                 
+                                                                </div>
                                                         </asp:View>
                                                         <%--End View 7--%>
                                                     </asp:MultiView>
@@ -2596,15 +2726,10 @@
             var b = confirm('Are you sure want to delete this ?');
             return b;
         }
-    </script>--%>
+    </script>--%> 
     <style>
-        .Center
-        {
-            text-align: center;
-        }
-        .style9
-        {
-            width: 50%;
+        table{
+            width:100%;
         }
     </style>
     </asp:Content>
