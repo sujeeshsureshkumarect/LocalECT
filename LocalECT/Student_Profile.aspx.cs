@@ -164,10 +164,10 @@ namespace LocalECT
                 EnrollmentDS.ConnectionString = sConn;
                 QualificationDS.ConnectionString = sConn;
                 Q_Audit.ConnectionString = sConn;
-                //DocumentsDS.ConnectionString = sConn;
-                //DocsEditDS.ConnectionString = sConn;
+                DocumentsDS.ConnectionString = sConn;
+                DocsEditDS.ConnectionString = sConn;
                 MajorDS.ConnectionString = sConn;
-                //MarksDS.ConnectionString = sConn;
+                MarksDS.ConnectionString = sConn;
                 WMajorDS.ConnectionString = sConn;
 
 
@@ -242,7 +242,7 @@ namespace LocalECT
                     iVerificationResult = LibraryMOD.IsFileVerifiedFromRegistrar(lblStudentId.Text, Campus);
                     if (iVerificationResult == InitializeModule.FALSE_VALUE)
                     {
-                        lblIsVerfiedFromRegistrar.Text = "Warning: UnVerified from the Registrar";
+                        lblIsVerfiedFromRegistrar.Text = "Warning: Unverified from the Registrar";
                         lblIsVerfiedFromRegistrar.ForeColor = Color.Red;
                     }
                     if (iVerificationResult == InitializeModule.TRUE_VALUE)
@@ -503,7 +503,7 @@ namespace LocalECT
 
                     MultiTabs.ActiveViewIndex = 1;
                     grdQualification.DataBind();
-                    //grdDocs.DataBind();
+                    grdDocs.DataBind();
                 }
 
 
@@ -514,7 +514,7 @@ namespace LocalECT
                 else
                 {
                     Session["CurrentStudent"] = sSID;
-                    //grdMarks.DataBind();
+                    grdMarks.DataBind();
                     FillCourses(sCollege, sDegree, sSpec);
                 }
 
@@ -1768,11 +1768,11 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlCourses.Items.Clear();
+                ddlCourses.Items.Clear();
 
                 while (Rd.Read())
                 {
-                    //ddlCourses.Items.Add(new ListItem(Rd["strCourse"].ToString(), Rd["strCourse"].ToString()));
+                    ddlCourses.Items.Add(new ListItem(Rd["strCourse"].ToString(), Rd["strCourse"].ToString()));
 
                 }
                 Rd.Close();
@@ -1855,11 +1855,11 @@ namespace LocalECT
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 
-                //ddlMSource.Items.Clear();
+                ddlMSource.Items.Clear();
 
                 while (Rd.Read())
                 {
-                    //ddlMSource.Items.Add(new ListItem(Rd["strCollegeDescEn"].ToString(), Rd["byteCollege"].ToString()));
+                    ddlMSource.Items.Add(new ListItem(Rd["strCollegeDescEn"].ToString(), Rd["byteCollege"].ToString()));
 
                 }
                 Rd.Close();
@@ -2359,12 +2359,12 @@ namespace LocalECT
                         lbl_Msg.Text = "Student Added Successfully";
                         div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                         div_msg.Visible = true;
-                        //QualificationDS.DataBind();
-                        //grdQualification.DataBind();
-                        //DocumentsDS.DataBind();
-                        //grdDocs.DataBind();
-                        //DocsEditDS.DataBind();
-                        //EnrollmentDS.DataBind();
+                        QualificationDS.DataBind();
+                        grdQualification.DataBind();
+                        DocumentsDS.DataBind();
+                        grdDocs.DataBind();
+                        DocsEditDS.DataBind();
+                        EnrollmentDS.DataBind();
                         Session["StudentSerialNo"] = hdnSerial.Value;
                     }
 
@@ -2434,11 +2434,11 @@ namespace LocalECT
                 {
                     int iEffected = 0;
 
-                    //iEffected = Delete_Marks(lblStudentId.Text);
-                    //iEffected += EnrollmentDS.Delete();
-                    //iEffected += DocsEditDS.Delete();
+                    iEffected = Delete_Marks(lblStudentId.Text);
+                    iEffected += EnrollmentDS.Delete();
+                    iEffected += DocsEditDS.Delete();
 
-                    //iEffected += QualificationDS.Delete();
+                    iEffected += QualificationDS.Delete();
 
                     iEffected += StudentDS.Delete();
 
@@ -2467,6 +2467,34 @@ namespace LocalECT
             {
 
             }
+        }
+        private int Delete_Marks(string sID)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            int iDeleted = 1;
+            try
+            {
+                string sSQL = "DELETE FROM Reg_Grade_Header WHERE lngStudentNumber='" + sID + "'";
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                iDeleted = Cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                iDeleted = 0;
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+            return iDeleted;
+
         }
 
         protected void lnk_Cancel_Click(object sender, EventArgs e)
@@ -2542,8 +2570,7 @@ namespace LocalECT
 
                         break;
                     case "4"://Search
-
-                        //ddlCampus.SelectedValue = ((int)Campus).ToString();
+                        
                         MultiTabs.ActiveViewIndex = 4;
                         //RunSerach();
                         break;
@@ -2563,12 +2590,151 @@ namespace LocalECT
 
         protected void UndoQ_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                mtvQualification.ActiveViewIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
 
+            }
         }
 
         protected void SaveQ_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (IsValid)
+                {
+                    bool IsAllowShowAdmissionVerification = false;
+                    bool IsAllowShowRegistrarVerification = false;
 
+                    IsAllowShowAdmissionVerification = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
+                   InitializeModule.enumPrivilege.ShowAdmissionVerification, CurrentRole);
+
+                    IsAllowShowRegistrarVerification = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_VerfiyTOEFL_HS,
+                  InitializeModule.enumPrivilege.ShowRegistrarVerification, CurrentRole);
+
+
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                      InitializeModule.enumPrivilege.AddQualification, CurrentRole) != true)
+                    {
+                        lbl_Msg.Text = "Sorry you cannot add qualification for student";
+                        div_msg.Visible = true;
+                        return;
+                    }
+
+                    string sQualification = ddlQualification.SelectedValue;
+
+                    switch (sQualification)
+                    {
+                        case "1"://High School
+                            bool IsAllowHSCertificateAdd = false;
+                            IsAllowHSCertificateAdd = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                                InitializeModule.enumPrivilege.HSCertificateAdd, CurrentRole);
+
+                            if (!IsAllowShowAdmissionVerification && !IsAllowShowRegistrarVerification && !IsAllowHSCertificateAdd)
+                            {                                
+                                lbl_Msg.Text = "Sorry you cannot add high school to students";
+                                div_msg.Visible = true;
+                                return;
+                            }
+                            break;
+                        case "6"://TOEFL
+                        case "7"://IELTS
+                        case "8"://TOEFL CBT
+                        case "9"://TOEFL IBT
+                        case "10"://TOEIC
+                        case "14"://Cambridge FCE
+                        case "15"://City & Guilds IESOL
+                        case "16"://EmSAT English Test
+                        case "26"://EmSAT Arabic Test
+
+
+                            bool IsAllowEnglishCertificateAdd = false;
+                            IsAllowEnglishCertificateAdd = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                                InitializeModule.enumPrivilege.EnglishCertificateAdd, CurrentRole);
+
+                            if (!IsAllowShowAdmissionVerification && !IsAllowShowRegistrarVerification && !IsAllowEnglishCertificateAdd)
+                            {                                
+                                lbl_Msg.Text = "Sorry you cannot add english certificate to students";
+                                div_msg.Visible = true;
+                                return;
+                            }
+                            if (sQualification == "15")
+                            {
+                                if (ddlQEngExamCenter.SelectedValue.ToString() == "" || ddlQEngExamCenter.SelectedValue.ToString() == "0")
+                                {                                  
+                                    lbl_Msg.Text = "Please select exam center";
+                                    div_msg.Visible = true;
+                                    ddlQEngExamCenter.Focus();
+                                    return;
+                                }
+                                if (ddlQEngGrade.SelectedValue.ToString() == "-" || ddlQEngGrade.SelectedValue.ToString() == "")
+                                {                                    
+                                    lbl_Msg.Text = "Please select exam grade";
+                                    div_msg.Visible = true;
+                                    ddlQEngGrade.Focus();
+                                    return;
+                                }
+                            }
+                            break;
+                    }
+
+
+                    int iAdded = 0;
+                    if (HiddenFieldQMode.Value == InitializeModule.enumModes.NewMode.ToString())
+                    {
+                        iAdded = QualificationDS.Insert();
+                        if (iAdded > 0)
+                        {                            
+                            lbl_Msg.Text = "Qualification Added Successfully ...";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
+                    }
+                    if (HiddenFieldQMode.Value == InitializeModule.enumModes.EditMode.ToString())
+                    {
+                        iAdded = QualificationDS.Update();
+                        if (iAdded > 0)
+                        {                           
+                            lbl_Msg.Text = "Qualification Updated Successfully ...";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
+                        //if (LibraryMOD.IsFileVerifiedFromRegistrar(lblStudentId.Text, Campus) == InitializeModule.FALSE_VALUE)
+                        //{
+                        //    lblIsVerfiedFromRegistrar.Text = "Warning: UnVerfied from the Registrar";
+                        //    lblIsVerfiedFromRegistrar.ForeColor = Color.Red;
+                        //}
+                        //else
+                        //{
+                        //    lblIsVerfiedFromRegistrar.Text = "Verfied from the Registrar";
+                        //    lblIsVerfiedFromRegistrar.ForeColor = Color.Green;  //#009933
+
+                        //}
+
+                    }
+                    mtvQualification.ActiveViewIndex = 0;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
         }
 
         protected void grdQualification_SelectedIndexChanged(object sender, EventArgs e)
@@ -2844,9 +3010,9 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.AddQualification, CurrentRole) != true)
                 {
-                    lbl_Msg.Text = "Sorry you cannot edit student qualification";
-                    div_msg.Visible = true;
-                    return;
+                    //lbl_Msg.Text = "Sorry you cannot edit student qualification";
+                    //div_msg.Visible = true;
+                    //return;
                 }
 
                 // Convert the row index stored in the CommandArgument
@@ -2867,7 +3033,69 @@ namespace LocalECT
 
         protected void NewQ_btn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.AddQualification, CurrentRole) != true)
+                {
+                    lbl_Msg.Text = "Sorry you cannot add qualification to students";
+                    div_msg.Visible = true;
+                    return;
+                }
 
+                if (hdnSerial.Value != "")
+                {
+                    SqlConnection Conn = new SqlConnection(QualificationDS.ConnectionString);
+                    Conn.Open();
+                    int iQualification = LibraryMOD.GetMaxID(Conn, "byteQualification", "Reg_Student_Qualifications", "lngSerial=" + hdnSerial.Value) + 1;
+                    lblQualification.Text = iQualification.ToString();
+                    Conn.Close();
+
+                    txtQYear.Text = "";
+                    txtSource.Text = "";
+                    txtQScore.Text = "";
+                    txtQDate.Text = "";
+                    ddlQEngGrade.SelectedValue = "-";
+                    ddlQCountry.SelectedValue = "1";
+                    ddlQCity.SelectedValue = "1";
+                    ddlQInstitutionType.SelectedValue = "0";
+                    ddlQG12_Stream.SelectedValue = "0";
+                    txtQScoreofMath.Text = "0";
+                    txtQScoreofChemistry.Text = "0";
+                    txtQScoreofBiology.Text = "0";
+                    txtQScoreofPhysics.Text = "0";
+                    ddlQEngExamCenter.SelectedValue = "0";
+                    ddlQualification.SelectedIndex = 0;
+                    ddlQMajor.SelectedIndex = 0;
+                    ddlHSSystem.SelectedIndex = 0;
+                    ddlEquivalencyIndicator.SelectedIndex = 0;
+                    txtEquivalencyAppNo.Text = "";
+                    //ddlQMinor.SelectedIndex = 0;
+                    txtAdmissionComments.Text = "";
+                    txtRegistrarComments.Text = "";
+                    chkAdmissionVerfication.Checked = false;
+                    chkRegistrarVerfication.Checked = false;
+                    mtvQualification.ActiveViewIndex = 1;
+                    HiddenFieldQMode.Value = InitializeModule.enumModes.NewMode.ToString();
+                    enable_disable_Q();
+
+                }
+                else
+                {
+                    lbl_Msg.Text = "Select or Add Student Please ...";
+                    div_msg.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
         }
 
         protected void ESLEX_btn_Click(object sender, EventArgs e)
@@ -2877,7 +3105,25 @@ namespace LocalECT
 
         protected void DeleteQ_btn_Click(object sender, EventArgs e)
         {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                    InitializeModule.enumPrivilege.DeleteQualification, CurrentRole) != true)
+            {                
+                lbl_Msg.Text = "Sorry you cannot delete a qualification";
+                div_msg.Visible = true;
+                return;
+            }
 
+            if (hdnSerial.Value != "" && grdQualification.SelectedIndex >= 0)
+            {
+                int iDeleted = QualificationDS.Delete();
+                lbl_Msg.Text = iDeleted.ToString() + " Qualification Deleted.";
+                div_msg.Visible = true;
+            }
+            else
+            {
+                lbl_Msg.Text = "Select Qualification Please.";
+                div_msg.Visible = true;
+            }
         }
 
         protected void ddlQualification_SelectedIndexChanged(object sender, EventArgs e)
@@ -3646,7 +3892,7 @@ namespace LocalECT
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
                     {
-                        lbl_Msg.Text = "Sorry you cannot enrolled a students";
+                        lbl_Msg.Text = "Sorry you cannot enrolled students";
                         div_msg.Visible = true;
                         return;
                     }
@@ -3835,8 +4081,8 @@ namespace LocalECT
             div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
             div_msg.Visible = true;
 
-            //mtvMarks.ActiveViewIndex = 0;
-            //grdMarks.DataBind();
+            mtvMarks.ActiveViewIndex = 0;
+            grdMarks.DataBind();
 
             MultiTabs.ActiveViewIndex = 3;
         }
@@ -4437,6 +4683,194 @@ namespace LocalECT
                 myReport.Close();
                 myReport.Dispose();
             }
+        }
+
+        protected void grdDocs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dvDocs.DataBind();
+            mtvDocs.ActiveViewIndex = 1;
+        }
+
+        protected void btnAddDocs_Click(object sender, EventArgs e)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            try
+            {
+
+                if (hdnSerial.Value == "")
+                {                    
+                    lbl_Msg.Text = "Select or Add Student Please ...";
+                    div_msg.Visible = true;
+                    return;
+                }
+
+                string sSQL = "Delete From Reg_Students_Documents Where lngSerial=" + hdnSerial.Value;
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                int iEffected = 0;
+                iEffected = Cmd.ExecuteNonQuery();
+
+                sSQL = "INSERT INTO Reg_Students_Documents";
+                sSQL += " (lngSerial, intDocument, isMandatory, isAvailable, strRemark, strUserCreate, dateCreate)";
+                sSQL += " SELECT " + hdnSerial.Value + " AS lSerial, intDocument, isMandatory, (CASE LD.intDocument WHEN 10 THEN 1 ELSE LD.isMandatory END) AS isAvailable, '' AS sRemark, ";
+                sSQL += " '" + Session["CurrentUserName"].ToString() + "' AS sUser, GETDATE() AS dDate FROM Lkp_Student_Documents AS LD";
+
+                Cmd.CommandText = sSQL;
+
+                iEffected = Cmd.ExecuteNonQuery();
+                if (iEffected > 0)
+                {       
+                    lbl_Msg.Text = "Documents Initiated Successfully ...";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    div_msg.Visible = true;
+                    grdDocs.DataBind();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+        }
+
+        protected void dvDocs_ItemUpdated(object sender, DetailsViewUpdatedEventArgs e)
+        {
+            SqlConnection Conn = new SqlConnection(sConn);
+            Conn.Open();
+            try
+            {
+                string sUser = Session["CurrentUserName"].ToString();
+                grdDocs.DataBind();
+                mtvDocs.ActiveViewIndex = 0;
+
+                string sSQL = "SELECT lngStudentNumber,Docs FROM Student_Missed_Docs Where lngSerial=" + hdnSerial.Value;
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                int iDocs = 0;
+                string sSno = "";
+                SqlDataReader Rd = Cmd.ExecuteReader();
+                while (Rd.Read())
+                {
+                    sSno = Rd["lngStudentNumber"].ToString();
+                    iDocs = Convert.ToInt32("0" + Rd["Docs"].ToString());
+                }
+                Rd.Close();
+                if (iDocs > 0)
+                {
+                    sSQL = "UPDATE Reg_Applications  SET bActive = 0,bContinue = 1,strUserSave='" + sUser + "',dateLastSave=getdate() WHERE lngSerial=" + hdnSerial.Value;
+                    Cmd.CommandText = sSQL;
+                    int iEffected = Cmd.ExecuteNonQuery();
+                    if (iEffected > 0)
+                    {
+                        chkActive.Checked = false;
+                        chkMissing.Checked = true;
+                    }
+                }
+                else
+                {
+                    sSQL = "UPDATE Reg_Applications  SET bActive = 1,bContinue = 0,strUserSave='" + sUser + "',dateLastSave=getdate() WHERE lngSerial=" + hdnSerial.Value;
+                    Cmd.CommandText = sSQL;
+                    int iEffected = Cmd.ExecuteNonQuery();
+                    if (iEffected > 0)
+                    {
+                        chkActive.Checked = true;
+                        chkMissing.Checked = false;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+
+            }
+        }
+
+        protected void AddM_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        InitializeModule.enumPrivilege.ESLCalc, CurrentRole) != true)
+                {                 
+                    lbl_Msg.Text = "Sorry you cannot add mark to students";
+                    div_msg.Visible = true;
+                    return;
+                }
+
+                if (lblStudentId.Text != "")
+                {
+                    mtvMarks.ActiveViewIndex = 1;
+                }
+                else
+                {                    
+                    lbl_Msg.Text = "Select or Add Student Please ...";
+                    div_msg.Visible = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+
+            }
+        }
+
+        protected void SaveM_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int iEffected = 0;
+                iEffected = MarksDS.Insert();
+                if (iEffected > 0)
+                {                    
+                    lbl_Msg.Text = "Mark Added Successfully ...";
+                    div_msg.Visible = true;
+                    grdMarks.DataBind();
+                    mtvMarks.ActiveViewIndex = 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+
+            }
+        }
+
+        protected void UndoM_btn_Click(object sender, EventArgs e)
+        {
+            mtvMarks.ActiveViewIndex = 0;
+            ddlMark.SelectedValue = "EX";
+            ddlCourses.SelectedValue = null;
         }
     }
 }
