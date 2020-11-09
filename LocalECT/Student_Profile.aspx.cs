@@ -271,6 +271,170 @@ namespace LocalECT
 
             }
         }
+        private void getEIDData()
+        {
+            try
+            {
+                //Session["EIDsID"] = hdnID.Value;
+                if (Session["EIDID"] != null)
+                {
+                    txtIDNo.Text = Session["EIDID"].ToString();
+                }
+
+                if (Session["EIDGender"] != null)
+                {
+                    string sGender = Session["EIDGender"].ToString();
+                    rbnGender.SelectedValue = sGender;
+                }
+                if (Session["EIDBirthDate"] != null)
+                {
+                    txtBirthDate.Text = Session["EIDBirthDate"].ToString();
+                }
+                if (Session["EIDMarital"] != null)
+                {
+                    ddlMaritalStatus.SelectedValue = Session["EIDMarital"].ToString();
+                }
+
+
+                if (Session["EIDExpiry"] != null)
+                {
+                    txtExpiry.Text = Session["EIDExpiry"].ToString();
+                }
+
+                if (txtExpiry.Text == "")
+                {
+                    txtExpiry.Text = string.Format("yyyy-MM-dd", DateTime.Today.Date);
+                }
+
+                if (Session["EIDFirstNameAr"] != null)
+                {
+                    txtFNameAr.Text = Session["EIDFirstNameAr"].ToString();
+                }
+                if (Session["EIDLastNameAr"] != null)
+                {
+                    txtLNameAr.Text = Session["EIDLastNameAr"].ToString();
+                }
+                if (Session["EIDFullNameAr"] != null)
+                {
+                    txtNameAr.Text = Session["EIDFullNameAr"].ToString();
+                }
+
+                if (Session["EIDFirstNameEn"] != null)
+                {
+                    txtFNameEn.Text = Session["EIDFirstNameEn"].ToString();
+                }
+                if (Session["EIDLastNameEn"] != null)
+                {
+                    txtLNameEn.Text = Session["EIDLastNameEn"].ToString();
+                }
+                if (Session["EIDFullNameEn"] != null)
+                {
+                    txtNameEn.Text = Session["EIDFullNameEn"].ToString();
+                }
+
+                if (Session["EIDNationality"] != null)
+                {
+                    string sNationality = Session["EIDNationality"].ToString();
+                    string sNationalityID = GetNationalityID_ByCountryCode3((int)Campus, sNationality);
+                    if (sNationalityID != "")
+                    {
+                        ddlNationality.SelectedValue = sNationalityID;
+                    }
+                }
+
+                if (Session["EIDPassport"] != null)
+                {
+                    // ddlIdentityType.SelectedValue = "2";//Passport                    
+                    txtIdentityNo.Text = Session["EIDPassport"].ToString();
+                }
+
+                if (Session["EIDWorkingPlace"] != null)
+                {
+                    txtCompany.Text = Session["EIDWorkingPlace"].ToString();
+                    if (Session["EIDJob"] != null)
+                    {
+                        txtJob.Text = Session["EIDJob"].ToString();
+                    }
+                    if (Session["EIDWorkField"] != null)
+                    {
+                        txtEmployerIndustry.Text = Session["EIDWorkField"].ToString();
+                    }
+                    rbnEmploymentStatus.SelectedValue = "1";
+                    ddlIWork.SelectedValue = "1";
+                }
+                else
+                {
+                    rbnEmploymentStatus.SelectedValue = "0";
+                    ddlIWork.SelectedValue = "0";
+                }
+
+                if (Session["EIDFamilyID"] != null)
+                {
+                    string sFamily = Session["EIDFamilyID"].ToString();
+                    int iLen = sFamily.Length;
+                    if (sFamily.Length >= 6)
+                    {
+                        txtCityNo.Text = sFamily.Substring(0, 3);
+                        txtFamilyNo.Text = sFamily.Substring(3, iLen - 3);
+                    }
+                    else
+                    {
+                        txtFamilyNo.Text = "999";
+                    }
+                }
+
+
+                if (Session["EIDPhone"] != null)
+                {
+                    txtPhone1.Text = Session["EIDPhone"].ToString();
+
+                }
+                if (Session["EIDAddress"] != null)
+                {
+                    txtAddress.Text += "," + Session["EIDAddress"].ToString();
+                }
+                if (Session["EIDImgUrl"] != null)
+                {
+                    imgStudent.ImageUrl = Session["EIDImgUrl"].ToString();
+                    Pic.Value = Session["EIDID"].ToString();
+                }
+
+                //Kill Session Data
+                Session["CallerID"] = null;
+                Session["EIDID"] = null;
+                Session["EIDGender"] = null;
+                Session["EIDBirthDate"] = null;
+                Session["EIDMarital"] = null;
+                Session["EIDExpiry"] = null;
+                Session["EIDFirstNameAr"] = null;
+                Session["EIDLastNameAr"] = null;
+                Session["EIDFullNameAr"] = null;
+                Session["EIDFirstNameEn"] = null;
+                Session["EIDLastNameEn"] = null;
+                Session["EIDFullNameEn"] = null;
+                Session["EIDNationality"] = null;
+                Session["EIDPassport"] = null;
+                Session["EIDWorkingPlace"] = null;
+                Session["EIDPhone"] = null;
+                Session["EIDAddress"] = null;
+                Session["EIDImgUrl"] = null;
+                Session["EIDFamilyID"] = null;
+                Session["EIDWorkField"] = null;
+                Session["EIDJob"] = null;
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+
+        }
         private void GetStudent(int iSerial)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
@@ -671,170 +835,7 @@ namespace LocalECT
             }
             return iserial;
         }
-        private void getEIDData()
-        {
-            try
-            {
-                //Session["EIDsID"] = hdnID.Value;
-                if (Session["EIDID"] != null)
-                {
-                    txtIDNo.Text = Session["EIDID"].ToString();
-                }
-
-                if (Session["EIDGender"] != null)
-                {
-                    string sGender = Session["EIDGender"].ToString();
-                    rbnGender.SelectedValue = sGender;
-                }
-                if (Session["EIDBirthDate"] != null)
-                {
-                    txtBirthDate.Text = Session["EIDBirthDate"].ToString();
-                }
-                if (Session["EIDMarital"] != null)
-                {
-                    ddlMaritalStatus.SelectedValue = Session["EIDMarital"].ToString();
-                }
-
-
-                if (Session["EIDExpiry"] != null)
-                {
-                    txtExpiry.Text = Session["EIDExpiry"].ToString();
-                }
-
-                if (txtExpiry.Text == "")
-                {
-                    txtExpiry.Text = string.Format("yyyy-MM-dd", DateTime.Today.Date);
-                }
-
-                if (Session["EIDFirstNameAr"] != null)
-                {
-                    txtFNameAr.Text = Session["EIDFirstNameAr"].ToString();
-                }
-                if (Session["EIDLastNameAr"] != null)
-                {
-                    txtLNameAr.Text = Session["EIDLastNameAr"].ToString();
-                }
-                if (Session["EIDFullNameAr"] != null)
-                {
-                    txtNameAr.Text = Session["EIDFullNameAr"].ToString();
-                }
-
-                if (Session["EIDFirstNameEn"] != null)
-                {
-                    txtFNameEn.Text = Session["EIDFirstNameEn"].ToString();
-                }
-                if (Session["EIDLastNameEn"] != null)
-                {
-                    txtLNameEn.Text = Session["EIDLastNameEn"].ToString();
-                }
-                if (Session["EIDFullNameEn"] != null)
-                {
-                    txtNameEn.Text = Session["EIDFullNameEn"].ToString();
-                }
-
-                if (Session["EIDNationality"] != null)
-                {
-                    string sNationality = Session["EIDNationality"].ToString();
-                    string sNationalityID = GetNationalityID_ByCountryCode3((int)Campus, sNationality);
-                    if (sNationalityID != "")
-                    {
-                        ddlNationality.SelectedValue = sNationalityID;
-                    }
-                }
-
-                if (Session["EIDPassport"] != null)
-                {
-                    // ddlIdentityType.SelectedValue = "2";//Passport                    
-                    txtIdentityNo.Text = Session["EIDPassport"].ToString();
-                }
-
-                if (Session["EIDWorkingPlace"] != null)
-                {
-                    txtCompany.Text = Session["EIDWorkingPlace"].ToString();
-                    if (Session["EIDJob"] != null)
-                    {
-                        txtJob.Text = Session["EIDJob"].ToString();
-                    }
-                    if (Session["EIDWorkField"] != null)
-                    {
-                        txtEmployerIndustry.Text = Session["EIDWorkField"].ToString();
-                    }
-                    rbnEmploymentStatus.SelectedValue = "1";
-                    ddlIWork.SelectedValue = "1";
-                }
-                else
-                {
-                    rbnEmploymentStatus.SelectedValue = "0";
-                    ddlIWork.SelectedValue = "0";
-                }
-
-                if (Session["EIDFamilyID"] != null)
-                {
-                    string sFamily = Session["EIDFamilyID"].ToString();
-                    int iLen = sFamily.Length;
-                    if (sFamily.Length >= 6)
-                    {
-                        txtCityNo.Text = sFamily.Substring(0, 3);
-                        txtFamilyNo.Text = sFamily.Substring(3, iLen - 3);
-                    }
-                    else
-                    {
-                        txtFamilyNo.Text = "999";
-                    }
-                }
-
-
-                if (Session["EIDPhone"] != null)
-                {
-                    txtPhone1.Text = Session["EIDPhone"].ToString();
-
-                }
-                if (Session["EIDAddress"] != null)
-                {
-                    txtAddress.Text += "," + Session["EIDAddress"].ToString();
-                }
-                if (Session["EIDImgUrl"] != null)
-                {
-                    imgStudent.ImageUrl = Session["EIDImgUrl"].ToString();
-                    Pic.Value = Session["EIDID"].ToString();
-                }
-
-                //Kill Session Data
-                Session["CallerID"] = null;
-                Session["EIDID"] = null;
-                Session["EIDGender"] = null;
-                Session["EIDBirthDate"] = null;
-                Session["EIDMarital"] = null;
-                Session["EIDExpiry"] = null;
-                Session["EIDFirstNameAr"] = null;
-                Session["EIDLastNameAr"] = null;
-                Session["EIDFullNameAr"] = null;
-                Session["EIDFirstNameEn"] = null;
-                Session["EIDLastNameEn"] = null;
-                Session["EIDFullNameEn"] = null;
-                Session["EIDNationality"] = null;
-                Session["EIDPassport"] = null;
-                Session["EIDWorkingPlace"] = null;
-                Session["EIDPhone"] = null;
-                Session["EIDAddress"] = null;
-                Session["EIDImgUrl"] = null;
-                Session["EIDFamilyID"] = null;
-                Session["EIDWorkField"] = null;
-                Session["EIDJob"] = null;
-
-            }
-            catch (Exception ex)
-            {
-                LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
-            }
-            finally
-            {
-
-            }
-
-        }
+      
 
         private void Empty_Controls()
         {
@@ -2572,7 +2573,7 @@ namespace LocalECT
                     case "4"://Search
                         
                         MultiTabs.ActiveViewIndex = 4;
-                        //RunSerach();
+                        RunSearch();
                         break;
                 }
             }
