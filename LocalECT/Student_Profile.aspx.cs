@@ -724,6 +724,14 @@ namespace LocalECT
                 while (Rd.Read())
                 {
                     hdnSerial.Value = Rd["lngSerial"].ToString();
+                    if(Campus.ToString()=="Males")
+                    {
+                        lblUnified.Text = "M"+Rd["iUnifiedID"].ToString();
+                    }
+                    else
+                    {
+                        lblUnified.Text = "F"+Rd["iUnifiedID"].ToString();
+                    }
                     txtUnifiedNo.Text = Rd["iUnifiedID"].ToString();
                     txtFNameEn.Text = Rd["strFirstDescEn"].ToString();
                     txtLNameEn.Text = Rd["strSecondDescEn"].ToString();
