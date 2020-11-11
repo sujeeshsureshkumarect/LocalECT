@@ -1394,6 +1394,10 @@
                                                                             <asp:LinkButton ID="lnkGet" runat="server" OnCommand="lnkGet_Command"
                                                                              Font-Strikeout="False" Font-Underline="True"
                                                                             ToolTip="Get current student CX contact ID." ForeColor="Blue">Get from CRM</asp:LinkButton>
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <asp:LinkButton ID="lnkCheck" runat="server" OnCommand="lnkCheck_Command"
+                                                                             Font-Strikeout="False" Font-Underline="True"
+                                                                            ToolTip="Check student detail using CX contact ID." ForeColor="Blue">Check</asp:LinkButton>
                                                                             <asp:Label ID="lbl_contacterror" runat="server" ForeColor="Red"></asp:Label>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server"
                                                                                 ControlToValidate="txtContactID" Display="Dynamic"

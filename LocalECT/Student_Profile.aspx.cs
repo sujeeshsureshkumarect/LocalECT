@@ -3505,7 +3505,54 @@ namespace LocalECT
             }
             return isSet;
         }
-
+        protected void lnkCheck_Command(object sender, CommandEventArgs e)
+        {
+            if(txtContactID.Text!="0" || txtContactID.Text!=null || txtContactID.Text!="")
+            {
+                //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "getContact();", true);
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.DefaultConnectionLimit = 9999;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                string accessToken = InitializeModule.CxPwd;
+                using (var httpClient = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts/" + txtContactID.Text.Trim() + ""))
+                    {
+                        request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                        request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                        var task = httpClient.SendAsync(request);
+                        task.Wait();
+                        var response = task.Result;
+                        string s = response.Content.ReadAsStringAsync().Result;
+                        var x = JObject.Parse(s);
+                        //If Status 200 OK
+                        if (response.IsSuccessStatusCode == true)
+                        {
+                            if (x["customFields"].HasValues)
+                            {
+                                var unifiedid = x["customFields"]["c"]["local_ect_unique_id"];
+                                var studentid = x["customFields"]["c"]["ect_student_id"];
+                                var studentname = x["lookupName"];
+                                Response.Write("<script>alert('Unified ID: " + unifiedid + "" + "\\n" + "ECT Student ID: " + studentid + "" + "\\n" + "Student Name: " + studentname + "');</script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('No Data Available in CX.');</script>");
+                            }
+                        } 
+                        else
+                        {
+                            Response.Write("<script>alert('"+s+"');</script>");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Enter a Valid Contact ID to check
+                Response.Write("<script>alert('Enter a Valid Contact ID to check');</script>");
+            }            
+        }
         protected void ddlMajor_SelectedIndexChanged(object sender, EventArgs e)
         {
 

@@ -1437,6 +1437,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.LinkButton lnkGet;
 
         /// <summary>
+        /// lnkCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkCheck;
+
+        /// <summary>
         /// lbl_contacterror control.
         /// </summary>
         /// <remarks>
