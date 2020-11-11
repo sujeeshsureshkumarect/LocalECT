@@ -110,5 +110,17 @@ namespace LocalECT
                 sc.Close();
             }
         }
+
+        protected void lnk_add_Click(object sender, EventArgs e)
+        {
+            if(drp_Campus.SelectedItem.Text=="Males")
+            {
+                Response.Redirect("Student_Profile.aspx?cmp=m");
+            }
+            else
+            {
+                Response.Redirect("Student_Profile.aspx?cmp=f");
+            }
+        }
     }
 }

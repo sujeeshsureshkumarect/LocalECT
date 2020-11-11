@@ -104,6 +104,16 @@ namespace LocalECT
                         if (Request.QueryString["sid"] !=null && Request.QueryString["sid"] !="")
                         {
                             Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                            if(Campus.ToString()=="Males")
+                            {
+                                rbnGender.SelectedValue = "1";
+                                rbnGender.Enabled = false;
+                            }
+                            else
+                            {
+                                rbnGender.SelectedValue = "0";
+                                rbnGender.Enabled = false;
+                            }
                             Session["StudentSerialNo"] = GetSerial(Request.QueryString["sid"]);
                             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
@@ -127,6 +137,28 @@ namespace LocalECT
                         //New Student
                         else
                         {
+                            if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
+                            {
+                                if(Request.QueryString["cmp"]=="m")
+                                {
+                                    Campus = InitializeModule.EnumCampus.Males;
+                                    rbnGender.SelectedValue = "1";
+                                    rbnGender.Enabled = false;
+                                }
+                                else
+                                {
+                                    Campus = InitializeModule.EnumCampus.Females;
+                                    rbnGender.SelectedValue = "0";
+                                    rbnGender.Enabled = false;
+                                }
+                            }
+                            else
+                            {
+                                Campus = InitializeModule.EnumCampus.Females;
+                                rbnGender.SelectedValue = "0";
+                                rbnGender.Enabled = false;
+                            }
+
                             lnk_delete.Visible = false;
                             Session["StudentSerialNo"] = null;
                             New();
@@ -2518,8 +2550,8 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                 {
-                    //Server.Transfer("Authorization.aspx");
-                    //return;
+                    Server.Transfer("Authorization.aspx");
+                    return;
                 }
                 Empty_Controls();
             }
@@ -4054,6 +4086,51 @@ namespace LocalECT
                                 grdMarks.DataBind();
                                 FillCourses(sCollege, sDegree, sMajor);
                                 Session["CurrentStudent"] = lblStudentId.Text;
+                                //Create Financial Account or Connect to Old one if Reference ID is there.
+                                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                                SqlTransaction objTrans = null;
+                                if (lblReference.Text!="" || lblReference.Text!=null)
+                                {
+                                    //Reference Found-Update Existing Student Account                                    
+                                    SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserCreate=@strUserCreate,dateCreate=@dateCreate,dateLastSave=@dateLastSave where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+                                    SqlCommand cmd2 = new SqlCommand("select intOnlineUser from Reg_Student_Accounts where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumbernew)", sc);
+                                    cmd.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
+                                    cmd.Parameters.AddWithValue("@strPhone1", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@strPhone2", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@intRegYear", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@byteRegSem", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@strUserCreate", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@dateCreate", lblReference.Text);
+                                    cmd.Parameters.AddWithValue("@dateLastSave", lblReference.Text);
+
+                                    cmd2.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
+                                    try
+                                    {
+                                        sc.Open();
+                                        objTrans = sc.BeginTransaction();
+                                        cmd.ExecuteNonQuery();
+                                        objTrans.Commit();
+                                        sc.Close();
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        objTrans.Rollback();
+                                        sc.Close();
+                                        Console.WriteLine(ex.Message);
+                                    }
+                                    finally
+                                    {
+                                        sc.Close();
+                                    }
+                                }
+                                else
+                                {
+                                    //Create New Student Account
+                                }
+                                //Create SIS User(111)
+                                //Update CX API Registration Status
                             }
                         }
                         else
