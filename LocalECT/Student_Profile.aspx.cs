@@ -4094,7 +4094,7 @@ namespace LocalECT
                                 {
                                     //Reference Found-Update Existing Student Account                                    
                                     SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserCreate=@strUserCreate,dateCreate=@dateCreate,dateLastSave=@dateLastSave where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
-                                    SqlCommand cmd2 = new SqlCommand("select intOnlineUser from Reg_Student_Accounts where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumbernew)", sc);
+                                    //SqlCommand cmd2 = new SqlCommand("select intOnlineUser from Reg_Student_Accounts where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumbernew)", sc);
                                     cmd.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
                                     cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
                                     cmd.Parameters.AddWithValue("@strPhone1", lblReference.Text);
@@ -4105,7 +4105,7 @@ namespace LocalECT
                                     cmd.Parameters.AddWithValue("@dateCreate", lblReference.Text);
                                     cmd.Parameters.AddWithValue("@dateLastSave", lblReference.Text);
 
-                                    cmd2.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
+                                    //cmd2.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
                                     try
                                     {
                                         sc.Open();
