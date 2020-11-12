@@ -101,10 +101,10 @@ namespace LocalECT
                         lblRegistrarComments.Visible = bResult;
 
                         //Update
-                        if (Request.QueryString["sid"] !=null && Request.QueryString["sid"] !="")
+                        if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
                         {
                             Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
-                            if(Campus.ToString()=="Males")
+                            if (Campus.ToString() == "Males")
                             {
                                 rbnGender.SelectedValue = "1";
                                 rbnGender.Enabled = false;
@@ -132,14 +132,14 @@ namespace LocalECT
                             else
                             {
                                 lnk_Save.Visible = true;
-                            }                           
+                            }
                         }
                         //New Student
                         else
                         {
                             if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
                             {
-                                if(Request.QueryString["cmp"]=="m")
+                                if (Request.QueryString["cmp"] == "m")
                                 {
                                     Campus = InitializeModule.EnumCampus.Males;
                                     rbnGender.SelectedValue = "1";
@@ -171,8 +171,8 @@ namespace LocalECT
                     Session.RemoveAll();
                     Response.Redirect("Login.aspx");
                 }
-               lbl_Msg.Text = "";
-               Connection_StringCLS ConnectionString;
+                lbl_Msg.Text = "";
+                Connection_StringCLS ConnectionString;
 
                 switch (Campus)
                 {
@@ -756,13 +756,13 @@ namespace LocalECT
                 while (Rd.Read())
                 {
                     hdnSerial.Value = Rd["lngSerial"].ToString();
-                    if(Campus.ToString()=="Males")
+                    if (Campus.ToString() == "Males")
                     {
-                        lblUnified.Text = "M"+Rd["iUnifiedID"].ToString();
+                        lblUnified.Text = "M" + Rd["iUnifiedID"].ToString();
                     }
                     else
                     {
-                        lblUnified.Text = "F"+Rd["iUnifiedID"].ToString();
+                        lblUnified.Text = "F" + Rd["iUnifiedID"].ToString();
                     }
                     txtUnifiedNo.Text = Rd["iUnifiedID"].ToString();
                     txtFNameEn.Text = Rd["strFirstDescEn"].ToString();
@@ -875,7 +875,7 @@ namespace LocalECT
             }
             return iserial;
         }
-      
+
 
         private void Empty_Controls()
         {
@@ -1592,7 +1592,7 @@ namespace LocalECT
                 drp_determination.DataSource = dt;
                 drp_determination.DataBind();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 sc.Close();
             }
@@ -1956,7 +1956,7 @@ namespace LocalECT
             int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, lblStudentId.Text, iYear, iSemester);
 
             if (iRegisteredHours == 0)
-            {                
+            {
                 lbl_Msg.Text = "Student must register courses before creating email.";
                 div_msg.Visible = true;
                 return;
@@ -1972,12 +1972,12 @@ namespace LocalECT
 
             //======= Create Moodle Account
             if (ClsMoodleAPI.CreateUpdateMoodleAccount(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
-            {                
+            {
                 lbl_Msg.Text += " & Moodle";
             }
             //======== Enroll student in Moodle courses
             if (ClsMoodleAPI.EnrollStudentinMoodleCourses(txtECTEmail.Text, lblStudentId.Text) == InitializeModule.SUCCESS_RET)
-            {                
+            {
                 lbl_Msg.Text += ", Student enrolled in Moodle courses";
             }
             //======= Create Zoom Account
@@ -1997,7 +1997,7 @@ namespace LocalECT
             string sFName = "";
             string sECTEmail = "";
             if (txtLNameEn.Text.Trim().Length <= 1)
-            {        
+            {
                 lbl_Msg.Text = "Please enter correct name in (Last Name) ";
                 div_msg.Visible = true;
                 return;
@@ -2028,14 +2028,14 @@ namespace LocalECT
             //Update student email    
             sECTEmail = sFName.ToString().Trim().Replace(" ", string.Empty) + iUnifiedID.ToString().PadLeft(6, Convert.ToChar("0")) + "@ect.ac.ae";
             if (LibraryMOD.UpdateStudentEmail(Campus, Convert.ToInt32(hdnSerial.Value), sECTEmail) == true)
-            {                
+            {
                 lbl_Msg.Text = "Student email has been created successfully";
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 div_msg.Visible = true;
                 txtECTEmail.Text = sECTEmail;
             }
             else
-            {                
+            {
                 lbl_Msg.Text = "The student's email has not been created";
                 div_msg.Visible = true;
             }
@@ -2093,7 +2093,7 @@ namespace LocalECT
                     int i = 0;
                     CreateUserEmailAD(dt.Rows[i]["Given_Name"].ToString(), dt.Rows[i]["Surname"].ToString(), dt.Rows[i]["Display_Name"].ToString(), dt.Rows[i]["Description"].ToString(), dt.Rows[i]["Email_Addresses"].ToString(), dt.Rows[i]["Sam_Account_Name"].ToString(), dt.Rows[i]["Department"].ToString(), dt.Rows[i]["Company"].ToString(), true);
                     //}
-                    UpdateEmailCreationRequired(Con, Convert.ToInt32(hdnSerial.Value));                   
+                    UpdateEmailCreationRequired(Con, Convert.ToInt32(hdnSerial.Value));
                     lbl_Msg.Text = "Students Email Created Successfully in Office365";
                     div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                     div_msg.Visible = true;
@@ -2339,7 +2339,7 @@ namespace LocalECT
         {
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                     InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-            {               
+            {
                 lbl_Msg.Text = "Sorry you cannot update students";
                 div_msg.Visible = true;
                 return;
@@ -2359,11 +2359,11 @@ namespace LocalECT
                 var days = difference.TotalDays;
 
                 if (days / 365 < 16)
-                {                    
+                {
                     lbl_Msg.Text = "Invalid birth date - Age less than 16 years";
                     div_msg.Visible = true;
                     return;
-                }    
+                }
 
                 if (txtIDNo.Text.Length < 15)
                 {
@@ -2394,6 +2394,10 @@ namespace LocalECT
                         div_msg.Visible = true;
                         return;
                     }
+                    else//Apply permission here later
+                    {
+                        lblReference.Enabled = true;
+                    }
                     iEffected = StudentDS.Insert();
                     if (iEffected > 0)
                     {
@@ -2418,6 +2422,10 @@ namespace LocalECT
                         lbl_Msg.Text = "Sorry you cannot update students";
                         div_msg.Visible = true;
                         return;
+                    }
+                    else//Apply permission here later
+                    {
+                        lblReference.Enabled = true;
                     }
 
                     iEffected = StudentDS.Update();
@@ -2465,7 +2473,7 @@ namespace LocalECT
             {
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
-                {                    
+                {
                     lbl_Msg.Text = "Sorry you cannot delete students";
                     div_msg.Visible = true;
                     return;
@@ -2579,7 +2587,7 @@ namespace LocalECT
                 if (sSender != "4")
                 {
                     if (hdnSerial.Value == "")
-                    {                        
+                    {
                         lbl_Msg.Text = "Select or add a student please...";
                         div_msg.Visible = true;
                         return;
@@ -2611,7 +2619,7 @@ namespace LocalECT
 
                         break;
                     case "4"://Search
-                        
+
                         MultiTabs.ActiveViewIndex = 4;
                         RunSearch();
                         break;
@@ -2681,7 +2689,7 @@ namespace LocalECT
                                 InitializeModule.enumPrivilege.HSCertificateAdd, CurrentRole);
 
                             if (!IsAllowShowAdmissionVerification && !IsAllowShowRegistrarVerification && !IsAllowHSCertificateAdd)
-                            {                                
+                            {
                                 lbl_Msg.Text = "Sorry you cannot add high school to students";
                                 div_msg.Visible = true;
                                 return;
@@ -2703,7 +2711,7 @@ namespace LocalECT
                                 InitializeModule.enumPrivilege.EnglishCertificateAdd, CurrentRole);
 
                             if (!IsAllowShowAdmissionVerification && !IsAllowShowRegistrarVerification && !IsAllowEnglishCertificateAdd)
-                            {                                
+                            {
                                 lbl_Msg.Text = "Sorry you cannot add english certificate to students";
                                 div_msg.Visible = true;
                                 return;
@@ -2711,14 +2719,14 @@ namespace LocalECT
                             if (sQualification == "15")
                             {
                                 if (ddlQEngExamCenter.SelectedValue.ToString() == "" || ddlQEngExamCenter.SelectedValue.ToString() == "0")
-                                {                                  
+                                {
                                     lbl_Msg.Text = "Please select exam center";
                                     div_msg.Visible = true;
                                     ddlQEngExamCenter.Focus();
                                     return;
                                 }
                                 if (ddlQEngGrade.SelectedValue.ToString() == "-" || ddlQEngGrade.SelectedValue.ToString() == "")
-                                {                                    
+                                {
                                     lbl_Msg.Text = "Please select exam grade";
                                     div_msg.Visible = true;
                                     ddlQEngGrade.Focus();
@@ -2734,7 +2742,7 @@ namespace LocalECT
                     {
                         iAdded = QualificationDS.Insert();
                         if (iAdded > 0)
-                        {                            
+                        {
                             lbl_Msg.Text = "Qualification Added Successfully ...";
                             div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                             div_msg.Visible = true;
@@ -2744,7 +2752,7 @@ namespace LocalECT
                     {
                         iAdded = QualificationDS.Update();
                         if (iAdded > 0)
-                        {                           
+                        {
                             lbl_Msg.Text = "Qualification Updated Successfully ...";
                             div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                             div_msg.Visible = true;
@@ -3148,7 +3156,7 @@ namespace LocalECT
         {
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                     InitializeModule.enumPrivilege.DeleteQualification, CurrentRole) != true)
-            {                
+            {
                 lbl_Msg.Text = "Sorry you cannot delete a qualification";
                 div_msg.Visible = true;
                 return;
@@ -3302,7 +3310,7 @@ namespace LocalECT
 
                 int iEffected = 0;
                 iEffected = Cmd.ExecuteNonQuery();
-                
+
                 lbl_Msg.Text = iEffected.ToString() + " ESL Courses Calculated";
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 div_msg.Visible = true;
@@ -3341,7 +3349,7 @@ namespace LocalECT
             string accessToken = InitializeModule.CxPwd;
             using (var httpClient = new HttpClient())
             {
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts?q=customFields.c.ect_student_id%3D%27"+ lblStudentId .Text+ "%27"))
+                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts?q=customFields.c.ect_student_id%3D%27" + lblStudentId.Text + "%27"))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", accessToken);
                     request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
@@ -3350,7 +3358,7 @@ namespace LocalECT
                     var response = task.Result;
                     string s = response.Content.ReadAsStringAsync().Result;
                     var x = JObject.Parse(s);
-                    if(x["items"].HasValues)
+                    if (x["items"].HasValues)
                     {
                         var id = x["items"][0]["id"];
                         txtContactID.Text = id.ToString();
@@ -3397,7 +3405,7 @@ namespace LocalECT
 
                     using (var httpClient = new HttpClient())
                     {
-                        using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/"+ txtOpportunityID.Text + ""))
+                        using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + txtOpportunityID.Text + ""))
                         {
                             request.Headers.TryAddWithoutValidation("Authorization", accessToken);
                             request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
@@ -3409,12 +3417,12 @@ namespace LocalECT
                             var response = task.Result;
                             string s = response.Content.ReadAsStringAsync().Result;
                             //If Status 200
-                            if(response.IsSuccessStatusCode==true)
+                            if (response.IsSuccessStatusCode == true)
                             {
                                 SetOpportunity(sSID);
                             }
                         }
-                    }                   
+                    }
                 }
                 else
                 {
@@ -3539,7 +3547,7 @@ namespace LocalECT
         }
         protected void lnkCheck_Command(object sender, CommandEventArgs e)
         {
-            if(txtContactID.Text!="0" || txtContactID.Text!=null || txtContactID.Text!="")
+            if (txtContactID.Text != "0" || txtContactID.Text != null || txtContactID.Text != "")
             {
                 //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "getContact();", true);
                 ServicePointManager.Expect100Continue = true;
@@ -3571,10 +3579,10 @@ namespace LocalECT
                             {
                                 Response.Write("<script>alert('No Data Available in CX.');</script>");
                             }
-                        } 
+                        }
                         else
                         {
-                            Response.Write("<script>alert('"+s+"');</script>");
+                            Response.Write("<script>alert('" + s + "');</script>");
                         }
                     }
                 }
@@ -3583,7 +3591,7 @@ namespace LocalECT
             {
                 //Enter a Valid Contact ID to check
                 Response.Write("<script>alert('Enter a Valid Contact ID to check');</script>");
-            }            
+            }
         }
         protected void ddlMajor_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3939,7 +3947,7 @@ namespace LocalECT
             {
 
                 if (hdnSerial.Value == "")
-                {                    
+                {
                     lbl_Msg.Text = "Select or Add Student Please ...";
                     div_msg.Visible = true;
                     return;
@@ -4003,7 +4011,7 @@ namespace LocalECT
                     }
 
                     if (ddlWMajor2.SelectedValue == "0")
-                    {                        
+                    {
                         lbl_Msg.Text = "Select the Second Preferred Major Please.";
                         div_msg.Visible = true;
                         ddlWMajor2.Focus();
@@ -4011,7 +4019,7 @@ namespace LocalECT
                     }
 
                     if (ddlWMajor3.SelectedValue == "0")
-                    {                  
+                    {
                         lbl_Msg.Text = "Select the Third Preferred Major Please.";
                         div_msg.Visible = true;
                         ddlWMajor3.Focus();
@@ -4044,6 +4052,7 @@ namespace LocalECT
                             sMajor = "999";
                         }
                     }
+                    isLegal = true;//delete later
                     if (isLegal)
                     {
                         SpecializationsDAL mySpecDAL = new SpecializationsDAL();
@@ -4053,7 +4062,7 @@ namespace LocalECT
                         int iRegTerm = iRegYear * 10 + iRegSem;
 
                         if (iEnTerm < iRegTerm)
-                        {                            
+                        {
                             lbl_Msg.Text = "Sorry you cannot enrolled a students on old term ...";
                             div_msg.Visible = true;
                             return;
@@ -4065,7 +4074,7 @@ namespace LocalECT
                         iEnYear = LibraryMOD.SeperateTerm(iEnTerm, out iEnSem);
 
 
-                     
+
                         CreateNewId(int.Parse(ddlType.SelectedValue), iEnYear, iEnSem);
                         if (lblStudentId.Text != "")
                         {
@@ -4079,7 +4088,7 @@ namespace LocalECT
 
                             iEffected = EnrollmentDS.Insert();
                             if (iEffected > 0)
-                            {                                
+                            {
                                 lbl_Msg.Text = "Student Enrolled Successfully ...";
                                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                                 div_msg.Visible = true;
@@ -4089,34 +4098,110 @@ namespace LocalECT
                                 //Create Financial Account or Connect to Old one if Reference ID is there.
                                 Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
                                 SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-                                SqlTransaction objTrans = null;
-                                if (lblReference.Text!="" || lblReference.Text!=null)
+                                //SqlTransaction objTrans = null;
+                                if (lblReference.Text.Length >0)
                                 {
-                                    //Reference Found-Update Existing Student Account                                    
-                                    SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserCreate=@strUserCreate,dateCreate=@dateCreate,dateLastSave=@dateLastSave where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
-                                    //SqlCommand cmd2 = new SqlCommand("select intOnlineUser from Reg_Student_Accounts where strAccountNo in (SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumbernew)", sc);
-                                    cmd.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
-                                    cmd.Parameters.AddWithValue("@strPhone1", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@strPhone2", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@intRegYear", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@byteRegSem", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@strUserCreate", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@dateCreate", lblReference.Text);
-                                    cmd.Parameters.AddWithValue("@dateLastSave", lblReference.Text);
-
-                                    //cmd2.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text);
+                                    //Reference Found-Update Existing Student Account 
+                                    string sAcc = "";
+                                    SqlCommand cmd1 = new SqlCommand("SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber", sc);
+                                    cmd1.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
+                                    DataTable dt1 = new DataTable();
+                                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
                                     try
                                     {
                                         sc.Open();
-                                        objTrans = sc.BeginTransaction();
-                                        cmd.ExecuteNonQuery();
-                                        objTrans.Commit();
+                                        da1.Fill(dt1);
                                         sc.Close();
+
+                                        if (dt1.Rows.Count > 0)
+                                        {
+                                            sAcc = dt1.Rows[0]["strAccountNo"].ToString();
+                                            SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
+                                            cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
+                                            cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text.Trim());
+                                            cmd.Parameters.AddWithValue("@strPhone1", txtPhone1.Text.Trim());
+                                            cmd.Parameters.AddWithValue("@strPhone2", txtPhone2.Text.Trim());
+                                            cmd.Parameters.AddWithValue("@intRegYear", Convert.ToInt32(Session["CurrentYear"]));
+                                            cmd.Parameters.AddWithValue("@byteRegSem", Session["CurrentSemester"].ToString());
+                                            cmd.Parameters.AddWithValue("@strUserSave", Session["CurrentUserName"].ToString());
+                                            //cmd.Parameters.AddWithValue("@dateCreate", DateTime.Now);
+                                            cmd.Parameters.AddWithValue("@dateLastSave", DateTime.Now);
+                                            try
+                                            {
+                                                sc.Open();
+                                               // objTrans = sc.BeginTransaction();
+                                                cmd.ExecuteNonQuery();
+                                                //Select Account Number of Student
+                                                sc.Close();
+
+                                                //Create SIS User(111)
+                                                SqlCommand Cmd = new SqlCommand();
+                                                Cmd.Connection = sc;
+                                                Cmd.CommandText = "Create_Online_User";
+                                                Cmd.CommandType = CommandType.StoredProcedure;
+                                                Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
+                                                Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                                                Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                                                try
+                                                {
+                                                    sc.Open();
+                                                    Cmd.ExecuteNonQuery();
+                                                    sc.Close();
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    sc.Close();
+                                                    Console.WriteLine(ex.Message);
+                                                }
+                                                finally
+                                                {
+                                                    sc.Close();
+                                                }
+
+                                                int iStatus = 1;
+                                                string sSQL = "UPDATE Reg_Student_Accounts";
+                                                sSQL += " SET intOnlineStatus =" + iStatus;
+                                                sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                                                sSQL += " Where strAccountNo='" + sAcc + "'";
+                                                Cmd.CommandType = CommandType.Text;
+                                                Cmd.CommandText = sSQL;
+                                                try
+                                                {
+                                                    sc.Open();
+                                                    Cmd.ExecuteNonQuery();
+                                                    sc.Close();
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    sc.Close();
+                                                    Console.WriteLine(ex.Message);
+                                                }
+                                                finally
+                                                {
+                                                    sc.Close();
+                                                }
+
+                                                //Update CX API Registration Status
+                                                if (txtContactID.Text!="0"||txtContactID.Text!=""||txtContactID.Text!=null)
+                                                {
+                                                    updatecxapiregistration(txtContactID.Text);
+                                                }
+                                                //Sharepoint List Creation
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                //objTrans.Rollback();
+                                                sc.Close();
+                                                Console.WriteLine(ex.Message);
+                                            }
+                                            finally
+                                            {
+                                                sc.Close();
+                                            }
+                                        }
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
-                                        objTrans.Rollback();
                                         sc.Close();
                                         Console.WriteLine(ex.Message);
                                     }
@@ -4128,19 +4213,80 @@ namespace LocalECT
                                 else
                                 {
                                     //Create New Student Account
+
+                                    string sAcc = Update_Acc();
+
+                                    if(sAcc!=null || sAcc!=""||sAcc!="0")
+                                    {
+                                        //Create SIS User(111)
+                                        SqlCommand Cmd = new SqlCommand();
+                                        Cmd.Connection = sc;
+                                        Cmd.CommandText = "Create_Online_User";
+                                        Cmd.CommandType = CommandType.StoredProcedure;
+                                        Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
+                                        Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                                        Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                                        try
+                                        {
+                                            sc.Open();
+                                            Cmd.ExecuteNonQuery();
+                                            sc.Close();
+                                        }
+                                        catch(Exception ex)
+                                        {
+                                            sc.Close();
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                        finally
+                                        {
+                                            sc.Close();
+                                        }
+
+
+                                        int iStatus = 1;
+                                        string sSQL = "UPDATE Reg_Student_Accounts";
+                                        sSQL += " SET intOnlineStatus =" + iStatus;
+                                        sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                                        sSQL += " Where strAccountNo='" + sAcc + "'";
+                                        Cmd.CommandType = CommandType.Text;
+                                        Cmd.CommandText = sSQL;
+                                        try
+                                        {
+                                            sc.Open();
+                                            Cmd.ExecuteNonQuery();
+                                            sc.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            sc.Close();
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                        finally
+                                        {
+                                            sc.Close();
+                                        }
+
+                                        //Update CX API Registration Status
+                                        if (txtContactID.Text != "0" || txtContactID.Text != "" || txtContactID.Text != null)
+                                        {
+                                            updatecxapiregistration(txtContactID.Text);
+                                        }
+                                        //Sharepoint List Creation
+
+                                    }
                                 }
-                                //Create SIS User(111)
-                                //Update CX API Registration Status
+
+
                             }
                         }
                         else
-                        {                           
+                        {
                             lbl_Msg.Text = "Student not Enrolled !";
                             div_msg.Visible = true;
                         }
                     }
                     else
-                    {                        
+                    {
                         lbl_Msg.Text = "HS AVG or ENG Score doesn’t meet the major requirement …!";
                         div_msg.Visible = true;
                         MultiTabs.ActiveViewIndex = 0;
@@ -4150,14 +4296,14 @@ namespace LocalECT
                 {
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                    {                        
+                    {
                         lbl_Msg.Text = "Sorry you cannot update students";
                         div_msg.Visible = true;
                         return;
                     }
 
                     if (ddlWMajor1.SelectedValue == "0")
-                    {                        
+                    {
                         lbl_Msg.Text = "Select the First Preferred Major Please.";
                         div_msg.Visible = true;
                         ddlWMajor1.Focus();
@@ -4180,7 +4326,7 @@ namespace LocalECT
 
                     iEffected = EnrollmentDS.Update();
                     if (iEffected > 0)
-                    {                        
+                    {
                         lbl_Msg.Text = "Student Enrollment Updated Successfully ...";
                         div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                         div_msg.Visible = true;
@@ -4198,6 +4344,162 @@ namespace LocalECT
             finally
             {
 
+            }
+        }
+        private string Get_New_Acc()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            string sNewAcc = "";
+            try
+            {
+
+                string sSQL = "SELECT sNewACC FROM New_ACC";
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+
+                sNewAcc = Cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception exp)
+            {
+                //Console.WriteLine("{0} Exception caught.", exp);
+                //divMsg.InnerText = exp.Message;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return sNewAcc;
+        }
+        private string Update_Acc()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            string newAcc= Get_New_Acc();
+            try
+            {
+                SqlCommand Cmd = new SqlCommand();
+                Cmd.CommandText = "Add_Account";
+                Cmd.CommandType = CommandType.StoredProcedure;
+                Cmd.Connection = Conn;
+                Cmd.Parameters.Add("@strAccountNo", SqlDbType.VarChar).Value = newAcc;
+                Cmd.Parameters.Add("@strStudentName", SqlDbType.VarChar).Value = txtNameEn.Text;
+                Cmd.Parameters.Add("@lngStudentNumber", SqlDbType.VarChar).Value = lblStudentId.Text.Trim();
+                Cmd.Parameters.Add("@strPhone1", SqlDbType.VarChar).Value = txtPhone1.Text;
+                Cmd.Parameters.Add("@byteAccountStatus", SqlDbType.SmallInt).Value = 0;
+                //int iTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
+                //int iYear = 0;
+                //int iSem = 0;
+                //iYear = LibraryMOD.SeperateTerm(iTerm, out iSem);
+                int iCSem = 0;
+                int iCYear = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out iCSem);
+                Cmd.Parameters.Add("@intRegYear", SqlDbType.Int).Value = iCYear;
+                Cmd.Parameters.Add("@byteRegSem", SqlDbType.SmallInt).Value = iCSem;
+                Cmd.Parameters.Add("@intDelegation", SqlDbType.Int).Value = 0;
+                Cmd.Parameters.Add("@curDelegation", SqlDbType.Decimal).Value = 0;
+                Cmd.Parameters.Add("@strDelegationNote", SqlDbType.VarChar).Value = DBNull.Value;
+                Cmd.Parameters.Add("@strNote", SqlDbType.VarChar).Value = DBNull.Value;
+                Cmd.Parameters.Add("@byteType", SqlDbType.SmallInt).Value = 0;
+                Cmd.Parameters.Add("@intOnlineStatus", SqlDbType.Int).Value = 1;
+                //Cmd.Parameters.Add("@intOnlineUser", SqlDbType.Int).Value = 0;
+                //Cmd.Parameters.Add("@strOnlinePWD", SqlDbType.VarChar).Value = "";
+                string sUser = Session["CurrentUserName"].ToString();
+                Cmd.Parameters.Add("@sUser", SqlDbType.VarChar).Value = sUser;
+                Cmd.ExecuteNonQuery();
+
+                
+                //if (ddlIDs.SelectedValue != "0")
+                //{
+                //    Cmd.CommandText = "UPDATE Reg_Applications SET bOtherCollege =" + rbnStatus.SelectedValue + "  WHERE lngStudentNumber='" + ddlIDs.SelectedValue + "'";
+                //    Cmd.CommandType = CommandType.Text;
+                //    Cmd.ExecuteNonQuery();
+                //}
+
+                // divMsg.InnerText = "Data Updated Successfully";
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                //divMsg.InnerText = exp.Message;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return newAcc;
+        }
+        public void updatecxapiregistration(string contactid)
+        {
+            string registrationstatus = "Unregistered";
+            string retention_status = "Opened";
+            string numberofregisteredcourses = "0";
+            string cgpa = "0";
+            string ect_student_id = lblStudentId.Text;
+            string financialbalance = "A";
+            string sisusername = lblStudentId.Text;
+            string sispassword = "ect@12345";
+            string ectemailpassword = "ect@12345";
+            string major = ddlMajor.SelectedItem.Text;
+            string Credit_Completed = "0";
+
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+            cmd.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if(dt.Rows.Count>0)
+                {
+                    sisusername = dt.Rows[0]["UserName"].ToString();
+                    sispassword = dt.Rows[0]["Password"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+            //API Call
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            string accessToken = InitializeModule.CxPwd;
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts/" + contactid + ""))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                    request.Content = new StringContent("{\n    \"customFields\": {\n        \"c\": {\n            \"registrationstatus\": {\n                \"lookupName\": \"" + registrationstatus + "\"\n            },\n            \"numberofregisteredcourses\": " + numberofregisteredcourses + ",\n            \"cgpa\": " + cgpa + ",\n            \"retention_status\": {\n                \"lookupName\": \"" + retention_status + "\"\n            },\n            \"ect_student_id\": \"" + ect_student_id + "\",\n            \"financialbalance\": \"" + financialbalance + "\",\n            \"sisusername\": \"" + sisusername + "\",\n            \"sispassword\": \"" + sispassword + "\",\n            \"ectemailpassword\": \"" + ectemailpassword + "\"\n        },\n        \"CO\": {\n            \"Major\": \"" + major + "\",\n            \"Credit_Completed\": " + Credit_Completed + "\n        }\n    }\n}");
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                    var task = httpClient.SendAsync(request);
+                    task.Wait();
+                    var response = task.Result;
+                    string s = response.Content.ReadAsStringAsync().Result;
+                    //If Status 200
+                    if (response.IsSuccessStatusCode == true)
+                    {
+                        //API Call-Update Registration Status-SUCCESS
+                    }
+
+                }
             }
         }
 
@@ -5010,6 +5312,7 @@ namespace LocalECT
         {
             int iKey = int.Parse(e.CommandArgument.ToString());
             GetStudent(iKey);
+            lblReference.Enabled = true;
         }
         protected void Search_Print_Command(object sender, CommandEventArgs e)
         {

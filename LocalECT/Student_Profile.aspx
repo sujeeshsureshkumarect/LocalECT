@@ -1472,7 +1472,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Reference ID</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="lblReference" runat="server" ReadOnly="true"
+                                                                                <asp:TextBox ID="lblReference" runat="server" 
                                                                                     CssClass="form-control"></asp:TextBox>
                                                                             </div>
                                                                         </div>
