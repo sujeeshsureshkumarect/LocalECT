@@ -14,9 +14,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint;
+using ListItem = System.Web.UI.WebControls.ListItem;
+
 class ENGCourse
 {
     string sCourse;
@@ -834,7 +839,7 @@ namespace LocalECT
 
                     string sURL = "~/Images/Students/PIC" + Pic.Value + ".jpeg";
 
-                    if (File.Exists(Server.MapPath(sURL)))
+                    if (System.IO.File.Exists(Server.MapPath(sURL)))
                     {
                         imgStudent.ImageUrl = sURL;
                     }
@@ -1074,7 +1079,7 @@ namespace LocalECT
 
                 while (Rd.Read())
                 {
-                    ddlEmployerEmirate.Items.Add(new ListItem(Rd["strEmirateEn"].ToString(), Rd["byteEmirate"].ToString()));
+                    ddlEmployerEmirate.Items.Add(new System.Web.UI.WebControls.ListItem(Rd["strEmirateEn"].ToString(), Rd["byteEmirate"].ToString()));
 
                 }
                 Rd.Close();
@@ -1084,8 +1089,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1114,7 +1119,7 @@ namespace LocalECT
 
                 while (Rd.Read())
                 {
-                    ddlHSSystem.Items.Add(new ListItem(Rd["sSystem"].ToString(), Rd["iSerial"].ToString()));
+                    ddlHSSystem.Items.Add(new System.Web.UI.WebControls.ListItem(Rd["sSystem"].ToString(), Rd["iSerial"].ToString()));
 
                 }
                 Rd.Close();
@@ -1124,8 +1129,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1163,8 +1168,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1203,8 +1208,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1239,8 +1244,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1284,8 +1289,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1346,8 +1351,8 @@ namespace LocalECT
 
 
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1439,8 +1444,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1465,8 +1470,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1493,8 +1498,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1518,8 +1523,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1544,8 +1549,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1568,8 +1573,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1595,6 +1600,7 @@ namespace LocalECT
             catch (Exception ex)
             {
                 sc.Close();
+                LibraryMOD.ShowErrorMessage(ex);
             }
             finally
             {
@@ -1618,8 +1624,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1643,8 +1649,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1669,8 +1675,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1694,8 +1700,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1718,8 +1724,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1751,8 +1757,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1785,8 +1791,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1823,8 +1829,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1849,8 +1855,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1873,8 +1879,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -1910,8 +1916,8 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
+                //lbl_Msg.Text = ex.Message;
+                //div_msg.Visible = true;
             }
             finally
             {
@@ -4052,7 +4058,7 @@ namespace LocalECT
                             sMajor = "999";
                         }
                     }
-                    isLegal = true;//delete later
+                    //isLegal = true;//delete later
                     if (isLegal)
                     {
                         SpecializationsDAL mySpecDAL = new SpecializationsDAL();
@@ -4116,6 +4122,7 @@ namespace LocalECT
                                         if (dt1.Rows.Count > 0)
                                         {
                                             sAcc = dt1.Rows[0]["strAccountNo"].ToString();
+                                            Session["sAcc"] = sAcc;
                                             SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
                                             cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
                                             cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text.Trim());
@@ -4180,6 +4187,28 @@ namespace LocalECT
                                                 {
                                                     sc.Close();
                                                 }
+                                                string sFName = "";
+                                                int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                //update Unified ID
+                                                if (iUnifiedID > 0)
+                                                {
+                                                    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                    //check reference number
+                                                    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                    {
+                                                        //Get updated UnifiedID
+                                                        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    if (iUnifiedID == 0)
+                                                    {
+                                                        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    }
+                                                    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                }
 
                                                 //Update CX API Registration Status
                                                 if (txtContactID.Text!="0"||txtContactID.Text!=""||txtContactID.Text!=null)
@@ -4187,6 +4216,7 @@ namespace LocalECT
                                                     updatecxapiregistration(txtContactID.Text);
                                                 }
                                                 //Sharepoint List Creation
+                                                sentdatatoSPLIst();
                                             }
                                             catch (Exception ex)
                                             {
@@ -4218,6 +4248,7 @@ namespace LocalECT
 
                                     if(sAcc!=null || sAcc!=""||sAcc!="0")
                                     {
+                                        Session["sAcc"] = sAcc;
                                         //Create SIS User(111)
                                         SqlCommand Cmd = new SqlCommand();
                                         Cmd.Connection = sc;
@@ -4266,13 +4297,36 @@ namespace LocalECT
                                             sc.Close();
                                         }
 
+                                        string sFName = "";
+                                        int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                        //update Unified ID
+                                        if (iUnifiedID > 0)
+                                        {
+                                            LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                            //check reference number
+                                            if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                            {
+                                                //Get updated UnifiedID
+                                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            if (iUnifiedID == 0)
+                                            {
+                                                iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            }
+                                            LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                        }
+
                                         //Update CX API Registration Status
                                         if (txtContactID.Text != "0" || txtContactID.Text != "" || txtContactID.Text != null)
                                         {
                                             updatecxapiregistration(txtContactID.Text);
                                         }
                                         //Sharepoint List Creation
-
+                                        sentdatatoSPLIst();
                                     }
                                 }
 
@@ -4345,6 +4399,115 @@ namespace LocalECT
             {
 
             }
+        }
+        public void sentdatatoSPLIst()
+        {
+            int sem = 0;
+            int Year = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out sem);
+
+            int iYear = Year;
+            int iSem = sem;
+            string sSemester = LibraryMOD.GetSemesterString(iSem);
+            int iTerm = iYear * 10 + iSem;
+
+            string Addedby = "";
+            SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);            
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    Addedby= dt.Rows[0]["Email"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+            string AlertTo = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc1 = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd1 = new SqlCommand("SELECT sACCAlert from Cmn_Firm", sc1);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            try
+            {
+                sc1.Open();
+                da1.Fill(dt1);
+                sc1.Close();
+
+                if (dt1.Rows.Count > 0)
+                {
+                    AlertTo = dt1.Rows[0]["sACCAlert"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc1.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc1.Close();
+            }
+            string gender = "";
+            if(rbnGender.SelectedValue=="0")
+            {
+                gender = "Female";
+            }
+            else
+            {
+                gender = "Male";
+            }
+
+            string login = "ets.services.admin@ect.ac.ae"; //give your username here  
+            string password = "Ser71ces@328"; //give your password  
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            string siteUrl = "https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices";
+            ClientContext clientContext = new ClientContext(siteUrl);
+            Microsoft.SharePoint.Client.List myList = clientContext.Web.Lists.GetByTitle("New Admission");
+            ListItemCreationInformation itemInfo = new ListItemCreationInformation();
+            Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);            
+            myItem["Term"] = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);
+            myItem["UID"] = lblUnified.Text.Trim();
+            myItem["ACC"] = Session["sAcc"].ToString();
+            myItem["SID"] = lblStudentId.Text.Trim();
+            myItem["Name"] = txtNameEn.Text.Trim();
+            myItem["Gender"] = gender;
+            myItem["eMail"] = ""; //Student Email    
+            myItem["CXID"] = txtContactID.Text.Trim();
+            myItem["AddedBy"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
+            //myItem["AddedBy"] = clientContext.Web.EnsureUser(Addedby);
+            myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            try
+            {
+                myItem.Update();
+                var onlineCredentials = new SharePointOnlineCredentials(login, securePassword);
+                clientContext.Credentials = onlineCredentials;
+                clientContext.ExecuteQuery();        
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            //Console.ReadLine();
         }
         private string Get_New_Acc()
         {
@@ -4502,6 +4665,9 @@ namespace LocalECT
                 }
             }
         }
+
+
+
 
         protected void AddESLs_Click(object sender, EventArgs e)
         {
@@ -4853,7 +5019,7 @@ namespace LocalECT
                     //}
                     if (imgStudent.ImageUrl != "~/Images/Students/Student.jpeg" && imgStudent.ImageUrl != "~/Images/Students/PIC999999999999999.jpeg")
                     {
-                        if (File.Exists(Server.MapPath(imgStudent.ImageUrl)))
+                        if (System.IO.File.Exists(Server.MapPath(imgStudent.ImageUrl)))
                         {
                             FileStream fstr = new FileStream(Server.MapPath(imgStudent.ImageUrl), FileMode.Open);
                             BinaryReader br = new BinaryReader(fstr);
