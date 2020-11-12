@@ -4188,7 +4188,9 @@ namespace LocalECT
                                                     sc.Close();
                                                 }
                                                 string sFName = "";
-                                                int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                int iSerial = GetSerial(lblReference.Text.Trim());                                             
+                                                //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, iSerial, out sFName);
                                                 //update Unified ID
                                                 if (iUnifiedID > 0)
                                                 {
@@ -4494,8 +4496,8 @@ namespace LocalECT
             myItem["CXID"] = txtContactID.Text.Trim();
             //myItem["AddedBy"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
             myItem["AddedBy"] = clientContext.Web.EnsureUser(Addedby);
-            //myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
-            myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            myItem["AlertTo"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//AlertTo  
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
             try
             {
                 myItem.Update();
