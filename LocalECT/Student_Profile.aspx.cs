@@ -4492,10 +4492,10 @@ namespace LocalECT
             myItem["Gender"] = gender;
             myItem["eMail"] = ""; //Student Email    
             myItem["CXID"] = txtContactID.Text.Trim();
-            myItem["AddedBy"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
-            //myItem["AddedBy"] = clientContext.Web.EnsureUser(Addedby);
-            myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
-            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            //myItem["AddedBy"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
+            myItem["AddedBy"] = clientContext.Web.EnsureUser(Addedby);
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
+            myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
             try
             {
                 myItem.Update();
