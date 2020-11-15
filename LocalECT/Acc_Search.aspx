@@ -127,8 +127,8 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>">Action1</a>
-                                                             <a class="dropdown-item" href="#">Action1</a>
+                                                             <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>">Action 1</a>
+                                                             <a class="dropdown-item" href="#">Action 2</a>
                                                              <%--<a class="dropdown-item" href="#">Change Status</a>
                                                              <a class="dropdown-item" href="#">Testimonies</a>--%>
                                                              <%--<a class="dropdown-item" href="#">Marks</a>--%>
