@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Acc_Search.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Authorization.aspx" />
     <Content Include="ChangePwd.aspx" />
@@ -8047,6 +8048,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acc_Search.aspx.cs">
+      <DependentUpon>Acc_Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acc_Search.aspx.designer.cs">
+      <DependentUpon>Acc_Search.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AcademicAdvisingCls.cs" />
     <Compile Include="App_Start\AcademicAdvising_RecommendedCoursesCls.cs" />
     <Compile Include="App_Start\AcceptedStudentsCls.cs" />
