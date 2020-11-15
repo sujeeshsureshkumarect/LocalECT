@@ -284,7 +284,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color: #FF3300;">Access Category</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3" >Access Category</label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:DropDownList ID="ddlAccess" runat="server" DataSourceID="AccessDs"
                                                                 DataTextField="sAccessCategory" DataValueField="iAccessCategory"
@@ -378,7 +378,7 @@
                                                         </div>
                                                     </div> 
                                                      <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Unified No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3"  >Unified No</label>
                                                         <div class="col-md-4 col-sm-4 ">
                                                             <asp:TextBox ID="txtUnifiedNo" runat="server" CssClass="form-control" TabIndex="29" ToolTip="Passport Unified No or Visa Unified No">NA</asp:TextBox>
                                                         </div>
@@ -394,7 +394,7 @@
                                                     </div> 
 
                                                       <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">City No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3"  >City No</label>
                                                         <div class="col-md-4 col-sm-4 ">
                                                             <asp:TextBox ID="txtCityNo" runat="server" CssClass="form-control" TabIndex="31" >999</asp:TextBox>
                                                         </div>
@@ -402,14 +402,14 @@
                                                     </div> 
 
                                                        <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Family No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3"  >Family No</label>
                                                         <div class="col-md-4 col-sm-4 ">
                                                             <asp:TextBox ID="txtFamilyNo" runat="server" CssClass="form-control" TabIndex="32" >999</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from Family Book</label>
                                                     </div>
                                                        <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Family Book No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3"  >Family Book No</label>
                                                         <div class="col-md-4 col-sm-4 ">
                                                             <asp:TextBox ID="txtFamilyBookNo" runat="server" CssClass="form-control" TabIndex="33" >999999</asp:TextBox>
                                                         </div>
@@ -417,7 +417,7 @@
                                                     </div>
 
                                                       <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">National No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3"  >National No</label>
                                                         <div class="col-md-4 col-sm-4 ">
                                                             <asp:TextBox ID="txtNationalNo" runat="server" CssClass="form-control" TabIndex="34" >NA</asp:TextBox>
                                                         </div>
@@ -562,13 +562,13 @@
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Company Name</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3"  >Company Name</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtCompany" runat="server"  TabIndex="37" CssClass="form-control">NA</asp:TextBox>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3" style="color: #FF3300;">Country</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3" >Country</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlEmployerCountry" runat="server" TabIndex="38"
                                                                  CssClass="form-control" DataTextField="strCountryDescEn" DataValueField="byteCountry">
@@ -576,7 +576,7 @@
                                                          </div>
                                                      </div>
                                                       <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3" style="color: #FF3300;">Emirate</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3" >Emirate</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlEmployerEmirate" runat="server" TabIndex="39"
                                                                  CssClass="form-control" DataTextField="strEmirateEn" DataValueField="byteEmirate">
@@ -592,7 +592,7 @@
                                                          </div>
                                                      </div>
                                                       <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Industry</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3"  >Industry</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtEmployerIndustry" runat="server"  TabIndex="41" CssClass="form-control">NA</asp:TextBox>
                                                          </div>
@@ -638,25 +638,25 @@
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Name(Supervisor)</label>
+                                                         <label class="col-form-label col-md-5 col-sm-5"  >Employer Name(Supervisor)</label>
                                                          <div class="col-md-7 col-sm-7 ">
                                                             <asp:TextBox ID="txtEmployerName" runat="server"  TabIndex="47" CssClass="form-control">NA</asp:TextBox>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Position</label>
+                                                         <label class="col-form-label col-md-5 col-sm-5"  >Employer Position</label>
                                                          <div class="col-md-7 col-sm-7 ">
                                                             <asp:TextBox ID="txtEmployerPos" runat="server"  TabIndex="48" CssClass="form-control">NA</asp:TextBox>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-5 col-sm-5" style="color:#FF3300;">Employer Phone</label>
+                                                         <label class="col-form-label col-md-5 col-sm-5"  >Employer Phone</label>
                                                          <div class="col-md-7 col-sm-7 ">
                                                             <asp:TextBox ID="txtEmployerPhone" runat="server"  TabIndex="48" CssClass="form-control">999999999</asp:TextBox>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-5 col-sm-5" style="color: #FF3300;">Employer E-Mail</label>
+                                                         <label class="col-form-label col-md-5 col-sm-5" >Employer E-Mail</label>
                                                          <div class="col-md-7 col-sm-7 ">
                                                              <asp:TextBox ID="txtEmployeremail" runat="server" TabIndex="48" CssClass="form-control">xyz@xyz.com</asp:TextBox>
                                                              <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
@@ -713,7 +713,7 @@
                                                         <asp:View ID="View1" runat="server" >
                                                             <div class="col-md-12 col-sm-12">
                                                                 
-                                                                    <h3 style="text-align:center;color:#ff7f50"><i class="fa fa-graduation-cap"></i> Qualifications</h3>
+                                                                    <h3 style="text-align:center;"><i class="fa fa-graduation-cap"></i> Qualifications</h3>
                                                                 <hr />
                                                                     <asp:MultiView ID="mtvQualification" runat="server" ActiveViewIndex="0">
                                                     <table width=100% align="center">
@@ -1074,7 +1074,7 @@
                                                                                 </div>
                                                                             </div>
                                                                              <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">HS System<br />&nbsp;</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3"  >HS System<br />&nbsp;</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
                                                                                      <asp:DropDownList ID="ddlHSSystem" runat="server" 
                                                                                     DataTextField="sSystem" DataValueField="iSerial" TabIndex="59" 
@@ -1087,7 +1087,7 @@
                                                                                      </div>
                                                                             </div>
                                                                                 <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Equivalency App No.</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3"  >Equivalency App No.</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
                                                                                       <asp:TextBox ID="txtEquivalencyAppNo" runat="server" TabIndex="61" 
                                                                                     ValidationGroup="Q" CssClass="form-control">NA</asp:TextBox>                                                                              
@@ -1204,7 +1204,7 @@
                                                                                      </div>
                                                                             </div>
                                                                               <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3" style="color:#FF3300;">Equivalency Indicator</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3"  >Equivalency Indicator</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
                                                                                       <asp:DropDownList ID="ddlEquivalencyIndicator" runat="server" TabIndex="60" 
                                                                                    CssClass="form-control">
@@ -1345,7 +1345,7 @@
                                                         <%--Start View 2--%>
                                                         <asp:View ID="View2" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-flag-checkered"></i> Enrollment</h3>
+                                                                <h3 style="text-align: center; "><i class="fa fa-flag-checkered"></i> Enrollment</h3>
                                                                 <hr />
                                                                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" 
                                                         ValidationGroup="E" />
@@ -1491,7 +1491,7 @@
                                                                             </div>
                                                                         </div>
                                                                          <div class="form-group row">
-                                                                            <label class="col-form-label col-md-4 col-sm-4" style="color:#FF3300">ORCID</label>
+                                                                            <label class="col-form-label col-md-4 col-sm-4" >ORCID</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="txtORCID" runat="server"  TabIndex="75"
                                                                                     CssClass="form-control">NA</asp:TextBox>
@@ -1565,7 +1565,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4"></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:CheckBox ID="chkCompleteBAFromOtherInstitution" runat="server"
-                                                                                    Enabled="False" Style="color: #0000FF; font-weight: bold" TabIndex="91"
+                                                                                    Enabled="False" Style="font-weight: bold" TabIndex="91"
                                                                                     Text="&nbsp;&nbsp;Is complete BA from other  institution" />
                                                                             </div>
                                                                         </div>
@@ -1573,7 +1573,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4"></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:CheckBox ID="chkCompleteMasterFromOtherInstitution" runat="server" 
-                                                        Enabled="False" style="color: #CC6600; font-weight: bold" TabIndex="92" 
+                                                        Enabled="False" style="font-weight: bold" TabIndex="92" 
                                                         Text="&nbsp;&nbsp;Is complete Master from other  institution" />
                                                                             </div>
                                                                         </div>
@@ -1823,7 +1823,7 @@
                                                         <%--Start View 3--%>
                                                         <asp:View ID="View3" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-folder-open"></i> Documents</h3>
+                                                                <h3 style="text-align: center; "><i class="fa fa-folder-open"></i> Documents</h3>
                                                                 <hr />
                                                                  <table  align="center">
                                     <tr>
@@ -1961,7 +1961,7 @@
                                                          <%--Start View 4--%>
                                                         <asp:View ID="View4" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-table"></i> Marks</h3>
+                                                                <h3 style="text-align: center; "><i class="fa fa-table"></i> Marks</h3>
                                                                 <hr />
 
                                                                  <div>
@@ -2135,7 +2135,7 @@
                                                          <%--Start View 7--%>
                                                         <asp:View ID="View7" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; color: #ff7f50"><i class="fa fa-search"></i> Search</h3>
+                                                                <h3 style="text-align: center;"><i class="fa fa-search"></i> Search</h3>
                                                                 <hr />
                                                                   <div>
                                     <table align="center">
