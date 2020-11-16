@@ -191,7 +191,7 @@
                                                     <div class="form-group">
                                                         <label>Admission Payment Type</label>
                                                         <div class="input-group">
-                                                            <asp:DropDownList ID="drp_PaymentType" runat="server"                                             
+                                                            <asp:DropDownList ID="drp_PaymentType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drp_PaymentType_SelectedIndexChanged"                                             
                                 CssClass="form-control" >
                                         </asp:DropDownList>
                                                         </div>
@@ -201,7 +201,7 @@
                                                     <div class="form-group">
                                                         <label>Admission Payment Value</label>
                                                         <div class="input-group">
-                                                            <asp:TextBox ID="txt_Value" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            <asp:TextBox ID="txt_Value" runat="server" CssClass="form-control" Enabled="false" Text="0"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,5 +218,7 @@
                                 </div>
                             </div>
                         </div>
+    <asp:HiddenField ID="hdn_Admission_Payment_Type" runat="server" />
+    <asp:HiddenField ID="hdn_OpportunityID" runat="server" />
                     </div>
     </asp:Content>

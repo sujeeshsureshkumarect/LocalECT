@@ -4,6 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -390,12 +393,26 @@ namespace LocalECT
                     if (string.IsNullOrEmpty(Rd["iAdmissionPaymentType"].ToString()))
                     {
                         drp_PaymentType.SelectedValue = "0";
+                        hdn_Admission_Payment_Type.Value = "0";
                     }
                     else
                     {
                         drp_PaymentType.SelectedValue = Rd["iAdmissionPaymentType"].ToString();
+                        hdn_Admission_Payment_Type.Value= Rd["iAdmissionPaymentType"].ToString();
                     }
-                    txt_Value.Text = Rd["cAdmissionPaymentValue"].ToString();
+                    if(Rd["iAdmissionPaymentType"].ToString()=="3")
+                    {
+                        txt_Value.Enabled = true;
+                    }
+                    if (string.IsNullOrEmpty(Rd["cAdmissionPaymentValue"].ToString()))
+                    {
+                        txt_Value.Text = "0";
+                    }
+                    else
+                    {
+                        txt_Value.Text = Rd["cAdmissionPaymentValue"].ToString();
+                    }
+                    //txt_Value.Text = Rd["cAdmissionPaymentValue"].ToString();
                     txtAmount.Text = Rd["curDelegation"].ToString();
                     txtRemarks.Text = Rd["strDelegationNote"].ToString();
                     //if (LibraryMOD.isFinanceProblems(Campus, ddlIDs.SelectedValue))
@@ -424,6 +441,8 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
+
+           // SqlCommand cmd=new SqlCommand
         }
         //private void Fill_Student()
         //{
@@ -455,6 +474,45 @@ namespace LocalECT
         //        Conn.Dispose();
         //    }
         //}
+
+        private bool isOpportunitySet(string sSID, out int iOpportunity)
+        {
+            bool isSet = false;
+            iOpportunity = 0;
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+
+                string sSQL = "SELECT iOpportunityID, isOpportunitySet";
+                sSQL += " FROM Reg_Applications";
+                sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+
+                while (Rd.Read())
+                {
+                    iOpportunity = Convert.ToInt32(Rd["iOpportunityID"].ToString());
+                    isSet = Convert.ToBoolean(Rd["isOpportunitySet"].ToString());
+                }
+                Rd.Close();
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return isSet;
+        }
         private void Fill_Sponsors()
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
@@ -519,13 +577,13 @@ namespace LocalECT
             try
             {
                 drp_PaymentType.Items.Clear();
-                drp_PaymentType.Items.Add(new ListItem("-", "0"));
-                string sSQL = "SELECT [iAdmissionPaymentType],cAdmissionPaymentValue] FROM [Lkp_AdmissionPayment]";
+                //drp_PaymentType.Items.Add(new ListItem("-", "0"));
+                string sSQL = "SELECT [iAdmissionPaymentType],[cAdmissionPaymentValue],[sAdmissionPaymentDesc] FROM [Lkp_AdmissionPayment]";
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
                 while (Rd.Read())
                 {
-                    drp_PaymentType.Items.Add(new ListItem(Rd["iAdmissionPaymentType"].ToString(), Rd["cAdmissionPaymentValue"].ToString()));
+                    drp_PaymentType.Items.Add(new ListItem(Rd["sAdmissionPaymentDesc"].ToString(), Rd["iAdmissionPaymentType"].ToString()));
                 }
                 Rd.Close();
 
@@ -552,7 +610,23 @@ namespace LocalECT
                 return;
 
             }
-            Update_Acc();
+
+            if(drp_PaymentType.SelectedItem.Value=="3")
+            {
+                if(Convert.ToInt32(txt_Value.Text)>500)
+                {
+                    Update_Acc();
+                }
+                else
+                {
+                    lbl_Msg.Text = "Admission Payment Value needs to greater than 500.";
+                    div_msg.Visible = true;
+                }
+            }
+            else
+            {
+                Update_Acc();
+            }
         }
         private void Update_Acc()
         {
@@ -597,8 +671,8 @@ namespace LocalECT
                 //}
 
                 SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
-                cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Text);
-                cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", drp_PaymentType.SelectedItem.Value);
+                cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
+                cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", txt_Value.Text.Trim());
                 cmd1.Parameters.AddWithValue("@strAccountNo", lblACC.Text);
                 try
                 {
@@ -615,6 +689,83 @@ namespace LocalECT
                 {
                     Conn.Close();
                 }
+
+                //Update Opportunity-Pending Payment
+
+                if(hdn_Admission_Payment_Type.Value=="0" && Convert.ToInt32(drp_PaymentType.SelectedItem.Value)>0)
+                {
+                    //New Change by Accounts Team
+                    int iOpportunity = 0;
+                    if (isOpportunitySet(ddlIDs.Text, out iOpportunity))
+                    {
+                        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                        //div_msg.Visible = true;
+                        if (iOpportunity > 0)
+                        {
+                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                            ServicePointManager.Expect100Continue = true;
+                            ServicePointManager.DefaultConnectionLimit = 9999;
+                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            string accessToken = InitializeModule.CxPwd;
+
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Pending Payment\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //If Status 200
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
+                                    //    SetOpportunity(sSID);
+                                    //}
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                        //div_msg.Visible = true;
+                        if (iOpportunity > 0)
+                        {
+                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                            ServicePointManager.Expect100Continue = true;
+                            ServicePointManager.DefaultConnectionLimit = 9999;
+                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            string accessToken = InitializeModule.CxPwd;
+
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //If Status 200
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
+                                    //    SetOpportunity(sSID);
+                                    //}
+                                }
+                            }
+                        }
+                    }
+                }
+
 
                 lbl_Msg.Text = "Data Updated Successfully";
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
@@ -635,6 +786,30 @@ namespace LocalECT
         protected void lnk_Cancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Acc_Search");
+        }
+
+        protected void drp_PaymentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drp_PaymentType.SelectedItem.Value == "1")
+            {
+                txt_Value.Text = "3500";
+                txt_Value.Enabled = false;
+            }
+            else if (drp_PaymentType.SelectedItem.Value == "2")
+            {
+                txt_Value.Text = "0";
+                txt_Value.Enabled = false;
+            }
+            else if (drp_PaymentType.SelectedItem.Value == "3")
+            {
+                txt_Value.Text = "0";
+                txt_Value.Enabled = true;
+            }
+            else
+            {
+                txt_Value.Text = "0";
+                txt_Value.Enabled = false;
+            }
         }
     }
 }
