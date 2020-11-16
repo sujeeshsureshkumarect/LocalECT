@@ -46,17 +46,21 @@ namespace LocalECT
         {
             String sqlcomd = "";
             string sqlcont = "";
+            //hdnMF.Value = "e0a8zjpV";
             if (drp_Campus.SelectedItem.Text == "Males")
             {
                 constr = ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString;
-                sqlcomd = "SELECT sNo, sName, sAccount, sPhone  FROM Web_Acc_Search where ";
+                sqlcomd = "SELECT sNo, sName, sAccount, sPhone1, ECTEmail  FROM [Web_Students_Search] where sAccount is not null AND ";
+                //sqlcomd = "SELECT sNo, sName, sAccount, sPhone, ECTEmail  FROM Web_Acc_Search where ";
                 Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+                //hdnMF.Value = "yM87jnAJ";
             }
             else
             {
                 constr = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
-                sqlcomd = "SELECT sNo, sName, sAccount, sPhone  FROM Web_Acc_Search where ";
+                sqlcomd = "SELECT sNo, sName, sAccount, sPhone1, ECTEmail  FROM [Web_Students_Search] where sAccount is not null AND ";
                 Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+                //hdnMF.Value = "e0a8zjpV";
             }
             Session["CurrentCampus"] = Campus;
             if (drp_Criteria.SelectedItem.Text == "Student ID")
@@ -69,11 +73,15 @@ namespace LocalECT
             }
             else if (drp_Criteria.SelectedItem.Text == "Phone Number")
             {
-                sqlcont = "sPhone like '%" + txt_Search.Text + "%'";
+                sqlcont = "(sPhone1 like '%" + txt_Search.Text + "%' OR sPhone2 like '%" + txt_Search.Text + "%')";
             }
             else if (drp_Criteria.SelectedItem.Text == "Student Account Number")
             {
                 sqlcont = "sAccount like '%" + txt_Search.Text + "%'";
+            }
+            else if (drp_Criteria.SelectedItem.Text == "ECT Email")
+            {
+                sqlcont = "ECTEmail like '%" + txt_Search.Text + "%'";
             }
 
             SqlConnection sc = new SqlConnection(constr);

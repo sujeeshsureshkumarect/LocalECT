@@ -74,7 +74,8 @@
                                             <asp:ListItem Text="Student ID" Value="sNo" />
                                             <asp:ListItem Text="Student Name" Value="sName" />
                                             <asp:ListItem Text="Student Account Number" Value="sAccount" />
-                                            <asp:ListItem Text="Phone Number" Value="sPhone" />                                            
+                                            <asp:ListItem Text="Phone Number" Value="sPhone1" />  
+                                            <asp:ListItem Text="ECT Email" Value="ECTEmail" />                                             
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -110,6 +111,7 @@
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Student Name</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Account No.</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Phone No.</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Email</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
                                                  </thead>
@@ -120,17 +122,18 @@
                                                  <td><%#Eval("sNo")%></td>
                                                  <td><%#Eval("sName")%></td>
                                                  <td><%#Eval("sAccount")%></td>
-                                                 <td><%#Eval("sPhone")%></td>
+                                                 <td><%#Eval("sPhone1")%></td>
+                                                 <td><%#Eval("ECTEmail")%></td>
                                                  <td>
                                                      <div class="btn-group">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>">Action 1</a>
-                                                             <a class="dropdown-item" href="#">Action 2</a>
-                                                             <%--<a class="dropdown-item" href="#">Change Status</a>
-                                                             <a class="dropdown-item" href="#">Testimonies</a>--%>
+                                                             <a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("sAccount")%>">Edit</a>
+                                                             <a class="dropdown-item" href="#">Receive Fees Payment</a>
+                                                             <a class="dropdown-item" href="#">Receive Other Revenue Payment</a>
+                                                            <%-- <a class="dropdown-item" href="#">Testimonies</a>--%>
                                                              <%--<a class="dropdown-item" href="#">Marks</a>--%>
                                                          </div>
                                                      </div>
@@ -144,7 +147,7 @@
                                  </div>
 
                              </div>
-            
+                                           <%-- <asp:HiddenField ID="hdnMF" runat="server" />--%>
                                         </div>
                                     </div>
                                 </div>
