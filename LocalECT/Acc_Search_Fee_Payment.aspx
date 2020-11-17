@@ -191,6 +191,8 @@
                                                             <div class="input-group">
                                                                 <asp:TextBox ID="txtPRemark" runat="server" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>                                                                
                                                                  <asp:HiddenField ID="hdnPaymentStatus" runat="server" Value="1" />
+                                                                <asp:HiddenField ID="hdniAdmissionPaymentType" runat="server" Value="0" />
+                                                                <asp:HiddenField ID="hdncAdmissionPaymentValue" runat="server" Value="0" />
                                                             </div>
                                                         </div>
                                                     </div>

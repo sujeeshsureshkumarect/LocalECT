@@ -153,8 +153,7 @@ namespace LocalECT
         private void UpdateStAcc(string sSno, string sAcc, int iStatus)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
-            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
-            Conn.Open();
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);           
             try
             {
                 string sSQL = "";
@@ -169,8 +168,9 @@ namespace LocalECT
                     Cmd.Parameters.Add("@UserNo", SqlDbType.Int).Value = iOnlineUser;
                     Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = sSno;
                     Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                    Conn.Open();
                     Cmd.ExecuteNonQuery();
-
+                    Conn.Close();
                 }
 
                 if (iStatus == 1)
@@ -180,8 +180,9 @@ namespace LocalECT
                     Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = sSno;
                     Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
                     Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                    Conn.Open();
                     Cmd.ExecuteNonQuery();
-
+                    Conn.Close();
                 }
 
                 if (iStatus == 2)
@@ -191,7 +192,9 @@ namespace LocalECT
                     Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = sSno;
                     Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
                     Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 105;
+                    Conn.Open();
                     Cmd.ExecuteNonQuery();
+                    Conn.Close();
                 }
 
                 sSQL = "UPDATE Reg_Student_Accounts";
@@ -200,8 +203,10 @@ namespace LocalECT
                 sSQL += " Where strAccountNo='" + sAcc + "'";
                 Cmd.CommandType = CommandType.Text;
                 Cmd.CommandText = sSQL;
+                Conn.Open();
                 Cmd.ExecuteNonQuery();
-                
+                Conn.Close();
+
                 lbl_Msg.Text = "Online Status updated successfully";
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 div_msg.Visible = true;
@@ -632,7 +637,7 @@ namespace LocalECT
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
-            Conn.Open();
+           
 
             try
             {
@@ -661,7 +666,9 @@ namespace LocalECT
                 //Cmd.Parameters.Add("@strOnlinePWD", SqlDbType.VarChar).Value = "";
                 string sUser = Session["CurrentUserName"].ToString();
                 Cmd.Parameters.Add("@sUser", SqlDbType.VarChar).Value = sUser;
+                Conn.Open();
                 Cmd.ExecuteNonQuery();
+                Conn.Close();
 
                 //if (ddlIDs.Text != "0")
                 //{
