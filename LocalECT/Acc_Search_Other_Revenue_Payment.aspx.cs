@@ -483,9 +483,25 @@ namespace LocalECT
 
                 string sSQL = "";
                 int iCheque = 0;
+                DateTime datepayment;
+                DateTime datedue;
+                if (string.IsNullOrEmpty(txtDatePayment.Text.Trim()))
+                {
+                    datepayment = DateTime.Now;
+                }
+                else
+                {
+                    datepayment = Convert.ToDateTime(txtDatePayment.Text.Trim());
+                }
+                if (string.IsNullOrEmpty(txtDueDate.Text.Trim()))
+                {
+                    datedue = DateTime.Now;
+                }
+                else
+                {
+                    datedue = Convert.ToDateTime(txtDueDate.Text.Trim());
+                }
 
-                DateTime datepayment = Convert.ToDateTime(txtDatePayment.Text.Trim());
-                DateTime datedue = Convert.ToDateTime(txtDueDate.Text.Trim());
 
                 bool isFound = false;
                 if (!isAdd)
@@ -516,7 +532,8 @@ namespace LocalECT
                     iCampaus = 2;
                 }
 
-                string remarks = lblACC.Text + "-" + ddlIDs.Text + "-" + txtPRemark.Text;
+                //string remarks = lblACC.Text + "-" + ddlIDs.Text + "-" + txtPRemark.Text;
+                string remarks = ddlIDs.Text + "- " + txtName.Text + "- " + txtPRemark.Text;
 
                 if (isAdd)
                 {
@@ -700,11 +717,11 @@ namespace LocalECT
             try
             {
                 sVoucher = NewVoucher();
-
+                string remarks = ddlIDs.Text + "- " + txtName.Text ;
                 string sSQL = "INSERT INTO Acc_Voucher_Header";
-                sSQL += " (intFy,byteFSemester,strVoucherNo,dateVoucher,strAccountNo,lngStudentNumber,isPrinted,strUserCreate,dateCreate)";
+                sSQL += " (intFy,byteFSemester,strVoucherNo,dateVoucher,strAccountNo,lngStudentNumber,isPrinted,strUserCreate,dateCreate,strRemark)";
                 sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + sVoucher + "',GetDate(),'" + hdnRevenueAccount.Value;
-                sSQL += "','" + ddlIDs.Text + "',0,'" + Session["CurrentUserName"].ToString() + "',GetDate())";
+                sSQL += "','" + ddlIDs.Text + "',0,'" + Session["CurrentUserName"].ToString() + "',GetDate(),'"+remarks+"')";
                 SqlCommand Cmd = new SqlCommand();
                 Cmd.Connection = Conn;
                 Cmd.CommandText = sSQL;

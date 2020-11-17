@@ -474,8 +474,24 @@ namespace LocalECT
                 string sSQL = "";
                 int iCheque = 0;
 
-                DateTime datepayment = Convert.ToDateTime(txtDatePayment.Text.Trim());
-                DateTime datedue = Convert.ToDateTime(txtDueDate.Text.Trim());
+                DateTime datepayment;
+                DateTime datedue;
+                if (string.IsNullOrEmpty(txtDatePayment.Text.Trim()))
+                {
+                    datepayment = DateTime.Now;
+                }
+                else
+                {
+                    datepayment = Convert.ToDateTime(txtDatePayment.Text.Trim());
+                }
+                if (string.IsNullOrEmpty(txtDueDate.Text.Trim()))
+                {
+                    datedue = DateTime.Now;
+                }
+                else
+                {
+                    datedue = Convert.ToDateTime(txtDueDate.Text.Trim());
+                }
 
                 bool isFound = false;
                 if (!isAdd)
