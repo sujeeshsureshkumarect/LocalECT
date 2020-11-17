@@ -154,6 +154,7 @@
     <Content Include="Acc_Search.aspx" />
     <Content Include="Acc_Search_Edit.aspx" />
     <Content Include="Acc_Search_Fee_Payment.aspx" />
+    <Content Include="Acc_Search_Other_Revenue_Payment.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Authorization.aspx" />
     <Content Include="ChangePwd.aspx" />
@@ -8070,6 +8071,13 @@
     </Compile>
     <Compile Include="Acc_Search_Fee_Payment.aspx.designer.cs">
       <DependentUpon>Acc_Search_Fee_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acc_Search_Other_Revenue_Payment.aspx.cs">
+      <DependentUpon>Acc_Search_Other_Revenue_Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acc_Search_Other_Revenue_Payment.aspx.designer.cs">
+      <DependentUpon>Acc_Search_Other_Revenue_Payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\AcademicAdvisingCls.cs" />
     <Compile Include="App_Start\AcademicAdvising_RecommendedCoursesCls.cs" />
