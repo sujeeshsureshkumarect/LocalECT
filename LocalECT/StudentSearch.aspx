@@ -77,10 +77,15 @@
                                     <label class="col-form-label col-md-3 col-sm-3 ">Search Criteria</label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <asp:DropDownList ID="drp_Criteria" runat="server" CssClass="form-control">
-                                            <asp:ListItem Text="Student ID" Value="lngStudentNumber" />
+                                            <%--<asp:ListItem Text="Student ID" Value="lngStudentNumber" />
                                             <asp:ListItem Text="Student Name" Value="strLastDescEn" />
                                             <asp:ListItem Text="Phone Number" Value="phone" />
-                                            <asp:ListItem Text="ECT Email" Value="ectmail" />
+                                            <asp:ListItem Text="ECT Email" Value="ectmail" />--%>
+                                            <asp:ListItem Text="Student ID" Value="sNo" />
+                                            <asp:ListItem Text="Student Name" Value="sName" />
+                                            <asp:ListItem Text="Student Account Number" Value="sAccount" />
+                                            <asp:ListItem Text="Phone Number" Value="sPhone1" />  
+                                            <asp:ListItem Text="ECT Email" Value="ECTEmail" />   
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -111,11 +116,18 @@
                                              <table id='datatable' class='table table-striped table-bordered' style='width: 100%'>
                                                  <thead>
                                                      <tr class='headings'>
-                                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
+                                                        <%-- <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">ID</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Name</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Major</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>--%>
+                                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">ID</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Student Name</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Account No.</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Phone No.</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Email</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
                                                  </thead>
@@ -123,20 +135,25 @@
                                          <ItemTemplate>
                                              <tr>
                                                  <td align='center'><%# Container.ItemIndex+1 %></td>
-                                                 <td><%#Eval("lngStudentNumber")%></td>
+                                                 <%--<td><%#Eval("lngStudentNumber")%></td>
                                                  <td><%#Eval("strLastDescEn")%></td>
                                                  <td><%#Eval("strCaption")%></td>
-                                                 <td><%#Eval("strReasonDesc")%></td>
+                                                 <td><%#Eval("strReasonDesc")%></td>--%>
+                                                 <td><%#Eval("sNo")%></td>
+                                                 <td><%#Eval("sName")%></td>
+                                                 <td><%#Eval("sAccount")%></td>
+                                                 <td><%#Eval("sPhone1")%></td>
+                                                 <td><%#Eval("ECTEmail")%></td>
                                                  <td>
                                                      <div class="btn-group">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("lngStudentNumber")%>">Profile</a>
-                                                             <a class="dropdown-item" href="#">Change Major</a>
-                                                             <a class="dropdown-item" href="#">Change Status</a>
-                                                             <a class="dropdown-item" href="#">Testimonies</a>
+                                                             <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>">Profile</a>
+                                                             <a class="dropdown-item" href="Registration?sid=<%#Eval("sNo")%>">Registration</a>
+                                                            <%-- <a class="dropdown-item" href="#">Change Status</a>
+                                                             <a class="dropdown-item" href="#">Testimonies</a>--%>
                                                              <%--<a class="dropdown-item" href="#">Marks</a>--%>
                                                          </div>
                                                      </div>

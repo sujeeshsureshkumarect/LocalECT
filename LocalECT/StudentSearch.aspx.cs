@@ -56,35 +56,58 @@ namespace LocalECT
             if (drp_Campus.SelectedItem.Text == "Males")
             {
                 constr = ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString;
-                sqlcomd = "SELECT  dbo.Reg_Applications.lngStudentNumber, dbo.Reg_Students_Data.strLastDescEn, dbo.Reg_Specializations.strCaption, dbo.Reg_Students_Data.sECTemail, dbo.Reg_Students_Data.dateCreate, dbo.Reg_Applications.byteCancelReason, dbo.Lkp_Reasons.strReasonDesc FROM            dbo.Reg_Applications INNER JOIN dbo.Reg_Students_Data ON dbo.Reg_Applications.lngSerial = dbo.Reg_Students_Data.lngSerial INNER JOIN dbo.Reg_Specializations ON dbo.Reg_Applications.strCollege = dbo.Reg_Specializations.strCollege AND dbo.Reg_Applications.strDegree = dbo.Reg_Specializations.strDegree AND dbo.Reg_Applications.strSpecialization = dbo.Reg_Specializations.strSpecialization LEFT OUTER JOIN dbo.Lkp_Reasons ON dbo.Reg_Applications.byteCancelReason = dbo.Lkp_Reasons.byteReason WHERE (dbo.Reg_Students_Data.byteShift = 3 OR dbo.Reg_Students_Data.byteShift = 4 OR dbo.Reg_Students_Data.byteShift = 8) AND";
+                //sqlcomd = "SELECT  dbo.Reg_Applications.lngStudentNumber, dbo.Reg_Students_Data.strLastDescEn, dbo.Reg_Specializations.strCaption, dbo.Reg_Students_Data.sECTemail, dbo.Reg_Students_Data.dateCreate, dbo.Reg_Applications.byteCancelReason, dbo.Lkp_Reasons.strReasonDesc FROM            dbo.Reg_Applications INNER JOIN dbo.Reg_Students_Data ON dbo.Reg_Applications.lngSerial = dbo.Reg_Students_Data.lngSerial INNER JOIN dbo.Reg_Specializations ON dbo.Reg_Applications.strCollege = dbo.Reg_Specializations.strCollege AND dbo.Reg_Applications.strDegree = dbo.Reg_Specializations.strDegree AND dbo.Reg_Applications.strSpecialization = dbo.Reg_Specializations.strSpecialization LEFT OUTER JOIN dbo.Lkp_Reasons ON dbo.Reg_Applications.byteCancelReason = dbo.Lkp_Reasons.byteReason WHERE (dbo.Reg_Students_Data.byteShift = 3 OR dbo.Reg_Students_Data.byteShift = 4 OR dbo.Reg_Students_Data.byteShift = 8) AND";
+                sqlcomd = "SELECT sNo, sName, sAccount, sPhone1, ECTEmail FROM Web_Students_Search where";
                 Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
             }
             else
             {
                 constr = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
-                sqlcomd = "SELECT  dbo.Reg_Applications.lngStudentNumber, dbo.Reg_Students_Data.strLastDescEn, dbo.Reg_Specializations.strCaption, dbo.Reg_Students_Data.sECTemail, dbo.Reg_Students_Data.dateCreate, dbo.Reg_Applications.byteCancelReason, dbo.Lkp_Reasons.strReasonDesc FROM            dbo.Reg_Applications INNER JOIN dbo.Reg_Students_Data ON dbo.Reg_Applications.lngSerial = dbo.Reg_Students_Data.lngSerial INNER JOIN dbo.Reg_Specializations ON dbo.Reg_Applications.strCollege = dbo.Reg_Specializations.strCollege AND dbo.Reg_Applications.strDegree = dbo.Reg_Specializations.strDegree AND dbo.Reg_Applications.strSpecialization = dbo.Reg_Specializations.strSpecialization LEFT OUTER JOIN dbo.Lkp_Reasons ON dbo.Reg_Applications.byteCancelReason = dbo.Lkp_Reasons.byteReason WHERE (dbo.Reg_Students_Data.byteShift = 1 OR dbo.Reg_Students_Data.byteShift = 2 OR dbo.Reg_Students_Data.byteShift = 9) AND";
+                //sqlcomd = "SELECT  dbo.Reg_Applications.lngStudentNumber, dbo.Reg_Students_Data.strLastDescEn, dbo.Reg_Specializations.strCaption, dbo.Reg_Students_Data.sECTemail, dbo.Reg_Students_Data.dateCreate, dbo.Reg_Applications.byteCancelReason, dbo.Lkp_Reasons.strReasonDesc FROM            dbo.Reg_Applications INNER JOIN dbo.Reg_Students_Data ON dbo.Reg_Applications.lngSerial = dbo.Reg_Students_Data.lngSerial INNER JOIN dbo.Reg_Specializations ON dbo.Reg_Applications.strCollege = dbo.Reg_Specializations.strCollege AND dbo.Reg_Applications.strDegree = dbo.Reg_Specializations.strDegree AND dbo.Reg_Applications.strSpecialization = dbo.Reg_Specializations.strSpecialization LEFT OUTER JOIN dbo.Lkp_Reasons ON dbo.Reg_Applications.byteCancelReason = dbo.Lkp_Reasons.byteReason WHERE (dbo.Reg_Students_Data.byteShift = 1 OR dbo.Reg_Students_Data.byteShift = 2 OR dbo.Reg_Students_Data.byteShift = 9) AND";
+                sqlcomd = "SELECT sNo, sName, sAccount, sPhone1, ECTEmail FROM Web_Students_Search where ";
                 Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
             }
             Session["CurrentCampus"] = Campus;
-            if (drp_Criteria.SelectedItem.Text== "Student ID")
+            //if (drp_Criteria.SelectedItem.Text== "Student ID")
+            //{
+            //    sqlcont = "Reg_Applications.lngStudentNumber like '%"+txt_Search.Text+"%'";
+            //}
+            //else if (drp_Criteria.SelectedItem.Text == "Student Name")
+            //{
+            //    sqlcont = "Reg_Students_Data.strLastDescEn like '%" + txt_Search.Text + "%'";
+            //}
+            //else if (drp_Criteria.SelectedItem.Text == "Phone Number")
+            //{
+            //    sqlcont = "(Reg_Students_Data.strPhone1 like '%" + txt_Search.Text + "%' OR Reg_Students_Data.strPhone2 like '%" + txt_Search.Text + "%')";
+            //}
+            //else if (drp_Criteria.SelectedItem.Text == "ECT Email")
+            //{
+            //    sqlcont = "Reg_Students_Data.sECTemail like '%" + txt_Search.Text + "%'";
+            //}
+            if (drp_Criteria.SelectedItem.Text == "Student ID")
             {
-                sqlcont = "Reg_Applications.lngStudentNumber like '%"+txt_Search.Text+"%'";
+                sqlcont = "sNo like '%" + txt_Search.Text + "%'";
             }
             else if (drp_Criteria.SelectedItem.Text == "Student Name")
             {
-                sqlcont = "Reg_Students_Data.strLastDescEn like '%" + txt_Search.Text + "%'";
+                sqlcont = "sName like '%" + txt_Search.Text + "%'";
             }
             else if (drp_Criteria.SelectedItem.Text == "Phone Number")
             {
-                sqlcont = "(Reg_Students_Data.strPhone1 like '%" + txt_Search.Text + "%' OR Reg_Students_Data.strPhone2 like '%" + txt_Search.Text + "%')";
+                sqlcont = "(sPhone1 like '%" + txt_Search.Text + "%' OR sPhone2 like '%" + txt_Search.Text + "%')";
+            }
+            else if (drp_Criteria.SelectedItem.Text == "Student Account Number")
+            {
+                sqlcont = "sAccount like '%" + txt_Search.Text + "%'";
             }
             else if (drp_Criteria.SelectedItem.Text == "ECT Email")
             {
-                sqlcont = "Reg_Students_Data.sECTemail like '%" + txt_Search.Text + "%'";
+                sqlcont = "ECTEmail like '%" + txt_Search.Text + "%'";
             }
 
             SqlConnection sc = new SqlConnection(constr);
-            SqlCommand cmd = new SqlCommand(sqlcomd + " " + sqlcont+ " ORDER BY dbo.Reg_Students_Data.strLastDescEn ASC, dbo.Reg_Students_Data.dateCreate DESC", sc);
+            //SqlCommand cmd = new SqlCommand(sqlcomd + " " + sqlcont+ " ORDER BY dbo.Reg_Students_Data.strLastDescEn ASC, dbo.Reg_Students_Data.dateCreate DESC", sc);
+            SqlCommand cmd = new SqlCommand(sqlcomd + " " + sqlcont + " ORDER BY sName asc", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
