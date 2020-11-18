@@ -3941,6 +3941,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Home.aspx" />
+    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Cards.png" />
     <Content Include="images\ECT Logo.png" />
     <Content Include="images\Employees\Ihab.jpeg" />
@@ -6421,6 +6422,7 @@
     <Content Include="images\Students\Public.jpeg" />
     <Content Include="images\Students\Student.jpeg" />
     <Content Include="images\Students\Student.jpg" />
+    <Content Include="Includes\jQuery\jquery-1.4.1.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="LocalECT.Master" />
     <Content Include="images\Icons\vssver2.scc" />
@@ -8045,6 +8047,7 @@
     <Content Include="Site.Master" />
     <Content Include="StudentSearch.aspx" />
     <Content Include="Student_Profile.aspx" />
+    <Content Include="StyleSheet.css" />
     <Content Include="User_Setup.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />

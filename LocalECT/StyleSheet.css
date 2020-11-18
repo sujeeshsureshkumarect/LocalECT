@@ -1,0 +1,183 @@
+﻿TABLE TH {
+    border-right: white thin solid;
+    border-top: white thin solid;
+    font-weight: bold;
+    vertical-align: middle;
+    text-transform: capitalize;
+    border-left: white thin solid;
+    color: #ffffff;
+    border-bottom: white thin solid;
+    background-color: #3f658c;
+    text-align: center;
+    line-height: 2;
+    font-size: small;
+}
+
+.Serial
+{
+    border-right: white thin solid;
+    border-top: white thin solid;
+    vertical-align: middle;
+    border-left: white thin solid;
+    color: #ffffff;
+    border-bottom: white thin solid;
+    background-color: #84A5D6;
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: small;
+}
+
+.Command
+{
+    border: thin solid white;
+    vertical-align: middle;
+    color: #ffffff;
+    font-family: Verdana;
+    background-color: #84A5D6;
+    text-align: left;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: small;
+    font-style: normal;
+    font-variant: normal;
+    list-style-type: none;
+}
+
+
+
+.R_NormalWhite
+{
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    background-color: #EFF3FB;
+    text-align: left;
+}
+.C_Left
+{
+    vertical-align: middle;
+    font-family: Verdana;
+    text-align: left;
+}
+
+.R_NormalGray
+{
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    background-color: White;
+    text-align: left;
+}
+
+.R_Critical
+{
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    background-color: #FF0000;
+    text-align: left;
+    font-weight: bold;
+}
+
+
+
+.SelectedRow
+{
+    border-right: white thin groove;
+    border-top: white thin groove;
+    font-weight: bold;
+    vertical-align: middle;
+    border-left: white thin groove;
+    color: #ffffff;
+    border-bottom: white thin groove;
+    background-color: #ff9933;
+    text-align: left;
+}
+
+
+
+TABLE
+{
+	border-style: none;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+    direction: ltr;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    }
+
+.TABLETH
+{
+    border-right: white thin solid;
+    border-top: white thin solid;
+    font-weight: bold;
+    vertical-align: middle;
+    text-transform: capitalize;
+    border-left: white thin solid;
+    color: #ffffff;
+    border-bottom: white thin solid;
+    font-family: Verdana;
+    background-color: #b0c4de;
+    text-align: center;
+    font-size: medium ;
+}
+
+.NoData
+{
+    font-weight: bold;
+	text-align: center;
+	color:Red;
+    
+}
+
+.NoDataBlue
+{
+    font-weight: bold;
+	text-align: center;
+	color:#000066;
+    
+}
+
+.TvMain
+{
+	width:167px;
+	height:100%;
+}
+
+
+	
+
+
+
+.Confirm
+{
+	background-color: #F2B702;
+	margin: 3px;
+    padding: 3px;
+    -moz-border-radius: 5px;  
+    -webkit-border-radius: 5px;  
+    -khtml-border-radius: 5px;  
+}
+.Error
+{
+    border-style: solid;
+    background-color: #FFFFFF;
+    margin: 3px;
+    padding: 3px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    color: #FF0000;
+}
