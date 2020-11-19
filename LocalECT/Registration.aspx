@@ -57,8 +57,8 @@
      color:white;
 }
                   #ContentPlaceHolder1_tblDetail  th, td {
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-top: 7px;
 }
                 </style>
                  <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -100,7 +100,7 @@
             </asp:DropDownList>
                                         </div>
                                     <div class="col-md-6 col-sm-6 ">
-                                         <asp:Button ID="btnCopy" runat="server" Enabled="False"  
+                                         <asp:Button ID="btnCopy" runat="server"   
                         onclick="btnCopy_Click" 
                         Text="Register Student in Males" CssClass="btn btn-success btn-sm" />
                                     </div>
@@ -180,10 +180,7 @@
 
 
                                                
-                                                <br />
-                                                
                                                
-                                                <br />
                                             </asp:View>
 
                                         </asp:MultiView>
@@ -198,7 +195,7 @@
                                                                 DataSourceID="CTMDS" ForeColor="#333333" GridLines="None"
                                                                 Width="100%">
                                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                                                <RowStyle BackColor="#EFF3FB"/>
+                                                                <RowStyle BackColor="#ededed"/>
                                                                 <Columns>
                                                                     <asp:TemplateField HeaderText="?">
                                                                         <ItemTemplate>
@@ -313,7 +310,7 @@
                                                                 CellPadding="4" DataSourceID="TMDS" ForeColor="#333333" GridLines="None"
                                                                 Width="100%" Caption="Registered Courses" CaptionAlign="Top">
                                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                                                <RowStyle BackColor="#EFF3FB"/>
+                                                                <RowStyle BackColor="#ededed"/>
                                                                 <Columns>
                                                                     <asp:TemplateField HeaderText="?">
                                                                         <ItemTemplate>

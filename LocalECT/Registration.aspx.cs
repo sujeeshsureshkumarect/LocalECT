@@ -271,7 +271,7 @@ namespace LocalECT
                 TableHeaderCell Hc = new TableHeaderCell();
                 TableCell Hd = new TableCell();
                 Hc.ColumnSpan = 4;
-                Hc.Text = "Student Info";
+                Hc.Text = "Student Information";
                 Hr.Cells.Add(Hc);
                 MyTable.Rows.Add(Hr);
 
@@ -2527,10 +2527,11 @@ namespace LocalECT
             }
             if (CopyDS.Insert() > 0)
             {                
-                lbl_Msg.Text = "Female student copied or updated to males , change the campus to males and proceed.";
+                lbl_Msg.Text = "Female student copied or updated to Males and Campus changed to Males.";
                 Session["CurrentCampus"] = InitializeModule.EnumCampus.Males;
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 div_msg.Visible = true;
+                btnCopy.Visible = false;
             }
         }
     }

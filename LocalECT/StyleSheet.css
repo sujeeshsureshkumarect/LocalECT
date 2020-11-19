@@ -46,15 +46,14 @@
 
 
 
-.R_NormalWhite
-{
-  /*  border-right: cornflowerblue thin solid;
+.R_NormalWhite {
+    /*  border-right: cornflowerblue thin solid;
     border-top: cornflowerblue thin solid;*/
     vertical-align: middle;
-   /* border-left: cornflowerblue thin solid;*/
+    /* border-left: cornflowerblue thin solid;*/
     color: #003333;
-   /* border-bottom: cornflowerblue thin solid;*/
-    background-color: #EFF3FB;
+    /* border-bottom: cornflowerblue thin solid;*/
+    background-color: #ededed;
     text-align: left;
 }
 .C_Left
@@ -82,7 +81,7 @@
     border-top: cornflowerblue thin solid;*/
     vertical-align: middle;
     /*border-left: cornflowerblue thin solid;*/
-    color: #003333;
+    color: white;
     /*border-bottom: cornflowerblue thin solid;*/
     background-color: #FF0000;
     text-align: left;
