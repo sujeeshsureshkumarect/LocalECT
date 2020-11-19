@@ -1374,6 +1374,8 @@ namespace LocalECT
                 TMDS.SelectCommand = GetSQL(sSelectedValue.Value, iRegYear, iRegSem);
                 TMDS.DataBind();
                 grdTimeTable.DataBind();
+
+
                 UpdateConfirm("Course " + sCourse + " added successfully.", false);
                 //Page.ClientScript.RegisterStartupScript(this.GetType(), "testScript", "$(document).ready(function(){ $('#divConfirmation').text('Course " + sCourse + " added successfully.').slideToggle('slow'); });", true);
 
