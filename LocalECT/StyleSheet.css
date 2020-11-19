@@ -48,12 +48,12 @@
 
 .R_NormalWhite
 {
-    border-right: cornflowerblue thin solid;
-    border-top: cornflowerblue thin solid;
+  /*  border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;*/
     vertical-align: middle;
-    border-left: cornflowerblue thin solid;
+   /* border-left: cornflowerblue thin solid;*/
     color: #003333;
-    border-bottom: cornflowerblue thin solid;
+   /* border-bottom: cornflowerblue thin solid;*/
     background-color: #EFF3FB;
     text-align: left;
 }
@@ -66,24 +66,24 @@
 
 .R_NormalGray
 {
-    border-right: cornflowerblue thin solid;
-    border-top: cornflowerblue thin solid;
+    /*border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;*/
     vertical-align: middle;
-    border-left: cornflowerblue thin solid;
+    /*border-left: cornflowerblue thin solid;*/
     color: #003333;
-    border-bottom: cornflowerblue thin solid;
+   /* border-bottom: cornflowerblue thin solid;*/
     background-color: White;
     text-align: left;
 }
 
 .R_Critical
 {
-    border-right: cornflowerblue thin solid;
-    border-top: cornflowerblue thin solid;
+    /*border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;*/
     vertical-align: middle;
-    border-left: cornflowerblue thin solid;
+    /*border-left: cornflowerblue thin solid;*/
     color: #003333;
-    border-bottom: cornflowerblue thin solid;
+    /*border-bottom: cornflowerblue thin solid;*/
     background-color: #FF0000;
     text-align: left;
     font-weight: bold;

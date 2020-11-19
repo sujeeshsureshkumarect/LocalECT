@@ -56,8 +56,9 @@
      background:#3f658c;
      color:white;
 }
-                    th, td {
-  padding: 5px;
+                  #ContentPlaceHolder1_tblDetail  th, td {
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
                 </style>
                  <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -152,7 +153,16 @@
                                             </asp:View>
                                             <asp:View ID="View2" runat="server">
                                                 <hr />
-                                                <div id="divRec" runat="server">
+                                               <%-- <table width="100%">
+                                                    <tr>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>--%>
+                                                            <div id="divRec" runat="server">
+                                                        <%--</td>
+                                                    </tr>
+                                                </table>--%>
                                                 </div>
                                             </asp:View>
                                             <asp:View ID="View3" runat="server">
@@ -414,33 +424,35 @@
 
                                             </asp:View>
                                             <asp:View ID="View5" runat="server">
-                                                <div id="divAddContainer" runat="server" style="border: thin solid #0000FF; background-color: #EFF3FB; vertical-align: middle; text-align: center;">
+                                                <div id="divAddContainer" runat="server" style="border: thin solid #ededed; background-color: #f7f7f7; vertical-align: middle; text-align: center;">
                                                     <table style="width:100%">
                                                         <tr>
                                                             <td colspan="2">
                                                                 <div id="divAdd" runat="server"
-                                                                    style="background-color: #F2B702; vertical-align: middle; text-align: center; width: 100%;">
+                                                                    style="background-color: #3f658c; vertical-align: middle; text-align: center; width: 100%;color:#ffffff;font-weight:bold;">
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center">
+                                                            <td align="center" colspan="2">
                                                                 <asp:Button ID="Proceedbtn" runat="server" OnClick="Proceedbtn_Click"
                                                                     Text="Proceed" CssClass="btn btn-success btn-sm" />
-                                                            </td>
-                                                            <td align="center">
-                                                                <asp:Button ID="Cancelbtn" runat="server" OnClick="Cancelbtn_Click"
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                 <asp:Button ID="Cancelbtn" runat="server" OnClick="Cancelbtn_Click"
                                                                     Text="Cancel" CssClass="btn btn-danger btn-sm"/>
                                                             </td>
+                                                            
                                                         </tr>
                                                         <tr>
-                                                            <td align="right" width="45%">
+                                                            <td align="center" colspan="2">
                                                                 <asp:Label ID="Label3" runat="server" Text="As : "></asp:Label>
-                                                            </td>
-                                                            <td align="left">
+                                                                &nbsp;&nbsp;
                                                                 <asp:DropDownList ID="ddlAlt" runat="server" Width="150px"
                                                                     ToolTip="Use it to set an alternative to" CssClass="form-control">
                                                                 </asp:DropDownList>
+                                                            </td>
+                                                            <td align="left">
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>

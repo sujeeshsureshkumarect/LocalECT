@@ -121,7 +121,7 @@ namespace LocalECT
                         TMDS.SelectCommand = GetSQL(sSelectedValue.Value, iRegYear, iRegSem);
                         TMDS.DataBind();
                         grdTimeTable.DataBind();
-                        btnCopy.Enabled = (Campus.ToString() == "Females");
+                        btnCopy.Visible = (Campus.ToString() == "Females");
                     }
                     FillTerms();
                     fill_Alt();
@@ -259,6 +259,7 @@ namespace LocalECT
                 MyTable.Width = Unit.Percentage(100);
                 MyTable.BorderWidth = 1;
                 MyTable.GridLines = GridLines.Horizontal;
+                MyTable.ID = "tblDetail";
 
                 TableHeaderRow Hr = new TableHeaderRow();
                 TableHeaderCell Hc = new TableHeaderCell();
@@ -401,6 +402,7 @@ namespace LocalECT
                 MyTable.Width = Unit.Percentage(100);
                 MyTable.BorderWidth = 1;
                 MyTable.GridLines = GridLines.Horizontal;
+                MyTable.ID = "tbl_advising";
 
                 TableHeaderRow Hr = new TableHeaderRow();
                 TableHeaderCell Hc = new TableHeaderCell();
@@ -445,13 +447,22 @@ namespace LocalECT
                 for (int i = 0; i < iMax; i++)
                 {
 
+                    //if (myMirror.Mirror[i].isRecommended)
+                    //{
+                    //    sTable += "<td bgcolor='#CC3300'>" + myMirror.Mirror[i].sGrade + "</td>";
+                    //}
+                    //else
+                    //{
+                    //    sTable += "<td>" + myMirror.Mirror[i].sGrade + "</td>";
+                    //}
+
                     if (myMirror.Mirror[i].isRecommended)
                     {
-                        sTable += "<td bgcolor='#CC3300'>" + myMirror.Mirror[i].sGrade + "</td>";
+                        sTable += "<td style='font-family: Arial, Helvetica, sans-serif; font-size: small; color: #000000; text-align: center; vertical-align: top; background-color: #F2B702'>" + myMirror.Mirror[i].sGrade + "</td>";
                     }
                     else
                     {
-                        sTable += "<td>" + myMirror.Mirror[i].sGrade + "</td>";
+                        sTable += "<td style='font-family: Arial, Helvetica, sans-serif; font-size: small; color: #000000; text-align: center; vertical-align: top'>" + myMirror.Mirror[i].sGrade + "</td>";
                     }
                 }
                 sTable += "</tr>";
@@ -493,13 +504,21 @@ namespace LocalECT
                 for (int i = iMax; i < iCourses; i++)
                 {
 
+                    //if (myMirror.Mirror[i].isRecommended)
+                    //{
+                    //    sTable += "<td bgcolor='#CC3300'>" + myMirror.Mirror[i].sGrade + "</td>";
+                    //}
+                    //else
+                    //{
+                    //    sTable += "<td>" + myMirror.Mirror[i].sGrade + "</td>";
+                    //}
                     if (myMirror.Mirror[i].isRecommended)
                     {
-                        sTable += "<td bgcolor='#CC3300'>" + myMirror.Mirror[i].sGrade + "</td>";
+                        sTable += "<td style='font-family: Arial, Helvetica, sans-serif; font-size: small; color: #000000; text-align: center; vertical-align: top; background-color: #F2B702'>" + myMirror.Mirror[i].sGrade + "</td>";
                     }
                     else
                     {
-                        sTable += "<td>" + myMirror.Mirror[i].sGrade + "</td>";
+                        sTable += "<td style='font-family: Arial, Helvetica, sans-serif; font-size: small; color: #000000; text-align: center; vertical-align: top'>" + myMirror.Mirror[i].sGrade + "</td>";
                     }
                 }
                 sTable += "</tr>";
