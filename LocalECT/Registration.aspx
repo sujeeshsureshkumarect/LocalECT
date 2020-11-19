@@ -319,7 +319,7 @@
                                                                         <ItemTemplate>
                                                                             <asp:LinkButton ID="Dropbtn" runat="server"
                                                                                 CommandArgument='<%# Eval("iSession") + ";" + Eval("Course")+ ";" + Eval("Class") %>'
-                                                                                OnCommand="Dropbtn_Command" OnClientClick="return DropConfirm();" CssClass="btn btn-danger btn-sm"><i class="fa fa-minus"></i> Drop</asp:LinkButton>
+                                                                                OnCommand="Dropbtn_Command" OnClientClick="return DropConfirm();" CssClass="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Drop</asp:LinkButton>
                                                                         </ItemTemplate>
                                                                         <EditItemTemplate>
                                                                             <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("iYear") %>'></asp:TextBox>
