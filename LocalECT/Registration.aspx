@@ -507,6 +507,10 @@
     </div>
     <asp:HiddenField ID="sSelectedValue" runat="server" />
     <asp:HiddenField ID="sSelectedText" runat="server" />
+    <asp:HiddenField ID="hdnStudentMajor" runat="server" />
+    <asp:HiddenField ID="hdnSerial" runat="server" />
+    <asp:HiddenField ID="hdnStudentEmail" runat="server" />
+    <asp:HiddenField ID="hdnMsg" runat="server" />
     <asp:SqlDataSource ID="CopyDS" runat="server"
         ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
         InsertCommand="CopyToMales" InsertCommandType="StoredProcedure"
