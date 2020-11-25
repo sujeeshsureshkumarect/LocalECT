@@ -152,8 +152,8 @@
                                                          <div class="dropdown-menu">
                                                              <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>">Profile</a>
                                                              <a class="dropdown-item" href="Registration?sid=<%#Eval("sNo")%>">Registration</a>
-                                                            <%-- <a class="dropdown-item" href="#">Change Status</a>
-                                                             <a class="dropdown-item" href="#">Testimonies</a>--%>
+                                                             <a class="dropdown-item" href="ChangeMajor?sid=<%#Eval("sNo")%>">Change Major</a>
+                                                             <%--<a class="dropdown-item" href="#">Testimonies</a>--%>
                                                              <%--<a class="dropdown-item" href="#">Marks</a>--%>
                                                          </div>
                                                      </div>

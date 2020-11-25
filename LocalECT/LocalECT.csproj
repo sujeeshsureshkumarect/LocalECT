@@ -157,6 +157,7 @@
     <Content Include="Acc_Search_Other_Revenue_Payment.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Authorization.aspx" />
+    <Content Include="ChangeMajor.aspx" />
     <Content Include="ChangePwd.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -8260,6 +8261,13 @@
     </Compile>
     <Compile Include="Authorization.aspx.designer.cs">
       <DependentUpon>Authorization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeMajor.aspx.cs">
+      <DependentUpon>ChangeMajor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeMajor.aspx.designer.cs">
+      <DependentUpon>ChangeMajor.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChangePwd.aspx.cs">
       <DependentUpon>ChangePwd.aspx</DependentUpon>
