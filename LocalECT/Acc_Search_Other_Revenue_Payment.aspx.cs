@@ -31,24 +31,26 @@ namespace LocalECT
                 {
                     Campus = InitializeModule.EnumCampus.Males;
                     hdnRevenueAccount.Value= "0100000";
+                    txt_otherrevenueAccNo.Text= "0100000";
                 }
                 else
                 {
                     Campus = InitializeModule.EnumCampus.Females;
                     hdnRevenueAccount.Value = "0200000";
+                    txt_otherrevenueAccNo.Text = "0200000";
                 }
                 if (!IsPostBack)
                 {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-                    }
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                    InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-                    }
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    //    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    //{
+                    //    Server.Transfer("Authorization.aspx");
+                    //}
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    //InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
+                    //{
+                    //    Server.Transfer("Authorization.aspx");
+                    //}
                     FillTerms();
                     iCYear = Convert.ToInt32(Session["CurrentYear"].ToString());
                     iCSem = Convert.ToInt32(Session["CurrentSemester"].ToString()); ;

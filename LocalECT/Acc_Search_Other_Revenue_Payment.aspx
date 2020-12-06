@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Account Number</label>
+                                                        <label>Student Account Number</label><a href="Acc_Search.aspx" class="btn btn-success btn-sm" style="float:right;"><i class="fa fa-search"></i> Account Search</a>
                                                         <div class="input-group">
                                                             <asp:TextBox ID="lblACC" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         </div>
@@ -87,6 +87,14 @@
                                                                  Enabled="false">                                                               
                                                            </asp:DropDownList>--%>
                                                             <asp:TextBox ID="ddlIDs" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Other Revenue Account #</label>
+                                                        <div class="input-group">                                                           
+                                                            <asp:TextBox ID="txt_otherrevenueAccNo" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -145,10 +153,10 @@
                                                         <div class="input-group">
                                                             <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
                                                                 <asp:ListItem Selected="True" Value="0">Entry</asp:ListItem>
-                                                                <asp:ListItem Value="1">Paid</asp:ListItem>
+                                                                <%--<asp:ListItem Value="1">Paid</asp:ListItem>
                                                                 <asp:ListItem Value="2">Returned</asp:ListItem>
                                                                 <asp:ListItem Value="3">Insurance</asp:ListItem>
-                                                                <asp:ListItem Value="4">Canceled</asp:ListItem>
+                                                                <asp:ListItem Value="4">Canceled</asp:ListItem>--%>
                                                             </asp:DropDownList>
                                                         </div>
                                                     </div>
@@ -199,7 +207,7 @@
                                                     </div>
                                                  <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-floppy-o"></i> Create Payment</asp:LinkButton>
+                                                            <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-plus"></i> Add Payment</asp:LinkButton>
                                                       <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>                      
                                                         </div>
                                                     </div>

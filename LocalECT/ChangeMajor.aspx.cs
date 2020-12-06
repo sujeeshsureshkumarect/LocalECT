@@ -47,7 +47,6 @@ namespace LocalECT
 
                 if (Session["CurrentRole"] != null)
                 {
-
                     CurrentRole = (int)Session["CurrentRole"];
                     Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
                     sUser = Session["CurrentUserName"].ToString();

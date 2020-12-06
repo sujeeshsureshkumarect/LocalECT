@@ -37,16 +37,16 @@ namespace LocalECT
                 }
                 if (!IsPostBack)
                 {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-                    }
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                    InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-                    }
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    //    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    //{
+                    //    Server.Transfer("Authorization.aspx");
+                    //}
+                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    //InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
+                    //{
+                    //    Server.Transfer("Authorization.aspx");
+                    //}
                     FillTerms();
                     iCYear = Convert.ToInt32(Session["CurrentYear"].ToString());
                     iCSem = Convert.ToInt32(Session["CurrentSemester"].ToString()); ;
@@ -63,7 +63,7 @@ namespace LocalECT
                 else
                 {
                     iTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
-                    iCYear = LibraryMOD.SeperateTerm(iTerm, out iCSem);
+                    iCYear = LibraryMOD.SeperateTerm(iTerm, out iCSem);                    
                 }
             }
             else
@@ -72,6 +72,35 @@ namespace LocalECT
                 Response.Redirect("Login.aspx");
             }
         }
+
+        public void bindentries(string voucherno)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT Acc_Voucher_Detail.strVoucherNo, Acc_Voucher_Detail.lngEntryNo, Acc_Voucher_Detail.curCredit, Acc_Cheques.dateDue, Acc_PaymentsTypes.strPaymentTypeEn, Acc_Cheques.strChequeNo FROM Acc_Voucher_Detail INNER JOIN Acc_PaymentsTypes ON Acc_Voucher_Detail.bytePaymentWay = Acc_PaymentsTypes.bytePaymentType LEFT OUTER JOIN Acc_Cheques ON Acc_Voucher_Detail.lngCheque = Acc_Cheques.lngCheque where Acc_Voucher_Detail.strVoucherNo=@strVoucherNo order by lngEntryNo asc", sc);
+            cmd.Parameters.AddWithValue("@strVoucherNo", voucherno);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                RepterDetails.DataSource = dt;
+                RepterDetails.DataBind();
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
         private void FillTerms()
         {
             List<Semesters> myTerms = new List<Semesters>();
@@ -126,13 +155,28 @@ namespace LocalECT
                     }
                     else
                     {
-                        updatefeespayment();
+                        if (hdnPaymentStatus.Value == "2")//Add Entries to Same Voucher
+                        {
+                            updatefeespaymententry();
+                        }
+                        else
+                        {
+                            updatefeespayment();
+                        }                            
                     }
                 }
             }
             else
             {
-                updatefeespayment();
+                //updatefeespayment();
+                if (hdnPaymentStatus.Value == "2")//Add Entries to Same Voucher
+                {
+                    updatefeespaymententry();
+                }
+                else
+                {
+                    updatefeespayment();
+                }
             }
         }
 
@@ -157,13 +201,60 @@ namespace LocalECT
                     sMsg = "Payment added.";
                     //Check for First Payment and CX Update and Change Student to 105 Role based on Payment Value.
                     checkfirstpayment(lblACC.Text);//checking that its first payment done by student or not
-                    lbl_Msg.Text = "Payment Created Succesfully";
+                    lbl_Msg.Text = "Payment Added Succesfully";
                     div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                     div_msg.Visible = true;
-                    lnk_update.Enabled = false;
+                    lnk_update.Enabled = true;
+
+                    lblEntryNo.Text = GetNewEntry(lblVoucher.Text).ToString();
+                    bindentries(lblVoucher.Text);
+                    hdnPaymentStatus.Value = "2";//Add Entries to Same Voucher
+
+                    ddlPaymentWay.SelectedIndex = 0;
+                    txtCheque.Text = "";
+                    txtDueDate.Text = "";
+                    txtPayment.Text = "";
+                    txtPRemark.Text = "";
                 }
             }
+        }
+        public void updatefeespaymententry()
+        {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                   InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
+            {
+                //lbl_Msg.Text = "Sorry you cannot update payment.";
+                //div_msg.Visible = true;
+                //return;
+            }
+            //string sVoucher = AddVoucher();
+            int iEntry = GetNewEntry(lblVoucher.Text.Trim());
+            string sMsg = "Payment not saved !";
+            bool isUpdated = false;
+            if (hdnPaymentStatus.Value == "2")//Add Entries to Same Voucher
+            {
+                isUpdated = UpdatePayment(true);
+                if (isUpdated)
+                {
+                    sMsg = "Payment added.";
+                    //Check for First Payment and CX Update and Change Student to 105 Role based on Payment Value.
+                    //checkfirstpayment(lblACC.Text);//checking that its first payment done by student or not
+                    lbl_Msg.Text = "Payment Added Succesfully";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    div_msg.Visible = true;
+                    lnk_update.Enabled = true;
 
+                    lblEntryNo.Text = GetNewEntry(lblVoucher.Text).ToString();
+                    bindentries(lblVoucher.Text);
+                    hdnPaymentStatus.Value = "2";//Add Entries to Same Voucher
+
+                    ddlPaymentWay.SelectedIndex = 0;
+                    txtCheque.Text = "";
+                    txtDueDate.Text = "";
+                    txtPayment.Text = "";
+                    txtPRemark.Text = "";
+                }
+            }
         }
         public void checkfirstpayment(string sAcc)
         {

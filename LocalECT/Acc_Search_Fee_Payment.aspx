@@ -26,7 +26,7 @@
                         border-radius: 4px;
                         font-size: 13px;
                     }
-                                </style>
+                                </style>                        
                             </div>
                             <div class="clearfix"></div>
                             <div class="row">
@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Account Number</label>
+                                                        <label>Student Account Number</label><a href="Acc_Search.aspx" class="btn btn-success btn-sm" style="float:right;"><i class="fa fa-search"></i> Account Search</a>
                                                         <div class="input-group">
                                                             <asp:TextBox ID="lblACC" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         </div>
@@ -145,10 +145,10 @@
                                                         <div class="input-group">
                                                             <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
                                                                 <asp:ListItem Selected="True" Value="0">Entry</asp:ListItem>
-                                                                <asp:ListItem Value="1">Paid</asp:ListItem>
+                                                                <%--<asp:ListItem Value="1">Paid</asp:ListItem>
                                                                 <asp:ListItem Value="2">Returned</asp:ListItem>
                                                                 <asp:ListItem Value="3">Insurance</asp:ListItem>
-                                                                <asp:ListItem Value="4">Canceled</asp:ListItem>
+                                                                <asp:ListItem Value="4">Canceled</asp:ListItem>--%>
                                                             </asp:DropDownList>
                                                         </div>
                                                     </div>
@@ -198,10 +198,57 @@
                                                     </div>
                                                  <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-floppy-o"></i> Create Payment</asp:LinkButton>
+                                                            <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-plus"></i> Add Payment</asp:LinkButton>
                                                       <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>                      
                                                         </div>
                                                     </div>
+                                                
+                                                <div class="col-md-12" runat="server" id="div_Entries">
+                                                    <hr />
+                                                              <div id="divResult" runat="server" class="table-responsive">
+                                     <asp:Repeater ID="RepterDetails" runat="server">
+                                         <HeaderTemplate>
+                                             <table id='datatable' class='table table-striped table-bordered' style='width: 100%'>
+                                                 <thead>
+                                                     <tr class='headings'>
+                                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Voucher-Entry #</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Payment Way</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Amount</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Cheque #</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Due Date</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
+                                                     </tr>
+                                                 </thead>
+                                         </HeaderTemplate>
+                                         <ItemTemplate>
+                                             <tr>
+                                                 <td align='center'><%# Container.ItemIndex+1 %></td>
+                                                 <td><%#Eval("strVoucherNo")%>-<%#Eval("lngEntryNo")%></td>
+                                                 <td><%#Eval("strPaymentTypeEn")%></td>
+                                                 <td><%#Eval("curCredit")%></td>
+                                                 <td><%#Eval("strChequeNo")%></td>
+                                                  <td><span style="display: none;"><%#Eval("dateDue","{0:yyyyMMdd}")%></span><%#Eval("dateDue","{0:dd/MM/yyyy}")%></td>
+                                                 <td>
+                                                     <div class="btn-group">
+                                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                             Actions
+                                                         </button>
+                                                         <div class="dropdown-menu">
+                                                             <a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("strVoucherNo")%>">Edit</a>
+                                                             <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("strVoucherNo")%>">Delete</a>                                                                                                                   
+                                                         </div>
+                                                     </div>
+                                                 </td>
+                                             </tr>
+                                         </ItemTemplate>
+                                         <FooterTemplate>
+                                             </table>  
+                                         </FooterTemplate>
+                                     </asp:Repeater>
+                                 </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

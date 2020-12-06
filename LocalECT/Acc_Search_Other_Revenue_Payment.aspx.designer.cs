@@ -87,6 +87,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox ddlIDs;
 
         /// <summary>
+        /// txt_otherrevenueAccNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_otherrevenueAccNo;
+
+        /// <summary>
         /// lblVoucher control.
         /// </summary>
         /// <remarks>
