@@ -193,6 +193,7 @@
                                                                  <asp:HiddenField ID="hdnPaymentStatus" runat="server" Value="1" />
                                                                 <asp:HiddenField ID="hdniAdmissionPaymentType" runat="server" Value="0" />
                                                                 <asp:HiddenField ID="hdncAdmissionPaymentValue" runat="server" Value="0" />
+                                                                <asp:HiddenField ID="hdnChquenoUpdate" runat="server" Value="0" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,8 +236,10 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("strVoucherNo")%>">Edit</a>
-                                                             <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("strVoucherNo")%>">Delete</a>                                                                                                                   
+                                                             <%--<a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("strVoucherNo")%>">Edit</a>
+                                                             <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("strVoucherNo")%>">Delete</a>  --%>   
+                                                              <asp:LinkButton ID="lnk_Edit" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("lngEntryNo")%>' oncommand="EditBTN_Command"><i class="fa fa-edit"></i> View / Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("lngEntryNo")%>' oncommand="DeleteBTN_Command" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName='<%#Eval("lngCheque")%>'><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                  </td>

@@ -77,7 +77,7 @@ namespace LocalECT
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-            SqlCommand cmd = new SqlCommand("SELECT Acc_Voucher_Detail.strVoucherNo, Acc_Voucher_Detail.lngEntryNo, Acc_Voucher_Detail.curCredit, Acc_Cheques.dateDue, Acc_PaymentsTypes.strPaymentTypeEn, Acc_Cheques.strChequeNo FROM Acc_Voucher_Detail INNER JOIN Acc_PaymentsTypes ON Acc_Voucher_Detail.bytePaymentWay = Acc_PaymentsTypes.bytePaymentType LEFT OUTER JOIN Acc_Cheques ON Acc_Voucher_Detail.lngCheque = Acc_Cheques.lngCheque where Acc_Voucher_Detail.strVoucherNo=@strVoucherNo order by lngEntryNo asc", sc);
+            SqlCommand cmd = new SqlCommand("SELECT Acc_Voucher_Detail.strVoucherNo, Acc_Voucher_Detail.lngEntryNo, Acc_Voucher_Detail.curCredit, Acc_Cheques.dateDue, Acc_PaymentsTypes.strPaymentTypeEn, Acc_Cheques.strChequeNo, Acc_Cheques.lngCheque FROM Acc_Voucher_Detail INNER JOIN Acc_PaymentsTypes ON Acc_Voucher_Detail.bytePaymentWay = Acc_PaymentsTypes.bytePaymentType LEFT OUTER JOIN Acc_Cheques ON Acc_Voucher_Detail.lngCheque = Acc_Cheques.lngCheque where Acc_Voucher_Detail.strVoucherNo=@strVoucherNo order by lngEntryNo asc", sc);
             cmd.Parameters.AddWithValue("@strVoucherNo", voucherno);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -159,6 +159,10 @@ namespace LocalECT
                         {
                             updatefeespaymententry();
                         }
+                        else if (hdnPaymentStatus.Value == "3")//Update Selected Entry to Same Voucher
+                        {
+
+                        }
                         else
                         {
                             updatefeespayment();
@@ -172,6 +176,10 @@ namespace LocalECT
                 if (hdnPaymentStatus.Value == "2")//Add Entries to Same Voucher
                 {
                     updatefeespaymententry();
+                }
+                else if (hdnPaymentStatus.Value == "3")//Update Selected Entry to Same Voucher
+                {
+
                 }
                 else
                 {
@@ -256,6 +264,156 @@ namespace LocalECT
                 }
             }
         }
+
+        protected void EditBTN_Command(object sender, CommandEventArgs e)
+        {
+            int r = 0;
+            r = Get_Entry(int.Parse(e.CommandArgument.ToString()));
+        }
+        protected void DeleteBTN_Command(object sender, CommandEventArgs e)
+        {
+            int lngEntryNo = 0;
+            lngEntryNo = int.Parse(e.CommandArgument.ToString());
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("delete from Acc_Voucher_Detail where strVoucherNo=@strVoucherNo and lngEntryNo=@lngEntryNo", sc);
+            cmd.Parameters.AddWithValue("@strVoucherNo", lblVoucher.Text.Trim());
+            cmd.Parameters.AddWithValue("@lngEntryNo", lngEntryNo);
+            try
+            {
+                sc.Open();
+                cmd.ExecuteNonQuery();
+                sc.Close();
+
+                int lngCheque = 0;
+                if(string.IsNullOrEmpty(e.CommandName.ToString()))
+                {
+
+                }
+                else
+                {
+                    lngCheque = int.Parse(e.CommandName.ToString());
+                    if (lngCheque > 0)
+                    {
+                        SqlCommand cmd1 = new SqlCommand("delete from Acc_Cheques where lngCheque=@lngCheque", sc);
+                        cmd1.Parameters.AddWithValue("@lngCheque", lngCheque);
+                        try
+                        {
+                            sc.Open();
+                            cmd1.ExecuteNonQuery();
+                            sc.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+                    }
+                }               
+
+
+                lbl_Msg.Text = "Voucher# "+lblVoucher.Text+" - (Entry: " + lngEntryNo + ") Deleted Successfully";
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+
+                lblEntryNo.Text = GetNewEntry(lblVoucher.Text).ToString();
+                bindentries(lblVoucher.Text);
+                hdnPaymentStatus.Value = "2";//Add Entries to Same Voucher
+
+                ddlPaymentWay.SelectedIndex = 0;
+                txtCheque.Text = "";
+                txtDueDate.Text = "";
+                txtPayment.Text = "";
+                txtPRemark.Text = "";
+            }
+            catch (Exception exp)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+        private int Get_Entry(int lngEntryNo)
+        {
+            int r = 0;
+            try
+            {
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                SqlCommand cmd = new SqlCommand("SELECT Acc_Voucher_Detail.strVoucherNo, Acc_Voucher_Detail.strRemark, Acc_Voucher_Detail.datePayment, Acc_Voucher_Detail.lngEntryNo, Acc_Voucher_Detail.curCredit, Acc_Cheques.dateDue, Acc_PaymentsTypes.strPaymentTypeEn, Acc_Cheques.strChequeNo, Acc_Cheques.lngCheque, Acc_Banks.strBankEn FROM Acc_Voucher_Detail INNER JOIN Acc_PaymentsTypes ON Acc_Voucher_Detail.bytePaymentWay = Acc_PaymentsTypes.bytePaymentType INNER JOIN Acc_Banks ON Acc_Voucher_Detail.intBank = Acc_Banks.intBank LEFT OUTER JOIN Acc_Cheques ON Acc_Voucher_Detail.lngCheque = Acc_Cheques.lngCheque where Acc_Voucher_Detail.strVoucherNo=@strVoucherNo and Acc_Voucher_Detail.lngEntryNo=@lngEntryNo", sc);
+                cmd.Parameters.AddWithValue("@strVoucherNo", lblVoucher.Text.Trim());
+                cmd.Parameters.AddWithValue("@lngEntryNo", lngEntryNo);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+                    if (dt.Rows.Count > 0)
+                    {
+                        txtDatePayment.Text = Convert.ToDateTime(dt.Rows[0]["datePayment"]).ToString("mm/dd/yyyy");
+                        txtPayment.Text = dt.Rows[0]["curCredit"].ToString();
+                        ddlPaymentWay.SelectedIndex = ddlPaymentWay.Items.IndexOf(ddlPaymentWay.Items.FindByText(dt.Rows[0]["strPaymentTypeEn"].ToString()));
+                        lblEntryNo.Text = lngEntryNo.ToString();
+                        if (dt.Rows[0]["strPaymentTypeEn"].ToString() == "Cheque")
+                        {
+                            cheque.Visible = true;
+                            txtCheque.Text= dt.Rows[0]["strChequeNo"].ToString();
+                            txtDueDate.Text= Convert.ToDateTime(dt.Rows[0]["dateDue"]).ToString("mm/dd/yyyy");
+                            ddlBank.SelectedIndex = ddlBank.Items.IndexOf(ddlBank.Items.FindByText(dt.Rows[0]["strBankEn"].ToString()));
+                            hdnChquenoUpdate.Value= dt.Rows[0]["lngCheque"].ToString();
+                        }
+                        else
+                        {
+                            cheque.Visible = false;
+                        }
+                        txtPRemark.Text = dt.Rows[0]["strRemark"].ToString();
+                        hdnPaymentStatus.Value = "3";//Update Selected Entry to Same Voucher
+                    }
+                    else
+                    {
+                        lbl_Msg.Text = "No Data Available.";
+                        div_msg.Visible = true;
+                    }
+
+                }
+                catch (Exception exp)
+                {
+                    sc.Close();
+                    Console.WriteLine("{0} Exception caught.", exp);
+                    lbl_Msg.Text = exp.Message;
+                    div_msg.Visible = true;
+                }
+                finally
+                {
+                    sc.Close();
+                }
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+
+            }
+            return r;
+        }
+
         public void checkfirstpayment(string sAcc)
         {
             //checking that its first payment done by student or not

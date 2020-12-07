@@ -249,6 +249,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.HiddenField hdncAdmissionPaymentValue;
 
         /// <summary>
+        /// hdnChquenoUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnChquenoUpdate;
+
+        /// <summary>
         /// lnk_update control.
         /// </summary>
         /// <remarks>
