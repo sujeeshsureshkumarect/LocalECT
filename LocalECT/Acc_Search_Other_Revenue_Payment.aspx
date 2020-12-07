@@ -118,7 +118,7 @@
                                                     <div class="form-group">
                                                         <label>Date</label>
                                                         <div class="input-group">                                                            
-                                                            <asp:TextBox ID="txtDatePayment" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                                            <asp:TextBox ID="txtDatePayment" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Payment Date Required" Display="Dynamic" ForeColor="Red" ControlToValidate="txtDatePayment" ValidationGroup="no" >*Payment Date Required</asp:RequiredFieldValidator>
                                                         </div>
                                                     </div>
@@ -175,7 +175,7 @@
                                                         <div class="form-group">
                                                             <label>Due Date</label>
                                                             <div class="input-group">
-                                                                <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>                                                                
+                                                                <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,6 +211,54 @@
                                                       <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>                      
                                                         </div>
                                                     </div>
+
+                                                                    <div class="col-md-12" runat="server" id="div_Entries">
+                                                    <hr />
+                                                              <div id="divResult" runat="server" class="table-responsive">
+                                     <asp:Repeater ID="RepterDetails" runat="server">
+                                         <HeaderTemplate>
+                                             <table id='datatable' class='table table-striped table-bordered' style='width: 100%'>
+                                                 <thead>
+                                                     <tr class='headings'>
+                                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Voucher-Entry #</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Payment Way</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Amount</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Cheque #</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Due Date</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
+                                                     </tr>
+                                                 </thead>
+                                         </HeaderTemplate>
+                                         <ItemTemplate>
+                                             <tr>
+                                                 <td align='center'><%# Container.ItemIndex+1 %></td>
+                                                 <td><%#Eval("strVoucherNo")%>-<%#Eval("lngEntryNo")%></td>
+                                                 <td><%#Eval("strPaymentTypeEn")%></td>
+                                                 <td><%#Eval("curCredit")%></td>
+                                                 <td><%#Eval("strChequeNo")%></td>
+                                                  <td><span style="display: none;"><%#Eval("dateDue","{0:yyyyMMdd}")%></span><%#Eval("dateDue","{0:dd/MM/yyyy}")%></td>
+                                                 <td>
+                                                     <div class="btn-group">
+                                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                             Actions
+                                                         </button>
+                                                         <div class="dropdown-menu">
+                                                             <%--<a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("strVoucherNo")%>">Edit</a>
+                                                             <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("strVoucherNo")%>">Delete</a>  --%>   
+                                                              <asp:LinkButton ID="lnk_Edit" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("lngEntryNo")%>' oncommand="EditBTN_Command"><i class="fa fa-edit"></i> View / Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Delete" runat="server" CssClass="dropdown-item" CommandArgument='<%#Eval("lngEntryNo")%>' oncommand="DeleteBTN_Command" OnClientClick="return confirm('Are you sure you want to delete?'); " CommandName='<%#Eval("lngCheque")%>'><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                                                         </div>
+                                                     </div>
+                                                 </td>
+                                             </tr>
+                                         </ItemTemplate>
+                                         <FooterTemplate>
+                                             </table>  
+                                         </FooterTemplate>
+                                     </asp:Repeater>
+                                 </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,4 +266,14 @@
                             </div>
                         </div>
                     </div>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            $j(function () {
+                $j("#txtDatePayment").datepicker({ dateFormat: 'dd/mm/yy' });
+                $j("#txtDueDate").datepicker({ dateFormat: 'dd/mm/yy' });
+            });
+        </script>
     </asp:Content>

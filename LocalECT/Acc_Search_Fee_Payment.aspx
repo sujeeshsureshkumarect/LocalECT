@@ -26,7 +26,7 @@
                         border-radius: 4px;
                         font-size: 13px;
                     }
-                                </style>                        
+                                </style>                  
                             </div>
                             <div class="clearfix"></div>
                             <div class="row">
@@ -110,7 +110,7 @@
                                                     <div class="form-group">
                                                         <label>Date</label>
                                                         <div class="input-group">                                                            
-                                                            <asp:TextBox ID="txtDatePayment" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                                            <asp:TextBox ID="txtDatePayment" runat="server" CssClass="form-control" ClientIDMode="Static" placeholder="DD/MM/YYYY"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Payment Date Required" Display="Dynamic" ForeColor="Red" ControlToValidate="txtDatePayment" ValidationGroup="no" >*Payment Date Required</asp:RequiredFieldValidator>
                                                         </div>
                                                     </div>
@@ -167,7 +167,7 @@
                                                         <div class="form-group">
                                                             <label>Due Date</label>
                                                             <div class="input-group">
-                                                                <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>                                                                
+                                                                <asp:TextBox ID="txtDueDate" runat="server" CssClass="form-control" ClientIDMode="Static" placeholder="DD/MM/YYYY"></asp:TextBox>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -201,6 +201,7 @@
                                                         <div class="form-group">
                                                             <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-plus"></i> Add Payment</asp:LinkButton>
                                                       <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>                      
+                                                            <asp:LinkButton ID="lnk_Print" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Print_Click" Visible="false" ToolTip="Print PDF"><i class=" fa fa-print"></i> Print</asp:LinkButton>                      
                                                         </div>
                                                     </div>
                                                 
@@ -259,4 +260,15 @@
                             </div>
                         </div>
                     </div>
+    
+                                               <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            $j(function () {
+                $j("#txtDatePayment").datepicker({ dateFormat: 'dd/mm/yy' });
+                $j("#txtDueDate").datepicker({ dateFormat: 'dd/mm/yy' });
+            });
+        </script>
     </asp:Content>
