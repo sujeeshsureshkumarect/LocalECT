@@ -7588,6 +7588,17 @@
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Login_v9\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Acc_Voucher.xsc">
+      <DependentUpon>Acc_Voucher.xsd</DependentUpon>
+    </Content>
+    <None Include="Acc_Voucher.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Acc_Voucher.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Acc_Voucher.xss">
+      <DependentUpon>Acc_Voucher.xsd</DependentUpon>
+    </Content>
     <None Include="App_Start\ACCBalance.xsd" />
     <Content Include="App_Start\ACCBalance.xss">
       <DependentUpon>ACCBalance.xsd</DependentUpon>
@@ -8083,6 +8094,11 @@
     </Compile>
     <Compile Include="Acc_Search_Other_Revenue_Payment.aspx.designer.cs">
       <DependentUpon>Acc_Search_Other_Revenue_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acc_Voucher.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Compile>
     <Compile Include="App_Start\AcademicAdvisingCls.cs" />
     <Compile Include="App_Start\AcademicAdvising_RecommendedCoursesCls.cs" />
@@ -8732,6 +8748,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CrystalReport3_AccVoucher.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport3_AccVoucher.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\CurrentTimeTable_rpt.cs">
@@ -9880,6 +9902,10 @@
     <EmbeddedResource Include="Reports\CrystalReport2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CrystalReport3_AccVoucher.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport3_AccVoucher.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CurrentTimeTable_rpt.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

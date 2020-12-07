@@ -209,6 +209,7 @@
                                                         <div class="form-group">
                                                             <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click" ValidationGroup="no"><i class=" fa fa-plus"></i> Add Payment</asp:LinkButton>
                                                       <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>                      
+                                                            <asp:LinkButton ID="lnk_Print" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Print_Click" Visible="false" ToolTip="Print PDF"><i class=" fa fa-print"></i> Print</asp:LinkButton>                      
                                                         </div>
                                                     </div>
 

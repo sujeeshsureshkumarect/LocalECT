@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -1181,7 +1183,233 @@ namespace LocalECT
 
         protected void lnk_Print_Click(object sender, EventArgs e)
         {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+         InitializeModule.enumPrivilege.Print, CurrentRole) != true)
+            {               
+                //lbl_Msg.Text = InitializeModule.MsgPrintAuthorization;
+                //div_msg.Visible = true;
+                //return;
+            }
 
+            if (!string.IsNullOrEmpty(lblVoucher.Text))
+            {
+                UpdateVoucher(lblVoucher.Text, true);//Close the printing
+                Export(InitializeModule.ECT_Buttons.Print);
+            }
+        }
+        private bool UpdateVoucher(string sVoucher, bool isPrinted)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            bool isUpdated = false;
+            try
+            {
+
+                string sSQL = "UPDATE Acc_Voucher_Header SET";
+                sSQL += " isPrinted=" + Convert.ToInt32(isPrinted);
+                sSQL += ",strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate()";
+                sSQL += " WHERE intFy=" + iCYear;
+                sSQL += " AND byteFSemester=" + iCSem;
+                sSQL += " AND strVoucherNo='" + sVoucher + "'";
+
+                SqlCommand Cmd = new SqlCommand();
+                Cmd.Connection = Conn;
+                Cmd.CommandText = sSQL;
+                int iEffected = 0;
+                iEffected = Cmd.ExecuteNonQuery();
+                isUpdated = (iEffected > 0);
+            }
+            catch (Exception exp)
+            {
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return isUpdated;
+        }
+        private void Export(InitializeModule.ECT_Buttons iExport)
+        {
+            ReportDocument myReport = new ReportDocument();
+
+            try
+            {
+                DataTable rptDS = new DataTable();
+                rptDS = Prepare_Report(GetSQL(lblVoucher.Text));
+
+                string reportPath = Server.MapPath("Reports/CrystalReport3_AccVoucher.rpt");
+                myReport.Load(reportPath);
+                myReport.SetDataSource(rptDS);
+                ////txtPrinter.Text = DefaultPrinterName();
+                //myReport.PrintOptions.PrinterName = "";
+                ////
+                //myReport.PrintOptions.PaperSize = SetPaperSize(myReport.PrintOptions.PrinterName);
+                //myReport.PrintToPrinter(1, false, 0, 0);
+                myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Page.Response, true, "ECTReport");
+
+                //myReport.PrintOptions.PaperOrientation = PaperOrientation.Portrait;
+
+
+                //TextObject txt;
+                //txt = (TextObject)myReport.ReportDefinition.ReportObjects["txtTitle"];
+
+                //txt.Text = GetCaption();
+
+
+                //switch (iExport)
+                //{
+                //    case InitializeModule.ECT_Buttons.Print:
+                //        myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Page.Response, true, "ECTReport");
+                //        break;
+                //    case InitializeModule.ECT_Buttons.ToExcel:
+                //        myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.ExcelRecord, Page.Response, true, "ECTReport");
+                //        break;
+                //    case InitializeModule.ECT_Buttons.ToWord:
+                //        myReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.WordForWindows, Page.Response, true, "ECTReport");
+                //        break;
+                //}
+                Session["CurrentReport"] = myReport;
+                //Response.Redirect("RPTViewer.aspx?sPage=ProgramMirror.aspx");
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                myReport.Close();
+                myReport.Dispose();
+            }
+        }
+        private string GetSQL(string sVoucher)
+        {
+            string sSQL = "";
+            try
+            {
+                sSQL = "SELECT VH.strVoucherNo, VH.dateVoucher, VH.strAccountNo, A.strStudentName, A.lngStudentNumber, VD.lngEntryNo, VD.curCredit, VD.bytePaymentWay,";
+                sSQL += " PT.strPaymentTypeEn AS PWay, C.strChequeNo, VD.dateDue, B.strBankEn AS Bank, VD.strRemark";
+                sSQL += " FROM Acc_Voucher_Header AS VH INNER JOIN Acc_Voucher_Detail AS VD ON VH.intFy = VD.intFy AND VH.byteFSemester = VD.byteFSemester AND VH.strVoucherNo = VD.strVoucherNo INNER JOIN";
+                sSQL += " Acc_PaymentsTypes AS PT ON VD.bytePaymentWay = PT.bytePaymentType LEFT OUTER JOIN Acc_Cheques AS C ON VD.lngCheque = C.lngCheque INNER JOIN";
+                sSQL += " Reg_Student_Accounts AS A ON VH.strAccountNo = A.strAccountNo LEFT OUTER JOIN Acc_Banks AS B ON VD.intBank = B.intBank";
+                sSQL += " WHERE VH.strVoucherNo = '" + sVoucher + "' AND VH.intFy = " + iCYear + " AND VH.byteFSemester =" + iCSem;
+            }
+            catch (Exception exp)
+            {
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+            return sSQL;
+        }
+        private DataTable Prepare_Report(string sSQL)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+
+            DataTable dt = new DataTable();
+            DataRow dr;
+            DataSet ds = new DataSet();
+            try
+            {
+                //VH.strVoucherNo, VH.dateVoucher, VH.strAccountNo, A.strStudentName, A.lngStudentNumber,
+                //VD.lngEntryNo, VD.curCredit, VD.bytePaymentWay
+                //PT.strPaymentTypeEn AS PType, C.strChequeNo, VD.dateDue, B.strBankEn AS Bank,
+                //VD.bytePaymentWay AS PWay, VH.strRemark"
+                DataColumn myCol;
+
+                myCol = new DataColumn("iSerial", Type.GetType("System.Int32"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sVoucher", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sVoucherDate", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sAccount", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sName", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sID", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("dAmount", Type.GetType("System.Double"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("iWay", Type.GetType("System.Int32"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sWay", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sCheque", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sDueDate", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sBank", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sRemark", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sCash", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+                myCol = new DataColumn("sUser", Type.GetType("System.String"));
+                dt.Columns.Add(myCol);
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                SqlDataReader Rd = Cmd.ExecuteReader();
+
+                string sCash = Campus.ToString();
+                string sUser = Session["CurrentUserName"].ToString();
+
+
+                while (Rd.Read())
+                {
+                    dr = dt.NewRow();
+                    dr["iSerial"] = Convert.ToInt32(Rd["lngEntryNo"]);
+                    dr["sVoucher"] = Rd["strVoucherNo"].ToString();
+                    dr["sVoucherDate"] = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(Rd["dateVoucher"]));
+                    dr["sAccount"] = Rd["strAccountNo"].ToString();
+                    dr["sName"] = Rd["strStudentName"].ToString();
+                    dr["sID"] = Rd["lngStudentNumber"].ToString();
+                    dr["dAmount"] = Convert.ToDouble(Rd["curCredit"]);
+                    dr["iWay"] = Convert.ToInt32(Rd["bytePaymentWay"]);
+                    dr["sWay"] = Rd["PWay"].ToString();
+
+
+                    if (!Rd["strChequeNo"].Equals(DBNull.Value))
+                    {
+                        dr["sCheque"] = Rd["strChequeNo"].ToString();
+                        dr["sDueDate"] = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(Rd["dateDue"]));
+                        dr["sBank"] = Rd["Bank"].ToString();
+                    }
+
+                    dr["sRemark"] = Rd["strRemark"].ToString();
+
+                    dr["sCash"] = sCash;
+                    dr["sUser"] = sUser;
+
+                    dt.Rows.Add(dr);
+                }
+                Rd.Close();
+                dt.TableName = "tblVoucher";
+                dt.AcceptChanges();
+                //ds.Tables.Add(dt);
+
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return dt;
         }
     }
 }
