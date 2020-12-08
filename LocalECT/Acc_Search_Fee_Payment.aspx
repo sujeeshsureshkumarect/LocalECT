@@ -175,12 +175,11 @@
                                                         <div class="form-group">
                                                             <label>Bank</label>
                                                             <div class="input-group">
-                                                                <asp:DropDownList ID="ddlBank" runat="server" CssClass="form-control"
-                                                                    DataSourceID="BankDS" DataTextField="strBankEn" DataValueField="intBank">
+                                                                <asp:DropDownList ID="ddlBank" runat="server" CssClass="form-control">
                                                                 </asp:DropDownList>
-                                                                <asp:SqlDataSource ID="BankDS" runat="server"
+                                                          <%--      <asp:SqlDataSource ID="BankDS" runat="server"
                                                                     ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>"
-                                                                    SelectCommand="SELECT [intBank], [strBankEn] FROM [Acc_Banks] ORDER BY [strBankEn]"></asp:SqlDataSource>
+                                                                    SelectCommand="SELECT [intBank], [strBankEn] FROM [Acc_Banks] ORDER BY [strBankEn]"></asp:SqlDataSource>--%>
                                                             </div>
                                                         </div>
                                                     </div>

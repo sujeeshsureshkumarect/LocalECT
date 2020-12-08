@@ -54,6 +54,7 @@ namespace LocalECT
                         Server.Transfer("Authorization.aspx");
                     }
                     FillTerms();
+                    FillBanks();
                     iCYear = Convert.ToInt32(Session["CurrentYear"].ToString());
                     iCSem = Convert.ToInt32(Session["CurrentSemester"].ToString()); ;
                     iTerm = iCYear * 10 + iCSem;
@@ -133,6 +134,35 @@ namespace LocalECT
             finally
             {
                 myTerms.Clear();
+            }
+        }
+        public void FillBanks()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT [intBank], [strBankEn] FROM [Acc_Banks] ORDER BY [strBankEn]", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                ddlBank.DataSource = dt;
+                ddlBank.DataTextField = "strBankEn";
+                ddlBank.DataValueField = "intBank";
+                ddlBank.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
         protected void lnk_update_Click(object sender, EventArgs e)
