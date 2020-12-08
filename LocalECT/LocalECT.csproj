@@ -4167,6 +4167,7 @@
     <Content Include="images\Employees\PICE10264.jpeg" />
     <Content Include="images\Employees\PICE10265.jpeg" />
     <Content Include="images\Employees\Public.jpeg" />
+    <Content Include="images\favicon32.png" />
     <Content Include="images\Icons\Cart.png" />
     <Content Include="images\Icons\Correct.gif" />
     <Content Include="images\Icons\correct1.png" />

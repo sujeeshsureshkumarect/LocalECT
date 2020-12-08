@@ -557,7 +557,7 @@
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlIWork" runat="server" TabIndex="36"
                                                                  CssClass="form-control" DataTextField="strWorkPlaceEn"
-                                                                 DataValueField="intWorkPlace">
+                                                                 DataValueField="intWorkPlace" AutoPostBack="true" OnSelectedIndexChanged="ddlIWork_SelectedIndexChanged">
                                                              </asp:DropDownList>
                                                          </div>
                                                      </div>

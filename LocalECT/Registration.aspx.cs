@@ -175,7 +175,7 @@ namespace LocalECT
             try
             {
                 myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
-                for (int i = 0; i < myTerms.Count; i++)
+                for (int i = 0; i < 3; i++)//for (int i = 0; i < myTerms.Count; i++)
                 {
                     Terms.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
 

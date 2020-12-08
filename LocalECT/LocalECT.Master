@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ECT</title>
-    <link rel="shortcut icon" href="https://lms.ectmoodle.ae/theme/image.php/ect/theme/1595326309/favicon" />
+    <title>ECT</title>    
+    <link rel="shortcut icon" href="images/favicon32.png" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <!-- Bootstrap -->

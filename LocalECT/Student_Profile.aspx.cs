@@ -138,6 +138,8 @@ namespace LocalECT
                             {
                                 lnk_Save.Visible = true;
                             }
+                            ddlMajor.Enabled = false;
+                            ddlEnrollmentTerm.Enabled = false;
                         }
                         //New Student
                         else
@@ -5562,6 +5564,19 @@ namespace LocalECT
             {
 
 
+            }
+        }
+        protected void ddlIWork_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlIWork.SelectedItem.Text!="Other")
+            {
+                txtCompany.Text = ddlIWork.SelectedItem.Text;
+                txtCompany.Enabled = false;
+            }
+            else
+            {
+                txtCompany.Text = "NA";
+                txtCompany.Enabled = true;
             }
         }
     }

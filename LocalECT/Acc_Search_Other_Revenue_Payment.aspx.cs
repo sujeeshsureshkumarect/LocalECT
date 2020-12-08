@@ -43,16 +43,16 @@ namespace LocalECT
                 }
                 if (!IsPostBack)
                 {
-                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                    //    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                    //{
-                    //    Server.Transfer("Authorization.aspx");
-                    //}
-                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-                    //InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
-                    //{
-                    //    Server.Transfer("Authorization.aspx");
-                    //}
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+                    }
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+                    }
                     FillTerms();
                     iCYear = Convert.ToInt32(Session["CurrentYear"].ToString());
                     iCSem = Convert.ToInt32(Session["CurrentSemester"].ToString()); ;
@@ -208,9 +208,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                    InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                //lbl_Msg.Text = "Sorry you cannot update payment.";
-                //div_msg.Visible = true;
-                //return;
+                lbl_Msg.Text = "Sorry you cannot update payment.";
+                div_msg.Visible = true;
+                return;
             }
             string sVoucher = AddVoucher();
             int iEntry = GetNewEntry(sVoucher);
@@ -250,9 +250,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                    InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                //lbl_Msg.Text = "Sorry you cannot update payment.";
-                //div_msg.Visible = true;
-                //return;
+                lbl_Msg.Text = "Sorry you cannot update payment.";
+                div_msg.Visible = true;
+                return;
             }
             //string sVoucher = AddVoucher();
             int iEntry = GetNewEntry(lblVoucher.Text.Trim());
@@ -291,9 +291,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                    InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                //lbl_Msg.Text = "Sorry you cannot update payment.";
-                //div_msg.Visible = true;
-                //return;
+                lbl_Msg.Text = "Sorry you cannot update payment.";
+                div_msg.Visible = true;
+                return;
             }
             //string sVoucher = AddVoucher();
             //int iEntry = GetNewEntry(lblVoucher.Text.Trim());
