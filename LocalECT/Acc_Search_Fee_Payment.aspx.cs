@@ -231,6 +231,7 @@ namespace LocalECT
             {
                 lbl_Msg.Text = "Sorry you cannot update payment.";
                 div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 return;
             }
             string sVoucher = AddVoucher();
@@ -271,6 +272,7 @@ namespace LocalECT
             {
                 lbl_Msg.Text = "Sorry you cannot update payment.";
                 div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 return;
             }
             //string sVoucher = AddVoucher();
@@ -312,6 +314,7 @@ namespace LocalECT
             {
                 lbl_Msg.Text = "Sorry you cannot update payment.";
                 div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 return;
             }
             //string sVoucher = AddVoucher();
