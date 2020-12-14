@@ -140,7 +140,7 @@
                                         <div class="col-md-6 col-sm-6">
                                             &nbsp;<br />
                                             <asp:LinkButton ID="lnk_update" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click"><i class=" fa fa-floppy-o"></i> Update</asp:LinkButton>
-                                            <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>
+                                            <asp:LinkButton ID="lnk_Cancel" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Back</asp:LinkButton>
                                         </div>
                                     </div>
 
@@ -175,7 +175,7 @@
                                            <div class="col-md-6 col-sm-6">
                                             &nbsp;<br />
                                             <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_update_Click"><i class=" fa fa-floppy-o"></i> Update</asp:LinkButton>
-                                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>
+                                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Back</asp:LinkButton>
                                         </div>
                                     </div>
 
@@ -242,7 +242,7 @@
                                            <div class="col-md-6 col-sm-6">
                                             &nbsp;<br />
                                             <asp:LinkButton ID="lnk_Settings" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Settings_Click"><i class=" fa fa-floppy-o"></i> Update</asp:LinkButton>
-                                            <asp:LinkButton ID="LinkButton4" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Cancel</asp:LinkButton>
+                                            <asp:LinkButton ID="LinkButton4" runat="server" CssClass="btn btn-danger btn-sm" OnClick="lnk_Cancel_Click"><i class=" fa fa-close"></i> Back</asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>
