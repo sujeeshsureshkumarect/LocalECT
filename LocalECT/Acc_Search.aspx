@@ -131,6 +131,7 @@
                                                          </button>
                                                          <div class="dropdown-menu">
                                                              <a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("sAccount")%>">Edit</a>
+                                                             <a class="dropdown-item" href="Acc_Search_Details?sAcc=<%#Eval("sAccount")%>">Details</a>
                                                              <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("sAccount")%>">Receive Fees Payment</a>
                                                              <a class="dropdown-item" href="Acc_Search_Other_Revenue_Payment?sAcc=<%#Eval("sAccount")%>">Receive Other Revenue Payment</a>                                                         
                                                          </div>

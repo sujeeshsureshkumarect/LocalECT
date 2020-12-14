@@ -152,6 +152,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Acc_Search.aspx" />
+    <Content Include="Acc_Search_Details.aspx" />
     <Content Include="Acc_Search_Edit.aspx" />
     <Content Include="Acc_Search_Fee_Payment.aspx" />
     <Content Include="Acc_Search_Other_Revenue_Payment.aspx" />
@@ -8074,6 +8075,13 @@
     </Compile>
     <Compile Include="Acc_Search.aspx.designer.cs">
       <DependentUpon>Acc_Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acc_Search_Details.aspx.cs">
+      <DependentUpon>Acc_Search_Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acc_Search_Details.aspx.designer.cs">
+      <DependentUpon>Acc_Search_Details.aspx</DependentUpon>
     </Compile>
     <Compile Include="Acc_Search_Edit.aspx.cs">
       <DependentUpon>Acc_Search_Edit.aspx</DependentUpon>

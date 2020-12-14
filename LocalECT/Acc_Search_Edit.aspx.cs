@@ -699,79 +699,79 @@ namespace LocalECT
 
                 //Update Opportunity-Pending Payment
 
-                if(hdn_Admission_Payment_Type.Value=="0" && Convert.ToInt32(drp_PaymentType.SelectedItem.Value)>0)
-                {
-                    //New Change by Accounts Team
-                    int iOpportunity = 0;
-                    if (isOpportunitySet(ddlIDs.Text, out iOpportunity))
-                    {
-                        //lbl_Msg.Text = "Opportunity must be set one time only.";
-                        //div_msg.Visible = true;
-                        if (iOpportunity > 0)
-                        {
-                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                            ServicePointManager.Expect100Continue = true;
-                            ServicePointManager.DefaultConnectionLimit = 9999;
-                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                            string accessToken = InitializeModule.CxPwd;
+                //if(hdn_Admission_Payment_Type.Value=="0" && Convert.ToInt32(drp_PaymentType.SelectedItem.Value)>0)
+                //{
+                //    //New Change by Accounts Team
+                //    int iOpportunity = 0;
+                //    if (isOpportunitySet(ddlIDs.Text, out iOpportunity))
+                //    {
+                //        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                //        //div_msg.Visible = true;
+                //        if (iOpportunity > 0)
+                //        {
+                //            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                //            ServicePointManager.Expect100Continue = true;
+                //            ServicePointManager.DefaultConnectionLimit = 9999;
+                //            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                //            string accessToken = InitializeModule.CxPwd;
 
-                            using (var httpClient = new HttpClient())
-                            {
-                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                                {
-                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                //            using (var httpClient = new HttpClient())
+                //            {
+                //                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                //                {
+                //                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                //                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
-                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                                    var task = httpClient.SendAsync(request);
-                                    task.Wait();
-                                    var response = task.Result;
-                                    string s = response.Content.ReadAsStringAsync().Result;
-                                    //If Status 200
-                                    //if (response.IsSuccessStatusCode == true)
-                                    //{
-                                    //    SetOpportunity(sSID);
-                                    //}
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //lbl_Msg.Text = "Opportunity must be set one time only.";
-                        //div_msg.Visible = true;
-                        if (iOpportunity > 0)
-                        {
-                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                            ServicePointManager.Expect100Continue = true;
-                            ServicePointManager.DefaultConnectionLimit = 9999;
-                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                            string accessToken = InitializeModule.CxPwd;
+                //                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                //                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                //                    var task = httpClient.SendAsync(request);
+                //                    task.Wait();
+                //                    var response = task.Result;
+                //                    string s = response.Content.ReadAsStringAsync().Result;
+                //                    //If Status 200
+                //                    //if (response.IsSuccessStatusCode == true)
+                //                    //{
+                //                    //    SetOpportunity(sSID);
+                //                    //}
+                //                }
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                //        //div_msg.Visible = true;
+                //        if (iOpportunity > 0)
+                //        {
+                //            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                //            ServicePointManager.Expect100Continue = true;
+                //            ServicePointManager.DefaultConnectionLimit = 9999;
+                //            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                //            string accessToken = InitializeModule.CxPwd;
 
-                            using (var httpClient = new HttpClient())
-                            {
-                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                                {
-                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                //            using (var httpClient = new HttpClient())
+                //            {
+                //                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                //                {
+                //                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                //                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
-                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                                    var task = httpClient.SendAsync(request);
-                                    task.Wait();
-                                    var response = task.Result;
-                                    string s = response.Content.ReadAsStringAsync().Result;
-                                    //If Status 200
-                                    //if (response.IsSuccessStatusCode == true)
-                                    //{
-                                    //    SetOpportunity(sSID);
-                                    //}
-                                }
-                            }
-                        }
-                    }
-                }
+                //                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                //                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                //                    var task = httpClient.SendAsync(request);
+                //                    task.Wait();
+                //                    var response = task.Result;
+                //                    string s = response.Content.ReadAsStringAsync().Result;
+                //                    //If Status 200
+                //                    //if (response.IsSuccessStatusCode == true)
+                //                    //{
+                //                    //    SetOpportunity(sSID);
+                //                    //}
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
 
 
                 lbl_Msg.Text = "Data Updated Successfully";
@@ -817,6 +817,89 @@ namespace LocalECT
                 txt_Value.Text = "0";
                 txt_Value.Enabled = false;
             }
+        }
+        protected void ddlRegTerm1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(lblACC.Text))
+                {                 
+                    lbl_Msg.Text = "Select a student please or the students hasn't account yet.";
+                    div_msg.Visible = true;
+                }
+                int iTerm = 0;
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                      InitializeModule.enumPrivilege.ChangeOnlineStatus, CurrentRole) != true)
+                {
+                    iTerm = int.Parse(ddlRegTerm.SelectedValue);
+                    //ddlRegTerm1.SelectedValue = ddlRegTerm.SelectedValue;                
+                    lbl_Msg.Text = "Sorry you cannot change reg term for student";
+                    div_msg.Visible = true;
+                    return;
+                }
+
+                iTerm = int.Parse(ddlRegTerm.SelectedValue);
+                string sAccount = lblACC.Text;//getStAcc(sSelectedValue.Value);
+                UpdateRegTerm(sAccount, iTerm);
+            }
+            catch (Exception exp)
+            {
+                //Console.WriteLine("{0} Exception caught.", exp);
+                //divMsg.InnerText = exp.Message;
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void UpdateRegTerm(string sAccount, int iTerm)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+                string sSQL = "";
+                SqlCommand Cmd = new SqlCommand();
+                Cmd.Connection = Conn;
+                int iYear = 0;
+                int iSem = 0;
+                iYear = LibraryMOD.SeperateTerm(iTerm, out iSem);
+
+
+                sSQL = "UPDATE Reg_Student_Accounts";
+                sSQL += " SET intRegYear =" + iYear + " , byteRegSem =" + iSem;
+                sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate(),strMachine='localect',strNUser='" + Session["CurrentUserName"].ToString() + "'";
+                sSQL += " WHERE strAccountNo='" + sAccount + "'";
+
+                Cmd.CommandType = CommandType.Text;
+                Cmd.CommandText = sSQL;
+                Cmd.ExecuteNonQuery();
+                ddlRegTerm.SelectedValue = ddlRegTerm.SelectedValue;
+                lbl_Msg.Text = "Reg Term updated successfully";
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+            }
+            catch (Exception exp)
+            {
+                //Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = "Reg Term not updated";
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+
+        }
+        protected void lnk_Settings_Click(object sender, EventArgs e)
+        {
+            ddlOnlineStatus_SelectedIndexChanged(null,null);
+            ddlFinanceCat_SelectedIndexChanged(null, null);
+            ddlACCWanted_SelectedIndexChanged(null, null);
+            ddlRegTerm1_SelectedIndexChanged(null, null);
         }
     }
 }
