@@ -74,7 +74,7 @@ namespace LocalECT
                         ddlACCWanted.Enabled = false;
                     }
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
-               InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                      InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
                     {
                         lnk_update.Enabled = false;
                         LinkButton1.Enabled = false;
