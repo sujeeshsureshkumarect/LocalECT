@@ -77,7 +77,8 @@ namespace LocalECT
                InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
                     {
                         lnk_update.Enabled = false;
-
+                        LinkButton1.Enabled = false;
+                        lnk_Settings.Enabled = false;
                     }
                 }
             }
@@ -878,8 +879,8 @@ namespace LocalECT
                 Cmd.ExecuteNonQuery();
                 ddlRegTerm.SelectedValue = ddlRegTerm.SelectedValue;
                 lbl_Msg.Text = "Reg Term updated successfully";
-                div_msg.Visible = true;
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
             }
             catch (Exception exp)
             {
