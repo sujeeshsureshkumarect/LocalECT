@@ -165,6 +165,7 @@
     <Content Include="ChangeMajor.aspx" />
     <Content Include="ChangePwd.aspx" />
     <Content Include="ClassAttendance.aspx" />
+    <Content Include="ClassAttendanceDM.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -4174,12 +4175,100 @@
     <Content Include="images\Employees\PICE10265.jpeg" />
     <Content Include="images\Employees\Public.jpeg" />
     <Content Include="images\favicon32.png" />
+    <Content Include="images\Icons\AccessCategory.jpg" />
+    <Content Include="images\Icons\AddCall.jpg" />
+    <Content Include="images\Icons\AddPeople.jpg" />
+    <Content Include="images\Icons\add_Small.gif" />
+    <Content Include="images\Icons\Add_Student.gif" />
+    <Content Include="images\Icons\Back.jpg" />
+    <Content Include="images\Icons\Back1.jpg" />
+    <Content Include="images\Icons\Barcoode.gif" />
+    <Content Include="images\Icons\Blank_Doc.gif" />
+    <Content Include="images\Icons\Calc.gif" />
+    <Content Include="images\Icons\Calender.gif" />
+    <Content Include="images\Icons\Call.gif" />
     <Content Include="images\Icons\Cart.png" />
+    <Content Include="images\Icons\Clear.jpg" />
+    <Content Include="images\Icons\close-icon.gif" />
     <Content Include="images\Icons\Correct.gif" />
     <Content Include="images\Icons\correct1.png" />
     <Content Include="images\Icons\Delete.gif" />
+    <Content Include="images\Icons\Delete_BW.jpg" />
+    <Content Include="images\Icons\Delete_Data.gif" />
+    <Content Include="images\Icons\Delete_Data2.gif" />
+    <Content Include="images\Icons\Delete_Small.gif" />
+    <Content Include="images\Icons\Delete_Student.gif" />
+    <Content Include="images\Icons\Delete_Table.gif" />
+    <Content Include="images\Icons\Dollar_Anim.gif" />
+    <Content Include="images\Icons\Door.jpg" />
+    <Content Include="images\Icons\Down.gif" />
+    <Content Include="images\Icons\download.gif" />
+    <Content Include="images\Icons\edit.gif" />
+    <Content Include="images\Icons\edit2.gif" />
+    <Content Include="images\Icons\First.gif" />
+    <Content Include="images\Icons\Flag.gif" />
+    <Content Include="images\Icons\GoBack.jpg" />
+    <Content Include="images\Icons\Goto_Student.gif" />
+    <Content Include="images\Icons\Home.gif" />
+    <Content Include="images\Icons\Home2.gif" />
+    <Content Include="images\Icons\images.jpg" />
+    <Content Include="images\Icons\Info.jpg" />
+    <Content Include="images\Icons\info1.jpg" />
+    <Content Include="images\Icons\info2.jpg" />
+    <Content Include="images\Icons\info3.jpg" />
+    <Content Include="images\Icons\Last.gif" />
+    <Content Include="images\Icons\Look.gif" />
+    <Content Include="images\Icons\Mail.gif" />
+    <Content Include="images\Icons\news.gif" />
+    <Content Include="images\Icons\New_File.gif" />
+    <Content Include="images\Icons\New_File.jpg" />
+    <Content Include="images\Icons\Next_Column.gif" />
+    <Content Include="images\Icons\Next_File.gif" />
+    <Content Include="images\Icons\Open.gif" />
+    <Content Include="images\Icons\Picture.gif" />
+    <Content Include="images\Icons\Prev_Column.gif" />
+    <Content Include="images\Icons\Prev_File.gif" />
     <Content Include="images\Icons\Print.gif" />
+    <Content Include="images\Icons\Print_BW.jpg" />
     <Content Include="images\Icons\QRIcon.png" />
+    <Content Include="images\Icons\Question.gif" />
+    <Content Include="images\Icons\Question.png" />
+    <Content Include="images\Icons\ReadMail.gif" />
+    <Content Include="images\Icons\Redo_Undo.gif" />
+    <Content Include="images\Icons\Refresh.gif" />
+    <Content Include="images\Icons\Refresh.jpg" />
+    <Content Include="images\Icons\Run.gif" />
+    <Content Include="images\Icons\Run_BW.jpg" />
+    <Content Include="images\Icons\Save.gif" />
+    <Content Include="images\Icons\SaveMail.gif" />
+    <Content Include="images\Icons\SaveMail2.gif" />
+    <Content Include="images\Icons\Save_BW.jpg" />
+    <Content Include="images\Icons\Search.gif" />
+    <Content Include="images\Icons\Search_Web.gif" />
+    <Content Include="images\Icons\Setting.gif" />
+    <Content Include="images\Icons\Setting2.gif" />
+    <Content Include="images\Icons\Setting_BW.gif" />
+    <Content Include="images\Icons\ShowCalls.jpg" />
+    <Content Include="images\Icons\small_download.gif" />
+    <Content Include="images\Icons\SMS.gif" />
+    <Content Include="images\Icons\sSearch.bmp" />
+    <Content Include="images\Icons\star.gif" />
+    <Content Include="images\Icons\Stop.gif" />
+    <Content Include="images\Icons\Sync.gif" />
+    <Content Include="images\Icons\Time.gif" />
+    <Content Include="images\Icons\toChart.gif" />
+    <Content Include="images\Icons\toData.gif" />
+    <Content Include="images\Icons\toDesk.gif" />
+    <Content Include="images\Icons\toExcel.gif" />
+    <Content Include="images\Icons\toExcel_BW.jpg" />
+    <Content Include="images\Icons\toWord.gif" />
+    <Content Include="images\Icons\toWord_BW.jpg" />
+    <Content Include="images\Icons\Track.gif" />
+    <Content Include="images\Icons\Up.gif" />
+    <Content Include="images\Icons\update.gif" />
+    <Content Include="images\Icons\Write_Data.gif" />
+    <Content Include="images\Icons\x.jpg" />
+    <Content Include="images\Icons\xml.gif" />
     <Content Include="images\InitialImage.png" />
     <Content Include="images\Majors\010103.bmp" />
     <Content Include="images\Majors\ACC100.bmp" />
@@ -7960,6 +8049,7 @@
     <Content Include="images\Students\Females\vssver2.scc" />
     <Content Include="images\Students\Males\Thumbs.db" />
     <Content Include="images\Students\Males\vssver2.scc" />
+    <Content Include="images\Icons\Run_BW.psd" />
     <None Include="LPOPrint.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -8313,6 +8403,13 @@
     </Compile>
     <Compile Include="ClassAttendance.aspx.designer.cs">
       <DependentUpon>ClassAttendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClassAttendanceDM.aspx.cs">
+      <DependentUpon>ClassAttendanceDM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClassAttendanceDM.aspx.designer.cs">
+      <DependentUpon>ClassAttendanceDM.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
