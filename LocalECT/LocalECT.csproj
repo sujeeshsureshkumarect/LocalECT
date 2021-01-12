@@ -3948,6 +3948,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="GradesDM.aspx" />
+    <Content Include="GradesEntry.aspx" />
+    <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Cards.png" />
@@ -8449,6 +8452,27 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GradesDM.aspx.cs">
+      <DependentUpon>GradesDM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GradesDM.aspx.designer.cs">
+      <DependentUpon>GradesDM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GradesEntry.aspx.cs">
+      <DependentUpon>GradesEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GradesEntry.aspx.designer.cs">
+      <DependentUpon>GradesEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GradesView.aspx.cs">
+      <DependentUpon>GradesView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GradesView.aspx.designer.cs">
+      <DependentUpon>GradesView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Handler1.ashx.cs">
       <DependentUpon>Handler1.ashx</DependentUpon>
