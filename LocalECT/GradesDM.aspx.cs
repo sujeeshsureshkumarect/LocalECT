@@ -145,7 +145,8 @@ namespace LocalECT
             }
             else
             {
-               Response.Redirect("Login.aspx");
+                Session.RemoveAll();
+                Response.Redirect("Login.aspx");
             }
 
             CurrentCampus = (InitializeModule.EnumCampus)int.Parse(Request.QueryString["Campus"]);

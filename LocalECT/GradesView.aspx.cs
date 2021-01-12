@@ -35,6 +35,7 @@ namespace LocalECT
             }
             else
             {
+                Session.RemoveAll();
                 Response.Redirect("Login.aspx");
             }
             if (!IsPostBack)
