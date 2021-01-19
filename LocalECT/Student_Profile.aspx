@@ -195,6 +195,7 @@
                                                     <div id="img" align="middle">
                                                         <asp:Label ID="lblIsVerfiedFromRegistrar" runat="server" Text="Verified from the Registrar" style="color: #009933; font-weight: 700"></asp:Label>
                                                         <asp:HiddenField ID="hdnSerial" runat="server" />
+                                                        <asp:HiddenField ID="hdniUnifiedID" runat="server" />
                                                         <asp:HiddenField ID="Pic" runat="server" />
                                                         <br />
                                                         <asp:LinkButton ID="btnGetEID" runat="server" CssClass="btn btn-success btn-sm" OnClick="btnGetEID_Click"><i class="fa fa-download"></i> Read from EID</asp:LinkButton>
@@ -701,7 +702,7 @@
                                                             <Items>
                                                                 <asp:MenuItem Text="Qualifications" Value="0" ></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Enrollment" Value="1"></asp:MenuItem>
-                                                                <asp:MenuItem Text="    |   Documents" Value="2"></asp:MenuItem>
+                                                                <asp:MenuItem Text="    |   Files" Value="2"></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Marks" Value="3"></asp:MenuItem>
                                                                 <asp:MenuItem Text="    |   Search" Value="4"></asp:MenuItem>
                                                             </Items>
@@ -1823,7 +1824,7 @@
                                                         <%--Start View 3--%>
                                                         <asp:View ID="View3" runat="server">
                                                             <div class="col-md-12 col-sm-12">
-                                                                <h3 style="text-align: center; "><i class="fa fa-folder-open"></i> Documents</h3>
+                                                                <h3 style="text-align: center; "><i class="fa fa-folder-open"></i> Files</h3>
                                                                 <hr />
                                                                  <table  align="center">
                                     <tr>
@@ -1865,6 +1866,13 @@
                                                                                 SortExpression="strRemark">
                                                                                 <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:BoundField>
+                                                                            <asp:BoundField DataField="strURL" HeaderText="Files" 
+                                                                                SortExpression="strURL">
+                                                                                <ItemStyle HorizontalAlign="Left" />
+                                                                            </asp:BoundField>
+                                                                           <%-- <asp:HyperLinkField DataNavigateUrlFields="strURL" HeaderText="strURL" 
+                                                                                DataNavigateUrlFormatString="ReplacePage.aspx?StockNumber={0}" 
+                                                                                DataTextField="strURL" />--%>
                                                                         </Columns>
                                                                         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -1888,25 +1896,26 @@
                                                                 <td align="center">
                                                                     <asp:SqlDataSource ID="DocsEditDS" runat="server" 
                                                                         ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                                                        DeleteCommand="DELETE FROM Reg_Students_Documents WHERE (lngSerial = @lngSerial)" 
-                                                                        SelectCommand="SELECT [lngSerial], [intDocument], [isMandatory], [isAvailable], [strRemark] FROM [Reg_Students_Documents] WHERE (([lngSerial] = @lngSerial) AND ([intDocument] = @intDocument))" 
-                                                                        UpdateCommand="UPDATE Reg_Students_Documents SET isMandatory = @isMandatory, isAvailable = @isAvailable, strRemark = @strRemark, strUserSave = @strUserSave, dateLastSave = GETDATE() WHERE (lngSerial = @lngSerial) AND (intDocument = @intDocument)">
+                                                                        DeleteCommand="DELETE FROM Reg_Students_Files WHERE (intUnified = @intUnified)" 
+                                                                        SelectCommand="SELECT [intFile],[intUnified], [intDocument], [isMandatory], [isAvailable], [strRemark],[strURL] FROM [Reg_Students_Files] WHERE (([intUnified] = @intUnified) AND ([intDocument] = @intDocument))" 
+                                                                        UpdateCommand="UPDATE Reg_Students_Files SET isMandatory = @isMandatory, isAvailable = @isAvailable, strRemark = @strRemark, strUserSave = @strUserSave, dateLastSave = GETDATE() WHERE (intUnified = @intUnified) AND (intDocument = @intDocument)">
                                                                         <SelectParameters>
-                                                                            <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                                                            <asp:ControlParameter ControlID="hdniUnifiedID" DefaultValue="0" Name="intUnified" 
                                                                                 PropertyName="Value" Type="Int32" />
                                                                             <asp:ControlParameter ControlID="grdDocs" DefaultValue="0" Name="intDocument" 
                                                                                 PropertyName="SelectedValue" Type="Int16" />
                                                                         </SelectParameters>
                                                                         <DeleteParameters>
-                                                                            <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                                                            <asp:ControlParameter ControlID="hdniUnifiedID" DefaultValue="0" Name="intUnified" 
                                                                                 PropertyName="Value" />
                                                                         </DeleteParameters>
                                                                         <UpdateParameters>
-                                                                            <asp:Parameter Name="lngSerial" />
+                                                                            <asp:Parameter Name="intUnified" />
                                                                             <asp:Parameter Name="intDocument" />
                                                                             <asp:Parameter Name="isMandatory" />
                                                                             <asp:Parameter Name="isAvailable" />
                                                                             <asp:Parameter Name="strRemark" />
+                                                                            <asp:Parameter Name="intFile" />
                                                                             <asp:SessionParameter DefaultValue="-" Name="strUserSave" 
                                                                                 SessionField="CurrentUserName" />
                                                                         </UpdateParameters>
@@ -1915,22 +1924,28 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center">
-                                                                    <asp:DetailsView ID="dvDocs" runat="server" AutoGenerateEditButton="True" 
-                                                                        AutoGenerateRows="False" CellPadding="4" DataKeyNames="lngSerial,intDocument" 
-                                                                        DataSourceID="DocsEditDS" DefaultMode="Edit" ForeColor="#333333" 
-                                                                        GridLines="None" Height="50px" onitemupdated="dvDocs_ItemUpdated" Width="125px">
+                                                                    <asp:DetailsView ID="dvDocs" runat="server" AutoGenerateEditButton="True"
+                                                                        AutoGenerateRows="False" CellPadding="4" DataKeyNames="intUnified,intDocument,intFile"
+                                                                        DataSourceID="DocsEditDS" DefaultMode="Edit" ForeColor="#333333"
+                                                                        GridLines="None" Height="50px" OnItemUpdated="dvDocs_ItemUpdated" Width="125px">
                                                                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                                                         <CommandRowStyle BackColor="#E2DED6" Font-Bold="True" />
                                                                         <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                                                                         <FieldHeaderStyle BackColor="#E9ECF1" Font-Bold="True" />
                                                                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                                                                         <Fields>
-                                                                            <asp:CheckBoxField DataField="isMandatory" HeaderText="Mandatory" 
+                                                                            <asp:CheckBoxField DataField="isMandatory" HeaderText="Mandatory"
                                                                                 SortExpression="isMandatory" />
-                                                                            <asp:CheckBoxField DataField="isAvailable" HeaderText="Available" 
+                                                                            <asp:CheckBoxField DataField="isAvailable" HeaderText="Available"
                                                                                 SortExpression="isAvailable" />
-                                                                            <asp:BoundField DataField="strRemark" HeaderText="Remark" 
+                                                                            <asp:BoundField DataField="strRemark" HeaderText="Remark"
                                                                                 SortExpression="strRemark" />
+                                                                            <asp:TemplateField HeaderText="Upload">
+                                                                                <EditItemTemplate>
+                                                                                    <asp:FileUpload ID="FileUpload" runat="server" />
+                                                                                </EditItemTemplate>
+                                                                            </asp:TemplateField>
+
                                                                         </Fields>
                                                                         <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
                                                                         <EditRowStyle BackColor="#999999" />
@@ -1943,9 +1958,10 @@
                                                 </asp:MultiView>
                                                 <asp:SqlDataSource ID="DocumentsDS" runat="server" 
                                                     ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                                    SelectCommand="SELECT SD.lngSerial, SD.intDocument, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark FROM Reg_Students_Documents AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.lngSerial = @lngSerial) ORDER BY SD.intDocument">
+                                                    SelectCommand="SELECT SD.intUnified, SD.intDocument, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark,SD.strURL FROM Reg_Students_Files AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.intUnified = @hdniUnifiedID) ORDER BY SD.intDocument">
+                                                    <%--SelectCommand="SELECT SD.lngSerial, SD.intDocument, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark FROM Reg_Students_Documents AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.lngSerial = @lngSerial) ORDER BY SD.intDocument">--%>
                                                     <SelectParameters>
-                                                        <asp:ControlParameter ControlID="hdnSerial" DefaultValue="0" Name="lngSerial" 
+                                                        <asp:ControlParameter ControlID="hdniUnifiedID" DefaultValue="0" Name="hdniUnifiedID" 
                                                             PropertyName="Value" />
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>

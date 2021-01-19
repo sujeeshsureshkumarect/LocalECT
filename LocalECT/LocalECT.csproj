@@ -9804,6 +9804,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Student_Files\Female\" />
+    <Folder Include="Student_Files\Male\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -766,10 +766,12 @@ namespace LocalECT
                     if (Campus.ToString() == "Males")
                     {
                         lblUnified.Text = "M" + Rd["iUnifiedID"].ToString();
+                        hdniUnifiedID.Value = Rd["iUnifiedID"].ToString();
                     }
                     else
                     {
                         lblUnified.Text = "F" + Rd["iUnifiedID"].ToString();
+                        hdniUnifiedID.Value = Rd["iUnifiedID"].ToString();
                     }
                     txtUnifiedNo.Text = Rd["iUnifiedID"].ToString();
                     txtFNameEn.Text = Rd["strFirstDescEn"].ToString();
@@ -5303,21 +5305,21 @@ namespace LocalECT
             try
             {
 
-                if (hdnSerial.Value == "")
+                if (hdniUnifiedID.Value == "")
                 {                    
                     lbl_Msg.Text = "Select or Add Student Please ...";
                     div_msg.Visible = true;
                     return;
                 }
 
-                string sSQL = "Delete From Reg_Students_Documents Where lngSerial=" + hdnSerial.Value;
+                string sSQL = "Delete From Reg_Students_Files Where intUnified=" + hdniUnifiedID.Value;
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 int iEffected = 0;
                 iEffected = Cmd.ExecuteNonQuery();
 
-                sSQL = "INSERT INTO Reg_Students_Documents";
-                sSQL += " (lngSerial, intDocument, isMandatory, isAvailable, strRemark, strUserCreate, dateCreate)";
-                sSQL += " SELECT " + hdnSerial.Value + " AS lSerial, intDocument, isMandatory, (CASE LD.intDocument WHEN 10 THEN 1 ELSE LD.isMandatory END) AS isAvailable, '' AS sRemark, ";
+                sSQL = "INSERT INTO Reg_Students_Files";
+                sSQL += " (intUnified, intDocument, isMandatory, isAvailable, strRemark, strUserCreate, dateCreate)";
+                sSQL += " SELECT " + hdniUnifiedID.Value + " AS lSerial, intDocument, isMandatory, (CASE LD.intDocument WHEN 10 THEN 1 ELSE LD.isMandatory END) AS isAvailable, '' AS sRemark, ";
                 sSQL += " '" + Session["CurrentUserName"].ToString() + "' AS sUser, GETDATE() AS dDate FROM Lkp_Student_Documents AS LD";
 
                 Cmd.CommandText = sSQL;
@@ -5353,6 +5355,40 @@ namespace LocalECT
             Conn.Open();
             try
             {
+                // Reference the FileUpload control
+                FileUpload FileUpload = (FileUpload)dvDocs.FindControl("FileUpload");
+                if (FileUpload.HasFile)
+                {
+                    Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                    SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                    //string intDocument = this.dvDocs.DataKey.Value.ToString();
+                    string intUnified = dvDocs.DataKey[0].ToString();
+                    string intDocument = dvDocs.DataKey[1].ToString();
+                    string intFile = dvDocs.DataKey[2].ToString();
+                    string filename = "";
+                    string path = "";
+                    string path1 = "";
+                    string extension = Path.GetExtension(FileUpload.PostedFile.FileName);
+                    //UPDATE Reg_Students_Files SET isMandatory = @isMandatory, isAvailable = @isAvailable, strRemark = @strRemark, strUserSave = @strUserSave, dateLastSave = GETDATE() WHERE (intUnified = @intUnified) AND (intDocument = @intDocument)
+                    if (Campus.ToString() == "Males")
+                    {
+                        EnsureDirectoriesExist("~/Student_Files/Male/" + intUnified +  "/");
+                        filename = "M" + intUnified + "_" + intDocument + "_" + intFile;
+                        path = "Student_Files/Male/"+ intUnified + "/" + filename + extension;
+                        path1 = "~/Student_Files/Male/" + intUnified + "/" + filename + extension;
+                    }
+                    else
+                    {
+                        EnsureDirectoriesExist("~/Student_Files/Female/" + intUnified + "/");
+                        filename = "F" + intUnified + "_" + intDocument + "_" + intFile;
+                        path = "Student_Files/Female/" + intUnified + "/" + filename + extension;
+                        path1 = "~/Student_Files/Female/" + intUnified + "/" + filename + extension;
+                    }                    
+                    FileUpload.SaveAs(Server.MapPath(path1));
+
+                    SqlCommand cmd = new SqlCommand("UPDATE Reg_Students_Files SET strURL = @strURL, WHERE (intUnified = @intUnified) AND (intDocument = @intDocument) AND (intFile = @intFile)", sc);
+                }
+
                 string sUser = Session["CurrentUserName"].ToString();
                 grdDocs.DataBind();
                 mtvDocs.ActiveViewIndex = 0;
@@ -5406,7 +5442,16 @@ namespace LocalECT
 
             }
         }
+        public void EnsureDirectoriesExist(string path)
+        {
 
+            // if the \pix directory doesn't exist - create it. 
+            if (!System.IO.Directory.Exists(Server.MapPath(@"" + path + "")))
+            {
+                System.IO.Directory.CreateDirectory(Server.MapPath(@"" + path + ""));
+            }
+
+        }
         protected void AddM_btn_Click(object sender, EventArgs e)
         {
             try
