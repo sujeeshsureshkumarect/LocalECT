@@ -5386,7 +5386,29 @@ namespace LocalECT
                     }                    
                     FileUpload.SaveAs(Server.MapPath(path1));
 
-                    SqlCommand cmd = new SqlCommand("UPDATE Reg_Students_Files SET strURL = @strURL, WHERE (intUnified = @intUnified) AND (intDocument = @intDocument) AND (intFile = @intFile)", sc);
+                    SqlCommand cmd = new SqlCommand("UPDATE Reg_Students_Files SET strURL = @strURL,strTitle=@strTitle WHERE (intUnified = @intUnified) AND (intDocument = @intDocument) AND (intFile = @intFile)", sc);
+                    cmd.Parameters.AddWithValue("@strURL", path);
+                    cmd.Parameters.AddWithValue("@strTitle", filename + extension);
+                    cmd.Parameters.AddWithValue("@intUnified", intUnified);
+                    cmd.Parameters.AddWithValue("@intDocument", intDocument);
+                    cmd.Parameters.AddWithValue("@intFile", intFile);
+                    try
+                    {
+                        sc.Open();
+                        cmd.ExecuteNonQuery();
+                        sc.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        sc.Close();
+                        LibraryMOD.ShowErrorMessage(ex);
+                        lbl_Msg.Text = ex.Message;
+                        div_msg.Visible = true;
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
                 }
 
                 string sUser = Session["CurrentUserName"].ToString();

@@ -1866,13 +1866,16 @@
                                                                                 SortExpression="strRemark">
                                                                                 <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:BoundField>
-                                                                            <asp:BoundField DataField="strURL" HeaderText="Files" 
+                                                                            <%--<asp:BoundField DataField="strURL" HeaderText="Files" 
                                                                                 SortExpression="strURL">
                                                                                 <ItemStyle HorizontalAlign="Left" />
-                                                                            </asp:BoundField>
-                                                                           <%-- <asp:HyperLinkField DataNavigateUrlFields="strURL" HeaderText="strURL" 
-                                                                                DataNavigateUrlFormatString="ReplacePage.aspx?StockNumber={0}" 
-                                                                                DataTextField="strURL" />--%>
+                                                                            </asp:BoundField>--%>
+                                                                             <%-- <asp:BoundField DataField="strURL" HtmlEncode="False" HeaderText="Files"
+                                                                                  DataFormatString="<a target='_blank' href='{0}'>{0}</a>" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>--%>
+                                                                            <asp:HyperLinkField DataTextField="strTitle" DataNavigateUrlFields="strURL" 
+                                                                                DataNavigateUrlFormatString="{0}" HeaderText="Files" 
+                                                                                SortExpression="strURL" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true" Target="_blank"/>
+
                                                                         </Columns>
                                                                         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -1897,7 +1900,7 @@
                                                                     <asp:SqlDataSource ID="DocsEditDS" runat="server" 
                                                                         ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
                                                                         DeleteCommand="DELETE FROM Reg_Students_Files WHERE (intUnified = @intUnified)" 
-                                                                        SelectCommand="SELECT [intFile],[intUnified], [intDocument], [isMandatory], [isAvailable], [strRemark],[strURL] FROM [Reg_Students_Files] WHERE (([intUnified] = @intUnified) AND ([intDocument] = @intDocument))" 
+                                                                        SelectCommand="SELECT [intFile],[intUnified], [intDocument], [isMandatory], [isAvailable], [strRemark],[strURL],[strTitle] FROM [Reg_Students_Files] WHERE (([intUnified] = @intUnified) AND ([intDocument] = @intDocument))" 
                                                                         UpdateCommand="UPDATE Reg_Students_Files SET isMandatory = @isMandatory, isAvailable = @isAvailable, strRemark = @strRemark, strUserSave = @strUserSave, dateLastSave = GETDATE() WHERE (intUnified = @intUnified) AND (intDocument = @intDocument)">
                                                                         <SelectParameters>
                                                                             <asp:ControlParameter ControlID="hdniUnifiedID" DefaultValue="0" Name="intUnified" 
@@ -1945,6 +1948,9 @@
                                                                                     <asp:FileUpload ID="FileUpload" runat="server" />
                                                                                 </EditItemTemplate>
                                                                             </asp:TemplateField>
+                                                                             <asp:HyperLinkField DataTextField="strTitle" DataNavigateUrlFields="strURL" 
+                                                                                DataNavigateUrlFormatString="{0}" HeaderText="Files" 
+                                                                                SortExpression="strURL" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true" Target="_blank"/>
 
                                                                         </Fields>
                                                                         <HeaderStyle BackColor="#3f658c" Font-Bold="True" ForeColor="White" />
@@ -1958,7 +1964,7 @@
                                                 </asp:MultiView>
                                                 <asp:SqlDataSource ID="DocumentsDS" runat="server" 
                                                     ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                                    SelectCommand="SELECT SD.intUnified, SD.intDocument, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark,SD.strURL FROM Reg_Students_Files AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.intUnified = @hdniUnifiedID) ORDER BY SD.intDocument">
+                                                    SelectCommand="SELECT SD.intUnified, SD.intDocument,SD.strTitle, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark,SD.strURL FROM Reg_Students_Files AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.intUnified = @hdniUnifiedID) ORDER BY SD.intDocument">
                                                     <%--SelectCommand="SELECT SD.lngSerial, SD.intDocument, D.strDocumentEn, SD.isMandatory, SD.isAvailable, SD.strRemark FROM Reg_Students_Documents AS SD INNER JOIN Lkp_Student_Documents AS D ON SD.intDocument = D.intDocument WHERE (SD.lngSerial = @lngSerial) ORDER BY SD.intDocument">--%>
                                                     <SelectParameters>
                                                         <asp:ControlParameter ControlID="hdniUnifiedID" DefaultValue="0" Name="hdniUnifiedID" 
