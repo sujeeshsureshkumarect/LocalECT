@@ -700,79 +700,79 @@ namespace LocalECT
 
                 //Update Opportunity-Pending Payment
 
-                //if(hdn_Admission_Payment_Type.Value=="0" && Convert.ToInt32(drp_PaymentType.SelectedItem.Value)>0)
-                //{
-                //    //New Change by Accounts Team
-                //    int iOpportunity = 0;
-                //    if (isOpportunitySet(ddlIDs.Text, out iOpportunity))
-                //    {
-                //        //lbl_Msg.Text = "Opportunity must be set one time only.";
-                //        //div_msg.Visible = true;
-                //        if (iOpportunity > 0)
-                //        {
-                //            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                //            ServicePointManager.Expect100Continue = true;
-                //            ServicePointManager.DefaultConnectionLimit = 9999;
-                //            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                //            string accessToken = InitializeModule.CxPwd;
+                if (hdn_Admission_Payment_Type.Value == "0" && Convert.ToInt32(drp_PaymentType.SelectedItem.Value) > 0)
+                {
+                    //New Change by Accounts Team
+                    int iOpportunity = 0;
+                    if (isOpportunitySet(ddlIDs.Text, out iOpportunity))
+                    {
+                        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                        //div_msg.Visible = true;
+                        if (iOpportunity > 0)
+                        {
+                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                            ServicePointManager.Expect100Continue = true;
+                            ServicePointManager.DefaultConnectionLimit = 9999;
+                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            string accessToken = InitializeModule.CxPwd;
 
-                //            using (var httpClient = new HttpClient())
-                //            {
-                //                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                //                {
-                //                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                //                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                //                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
-                //                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                //                    var task = httpClient.SendAsync(request);
-                //                    task.Wait();
-                //                    var response = task.Result;
-                //                    string s = response.Content.ReadAsStringAsync().Result;
-                //                    //If Status 200
-                //                    //if (response.IsSuccessStatusCode == true)
-                //                    //{
-                //                    //    SetOpportunity(sSID);
-                //                    //}
-                //                }
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        //lbl_Msg.Text = "Opportunity must be set one time only.";
-                //        //div_msg.Visible = true;
-                //        if (iOpportunity > 0)
-                //        {
-                //            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                //            ServicePointManager.Expect100Continue = true;
-                //            ServicePointManager.DefaultConnectionLimit = 9999;
-                //            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                //            string accessToken = InitializeModule.CxPwd;
+                                    request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //If Status 200
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
+                                    //    SetOpportunity(sSID);
+                                    //}
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //lbl_Msg.Text = "Opportunity must be set one time only.";
+                        //div_msg.Visible = true;
+                        if (iOpportunity > 0)
+                        {
+                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                            ServicePointManager.Expect100Continue = true;
+                            ServicePointManager.DefaultConnectionLimit = 9999;
+                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            string accessToken = InitializeModule.CxPwd;
 
-                //            using (var httpClient = new HttpClient())
-                //            {
-                //                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                //                {
-                //                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                //                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                //                    request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
-                //                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                //                    var task = httpClient.SendAsync(request);
-                //                    task.Wait();
-                //                    var response = task.Result;
-                //                    string s = response.Content.ReadAsStringAsync().Result;
-                //                    //If Status 200
-                //                    //if (response.IsSuccessStatusCode == true)
-                //                    //{
-                //                    //    SetOpportunity(sSID);
-                //                    //}
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
+                                    request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //If Status 200
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
+                                    //    SetOpportunity(sSID);
+                                    //}
+                                }
+                            }
+                        }
+                    }
+                }
 
 
                 lbl_Msg.Text = "Data Updated Successfully";

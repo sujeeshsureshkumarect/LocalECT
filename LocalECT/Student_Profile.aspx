@@ -1375,7 +1375,7 @@
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
                                                                             <asp:LinkButton ID="lnkOpportunity" runat="server" 
                                                                             Font-Underline="True" OnCommand="lnkOpportunity_Command"
-                                                                            ToolTip="Do that after you save please." ForeColor="Blue">Set CRM Opportunity</asp:LinkButton>
+                                                                            ToolTip="Do that after you save please." ForeColor="Blue" Visible="false">Set CRM Opportunity</asp:LinkButton>
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server"
                                                                                 ControlToValidate="txtOpportunityID" Display="Dynamic"
                                                                                 ErrorMessage="Opportunity ID is required" SetFocusOnError="True"
