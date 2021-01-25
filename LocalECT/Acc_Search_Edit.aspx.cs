@@ -637,8 +637,7 @@ namespace LocalECT
         private void Update_Acc()
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
-            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
-           
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);           
 
             try
             {
