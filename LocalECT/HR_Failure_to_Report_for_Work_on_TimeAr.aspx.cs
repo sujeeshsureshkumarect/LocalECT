@@ -16,7 +16,7 @@ using System.Text;
 
 namespace LocalECT
 {
-    public partial class HR_Failure_to_Report_for_Work_on_Time : System.Web.UI.Page
+    public partial class HR_Failure_to_Report_for_Work_on_TimeAr : System.Web.UI.Page
     {
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
@@ -108,13 +108,15 @@ namespace LocalECT
             Microsoft.SharePoint.Client.List myList = clientContext.Web.Lists.GetByTitle("HR-Services");
             ListItemCreationInformation itemInfo = new ListItemCreationInformation();
             Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
+
             myItem["Title"] = "Initiated";
             myItem["Reference"] = refno;
             myItem["ServiceID"] = lbl_ServiceID.Text.Trim();
-            myItem["Request"] = "<b>Service ID:</b> " + lbl_ServiceID.Text + "<br/> <b>Service Name:</b> " + lbl_ServiceName.Text + "<br/><b>Designation:</b> " + Lbl_Position.Text + "<br/><b>Contact No:</b> " + ContactNo.Text + "<br/><b>Business Unit:</b> " + lbl_Dept.Text + "<br/><b>Date:</b> " + sDate.Text + "<br/><b>From(Time):</b> " + TimeFrom.Text + "<br/><b>To(Time):</b> " + TimeTo.Text + "<br/><b>Total Hours/Days:</b> " + TotalDays.Text + "<br/><b>Explain the Leave Purpose in brief:</b> " + ExplainBrief.Text + "<br/><b>Evidence Document Attached:</b>" + EV_Document.SelectedItem.Text + "<br/><b>Signature:</b>" + Sig.Text + "<br/><b>Date:</b>" + tDate.Text + "<br/>";
+            myItem["Request"] = "<b>Service ID:</b> " + lbl_ServiceID.Text + "<br/> <b>Service Name:</b> " + lbl_ServiceName.Text + "<br/><b>Designation:</b> " + Lbl_Position.Text + "<br/><b>Contact No:</b> " + ContactNo.Text + "<br/><b>Business Unit:</b> " + lbl_Dept.Text + "<br/><b>Date:</b> " + sDate.Text + "<br/><b>From(Time):</b> " + TimeFrom.Text + "<br/><b>To(Time):</b> " + TimeTo.Text + "<br/><b>Total Hours/Days:</b> " + TotalDays.Text + "<br/><b>Explain the Leave Purpose in brief:</b> " + ExplainBrief.Text + "<br/><b>Eviden Document Attached:</b>" + EV_Document.SelectedItem.Text + "<br/><b>Signature:</b>" + Sig.Text + "<br/><b>Date:</b>" + tDate.Text + "<br/>";
             myItem["EmpID"] = lbl_EmpID.Text.Trim();
             myItem["Employee_x0020_Name"] = lbl_EmpName.Text.Trim();
             myItem["Requestor"] = clientContext.Web.EnsureUser(UserEmail.Value);
+
             string approvers = Approvers.Value;
 
             string[] users = approvers.Split(',');
@@ -184,7 +186,6 @@ namespace LocalECT
             }
             //Console.ReadLine();
         }
-
         public void approvalDetails()
         {
             SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);

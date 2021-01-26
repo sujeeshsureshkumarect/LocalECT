@@ -29,7 +29,7 @@ namespace LocalECT
                     approvalDetails();
                     DateTime TodayDate = DateTime.Today;
                     txt_Date.Text = TodayDate.ToString("dd/MM/yyyy");
-
+                    Signature.Text = lbl_EmpName.Text;
                 }
             }
             else

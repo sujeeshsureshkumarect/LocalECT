@@ -3955,6 +3955,8 @@
     <Content Include="HR_Cancellation_Leave_Form.aspx" />
     <Content Include="HR_Employee_Leaving_Clearance_Form.aspx" />
     <Content Include="HR_Failure_to_Report_for_Work_on_Time.aspx" />
+    <Content Include="HR_Failure_to_Report_for_Work_on_TimeAr.aspx" />
+    <Content Include="HR_LeaveApplication.aspx" />
     <Content Include="HR_Services.aspx" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Cards.png" />
@@ -8509,6 +8511,20 @@
     <Compile Include="HR_Failure_to_Report_for_Work_on_Time.aspx.designer.cs">
       <DependentUpon>HR_Failure_to_Report_for_Work_on_Time.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HR_Failure_to_Report_for_Work_on_TimeAr.aspx.cs">
+      <DependentUpon>HR_Failure_to_Report_for_Work_on_TimeAr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Failure_to_Report_for_Work_on_TimeAr.aspx.designer.cs">
+      <DependentUpon>HR_Failure_to_Report_for_Work_on_TimeAr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_LeaveApplication.aspx.cs">
+      <DependentUpon>HR_LeaveApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_LeaveApplication.aspx.designer.cs">
+      <DependentUpon>HR_LeaveApplication.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HR_Services.aspx.cs">
       <DependentUpon>HR_Services.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9838,6 +9854,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Student_Files\Female\" />
     <Folder Include="Student_Files\Male\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
