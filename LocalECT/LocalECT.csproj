@@ -3953,6 +3953,7 @@
     <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="HR_Cancellation_Leave_Form.aspx" />
+    <Content Include="HR_Employee_Leaving_Clearance_Form.aspx" />
     <Content Include="HR_Services.aspx" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Cards.png" />
@@ -8492,6 +8493,13 @@
     </Compile>
     <Compile Include="HR_Cancellation_Leave_Form.aspx.designer.cs">
       <DependentUpon>HR_Cancellation_Leave_Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_Employee_Leaving_Clearance_Form.aspx.cs">
+      <DependentUpon>HR_Employee_Leaving_Clearance_Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Employee_Leaving_Clearance_Form.aspx.designer.cs">
+      <DependentUpon>HR_Employee_Leaving_Clearance_Form.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR_Services.aspx.cs">
       <DependentUpon>HR_Services.aspx</DependentUpon>

@@ -13,10 +13,9 @@ using DataTable = System.Data.DataTable;
 using System.Security;
 using System.IO;
 using System.Text;
-
 namespace LocalECT
 {
-    public partial class HR_Cancellation_Leave_Form : System.Web.UI.Page
+    public partial class HR_Employee_Leaving_Clearance_Form : System.Web.UI.Page
     {
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
@@ -30,7 +29,6 @@ namespace LocalECT
                     approvalDetails();
                     DateTime TodayDate = DateTime.Today;
                     txt_Date.Text = TodayDate.ToString("dd/MM/yyyy");
-                    Signature.Text = lbl_EmpName.Text;
 
                 }
             }
@@ -57,8 +55,8 @@ namespace LocalECT
                 {
                     lbl_EmpID.Text = dt.Rows[0]["Personnelnr"].ToString();
                     lbl_EmpName.Text = dt.Rows[0]["Name"].ToString();
-                    //  Lbl_Position.Text = dt.Rows[0]["Designation"].ToString();
-                    // lbl_Dept.Text = dt.Rows[0]["DepartmentName"].ToString();
+                    Lbl_Position.Text = dt.Rows[0]["Designation"].ToString();
+                    lbl_Dept.Text = dt.Rows[0]["DepartmentName"].ToString();
                     //   txt_Gender.Text = dt.Rows[0]["Gender"].ToString();
                     //  txtCategory.Text = dt.Rows[0]["Category"].ToString();
                     // txtPhoneNumber.Text = dt.Rows[0]["MobilePhoneNumber"].ToString();
@@ -109,23 +107,13 @@ namespace LocalECT
             ListItemCreationInformation itemInfo = new ListItemCreationInformation();
             Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
 
-
-
-
-
-
-
-            var user1 = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");
-            var user2 = clientContext.Web.EnsureUser("abdul.shukkoor@ect.ac.ae");
-            var UsersLists = new[] { user1, user2 };
             myItem["Title"] = "Initiated";
             myItem["Reference"] = refno;
             myItem["ServiceID"] = lbl_ServiceID.Text.Trim();
-            myItem["Request"] = "<b>Service ID:</b> " + lbl_ServiceID.Text + "<br/> <b>Service Name:</b> " + lbl_ServiceNameEn.Text + "/" + lbl_ServiceNameAr.Text + "<br/><b>Cancelled Leave Duration:</b> " + LeaveDuration.Text + "<br/><b>Signature:</b>" + Signature.Text + "<br/><b>Date:</b>" + txt_Date.Text + "<br/>";
+            myItem["Request"] = "<b>Service ID:</b> " + lbl_ServiceID.Text + "<br/> <b>Service Name:</b> " + lbl_ServiceNameEn.Text + "/" + lbl_ServiceNameAr.Text + "<br/><b>Signature:</b>" + Signature.Text + "<br/><b>Date:</b>" + txt_Date.Text + "<br/>";
             myItem["EmpID"] = lbl_EmpID.Text.Trim();
             myItem["Employee_x0020_Name"] = lbl_EmpName.Text.Trim();
             myItem["Requestor"] = clientContext.Web.EnsureUser(UserEmail.Value);
-
             string approvers = Approvers.Value;
 
             string[] users = approvers.Split(',');
@@ -195,7 +183,6 @@ namespace LocalECT
             }
             //Console.ReadLine();
         }
-
         public void approvalDetails()
         {
             SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);

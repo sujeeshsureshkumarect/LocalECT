@@ -1,10 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HR_Cancellation_Leave_Form.aspx.cs" Inherits="LocalECT.HR_Cancellation_Leave_Form" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HR_Employee_Leaving_Clearance_Form.aspx.cs" Inherits="LocalECT.HR_Employee_Leaving_Clearance_Form"  MasterPageFile="~/LocalECT.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-  <head>
    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-    </head>
+ 
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
@@ -49,7 +47,8 @@
                         width: 24%
                     }
                 </style>
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+              <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -60,7 +59,6 @@
           });
         </script>
 
- 
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -93,7 +91,7 @@
                                     <tr>
                                         <th style="text-align: left; padding-left: 10px">Issue: 18/08/2011</th>
                                         <th style="text-align: right;">Revision Date: 12/09/2018</th>
-                                        <th style="text-align: right; padding-right: 10px">Ref No.: ECT-HRS-HRSO-FRM.005</th>
+                                        <th style="text-align: right; padding-right: 10px">Ref No.: ECT-HRS-HRSO-FRM.008</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -102,29 +100,30 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <p style="text-align: center; font-size: 23px; font-weight: bold;"><span lang="CS">Cancellation Leave Form</span> /<b><span dir="RTL" lang="AR-AE">نموذج إلغاء إجازة</span><span dir="RTL"> </span></b></p>
+                                            <p style="text-align: center; font-size: 23px; font-weight: bold;"><span lang="CS">Employee’s Leaving Clearance Form </span> / <b><span dir="RTL" lang="AR-SA">نموذج إخلاء طرف للموظفين </span></b></p>
                                         </td>
                                     </tr>
                                 </table>
 
                               
-                               
-                                
+                                <hr />
+                                <hr />
                                   <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b>Service ID</b>
                                         </td>
                                         <td align="center">
-                                              <asp:Label ID="lbl_ServiceID" runat="server" Text="1036"></asp:Label></td>
+                                              <asp:Label ID="lbl_ServiceID" runat="server">1039</asp:Label></td>
                                         <td align="center" style="background-color: #f2f2f2;">
                                             <b>Service Name</b>
                                         </td>
                                         <td align="center">
-                                            <asp:Label ID="lbl_ServiceNameEn" runat="server" Style="text-transform: capitalize;"><b>نموذج إلغاء إجازة</b> </asp:Label>
-                                            <br />
-                                            <asp:Label ID="lbl_ServiceNameAr" runat="server" Style="font-size: 13px; font-weight: bold"> Cancellation Leave Form
-                                            </asp:Label>
+                                            
+                                            
+                                            <asp:Label ID="lbl_ServiceNameAr" runat="server" Style="font-size: 13px; font-weight: bold"> نموذج إخلاء طرف للموظفين
+                                            </asp:Label> <br />
+                                          <asp:Label ID="lbl_ServiceNameEn" runat="server" Style="text-transform: capitalize;"><b>Employee’s Leaving Clearance Form </b> </asp:Label>
                                         </td>
                                     </tr>
                                    
@@ -146,41 +145,42 @@
                                         </td>
                                         
                                     </tr>
-                                    
+                                        <tr>
+                                        <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
+                                            <b>Designation / المسمى الوظيفي</b></td>
+                                        <td align="center">
+                                            <asp:Label ID="Lbl_Position" runat="server" Text="Position"></asp:Label>
+                                        </td>
+                                        
+                                            <td align="center" style="background-color: #f2f2f2;">
+                                            <b>Department/ القسم</b>
+                                        </td>
+                                        <td align="center">
+                                            <asp:Label ID="lbl_Dept" runat="server" Text="Department"></asp:Label>
+                                        </td>
+                                        
+                                    </tr>
                                 </table>
                                     <hr />                         
                                 <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
-                                    <tr id="tdlanguage" runat="server">
-                                        <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
-                                            <b><span>Cancelled Leave Duration</span><span style="color: red">*</span></b></td>
-                                        <td align="center">
-                                            <asp:TextBox ID="LeaveDuration" runat="server" CssClass="form-control" Height="25px"></asp:TextBox>
-                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="LeaveDuration" Display="Dynamic" ValidationGroup="no" ErrorMessage="*Cancelled Leave Duration Required " ForeColor="Red"></asp:RequiredFieldValidator>
-                                        </td>
-                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
-                                            <b><span style="color: red">*</span><span dir="RTL" lang="AR-SA">فترة الإجازة الملغاة</span></b></td>
-                                    </tr>
-                                 
+                                   
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
-                                            <b><span>Date</span> <span style="color: red">*</span></b>
+                                            <b><span>Date</span><span style="color: red">*</span></b>
                                         </td>
                                         <td align="center">
-                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control" Height="25px" ClientIDMode="Static"></asp:TextBox>
-                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_Date" Display="Dynamic" ValidationGroup="no" ErrorMessage="*Date Required " ForeColor="Red"></asp:RequiredFieldValidator>
-
+                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control" Height="25px"  ClientIDMode="Static"></asp:TextBox>
                                         </td>
-                                        <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
+                                       <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span style="color: red">*</span><span dir="RTL" lang="AR-SA">التاريخ</span></b>
                                         </td>
-                                       
                                     </tr>
                                     
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
-                                            <b><span>Signature</span></b></td>
+                                            <b><span>Signature </span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Height="25px" Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
+                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Height="25px"></asp:TextBox>
                                         </td>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span dir="RTL" lang="AR-SA">التوقيع</span></b></td>
@@ -200,7 +200,7 @@
                                     </tr>--%>
                                 </table>
                <asp:HiddenField ID="UserEmail" runat="server" />
-                               <asp:HiddenField ID="Approvers" runat="server" />
+                                <asp:HiddenField ID="Approvers" runat="server" />
                               <asp:HiddenField ID="Approvals" runat="server" />
                                 <br />
                                 <asp:LinkButton ID="lnk_Generate" runat="server" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="lnk_Generate_Click"><i class="fa fa-send"> </i> Generate Request</asp:LinkButton>
