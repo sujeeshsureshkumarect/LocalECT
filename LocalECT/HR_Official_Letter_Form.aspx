@@ -141,7 +141,7 @@
                                         </td>
                                         
                                             <td align="center" style="background-color: #f2f2f2;">
-                                            <b>Employee Name</b> /<b><span dir="RTL" lang="AR-SA">الاسم</span><span dir="RTL"> </span></b>
+                                            <b>Employee Name</b> / <b><span dir="RTL" lang="AR-SA">الاسم</span><span dir="RTL"> </span></b>
                                         </td>
                                         <td align="center">
                                             <asp:Label ID="lbl_EmpName" runat="server" Text="Employee Name"></asp:Label>
@@ -218,7 +218,7 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span>Signature</span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Height="25px" Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
+                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
                                         </td>
                                           <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span dir="RTL" lang="AR-SA">التوقيع</span></b></td>
