@@ -177,7 +177,7 @@
                                 <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
                                     <tr id="tdlanguage" runat="server">
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style8">
-                                            <b>Leave Type</b></td>
+                                            <b>Leave Type<span style="color: red">*</span></b></td>
                                         <td align="center">
                                             <asp:RadioButtonList ID="LeaveType" runat="server"   >
                                                 <asp:ListItem> Annual Leave</asp:ListItem>
@@ -189,7 +189,7 @@
                                                 <asp:ListItem> Unpaid Leave (leave without pay is granted only in case the employee has fully utilized the annual leave entitlement)</asp:ListItem>
                                                 <asp:ListItem> Others (Please specify: </asp:ListItem>
                                             </asp:RadioButtonList>
-<asp:RequiredFieldValidator ID="LeaveTypeValidator1" runat="server" ErrorMessage="Please select leave type" Display="Dynamic" ForeColor="#CC3300" ValidationGroup="no" ControlToValidate="LeaveType"></asp:RequiredFieldValidator>
+<asp:RequiredFieldValidator ID="LeaveTypeValidator1" runat="server" ErrorMessage="*Please select leave type" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="LeaveType"></asp:RequiredFieldValidator>
                                         </td>
                                     
                                     </tr>
@@ -216,35 +216,35 @@
                                      <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style6">
-                                            <b>Leave Starts on</b></td>
+                                            <b>Leave Starts on<span style="color: red">*</span></b></td>
                                         <td align="center" class="auto-style7">
                                             <asp:TextBox ID="Leave_StartDate" runat="server" CssClass="form-control"   Placeholder="dd/mm/yyyy" ClientIDMode="Static"></asp:TextBox>
-                                          <asp:RequiredFieldValidator ID="Leave_StartDate_Validator" runat="server" ErrorMessage="Please select leave start date" Display="Dynamic" ForeColor="#CC3300" ValidationGroup="no" ControlToValidate="Leave_StartDate"></asp:RequiredFieldValidator>
+                                          <asp:RequiredFieldValidator ID="Leave_StartDate_Validator" runat="server" ErrorMessage="-Please select leave start date" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="Leave_StartDate"></asp:RequiredFieldValidator>
                                             </td>
                                         
                                             <td align="center" style="background-color: #f2f2f2;" class="auto-style7">
-                                                <b><span>Leave ends on</span></b> 
+                                                <b><span>Leave ends on<span style="color: red">*</span></span></b> 
                                         </td>
                                         <td align="center" class="auto-style7">
                                             <asp:TextBox ID="Leave_EndDate" runat="server" CssClass="form-control"   ClientIDMode="Static" Placeholder="dd/mm/yyyy" OnTextChanged="Leave_EndDate_TextChanged" AutoPostBack="true"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="Leave_EndDate_Validator" runat="server" ErrorMessage="Please select leave end date" Display="Dynamic" ForeColor="#CC3300" ValidationGroup="no" ControlToValidate="Leave_EndDate"></asp:RequiredFieldValidator>
+                                            <asp:RequiredFieldValidator ID="Leave_EndDate_Validator" runat="server" ErrorMessage="*Please select leave end date" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="Leave_EndDate"></asp:RequiredFieldValidator>
                                            </td>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style6"><b>No of Days</b></td>
                                         <td><asp:Label runat="server" ID="Total_Days" CssClass="form-control"  ></asp:Label></td>
                                     </tr>
                                      <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
-                                            <b><span>Contact address while on leave: </span></b></td>
+                                            <b><span>Contact address while on leave:<span style="color: red">*</span> </span></b></td>
                                         <td align="center">
                                             <asp:TextBox ID="ContactOnLeave" runat="server" TextMode="MultiLine" CssClass="form-control" Height="50px"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please  enter address while on leave" Display="Dynamic" ForeColor="#CC3300" ValidationGroup="no" ControlToValidate="ContactOnLeave"></asp:RequiredFieldValidator>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Please  enter address while on leave" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="ContactOnLeave"></asp:RequiredFieldValidator>
                                            </td>
                                         
                                             <td align="center" style="background-color: #f2f2f2;">
-                                                <b><span>Contact No.: </span></b>&nbsp;</td>
+                                                <b><span>Contact No.:<span style="color: red">*</span> </span></b>&nbsp;</td>
                                         <td align="center" colspan="3">
                                             <asp:TextBox ID="ContactNo" runat="server" CssClass="form-control" TextMode="Phone" placeholder="0505005500"></asp:TextBox>
-                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please  enter mobile no" Display="Dynamic" ForeColor="#CC3300" ValidationGroup="no" ControlToValidate="ContactNo"></asp:RequiredFieldValidator>
+                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Please  enter mobile no" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="ContactNo"></asp:RequiredFieldValidator>
 
                                             </td>
                                         
