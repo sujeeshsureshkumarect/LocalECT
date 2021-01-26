@@ -188,6 +188,8 @@ namespace LocalECT
         }
         public void approvalDetails()
         {
+            Approvers.Value = "";
+            Approvals.Value = "";
             SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
