@@ -154,7 +154,7 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span>Cancelled Leave Duration</span><span style="color: red">*</span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="LeaveDuration" runat="server" CssClass="form-control" Height="25px"></asp:TextBox>
+                                            <asp:TextBox ID="LeaveDuration" runat="server" CssClass="form-control"></asp:TextBox>
                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="LeaveDuration" Display="Dynamic" ValidationGroup="no" ErrorMessage="*Cancelled Leave Duration Required " ForeColor="Red"></asp:RequiredFieldValidator>
                                         </td>
                                          <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
@@ -166,7 +166,7 @@
                                             <b><span>Date</span> <span style="color: red">*</span></b>
                                         </td>
                                         <td align="center">
-                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control" Height="25px" ClientIDMode="Static"></asp:TextBox>
+                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control"  ClientIDMode="Static"></asp:TextBox>
                                           <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_Date" Display="Dynamic" ValidationGroup="no" ErrorMessage="*Date Required " ForeColor="Red"></asp:RequiredFieldValidator>
 
                                         </td>
@@ -180,7 +180,7 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span>Signature</span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Height="25px" Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
+                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control"  Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
                                         </td>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span dir="RTL" lang="AR-SA">التوقيع</span></b></td>

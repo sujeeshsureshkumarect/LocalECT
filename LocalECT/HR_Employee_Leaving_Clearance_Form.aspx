@@ -106,8 +106,7 @@
                                 </table>
 
                               
-                                <hr />
-                                <hr />
+                               
                                   <table style="width: 100%; border: 1px solid #e5e5e5" align="center" class="details">
                                     <tr>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
@@ -169,7 +168,7 @@
                                             <b><span>Date</span><span style="color: red">*</span></b>
                                         </td>
                                         <td align="center">
-                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control" Height="25px"  ClientIDMode="Static"></asp:TextBox>
+                                            <asp:TextBox ID="txt_Date" runat="server" CssClass="form-control"  ClientIDMode="Static"></asp:TextBox>
                                         </td>
                                        <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span style="color: red">*</span><span dir="RTL" lang="AR-SA">التاريخ</span></b>
@@ -180,7 +179,7 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span>Signature </span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Height="25px"></asp:TextBox>
+                                            <asp:TextBox ID="Signature" runat="server"  CssClass="form-control" Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
                                         </td>
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span dir="RTL" lang="AR-SA">التوقيع</span></b></td>
