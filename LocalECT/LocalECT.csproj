@@ -3952,6 +3952,8 @@
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="HR_Cancellation_Leave_Form.aspx" />
+    <Content Include="HR_Services.aspx" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\Cards.png" />
     <Content Include="images\ECT Logo.png" />
@@ -8483,6 +8485,20 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_Cancellation_Leave_Form.aspx.cs">
+      <DependentUpon>HR_Cancellation_Leave_Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Cancellation_Leave_Form.aspx.designer.cs">
+      <DependentUpon>HR_Cancellation_Leave_Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_Services.aspx.cs">
+      <DependentUpon>HR_Services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Services.aspx.designer.cs">
+      <DependentUpon>HR_Services.aspx</DependentUpon>
     </Compile>
     <Compile Include="LocalECT.Master.cs">
       <DependentUpon>LocalECT.Master</DependentUpon>
