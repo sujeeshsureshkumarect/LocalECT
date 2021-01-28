@@ -3614,6 +3614,21 @@ namespace LocalECT
 
             ddlAdvisor.SelectedValue = SetAdvisorAsWantedMajor(Convert.ToInt32(ddlWMajor1.SelectedValue)).ToString();
             ddlWMajor2.Focus();
+
+            string sCollege, sDegree, sMajor;
+
+            sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
+            sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
+            sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+            int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
+
+
+            //Set ESL plan depending on prefered major
+            if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
+            {
+                ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+            }
         }
         private int SetAdvisorAsWantedMajor(int iWantedMajor)
         {
@@ -3951,6 +3966,106 @@ namespace LocalECT
             return isIt;
 
         }
+        protected string Get_ESL_Plan(string sDegree, int iWMajor1)//New
+        {
+            string sMajorValue = "010201";
+
+            try
+            {
+                //0	Undecided
+                //2	Foundation Certificate
+                //11	Diploma in e-Commerce and Marketing
+                //10	Diploma in Computer Graphic Design & Animation
+                //3	Diploma in Business Administration and Computer Information Systems
+
+                //12	Diploma in Banking and Finance
+                //13	Diploma in Accounting
+                //8	Diploma in Human Resource Management
+
+
+                //18	Diploma in Mass Communication and Public Relations
+                //24	Diploma in Public Relations
+                //34	Bachelor of Mass communication major in Journalism
+                //35	Bachelor of Mass communication major in Public Relations and Advertising
+                //36	Bachelor of Mass communication major in Radio and Television
+
+                //31	Bachelor of Business Administration in Management
+                //32	Bachelor of Business Administration in Business Information Technology
+                //33	Bachelor of Business Administration in Human Resource Management
+                //37	Bachelor of Business Administration in Accounting
+                //38	Bachelor of Business Administration in Banking and Finance
+                //39	Bachelor of Business Administration in Islamic Banking and Finance
+                //40	Bachelor of Business Administration in Industrial Management
+
+                //41	Bachelor of Applied Health Sciences major in Health Information Management
+                //42	Bachelor of Science in Healthcare Management
+                //43	Bachelor of Science in Medical Diagnostic Imaging
+                //44	Bachelor of Science in Medical Laboratory Sciences
+
+                //45	Bachelor of Science in Civil Engineering
+                //46	Bachelor of Science in Mechanical Engineering
+                //47	Bachelor of Science in Industrial Engineering
+
+
+                switch (iWMajor1)
+                {
+                    case 3:
+                    case 12:
+                    case 13:
+                        //BACIS,ACC & BAF
+                        sMajorValue = "010210";
+                        break;
+                    case 8:
+                        //HRM
+                        sMajorValue = "010211";
+                        break;
+                    case 24:
+                    case 34:
+                    case 35:
+                    case 36:
+                        //Media
+                        sMajorValue = "010209";
+                        break;
+                    case 41:
+                        //HIM
+                        sMajorValue = "010207";
+                        break;
+                    case 42:
+                        //HCM
+                        sMajorValue = "010208";
+                        break;
+                    case 43:
+                    case 44:
+                        //MDI & MLS
+                        //   ddlMajor.SelectedValue = "010205";
+                        sMajorValue = "010205";
+                        break;
+                    case 45:
+                    case 46:
+                    case 47:
+                        //Engineering
+                        sMajorValue = "010206";
+                        break;
+                    default:
+                        //Other majors including business administration
+                        sMajorValue = "010201";
+                        break;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+
+            }
+            return sMajorValue;
+        }
         protected void SaveE_btn_Click(object sender, EventArgs e)
         {
             try
@@ -4042,8 +4157,19 @@ namespace LocalECT
                     sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
                     sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
                     sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+                    int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
 
                     bool isLegal = true;
+
+                    //Set ESL plan depending on prefered major
+                    if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
+                    {
+                        ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                        sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+
+                    }
+
+                    //========================================
 
                     if (sDegree == "2" && sMajor == "3")
                     {
@@ -4376,6 +4502,21 @@ namespace LocalECT
                     //    divMsg.InnerText = "Sorry you cannot update enrollment data";
                     //    return;
                     //}
+
+                    string sCollege, sDegree, sMajor;
+
+                    sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
+                    sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
+                    sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+                    int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
+
+                    //Set ESL plan depending on prefered major
+                    if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
+                    {
+                        ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                        sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+                        LibraryMOD.UpdateStudentMajor(Campus, lblStudentId.Text, sMajor);
+                    }
 
                     int iTerm, iGraduationYear, iGraduationSem;
                     iTerm = int.Parse(ddlStatusTerm.SelectedValue);

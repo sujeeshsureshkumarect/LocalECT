@@ -474,7 +474,7 @@ namespace LocalECT
                     {
                         return;
                     }
-                    CopyPreviousGrades(sOldID, sNewID, (sCDegree == "2" && sCMajor == "2"));
+                    CopyPreviousGrades(sOldID, sNewID, (sCDegree == "2" && (sCMajor == "2" || sCMajor == "3" || sCMajor == "4")));//Not Foundation
                     CalculateGrades(sNewID, CGPA);
                 }
                 else if (sCDegree == sNDegree && iStatus == 0)//Change Major in the same profile
@@ -493,7 +493,7 @@ namespace LocalECT
                 }
                 else if (sCDegree != sNDegree)//Upgrade
                 {
-                    if (sNDegree == "2" && (sNMajor == "1" || sNMajor == "5" || sNMajor == "6" || sNMajor == "7"))
+                    if (sNDegree == "2" && (sNMajor != "2" && sNMajor != "3" && sNMajor != "4"))//Not Foundation
                     {
                         SetStatus(sOldID, 31);//Convert to ESL
                     }
@@ -506,7 +506,7 @@ namespace LocalECT
                                 SetStatus(sOldID, 27);//Convert to Bachelor
                                 break;
                             case "2":
-                                if (sCMajor == "1" || sCMajor == "5" || sCMajor == "6" || sCMajor == "7")
+                                if (sCMajor != "2" && sCMajor != "3" && sCMajor != "4")//Not Foundation
                                 {
                                     SetStatus(sOldID, 29);//English Proficiency Passed
                                 }
@@ -523,7 +523,7 @@ namespace LocalECT
                     {
                         return;
                     }
-                    CopyPreviousGrades(sOldID, sNewID, (sCDegree == "2" && sCMajor == "2"));
+                    CopyPreviousGrades(sOldID, sNewID, (sCDegree == "2" && (sCMajor == "2" || sCMajor == "3" || sCMajor == "4")));//Not Foundation
                     CGPA = GetCGPA(sOldID);
                     CalculateGrades(sNewID, CGPA);
 
@@ -536,7 +536,7 @@ namespace LocalECT
                 }
 
                 //Create AL Grades
-                if (sCDegree != "2" || (sCDegree == "2" && sCMajor == "1"))//Not Foundation
+                if (sCDegree != "2" || (sCDegree == "2" && (sCMajor != "2" && sCMajor != "3" && sCMajor != "4")))//Not Foundation
                 {
                     Recreate_AL(sNewID, iRegYear, iRegSem);
                     if (sNDegree == "3" && sCDegree == "1")//Bachelor
@@ -1278,7 +1278,7 @@ namespace LocalECT
                         iStudentType = 0;//Diploma
                         break;
                     case "2":
-                        if (sNMajor == "1" || sNMajor == "5" || sNMajor == "6" || sNMajor == "7")//ESL
+                        if (sNMajor != "2" && sNMajor != "3" && sNMajor != "4")//ESL//Not Foundation
                         {
                             iStudentType = 5;
                         }
@@ -1337,7 +1337,7 @@ namespace LocalECT
                     sCreated = sNewId;
                 }
 
-                if ((sCDegree == "2" && sCMajor == "2") || iStatus == 20 || iStatus == 7)
+                if ((sCDegree == "2" && (sCMajor == "2") || (sCMajor == "3") || (sCMajor == "4")) || iStatus == 20 || iStatus == 7)//Not Foundation
                 {
                     int iNewStatus = 4;//Readmitted
                     if (sCDegree == "2" || iStatus == 20)
@@ -1460,7 +1460,7 @@ namespace LocalECT
                 //CGPA =double.Parse( "0"+ LibraryMOD.GetColValue(Conn, "CGPA", "GPA_Until", " lngStudentNumber='" + sID +"'"));
 
                 //Dont Cancel for ESL Re-Medial
-                bool dontcancel = ((sCDegree == "2" && sCMajor == "1") || (sNDegree == "2" && sNMajor == "1"));
+                bool dontcancel = ((sCDegree == "2" && ((sCMajor != "2") && (sCMajor != "3") && (sCMajor != "4"))) || (sNDegree == "2" && ((sNMajor != "2") && (sNMajor != "3") && (sNMajor != "4"))));//Not Foundation
                 if (CGPA < 2 && (dontcancel != true))
                 {
                     Cancel_Grades(sID, iRegYear, iRegSem);

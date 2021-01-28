@@ -38,7 +38,42 @@ public class LibraryMOD
             con.Close();
         return AffectedRows;
     }
+    public static bool UpdateStudentMajor(InitializeModule.EnumCampus Campus, string sID, string sMajor)
+    {
+        Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+        SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+        Conn.Open();
+        bool isChanged = false;
+        try
+        {
+            //Change the advisor
+            string sSQL = "UPDATE Reg_Applications set strSpecialization='" + sMajor + "'";
+            sSQL += " WHERE lngStudentNumber='" + sID + "'";
 
+
+
+            SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+            int iEffected = 0;
+
+
+
+            iEffected = Cmd.ExecuteNonQuery();
+            isChanged = (iEffected > 0);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("{0} Exception caught.", ex);
+
+
+
+        }
+        finally
+        {
+            Conn.Close();
+            Conn.Dispose();
+        }
+        return isChanged;
+    }
     public static int GetMaxID(SqlConnection con, string ColName, string TableName)
     {
         int functionReturnValue = 0;

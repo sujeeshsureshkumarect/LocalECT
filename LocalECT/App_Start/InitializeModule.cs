@@ -16,7 +16,7 @@ public class InitializeModule
     //String Constant 
     public const string MCam_serverName = "localect";
     public const string FCam_serverName = "sql_server";
-    public const string New_DB="ECTData_New";
+    public const string New_DB = "ECTData_New";
     public const string MCam_DB = "ECTData";
     public const string FCam_DB = "ECTData";
     public const string CxPwd = "Basic bG9jYWxlY3Q6RWN0QDIwMjA=";
@@ -88,19 +88,19 @@ public class InitializeModule
     }
 
     public enum EnumColleges : int
-    { 
-        Accounting=9,
-        ACF=22,
-        HIM=15,
-        BAF=8,
-        BA=3,
-        BIT_BACIS=2,
-        GDA=7,
-        Gen_Fnd=11,
-        HRM=5,
-        IM=4,
-        PR=13,
-        Engineering=24
+    {
+        Accounting = 9,
+        ACF = 22,
+        HIM = 15,
+        BAF = 8,
+        BA = 3,
+        BIT_BACIS = 2,
+        GDA = 7,
+        Gen_Fnd = 11,
+        HRM = 5,
+        IM = 4,
+        PR = 13,
+        Engineering = 24
 
 
     }
@@ -151,13 +151,13 @@ public class InitializeModule
         StudentFacultyEvaluation = 10,
         StudentsSatisfactionQuestionnaire = 11,
         FacultySatisfactionQuestionnaire = 12,
-        ClassVisitEvaluation=13,
-	    CourseLeaderEvaluation=14,
-	    ProgramCoordinatorEvaluation=15,
-        TeachingLearningEvaluatebyStudent=16,
-        StudentsSatisfactionQuestionnaireNew= 17,
+        ClassVisitEvaluation = 13,
+        CourseLeaderEvaluation = 14,
+        ProgramCoordinatorEvaluation = 15,
+        TeachingLearningEvaluatebyStudent = 16,
+        StudentsSatisfactionQuestionnaireNew = 17,
         EmployeeSatisfactionQuestionnaire_18_11_2011 = 18,
-        FacultySatisfactionQuestionnaire_18_11_2011 =19,
+        FacultySatisfactionQuestionnaire_18_11_2011 = 19,
         BAIndustrialManagement = 20
     }
     public enum enumQuestionType : int
@@ -184,7 +184,7 @@ public class InitializeModule
         Males = 1,
         Females = 2,
         ECTNew = 3,
-        ACMS=4
+        ACMS = 4
     }
     public enum EnumDegree : int
     {
@@ -205,7 +205,7 @@ public class InitializeModule
         //'ExtraDays_2Hours = 6
         //'ExtraDays_HalfDay = 7
     }
-   
+
     public enum EnumEmpGroup : int
     {
         Administrative = 1,
@@ -235,19 +235,19 @@ public class InitializeModule
         BaExtendedMReg = 5,
         ESLExtendedMReg = 6,
         DiplomaExtendedMReg = 7,
-        FndOMReg =8,
+        FndOMReg = 8,
         FndNMReg = 9,
         EslOMReg = 10,
         EslNMReg = 11,
-        
-        
+
+
         AllFReg = 12,
         OldFReg = 13,
         BaOldFReg = 14,
 
         NewFReg = 15,
         BaNewFReg = 16,
-        
+
         BaExtendedFReg = 17,
         ESLExtendedFReg = 18,
         DiplomaExtendedFReg = 19,
@@ -256,32 +256,32 @@ public class InitializeModule
         FndNFReg = 21,
         EslOFReg = 22,
         EslNFReg = 23,
-        
+
         //================Unregister Males & Females
         AllMNReg = 24,
         OldMNReg = 25,
         BaOldMNReg = 26,
-        
+
         NewMNReg = 27,
         BaNewMNReg = 28,
-        
+
         BaExtendedMNReg = 29,
-        ESLExtendedMnReg=30,
+        ESLExtendedMnReg = 30,
         DiplomaExtendedMnReg = 31,
 
         FndOMNReg = 32,
         FndNMNReg = 33,
         EslOMNReg = 34,
         EslNMNReg = 35,
-        
+
 
         AllFNReg = 36,
         OldFNReg = 37,
         BaOldFNReg = 38,
-        
+
         NewFNReg = 39,
         BaNewFNReg = 40,
-        
+
         DiplomaExtendedFnReg = 41,
         BaExtendedFNReg = 42,
         ESLExtendedFNReg = 43,
@@ -290,7 +290,7 @@ public class InitializeModule
         FndNFNReg = 45,
         EslOFNReg = 46,
         EslNFNReg = 47,
-       
+
         //===========registered Media Males & Females
         AllMediaMReg = 48,
         OldMediaMReg = 49,
@@ -298,7 +298,7 @@ public class InitializeModule
 
         NewMediaMReg = 51,
         BaMediaNewMReg = 52,
-        
+
         BaMediaExtendedMReg = 53,
         ESLMediaExtendedMReg = 54,
         DiplomaMediaExtendedMReg = 55,
@@ -308,13 +308,13 @@ public class InitializeModule
         EslMediaOMReg = 58,
         EslMediaNMReg = 59,
 
-        AllMediaFReg =60,
+        AllMediaFReg = 60,
         OldMediaFReg = 61,
         BaMediaOldFReg = 62,
 
         NewMediaFReg = 63,
         BaMediaNewFReg = 64,
-        
+
         BaMediaExtendedFReg = 65,
         ESLMediaExtendedFReg = 66,
         DiplomaMediaExtendedFReg = 67,
@@ -323,7 +323,7 @@ public class InitializeModule
         FndMediaNFReg = 69,
         EslMediaOFReg = 70,
         EslMediaNFReg = 71,
-       
+
         //================Unregister Media Males & Females
         AllMediaMNReg = 72,
         OldMediaMNReg = 73,
@@ -331,11 +331,11 @@ public class InitializeModule
 
         NewMediaMNReg = 75,
         BaMediaNewMNReg = 76,
-       
+
         BaMediaExtendedMNReg = 77,
         ESLMediaExtendedMNReg = 78,
         DiplomaMediaExtendedMNReg = 79,
- 
+
         FndMediaOMNReg = 80,
         FndMediaNMNReg = 81,
         EslMediaOMNReg = 82,
@@ -360,16 +360,16 @@ public class InitializeModule
         AllExtendedToBA = 97,
         //AllM_NotExtendedBA=,
         //AllF_NotExtendedBA=,
-        OldDiplomaRetention_LastYear=98,
-        OldDiplomaRetention_LastSem=99,
-        OldBARetention_LastYear=100,
-        OldBARetention_LastSem=101,
-        AllOldRetention_LastYear=102,
-        AllOldRetention_LastSem=103,
+        OldDiplomaRetention_LastYear = 98,
+        OldDiplomaRetention_LastSem = 99,
+        OldBARetention_LastYear = 100,
+        OldBARetention_LastSem = 101,
+        AllOldRetention_LastYear = 102,
+        AllOldRetention_LastSem = 103,
         AllOldUnregister_LastYear = 104,
         AllOldUnregister_LastSem = 105,
 
-        AllPostponed =106,
+        AllPostponed = 106,
         AllPostponed_LastYear = 107,
         AllPostponed_LastSem = 108,
 
@@ -377,7 +377,7 @@ public class InitializeModule
         AllPotentialNotExtendedBA_LastYear = 110,
         AllPotentialNotExtendedBA_LastSem = 111,
 
-        AllDiplomaGraduated_Last2Years=112,
+        AllDiplomaGraduated_Last2Years = 112,
         AllDiplomaGraduated_LastYear = 113,
         AllDiplomaGraduated_LastSem = 114,
 
@@ -442,118 +442,126 @@ public class InitializeModule
         ShowAllLecturer = 47,
         ShowUnitLecturer = 48,
         AllowGradesFromAnyPC = 49,
-        ChangeMajor=50,
-        AddQualification=51,
-        DeleteQualification=52,
-        UpdateStudentData=53,
-        CopyStudent=54,
-        ImportGrades=55,
-        ChangeID=56,
+        ChangeMajor = 50,
+        AddQualification = 51,
+        DeleteQualification = 52,
+        UpdateStudentData = 53,
+        CopyStudent = 54,
+        ImportGrades = 55,
+        ChangeID = 56,
         ShowAll = 57,
-        SeekGradesbyStudent=58,
-        SkipESLs=59,
+        SeekGradesbyStudent = 58,
+        SkipESLs = 59,
         //Statuses 
-        StatusWithdrawn	=	60	,
-        StatusTransferred	=	61	,
-        StatusGraduated	=	62	,
-        StatusReadmitted	=	63	,
-        StatusUnderProbation	=	64	,
-        StatusDismissedfromtheCollege	=	65	,
-        StatusDiscontinued	=	66	,
-        StatusSuspended	=	67	,
-        StatusAbsent	=	68	,
-        StatusInActive	=	69	,
-        StatusPostponed	=	70	,
-        StatusVisitingStudents	=	71	,
-        StatusCanceled	=	72	,
-        StatusTOEFLEnterRequired	=	73	,
-        StatusTOEFLExitRequired	=	74	,
-        StatusNoStatus	=	75	,
-        StatusNoContact	=	76	,
-        StatusNoAnswer	=	77	,
-        StatusIntendtoregister	=	78	,
-        StatusNeverRegistered	=	79	,
-        StatusFoundationCompelete	=	80	,
-        StatusExpectedtoGraduate	=	81	,
-        StatusDismissedfromtheProgram	=	82	,
-        StatusConverttoBachelor	=	83	,
-        StatusConverttoDiploma	=	84	,
+        StatusWithdrawn = 60,
+        StatusTransferred = 61,
+        StatusGraduated = 62,
+        StatusReadmitted = 63,
+        StatusUnderProbation = 64,
+        StatusDismissedfromtheCollege = 65,
+        StatusDiscontinued = 66,
+        StatusSuspended = 67,
+        StatusAbsent = 68,
+        StatusInActive = 69,
+        StatusPostponed = 70,
+        StatusVisitingStudents = 71,
+        StatusCanceled = 72,
+        StatusTOEFLEnterRequired = 73,
+        StatusTOEFLExitRequired = 74,
+        StatusNoStatus = 75,
+        StatusNoContact = 76,
+        StatusNoAnswer = 77,
+        StatusIntendtoregister = 78,
+        StatusNeverRegistered = 79,
+        StatusFoundationCompelete = 80,
+        StatusExpectedtoGraduate = 81,
+        StatusDismissedfromtheProgram = 82,
+        StatusConverttoBachelor = 83,
+        StatusConverttoDiploma = 84,
         //Reg Status
-        ShowRetention=85,
-        ShowUnRegisteredStudents=86,
-        ShowUnRegisteredNewStudents=87,
+        ShowRetention = 85,
+        ShowUnRegisteredStudents = 86,
+        ShowUnRegisteredNewStudents = 87,
         //---------------------
         EnglishCertificateScore = 88,
-        EnglishCertificateAdd=89,
-        EnglishCertificateEdit=90,
-        HSCertificateAdd=91,
-        HSCertificateEdit=92,
-        SkipMaxBorrowedBooks=93,
-        ShowAllMajors=94,
-        ShowReminderSuggested = 95, 
-        MakeAllPassed=96,
-        ChangeStudentName=97,
-        ChangePreferredMajor=149,
+        EnglishCertificateAdd = 89,
+        EnglishCertificateEdit = 90,
+        HSCertificateAdd = 91,
+        HSCertificateEdit = 92,
+        SkipMaxBorrowedBooks = 93,
+        ShowAllMajors = 94,
+        ShowReminderSuggested = 95,
+        MakeAllPassed = 96,
+        ChangeStudentName = 97,
+        ChangePreferredMajor = 149,
         ShowAdmissionVerification = 98,
         ShowRegistrarVerification = 99,
         AllowEditGradeAfterSubmitting = 100,
         ChangeGrade_F = 101,
-        ChangeGrade_EW_W=102,
+        ChangeGrade_EW_W = 102,
         ChangeGrade_I = 103,
-        ChangeGrade_NG=104,
-        TestimoniesPrinting=105,
-        ChangeOnlineStatus=106,
-        ACCManageStDiscounts=107,
-        ACCManageStFees=108,
-        ACCAddStPayment=109,
-        ACCManageStPayment=110,
-        ACCCancelStPayment=111,
-        ACCChequePaid=112,
-        ACCChequeReturned=113,
-        ACCChequeCanceled=114,
-        ACCChequeInsurance=115,
-        ACCCashPayment=116,
-        ACCCreditPayment=117,
-        ACCChequePayment=118,
-        SkipOutOfMajor=119,
-        ShowRetention_Extra=120,
-        ACCChangeCash=121,
-        ACCSkipPrinted=122,
-        Testimonies_Reg=123,
-        Testimonies_Final=124,
-        Testimonies_Training=125,
-        Testimonies_Admission=126,
-        Testimonies_Graduation=148,
-        Transcript_ShowSignature=127,
+        ChangeGrade_NG = 104,
+        TestimoniesPrinting = 105,
+        ChangeOnlineStatus = 106,
+        ACCManageStDiscounts = 107,
+        ACCManageStFees = 108,
+        ACCAddStPayment = 109,
+        ACCManageStPayment = 110,
+        ACCCancelStPayment = 111,
+        ACCChequePaid = 112,
+        ACCChequeReturned = 113,
+        ACCChequeCanceled = 114,
+        ACCChequeInsurance = 115,
+        ACCCashPayment = 116,
+        ACCCreditPayment = 117,
+        ACCChequePayment = 118,
+        SkipOutOfMajor = 119,
+        ShowRetention_Extra = 120,
+        ACCChangeCash = 121,
+        ACCSkipPrinted = 122,
+        Testimonies_Reg = 123,
+        Testimonies_Final = 124,
+        Testimonies_Training = 125,
+        Testimonies_Admission = 126,
+        Testimonies_Graduation = 148,
+        Transcript_ShowSignature = 127,
         AllowRepeatPassedCoursesNot_D = 128,
         AllowRepeatPassedCourses_D = 129,
-        SkipMaxMajorElective=130,
-        SkipMaxFreeElective=131,
-        ChangeAuditor=132,
-        ShowAllDepartments=133,
-        ShowDirectorVerification=134,
-        ShowCRMCalls=135,
-        ShowCRMWalkIn=136,
- 		ShowCRMSchoolVisit=137,
-        ShowCRMExhibition=138,
-		ShowCRMWebsite=139,
-        ImportSMSContactFromSearch=140,
-        ImportSMSContactFromCourse=141,
-        ImportSMSContactFromPSMS=142,
-        ImportSMSContactFromAttWarning=143,
-        ShowBalance=144,
-        ShowECTemail=145,
-        RunFullDistribution=146,
-        RunPartialDistribution=147,
-        ShowAllFaculties=150,
-        Skip99=151,
-        ChangePicture=152,
-        ShowStudentSurvey=153,
-        ShowFacultyStaffSurvey=154,
-        ShowAdminStaffSurvey=155,
-        UpdateCRMStatus=165,
-        UpdateCRMFullData=166,
-        UpdateCRMOpportunity=167
+        SkipMaxMajorElective = 130,
+        SkipMaxFreeElective = 131,
+        ChangeAuditor = 132,
+        ShowAllDepartments = 133,
+        ShowDirectorVerification = 134,
+        ShowCRMCalls = 135,
+        ShowCRMWalkIn = 136,
+        ShowCRMSchoolVisit = 137,
+        ShowCRMExhibition = 138,
+        ShowCRMWebsite = 139,
+        ImportSMSContactFromSearch = 140,
+        ImportSMSContactFromCourse = 141,
+        ImportSMSContactFromPSMS = 142,
+        ImportSMSContactFromAttWarning = 143,
+        ShowBalance = 144,
+        ShowECTemail = 145,
+        RunFullDistribution = 146,
+        RunPartialDistribution = 147,
+        ShowAllFaculties = 150,
+        Skip99 = 151,
+        ChangePicture = 152,
+        ShowStudentSurvey = 153,
+        ShowFacultyStaffSurvey = 154,
+        ShowAdminStaffSurvey = 155,
+        UpdateCRMStatus = 165,
+        UpdateCRMFullData = 166,
+        UpdateCRMOpportunity = 167,
+        ChangeAcceptanceType = 168,//new
+        ChangeCXID = 169,//new
+        ChangeFirstPaymentType = 170,//new
+        SetRegTerm = 171,//new
+        SetCurrentTerm = 172,//new
+        SetMarksTerm = 173,//new
+        CalculateFees = 174,//new
+        CalculateVAT = 175//new
     }
 
     public enum enumPrivilegeObjects : int
@@ -615,7 +623,7 @@ public class InitializeModule
         CRM_Tracking = 1156,
         CRM_Admission = 1157,
 
-        CRM_DailyCalls=1216,
+        CRM_DailyCalls = 1216,
         //***
         CRM_FirmSetup = 801,
         CRM_SystemConstant = 802,
@@ -626,7 +634,7 @@ public class InitializeModule
         CRM_CallsMonitor = 807,
 
 
-         //PA
+        //PA
         PA_NewAppraisal = 600,
         PA_EmployeeEvaluation = 601,
         PA_StudentCourseEvaluation = 602,
@@ -638,9 +646,9 @@ public class InitializeModule
         PA_GraduateEmployer = 608,
         PA_CoruseEvaluation = 609,
         PA_StudentEvaluation = 610,
-        PA_StudentsSatisfactionQuestionnaire=611,
+        PA_StudentsSatisfactionQuestionnaire = 611,
         PA_FacultySatisfactionQuestionnaire = 612,
-        PA_StudentInstructorMultiEvalSummery=613,
+        PA_StudentInstructorMultiEvalSummery = 613,
         PA_InstructorEvaluations = 620,
         PA_BAIndustrialManagement = 690,
 
@@ -701,7 +709,7 @@ public class InitializeModule
         ECT_Track_View = 1132,
         ECT_CGPAs = 1135,
         ECT_Status_Statistics = 1136,
-        ECT_Transcript=1141,
+        ECT_Transcript = 1141,
         ECT_Grades_Statistics = 1146,
         ECT_Grades_List = 1138,
         ECT_Completion = 1147,
@@ -711,67 +719,68 @@ public class InitializeModule
         ECT_Major_History = 1152,
         ECT_Programs_Advisors = 1158,
         ECT_Registration = 1159,
-        ECT_Avg_Courses=1160,
+        ECT_Avg_Courses = 1160,
         ECT_LecturerOfficeHours = 1161,
         ECT_StudentsBooks = 1163,
         ECT_MajorCourse = 1164,
-        ECT_AlternativeSetup=1165,
+        ECT_AlternativeSetup = 1165,
         ECT_StudentStauts = 1166,
-        ECT_ChangingStatus=1167,
+        ECT_ChangingStatus = 1167,
         ECT_Committee = 1168,
-        ECT_EngTestList=1183,
-        ECT_FinalExam=1184,
+        ECT_EngTestList = 1183,
+        ECT_FinalExam = 1184,
         ECT_FinalExamConflics = 1185,
-        ECT_FinalExamCoursesCounts =1186,
+        ECT_FinalExamCoursesCounts = 1186,
         ECT_MissingDocuments = 1187,
-        ECT_Printing_Request=1188,
-        ECT_Printing_Request_Download=1189,
-        ECT_DataAuditing=1190,
-        ECT_VerfiyTOEFL_HS=1191,
+        ECT_Printing_Request = 1188,
+        ECT_Printing_Request_Download = 1189,
+        ECT_DataAuditing = 1190,
+        ECT_VerfiyTOEFL_HS = 1191,
         ECT_GradesAudit = 1192,
-        ECT_GraduatesSetting=1193,
-        ECT_StudentCenter=1194,
-        ECT_Graduated_AMRICON=1195,
-        ECT_Security_Reports=1196,
+        ECT_GraduatesSetting = 1193,
+        ECT_StudentCenter = 1194,
+        ECT_Graduated_AMRICON = 1195,
+        ECT_Security_Reports = 1196,
         ECT_Roles_Permissions = 1197,
-        ECT_EnrolledStudents_Embassy=1203,
-        ECT_TOEFL_IELTS_Exams=1209,
+        ECT_EnrolledStudents_Embassy = 1203,
+        ECT_TOEFL_IELTS_Exams = 1209,
         ECT_SendEmail = 1211,
-        ECT_ProgramsTargets=1212,
-        ECT_AllStudentsAtRisk=1213,
-        ECT_AdvisingSetting=1217,
+        ECT_ProgramsTargets = 1212,
+        ECT_AllStudentsAtRisk = 1213,
+        ECT_AdvisingSetting = 1217,
         ECT_SMS_Request = 1218,
         ECT_SMS_Request_View = 1219,
-        ECT_Registration_Tracking=1220,
-        ECT_Cohort_Tracking=1224,
+        ECT_Registration_Tracking = 1220,
+        ECT_OfficialLetter = 1222,
+        ECT_Cohort_Tracking = 1224,
         ECT_Graduaes_Tracking = 1225,
-        ECT_Registered_Tracking=1226,
+        ECT_Registered_Tracking = 1226,
         ECT_PC_Daily_Checkup = 1227,
         ECT_PC_Check_Tracking = 1228,
         ECT_Applicants_Tracking = 1229,
-        ECT_Reg_Balance=1230,
+        ECT_Reg_Balance = 1230,
         ECT_Reg_Fees = 1231,
         ECT_Reg_Discount = 1232,
         ECT_Balance_Tracking = 1233,
         ECT_STD_Balance_Tracking = 1254,
-        ECT_ACC_Adjustments=1259,
-        ECT_PhonesExtensions=1234,
+        ECT_ACC_Adjustments = 1259,
+        ECT_PhonesExtensions = 1234,
         ECT_Daily_Receipt = 1235,
-        ECT_TransferBooks=1238,
-        ECT_MyTimeTable=1239,
-        ECT_ACMS=1240,
-        ECT_ActiveEmployees=1241,
-        ECT_AccessDoors=1242,
-        ECT_AccessDoorsCategories=1243,
+        ECT_TransferBooks = 1238,
+        ECT_MyTimeTable = 1239,
+        ECT_ACMS = 1240,
+        ECT_ActiveEmployees = 1241,
+        ECT_AccessDoors = 1242,
+        ECT_AccessDoorsCategories = 1243,
         ECT_CancelBooks = 1244,
-        ECT_ACMS_Transactions=1245,
+        ECT_ACMS_Transactions = 1245,
         ECT_ACMS_AttendanceReport = 1246,
         ECT_ACMS_Users = 1247,
         ECT_Surveys = 1248,
-        
+
         ECT_Faculty = 1250,
         ECT_Print_Transferred_Books = 1251,
-        ECT_DailyRegTracking=1252,
+        ECT_DailyRegTracking = 1252,
         //ECT Library
         Lib_Authers = 1093,
         Lib_Places = 1094,
@@ -793,7 +802,7 @@ public class InitializeModule
         Lib_RepBookClass = 1129,
         Lib_RepBookTrans = 1130,
         Lib_RepBookBorrowed = 1131,
-        
+
         Lib_Damaged_Books = 1249,
 
         Sto_BookStu = 1162,
@@ -801,16 +810,16 @@ public class InitializeModule
 
         ECT_StudentWarning = 1112,
         ECT_Current_TimeTable = 1113,
-        ECT_ACC_Search=1199,
-        
-        
+        ECT_ACC_Search = 1199,
+
+
         //ECT Security
         ECT_MapsManager = 1018,
         ECT_RolesManager = 1019,
         ECT_UsersSetup = 1020,
         ECT_ChangePassword = 1021,
         ECT_TimeSheetRpt = 1084,
-        ECT_SetInstructorPc=1200,
+        ECT_SetInstructorPc = 1200,
         ECT_PA_Transcript = 1202,
         ECT_PA_Registration = 1205,
         ECT_PA_Advising = 1206,
@@ -821,19 +830,18 @@ public class InitializeModule
         ECT_Access = 1242,
         ECT_Access_Categories = 1243,
 
-        //Setting
+            //Setting
         Setting_Setting = 1264,
-        Setting_SystemsManager=1265,
+        Setting_SystemsManager = 1265,
         Setting_PrivilegesManager = 1266,
         Setting_MapsManager = 1267,
         Setting_RolesManager = 1268,
         Setting_UsersSetup = 1269,
 
         //Procurment
-        Procurment_Procurment=1271,
+        Procurment_Procurment = 1271,
         Procurment_SupplierManager = 1272,
         Procurment_LPOManager = 1273
-
     }
 
     public enum enumEmployeeGroups : int
@@ -926,8 +934,8 @@ public class InitializeModule
         MainConcerned = 3000,
         CRMStatus = 3003,
         CRMReferences = 3004,
-        CRMStaff=3005,
-        CRMEntryType=3006,
+        CRMStaff = 3005,
+        CRMEntryType = 3006,
 
         TransferTo,
 
@@ -997,7 +1005,7 @@ public class InitializeModule
         ADEC = 5
 
     }
-     public enum enumHSSystem : int
+    public enum enumHSSystem : int
     {
         Other = 0,
         MOE = 1,
@@ -1005,40 +1013,40 @@ public class InitializeModule
         Australian = 3,
         Bangladeshi = 4,
         British = 5,
-        Canadian =6,
-        CBSE =7,
-        ENC =8,
-        French =9,
-        German =10,
-        Indian =11,
-        International_Baccalaureate =12,
-        Iranian =13,
-        Japanese =14,
-        Pakistani =15,
-        Philippines =16,
-        Russian =17,
-        SABIS =18,
-        Singapore =19
+        Canadian = 6,
+        CBSE = 7,
+        ENC = 8,
+        French = 9,
+        German = 10,
+        Indian = 11,
+        International_Baccalaureate = 12,
+        Iranian = 13,
+        Japanese = 14,
+        Pakistani = 15,
+        Philippines = 16,
+        Russian = 17,
+        SABIS = 18,
+        Singapore = 19
     }
     public enum enumHS_Major : int
     {
-        Generalsecondaryschool	=1	,
-	    Diploma	=2,
-	    Sience	=3,
-	    Literary=4,
-	    Accounting=7,
-	    Technical=8,
-	    Marketing=9,
-	    InformationTechnology=11,
-	    Commercial=14,
-	    Industrial=15,
-	    Agricultural=16,
-	    Other=12,
-	    HRM=13,
-	    AppliedTechnology=17,
-	    AdvanceStream=19,
-	    GeneralStream=20,
-	    ADECStream=21,
-	    Enjaz=18
+        Generalsecondaryschool = 1,
+        Diploma = 2,
+        Sience = 3,
+        Literary = 4,
+        Accounting = 7,
+        Technical = 8,
+        Marketing = 9,
+        InformationTechnology = 11,
+        Commercial = 14,
+        Industrial = 15,
+        Agricultural = 16,
+        Other = 12,
+        HRM = 13,
+        AppliedTechnology = 17,
+        AdvanceStream = 19,
+        GeneralStream = 20,
+        ADECStream = 21,
+        Enjaz = 18
     }
 }
