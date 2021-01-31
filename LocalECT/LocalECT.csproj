@@ -3953,10 +3953,13 @@
     <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="HR_Cancellation_Leave_Form.aspx" />
+    <Content Include="HR_Children_Education_Allowance_Claim_Form.aspx" />
     <Content Include="HR_Employee_Leaving_Clearance_Form.aspx" />
+    <Content Include="HR_Extra_Days_Hours_Form.aspx" />
     <Content Include="HR_Failure_to_Report_for_Work_on_Time.aspx" />
     <Content Include="HR_Failure_to_Report_for_Work_on_TimeAr.aspx" />
     <Content Include="HR_LeaveApplication.aspx" />
+    <Content Include="HR_Loan_Application.aspx" />
     <Content Include="HR_Official_Letter_Form.aspx" />
     <Content Include="HR_Resumption_to_Duty_Form.aspx" />
     <Content Include="HR_Services.aspx" />
@@ -8499,12 +8502,26 @@
     <Compile Include="HR_Cancellation_Leave_Form.aspx.designer.cs">
       <DependentUpon>HR_Cancellation_Leave_Form.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HR_Children_Education_Allowance_Claim_Form.aspx.cs">
+      <DependentUpon>HR_Children_Education_Allowance_Claim_Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Children_Education_Allowance_Claim_Form.aspx.designer.cs">
+      <DependentUpon>HR_Children_Education_Allowance_Claim_Form.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HR_Employee_Leaving_Clearance_Form.aspx.cs">
       <DependentUpon>HR_Employee_Leaving_Clearance_Form.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HR_Employee_Leaving_Clearance_Form.aspx.designer.cs">
       <DependentUpon>HR_Employee_Leaving_Clearance_Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_Extra_Days_Hours_Form.aspx.cs">
+      <DependentUpon>HR_Extra_Days_Hours_Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Extra_Days_Hours_Form.aspx.designer.cs">
+      <DependentUpon>HR_Extra_Days_Hours_Form.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR_Failure_to_Report_for_Work_on_Time.aspx.cs">
       <DependentUpon>HR_Failure_to_Report_for_Work_on_Time.aspx</DependentUpon>
@@ -8526,6 +8543,13 @@
     </Compile>
     <Compile Include="HR_LeaveApplication.aspx.designer.cs">
       <DependentUpon>HR_LeaveApplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HR_Loan_Application.aspx.cs">
+      <DependentUpon>HR_Loan_Application.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HR_Loan_Application.aspx.designer.cs">
+      <DependentUpon>HR_Loan_Application.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR_Official_Letter_Form.aspx.cs">
       <DependentUpon>HR_Official_Letter_Form.aspx</DependentUpon>
