@@ -6535,6 +6535,22 @@
     <Content Include="images\Students\Student.jpeg" />
     <Content Include="images\Students\Student.jpg" />
     <Content Include="Includes\jQuery\jquery-1.4.1.min.js" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\global.css" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-body.gif" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-body.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-bottom.gif" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-bottom.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-top.gif" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\bg-box-top.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\dialog-error.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\dialog-help.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\dialog-information.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\dialog-warning.png" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\index.html" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\jquery.easing.1.3.js" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.css" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.v1.2.jquery.js" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.v1.2.jquery.mini.js" />
     <Content Include="Login.aspx" />
     <Content Include="LocalECT.Master" />
     <Content Include="images\Icons\vssver2.scc" />
@@ -8064,6 +8080,9 @@
     <Content Include="images\Students\Males\Thumbs.db" />
     <Content Include="images\Students\Males\vssver2.scc" />
     <Content Include="images\Icons\Run_BW.psd" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\Thumbs.db" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\vssver2.scc" />
+    <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\vssver2.scc" />
     <None Include="LPOPrint.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -8170,6 +8189,7 @@
     <Content Include="Security_Roles.aspx" />
     <Content Include="Site.Master" />
     <Content Include="StudentSearch.aspx" />
+    <Content Include="Students_Advising.aspx" />
     <Content Include="Student_Profile.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="User_Setup.aspx" />
@@ -9867,6 +9887,13 @@
     </Compile>
     <Compile Include="StudentSearch.aspx.designer.cs">
       <DependentUpon>StudentSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Students_Advising.aspx.cs">
+      <DependentUpon>Students_Advising.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Students_Advising.aspx.designer.cs">
+      <DependentUpon>Students_Advising.aspx</DependentUpon>
     </Compile>
     <Compile Include="Student_Profile.aspx.cs">
       <DependentUpon>Student_Profile.aspx</DependentUpon>
