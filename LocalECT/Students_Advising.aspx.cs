@@ -791,6 +791,7 @@ namespace LocalECT
                 Tc.ColumnSpan = 4;
 
                 System.Web.UI.WebControls.Table GenCrsTable = new System.Web.UI.WebControls.Table();
+                //GenCrsTable.Width = Unit.Percentage(100);
                 GenCrsTable.CellPadding = 0;
                 GenCrsTable.CellSpacing = 0;
                 GenCrsTable.BorderWidth = 1;
@@ -828,7 +829,8 @@ namespace LocalECT
                 for (int i = 0; i < iMax; i++)
                 {
                     Crslbl = new Label();
-                    Crslbl.Width = 30;
+                    //Crslbl.Width = 30;
+                    Crslbl.Width = Unit.Percentage(100);
                     if (myMirror.Mirror[i].isRecommended)
                     {
                         Crslbl.BackColor = Color.OrangeRed;
@@ -863,6 +865,7 @@ namespace LocalECT
                 iCourses = myMirror.Mirror.Length;
 
                 System.Web.UI.WebControls.Table OtherCrsTable = new System.Web.UI.WebControls.Table();
+                //OtherCrsTable.Width = Unit.Percentage(100);
                 OtherCrsTable.CellPadding = 0;
                 OtherCrsTable.CellSpacing = 0;
                 OtherCrsTable.BorderWidth = 1;
@@ -894,7 +897,7 @@ namespace LocalECT
                 for (int i = iMax; i < iCourses; i++)
                 {
                     Crslbl = new Label();
-                    Crslbl.Width = 30;
+                    Crslbl.Width = Unit.Percentage(100);
                     if (myMirror.Mirror[i].isRecommended)
                     {
                         Crslbl.BackColor = Color.OrangeRed;

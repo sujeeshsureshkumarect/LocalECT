@@ -33,10 +33,10 @@
                                         display: block;
                                     }  
                                     
-                                  /* #ContentPlaceHolder1_tblDetail  th, td {
+                                   #ContentPlaceHolder1_tblDetail  th, td {
   padding-bottom: 7px;
   padding-top: 7px;
-}*/
+}
                                   caption {
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -75,7 +75,7 @@
     line-height: 2;
     font-size: small;
 }
-            TABLE {
+/*            TABLE {
     border-style: none;
     padding: 0px;
     margin: 0px;
@@ -84,8 +84,9 @@
     line-height: normal;
     letter-spacing: normal;
     text-align: left;
+    padding:5px;
 }
-
+*/
          .style9
          {
              height: 24px;
@@ -102,6 +103,31 @@
          {
              text-align: center;
          }
+         .R_NormalWhite {
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    font-family: Verdana;
+    background-color: #EFF3FB;
+    text-align: left;
+}
+         .R_NormalGray {
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    font-family: Verdana;
+    background-color: White;
+    text-align: left;
+}
+         /*table {
+    border: 1px solid #dee2e6;
+}*/
                                 </style>
                             </div>
                             <div class="clearfix"></div>
@@ -199,7 +225,7 @@
                             </tr>
                             <tr>                               
                                 <td align="center">
-                                    <hr />
+                                   <%-- <hr />--%>
                                     <h2>
                                         <asp:LinkButton ID="lngAdvisorComments" runat="server" Font-Size="Large"
                                             onclick="lngAdvisorComments_Click" ForeColor="Blue" Font-Underline="true"
@@ -225,10 +251,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                           <%-- <tr>
                                 <td>
                                     &nbsp;</td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td>
                                     <div ID="divCRS" runat="server" align="center" visible="false">
@@ -366,10 +392,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                           <%-- <tr>
                                 <td>
                                     &nbsp;</td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td>
                                     <asp:GridView ID="grdAdvisorsComments" runat="server" 
