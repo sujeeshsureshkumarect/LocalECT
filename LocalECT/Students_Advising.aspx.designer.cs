@@ -300,7 +300,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton Print_Adv_btn;
+        protected global::System.Web.UI.WebControls.LinkButton Print_Adv_btn;
 
         /// <summary>
         /// SaveCMD control.
@@ -309,7 +309,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton SaveCMD;
+        protected global::System.Web.UI.WebControls.LinkButton SaveCMD;
 
         /// <summary>
         /// grdAdvisorsComments control.
@@ -363,7 +363,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnHideGrades;
+        protected global::System.Web.UI.WebControls.LinkButton btnHideGrades;
 
         /// <summary>
         /// divNewGrades control.
@@ -453,7 +453,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnRefresh;
+        protected global::System.Web.UI.WebControls.LinkButton btnRefresh;
 
         /// <summary>
         /// btnToExcel control.
@@ -462,7 +462,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnToExcel;
+        protected global::System.Web.UI.WebControls.LinkButton btnToExcel;
 
         /// <summary>
         /// ButSave control.
@@ -471,7 +471,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ButSave;
+        protected global::System.Web.UI.WebControls.LinkButton ButSave;
 
         /// <summary>
         /// ButPrint control.
@@ -480,7 +480,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ButPrint;
+        protected global::System.Web.UI.WebControls.LinkButton ButPrint;
 
         /// <summary>
         /// lnkStudenttranscript0 control.
@@ -535,5 +535,50 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnDegree;
+
+        /// <summary>
+        /// div1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div1;
+
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+
+        /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
+
+        /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

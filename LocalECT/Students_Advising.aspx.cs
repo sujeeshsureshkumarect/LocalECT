@@ -2060,7 +2060,7 @@ namespace LocalECT
             }
 
         }
-        protected void btnRefresh_Click(object sender, ImageClickEventArgs e)
+        protected void btnRefresh_Click(object sender, EventArgs e)
         {
 
             initCGPAData();
@@ -2163,19 +2163,21 @@ namespace LocalECT
             }
         }
 
-        protected void btnHideGrades_Click(object sender, ImageClickEventArgs e)
+        protected void btnHideGrades_Click(object sender, EventArgs e)
         {
-            if (btnHideGrades.ImageUrl == "~/Images/Icons/Up.gif")
+            if (btnHideGrades.Text == "Hide old grades")
             {
                 divGrades.Visible = false;
-                btnHideGrades.ImageUrl = "~/Images/Icons/Down.gif";
+               // btnHideGrades.ImageUrl = "~/Images/Icons/Down.gif";
                 btnHideGrades.ToolTip = "Show old grades";
+                btnHideGrades.Text = "Show old grades";
             }
             else
             {
                 divGrades.Visible = true;
-                btnHideGrades.ImageUrl = "~/Images/Icons/Up.gif";
+                //btnHideGrades.ImageUrl = "~/Images/Icons/Up.gif";
                 btnHideGrades.ToolTip = "Hide old grades";
+                btnHideGrades.Text = "Hide old grades";
             }
         }
 
@@ -2673,12 +2675,12 @@ namespace LocalECT
                 myReport.Dispose();
             }
         }
-        protected void btnToExcel_Click(object sender, ImageClickEventArgs e)
+        protected void btnToExcel_Click(object sender, EventArgs e)
         {
             ExportCGPADemo();
         }
 
-        protected void ButPrint_Click(object sender, ImageClickEventArgs e)
+        protected void ButPrint_Click(object sender, EventArgs e)
         {
 
         }
@@ -2687,7 +2689,7 @@ namespace LocalECT
 
         }
 
-        protected void ButSave_Click(object sender, ImageClickEventArgs e)
+        protected void ButSave_Click(object sender, EventArgs e)
         {
 
             int iEffected = 0;
@@ -2874,7 +2876,7 @@ namespace LocalECT
                 else if (sCourse.Substring(0, 6) == "FELECT")//Free Elective (Out of major crs in the same level)
                 {
 
-                    sSQL = "SELECT intStudyYear, byteSemester, byteShift, strCourse, byteClass, byteCreditHours, strLecturerDescEn, dateTimeFrom, dateTimeTo, strDays, strHall, Max, Capacity,CourseDesc,IsArabicCourse";
+                    sSQL = "SELECT intStudyYear, byteSemester, byteShift, strCourse, byteClass, byteCreditHours, strLecturerDescEn, dateTimeFrom, dateTimeTo, strDays, strHall, Max, Capacity,(Max-Capacity) as Available ,CourseDesc,IsArabicCourse";
                     sSQL += " FROM (SELECT CT.intStudyYear, CT.byteSemester, CT.byteShift, CT.strCourse, CT.byteClass, C.byteCreditHours, L.strLecturerDescEn, CT.dateTimeFrom, CT.dateTimeTo,";
                     sSQL += " dbo.ExtractDays(COALESCE (CT.byteDay, 0)) AS strDays, CT.strHall, (CASE WHEN H.intMaxSeats < MaxCapacity THEN H.intMaxSeats ELSE MaxCapacity END) AS Max, COALESCE (CC.RegCapacity, 0) AS Capacity, C.strCourseDescEn AS CourseDesc,C.IsArabicCourse";
                     sSQL += " FROM Reg_CourseTime_Schedule AS CT INNER JOIN Reg_Courses AS C ON CT.strCourse = C.strCourse INNER JOIN Reg_Lecturers AS L ON CT.intLecturer = L.intLecturer INNER JOIN";
@@ -2910,13 +2912,13 @@ namespace LocalECT
 
                 //divMsg.InnerText = sID;
 
-                divCRS.Visible = true;
-                lngAdvisorComments.Visible = false;
-                divDetail.Visible = false;
-                divTools.Visible = divDetail.Visible;
+                //divCRS.Visible = true;
+                //lngAdvisorComments.Visible = false;
+                //divDetail.Visible = false;
+                //divTools.Visible = divDetail.Visible;
                 if (sCourse.Substring(0, 6) != "FELECT")
                 {
-                    sSQL = "SELECT intStudyYear, byteSemester, byteShift, strCourse, byteClass, byteCreditHours, strLecturerDescEn, dateTimeFrom, dateTimeTo, strDays, strHall, Max, Capacity,CourseDesc,IsArabicCourse";
+                    sSQL = "SELECT intStudyYear, byteSemester, byteShift, strCourse, byteClass, byteCreditHours, strLecturerDescEn, dateTimeFrom, dateTimeTo, strDays, strHall, Max, Capacity,(Max-Capacity) as Available ,CourseDesc,IsArabicCourse";
                     sSQL += " FROM (SELECT CT.intStudyYear, CT.byteSemester, CT.byteShift, CT.strCourse, CT.byteClass, C.byteCreditHours, L.strLecturerDescEn, CT.dateTimeFrom, CT.dateTimeTo,dbo.ExtractDays(COALESCE (CT.byteDay, 0)) AS strDays, CT.strHall,";
                     sSQL += " (CASE WHEN H.intMaxSeats < MaxCapacity THEN H.intMaxSeats ELSE MaxCapacity END) AS Max, COALESCE (CC.RegCapacity, 0) AS Capacity,C.strCourseDescEn AS CourseDesc,C.IsArabicCourse";
                     sSQL += " FROM Reg_CourseTime_Schedule AS CT INNER JOIN Reg_Courses AS C ON CT.strCourse = C.strCourse INNER JOIN Reg_Lecturers AS L ON CT.intLecturer = L.intLecturer INNER JOIN";
@@ -2928,21 +2930,26 @@ namespace LocalECT
                 }
 
                 Connection_StringCLS mycon = new Connection_StringCLS(Campus);
-                TmDS.ConnectionString = mycon.Conn_string;
-                TmDS.SelectCommand = sSQL;
+                SqlDataSource1.ConnectionString = mycon.Conn_string;
+                SqlDataSource1.SelectCommand = sSQL;
                 //TmDS.SelectParameters["iYear"].DefaultValue = iYear.ToString();
                 //TmDS.SelectParameters["bSem"].DefaultValue = iSem.ToString();
                 //TmDS.SelectParameters["sCourse"].DefaultValue = sCourse;
-                TmDS.DataBind();
-                lblCourse.Text = sCourse;
+                SqlDataSource1.DataBind();
+                Label3.Text = sCourse;
                 CoursesCls TheCourse = new CoursesCls();
-                lblCourseName.Text = TheCourse.GetCourseName(Campus, sCourse.Replace("'", ""));
+                Label4.Text = TheCourse.GetCourseName(Campus, sCourse.Replace("'", ""));
 
-                txtAdvisorName.Text = myList[0].Advisor;
+                //txtAdvisorName.Text = myList[0].Advisor;
                 //int iAdvisorID = 0;
                 //iAdvisorID = Convert.ToInt32("0" + Session["CurrentLecturer"].ToString());
 
-                txtStudentCGPA.Text = String.Format("{0:0.00}", myList[0].CGPA);
+                //txtStudentCGPA.Text = String.Format("{0:0.00}", myList[0].CGPA);
+                div1.InnerHtml = "";
+                string title = "";
+                string body = "Welcome to ASPSnippets.com";
+                ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + title + "', '" + body + "');", true);
+           
 
             }
             catch (Exception ex)
@@ -3010,6 +3017,146 @@ namespace LocalECT
 
             }
         }
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView drv = e.Row.DataItem as DataRowView;
+                //if (drv["Available"].ToString().Equals("26"))
+                if (Convert.ToInt32(drv["Available"]) <= 0)
+                {
+                    e.Row.BackColor = ColorTranslator.FromHtml("#ededed");                    
+                    e.Row.Enabled = false;
+                    e.Row.Cells[10].Text = "0";
+                    e.Row.Cells[0].Text = "";
+                }
+            }
+        }
+        protected void grdCrs_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            Connection_StringCLS MyConnection_string = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(MyConnection_string.Conn_string.ToString());
+            Conn.Open();
+            try
+            {
+                //intStudyYear,byteSemester,strCourse,byteClass,byteShift
+                int iSelectedIndex = GridView1.SelectedIndex;
+                int iYear = int.Parse(GridView1.DataKeys[iSelectedIndex].Values["intStudyYear"].ToString());
+                int iSem = int.Parse(GridView1.DataKeys[iSelectedIndex].Values["byteSemester"].ToString());
+                string sCourse = GridView1.DataKeys[iSelectedIndex].Values["strCourse"].ToString();
+                int iShift = int.Parse(GridView1.DataKeys[iSelectedIndex].Values["byteShift"].ToString());
+                int iClass = int.Parse(GridView1.DataKeys[iSelectedIndex].Values["byteClass"].ToString());
+
+                MirrorCLS myMirror = ((List<MirrorCLS>)Session["myList"])[0];
+                Plans myPlan = (Plans)Session["myPlan"];
+                RegValidation validation = new RegValidation(this.Campus, this.CurrentRole, myMirror, myPlan, sCourse, iYear, iSem, iShift, iClass);
+
+                string sSQL = "";
+
+                if (validation.validateAdvising(Page, iYear, iSem))
+                {
+                    sSQL = "SELECT strCourse AS Code, CourseDesc AS Course,";
+                    sSQL += " (CASE byteShift WHEN 1 THEN 'FM' WHEN 2 THEN 'FE' WHEN 3 THEN 'MM' WHEN 4 THEN 'ME' WHEN 8 THEN 'WEM' WHEN 9 THEN 'WEF' END) AS Session,";
+                    sSQL += " byteClass AS Class, strLecturerDescEn AS Lecturer, dateTimeFrom AS [From], dateTimeTo AS [To], strDays AS Days, strHall AS Hall";
+                    sSQL += " FROM (SELECT CT.intStudyYear, CT.byteSemester, CT.byteShift, CT.strCourse,C.strCourseDescEn AS CourseDesc, CT.byteClass, C.byteCreditHours, L.strLecturerDescEn, CT.dateTimeFrom, CT.dateTimeTo,";
+                    sSQL += " dbo.ExtractDays(COALESCE (CT.byteDay, 0)) AS strDays, CT.strHall,(CASE WHEN H.intMaxSeats < MaxCapacity THEN H.intMaxSeats ELSE MaxCapacity END) AS Max, COALESCE (CC.RegCapacity, 0) AS Capacity FROM Reg_CourseTime_Schedule as CT INNER JOIN Reg_Courses AS C ON CT.strCourse=C.strCourse INNER JOIN";
+                    sSQL += " Reg_Lecturers AS L ON CT.intLecturer = L.intLecturer INNER JOIN Reg_Available_Courses AS AV ON CT.intStudyYear = AV.intStudyYear AND CT.byteSemester = AV.byteSemester AND CT.strCourse = AV.strCourse AND";
+                    sSQL += " CT.byteClass = AV.byteClass AND CT.byteShift = AV.byteShift INNER JOIN Lkp_Halls AS H ON CT.strHall = H.strHall INNER JOIN";
+                    sSQL += " Lkp_Course_Classes AS CCL ON C.byteCourseClass = CCL.byteCourseClass LEFT OUTER JOIN ClassCapacity AS CC ON CT.intStudyYear = CC.iYear AND CT.byteSemester = CC.Sem AND CT.strCourse = CC.Course AND CT.byteClass = CC.Class AND";
+                    sSQL += " CT.byteShift = CC.Shift WHERE (CT.intStudyYear = " + iYear + ") AND (CT.byteSemester = " + iSem + ") AND (CT.strCourse = '" + sCourse + "') AND (CT.byteShift = " + iShift + ") AND (CT.byteClass = " + iClass + ")) AS TM";
+                    sSQL += " WHERE  (Max > Capacity) AND (byteClass < 100) ORDER BY [From]";
+
+
+                    //string sSql = "SELECT  TOP (100) PERCENT TM.strCourse AS Code";
+                    //sSql += " , TM.CourseDesc AS Course, TM.byteClass AS Class, TM.strLecturerDescEn AS Lecturer";
+                    //sSql += " , TM.Session, TM.dateTimeFrom AS [From]";
+                    //sSql += " , TM.dateTimeTo AS [To], TM.strDays AS Days, TM.strHall AS Hall, 'Males' AS Campus";
+                    //sSql += " FROM Localect.ECTData.dbo.TimeTable_Males AS TM INNER JOIN";
+                    //sSql += " Localect.ECTData.dbo.Course_Balance_View AS CV ON TM.intStudyYear = CV.iYear AND TM.byteSemester = CV.Sem ";
+                    //sSql += " AND TM.strCourse = CV.Course AND TM.byteClass = CV.Class AND TM.byteShift = CV.Shift";
+                    //sSql += " WHERE CV.iYear=" + iYear;
+                    //sSql += " AND CV.Sem=" + iSem;
+                    //sSql += " AND CV.Student='" + sSelectedValue.Value + "'";
+                    //sSql += " UNION";
+                    //sSql += " SELECT  TOP (100) PERCENT TM.strCourse AS Code, TM.CourseDesc AS Course";
+                    //sSql += " , TM.byteClass AS Class, TM.strLecturerDescEn AS Lecturer, TM.Session, TM.dateTimeFrom AS [From]";
+                    //sSql += " , TM.dateTimeTo AS [To], TM.strDays AS Days, TM.strHall AS Hall, 'Females' AS Campus";
+                    //sSql += " FROM Sql_Server.ECTData.dbo.TimeTable_Females AS TM INNER JOIN";
+                    //sSql += " Sql_Server.ECTData.dbo.Course_Balance_View AS CV ON TM.intStudyYear = CV.iYear ";
+                    //sSql += " AND TM.byteSemester = CV.Sem AND TM.strCourse = CV.Course AND TM.byteClass = CV.Class ";
+                    //sSql += " AND TM.byteShift = CV.Shift";
+                    //sSql += " WHERE CV.iYear=" + iYear;
+                    //sSql += " AND CV.Sem=" + iSem;
+                    //sSql += " AND CV.Student='" + sSelectedValue.Value + "'";
+
+                    //sSql += " ORDER BY Code, [From]";
+                    DataRow dr = null;
+
+                    if (Suggesteddt.Columns.Count == 0)
+                    {
+                        Initdt();
+                    }
+                    int iIndex = Suggesteddt.Rows.Count;
+
+                    SqlCommand cmd = new SqlCommand(sSQL, Conn);
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    txtComment.Text += " \n recommended to register: ";
+
+                    while (rd.Read())
+                    {
+                        iIndex += 1;
+                        dr = Suggesteddt.NewRow();
+                        dr["Index"] = iIndex;
+                        dr["Code"] = rd["Code"].ToString();
+                        dr["Course"] = rd["Course"].ToString();
+                        dr["Session"] = rd["Session"].ToString();
+                        dr["Class"] = rd["Class"].ToString();
+                        dr["Lecturer"] = rd["Lecturer"].ToString();
+                        dr["From"] = string.Format("{0:hh:mm tt}", rd["From"]);
+                        dr["To"] = string.Format("{0:hh:mm tt}", rd["To"]);
+                        dr["Days"] = rd["Days"].ToString();
+                        dr["Hall"] = rd["Hall"].ToString();
+                        dr["isReg"] = "No";
+                        dr["Campus"] = Campus.ToString();
+                        Suggesteddt.Rows.Add(dr);
+                        txtComment.Text += rd["Code"].ToString();
+                        txtComment.Text += "-" + rd["Course"].ToString() + ";";
+                    }
+                    rd.Close();
+                    grdSuggested.DataSource = Suggesteddt;
+                    grdSuggested.DataBind();
+
+                    //New
+                    //lbl_Msg.Text = "Course Added to the suggested list";
+                    div1.InnerHtml = "Course Added to the suggested list";
+                    string title = "";
+                    string body = "Welcome to ASPSnippets.com";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + title + "', '" + body + "');", true);
+                }
+                else
+                {
+                    //Crsimg_Click(null,null);
+                    //div1.InnerHtml = validation.ErrorMessage;
+                    div1.InnerHtml = validation.ErrorMessage;
+                    string title = "";
+                    string body = "Welcome to ASPSnippets.com";
+                    ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + title + "', '" + body + "');", true);
+                    //string sScript = "$(function(){ $('#divConfirmation').html('" + validation.ErrorMessage + "').css({'background-color':'#fff','border':'2px solid red', 'color':'red'}).slideToggle('slow'); });";
+                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "testScript2", sScript, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+            }
+            finally
+            {
+                Session["Suggesteddt"] = Suggesteddt;
+                Conn.Close();
+                Conn.Dispose();
+            }
+        }
+        
         protected void grdCrs_SelectedIndexChanged(object sender, EventArgs e)
         {
             Connection_StringCLS MyConnection_string = new Connection_StringCLS(Campus);
@@ -3594,7 +3741,7 @@ namespace LocalECT
                 myReport.Dispose();
             }
         }
-        protected void Print_Adv_btn_Click(object sender, ImageClickEventArgs e)
+        protected void Print_Adv_btn_Click(object sender, EventArgs e)
         {
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Advising,
                     InitializeModule.enumPrivilege.Print, CurrentRole) != true)
@@ -3608,7 +3755,7 @@ namespace LocalECT
         {
             fill_Registered();
         }
-        protected void SaveCMD_Click(object sender, ImageClickEventArgs e)
+        protected void SaveCMD_Click(object sender, EventArgs e)
         {
             if (txtComment.Text == "")
             {
@@ -3857,5 +4004,7 @@ namespace LocalECT
             }
             ExportAllAdvisorsComments();
         }
+
+       
     }
 }

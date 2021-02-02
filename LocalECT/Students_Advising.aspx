@@ -229,7 +229,7 @@
                                     <h2>
                                         <asp:LinkButton ID="lngAdvisorComments" runat="server" Font-Size="Large"
                                             onclick="lngAdvisorComments_Click" ForeColor="Blue" Font-Underline="true"
-                                            >Advisor Comments</asp:LinkButton>
+                                            >Advisor Comments/Suggested Courses</asp:LinkButton>
                                         &nbsp;&nbsp;|&nbsp;&nbsp;
                                         <asp:LinkButton ID="lnkStudenttranscript" runat="server" Font-Size="Large" 
                                             onclick="lnkStudenttranscript_Click" ForeColor="Blue" Font-Underline="true"
@@ -343,7 +343,7 @@
                                                 ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
                                         </asp:GridView>
                                         <br />
-                                        <asp:LinkButton ID="lngBack" runat="server" onclick="lngBack_Click" ForeColor="Blue" Font-Underline="true">Back to the Mirror</asp:LinkButton>
+                                        <asp:LinkButton ID="lngBack" runat="server" onclick="lngBack_Click" Font-Underline="true" CssClass="btn btn-success btn-sm"><i class="fa fa-reply"></i> Back to the Mirror</asp:LinkButton>
                                         <hr />
                                         <table class="style7">
                                             <tr>
@@ -372,23 +372,24 @@
                                         <br />
                                         <br />
                                         <asp:Label ID="Label1" runat="server" 
-                                            Text="Advisor Comment (Previous Semester Performance)"></asp:Label>
+                                            Text="Advisor Comment (Previous Semester Performance)" Font-Bold="true" Font-Underline="true"></asp:Label>
                                         <br />
                                         <asp:TextBox ID="txtComment" runat="server" Height="100px" TextMode="MultiLine" 
                                             Width="100%"></asp:TextBox>
                                         <br />
-                                        <asp:Label ID="Label2" runat="server" Text="Student feedback"></asp:Label>
+                                        <asp:Label ID="Label2" runat="server" Text="Student feedback" Font-Bold="true" Font-Underline="true"></asp:Label>
                                         <br />
                                         <asp:TextBox ID="txtStudentFeedback" runat="server" Height="58px" 
                                             TextMode="MultiLine" Width="100%"></asp:TextBox>
                                         <br />
-                                        <asp:ImageButton ID="Print_Adv_btn" runat="server" 
-                                            ImageUrl="~/Images/Icons/Print_BW.jpg" onclick="Print_Adv_btn_Click" 
-                                            ToolTip="Print Student Visit Record" />
-                                        <asp:ImageButton ID="SaveCMD" runat="server" ImageUrl="~/Images/Icons/Save.gif" 
+                                          <br />
+                                        <asp:LinkButton ID="Print_Adv_btn" runat="server" CssClass="btn btn-success btn-sm"
+                                            onclick="Print_Adv_btn_Click" 
+                                            ToolTip="Print Student Visit Record" ><i class="fa fa-print"></i> Print Student Visit Record</asp:LinkButton>
+                                        <asp:LinkButton ID="SaveCMD" runat="server" CssClass="btn btn-success btn-sm"
                                             onclick="SaveCMD_Click" 
-                                            Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                                            ToolTip="Save" />
+                                            
+                                            ToolTip="Save" ><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
                                     </div>
                                 </td>
                             </tr>
@@ -479,9 +480,9 @@
                              </tr>
                              <tr>
                                  <td align="center" colspan="2">
-                                     <asp:ImageButton ID="btnHideGrades" runat="server" Height="30px" 
-                                         ImageUrl="~/Images/Icons/Up.gif" onclick="btnHideGrades_Click" 
-                                         ToolTip="Hide old grades" Width="30px" />
+                                     <asp:LinkButton ID="btnHideGrades" runat="server" 
+                                          onclick="btnHideGrades_Click" 
+                                         ToolTip="Hide old grades"  CssClass="btn btn-success btn-sm" Text="Hide old grades"/>
                                  </td>
                              </tr>
                              <tr>
@@ -492,7 +493,7 @@
                              </tr>
                              <tr>
                                  <td align="center" colspan="2">
-                                     <asp:LinkButton ID="lngNewGrdae" runat="server" onclick="lngNewGrdae_Click">Add new grade</asp:LinkButton>
+                                     <asp:LinkButton ID="lngNewGrdae" runat="server" onclick="lngNewGrdae_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add new grade</asp:LinkButton>
                                  </td>
                              </tr>
                              <tr>
@@ -561,18 +562,16 @@
                              </tr>
                              <tr>
                                  <td align="center">
-                                     <asp:ImageButton ID="btnRefresh" runat="server" Height="30px" 
-                                         ImageUrl="~/Images/Icons/Refresh.jpg" onclick="btnRefresh_Click" 
-                                         ToolTip="Clear all changes" Width="30px" />
-                                     <asp:ImageButton ID="btnToExcel" runat="server" Height="30px" 
-                                         ImageUrl="~/Images/Icons/toExcel.gif" onclick="btnToExcel_Click" 
-                                         ToolTip="Export to excel" Width="30px" />
-                                     <asp:ImageButton ID="ButSave" runat="server" Height="35px" 
-                                         ImageUrl="~/Images/Icons/Save.gif"  
-                                         style="width: 43px" TabIndex="4" Width="30px" onclick="ButSave_Click" />
-                                     <asp:ImageButton ID="ButPrint" runat="server" 
-                                         ImageUrl="~/Images/Icons/Print_BW.jpg" onclick="ButPrint_Click" 
-                                         ToolTip="Click To preview" />
+                                     <asp:LinkButton ID="btnRefresh" runat="server"  
+                                          onclick="btnRefresh_Click" 
+                                         ToolTip="Clear all changes"  CssClass="btn btn-success btn-sm"><i class="fa fa-refresh"></i> Clear</asp:LinkButton>
+                                     <asp:LinkButton ID="btnToExcel" runat="server"  onclick="btnToExcel_Click" 
+                                         ToolTip="Export to excel"   CssClass="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i> Export</asp:LinkButton>
+                                     <asp:LinkButton ID="ButSave" runat="server" 
+                                          TabIndex="4"  onclick="ButSave_Click"  CssClass="btn btn-success btn-sm"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
+                                     <asp:LinkButton ID="ButPrint" runat="server" 
+                                          onclick="ButPrint_Click" 
+                                         ToolTip="Click To preview" CssClass="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</asp:LinkButton>
                                  </td>
                                  <td align="center">
                                      &nbsp;</td>
@@ -645,4 +644,88 @@
                             </div>
                         </div>
                     </div>
+
+    <!-- Modal Popup -->
+<div id="MyPopup" class="modal fade" role="dialog" style="width:100%">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <div ID="div1" runat="server">
+                                        </div>
+                <br />
+                  <asp:Label ID="Label3" runat="server" Font-Bold="True" ForeColor="Red" 
+                                             ></asp:Label>&nbsp;&nbsp;&nbsp;
+                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" ForeColor="Red" 
+                                            ></asp:Label>
+                                        <br />
+                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                                            
+                                            DataKeyNames="intStudyYear,byteSemester,strCourse,byteClass,byteShift" 
+                                            DataSourceID="SqlDataSource1" EmptyDataText="Course not available." 
+                                            onselectedindexchanged="grdCrs_SelectedIndexChanged1" PageSize="15" Width="100%" OnRowDataBound="GridView1_RowDataBound">
+                                            <Columns>
+                                                <asp:TemplateField ShowHeader="true" HeaderText="Suggest">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" 
+                                                            CommandArgument='<%# Eval("byteClass") %>' CommandName="Select" Text="Suggest" 
+                                                            ToolTip='<%# Bind("CourseDesc") %>' ForeColor="Blue" Font-Underline="true"></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="strCourse" HeaderText="Code" 
+                                                    SortExpression="strCourse" />
+                                                <asp:BoundField DataField="byteClass" HeaderText="Section" 
+                                                    SortExpression="byteClass" />
+                                                <asp:BoundField DataField="strLecturerDescEn" HeaderText="Lecturer" 
+                                                    SortExpression="strLecturerDescEn" />
+                                                <asp:BoundField DataField="dateTimeFrom" DataFormatString="{0:hh:mm tt}" 
+                                                    HeaderText="From" SortExpression="dateTimeFrom" />
+                                                <asp:BoundField DataField="dateTimeTo" DataFormatString="{0:hh:mm tt}" 
+                                                    HeaderText="To" SortExpression="dateTimeTo" />
+                                                <asp:BoundField DataField="strDays" HeaderText="Days" ReadOnly="True" 
+                                                    SortExpression="strDays" />
+                                                <asp:BoundField DataField="strHall" HeaderText="Hall" 
+                                                    SortExpression="strHall" />
+                                                <asp:BoundField DataField="Max" HeaderText="Max" SortExpression="Max" 
+                                                    Visible="False" />
+                                                <asp:BoundField DataField="Capacity" HeaderText="Capacity" ReadOnly="True" 
+                                                    SortExpression="Capacity" Visible="False" />
+                                                 <asp:BoundField DataField="Available" HeaderText="Available" ReadOnly="True" 
+                                                    SortExpression="Available" Visible="True" />
+                                            </Columns>
+                                            <EmptyDataRowStyle BackColor="#FF3300" Font-Bold="True" Font-Size="Medium" 
+                                                ForeColor="Black" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                        </asp:GridView>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                            ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>" 
+                                            
+                                            SelectCommand="SELECT intStudyYear, byteSemester, byteShift, strCourse, byteClass, byteCreditHours, strLecturerDescEn, dateTimeFrom, dateTimeTo, strDays, strHall, Max, Capacity,(Max-Capacity) as Available , CourseDesc FROM (SELECT CT.intStudyYear, CT.byteSemester, CT.byteShift, CT.strCourse, CT.byteClass, C.byteCreditHours, L.strLecturerDescEn, CT.dateTimeFrom, CT.dateTimeTo, dbo.ExtractDays(COALESCE (CT.byteDay, 0)) AS strDays, CT.strHall, (CASE WHEN H.intMaxSeats &lt; MaxCapacity THEN H.intMaxSeats ELSE MaxCapacity END) AS Max, COALESCE (CC.RegCapacity, 0) AS Capacity, C.strCourseDescEn AS CourseDesc FROM Reg_CourseTime_Schedule AS CT INNER JOIN Reg_Courses AS C ON CT.strCourse = C.strCourse INNER JOIN Reg_Lecturers AS L ON CT.intLecturer = L.intLecturer INNER JOIN Reg_Available_Courses AS AV ON CT.intStudyYear = AV.intStudyYear AND CT.byteSemester = AV.byteSemester AND CT.strCourse = AV.strCourse AND CT.byteClass = AV.byteClass AND CT.byteShift = AV.byteShift INNER JOIN Lkp_Halls AS H ON CT.strHall = H.strHall INNER JOIN Lkp_Course_Classes AS CCL ON C.byteCourseClass = CCL.byteCourseClass LEFT OUTER JOIN ClassCapacity AS CC ON CT.intStudyYear = CC.iYear AND CT.byteSemester = CC.Sem AND CT.strCourse = CC.Course AND CT.byteClass = CC.Class AND CT.byteShift = CC.Shift WHERE (CT.intStudyYear = @iYear) AND (CT.byteSemester = @bSem) AND (CT.strCourse IN (@sCourse))) AS TM WHERE (Max &gt; Capacity) AND (byteClass &lt; 100) ORDER BY strCourse, byteShift, byteClass, dateTimeFrom">
+                                            <SelectParameters>
+                                                <asp:Parameter DefaultValue="0" Name="iYear" />
+                                                <asp:Parameter DefaultValue="0" Name="bSem" />
+                                                <asp:Parameter DefaultValue="0" Name="sCourse" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+    function ShowPopup(title, body) {
+        $("#MyPopup .modal-title").html("Available Classes");
+        //$("#MyPopup .modal-body").html(body);
+        $("#MyPopup").modal("show");
+    }
+    </script>
     </asp:Content>
