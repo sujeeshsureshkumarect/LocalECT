@@ -125,6 +125,18 @@
     background-color: White;
     text-align: left;
 }
+         .R_Critical {
+    border-right: cornflowerblue thin solid;
+    border-top: cornflowerblue thin solid;
+    vertical-align: middle;
+    border-left: cornflowerblue thin solid;
+    color: #003333;
+    border-bottom: cornflowerblue thin solid;
+    font-family: Verdana;
+    background-color: #FF0000;
+    text-align: left;
+    font-weight: bold;
+}
          /*table {
     border: 1px solid #dee2e6;
 }*/
