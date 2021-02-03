@@ -206,12 +206,12 @@
                                     
                                     <div ID="divTools" runat="server" align="center">
                                         <div class="col-md-3">
-                                            <asp:DropDownList ID="Term_ddl" runat="server" CssClass="form-control" 
-                                                OnSelectedIndexChanged="Term_ddl_SelectedIndexChanged">
+                                            <asp:DropDownList ID="Term_ddl" runat="server" CssClass="form-control cesds" 
+                                                OnSelectedIndexChanged="Term_ddl_SelectedIndexChanged" Visible="true">
                                             </asp:DropDownList>
                                         </div>
                                          <div class="col-md-3">
-                                             <asp:DropDownList ID="Type_ddl" runat="server" CssClass="form-control"  >
+                                             <asp:DropDownList ID="Type_ddl" runat="server" CssClass="form-control cesds" Visible="true">
                                             <asp:ListItem Selected="True">For Registration</asp:ListItem>
                                             <asp:ListItem>For Add and Drop</asp:ListItem>
                                             <asp:ListItem>Empty Form</asp:ListItem>
@@ -227,7 +227,11 @@
                                                 ToolTip="Print" ><i class="fa fa-print"></i> Print</asp:LinkButton>
                                         </div>
                                         
-                                        
+                                        <style>
+                                            .cesds{
+                                                visibility:visible !important;
+                                            }
+                                        </style>
                                         
                                        
                                        

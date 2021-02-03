@@ -71,6 +71,7 @@ namespace LocalECT
 
             divCRS.Visible = false;
             divDetail.Visible = true;
+            divTools.Visible= divDetail.Visible;
             rbnView.SelectedIndex = 0;
             MultiView1.ActiveViewIndex = rbnView.SelectedIndex;
 
@@ -144,6 +145,7 @@ namespace LocalECT
 
             divCRS.Visible = false;
             divDetail.Visible = true;
+            divTools.Visible= divDetail.Visible;
             rbnView.SelectedIndex = 0;
             MultiView1.ActiveViewIndex = rbnView.SelectedIndex;
             lngAdvisorComments.Visible = true;
@@ -256,6 +258,7 @@ namespace LocalECT
                     Print_btn.Enabled = true;
                     divCRS.Visible = false;
                     divDetail.Visible = true;
+                    divTools.Visible= divDetail.Visible;
                     lngAdvisorComments.Visible = true;
                 }
                 Search1_ChangedEvent(null, null);
@@ -264,8 +267,8 @@ namespace LocalECT
 
             //Run_btn.Visible = divDetail.Visible;
             //Print_btn.Visible = divDetail.Visible;
-            //Term_ddl.Visible = divDetail.Visible;
-            //Type_ddl.Visible = divDetail.Visible;
+            Term_ddl.Visible = true;
+            Type_ddl.Visible = true;
         }
 
         private void FillTerms()
