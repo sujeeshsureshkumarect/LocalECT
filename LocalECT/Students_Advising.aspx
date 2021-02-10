@@ -149,6 +149,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-user"></i> Student Advising</h2>
                                             <ul class="nav navbar-right panel_toolbox">
+                                                <a href="StudentSearch.aspx" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Student Search</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
