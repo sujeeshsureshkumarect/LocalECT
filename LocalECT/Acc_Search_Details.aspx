@@ -311,7 +311,7 @@ td, th {
                                 runat="server" ForeColor="Red" Visible="False">0</asp:Label>
                         </td>
                     </tr>
-                    <tr style="display:none;">
+                    <tr style="display:none;"> 
                         <td align="right" width="50%" class="style10">
                             <asp:Label ID="lblArNameCaption" runat="server" Text="Arabic Name : " 
                                 Visible="False" Font-Bold="true"></asp:Label>
