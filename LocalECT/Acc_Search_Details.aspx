@@ -57,18 +57,18 @@ table {
 #studentbalance td,th{
     border:1px solid #dddddd;
 }
-/*#TimeTable td,th{
+#gpa td,th{
     border:1px solid #dddddd;
-}*/
+}
 td, th {
  /* border: 1px solid #dddddd;*/
  /* text-align: left;*/
  /* padding: 5px;*/
 }
 
-/*tr:nth-child(even) {
-  background-color: #dddddd;
-}*/
+#gpa tr:nth-child(even) {
+  background-color: #eff3fb;
+}
 </style>
             </div>
             <div class="clearfix"></div>
@@ -284,7 +284,7 @@ td, th {
                     </tr>
                     <tr>
                         <td align="right" width="50%" class="style10">
-                            <asp:Label ID="lblLTRCaption" runat="server" Text="LTR Both Side(F+M) : " 
+                            <asp:Label ID="lblLTRCaption" runat="server" Text="LTR Both Side (F+M) : " 
                                 Visible="False" Font-Bold="true"></asp:Label>
                         </td>
                         <td class="style10">
@@ -294,7 +294,7 @@ td, th {
                     <tr>
                         <td align="right" width="50%" class="style10">
                                                                        <asp:Label ID="lblOBalanceVATCaption" 
-                                runat="server" Text="Student Balance(Current Side):" Visible="False" Font-Bold="true"></asp:Label>
+                                runat="server" Text="Student Balance (Current Side):" Visible="False" Font-Bold="true"></asp:Label>
                         </td>
                         <td class="style10">
                                                                        <asp:Label ID="lblOBalanceCVAT" 
@@ -304,7 +304,7 @@ td, th {
                     <tr>
                         <td align="right" width="50%" class="style10">
                                                                        <asp:Label ID="lblOBalanceVATCaptionBTS" 
-                                runat="server" Text="Student Balance(Both Side(F+M)):" Visible="False" Font-Bold="true"></asp:Label>
+                                runat="server" Text="Student Balance (Both Side(F+M)):" Visible="False" Font-Bold="true"></asp:Label>
                         </td>
                         <td class="style10">
                                                                        <asp:Label ID="lblOBalanceVATBTS" 
@@ -1146,7 +1146,7 @@ td, th {
                                                                        </th>
                                                                    </tr>
                                                                    <tr>
-                                                                       <td align="left">
+                                                                       <td align="center">
                                                                            <asp:Label ID="lblMajorCaption10" runat="server" Text="Term" Font-Bold="true"></asp:Label>
                                                                        </td>
                                                                        <td align="center">
@@ -1169,7 +1169,7 @@ td, th {
                                                                        </td>
                                                                    </tr>
                                                                    <tr>
-                                                                       <td align="left">
+                                                                       <td align="center">
                                                                            <asp:Label ID="lblMajorCaption11" runat="server" Text="Overall" Font-Bold="true"></asp:Label>
                                                                        </td>
                                                                        <td align="center">

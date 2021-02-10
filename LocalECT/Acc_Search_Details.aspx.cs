@@ -281,7 +281,9 @@ namespace LocalECT
             if (string.IsNullOrEmpty(sSelectedText.Value))
             {
 
-                divMsg.InnerText = "Select Student Please ...";
+                //divMsg.InnerText = "Select Student Please ...";
+                lbl_Msg.Text = "Select Student Please ...";
+                div_msg.Visible = true;
                 return;
 
             }
@@ -308,7 +310,9 @@ namespace LocalECT
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                     {
-                        divMsg.InnerText = "Sorry you not allowed to add a student account.";
+                        //divMsg.InnerText = "Sorry you not allowed to add a student account.";
+                        lbl_Msg.Text = "Sorry you not allowed to add a student account.";
+                        div_msg.Visible = true;
                         return;
 
                     }
@@ -323,7 +327,9 @@ namespace LocalECT
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                     {
-                        divMsg.InnerText = "Sorry you not allowed to add a student account.";
+                        //divMsg.InnerText = "Sorry you not allowed to add a student account.";
+                        lbl_Msg.Text = "Sorry you not allowed to add a student account.";
+                        div_msg.Visible = true;
                         return;
 
                     }
@@ -363,7 +369,9 @@ namespace LocalECT
 
 
                 LibraryMOD.ShowErrorMessage(ex);
-                divMsg.InnerText = ex.Message;
+                //divMsg.InnerText = ex.Message;
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -825,7 +833,10 @@ namespace LocalECT
                     Cmd.ExecuteNonQuery();
                 }
 
-                divMsg.InnerText = "Data Updated Successfully";
+                //divMsg.InnerText = "Data Updated Successfully";
+                lbl_Msg.Text = "Data Updated Successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
             }
             catch (Exception exp)
             {
@@ -845,7 +856,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you not allowed to update a student account.";
+                //divMsg.InnerText = "Sorry you not allowed to update a student account.";
+                lbl_Msg.Text = "Sorry you not allowed to update a student account.";
+                div_msg.Visible = true;
                 return;
 
             }
@@ -1111,7 +1124,9 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -1132,7 +1147,9 @@ namespace LocalECT
             {
                 if (string.IsNullOrEmpty(sSelectedText.Value))
                 {
-                    divMsg.InnerText = "Select a student please or the students hasn't account yet.";
+                    //divMsg.InnerText = "Select a student please or the students hasn't account yet.";
+                    lbl_Msg.Text = "Select a student please or the students hasn't account yet.";
+                    div_msg.Visible = true;
                     return;
                 }
                 int iStatus = 0;
@@ -1141,8 +1158,9 @@ namespace LocalECT
                 {
                     iStatus = getOnlineStatus(sSelectedValue.Value);
                     ddlOnlineStatus.SelectedIndex = iStatus;
-                    divMsg.InnerText = "Sorry you cannot change online status for student";
-
+                    //divMsg.InnerText = "Sorry you cannot change online status for student";
+                    lbl_Msg.Text = "Sorry you cannot change online status for student";
+                    div_msg.Visible = true;
                     return;
                 }
 
@@ -1293,15 +1311,19 @@ namespace LocalECT
                 Cmd.CommandText = sSQL;
                 Cmd.ExecuteNonQuery();
 
-                divMsg.InnerText = "Online Status updated successfully";
-
+                //divMsg.InnerText = "Online Status updated successfully";
+                lbl_Msg.Text = "Online Status updated successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
 
 
             }
             catch (Exception exp)
             {
                 //Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = "Online Status not updated";
+                //divMsg.InnerText = "Online Status not updated";
+                lbl_Msg.Text = "Online Status not updated";
+                div_msg.Visible = true;
             }
             finally
             {
@@ -1492,7 +1514,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot manage st payment.";
+                //divMsg.InnerText = "Sorry you cannot manage st payment.";
+                lbl_Msg.Text = "Sorry you cannot manage st payment.";
+                div_msg.Visible = true;
                 return;
             }
             string sVoucher = grdPayment.SelectedDataKey["strVoucherNo"].ToString();
@@ -1510,7 +1534,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot manage st payment.";
+                //divMsg.InnerText = "Sorry you cannot manage st payment.";
+                lbl_Msg.Text = "Sorry you cannot manage st payment.";
+                div_msg.Visible = true;
                 return;
             }
             string sVoucher = lblVoucher.Text;
@@ -1527,7 +1553,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot add payment.";
+                //divMsg.InnerText = "Sorry you cannot add payment.";
+                lbl_Msg.Text = "Sorry you cannot add payment.";
+                div_msg.Visible = true;
                 return;
             }
             Empty_Payment_Controls(0);
@@ -1541,7 +1569,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot add payment.";
+                //divMsg.InnerText = "Sorry you cannot add payment.";
+                lbl_Msg.Text = "Sorry you cannot add payment.";
+                div_msg.Visible = true;
                 return;
             }
             Empty_Payment_Controls(GetNewEntry(lblVoucher.Text));
@@ -1678,14 +1708,18 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot update payment.";
+                //divMsg.InnerText = "Sorry you cannot update payment.";
+                lbl_Msg.Text = "Sorry you cannot update payment.";
+                div_msg.Visible = true;
                 return;
             }
             string sMsg = "Payment not saved !";
             bool isUpdated = false;
             if (hdnPaymentStatus.Value == "")
             {
-                divMsg.InnerText = "Select a payment or add new one please.";
+                //divMsg.InnerText = "Select a payment or add new one please.";
+                lbl_Msg.Text = "Select a payment or add new one please.";
+                div_msg.Visible = true;
                 return;
             }
             if (hdnPaymentStatus.Value == "0")//Update
@@ -1714,7 +1748,9 @@ namespace LocalECT
                     sMsg = "Payment added.";
                 }
             }
-            divMsg.InnerText = sMsg;
+            //divMsg.InnerText = sMsg;
+            lbl_Msg.Text = sMsg;
+            div_msg.Visible = true;
             grdPayment.DataBind();
             grdVD.DataBind();
         }
@@ -1734,7 +1770,9 @@ namespace LocalECT
                 {
                     case "0"://Entry
 
-                        divMsg.InnerText = "Sorry you cannot set status :Entry.";
+                        //divMsg.InnerText = "Sorry you cannot set status :Entry.";
+                        lbl_Msg.Text = "Sorry you cannot set status :Entry.";
+                        div_msg.Visible = true;
                         return false;
 
                         break;
@@ -1742,7 +1780,9 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCChequePaid, CurrentRole) != true)
                         {
-                            divMsg.InnerText = "Sorry you cannot set status :Paid.";
+                            //divMsg.InnerText = "Sorry you cannot set status :Paid.";
+                            lbl_Msg.Text = "Sorry you cannot set status :Paid.";
+                            div_msg.Visible = true;
                             return false;
                         }
                         break;
@@ -1750,7 +1790,9 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCChequeReturned, CurrentRole) != true)
                         {
-                            divMsg.InnerText = "Sorry you cannot set status :Returned.";
+                            //divMsg.InnerText = "Sorry you cannot set status :Returned.";
+                            lbl_Msg.Text = "Sorry you cannot set status :Returned.";
+                            div_msg.Visible = true;
                             return false;
                         }
                         break;
@@ -1758,7 +1800,9 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCChequeInsurance, CurrentRole) != true)
                         {
-                            divMsg.InnerText = "Sorry you cannot set status :Insurance.";
+                            //divMsg.InnerText = "Sorry you cannot set status :Insurance.";
+                            lbl_Msg.Text = "Sorry you cannot set status :Insurance.";
+                            div_msg.Visible = true;
                             return false;
                         }
                         break;
@@ -1766,7 +1810,9 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCChequeCanceled, CurrentRole) != true)
                         {
-                            divMsg.InnerText = "Sorry you cannot set status :Canceled.";
+                            //divMsg.InnerText = "Sorry you cannot set status :Canceled.";
+                            lbl_Msg.Text = "Sorry you cannot set status :Canceled.";
+                            div_msg.Visible = true;
                             return false;
                         }
                         break;
@@ -1862,7 +1908,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -1897,7 +1945,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -1928,7 +1978,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -1943,7 +1995,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCCancelStPayment, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot delete payment.";
+                //divMsg.InnerText = "Sorry you cannot delete payment.";
+                lbl_Msg.Text = "Sorry you cannot delete payment.";
+                div_msg.Visible = true;
                 return;
             }
 
@@ -1963,7 +2017,9 @@ namespace LocalECT
             {
                 sMsg = "Select payment please.";
             }
-            divMsg.InnerText = sMsg;
+            //divMsg.InnerText = sMsg;
+            lbl_Msg.Text = sMsg;
+            div_msg.Visible = true;
         }
         private bool UpdateVoucher(string sVoucher, bool isPrinted)
         {
@@ -1990,7 +2046,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2023,7 +2081,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2037,7 +2097,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                 InitializeModule.enumPrivilege.Print, CurrentRole) != true)
             {
-                divMsg.InnerText = InitializeModule.MsgPrintAuthorization;
+                //divMsg.InnerText = InitializeModule.MsgPrintAuthorization;
+                lbl_Msg.Text = InitializeModule.MsgPrintAuthorization;
+                div_msg.Visible = true;
                 return;
             }
 
@@ -2074,7 +2136,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCManageStFees, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot manage st fees.";
+                //divMsg.InnerText = "Sorry you cannot manage st fees.";
+                lbl_Msg.Text = "Sorry you cannot manage st fees.";
+                div_msg.Visible = true;
                 return;
             }
         }
@@ -2083,7 +2147,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ACCManageStDiscounts, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot manage st discount.";
+                //divMsg.InnerText = "Sorry you cannot manage st discount.";
+                lbl_Msg.Text = "Sorry you cannot manage st discount.";
+                div_msg.Visible = true;
                 return;
             }
         }
@@ -2102,7 +2168,9 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2258,7 +2326,9 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2327,7 +2397,9 @@ namespace LocalECT
                 {
                     bStatus = LibraryMOD.isFinanceProblems(Campus, sSelectedValue.Value);
                     ddlFinance.SelectedIndex = Convert.ToInt32(bStatus);
-                    divMsg.InnerText = "Sorry you cannot change online status for student";
+                    //divMsg.InnerText = "Sorry you cannot change online status for student";
+                    lbl_Msg.Text = "Sorry you cannot change online status for student";
+                    div_msg.Visible = true;
 
                     return;
                 }
@@ -2369,13 +2441,18 @@ namespace LocalECT
                 Cmd.CommandText = sSQL;
                 Cmd.ExecuteNonQuery();
 
-                divMsg.InnerText = "($) Has Finance updated successfully";
+                //divMsg.InnerText = "($) Has Finance updated successfully";
+                lbl_Msg.Text = "($) Has Finance updated successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
 
             }
             catch (Exception exp)
             {
                 //Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = "($) Has Finance not updated";
+                //divMsg.InnerText = "($) Has Finance not updated";
+                lbl_Msg.Text = "($) Has Finance not updated";
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2407,13 +2484,18 @@ namespace LocalECT
                 Cmd.CommandText = sSQL;
                 Cmd.ExecuteNonQuery();
 
-                divMsg.InnerText = "Is Acc Wanted? updated successfully";
+                //divMsg.InnerText = "Is Acc Wanted? updated successfully";
+                lbl_Msg.Text = "Is Acc Wanted? updated successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
 
             }
             catch (Exception exp)
             {
                 //Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = "Is Acc Wanted? not updated";
+                //divMsg.InnerText = "Is Acc Wanted? not updated";
+                lbl_Msg.Text = "Is Acc Wanted? not updated";
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2447,12 +2529,17 @@ namespace LocalECT
                 Cmd.CommandText = sSQL;
                 Cmd.ExecuteNonQuery();
                 ddlRegTerm.SelectedValue = ddlRegTerm1.SelectedValue;
-                divMsg.InnerText = "Reg Term updated successfully";
+                //divMsg.InnerText = "Reg Term updated successfully";
+                lbl_Msg.Text = "Reg Term updated successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
             }
             catch (Exception exp)
             {
                 //Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = "Reg Term not updated";
+                //divMsg.InnerText = "Reg Term not updated";
+                lbl_Msg.Text = "Reg Term not updated";
+                div_msg.Visible = true;
             }
             finally
             {
@@ -2468,7 +2555,9 @@ namespace LocalECT
             {
                 if (string.IsNullOrEmpty(sSelectedText.Value))
                 {
-                    divMsg.InnerText = "Select a student please or the students hasn't account yet.";
+                    //divMsg.InnerText = "Select a student please or the students hasn't account yet.";
+                    lbl_Msg.Text = "Select a student please or the students hasn't account yet.";
+                    div_msg.Visible = true;
                     return;
                 }
                 bool bStatus = false;
@@ -2477,7 +2566,9 @@ namespace LocalECT
                 {
                     bStatus = LibraryMOD.isACCWanted(sSelectedValue.Value, Campus);
                     ddlACCWanted.SelectedIndex = Convert.ToInt32(bStatus);
-                    divMsg.InnerText = "Sorry you cannot change online status for student";
+                    //divMsg.InnerText = "Sorry you cannot change online status for student";
+                    lbl_Msg.Text = "Sorry you cannot change online status for student";
+                    div_msg.Visible = true;
 
                     return;
                 }
@@ -2681,7 +2772,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                        InitializeModule.enumPrivilege.Print, CurrentRole) != true)
             {
-                divMsg.InnerText = "Sorry you cannot print quotations!";
+                //divMsg.InnerText = "Sorry you cannot print quotations!";
+                lbl_Msg.Text = "Sorry you cannot print quotations!";
+                div_msg.Visible = true;
                 return;
             }
 
@@ -2914,7 +3007,9 @@ namespace LocalECT
                 {
                     iTerm = int.Parse(ddlRegTerm.SelectedValue);
                     ddlRegTerm1.SelectedValue = ddlRegTerm.SelectedValue;
-                    divMsg.InnerText = "Sorry you cannot change reg term for student";
+                    //divMsg.InnerText = "Sorry you cannot change reg term for student";
+                    lbl_Msg.Text = "Sorry you cannot change reg term for student";
+                    div_msg.Visible = true;
 
                     return;
                 }
@@ -2949,7 +3044,9 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                             InitializeModule.enumPrivilege.ACCManageStPayment, CurrentRole) != true)
                 {
-                    divMsg.InnerText = "Sorry you cannot manage st cheques.";
+                    //divMsg.InnerText = "Sorry you cannot manage st cheques.";
+                    lbl_Msg.Text = "Sorry you cannot manage st cheques.";
+                    div_msg.Visible = true;
                     return;
                 }
                 int iTerm = Convert.ToInt32(grdCheques.SelectedDataKey["Term"].ToString());
@@ -3124,7 +3221,9 @@ namespace LocalECT
                 if (!isAllowed)
                 {
                     ddlFinanceCat.SelectedValue = iFinCat.ToString();
-                    divMsg.InnerText = "Sorry, You are not authorized to change (" + ddlFinanceCat.SelectedItem.Text + ") category";
+                    //divMsg.InnerText = "Sorry, You are not authorized to change (" + ddlFinanceCat.SelectedItem.Text + ") category";
+                    lbl_Msg.Text = "Sorry, You are not authorized to change (" + ddlFinanceCat.SelectedItem.Text + ") category";
+                    div_msg.Visible = true;
                 }
                 else
                 {
@@ -3133,7 +3232,9 @@ namespace LocalECT
                     int iEffected = LibraryMOD.UpdateFinanceCategory(sSelectedValue.Value, Convert.ToInt32(ddlFinanceCat.SelectedValue), sUser);
                     if (iEffected > 0)
                     {
-                        divMsg.InnerText = "Finance category updated to (" + ddlFinanceCat.SelectedItem.Text + ")";
+                        //divMsg.InnerText = "Finance category updated to (" + ddlFinanceCat.SelectedItem.Text + ")";
+                        lbl_Msg.Text = "Finance category updated to (" + ddlFinanceCat.SelectedItem.Text + ")";
+                        div_msg.Visible = true;
                     }
                 }
             }
