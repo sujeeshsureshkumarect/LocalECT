@@ -28,7 +28,18 @@
     font-weight:bold;
     text-align: center !important;
     caption-side: top !important;
-    color:#444444 !important;
+    /*color:#444444 !important;*/
+    font-weight: bold;
+    vertical-align: middle;
+    text-transform: capitalize;
+    /* border-left: white thin solid; */
+    color: #ECF0F1 !important;
+    /* border-bottom: white thin solid; */
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #3f658c;
+    text-align: center;
+    line-height: 2;
+    font-size: 13px;
 }
                     .page-title .title_left {
                         width: 100%;
@@ -535,7 +546,7 @@ td, th {
                                                                    ForeColor="#333333" GridLines="None" Width="100%">
                                                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                    <RowStyle BackColor="#EFF3FB" />
-                                                                   <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                   <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                        VerticalAlign="Middle" />
                                                                    <Columns>
                                                                        <asp:BoundField DataField="Session" HeaderText="Session" 
@@ -553,7 +564,7 @@ td, th {
                                                                        <asp:BoundField DataField="Hall" HeaderText="Hall" SortExpression="Hall" />
                                                                        <asp:BoundField DataField="strGrade" HeaderText="EW/W" />
                                                                    </Columns>
-                                                                   <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                   <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                    <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                        VerticalAlign="Middle" Wrap="True" />
@@ -578,7 +589,7 @@ td, th {
                                                                    onselectedindexchanged="grdFees_SelectedIndexChanged" Width="100%">
                                                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                    <RowStyle BackColor="#EFF3FB"  />
-                                                                   <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                   <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                        VerticalAlign="Middle" />
                                                                    <Columns>
                                                                        <asp:CommandField SelectText="Edit" ShowSelectButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
@@ -595,7 +606,7 @@ td, th {
                                                                        <asp:BoundField DataField="strRemark" HeaderText="Remark" 
                                                                            SortExpression="strRemark" />
                                                                    </Columns>
-                                                                   <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                   <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                    <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                        VerticalAlign="Middle" Wrap="True" />
@@ -631,9 +642,9 @@ td, th {
                                                                            Width="100%">
                                                                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                            <RowStyle BackColor="#EFF3FB"  />
-                                                                           <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                           <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                                VerticalAlign="Middle" />
-                                                                           <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" Font-Underline="true"/>
+                                                                           <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" Font-Underline="true"/>
                                                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                            <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                                VerticalAlign="Middle" Wrap="True" />
@@ -764,7 +775,7 @@ td, th {
                                                                            onselectedindexchanged="grdPayment_SelectedIndexChanged" Width="100%">
                                                                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                            <RowStyle BackColor="#EFF3FB"  />
-                                                                           <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                           <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                                VerticalAlign="Middle" />
                                                                            <Columns>
                                                                                <asp:CommandField SelectText="Edit" ShowSelectButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
@@ -781,7 +792,7 @@ td, th {
                                                                                <asp:BoundField DataField="strRemark" HeaderText="Remark" 
                                                                                    SortExpression="strRemark" />
                                                                            </Columns>
-                                                                           <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                           <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                            <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                                VerticalAlign="Middle" Wrap="True" />
@@ -835,7 +846,7 @@ td, th {
                                                                                        EmptyDataText="No Payments" ForeColor="#333333" GridLines="None" Width="100%">
                                                                                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                                        <RowStyle BackColor="#EFF3FB" />
-                                                                                       <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                                       <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                                            VerticalAlign="Middle" />
                                                                                        <Columns>
                                                                                            <asp:BoundField DataField="strVoucherNo" HeaderText="#" 
@@ -849,7 +860,7 @@ td, th {
                                                                                            <asp:BoundField DataField="lngStudentNumber" HeaderText="SID" 
                                                                                                SortExpression="lngStudentNumber" />
                                                                                        </Columns>
-                                                                                       <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                                       <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                                        <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                                            VerticalAlign="Middle" Wrap="True" />
@@ -881,7 +892,7 @@ td, th {
                                                                                        Width="100%">
                                                                                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                                        <RowStyle BackColor="#EFF3FB" />
-                                                                                       <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                                                       <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                                            VerticalAlign="Middle" />
                                                                                        <Columns>
                                                                                            <asp:CommandField SelectText="Edit" ShowSelectButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
@@ -902,7 +913,7 @@ td, th {
                                                                                            <asp:BoundField DataField="strBankEn" HeaderText="Bank" 
                                                                                                SortExpression="strBankEn" />
                                                                                        </Columns>
-                                                                                       <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                                                       <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                                        <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                                            VerticalAlign="Middle" Wrap="True" />
@@ -1431,7 +1442,7 @@ td, th {
                                                                Width="100%">
                                                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                <RowStyle BackColor="#EFF3FB"  />
-                                                               <EmptyDataRowStyle BackColor="#FFCC00" ForeColor="Red" HorizontalAlign="Center" 
+                                                               <EmptyDataRowStyle BackColor="#f7f7f7" ForeColor="Red" HorizontalAlign="Center" 
                                                                    VerticalAlign="Middle" />
                                                                <Columns>
                                                                    <asp:CommandField SelectText="Edit" ShowSelectButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
@@ -1446,7 +1457,7 @@ td, th {
                                                                    <asp:BoundField DataField="Active" HeaderText="Active" ReadOnly="True" 
                                                                        SortExpression="Active" />
                                                                </Columns>
-                                                               <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                               <PagerStyle BackColor="#ededed" ForeColor="#333333" HorizontalAlign="Center" />
                                                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                                                                <HeaderStyle Font-Bold="True" ForeColor="White" HorizontalAlign="Center" 
                                                                    VerticalAlign="Middle" Wrap="True" />
