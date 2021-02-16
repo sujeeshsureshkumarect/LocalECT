@@ -186,8 +186,86 @@ namespace LocalECT
             }
             //Console.ReadLine();
         }
+        //public void approvalDetails()
+        //{
+        //    Approvers.Value = "";
+        //    Approvals.Value = "";
+        //    SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    try
+        //    {
+        //        sc.Open();
+        //        da.Fill(dt);
+        //        sc.Close();
+
+        //        if (dt.Rows.Count > 0)
+        //        {
+
+
+        //            String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
+
+        //            if (IsFaculty == "Yes")
+        //            {
+        //                Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+        //                Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Approval,Finance and Admin Approval";
+        //            }
+        //            else
+        //            {
+        //                Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+        //                Approvals.Value = "Dept Head Approval,HR Approval,Finance and Admin Approval";
+        //            }
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sc.Close();
+        //        Console.WriteLine("{0} Exception caught.", ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        sc.Close();
+        //    }
+
+        //}
         public void approvalDetails()
         {
+            string hostdesc = "HR Representative Approval";
+            string hostmail = "hr@ect.ac.ae";
+
+            SqlCommand cmd1 = new SqlCommand("SELECT [Host] FROM [ECTDataNew].[dbo].[ECT_Services] where ServiceID=@ServiceID", sc);
+            cmd1.Parameters.AddWithValue("@ServiceID", lbl_ServiceID.Text);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            try
+            {
+                sc.Open();
+                da1.Fill(dt1);
+                sc.Close();
+
+                if (dt1.Rows.Count > 0)
+                {
+                    hostdesc = "HR Representative Approval";
+                    hostmail = dt1.Rows[0]["Host"].ToString();
+                }
+                else
+                {
+                    hostdesc = "HR Representative Approval";
+                    hostmail = "hr@ect.ac.ae";
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+
             Approvers.Value = "";
             Approvals.Value = "";
             SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
@@ -207,13 +285,13 @@ namespace LocalECT
 
                     if (IsFaculty == "Yes")
                     {
-                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
-                        Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Approval,Finance and Admin Approval";
+                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                        Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                     }
                     else
                     {
-                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
-                        Approvals.Value = "Dept Head Approval,HR Approval,Finance and Admin Approval";
+                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                        Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                     }
 
                 }

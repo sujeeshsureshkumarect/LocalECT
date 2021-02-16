@@ -10,7 +10,6 @@
                         <a href="#">&nbsp;Accounting /</a>
                         <a href="Acc_Search">&nbsp;Account Search /</a>
                         <a href="#">&nbsp;Details</a>
-
                     </h3>
                 </div>
                 <style>
