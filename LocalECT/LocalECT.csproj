@@ -8191,6 +8191,7 @@
     <Content Include="StudentSearch.aspx" />
     <Content Include="Students_Advising.aspx" />
     <Content Include="Student_Profile.aspx" />
+    <Content Include="Student_Report_Center.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="Transcript.aspx" />
     <Content Include="User_Setup.aspx" />
@@ -9902,6 +9903,13 @@
     </Compile>
     <Compile Include="Student_Profile.aspx.designer.cs">
       <DependentUpon>Student_Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Report_Center.aspx.cs">
+      <DependentUpon>Student_Report_Center.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_Report_Center.aspx.designer.cs">
+      <DependentUpon>Student_Report_Center.aspx</DependentUpon>
     </Compile>
     <Compile Include="Transcript.aspx.cs">
       <DependentUpon>Transcript.aspx</DependentUpon>
