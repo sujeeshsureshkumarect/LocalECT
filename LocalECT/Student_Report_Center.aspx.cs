@@ -182,10 +182,10 @@ namespace LocalECT
 
                         //Add Table Header
                         sb.Append("<thead>" + Environment.NewLine + "<tr class='headings'>" + Environment.NewLine + "");
-                        sb.Append("<th class='sorting_asc' tabindex='0' aria-controls='datatable' rowspan='1' colspan='1' aria-sort='ascending' aria-label='Name: activate to sort column descending'>#</th> " + Environment.NewLine + "");
+                        sb.Append("<th>#</th> " + Environment.NewLine + "");
                         foreach (DataColumn column in dt.Columns)
                         {
-                            sb.Append("<th class='sorting' tabindex='0' aria-controls='datatable' rowspan='1' colspan='1' aria-label='Salary: activate to sort column ascending'>" + column.ColumnName + "</th> "+Environment.NewLine+"");
+                            sb.Append("<th>" + column.ColumnName + "</th> "+Environment.NewLine+"");
                         }
                         sb.Append("</tr>" + Environment.NewLine + "</thead>" + Environment.NewLine + "");
 

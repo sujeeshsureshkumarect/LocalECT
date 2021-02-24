@@ -153,9 +153,50 @@
     padding-right: 25px;
     padding-top:14px;
                                 }
+                               thead input {
+        width: 100%;
+    }
                             </style>
+                            <script src="Scripts/jquery-3.4.1.min.js"></script>
+                      <%--      <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+                            <script src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
+                            <link href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css" rel="stylesheet" />--%>
+                           <script>
+                               $(document).ready(function () {
+                                   // Setup - add a text input to each footer cell
+                                   $('#datatable thead tr').clone().prependTo('#datatable thead');
+                                   $('#datatable thead tr:eq(0) th').each(function (i) {
+                                       var title = $(this).text();
 
-                           
+                                       $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
+                                       $('input', this).on('keyup change', function () {
+                                           if (table.column(i).search() !== this.value) {
+                                               table
+                                                   .column(i)
+                                                   .search(this.value)
+                                                   .draw();
+                                           }
+                                       });
+                                   });
+
+                                   var table;
+                                   if ($.fn.dataTable.isDataTable('#datatable')) {
+                                       table = $('#datatable').DataTable();
+                                   }
+                                   else {
+                                       table = $('#datatable').DataTable({
+                                           orderCellsTop: true,
+                                           fixedHeader: true
+                                       });
+                                   }
+
+                                   //var table = $('#datatable').DataTable({
+                                   //    orderCellsTop: true,
+                                   //    fixedHeader: true
+                                   //});
+                               });
+                           </script>
 
                         <div id="details">
                             <hr />
