@@ -79,8 +79,8 @@
                         </div>
                                     <asp:CheckBoxList id="chk_Fields" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CellPadding="5">
                                         <asp:ListItem Text="SID" Value="SD.SID"></asp:ListItem>
-                                        <asp:ListItem Text="NameEn" Value="SD.NameEn"></asp:ListItem>
-                                        <asp:ListItem Text="NameAr" Value="SD.NameAr"></asp:ListItem>
+                                        <asp:ListItem Text="Name(En)" Value="SD.NameEn"></asp:ListItem>
+                                        <asp:ListItem Text="Name(Ar)" Value="SD.NameAr"></asp:ListItem>
                                         <asp:ListItem Text="Gender" Value="SD.Gender"></asp:ListItem>
                                         <asp:ListItem Text="HRS" Value="RBS.HRS"></asp:ListItem>
                                         <asp:ListItem Text="MCRS" Value="RBS.MCRS"></asp:ListItem>
@@ -111,6 +111,7 @@
                                         <asp:ListItem Text="NGroup" Value="SD.NGroup"></asp:ListItem>
                                         <asp:ListItem Text="HSSection" Value="SD.HSSection"></asp:ListItem>
                                         <asp:ListItem Text="HSScore" Value="SD.HSScore"></asp:ListItem>
+                                        <asp:ListItem Text="EmSAT(Ar)" Value="SD.EmSAT_AR"></asp:ListItem>
                                         <asp:ListItem Text="ENG" Value="SD.ENG"></asp:ListItem>
                                         <asp:ListItem Text="ENGSource" Value="SD.ENGSource"></asp:ListItem>
                                         <asp:ListItem Text="ENGDate" Value="SD.ENGDate"></asp:ListItem>
@@ -157,11 +158,11 @@
         width: 100%;
     }
                             </style>
-                            <script src="Scripts/jquery-3.4.1.min.js"></script>
+                           <%-- <script src="Scripts/jquery-3.4.1.min.js"></script>--%>
                       <%--      <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
                             <script src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
                             <link href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css" rel="stylesheet" />--%>
-                           <script>
+            <%--               <script>
                                $(document).ready(function () {
                                    // Setup - add a text input to each footer cell
                                    $('#datatable thead tr').clone().prependTo('#datatable thead');
@@ -190,13 +191,8 @@
                                            fixedHeader: true
                                        });
                                    }
-
-                                   //var table = $('#datatable').DataTable({
-                                   //    orderCellsTop: true,
-                                   //    fixedHeader: true
-                                   //});
                                });
-                           </script>
+                           </script>--%>
 
                         <div id="details">
                             <hr />
@@ -214,8 +210,63 @@
                                         <div id="divResult" runat="server" class="table-responsive">
                                              <asp:Literal ID="DynamicTable" runat="server"></asp:Literal>
                                             </div>
+                                        
 
-                                    </div>
+                                        
+                                            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+                                            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchbuilder/1.0.1/css/searchBuilder.dataTables.min.css">
+                                            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css">
+
+                                        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+
+                                            <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>                                        
+                                            <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+                                            <script type="text/javascript" src="https://cdn.datatables.net/searchbuilder/1.0.1/js/dataTables.searchBuilder.min.js"></script>
+                                            <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
+
+                                        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                                        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+                                        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+
+                                            <script>
+                                                $.noConflict();  //Release the $ variable
+                                                jQuery(document).ready(function ($) {
+                                                    $('#example').DataTable({
+                                                        language: {
+                                                            searchBuilder: {                                                            
+                                                                title: {
+                                                                    0: 'Filters',
+                                                                    _: 'Filters (%d)'
+                                                                }
+                                                            }
+                                                        },
+                                                        dom: 'QBlfrtip',
+                                                        buttons: [
+                                                            'csv', 'excel', 'print'
+                                                        ]                                                        
+                                                    });
+                                                });
+    //$(document).ready(function () {
+    //    $('#example').DataTable({
+    //        dom: 'Qlfrtip',
+    //        searchBuilder: {
+    //            logic: 'OR'
+    //        }
+    //    });
+    //});
+                                            </script>
+                                        <style>
+                                            div.dtsb-searchBuilder button.dtsb-button{
+                                                font-size:12px !important;
+                                            }
+                                        </style>
+                                        
+                                        </div>
+
+                                    
                                 </div>
                             </div>
                         </div>                           

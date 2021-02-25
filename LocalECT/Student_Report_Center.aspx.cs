@@ -178,7 +178,7 @@ namespace LocalECT
                         //Results.DataBind();
 
                         StringBuilder sb = new StringBuilder();
-                        sb.Append("<table id='datatable' class='table table-striped table-bordered' style='width: 100%'>" + Environment.NewLine + "");
+                        sb.Append("<table id='example' class='table table-striped table-bordered' style='width: 100%'>" + Environment.NewLine + "");
 
                         //Add Table Header
                         sb.Append("<thead>" + Environment.NewLine + "<tr class='headings'>" + Environment.NewLine + "");

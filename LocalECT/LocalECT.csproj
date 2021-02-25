@@ -8193,6 +8193,7 @@
     <Content Include="Student_Profile.aspx" />
     <Content Include="Student_Report_Center.aspx" />
     <Content Include="StyleSheet.css" />
+    <Content Include="test.aspx" />
     <Content Include="Transcript.aspx" />
     <Content Include="User_Setup.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -9910,6 +9911,13 @@
     </Compile>
     <Compile Include="Student_Report_Center.aspx.designer.cs">
       <DependentUpon>Student_Report_Center.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Transcript.aspx.cs">
       <DependentUpon>Transcript.aspx</DependentUpon>
