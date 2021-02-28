@@ -1478,20 +1478,7 @@
                                                                                     CssClass="form-control"></asp:TextBox>
                                                                             </div>
                                                                         </div>
-                                                                           <div class="form-group row">
-                                                                            <label class="col-form-label col-md-4 col-sm-4">Type</label>
-                                                                            <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True"
-                                                                                    TabIndex="74" CssClass="form-control">
-                                                                                    <asp:ListItem Value="2">Foundation</asp:ListItem>
-                                                                                    <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
-                                                                                    <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
-                                                                                    <asp:ListItem Value="3">Bachelor</asp:ListItem>
-                                                                                    <asp:ListItem Value="1">Visiting</asp:ListItem>
-                                                                                    <asp:ListItem Value="4">Language Center</asp:ListItem>
-                                                                                </asp:DropDownList>
-                                                                            </div>
-                                                                        </div>
+                                                                       
                                                                          <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4" >ORCID</label>
                                                                             <div class="col-md-8 col-sm-8 ">
@@ -1601,6 +1588,20 @@
                                                                 </style>
                                                                 <div class="col-md-6 col-sm-6">
                                                                     <div class="x_panel">
+                                                                            <div class="form-group row">
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Type</label>
+                                                                            <div class="col-md-8 col-sm-8 ">
+                                                                                <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True"
+                                                                                    TabIndex="74" CssClass="form-control">
+                                                                                    <asp:ListItem Value="2">Foundation</asp:ListItem>
+                                                                                    <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
+                                                                                    <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
+                                                                                    <asp:ListItem Value="3">Bachelor</asp:ListItem>
+                                                                                    <asp:ListItem Value="1">Visiting</asp:ListItem>
+                                                                                    <asp:ListItem Value="4">Language Center</asp:ListItem>
+                                                                                </asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Current Major</label>
                                                                             <div class="col-md-8 col-sm-8 ">

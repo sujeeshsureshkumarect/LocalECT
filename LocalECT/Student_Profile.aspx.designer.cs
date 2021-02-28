@@ -1572,15 +1572,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox lblReference;
 
         /// <summary>
-        /// ddlType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlType;
-
-        /// <summary>
         /// txtORCID control.
         /// </summary>
         /// <remarks>
@@ -1678,6 +1669,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkCompleteMasterFromOtherInstitution;
+
+        /// <summary>
+        /// ddlType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlType;
 
         /// <summary>
         /// ddlMajor control.

@@ -677,25 +677,7 @@ namespace LocalECT
                 //    Cmd.ExecuteNonQuery();
                 //}
 
-                SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
-                cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
-                cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", txt_Value.Text.Trim());
-                cmd1.Parameters.AddWithValue("@strAccountNo", lblACC.Text);
-                try
-                {
-                    Conn.Open();
-                    cmd1.ExecuteNonQuery();
-                    Conn.Close();
-                }
-                catch(Exception ex)
-                {
-                    Conn.Close();
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    Conn.Close();
-                }
+               
 
                 //Update Opportunity-Pending Payment
 
@@ -717,7 +699,7 @@ namespace LocalECT
 
                             using (var httpClient = new HttpClient())
                             {
-                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
                                 {
                                     request.Headers.TryAddWithoutValidation("Authorization", accessToken);
                                     request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
@@ -729,10 +711,29 @@ namespace LocalECT
                                     var response = task.Result;
                                     string s = response.Content.ReadAsStringAsync().Result;
                                     //If Status 200
-                                    //if (response.IsSuccessStatusCode == true)
-                                    //{
-                                    //    SetOpportunity(sSID);
-                                    //}
+                                    if (response.IsSuccessStatusCode == true)
+                                    {
+                                        //SetOpportunity(sSID);
+                                        SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
+                                        cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
+                                        cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", txt_Value.Text.Trim());
+                                        cmd1.Parameters.AddWithValue("@strAccountNo", lblACC.Text);
+                                        try
+                                        {
+                                            Conn.Open();
+                                            cmd1.ExecuteNonQuery();
+                                            Conn.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Conn.Close();
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                        finally
+                                        {
+                                            Conn.Close();
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -751,7 +752,7 @@ namespace LocalECT
 
                             using (var httpClient = new HttpClient())
                             {
-                                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
                                 {
                                     request.Headers.TryAddWithoutValidation("Authorization", accessToken);
                                     request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
@@ -763,10 +764,29 @@ namespace LocalECT
                                     var response = task.Result;
                                     string s = response.Content.ReadAsStringAsync().Result;
                                     //If Status 200
-                                    //if (response.IsSuccessStatusCode == true)
-                                    //{
-                                    //    SetOpportunity(sSID);
-                                    //}
+                                    if (response.IsSuccessStatusCode == true)
+                                    {
+                                        //SetOpportunity(sSID);
+                                        SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
+                                        cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
+                                        cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", txt_Value.Text.Trim());
+                                        cmd1.Parameters.AddWithValue("@strAccountNo", lblACC.Text);
+                                        try
+                                        {
+                                            Conn.Open();
+                                            cmd1.ExecuteNonQuery();
+                                            Conn.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Conn.Close();
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                        finally
+                                        {
+                                            Conn.Close();
+                                        }
+                                    }
                                 }
                             }
                         }

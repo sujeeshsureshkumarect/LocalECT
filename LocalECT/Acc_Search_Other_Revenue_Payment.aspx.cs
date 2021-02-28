@@ -46,12 +46,12 @@ namespace LocalECT
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                     {
-                        Server.Transfer("Authorization.aspx");
+                       // Server.Transfer("Authorization.aspx");
                     }
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
                     {
-                        Server.Transfer("Authorization.aspx");
+                       // Server.Transfer("Authorization.aspx");
                     }
                     FillTerms();
                     FillBanks();
@@ -1451,6 +1451,36 @@ namespace LocalECT
                 Conn.Dispose();
             }
             return dt;
+        }
+
+        protected void ddlPaymentFor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Acc_Payment_For] where ORDER BY [strBankEn]", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                ddlBank.DataSource = dt;
+                ddlBank.DataTextField = "strBankEn";
+                ddlBank.DataValueField = "intBank";
+                ddlBank.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
         }
     }
 }

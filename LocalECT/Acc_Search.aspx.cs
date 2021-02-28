@@ -34,6 +34,12 @@ namespace LocalECT
                         Server.Transfer("Authorization.aspx");
                     }
                 }
+                if (Session["studenttable1"] != null)
+                {
+                    DataTable dt1 = (DataTable)Session["studenttable1"];
+                    RepterDetails.DataSource = dt1;
+                    RepterDetails.DataBind();
+                }
             }
             else
             {
@@ -94,6 +100,7 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
+                Session["studenttable1"] = dt;
                 RepterDetails.DataSource = dt;
                 RepterDetails.DataBind();
 

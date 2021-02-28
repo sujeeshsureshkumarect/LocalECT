@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CourseCalc.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="ECTSystems_Create.aspx" />
     <Content Include="ECTSystems_Home.aspx" />
@@ -3949,6 +3950,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="GradesDM.aspx" />
+    <Content Include="GradesEdit_Alt.aspx" />
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
@@ -8185,6 +8187,21 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Search1.ascx" />
+    <Content Include="SearchBuilder\buttons.dataTables.min.css" />
+    <Content Include="SearchBuilder\buttons.html5.min.js" />
+    <Content Include="SearchBuilder\buttons.print.min.js" />
+    <Content Include="SearchBuilder\dataTables.buttons.min.js" />
+    <Content Include="SearchBuilder\dataTables.dateTime.min.css" />
+    <Content Include="SearchBuilder\dataTables.dateTime.min.js" />
+    <Content Include="SearchBuilder\dataTables.searchBuilder.min.js" />
+    <Content Include="SearchBuilder\jquery-3.5.1.js" />
+    <Content Include="SearchBuilder\jquery.dataTables.min.css" />
+    <Content Include="SearchBuilder\jquery.dataTables.min.js" />
+    <Content Include="SearchBuilder\jszip.min.js" />
+    <Content Include="SearchBuilder\pdfmake.min.js" />
+    <Content Include="SearchBuilder\searchBuilder.dataTables.min.css" />
+    <Content Include="SearchBuilder\vfs_fonts.js" />
     <Content Include="Security_Objects.aspx" />
     <Content Include="Security_Roles.aspx" />
     <Content Include="Site.Master" />
@@ -8194,6 +8211,8 @@
     <Content Include="Student_Report_Center.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="test.aspx" />
+    <Content Include="Track_Classes.aspx" />
+    <Content Include="Track_Students.aspx" />
     <Content Include="Transcript.aspx" />
     <Content Include="User_Setup.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -8455,6 +8474,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CourseCalc.aspx.cs">
+      <DependentUpon>CourseCalc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CourseCalc.aspx.designer.cs">
+      <DependentUpon>CourseCalc.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -8493,6 +8519,13 @@
     </Compile>
     <Compile Include="GradesDM.aspx.designer.cs">
       <DependentUpon>GradesDM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GradesEdit_Alt.aspx.cs">
+      <DependentUpon>GradesEdit_Alt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GradesEdit_Alt.aspx.designer.cs">
+      <DependentUpon>GradesEdit_Alt.aspx</DependentUpon>
     </Compile>
     <Compile Include="GradesEntry.aspx.cs">
       <DependentUpon>GradesEntry.aspx</DependentUpon>
@@ -9856,6 +9889,13 @@
       <DependentUpon>WeeklyPcCheck.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Search1.ascx.cs">
+      <DependentUpon>Search1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search1.ascx.designer.cs">
+      <DependentUpon>Search1.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Security_Objects.aspx.cs">
       <DependentUpon>Security_Objects.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9918,6 +9958,20 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Track_Classes.aspx.cs">
+      <DependentUpon>Track_Classes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Track_Classes.aspx.designer.cs">
+      <DependentUpon>Track_Classes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Track_Students.aspx.cs">
+      <DependentUpon>Track_Students.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Track_Students.aspx.designer.cs">
+      <DependentUpon>Track_Students.aspx</DependentUpon>
     </Compile>
     <Compile Include="Transcript.aspx.cs">
       <DependentUpon>Transcript.aspx</DependentUpon>

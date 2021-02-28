@@ -236,7 +236,7 @@
                                                 jQuery(document).ready(function ($) {
                                                     $('#example').DataTable({
                                                         language: {
-                                                            searchBuilder: {                                                            
+                                                            searchBuilder: {
                                                                 title: {
                                                                     0: 'Filters',
                                                                     _: 'Filters (%d)'
@@ -246,7 +246,7 @@
                                                         dom: 'QBlfrtip',
                                                         buttons: [
                                                             'csv', 'excel', 'print'
-                                                        ]                                                        
+                                                        ]
                                                     });
                                                 });
     //$(document).ready(function () {

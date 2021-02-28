@@ -40,6 +40,13 @@ namespace LocalECT
                     {
                         lnk_add.Visible = true;
                     }
+
+                    if(Session["studenttable"]!=null)
+                    {
+                        DataTable dt1 = (DataTable)Session["studenttable"];
+                        RepterDetails.DataSource = dt1;
+                        RepterDetails.DataBind();
+                    }
                 }
             }
             else
@@ -116,6 +123,8 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
+
+                Session["studenttable"]= dt;
                 RepterDetails.DataSource = dt;
                 RepterDetails.DataBind();
 
