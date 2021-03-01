@@ -91,8 +91,8 @@ namespace LocalECT
                     string value = chk_Fields.Items[i].Value;
                     if (value == "condition1")
                     {
-                        value = "dbo.GetCHEDSSTTypeNew("+ selectedYear + ", "+ selectedSemester + ", SD.SID) AS STtype";
-                        //value = "(CASE WHEN ISNULL(LT.LTR, 0) = 0 THEN 'NEW' WHEN ISNULL(LT.LTR, 0) <> 0 AND (SD.RSTATUS = 3 OR SD.RSTATUS = 25) AND SD.Joined = " + selectedTerm + " THEN 'Extended' WHEN ISNULL(LT.LTR, 0) <> 0 AND SD.RSTATUS <> 0 AND SD.RSTATUS <> 3 AND SD.RSTATUS <> 25 AND SD.RSTATUS <> 29 AND SD.RSTATUS <> 20 AND SD.RSTATUS <> 27 AND SD.RSTATUS <> 28 AND SD.RSTATUS <> 31 AND SD.Joined = " + selectedTerm + " THEN 'Re-admitted' ELSE 'Continuing' END) AS STType";
+                        //value = "dbo.GetCHEDSSTTypeNew("+ selectedYear + ", "+ selectedSemester + ", SD.SID) AS STtype";
+                        value = "(CASE WHEN ISNULL(LT.LTR, 0) = 0 THEN 'NEW' WHEN ISNULL(LT.LTR, 0) <> 0 AND (SD.RSTATUS = 3 OR SD.RSTATUS = 25) AND SD.Joined = " + selectedTerm + " THEN 'Extended' WHEN ISNULL(LT.LTR, 0) <> 0 AND SD.RSTATUS <> 0 AND SD.RSTATUS <> 3 AND SD.RSTATUS <> 25 AND SD.RSTATUS <> 29 AND SD.RSTATUS <> 20 AND SD.RSTATUS <> 27 AND SD.RSTATUS <> 28 AND SD.RSTATUS <> 31 AND SD.Joined = " + selectedTerm + " THEN 'Re-admitted' ELSE 'Continuing' END) AS STType";
                     }
                     if (value == "condition2")
                     {
@@ -106,7 +106,7 @@ namespace LocalECT
             if(selectcount>10)
             {
                 //You exceeds the maximum limit of allowed selection.
-                lbl_Msg.Text = "You exceeds the maximum limit (10) of allowed selection.";
+                lbl_Msg.Text = "You exceeds the maximum limit (10) of allowed selections.";
                 div_msg.Visible = true;
                 DynamicTable.Text = "";
             }
@@ -125,42 +125,47 @@ namespace LocalECT
                 }                
 
                 string remainquery = "SELECT " + selectquery + " ";
-                remainquery += "FROM RDateBothSide AS RDBS RIGHT OUTER JOIN ";
-                remainquery += "(SELECT TOP (100) PERCENT SDT.iUnifiedID, MIN(DISTINCT CB.iYear * 10 + CB.Sem) AS FTR ";
-                remainquery += "FROM Course_Balance_View AS CB INNER JOIN ";
+                remainquery += "FROM (SELECT     TOP (100) PERCENT SDT.iUnifiedID, MIN(DISTINCT CB.iYear * 10 + CB.Sem) AS FTR ";
+                remainquery += "FROM          Course_Balance_View AS CB INNER JOIN ";
                 remainquery += "Reg_Applications AS A ON CB.Student = A.lngStudentNumber INNER JOIN ";
                 remainquery += "Reg_Students_Data AS SDT ON A.lngSerial = SDT.lngSerial ";
                 remainquery += "GROUP BY SDT.iUnifiedID ";
-                remainquery += "HAVING(SDT.iUnifiedID <> 0)) AS FT RIGHT OUTER JOIN ";
-                remainquery += "(SELECT iYear, Sem, Student, MCRS, FCRS, MHRS + FHRS AS HRS ";
-                remainquery += "FROM Reg_Both_Side ";
-                remainquery += "WHERE(iYear = " + selectedYear + ") AND(Sem = " + selectedSemester + ")) AS RBS INNER JOIN ";
+                remainquery += "HAVING      (SDT.iUnifiedID <> 0)) AS FT RIGHT OUTER JOIN ";
+                remainquery += "(SELECT     iYear, Sem, Student, MCRS, FCRS, MHRS + FHRS AS HRS ";
+                remainquery += "FROM          Reg_Both_Side ";
+                remainquery += "WHERE(iYear = " + selectedYear + ") AND(Sem = " + selectedSemester + ")) AS RBS INNER JOIN  ";
                 remainquery += "ECT_Student_Data AS SD ON RBS.Student = SD.SID ON FT.iUnifiedID = SD.UID LEFT OUTER JOIN ";
-                remainquery += "(SELECT GH.lngStudentNumber, COUNT(GH.strCourse) AS TC ";
-                remainquery += "FROM Reg_Grade_Header AS GH INNER JOIN ";
+                remainquery += "(SELECT     GH.lngStudentNumber, COUNT(GH.strCourse) AS TC ";
+                remainquery += "FROM          Reg_Grade_Header AS GH INNER JOIN ";
                 remainquery += "Lkp_Foreign_Colleges AS FC ON GH.byteRefCollege = FC.byteCollege ";
-                remainquery += "WHERE(GH.strGrade = N'TC') AND(FC.isAnotherCollege = 1) ";
+                remainquery += "WHERE      (GH.strGrade = N'TC') AND (FC.isAnotherCollege = 1) ";
                 remainquery += "GROUP BY GH.lngStudentNumber) AS TR ON SD.SID = TR.lngStudentNumber LEFT OUTER JOIN ";
-                remainquery += "(SELECT TOP(100) PERCENT SDT.iUnifiedID, MAX(DISTINCT CB.iYear * 10 + CB.Sem) AS LTR ";
-                remainquery += "FROM Course_Balance_View AS CB INNER JOIN ";
+                remainquery += "(SELECT     SDP.iUnifiedID AS UID, SMP.intStudyYear * 10 + SMP.byteSemester AS Term, MP.sUnified AS Major ";
+                remainquery += " FROM          Reg_Students_Data AS SDP INNER JOIN ";
+                remainquery += "Reg_Applications AS AP ON SDP.lngSerial = AP.lngSerial INNER JOIN ";
+                remainquery += "Reg_Student_Majors AS SMP ON AP.lngStudentNumber = SMP.lngStudentNumber INNER JOIN ";
+                remainquery += "Reg_Specializations AS MP ON SMP.strDegree = MP.strDegree AND SMP.strMajor = MP.strSpecialization) AS PMJ RIGHT OUTER JOIN ";                
+                remainquery += "(SELECT     TOP (100) PERCENT SDT.iUnifiedID, MAX(DISTINCT CB.iYear * 10 + CB.Sem) AS LTR ";
+                remainquery += "FROM          Course_Balance_View AS CB INNER JOIN ";
                 remainquery += "Reg_Applications AS A ON CB.Student = A.lngStudentNumber INNER JOIN ";
                 remainquery += "Reg_Students_Data AS SDT ON A.lngSerial = SDT.lngSerial ";
-                remainquery += "WHERE(CB.iYear * 10 + CB.Sem < " + selectedTerm + ") ";
+                remainquery += "WHERE (CB.iYear * 10 + CB.Sem < " + selectedTerm + ") ";
                 remainquery += "GROUP BY SDT.iUnifiedID ";
-                remainquery += "HAVING(SDT.iUnifiedID <> 0)) AS LT ON SD.UID = LT.iUnifiedID ON RDBS.intStudyYear = RBS.iYear AND RDBS.byteSemester = RBS.Sem AND ";
-                remainquery += "RDBS.SID = RBS.Student LEFT OUTER JOIN ";
-                remainquery += "(SELECT SMH.intStudyYear, SMH.byteSemester, SMH.lngStudentNumber, SMH.strDegree, SMH.strMajor, SMH.intRegistered ";
-                remainquery += "FROM Reg_Student_Majors AS SMH INNER JOIN ";
+                remainquery += "HAVING      (SDT.iUnifiedID <> 0)) AS LT ON PMJ.UID = LT.iUnifiedID AND PMJ.Term = LT.LTR ON SD.UID = LT.iUnifiedID LEFT OUTER JOIN ";
+                remainquery += "RDateBothSide AS RDBS ON RBS.iYear = RDBS.intStudyYear AND RBS.Sem = RDBS.byteSemester AND RBS.Student = RDBS.SID LEFT OUTER JOIN ";
+                remainquery += "(SELECT     SMH.intStudyYear, SMH.byteSemester, SMH.lngStudentNumber, SMH.strDegree, SMH.strMajor, SMH.intRegistered ";
+                remainquery += "FROM          Reg_Student_Majors AS SMH INNER JOIN ";
                 remainquery += "Cmn_Firm AS F ON SMH.intStudyYear * 10 + SMH.byteSemester < F.intRegYear * 10 + F.byteRegSemester ";
                 remainquery += "UNION ";
-                remainquery += "SELECT F.intRegYear, F.byteRegSemester, A.lngStudentNumber, A.strDegree, A.strSpecialization, 0 AS Registered ";
-                remainquery += "FROM Reg_Applications AS A CROSS JOIN ";
+                remainquery += "SELECT     F.intRegYear, F.byteRegSemester, A.lngStudentNumber, A.strDegree, A.strSpecialization, 0 AS Registered ";
+                remainquery += "FROM         Reg_Applications AS A CROSS JOIN ";
                 remainquery += "Cmn_Firm AS F) AS SM LEFT OUTER JOIN ";
                 remainquery += "Reg_Specializations AS M LEFT OUTER JOIN ";
                 remainquery += "Reg_Faculty AS MF ON M.FacultyID = MF.FacultyID ON SM.strDegree = M.strDegree AND SM.strMajor = M.strSpecialization ON ";
+
                 remainquery += "RBS.Student = SM.lngStudentNumber AND RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester LEFT OUTER JOIN ";
-                remainquery += "(SELECT lngStudentNumber, Debit - Credit + VAT AS Balance ";
-                remainquery += "FROM AccBalanceSTBothSide) AS ACBS ON SD.SID = ACBS.lngStudentNumber ";
+                remainquery += "(SELECT     lngStudentNumber, Debit - Credit + VAT AS Balance ";
+                remainquery += "FROM          AccBalanceSTBothSide) AS ACBS ON SD.SID = ACBS.lngStudentNumber ";
 
                 Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
                 SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
