@@ -866,20 +866,20 @@ namespace LocalECT
                     {
                         sSQL = "INSERT INTO Acc_Voucher_Detail";
                         sSQL += " (intFy,byteFSemester,strVoucherNo,lngEntryNo,strAccountNo,datePayment,curDebit,curCredit,bytePaymentWay,";
-                        sSQL += " byteStatus,lngCheque,dateDue,intBank,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus)";
+                        sSQL += " byteStatus,lngCheque,dateDue,intBank,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus,bytePaymentFor)";
                         sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + lblVoucher.Text + "'," + lblEntryNo.Text + ",'" + lblACC.Text + "'";
                         sSQL += ",'" + datepayment + "',0," + txtPayment.Text + "," + ddlPaymentWay.SelectedValue + "," + ddlStatus.SelectedValue;
                         sSQL += "," + iCheque + ",'" + datedue + "'," + ddlBank.SelectedValue + ",0,'" + txtPRemark.Text + "'";
-                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ")";
+                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ",0)";
                     }
                     else
                     {
                         sSQL = "INSERT INTO Acc_Voucher_Detail";
                         sSQL += " (intFy,byteFSemester,strVoucherNo,lngEntryNo,strAccountNo,datePayment,curDebit,curCredit,bytePaymentWay,";
-                        sSQL += " byteStatus,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus)";
+                        sSQL += " byteStatus,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus,bytePaymentFor)";
                         sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + lblVoucher.Text + "'," + lblEntryNo.Text + ",'" + lblACC.Text + "'";
                         sSQL += ",'" + datepayment + "',0," + txtPayment.Text + "," + ddlPaymentWay.SelectedValue + "," + ddlStatus.SelectedValue;
-                        sSQL += ",0,'" + txtPRemark.Text + "','" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ")";
+                        sSQL += ",0,'" + txtPRemark.Text + "','" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ",0)";
                     }
                 }
                 else
@@ -896,7 +896,7 @@ namespace LocalECT
                         sSQL = "UPDATE Acc_Voucher_Detail SET";
                         sSQL += " curCredit=" + txtPayment.Text + ",bytePaymentWay=" + ddlPaymentWay.SelectedValue + ",byteStatus=" + ddlStatus.SelectedValue;
                         sSQL += ",lngCheque=" + iCheque + ",dateDue='" + datedue + "',intBank=" + ddlBank.SelectedValue;
-                        sSQL += ",strRemark='" + txtPRemark.Text + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate()";
+                        sSQL += ",strRemark='" + txtPRemark.Text + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate(),bytePaymentFor=0";
                         sSQL += " WHERE intFy=" + iCYear + " AND byteFSemester=" + iCSem + " AND strVoucherNo='" + lblVoucher.Text + "' AND lngEntryNo=" + lblEntryNo.Text;
                     }
                     else
@@ -904,7 +904,7 @@ namespace LocalECT
                         sSQL = "UPDATE Acc_Voucher_Detail SET";
                         sSQL += " curCredit=" + txtPayment.Text + ",bytePaymentWay=" + ddlPaymentWay.SelectedValue + ",byteStatus=" + ddlStatus.SelectedValue;
                         //sSQL += ",lngCheque=" + iCheque + ",dateDue='" + txtDueDate.Text + "',intBank=" + ddlBank.SelectedValue;
-                        sSQL += ",strRemark='" + txtPRemark.Text + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate()";
+                        sSQL += ",strRemark='" + txtPRemark.Text + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate(),bytePaymentFor=0";
                         sSQL += " WHERE intFy=" + iCYear + " AND byteFSemester=" + iCSem + " AND strVoucherNo='" + lblVoucher.Text + "' AND lngEntryNo=" + lblEntryNo.Text;
 
                     }

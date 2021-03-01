@@ -457,6 +457,7 @@ namespace LocalECT
                 txtDueDate.Text = "";
                 txtPayment.Text = "";
                 txtPRemark.Text = "";
+                ddlPaymentFor.SelectedIndex = 0;
             }
             catch (Exception exp)
             {
@@ -915,7 +916,7 @@ namespace LocalECT
                         sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + lblVoucher.Text + "'," + lblEntryNo.Text + ",'" + hdnRevenueAccount.Value + "'";
                         sSQL += ",'" + datepayment + "',0," + txtPayment.Text + "," + ddlPaymentWay.SelectedValue + "," + ddlStatus.SelectedValue;
                         sSQL += "," + iCheque + ",'" + datedue + "'," + ddlBank.SelectedValue + ",0,'" + remarks + "'";
-                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ","+ddlPaymentFor.SelectedItem.Value+","+hdnCurrentVat.Value+")";
+                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + "," + ddlPaymentFor.SelectedItem.Value + "," + hdnCurrentVat.Value + ")";
                     }
                     else
                     {

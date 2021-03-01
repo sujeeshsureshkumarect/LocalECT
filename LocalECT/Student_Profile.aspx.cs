@@ -141,16 +141,62 @@ namespace LocalECT
                             ddlMajor.Enabled = false;
                             ddlEnrollmentTerm.Enabled = false;
                         }
-                        //New Student
+                        
                         else
                         {
-                            if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
+                            //Partial Data Entered
+                            if (Request.QueryString["isr"] != null && Request.QueryString["isr"] != "")
                             {
-                                if (Request.QueryString["cmp"] == "m")
+                                Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                                if (Campus.ToString() == "Males")
                                 {
-                                    Campus = InitializeModule.EnumCampus.Males;
                                     rbnGender.SelectedValue = "1";
                                     rbnGender.Enabled = false;
+                                }
+                                else
+                                {
+                                    rbnGender.SelectedValue = "0";
+                                    rbnGender.Enabled = false;
+                                }
+                                Session["StudentSerialNo"] = Request.QueryString["isr"];
+                                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
+                                {
+                                    lnk_delete.Visible = false;
+                                }
+                                else
+                                {
+                                    lnk_delete.Visible = true;
+                                }
+                                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                                {
+                                    lnk_Save.Visible = false;
+                                }
+                                else
+                                {
+                                    lnk_Save.Visible = true;
+                                }
+                                ddlMajor.Enabled = false;
+                                ddlEnrollmentTerm.Enabled = false;
+                            }
+                            //New Student
+                            else
+                            {
+                                if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
+                                {
+                                    if (Request.QueryString["cmp"] == "m")
+                                    {
+                                        Campus = InitializeModule.EnumCampus.Males;
+                                        rbnGender.SelectedValue = "1";
+                                        rbnGender.Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        Campus = InitializeModule.EnumCampus.Females;
+                                        rbnGender.SelectedValue = "0";
+                                        rbnGender.Enabled = false;
+                                    }
                                 }
                                 else
                                 {
@@ -158,18 +204,12 @@ namespace LocalECT
                                     rbnGender.SelectedValue = "0";
                                     rbnGender.Enabled = false;
                                 }
-                            }
-                            else
-                            {
-                                Campus = InitializeModule.EnumCampus.Females;
-                                rbnGender.SelectedValue = "0";
-                                rbnGender.Enabled = false;
-                            }
 
-                            lnk_delete.Visible = false;
-                            Session["StudentSerialNo"] = null;
-                            New();
-                            lnk_Save.Visible = true;
+                                lnk_delete.Visible = false;
+                                Session["StudentSerialNo"] = null;
+                                New();
+                                lnk_Save.Visible = true;
+                            }                            
                         }
                     }
                 }
