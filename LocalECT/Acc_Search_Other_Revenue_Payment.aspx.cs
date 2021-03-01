@@ -46,15 +46,16 @@ namespace LocalECT
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                     {
-                       // Server.Transfer("Authorization.aspx");
+                        Server.Transfer("Authorization.aspx");
                     }
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                     InitializeModule.enumPrivilege.ACCAddStPayment, CurrentRole) != true)
                     {
-                       // Server.Transfer("Authorization.aspx");
+                        Server.Transfer("Authorization.aspx");
                     }
                     FillTerms();
                     FillBanks();
+                    FillPaymentFor();
                     iCYear = Convert.ToInt32(Session["CurrentYear"].ToString());
                     iCSem = Convert.ToInt32(Session["CurrentSemester"].ToString()); ;
                     iTerm = iCYear * 10 + iCSem;
@@ -165,6 +166,38 @@ namespace LocalECT
                 sc.Close();
             }
         }
+
+        public void FillPaymentFor()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT [bytePaymentFor], [strPaymentFor], [curAmount], [curVAT] FROM [Acc_Payment_For] where [strPaymentFor]!='Tuition Fees' ORDER BY [strPaymentFor]", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                ddlPaymentFor.DataSource = dt;
+                ddlPaymentFor.DataTextField = "strPaymentFor";
+                ddlPaymentFor.DataValueField = "bytePaymentFor";
+                ddlPaymentFor.DataBind();
+                ddlPaymentFor.Items.Insert(0, new ListItem("---Select Payment For---", "---Select Payment For---"));
+
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
         protected void lnk_update_Click(object sender, EventArgs e)
         {
             if(Convert.ToDouble(txtPayment.Text)<=600)
@@ -269,6 +302,7 @@ namespace LocalECT
                     txtPayment.Text = "";
                     txtPRemark.Text = "";
                     cheque.Visible = false;
+                    ddlPaymentFor.SelectedIndex = 0;
                     //ddlBank.SelectedIndex = 0;
                 }
             }
@@ -311,6 +345,7 @@ namespace LocalECT
                     txtPayment.Text = "";
                     txtPRemark.Text = "";
                     cheque.Visible = false;
+                    ddlPaymentFor.SelectedIndex = 0;
                     //ddlBank.SelectedIndex = 0;
                 }
             }
@@ -352,6 +387,7 @@ namespace LocalECT
                     txtPayment.Text = "";
                     txtPRemark.Text = "";
                     cheque.Visible = false;
+                    ddlPaymentFor.SelectedIndex = 0;
                     //ddlBank.SelectedIndex = 0;
                 }
             }
@@ -875,20 +911,20 @@ namespace LocalECT
                     {
                         sSQL = "INSERT INTO Acc_Voucher_Detail";
                         sSQL += " (intFy,byteFSemester,strVoucherNo,lngEntryNo,strAccountNo,datePayment,curDebit,curCredit,bytePaymentWay,";
-                        sSQL += " byteStatus,lngCheque,dateDue,intBank,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus)";
+                        sSQL += " byteStatus,lngCheque,dateDue,intBank,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus,bytePaymentFor,curVat)";
                         sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + lblVoucher.Text + "'," + lblEntryNo.Text + ",'" + hdnRevenueAccount.Value + "'";
                         sSQL += ",'" + datepayment + "',0," + txtPayment.Text + "," + ddlPaymentWay.SelectedValue + "," + ddlStatus.SelectedValue;
                         sSQL += "," + iCheque + ",'" + datedue + "'," + ddlBank.SelectedValue + ",0,'" + remarks + "'";
-                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ")";
+                        sSQL += ",'" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ","+ddlPaymentFor.SelectedItem.Value+","+hdnCurrentVat.Value+")";
                     }
                     else
                     {
                         sSQL = "INSERT INTO Acc_Voucher_Detail";
                         sSQL += " (intFy,byteFSemester,strVoucherNo,lngEntryNo,strAccountNo,datePayment,curDebit,curCredit,bytePaymentWay,";
-                        sSQL += " byteStatus,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus)";
+                        sSQL += " byteStatus,byteCurrency,strRemark,strUserCreate,dateCreate,intCampus,bytePaymentFor,curVat)";
                         sSQL += " VALUES(" + iCYear + "," + iCSem + ",'" + lblVoucher.Text + "'," + lblEntryNo.Text + ",'" + hdnRevenueAccount.Value + "'";
                         sSQL += ",'" + datepayment + "',0," + txtPayment.Text + "," + ddlPaymentWay.SelectedValue + "," + ddlStatus.SelectedValue;
-                        sSQL += ",0,'" + remarks + "','" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + ")";
+                        sSQL += ",0,'" + remarks + "','" + Session["CurrentUserName"] + "',GetDate()," + iCampaus + "," + ddlPaymentFor.SelectedItem.Value + "," + hdnCurrentVat.Value + ")";
                     }
                 }
                 else
@@ -905,7 +941,7 @@ namespace LocalECT
                         sSQL = "UPDATE Acc_Voucher_Detail SET";
                         sSQL += " curCredit=" + txtPayment.Text + ",bytePaymentWay=" + ddlPaymentWay.SelectedValue + ",byteStatus=" + ddlStatus.SelectedValue;
                         sSQL += ",lngCheque=" + iCheque + ",dateDue='" + datedue + "',intBank=" + ddlBank.SelectedValue;
-                        sSQL += ",strRemark='" + remarks + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate()";
+                        sSQL += ",strRemark='" + remarks + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate(),bytePaymentFor="+ddlPaymentFor.SelectedItem.Value+ ",curVat="+hdnCurrentVat.Value+"";
                         sSQL += " WHERE intFy=" + iCYear + " AND byteFSemester=" + iCSem + " AND strVoucherNo='" + lblVoucher.Text + "' AND lngEntryNo=" + lblEntryNo.Text;
                     }
                     else
@@ -913,7 +949,7 @@ namespace LocalECT
                         sSQL = "UPDATE Acc_Voucher_Detail SET";
                         sSQL += " curCredit=" + txtPayment.Text + ",bytePaymentWay=" + ddlPaymentWay.SelectedValue + ",byteStatus=" + ddlStatus.SelectedValue;
                         //sSQL += ",lngCheque=" + iCheque + ",dateDue='" + txtDueDate.Text + "',intBank=" + ddlBank.SelectedValue;
-                        sSQL += ",strRemark='" +remarks + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate()";
+                        sSQL += ",strRemark='" +remarks + "',strUserSave='" + Session["CurrentUserName"] + "',dateLastSave=GetDate(),bytePaymentFor=" + ddlPaymentFor.SelectedItem.Value + ",curVat=" + hdnCurrentVat.Value + "";
                         sSQL += " WHERE intFy=" + iCYear + " AND byteFSemester=" + iCSem + " AND strVoucherNo='" + lblVoucher.Text + "' AND lngEntryNo=" + lblEntryNo.Text;
 
                     }
@@ -1457,29 +1493,44 @@ namespace LocalECT
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [Acc_Payment_For] where ORDER BY [strBankEn]", sc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
 
-                ddlBank.DataSource = dt;
-                ddlBank.DataTextField = "strBankEn";
-                ddlBank.DataValueField = "intBank";
-                ddlBank.DataBind();
+            if (ddlPaymentFor.SelectedItem.Value == "---Select Payment For---")
+            {
+                txtPayment.Text = "";
+                hdnCurrentVat.Value = "0";
+            }
+            else
+            {
+                SqlCommand cmd = new SqlCommand("SELECT [curAmount],[curVAT],([curAmount]+[curVAT]) as Value FROM [Acc_Payment_For] where [bytePaymentFor]=@bytePaymentFor", sc);
+                cmd.Parameters.AddWithValue("@bytePaymentFor", ddlPaymentFor.SelectedItem.Value);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
 
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
+                    if (dt.Rows.Count > 0)
+                    {
+                        txtPayment.Text =Math.Round(Convert.ToDouble(dt.Rows[0]["Value"]),2).ToString();
+                        hdnCurrentVat.Value=Math.Round(Convert.ToDouble(dt.Rows[0]["curVAT"]), 2).ToString();
+                    }
+                    else
+                    {
+                        txtPayment.Text = "";
+                        hdnCurrentVat.Value = "0";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
             }
         }
     }

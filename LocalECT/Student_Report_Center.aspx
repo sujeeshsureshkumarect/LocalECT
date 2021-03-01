@@ -87,7 +87,9 @@
                                         <asp:ListItem Text="FCRS" Value="RBS.FCRS"></asp:ListItem>
 
                                         <asp:ListItem Text="CRS" Value="RBS.MCRS + RBS.FCRS AS CRS"></asp:ListItem>
-                                        <asp:ListItem Text="RegDate" Value="RDBS.Date AS RegDate"></asp:ListItem>
+
+                                        
+                                        <asp:ListItem Text="RegDate" Value="convert(varchar(10),convert(date,RDBS.YYYYMMDD),23) AS RegDate"></asp:ListItem>
                                         <asp:ListItem Text="Balance" Value="ACBS.Balance"></asp:ListItem>
                                         <asp:ListItem Text="MajorFaculty" Value="MF.FacultyName AS MajorFaculty"></asp:ListItem>
 
@@ -130,8 +132,8 @@
                                         <asp:ListItem Text="isActive" Value="SD.isActive"></asp:ListItem>
                                         <asp:ListItem Text="isComplete" Value="SD.isComplete"></asp:ListItem>
                                         <asp:ListItem Text="WantedMajor" Value="SD.WantedMajor"></asp:ListItem>
-                                        <asp:ListItem Text="CreatedBy" Value="SD.CreatedBy"></asp:ListItem>
-                                        <asp:ListItem Text="Created" Value="SD.Created"></asp:ListItem>
+                                        <asp:ListItem Text="CreatedBy" Value="SD.CreatedBy"></asp:ListItem>                                        
+                                        <asp:ListItem Text="Created" Value="convert(varchar(10),convert(date,SD.Created),23) as Created"></asp:ListItem>
                                         <asp:ListItem Text="RCity" Value="SD.RCity"></asp:ListItem>
                                         <asp:ListItem Text="REmirate" Value="SD.REmirate"></asp:ListItem>
                                         <asp:ListItem Text="How" Value="SD.How"></asp:ListItem>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acc_Search_Other_Revenue_Payment.aspx.cs" Inherits="LocalECT.Acc_Search_Other_Revenue_Payment" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acc_Search_Other_Revenue_Payment.aspx.cs" Inherits="LocalECT.Acc_Search_Other_Revenue_Payment" MasterPageFile="~/LocalECT.Master" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -124,20 +124,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <%--  <div class="col-md-6 col-sm-6">
+                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
                                                         <label>Payment For</label>
                                                         <div class="input-group">
                                                             <asp:DropDownList ID="ddlPaymentFor" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlPaymentFor_SelectedIndexChanged" AutoPostBack="true">                                                                                                                                
                                                             </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator  runat="server" ControlToValidate="ddlPaymentFor" InitialValue="---Select Payment For---" ErrorMessage="*Please select Payment For" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                                         </div>
                                                     </div>
-                                                </div>--%>
+                                                </div>
                                                   <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
                                                         <label>Amount</label>
                                                         <div class="input-group">                                                            
-                                                            <asp:TextBox ID="txtPayment" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                            <asp:TextBox ID="txtPayment" runat="server" CssClass="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Payment Amount Required" Display="Dynamic" ForeColor="Red" ControlToValidate="txtPayment" ValidationGroup="no" >*Payment Amount Required</asp:RequiredFieldValidator>
                                                         </div>
                                                     </div>
@@ -211,6 +212,7 @@
                                                                 <asp:HiddenField ID="hdniAdmissionPaymentType" runat="server" Value="0" />
                                                                 <asp:HiddenField ID="hdncAdmissionPaymentValue" runat="server" Value="0" />
                                                                 <asp:HiddenField ID="hdnRevenueAccount" runat="server" Value="0200000" />
+                                                                <asp:HiddenField ID="hdnCurrentVat" runat="server" Value="0" />
                                                             </div>
                                                         </div>
                                                     </div>
