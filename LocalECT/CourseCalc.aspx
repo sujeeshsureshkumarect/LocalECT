@@ -23,11 +23,11 @@
             width: 100%;
             height :100%;
         }
-       .TableSize
+      /* .TableSize
         {
             width:800px;
             
-        }
+        }*/
         .ComboWidth
         {
         	margin-left: 0px;
@@ -179,6 +179,9 @@
             <td >
         
                 &nbsp;</td>
+            <td >
+        
+                &nbsp;</td>
             <td colspan="2" >
         
          <uc1:Search1 ID="Search1" runat="server" SCaption1="Student ID" SCaption2="Name" 
@@ -194,9 +197,12 @@
                                         &nbsp;</td>
             <td class="style14" align="right" >
         
-                                        <asp:ImageButton ID="RunCMD" runat="server" ImageUrl="~/Images/Icons/Run.gif"
+                                   <%--     <asp:ImageButton ID="RunCMD" runat="server" ImageUrl="~/Images/Icons/Run.gif"
                                         Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                                        ToolTip="Run" onclick="RunCMD_Click" />
+                                        ToolTip="Run" onclick="RunCMD_Click" />--%>
+
+                 <asp:LinkButton ID="RunCMD" runat="server" 
+                                        ToolTip="Run" OnClick="RunCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-bolt"></i> Run</asp:LinkButton>
         
                                                                                                                                               
             </td>
@@ -292,13 +298,13 @@
                       <asp:ImageButton ID="DeleteCMD" runat="server" 
                           ImageUrl="~/Images/Icons/Delete.gif" onclick="DeleteCMD_Click" 
                           Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                          ToolTip="Save" Enabled="False" />
+                          ToolTip="Delete" Enabled="False" />
                   </td>
                   <td>
                       <asp:ImageButton ID="printCMD" runat="server" 
                           ImageUrl="~/Images/Icons/Print.gif" onclick="printCMD_Click" 
                           Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                          ToolTip="Save" />
+                          ToolTip="Print" />
                   </td>
               </tr>
             </table>
@@ -327,7 +333,7 @@
                     SortExpression="#" />
           
      
-                <asp:CommandField ShowSelectButton="True" />
+                <asp:CommandField ShowSelectButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
           
      
                 <asp:BoundField DataField="intStudyYear" HeaderText="StudyYear" ReadOnly="True" 

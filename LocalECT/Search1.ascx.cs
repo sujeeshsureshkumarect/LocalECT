@@ -215,7 +215,7 @@ namespace LocalECT
             txt1.Focus();
 
         }
-        protected void Search1_btn_Click(object sender, ImageClickEventArgs e)
+        protected void Search1_btn_Click(object sender, EventArgs e)
         {
 
             string sCondition = " Where 1=1";

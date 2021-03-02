@@ -160,7 +160,7 @@ namespace LocalECT
 
 
         #endregion
-        protected void RunCMD_Click(object sender, ImageClickEventArgs e)
+        protected void RunCMD_Click(object sender, EventArgs e)
         {
             GetStudentData();
         }

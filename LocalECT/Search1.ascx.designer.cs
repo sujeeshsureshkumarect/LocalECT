@@ -111,7 +111,7 @@ namespace LocalECT
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton Search1_btn;
+        protected global::System.Web.UI.WebControls.LinkButton Search1_btn;
 
         /// <summary>
         /// Clear_LNK control.

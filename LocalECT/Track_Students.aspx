@@ -335,7 +335,7 @@
                             DataKeyNames="lngStudentNumber" DataSourceID="StudentsDS" 
                             onselectedindexchanged="StudentsGRD_SelectedIndexChanged" Width="100%">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" HeaderText="*" />
+                                <asp:CommandField ShowSelectButton="True" HeaderText="*" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
                                 <asp:BoundField DataField="lngStudentNumber" HeaderText="Student ID" 
                                     SortExpression="lngStudentNumber" />
                                 <asp:BoundField DataField="strLastDescEn" HeaderText="Name" 

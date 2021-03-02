@@ -232,7 +232,7 @@
                                                     </div>
                                                 </div>
                                                  <div class="form-group row">
-                                                    <label class="col-form-label col-md-3 col-sm-3">Full Name (EN)</label>
+                                                    <label class="col-form-label col-md-3 col-sm-3">Full Name (EN)<span style="color: red">*</span></label>
                                                      <div class="col-md-9 col-sm-9 ">
                                                          <asp:TextBox ID="txtNameEn" runat="server" CssClass="form-control" TabIndex="2"></asp:TextBox>
                                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
@@ -241,7 +241,7 @@
                                                      </div>
                                                 </div>
                                                  <div class="form-group row">
-                                                    <label class="col-form-label col-md-3 col-sm-3">First Name (EN)</label>
+                                                    <label class="col-form-label col-md-3 col-sm-3">First Name (EN)<span style="color: red">*</span></label>
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <asp:TextBox ID="txtFNameEn" runat="server" CssClass="form-control" TabIndex="3"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
@@ -250,7 +250,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-form-label col-md-3 col-sm-3">Last Name (EN)</label>
+                                                    <label class="col-form-label col-md-3 col-sm-3">Last Name (EN)<span style="color: red">*</span></label>
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <asp:TextBox ID="txtLNameEn" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
@@ -259,7 +259,7 @@
                                                     </div>
                                                 </div>
                                                  <div class="form-group row">
-                                                    <label class="col-form-label col-md-3 col-sm-3">Full Name (AR)</label>
+                                                    <label class="col-form-label col-md-3 col-sm-3">Full Name (AR)<span style="color: red">*</span></label>
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <asp:TextBox ID="txtNameAr" runat="server" CssClass="form-control" TabIndex="5"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
@@ -268,7 +268,7 @@
                                                     </div>
                                                 </div>
                                                     <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">First Name (AR)</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">First Name (AR)<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtFNameAr" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
@@ -277,7 +277,7 @@
                                                         </div>
                                                     </div>
                                                        <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">Last Name (AR)</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">Last Name (AR)<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtLNameAr" runat="server" CssClass="form-control" TabIndex="7"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
@@ -319,7 +319,7 @@
                                                 </div>
                                                     <hr />
                                                     <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">Phone 1</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">Phone 1<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtPhone1" runat="server" CssClass="form-control" TabIndex="22">9999999999</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
@@ -334,7 +334,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">E-Mail</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">E-Mail<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TabIndex="24">xyz@xyz.com</asp:TextBox>
                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
@@ -362,7 +362,7 @@
                                                     <hr />
                                                     
                                                       <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">Emirates ID</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">Emirates ID<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtIDNo" runat="server" CssClass="form-control" TabIndex="27">999999999999999</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server"
@@ -371,7 +371,7 @@
                                                         </div>
                                                     </div> 
                                                      <div class="form-group row">
-                                                        <label class="col-form-label col-md-3 col-sm-3">Passport No</label>
+                                                        <label class="col-form-label col-md-3 col-sm-3">Passport No<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtIdentityNo" runat="server" CssClass="form-control" TabIndex="28">NA</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
@@ -435,7 +435,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                  <div class="x_panel">
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3">Gender</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3">Gender<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:RadioButtonList ID="rbnGender" runat="server"
                                                                  RepeatDirection="Horizontal" TabIndex="9" CssClass="form-control">
@@ -455,7 +455,7 @@
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3">Birth Date</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3">Birth Date<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control" TabIndex="11" ValidationGroup="SD" ToolTip="mm/dd/yyyy" TextMode="Date"></asp:TextBox>
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
@@ -1036,7 +1036,7 @@
                                                                     <div class="col-md-6 col-sm-6">
                                                                         <div class="x_panel">
                                                                             <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3">Qualification</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3">Qualification<span style="color: red">*</span></label>
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                      <asp:DropDownList ID="ddlQualification" runat="server" 
                                                                                     DataTextField="strCertificateDescEn" DataValueField="intCertificate" 
@@ -1047,7 +1047,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3">Year</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3">Year<span style="color: red">*</span></label>
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                       <asp:TextBox ID="txtQYear" runat="server" TabIndex="53" ValidationGroup="Q" 
                                                                                     CssClass="form-control">9999</asp:TextBox>
@@ -1057,7 +1057,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3">Source</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3">Source<span style="color: red">*</span></label>
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                      <asp:TextBox ID="txtSource" runat="server" TabIndex="55" ValidationGroup="Q" 
                                                                                     CssClass="form-control">NA</asp:TextBox>
@@ -1110,7 +1110,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <label class="col-form-label col-md-3 col-sm-3">Score</label>
+                                                                                <label class="col-form-label col-md-3 col-sm-3">Score<span style="color: red">*</span></label>
                                                                                 <div class="col-md-4 col-sm-4 ">
                                                                                     <asp:TextBox ID="txtQScore" runat="server" TabIndex="65" CssClass="form-control"></asp:TextBox>
 
@@ -1370,7 +1370,7 @@
                                                                         TabIndex="73"  ForeColor="Black" OnCheckedChanged="chkMissing_CheckedChanged" />
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-form-label col-md-4 col-sm-4">Opportunity ID</label>
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Opportunity ID<span style="color: red">*</span></label>
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:TextBox ID="txtOpportunityID" runat="server" TabIndex="75"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
@@ -1389,7 +1389,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-form-label col-md-4 col-sm-4">Contact ID</label>
+                                                                        <label class="col-form-label col-md-4 col-sm-4">Contact ID<span style="color: red">*</span></label>
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:TextBox ID="txtContactID" runat="server" TabIndex="75"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
@@ -1686,7 +1686,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-form-label col-md-4 col-sm-4">Other Source</label>
+                                                                            <label class="col-form-label col-md-4 col-sm-4">Other Source<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="txtEnrollmentSource" runat="server" OnTextChanged="txtEnrollmentSource_TextChanged"
                                                                                     CssClass="form-control" TabIndex="84">-</asp:TextBox>

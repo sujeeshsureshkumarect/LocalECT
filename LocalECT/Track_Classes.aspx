@@ -48,7 +48,7 @@
             </td>
             <td>
                                          <asp:DropDownList ID="Term_ddl" runat="server" 
-                    Width="120px" AutoPostBack="True" Enabled="False" 
+                   CssClass="form-control" AutoPostBack="True" Enabled="False" 
                                              onselectedindexchanged="Term_ddl_SelectedIndexChanged">
                                          </asp:DropDownList>
                         </td>
@@ -57,7 +57,7 @@
                         </td>
             <td>
                 <asp:DropDownList ID="CampusCBO" runat="server" AutoPostBack="True" 
-                    Width="145px" CssClass="ComboHeight">
+                    CssClass="form-control" >
                 </asp:DropDownList>
                         </td>
         </tr>
@@ -67,7 +67,7 @@
             </td>
             <td>
                 <asp:DropDownList ID="LecturersCBO" runat="server" AutoPostBack="True" 
-                    Width="266px" CssClass="ComboHeight">
+                    CssClass="form-control">
                 </asp:DropDownList>
                         </td>
             <td>
