@@ -228,6 +228,14 @@ namespace LocalECT
                     LevelLBL.Text = myObjects[i].iLevel.ToString();
                     OrderCBO.SelectedValue = myObjects[i].ShowOrder.ToString();
                     DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
+                    if(myObjects[i].isVisible.ToString()=="True")
+                    {
+                        chk_Visible.Checked = true;
+                    }
+                    else
+                    {
+                        chk_Visible.Checked = false;
+                    }
                     //isDataChanged.Value = false.ToString();
                 }
 
@@ -317,6 +325,15 @@ namespace LocalECT
                 int iOrder = 1;
                 int iLevel = int.Parse(LevelLBL.Text);
                 int iSystem = int.Parse(SystemsCBO.SelectedValue);
+                string isVisible = "True";
+                if(chk_Visible.Checked==true)
+                {
+                    isVisible = "True";
+                }
+                else
+                {
+                    isVisible = "False";
+                }
 
                 myTree.FindNode(myValuePath).Select();
                 TreeNode tn;
@@ -340,7 +357,7 @@ namespace LocalECT
 
                 int r = myMapsDAL.UpdatePrivilegeObjects(InitializeModule.EnumCampus.ECTNew, int.Parse(DataStatus.Value), int.Parse(IDTXT.Text), "", DescTXT.Text, CaptionTXT.Text, iOrder,
                     iSystem, int.Parse(ParentLBL.Text), UrlTXT.Text,
-                    iLevel);
+                    iLevel,isVisible);
                 if (r > 0)
                 {
                     if (DataStatus.Value == ((int)InitializeModule.enumModes.NewMode).ToString())//new record
@@ -569,6 +586,7 @@ namespace LocalECT
             LevelLBL.Text = "";
             OrderCBO.SelectedValue = "0";
             DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
+            chk_Visible.Checked = false;
             //isDataChanged.Value = false.ToString();
 
         }

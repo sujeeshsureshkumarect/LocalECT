@@ -28,11 +28,12 @@ private int m_ShowOrder;
 private int m_SystemID; 
 private int m_ParentID; 
 private string m_sURL; 
-private int m_iLevel; 
-#endregion
-#region "Puplic Properties"
-//'-----------------------------------------------------
-public int ObjectID
+private int m_iLevel;
+private string m_isVisible;
+    #endregion
+    #region "Puplic Properties"
+    //'-----------------------------------------------------
+    public int ObjectID
 {
 get { return  m_ObjectID; }
 set {m_ObjectID  = value ; }
@@ -77,9 +78,14 @@ public int iLevel
 get { return  m_iLevel; }
 set {m_iLevel  = value ; }
 }
-#endregion
-//'-----------------------------------------------------
-public PrivilegeObjects()
+    public string isVisible
+    {
+        get { return m_isVisible; }
+        set { m_isVisible = value; }
+    }
+    #endregion
+    //'-----------------------------------------------------
+    public PrivilegeObjects()
 {
 try
 {
@@ -107,10 +113,11 @@ private string m_SystemIDFN ;
 private string m_ParentIDFN ;
 private string m_sURLFN ;
 private string m_iLevelFN ;
-#endregion
-//'-----------------------------------------------------
-#region "Puplic Properties"
-public string TableName 
+private string m_isVisibleFN;
+    #endregion
+    //'-----------------------------------------------------
+    #region "Puplic Properties"
+    public string TableName 
 {
 get { return m_TableName; }
 set { m_TableName = value; }
@@ -160,11 +167,17 @@ public string iLevelFN
 get { return  m_iLevelFN; }
 set {m_iLevelFN  = value ; }
 }
-#endregion
-//================End Properties ===================
-#region "Data Access Layer"
-//-----Get SQl Function ---------------------------------
-public string  GetSQL() 
+
+    public string isVisibleFN
+    {
+        get { return m_isVisibleFN; }
+        set { m_isVisibleFN = value; }
+    }
+    #endregion
+    //================End Properties ===================
+    #region "Data Access Layer"
+    //-----Get SQl Function ---------------------------------
+    public string  GetSQL() 
 {
 string sSQL  = "";
 try
@@ -179,7 +192,8 @@ sSQL += " , " + SystemIDFN;
 sSQL += " , " + ParentIDFN;
 sSQL += " , " + sURLFN;
 sSQL += " , " + iLevelFN;
-sSQL += "  FROM " + m_TableName;
+            sSQL += " , " + isVisibleFN;
+            sSQL += "  FROM " + m_TableName;
 //sSQL += "  Order By " + iLevelFN + "," + ShowOrderFN + " DESC";
 }
 catch (Exception ex)
@@ -207,7 +221,8 @@ sSQL += " , " + SystemIDFN;
 sSQL += " , " + ParentIDFN;
 sSQL += " , " + sURLFN;
 sSQL += " , " + iLevelFN;
-sSQL += "  FROM " + m_TableName;
+            sSQL += " , " + isVisibleFN;
+            sSQL += "  FROM " + m_TableName;
 }
 catch (Exception ex)
 {
@@ -235,7 +250,8 @@ sSQL += " , " + LibraryMOD.GetFieldName(SystemIDFN) + "=@SystemID";
 sSQL += " , " + LibraryMOD.GetFieldName(ParentIDFN) + "=@ParentID";
 sSQL += " , " + LibraryMOD.GetFieldName(sURLFN) + "=@sURL";
 sSQL += " , " + LibraryMOD.GetFieldName(iLevelFN) + "=@iLevel";
-sSQL += " WHERE ";
+sSQL += " , " + LibraryMOD.GetFieldName(isVisibleFN) + "=@isVisible";
+            sSQL += " WHERE ";
 sSQL += LibraryMOD.GetFieldName(ObjectIDFN)+"=@ObjectID";
 }
 catch (Exception ex)
@@ -264,6 +280,7 @@ sSQL += " , " + LibraryMOD.GetFieldName(SystemIDFN);
 sSQL += " , " + LibraryMOD.GetFieldName(ParentIDFN);
 sSQL += " , " + LibraryMOD.GetFieldName(sURLFN);
 sSQL += " , " + LibraryMOD.GetFieldName(iLevelFN);
+sSQL += " , " + LibraryMOD.GetFieldName(isVisibleFN);
 sSQL += ")";
 sSQL += " VALUES ";
 sSQL += "( ";
@@ -276,6 +293,7 @@ sSQL += " ,@SystemID";
 sSQL += " ,@ParentID";
 sSQL += " ,@sURL";
 sSQL += " ,@iLevel";
+sSQL += " ,@isVisible";
 sSQL += ") ";
 }
 catch (Exception ex)
@@ -321,9 +339,10 @@ public PrivilegeObjectsDAL()
         this.ParentIDFN = m_TableName + ".ParentID";
         this.sURLFN = m_TableName + ".sURL";
         this.iLevelFN = m_TableName + ".iLevel";
-        
+        this.isVisibleFN = m_TableName + ".isVisible";
 
-    }
+
+        }
     catch (Exception ex)
     {
         LibraryMOD.ShowErrorMessage(ex);
@@ -406,7 +425,8 @@ else
 {
 myPrivilegeObjects.iLevel = int.Parse(reader[LibraryMOD.GetFieldName( iLevelFN) ].ToString());
 }
- results.Add(myPrivilegeObjects);
+                myPrivilegeObjects.isVisible = reader[LibraryMOD.GetFieldName(isVisibleFN)].ToString();
+                results.Add(myPrivilegeObjects);
 }
 }
 catch (Exception ex)
@@ -422,7 +442,7 @@ Conn.Dispose();
 }
 return results;
 }
-public int UpdatePrivilegeObjects(InitializeModule.EnumCampus Campus, int iMode,int ObjectID,string ObjectNameAr,string ObjectNameEn,string DisplayObjectName,int ShowOrder,int SystemID,int ParentID,string sURL,int iLevel)
+public int UpdatePrivilegeObjects(InitializeModule.EnumCampus Campus, int iMode,int ObjectID,string ObjectNameAr,string ObjectNameEn,string DisplayObjectName,int ShowOrder,int SystemID,int ParentID,string sURL,int iLevel,string isVisible)
 {
 int iEffected = 0;
 Connection_StringCLS MyConnection_string = new Connection_StringCLS(Campus);
@@ -452,6 +472,7 @@ Cmd.Parameters.Add(new SqlParameter("@SystemID",SystemID));
 Cmd.Parameters.Add(new SqlParameter("@ParentID",ParentID));
 Cmd.Parameters.Add(new SqlParameter("@sURL",sURL));
 Cmd.Parameters.Add(new SqlParameter("@iLevel",iLevel));
+Cmd.Parameters.Add(new SqlParameter("@isVisible", isVisible));
 iEffected = Cmd.ExecuteNonQuery();
 }
 catch (Exception ex)
@@ -714,9 +735,10 @@ cmdPrivilegeObjects.Parameters.Add("@SystemID", SqlDbType.Int,4, LibraryMOD.GetF
 cmdPrivilegeObjects.Parameters.Add("@ParentID", SqlDbType.Int,4, LibraryMOD.GetFieldName(ParentIDFN));
 cmdPrivilegeObjects.Parameters.Add("@sURL", SqlDbType.NVarChar,100, LibraryMOD.GetFieldName(sURLFN));
 cmdPrivilegeObjects.Parameters.Add("@iLevel", SqlDbType.Int,4, LibraryMOD.GetFieldName(iLevelFN));
+cmdPrivilegeObjects.Parameters.Add("@isVisible", SqlDbType.Bit, 1, LibraryMOD.GetFieldName(isVisibleFN));
 
 
-Parmeter = cmdPrivilegeObjects.Parameters.Add("@ObjectID", SqlDbType.Int, 4, LibraryMOD.GetFieldName(ObjectIDFN));
+            Parmeter = cmdPrivilegeObjects.Parameters.Add("@ObjectID", SqlDbType.Int, 4, LibraryMOD.GetFieldName(ObjectIDFN));
 Parmeter.SourceVersion = DataRowVersion.Original;
 //'Its should be none for batch updating
 //'UpdateCommand, InsertCommand, and DeleteCommand 
@@ -735,6 +757,7 @@ cmdPrivilegeObjects.Parameters.Add("@SystemID", SqlDbType.Int,4, LibraryMOD.GetF
 cmdPrivilegeObjects.Parameters.Add("@ParentID", SqlDbType.Int,4, LibraryMOD.GetFieldName(ParentIDFN));
 cmdPrivilegeObjects.Parameters.Add("@sURL", SqlDbType.NVarChar,100, LibraryMOD.GetFieldName(sURLFN));
 cmdPrivilegeObjects.Parameters.Add("@iLevel", SqlDbType.Int,4, LibraryMOD.GetFieldName(iLevelFN));
+cmdPrivilegeObjects.Parameters.Add("@isVisible", SqlDbType.Bit, 1, LibraryMOD.GetFieldName(isVisibleFN));
 Parmeter.SourceVersion = DataRowVersion.Current;
 daPrivilegeObjects.InsertCommand =cmdPrivilegeObjects;
 daPrivilegeObjects.InsertCommand.UpdatedRowSource  = UpdateRowSource.None;
@@ -778,13 +801,14 @@ dr[LibraryMOD.GetFieldName(SystemIDFN)]=SystemID;
 dr[LibraryMOD.GetFieldName(ParentIDFN)]=ParentID;
 dr[LibraryMOD.GetFieldName(sURLFN)]=sURL;
 dr[LibraryMOD.GetFieldName(iLevelFN)]=iLevel;
-//dr[LibraryMOD.GetFieldName(CreationUserIDFN)] = InitializeModule.gUserNo;
-//dr[LibraryMOD.GetFieldName(CreationDateFN)] = DateTime.Now; //' CreationDate
-//dr[LibraryMOD.GetFieldName(LastUpdateUserIDFN)] = InitializeModule.gUserNo;  //'LastUpdateUserID
-//dr[LibraryMOD.GetFieldName(LastUpdateDateFN)] = DateTime.Now; //'LastUpdateDate
-//dr[LibraryMOD.GetFieldName(PCNameFN)] = InitializeModule.gPCName;
-//dr[LibraryMOD.GetFieldName(NetUserNameFN)]= InitializeModule.gNetUserName;
-dsPrivilegeObjects.Tables[TableName].Rows.Add(dr);
+dr[LibraryMOD.GetFieldName(isVisibleFN)] = isVisible;
+                    //dr[LibraryMOD.GetFieldName(CreationUserIDFN)] = InitializeModule.gUserNo;
+                    //dr[LibraryMOD.GetFieldName(CreationDateFN)] = DateTime.Now; //' CreationDate
+                    //dr[LibraryMOD.GetFieldName(LastUpdateUserIDFN)] = InitializeModule.gUserNo;  //'LastUpdateUserID
+                    //dr[LibraryMOD.GetFieldName(LastUpdateDateFN)] = DateTime.Now; //'LastUpdateDate
+                    //dr[LibraryMOD.GetFieldName(PCNameFN)] = InitializeModule.gPCName;
+                    //dr[LibraryMOD.GetFieldName(NetUserNameFN)]= InitializeModule.gNetUserName;
+                    dsPrivilegeObjects.Tables[TableName].Rows.Add(dr);
 break;
 case (int)InitializeModule.enumModes.EditMode:
  DataRow[] drAry = null;
@@ -799,11 +823,12 @@ drAry[0][LibraryMOD.GetFieldName(SystemIDFN)]=SystemID;
 drAry[0][LibraryMOD.GetFieldName(ParentIDFN)]=ParentID;
 drAry[0][LibraryMOD.GetFieldName(sURLFN)]=sURL;
 drAry[0][LibraryMOD.GetFieldName(iLevelFN)]=iLevel;
-//drAry[0][LibraryMOD.GetFieldName(LastUpdateUserIDFN)] = InitializeModule.gUserNo;  //'LastUpdateUserID
-//drAry[0][LibraryMOD.GetFieldName(LastUpdateDateFN)] = DateTime.Now; //'LastUpdateDate
-//drAry[0][LibraryMOD.GetFieldName(PCNameFN)] = InitializeModule.gPCName;
-//drAry[0][LibraryMOD.GetFieldName(NetUserNameFN)] = InitializeModule.gNetUserName;
-break;
+drAry[0][LibraryMOD.GetFieldName(isVisibleFN)] = isVisible;
+                    //drAry[0][LibraryMOD.GetFieldName(LastUpdateUserIDFN)] = InitializeModule.gUserNo;  //'LastUpdateUserID
+                    //drAry[0][LibraryMOD.GetFieldName(LastUpdateDateFN)] = DateTime.Now; //'LastUpdateDate
+                    //drAry[0][LibraryMOD.GetFieldName(PCNameFN)] = InitializeModule.gPCName;
+                    //drAry[0][LibraryMOD.GetFieldName(NetUserNameFN)] = InitializeModule.gNetUserName;
+                    break;
 }
 }
 catch (Exception ex)
@@ -935,7 +960,15 @@ else
 {
   iLevel = (int)PrivilegeObjectsDataRow[LibraryMOD.GetFieldName(iLevelFN)];
 }
-}
+            if (PrivilegeObjectsDataRow[LibraryMOD.GetFieldName(isVisibleFN)] == System.DBNull.Value)
+            {
+                isVisible = "";
+            }
+            else
+            {
+                isVisible = (string)PrivilegeObjectsDataRow[LibraryMOD.GetFieldName(isVisibleFN)];
+            }
+        }
 catch (Exception ex)
 {
 LibraryMOD.ShowErrorMessage(ex);

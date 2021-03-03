@@ -89,6 +89,10 @@
                                                     <asp:TextBox ID="LevelLBL" runat="server" Enabled="False" CssClass="form-control"></asp:TextBox>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <label>&nbsp;</label>
+                                                    <asp:CheckBox ID="chk_Visible" runat="server" Text="&nbsp;Is Visible"/>
+                                                </div>
+                                                <div class="form-group row">
                                                      <asp:LinkButton ID="NewCMD" runat="server"  onclick="NewCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> New</asp:LinkButton>
                                                     
                                                 <asp:LinkButton ID="SaveCMD" runat="server"  onclick="SaveCMD_Click" CssClass="btn btn-success btn-sm" ValidationGroup="isValid"><i class="fa fa-floppy-o"></i> Save</asp:LinkButton>
@@ -140,6 +144,10 @@
                                                         <asp:ListItem>19</asp:ListItem>
                                                         <asp:ListItem>20</asp:ListItem>
                                                     </asp:DropDownList>
+                                                </div>
+                                                <div class="form-group row">
+                                                   <label>&nbsp</label>
+                                                   
                                                 </div>
                                                  <div class="form-group row">
                                                 <asp:LinkButton ID="ManageLNK" runat="server" oncommand="ManageLNK_Command" CssClass="btn btn-success btn-sm"><i class="fa fa-cog"></i> Manage Privileges</asp:LinkButton>

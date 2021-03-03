@@ -350,7 +350,7 @@
                                                             <asp:TextBox ID="txtECTEmail" runat="server" CssClass="form-control" TabIndex="25"
                                                                 Enabled="False" ReadOnly="True"></asp:TextBox>
                                                             <asp:LinkButton ID="btnCreateEmail" runat="server" ForeColor="blue"
-                                                                Text="Create Email" Visible="true" onclick="btnCreateEmail_Click" />
+                                                                Text="Create Email" Visible="true" onclick="btnCreateEmail_Click" Enabled="false"/>
                                                         </div>
                                                     </div>
                                                        <div class="form-group row">
