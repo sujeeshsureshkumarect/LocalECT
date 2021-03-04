@@ -66,7 +66,7 @@ namespace LocalECT
 
         public void bindemployeeprofile()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -77,14 +77,14 @@ namespace LocalECT
 
                 if (dt.Rows.Count > 0)
                 {
-                    lbl_EmpID.Text = dt.Rows[0]["Personnelnr"].ToString();
-                    lbl_EmpName.Text = dt.Rows[0]["Name"].ToString();
-                    Lbl_Position.Text = dt.Rows[0]["Designation"].ToString();
-                    lbl_Dept.Text = dt.Rows[0]["DepartmentName"].ToString();
+                    lbl_EmpID.Text = "E" + dt.Rows[0]["EmployeeID"].ToString();
+                    lbl_EmpName.Text = dt.Rows[0]["EmployeeDisplayName"].ToString();
+                    Lbl_Position.Text = dt.Rows[0]["JobTitleEn"].ToString();
+                    lbl_Dept.Text = dt.Rows[0]["DepartmentAbbreviation"].ToString();
                     //   txt_Gender.Text = dt.Rows[0]["Gender"].ToString();
                     //  txtCategory.Text = dt.Rows[0]["Category"].ToString();
                     // txtPhoneNumber.Text = dt.Rows[0]["MobilePhoneNumber"].ToString();
-                    UserEmail.Value = dt.Rows[0]["Email"].ToString();
+                    UserEmail.Value = dt.Rows[0]["EmployeeEmail"].ToString();
                 }
             }
             catch (Exception ex)
@@ -269,19 +269,74 @@ namespace LocalECT
                 if (dt.Rows.Count > 0)
                 {
 
+                    string mymail= dt.Rows[0]["EmployeeEmail"].ToString();
+                    string hodmail= dt.Rows[0]["HOD_Email"].ToString();
+                    string deanmail= dt.Rows[0]["Dean_Email"].ToString();
+                    string presidentmail = "president@ect.ac.ae";
 
-                    String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
-
-                    if (IsFaculty == "Yes")
+                    if(mymail==hodmail)
                     {
-                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
-                        Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                        //Yes
+                        if(hodmail==deanmail)
+                        {
+                            String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
+
+                            if (IsFaculty == "Yes")
+                            {
+                                Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                                Approvals.Value = "Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                            }
+                            else
+                            {
+                                Approvers.Value = presidentmail + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                                Approvals.Value = "President Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                            }
+                        }
+                        else
+                        {
+                            String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
+
+                            if (IsFaculty == "Yes")
+                            {
+                                Approvers.Value =  dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                                Approvals.Value = "Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                            }
+                            else
+                            {
+                                Approvers.Value = dt.Rows[0]["Dean_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                                Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                            }
+                        }
                     }
                     else
                     {
-                        Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
-                        Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                        String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
+
+                        if (IsFaculty == "Yes")
+                        {
+                            Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                            Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                        }
+                        else
+                        {
+                            Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                            Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                        }
                     }
+
+
+                    //String IsFaculty = dt.Rows[0]["IsFaculty"].ToString();
+
+                    //if (IsFaculty == "Yes")
+                    //{
+                    //    Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + dt.Rows[0]["ProvostEmail"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                    //    Approvals.Value = "Dept Head Approval,Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                    //}
+                    //else
+                    //{
+                    //    Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                    //    Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                    //}
 
                 }
             }

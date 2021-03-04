@@ -41,9 +41,43 @@ namespace LocalECT
 
         }
 
+        //public void bindemployeeprofile()
+        //{
+        //    SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    try
+        //    {
+        //        sc.Open();
+        //        da.Fill(dt);
+        //        sc.Close();
+
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            lbl_EmpID.Text = dt.Rows[0]["Personnelnr"].ToString();
+        //            lbl_EmpName.Text = dt.Rows[0]["Name"].ToString();
+        //            Signature.Text = dt.Rows[0]["Name"].ToString();
+        //            //  Lbl_Position.Text = dt.Rows[0]["Designation"].ToString();
+        //            // lbl_Dept.Text = dt.Rows[0]["DepartmentName"].ToString();
+        //            //   txt_Gender.Text = dt.Rows[0]["Gender"].ToString();
+        //            //  txtCategory.Text = dt.Rows[0]["Category"].ToString();
+        //            // txtPhoneNumber.Text = dt.Rows[0]["MobilePhoneNumber"].ToString();
+        //            UserEmail.Value = dt.Rows[0]["Email"].ToString();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sc.Close();
+        //        Console.WriteLine("{0} Exception caught.", ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        sc.Close();
+        //    }
+        //}
         public void bindemployeeprofile()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -54,15 +88,13 @@ namespace LocalECT
 
                 if (dt.Rows.Count > 0)
                 {
-                    lbl_EmpID.Text = dt.Rows[0]["Personnelnr"].ToString();
-                    lbl_EmpName.Text = dt.Rows[0]["Name"].ToString();
+                    lbl_EmpID.Text = "E" + dt.Rows[0]["EmployeeID"].ToString();
+                    lbl_EmpName.Text = dt.Rows[0]["EmployeeDisplayName"].ToString();
                     Signature.Text = dt.Rows[0]["Name"].ToString();
-                    //  Lbl_Position.Text = dt.Rows[0]["Designation"].ToString();
-                    // lbl_Dept.Text = dt.Rows[0]["DepartmentName"].ToString();
                     //   txt_Gender.Text = dt.Rows[0]["Gender"].ToString();
                     //  txtCategory.Text = dt.Rows[0]["Category"].ToString();
                     // txtPhoneNumber.Text = dt.Rows[0]["MobilePhoneNumber"].ToString();
-                    UserEmail.Value = dt.Rows[0]["Email"].ToString();
+                    UserEmail.Value = dt.Rows[0]["EmployeeEmail"].ToString();
                 }
             }
             catch (Exception ex)
