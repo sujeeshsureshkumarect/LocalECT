@@ -187,7 +187,7 @@
                                                 <asp:ListItem> Compassionate Leave ( shall be supported with death certificate upon submission of Duty Resumption Form)</asp:ListItem>
                                                 <asp:ListItem> Unauthorized Absence (leave without prior approval from line manager)</asp:ListItem>
                                                 <asp:ListItem> Unpaid Leave (leave without pay is granted only in case the employee has fully utilized the annual leave entitlement)</asp:ListItem>
-                                                <asp:ListItem> Others (Please specify: </asp:ListItem>
+                                                <asp:ListItem> Others (Please specify) </asp:ListItem>
                                             </asp:RadioButtonList>
 <asp:RequiredFieldValidator ID="LeaveTypeValidator1" runat="server" ErrorMessage="*Please select leave type" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="LeaveType"></asp:RequiredFieldValidator>
                                         </td>
