@@ -167,6 +167,16 @@ namespace LocalECT
                 remainquery += "(SELECT     lngStudentNumber, Debit - Credit + VAT AS Balance ";
                 remainquery += "FROM          AccBalanceSTBothSide) AS ACBS ON SD.SID = ACBS.lngStudentNumber ";
 
+               
+                if(drp_Campus.SelectedItem.Text== "Males")
+                {
+                    Campus = InitializeModule.EnumCampus.Males;
+                }
+                else
+                {
+                    Campus = InitializeModule.EnumCampus.Females;
+                }
+
                 Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
                 SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
                 SqlCommand cmd = new SqlCommand(remainquery, sc);

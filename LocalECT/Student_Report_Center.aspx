@@ -116,6 +116,7 @@
                                         <asp:ListItem Text="NGroup" Value="SD.NGroup"></asp:ListItem>
                                         <asp:ListItem Text="HSSection" Value="SD.HSSection"></asp:ListItem>
                                         <asp:ListItem Text="HSScore" Value="SD.HSScore"></asp:ListItem>
+                                        <asp:ListItem Text="HSYear" Value="SD.HSYear"></asp:ListItem>
                                         <asp:ListItem Text="EmSAT(Ar)" Value="SD.EmSAT_AR"></asp:ListItem>
                                         <asp:ListItem Text="ENG" Value="SD.ENG"></asp:ListItem>
                                         <asp:ListItem Text="ENGSource" Value="SD.ENGSource"></asp:ListItem>
