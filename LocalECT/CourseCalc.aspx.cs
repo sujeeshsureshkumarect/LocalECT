@@ -22,9 +22,39 @@ namespace LocalECT
         int CurrentRole = 0;
         int iCampus = 0;
         string sUserName = "";
+        InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
 
         Grade_HeaderDAL myGrade_HeaderDAL = new Grade_HeaderDAL();
-
+        public string getstudentname(string sid)
+        {
+            string sName = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("select * from Web_Students_Search where sNo=@sNo", Conn);
+            cmd.Parameters.AddWithValue("@sNo", sid);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                Conn.Open();
+                da.Fill(dt);
+                Conn.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    sName = dt.Rows[0]["sName"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Conn.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return sName;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -42,14 +72,35 @@ namespace LocalECT
             //CurrentRole = Convert.ToInt32(Session["CurrentRole"]);
 
             //Add Event Handler to the custom control
-            Search1.ChangedEvent += new Search1.ChangedEventHandler(Search1_ChangedEvent);
-            Search1.NewEvent += new Search1.ChangedEventHandler(Search1_NewEvent);
+            //Search1.ChangedEvent += new Search1.ChangedEventHandler(Search1_ChangedEvent);
+            //Search1.NewEvent += new Search1.ChangedEventHandler(Search1_NewEvent);
 
-            divMsg.InnerText = "";
+            //divMsg.InnerText = "";
+            lbl_Msg.Text = "";
+            div_msg.Visible = false;
 
             if (!IsPostBack)
             {
-                iCampus = Convert.ToInt32(Session["CurrentCampus"]);
+                //Update
+                if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
+                {
+                    Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    string sid = Request.QueryString["sid"];
+                    sSelectedValue.Value = sid;
+                    sSelectedText.Value = getstudentname(sid);
+                    Session["CurrentStudent"] = sSelectedValue.Value;
+                    Session["CurrentStudentName"] = sSelectedText.Value;
+                }
+                if (Campus.ToString() == "Males")
+                {
+                    iCampus = 1;                    
+                }
+                else
+                {
+                    iCampus = 0;                    
+                }
+
+                //iCampus = Convert.ToInt32(Session["CurrentCampus"]);
 
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_CourseCalc,
                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
@@ -57,36 +108,33 @@ namespace LocalECT
                     Server.Transfer("Authorization.aspx");
 
                 }
-                //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_CourseCalc,
-                //InitializeModule.enumPrivilege.ShiftChangeAcademicYear , CurrentRole) != true)
-                //{
-                //    ddlAcademicYear.Enabled  = true ;
-
-                //}
 
                 Session["myList"] = null;
-
-                //Fill_Terms();
-
-
-                //ddlAcademicYear.SelectedValue = Convert.ToString(Session["CurrentYear"]);
-
-                if (Session["CurrentStudent"] != null)
+               
+                    if (Session["CurrentStudent"] != null)
                 {
                     sSelectedValue.Value = Session["CurrentStudent"].ToString();
                     sSelectedText.Value = Session["CurrentStudentName"].ToString();
                 }
-
+                //RunCMD_Click(null,null);
                 grdStudentGrades.DataBind();
 
                 DataStatus.Value = ((int)InitializeModule.enumModes.NewMode).ToString();
 
-                CampusCBO.SelectedValue = Convert.ToString(iCampus);
+                //CampusCBO.SelectedValue = Convert.ToString(iCampus);
 
             }
             else
             {
-                iCampus = Convert.ToInt32(CampusCBO.SelectedValue);
+                Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                if (Campus.ToString() == "Males")
+                {
+                    iCampus = 1;
+                }
+                else
+                {
+                    iCampus = 0;
+                }
                 Session["CurrentCampus"] = iCampus;
             }
             string sConn = "";
@@ -106,7 +154,7 @@ namespace LocalECT
             }
 
             SqlDataSourceStudentGrades.ConnectionString = sConn;
-            Search1.Campus = (InitializeModule.EnumCampus)iCampus;
+            //Search1.Campus = (InitializeModule.EnumCampus)iCampus;
             SqlDataSourceInstitute.ConnectionString = sConn;
 
             //DdlInstitute.DataBind();
@@ -124,12 +172,16 @@ namespace LocalECT
             grdStudentGrades.DataBind();
             if (grdStudentGrades.Rows.Count <= 0)
             {
-                lblrecordsCounts.Text = "No TC,EX,NC,EQ Grades for " + sSelectedText.Value;
+                //lblrecordsCounts.Text = "No TC,EX,NC,EQ Grades for " + sSelectedText.Value;
+                lbl_Msg.Text = "No TC,EX,NC,EQ Grades for " + sSelectedText.Value;
+                div_msg.Visible = true;
                 btnESLExemption.Visible = false;
             }
             else
             {
-                lblrecordsCounts.Text = "";
+                //lblrecordsCounts.Text = "";
+                lbl_Msg.Text = "";
+                div_msg.Visible = false;
                 btnESLExemption.Visible = true;
             }
         }
@@ -174,12 +226,16 @@ namespace LocalECT
                 //grade=e.OldValues [2]
 
                 // string sSQl = "UPDATE ";
-                divMsg.InnerText = "";
+                //divMsg.InnerText = "";
+                lbl_Msg.Text = "";
+                div_msg.Visible = false;
             }
             else
             {
 
-                divMsg.InnerText = e.NewValues[4].ToString() + "Not Allowed Grade";
+                //divMsg.InnerText = e.NewValues[4].ToString() + "Not Allowed Grade";
+                lbl_Msg.Text = e.NewValues[4].ToString() + "Not Allowed Grade";
+                div_msg.Visible = true;
             }
         }
 
@@ -196,12 +252,12 @@ namespace LocalECT
 
         }
 
-        protected void SaveCMD_Click(object sender, ImageClickEventArgs e)
+        protected void SaveCMD_Click(object sender, EventArgs e)
         {
             SaveData();
 
         }
-        protected void DeleteCMD_Click(object sender, ImageClickEventArgs e)
+        protected void DeleteCMD_Click(object sender, EventArgs e)
         {
             DeleteData();
         }
@@ -211,7 +267,9 @@ namespace LocalECT
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_CourseCalc,
                 InitializeModule.enumPrivilege.Delete, CurrentRole) != true)
             {
-                divMsg.InnerText = InitializeModule.MsgDeleteAuthorization;
+                //divMsg.InnerText = InitializeModule.MsgDeleteAuthorization;
+                lbl_Msg.Text = InitializeModule.MsgDeleteAuthorization;
+                div_msg.Visible = true;
                 return;
             }
             Connection_StringCLS myConnection_String = new Connection_StringCLS((InitializeModule.EnumCampus)iCampus);
@@ -234,20 +292,26 @@ namespace LocalECT
                     if (iEffected > 0)
                     {
                         //iEffected=myStudents_DataDAL.DeleteStudentsFromRole(" Where " + myStudents_DataDAL.lngSerialFN  + "=" + lblStudentSerialNo.Text,Conn,"");
-                        divMsg.InnerText = "Record Deleted Successfully";
+                        //divMsg.InnerText = "Record Deleted Successfully";
+                        lbl_Msg.Text = "Record Deleted Successfully";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
                         Initialize_Controls();
                         GetStudentData();
                     }
                 }
                 else
-                {
-                    divMsg.InnerText = "No Record Selected !";
+                {                    
+                    lbl_Msg.Text = "No Record Selected !";                    
+                    div_msg.Visible = true;
                 }
             }
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                divMsg.InnerText = ex.Message;
+                //divMsg.InnerText = ex.Message;
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -265,29 +329,39 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_CourseCalc,
                     InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                 {
-                    divMsg.InnerText = InitializeModule.MsgEditAuthorization;
+                    //divMsg.InnerText = InitializeModule.MsgEditAuthorization;
+                    lbl_Msg.Text = InitializeModule.MsgEditAuthorization;
+                    div_msg.Visible = true;
                     return;
                 }
                 if (string.IsNullOrEmpty(sSelectedValue.Value))
                 {
-                    divMsg.InnerText = "Please Select Student!";
+                    //divMsg.InnerText = "Please Select Student!";
+                    lbl_Msg.Text = "Please Select Student!";
+                    div_msg.Visible = true;
                     return;
                 }
 
                 if (DdlGrade.SelectedValue == "-1")
                 {
-                    divMsg.InnerText = "Please Select Grade!";
+                    //divMsg.InnerText = "Please Select Grade!";
+                    lbl_Msg.Text = "Please Select Grade!";
+                    div_msg.Visible = true;
                     return;
                 }
 
                 if (DdlCourses.SelectedValue == "-1" && txtCourse.Text == "")
                 {
-                    divMsg.InnerText = "Please Select Course!";
+                    //divMsg.InnerText = "Please Select Course!";
+                    lbl_Msg.Text = "Please Select Course!";
+                    div_msg.Visible = true;
                     return;
                 }
                 if (DdlCourses.SelectedValue == "-1" && txtCourse.Text != "")
                 {
-                    divMsg.InnerText = "Invalid Course!";
+                    //divMsg.InnerText = "Invalid Course!";
+                    lbl_Msg.Text = "Invalid Course!";
+                    div_msg.Visible = true;
                     return;
                 }
                 //if (DdlInstitute.SelectedValue == "-1")
@@ -339,7 +413,9 @@ namespace LocalECT
                     //}
                     //else
                     //{ 
-                    divMsg.InnerText = "Grade alraedy exist.Duplicate not allowed";
+                    //divMsg.InnerText = "Grade alraedy exist.Duplicate not allowed";
+                    lbl_Msg.Text = "Grade alraedy exist.Duplicate not allowed";
+                    div_msg.Visible = true;
                     return;
                     //}
 
@@ -352,7 +428,10 @@ namespace LocalECT
 
                 if (iEffected > 0)
                 {
-                    divMsg.InnerText = "Data Updated Successfully";
+                    //divMsg.InnerText = "Data Updated Successfully";
+                    lbl_Msg.Text = "Data Updated Successfully";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    div_msg.Visible = true;
                     GetStudentData();
                 }
 
@@ -362,7 +441,9 @@ namespace LocalECT
             catch (Exception ex)
             {
                 LibraryMOD.ShowErrorMessage(ex);
-                divMsg.InnerText = ex.Message;
+                //divMsg.InnerText = ex.Message;
+                lbl_Msg.Text = ex.Message;
+                div_msg.Visible = true;
             }
             finally
             {
@@ -388,8 +469,8 @@ namespace LocalECT
                         DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
 
                         SaveCMD.Enabled = true;
-                        SaveCMD.ImageUrl = "~/Images/Icons/Save.gif";
-                        DeleteCMD.ImageUrl = "~/Images/Icons/Delete.gif";
+                        //SaveCMD.ImageUrl = "~/Images/Icons/Save.gif";
+                        //DeleteCMD.ImageUrl = "~/Images/Icons/Delete.gif";
 
                         DeleteCMD.Enabled = true;
                         this.DdlCourses.SelectedValue = grdStudentGrades.SelectedRow.Cells[5].Text;
@@ -421,7 +502,9 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
         }
         protected void DdlCourses_SelectedIndexChanged(object sender, EventArgs e)
@@ -448,15 +531,20 @@ namespace LocalECT
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (LibraryMOD.CalcESL(sSelectedValue.Value, Convert.ToInt32(Session["StudentSerialNo"]), Convert.ToInt32(CampusCBO.SelectedValue), Session["CurrentUserName"].ToString()) == InitializeModule.TRUE_VALUE)
+            if (LibraryMOD.CalcESL(sSelectedValue.Value, Convert.ToInt32(Session["StudentSerialNo"]), iCampus, Session["CurrentUserName"].ToString()) == InitializeModule.TRUE_VALUE)
             {
                 DataStatus.Value = InitializeModule.enumModes.EditMode.ToString();
                 GetStudentData();
-                divMsg.InnerText = "Data Updated successfully";
+                //divMsg.InnerText = "Data Updated successfully";
+                lbl_Msg.Text = "Data Updated successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
             }
             else
             {
-                divMsg.InnerText = "Fail,Please select student";
+                //divMsg.InnerText = "Fail,Please select student";
+                lbl_Msg.Text = "Fail,Please select student";                
+                div_msg.Visible = true;
             }
 
 
@@ -465,31 +553,31 @@ namespace LocalECT
 
 
 
-        protected void CampusCBO_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Session["CurrentCampus"] = Convert.ToInt32(CampusCBO.SelectedValue);
-            iCampus = Convert.ToInt32(CampusCBO.SelectedValue);
-            string sConn = "";
+        //protected void CampusCBO_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    Session["CurrentCampus"] = Convert.ToInt32(CampusCBO.SelectedValue);
+        //    iCampus = Convert.ToInt32(CampusCBO.SelectedValue);
+        //    string sConn = "";
 
-            if (iCampus == (int)ECTGlobalDll.InitializeModule.EnumCampus.Males)
-            {
-                Connection_StringCLS MyConnection_string = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
-                sConn = MyConnection_string.Conn_string;
+        //    if (iCampus == (int)ECTGlobalDll.InitializeModule.EnumCampus.Males)
+        //    {
+        //        Connection_StringCLS MyConnection_string = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
+        //        sConn = MyConnection_string.Conn_string;
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-                Connection_StringCLS MyConnection_string = new Connection_StringCLS(InitializeModule.EnumCampus.Females);
-                sConn = MyConnection_string.Conn_string;
+        //        Connection_StringCLS MyConnection_string = new Connection_StringCLS(InitializeModule.EnumCampus.Females);
+        //        sConn = MyConnection_string.Conn_string;
 
-            }
+        //    }
 
-            SqlDataSourceStudentGrades.ConnectionString = sConn;
-            SqlDataSourceInstitute.ConnectionString = sConn;
-            DdlInstitute.DataBind();
+        //    SqlDataSourceStudentGrades.ConnectionString = sConn;
+        //    SqlDataSourceInstitute.ConnectionString = sConn;
+        //    DdlInstitute.DataBind();
 
-        }
+        //}
 
         protected void txtCourse_TextChanged(object sender, EventArgs e)
         {
@@ -524,7 +612,9 @@ namespace LocalECT
             catch (Exception exp)
             {
                 Console.WriteLine("{0} Exception caught.", exp);
-                divMsg.InnerText = exp.Message;
+                //divMsg.InnerText = exp.Message;
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
             }
         }
         protected void grdStudentGrades_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -701,7 +791,7 @@ namespace LocalECT
             return sSQL;
 
         }
-        protected void printCMD_Click(object sender, ImageClickEventArgs e)
+        protected void printCMD_Click(object sender, EventArgs e)
         {
             InitializeModule.EnumCampus Campus = (InitializeModule.EnumCampus)iCampus;
             Export(Prepare_Report(getSQL(), Campus));

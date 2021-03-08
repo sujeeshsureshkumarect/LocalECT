@@ -22,6 +22,7 @@ namespace LocalECT
         int iCampus = 0;
         string sUserName = "";
         Grade_HeaderDAL myGrade_HeaderDAL = new Grade_HeaderDAL();
+        InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,14 +40,27 @@ namespace LocalECT
             //CurrentRole = Convert.ToInt32(Session["CurrentRole"]);
 
             //Add Event Handler to the custom control
-            Search1.ChangedEvent += new Search1.ChangedEventHandler(Search1_ChangedEvent);
-            Search1.NewEvent += new Search1.ChangedEventHandler(Search1_NewEvent);
+            //Search1.ChangedEvent += new Search1.ChangedEventHandler(Search1_ChangedEvent);
+            //Search1.NewEvent += new Search1.ChangedEventHandler(Search1_NewEvent);
 
             divMsg.InnerText = "";
 
             if (!IsPostBack)
             {
-                iCampus = Convert.ToInt32(Session["CurrentCampus"]);
+                if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
+                {
+                    Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    string sid = Request.QueryString["sid"];
+                }
+
+                if (Campus.ToString() == "Males")
+                {
+                    iCampus = 1;
+                }
+                else
+                {
+                    iCampus = 0;
+                }
 
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_AlternativeSetup,
                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
@@ -96,7 +110,7 @@ namespace LocalECT
 
             SqlDataSourceStudentGrades.ConnectionString = sConn;
 
-            Search1.Campus = (InitializeModule.EnumCampus)iCampus;
+            //Search1.Campus = (InitializeModule.EnumCampus)iCampus;
             // grdStudentGrades.DataBind();
 
             //foreach (GridViewRow row in grdStudentGrades.Rows)
@@ -115,12 +129,44 @@ namespace LocalECT
             if (!IsPostBack)
             {
                 grdStudentGrades.DataBind();
+                //rdbShowAllOutofMajor_CheckedChanged(null,null);
+                Search1_ChangedEvent(null, null);
+                RunCMD_Click(null,null);
             }
 
 
         }
         //Event for the Search Control
-
+        public string getstudentname(string sid)
+        {
+            string sName = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("select * from Web_Students_Search where sNo=@sNo", Conn);
+            cmd.Parameters.AddWithValue("@sNo", sid);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                Conn.Open();
+                da.Fill(dt);
+                Conn.Close();
+                if (dt.Rows.Count > 0)
+                {
+                    sName = dt.Rows[0]["sName"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Conn.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return sName;
+        }
         protected void Search1_NewEvent(object Sender, Search1.ChangedEventArgs e)
         {
             sSelectedValue.Value = "";
@@ -130,17 +176,34 @@ namespace LocalECT
         }
         protected void Search1_ChangedEvent(object Sender, Search1.ChangedEventArgs e)
         {
-            sSelectedValue.Value = e.SValue1;
+            //sSelectedValue.Value = e.SValue1;
 
-            sSelectedText.Value = e.SValue2;
+            //sSelectedText.Value = e.SValue2;
+            sSelectedValue.Value = Request.QueryString["sid"];
+            sSelectedText.Value = getstudentname(Request.QueryString["sid"]);
+            Session["CurrentStudent"] = sSelectedValue.Value;
+            Session["CurrentStudentName"] = sSelectedText.Value;
 
-            iCampus = Convert.ToInt32(Session["CurrentCampus"]);
-            //int iSerialNo = LibraryMOD.GetStudentSerialNo(sSelectedValue.Value.ToString(), iCampus);
-            int iSerialNo = Convert.ToInt32(e.SValue3);
+            //iCampus = Convert.ToInt32(Session["CurrentCampus"]);
+            int iSerialNo = GetSerial(sSelectedValue.Value.ToString());
+            //int iSerialNo = Convert.ToInt32(e.SValue3);
             Session["StudentSerialNo"] = iSerialNo;
             GetSource();
             grdStudentGrades.DataBind();
 
+        }
+        private int GetSerial(string sNumber)
+        {
+            int iserial = 0;
+            try
+            {
+                ApplicationsDAL myapp = new ApplicationsDAL();
+                iserial = myapp.GetSerial(Campus, sNumber);
+            }
+            catch (Exception ex)
+            {
+            }
+            return iserial;
         }
         #region FillDropDownList
 
@@ -178,15 +241,15 @@ namespace LocalECT
         {
 
             string sSQL = "";
-            if (rdbShowAllOutofMajor.Checked)
-            {
-                sSQL = GetSQL_AllOutofMajor();
-            }
+            //if (rdbShowAllOutofMajor.Checked)
+            //{
+            //    sSQL = GetSQL_AllOutofMajor();
+            //}
 
-            if (rdbStudentGrades.Checked)
-            {
+            //if (rdbStudentGrades.Checked)
+            //{
                 sSQL = GetSQL_StudentAllGrades();
-            }
+            //}
 
             if (sSQL != "")
             {
@@ -529,6 +592,8 @@ namespace LocalECT
         protected void Terms_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetYearSemester();
+            Search1_ChangedEvent(null, null);
+            RunCMD_Click(null, null);
         }
         private void GetYearSemester()
         {
@@ -644,32 +709,33 @@ namespace LocalECT
         }
         protected void rdbShowAllOutofMajor_CheckedChanged(object sender, EventArgs e)
         {
-            switch (((CheckBox)sender).ID)
-            {
-                case "rdbShowAllOutofMajor":
-                    Search1.Visible = false;
-                    break;
-                case "rdbStudentGrades":
-                    Search1.Visible = true;
-                    break;
-                default:
-                    Search1.Visible = false;
-                    break;
-            }
+            //switch (((CheckBox)sender).ID)
+            //{
+            //    case "rdbShowAllOutofMajor":
+            //        Search1.Visible = false;
+            //        break;
+            //    case "rdbStudentGrades":
+            //        Search1.Visible = true;
+            //        break;
+            //    default:
+            //        Search1.Visible = false;
+            //        break;
+            //}
+            Search1_ChangedEvent(null, null);
         }
 
         private void GetSource()
         {
             string sSQL = "";
-            if (rdbShowAllOutofMajor.Checked)
-            {
-                sSQL = GetSQL_AllOutofMajor();
-            }
+            //if (rdbShowAllOutofMajor.Checked)
+            //{
+            //    sSQL = GetSQL_AllOutofMajor();
+            //}
 
-            if (rdbStudentGrades.Checked)
-            {
+            //if (rdbStudentGrades.Checked)
+            //{
                 sSQL = GetSQL_StudentAllGrades();
-            }
+            //}
 
             if (sSQL != "")
             {

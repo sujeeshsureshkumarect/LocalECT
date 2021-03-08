@@ -33,6 +33,10 @@
                     .table {
                         color:#444444;
                     }
+                    .dropdown-item {
+    width: 100%;
+    padding: 5px !important;
+}
                 </style>
                  <script>
                      setTimeout(explode, 200);
@@ -154,8 +158,8 @@
                                                               <a class="dropdown-item" href="Students_Advising?sid=<%#Eval("sNo")%>">Advising</a>
                                                              <a class="dropdown-item" href="Registration?sid=<%#Eval("sNo")%>">Registration</a>
                                                              <a class="dropdown-item" href="ChangeMajor?sid=<%#Eval("sNo")%>">Change Major</a>
-                                                             <%--<a class="dropdown-item" href="#">Testimonies</a>--%>
-                                                             <%--<a class="dropdown-item" href="#">Marks</a>--%>
+                                                             <a class="dropdown-item" href="CourseCalc?sid=<%#Eval("sNo")%>">Course Calc</a>
+                                                             <a class="dropdown-item" href="GradesEdit_Alt?sid=<%#Eval("sNo")%>">Alternative Setup</a>
                                                          </div>
                                                      </div>
                                                  </td>

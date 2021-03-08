@@ -1,14 +1,27 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseCalc.aspx.cs" Inherits="LocalECT.CourseCalc" MasterPageFile="~/LocalECT.Master"%>
-<%@ Register src="~/Search1.ascx" tagname="Search1" tagprefix="uc1" %>
+<%--<%@ Register src="~/Search1.ascx" tagname="Search1" tagprefix="uc1" %>--%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
                         <div class="">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <%--<h3>Welcome To Emirates College Of Technology (ECT)</h3>--%>
+                                               <h3 class="breadcrumb">
+                        <a href="Home">Home /</a>
+                        <a href="#">&nbsp;Registration /</a>
+                        <a href="StudentSearch">&nbsp;Student Search /</a>
+                        <a href="#">&nbsp;Course Calc</a>
+                    </h3>
                                 </div>
                                 <style>
+                                       .breadcrumb {
+                        padding: 8px 15px;
+                        margin-bottom: 20px;
+                        list-style: none;
+                        background-color: #ededed;
+                        border-radius: 4px;
+                        font-size: 13px;
+                    }
                                     .page-title .title_left {
                                         width: 100%;
                                         float: left;
@@ -112,7 +125,7 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-dashboard"></i> Course Calculation</h2>
+                                            <h2><i class="fa fa-calculator"></i> Course(s) Calculation</h2>
                                             <ul class="nav navbar-right panel_toolbox">
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
@@ -122,115 +135,40 @@
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="x_content">
-                                           
+                                              <div class="x_content bs-example-popovers" id="div_msg" runat="server" visible="false">
+                                                <div class="alert alert-danger alert-dismissible" role="alert" runat="server" id="div_Alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <asp:Label ID="lbl_Msg" runat="server" Text="" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
+                                                </div>
+                                            </div>
 
-                                                <table class="TableSize" style="width:100%;">
-      <%--  <tr>
-            <th class="PageTitle" rowspan="1">Course Calculation</th>
-            
-        </tr>--%>
-        
-        <tr>
-           <td>
-              <div id="divMsg" runat="server" 
-                 align="center" class="NoData">
-              </div>
-           </td>
-        </tr>
+                                                <table class="TableSize" style="width:100%;">       
         <tr>
             <td>
                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" 
                     ValidationGroup="isValid" style="text-align: center" />
             </td>
-        </tr>
-        <tr>
-            <td class="TABLETH">
-             
-            </td>
-        </tr>
-        
-     
-         <tr>
-            <td>
-             
-                &nbsp;&nbsp;</td>
-        </tr>
-        
-     
+        </tr>               
     </table>
                                                                                                                                               
    
-    <table class="">
-        <tr>
-            <td class="style14" >
-                &nbsp;</td>
-            <td class="style14" >
-                Campus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            <td>
-                <asp:DropDownList ID="CampusCBO" runat="server" AutoPostBack="True" 
-                    CssClass="form-control" 
-                    onselectedindexchanged="CampusCBO_SelectedIndexChanged">
-                    <asp:ListItem Value="1">Males</asp:ListItem>
-                    <asp:ListItem Value="2">Females</asp:ListItem>
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td >
-        
-                &nbsp;</td>
-            <td >
-        
-                &nbsp;</td>
-            <td colspan="2" >
-        
-         <uc1:Search1 ID="Search1" runat="server" SCaption1="Student ID" SCaption2="Name" 
-             SField1="sNo" SField2="sName" 
-             SSQL="SELECT sNo, sName,iSerial FROM Web_Students_Search" 
-             OnChangedEvent  ="Search1_ChangedEvent" Campus="Males" SField3="iSerial"  style="width:100%;"/>
-        
-            </td>
-        </tr>
-        <tr>
-            <td class="style14" >
-        
-                                        &nbsp;</td>
-            <td class="style14" align="right" >
-        
-                                   <%--     <asp:ImageButton ID="RunCMD" runat="server" ImageUrl="~/Images/Icons/Run.gif"
-                                        Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                                        ToolTip="Run" onclick="RunCMD_Click" />--%>
 
-                 <asp:LinkButton ID="RunCMD" runat="server" 
-                                        ToolTip="Run" OnClick="RunCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-bolt"></i> Run</asp:LinkButton>
-        
-                                                                                                                                              
-            </td>
-            <td class="style8">
-                <h3>
-                    <asp:Label ID="lblrecordsCounts" runat="server" style="text-align: center"></asp:Label>
-                </h3>
-            </td>
-        </tr>
-        </table>
      
                                                                                                                                               
       <table class="style7" style="width:100%;">
-          <tr>
-              <td class="style18" colspan="5" bgcolor="#FFCC66">
-                  &nbsp;</td>
-          </tr>
           <tr>
               <td class="style18">
                   </td>
               <td class="style18" align="right">
                 Course 
               </td>
-              <td class="style20">
+              <td class="">
                   <asp:TextBox ID="txtCourse" runat="server" 
                       ontextchanged="txtCourse_TextChanged"  CssClass="form-control" ></asp:TextBox>
               </td>
-              <td class="style19">
+              <td class="">
                 <asp:DropDownList ID="DdlCourses" runat="server" DataSourceID="SDSCourses" DataTextField="strCourse" 
                     DataValueField="strCourse" 
                      CssClass="form-control"  AutoPostBack="True" 
@@ -289,22 +227,19 @@
                   <td class="">
                       &nbsp;</td>
                   <td>
-                      <asp:ImageButton ID="SaveCMD" runat="server" ImageUrl="~/Images/Icons/Save.gif" 
-                          onclick="SaveCMD_Click" 
-                          Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                          ToolTip="Save" ValidationGroup="isValid" />
+                      <asp:LinkButton ID="SaveCMD" runat="server" 
+                          onclick="SaveCMD_Click"                           
+                          ToolTip="Save" ValidationGroup="isValid" CssClass="btn btn-success btn-sm"><i class="fa fa-save"></i> Save</asp:LinkButton>
                   </td>
                   <td>
-                      <asp:ImageButton ID="DeleteCMD" runat="server" 
-                          ImageUrl="~/Images/Icons/Delete.gif" onclick="DeleteCMD_Click" 
-                          Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                          ToolTip="Delete" Enabled="False" />
+                      <asp:LinkButton ID="DeleteCMD" runat="server" 
+                           onclick="DeleteCMD_Click"                           
+                          ToolTip="Delete" Enabled="False" CssClass="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                   </td>
                   <td>
-                      <asp:ImageButton ID="printCMD" runat="server" 
-                          ImageUrl="~/Images/Icons/Print.gif" onclick="printCMD_Click" 
-                          Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                          ToolTip="Print" />
+                      <asp:LinkButton ID="printCMD" runat="server" 
+                           onclick="printCMD_Click"                           
+                          ToolTip="Print" CssClass="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</asp:LinkButton>
                   </td>
               </tr>
             </table>
@@ -313,8 +248,8 @@
         <div align="center">                                                                                                                                                  
             <asp:GridView ID="grdStudentGrades" runat="server" BackColor="White" 
             BorderColor="#E7E7FF" BorderStyle="None" 
-            BorderWidth="1px" CellPadding="3" GridLines="Horizontal" Width="771px" 
-            Height="254px" DataSourceID="SqlDataSourceStudentGrades"  
+            BorderWidth="1px" CellPadding="3" GridLines="Horizontal" Width="100%" 
+             DataSourceID="SqlDataSourceStudentGrades"  
             CssClass="TableStyle" 
             OnRowUpdating ="grdStudentGrades_RowUpdating" 
             OnRowEditing ="grdStudentGrades_RowEditing" PageSize="50" 
@@ -377,8 +312,7 @@
        
         <div align="center">
          <asp:Button ID="btnESLExemption" runat="server" onclick="Button1_Click" 
-             Text="ESL Exemption" Width="139px" Height="30px" 
-                    ToolTip="Click to Calc ESL Courses" Visible="False" />
+             Text="ESL Exemption" ToolTip="Click to Calc ESL Courses" Visible="False" CssClass="btn btn-success btn-sm"/>
         </div>
         
        

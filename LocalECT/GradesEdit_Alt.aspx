@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GradesEdit_Alt.aspx.cs" Inherits="LocalECT.GradesEdit_Alt" MasterPageFile="~/LocalECT.Master"%>
-<%@ Register src="~/Search1.ascx" tagname="Search1" tagprefix="uc1" %>
+<%--<%@ Register src="~/Search1.ascx" tagname="Search1" tagprefix="uc1" %>--%>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
                         <div class="">
@@ -126,7 +126,7 @@
         
                 <asp:DropDownList ID="Terms" runat="server" CssClass="form-control"
                     onselectedindexchanged="Terms_SelectedIndexChanged" 
-                    style="margin-bottom: 0px">
+                    style="margin-bottom: 0px" AutoPostBack="true">
             </asp:DropDownList>
             
      </td>
@@ -149,47 +149,7 @@
         
      </td>
      </tr>
-     <tr>
-     <td class="style20" >
-        
-         &nbsp;</td>
-     <td class="style38" >
-        
-                &nbsp;</td>
-     <td class="style40" >
-        
-                <asp:RadioButton ID="rdbShowAllOutofMajor" runat="server" Checked="True" 
-                    ForeColor="Blue" GroupName="T" 
-                    oncheckedchanged="rdbShowAllOutofMajor_CheckedChanged" 
-                    Text="Show all courses out of major" AutoPostBack="True" />
-        
-     </td>
-     <td class="style39" >
-        
-                <asp:RadioButton ID="rdbStudentGrades" runat="server" ForeColor="#FF9900" 
-                    GroupName="T" oncheckedchanged="rdbShowAllOutofMajor_CheckedChanged" 
-                    Text="Show Student Grades" AutoPostBack="True" />
-        
-     </td>
-     </tr>
-     <tr>
-     <td class="style41" >
-        
-         </td>
-     <td colspan="3" class="style42" >
-        
-         <uc1:Search1 ID="Search1" runat="server" SCaption1="Student ID" SCaption2="Name" 
-             SField1="sNo" SField2="sName" 
-             SSQL="SELECT sNo, sName,iSerial FROM Web_Students_Search" 
-             OnChangedEvent  ="Search1_ChangedEvent" SField3="iSerial" 
-             Visible="False"  />
-        
-                                        <asp:ImageButton ID="RunCMD" runat="server" ImageUrl="~/Images/Icons/Run.gif"
-                                        Style="border-top-width: thin; border-left-width: thin; border-left-color: blue; border-bottom-width: thin; border-bottom-color: blue; border-top-color: blue; border-right-width: thin; border-right-color: blue;" 
-                                        ToolTip="Run" onclick="RunCMD_Click" />
-        
-     </td>
-     </tr>
+
      </table>
      
                                                                                                                                               
@@ -201,26 +161,16 @@
     </table>
                                                                                                                                               
    
-      <table class="TableSize" width="800">
-     <tr>
-     <td class="style20" >
-        
-         &nbsp;</td>
-     <td >
-        
-                                        &nbsp;</td>
-     </tr>
-     </table>
      
                                                                                                                                               
    
   <asp:HiddenField ID="sSelectedText" runat="server" />
      
-                                                                                                                                              
+        <hr />                                                                                                                                      
    
     <asp:GridView ID="grdStudentGrades" runat="server" BackColor="White" 
         BorderColor="#E7E7FF" BorderStyle="None" 
-        BorderWidth="1px" CellPadding="3" GridLines="Horizontal" Width="771px" Height="260px" 
+        BorderWidth="1px" CellPadding="3" GridLines="Horizontal" Width="100%"
         AllowPaging="True" 
         AllowSorting="True" DataSourceID="SqlDataSourceStudentGrades"  
         CssClass="TableStyle" 
@@ -235,7 +185,7 @@
        
         <RowStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" Font-Size="Small" />
         <Columns>
-            <asp:CommandField ShowEditButton="True" />
+            <asp:CommandField ShowEditButton="True" ItemStyle-ForeColor="Blue" ItemStyle-Font-Underline="true"/>
             <asp:BoundField DataField="lngStudentNumber" HeaderText="Student ID" 
                 ReadOnly="True" SortExpression="lngStudentNumber" >
             <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
