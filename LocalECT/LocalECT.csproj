@@ -3950,6 +3950,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="GradesDM.aspx" />
+    <Content Include="GradesEdit.aspx" />
     <Content Include="GradesEdit_Alt.aspx" />
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
@@ -8519,6 +8520,13 @@
     </Compile>
     <Compile Include="GradesDM.aspx.designer.cs">
       <DependentUpon>GradesDM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GradesEdit.aspx.cs">
+      <DependentUpon>GradesEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GradesEdit.aspx.designer.cs">
+      <DependentUpon>GradesEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="GradesEdit_Alt.aspx.cs">
       <DependentUpon>GradesEdit_Alt.aspx</DependentUpon>

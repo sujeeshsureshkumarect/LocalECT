@@ -160,6 +160,7 @@
                                                              <a class="dropdown-item" href="ChangeMajor?sid=<%#Eval("sNo")%>">Change Major</a>
                                                              <a class="dropdown-item" href="CourseCalc?sid=<%#Eval("sNo")%>">Course Calc</a>
                                                              <a class="dropdown-item" href="GradesEdit_Alt?sid=<%#Eval("sNo")%>">Alternative Setup</a>
+                                                             <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Grades Edit</a>
                                                          </div>
                                                      </div>
                                                  </td>

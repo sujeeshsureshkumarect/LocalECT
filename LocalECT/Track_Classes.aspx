@@ -39,9 +39,9 @@
                 <div id="divMsg" runat="server" class="NoData"></div>
             </td>
         </tr>
-        <tr>
+        <%--<tr>
             <th class="PageTitle" colspan="4">Classes Discipline</th>
-        </tr>
+        </tr>--%>
         <tr>
             <td>
                 <asp:Label ID="Label4" runat="server" Text="Term :"></asp:Label>
