@@ -33,6 +33,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Criteria;
 
         /// <summary>
+        /// drp_Type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Type;
+
+        /// <summary>
         /// txt_Search control.
         /// </summary>
         /// <remarks>

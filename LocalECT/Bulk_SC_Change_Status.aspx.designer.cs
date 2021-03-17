@@ -11,62 +11,35 @@ namespace LocalECT
 {
 
 
-    public partial class StudentSearch
+    public partial class Bulk_SC_Change_Status
     {
 
         /// <summary>
-        /// lnk_add control.
+        /// div_msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_add;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_msg;
 
         /// <summary>
-        /// drp_Campus control.
+        /// div_Alert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Campus;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_Alert;
 
         /// <summary>
-        /// drp_Criteria control.
+        /// lbl_Msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Criteria;
-
-        /// <summary>
-        /// drp_Type control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Type;
-
-        /// <summary>
-        /// txt_Search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Search;
-
-        /// <summary>
-        /// lnk_Search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Search;
+        protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
         /// alertsearch control.
@@ -78,49 +51,22 @@ namespace LocalECT
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertsearch;
 
         /// <summary>
-        /// lbl_Count control.
+        /// lbl_IDs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Count;
+        protected global::System.Web.UI.WebControls.Label lbl_IDs;
 
         /// <summary>
-        /// hdn_Selected_Sids control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_Selected_Sids;
-
-        /// <summary>
-        /// divResult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divResult;
-
-        /// <summary>
-        /// RepterDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepterDetails;
-
-        /// <summary>
-        /// drp_Bulk control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Bulk;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
         /// RequiredFieldValidator44 control.
@@ -132,12 +78,66 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator44;
 
         /// <summary>
-        /// lnk_Execute control.
+        /// ddlStatusTerm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Execute;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatusTerm;
+
+        /// <summary>
+        /// txt_Remarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Remarks;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
+        /// ddlReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlReason;
+
+        /// <summary>
+        /// ddlSubReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSubReason;
+
+        /// <summary>
+        /// lnk_BulkUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_BulkUpdate;
+
+        /// <summary>
+        /// SubReasonDS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SubReasonDS;
     }
 }

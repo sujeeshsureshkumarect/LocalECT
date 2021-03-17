@@ -691,28 +691,28 @@ namespace LocalECT
                         //div_msg.Visible = true;
                         if (iOpportunity > 0)
                         {
-                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                            ServicePointManager.Expect100Continue = true;
-                            ServicePointManager.DefaultConnectionLimit = 9999;
-                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                            string accessToken = InitializeModule.CxPwd;
+                            
+                            //ServicePointManager.Expect100Continue = true;
+                            //ServicePointManager.DefaultConnectionLimit = 9999;
+                            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            //string accessToken = InitializeModule.CxPwd;
 
-                            using (var httpClient = new HttpClient())
-                            {
-                                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                                {
-                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                            //using (var httpClient = new HttpClient())
+                            //{
+                                //using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                //{
+                                    //request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    //request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                                    request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
-                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                                    var task = httpClient.SendAsync(request);
-                                    task.Wait();
-                                    var response = task.Result;
-                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                                    //request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    //var task = httpClient.SendAsync(request);
+                                    //task.Wait();
+                                    //var response = task.Result;
+                                    //string s = response.Content.ReadAsStringAsync().Result;
                                     //If Status 200
-                                    if (response.IsSuccessStatusCode == true)
-                                    {
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
                                         //SetOpportunity(sSID);
                                         SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
                                         cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
@@ -733,9 +733,9 @@ namespace LocalECT
                                         {
                                             Conn.Close();
                                         }
-                                    }
-                                }
-                            }
+                                    //}
+                                //}
+                            //}
                         }
                     }
                     else
@@ -744,28 +744,28 @@ namespace LocalECT
                         //div_msg.Visible = true;
                         if (iOpportunity > 0)
                         {
-                            //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
-                            ServicePointManager.Expect100Continue = true;
-                            ServicePointManager.DefaultConnectionLimit = 9999;
-                            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-                            string accessToken = InitializeModule.CxPwd;
+                            
+                            //ServicePointManager.Expect100Continue = true;
+                            //ServicePointManager.DefaultConnectionLimit = 9999;
+                            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                            //string accessToken = InitializeModule.CxPwd;
 
-                            using (var httpClient = new HttpClient())
-                            {
-                                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
-                                {
-                                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
-                                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+                            //using (var httpClient = new HttpClient())
+                            //{
+                                //using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                                //{
+                                    //request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                                    //request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
 
-                                    request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
-                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                                    var task = httpClient.SendAsync(request);
-                                    task.Wait();
-                                    var response = task.Result;
-                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    //request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                                    //request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    //var task = httpClient.SendAsync(request);
+                                    //task.Wait();
+                                    //var response = task.Result;
+                                    //string s = response.Content.ReadAsStringAsync().Result;
                                     //If Status 200
-                                    if (response.IsSuccessStatusCode == true)
-                                    {
+                                    //if (response.IsSuccessStatusCode == true)
+                                    //{
                                         //SetOpportunity(sSID);
                                         SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
                                         cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", drp_PaymentType.SelectedItem.Value);
@@ -786,9 +786,9 @@ namespace LocalECT
                                         {
                                             Conn.Close();
                                         }
-                                    }
-                                }
-                            }
+                                    //}
+                                //}
+                            //}
                         }
                     }
                 }

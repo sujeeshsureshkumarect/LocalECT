@@ -33,11 +33,11 @@
                                 <script>
                                     setTimeout(explode, 200);
                                     function explode() {
-                                        var test = document.getElementById('datatable_info').textContent;
+                                        var test = document.getElementById('datatabless_info').textContent;
                                         document.getElementById('lbl_Count').textContent = "(" + test + ")";
                                     }
                                     $(document).on('keyup', '.dataTables_filter input', function () {
-                                        var test = document.getElementById('datatable_info').textContent;
+                                        var test = document.getElementById('datatabless_info').textContent;
                                         document.getElementById('lbl_Count').textContent = "(" + test + ")";
                                     })
                                 </script>
@@ -74,6 +74,7 @@
                                             <asp:ListItem Text="Student ID" Value="sNo" />
                                             <asp:ListItem Text="Student Name" Value="sName" />
                                             <asp:ListItem Text="Student Account Number" Value="sAccount" />
+                                             <asp:ListItem Text="Major Name" Value="strCaption" />  
                                             <asp:ListItem Text="Phone Number" Value="sPhone1" />  
                                             <asp:ListItem Text="ECT Email" Value="ECTEmail" />                                             
                                         </asp:DropDownList>
@@ -82,7 +83,14 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-3 col-sm-3 ">Search Text <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <asp:TextBox ID="txt_Search" runat="server" CssClass="form-control" OnTextChanged="lnk_Search_Click"></asp:TextBox>
+                               <asp:DropDownList ID="drp_Type" runat="server" CssClass="form-control" Width="100px">
+                                            <asp:ListItem Selected="True" Text="Like" Value="Like"></asp:ListItem>
+                                            <asp:ListItem Text="In" Value="In"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:TextBox ID="txt_Search" runat="server" CssClass="form-control" OnTextChanged="lnk_Search_Click" TextMode="MultiLine" Height="100px" ToolTip="You can add many IDs  or copy from excel column" placeholder="Example:
+StudentID1
+StudentID2
+StudentID3"></asp:TextBox>
                                          <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Search Text Required" ControlToValidate="txt_Search" ForeColor="Red" ValidationGroup="no">
                                             </asp:RequiredFieldValidator>
                                     </div>
@@ -100,15 +108,87 @@
                             
                         </div>
                                      </div>
+
+                                                          <script>
+                                                              $(document).ready(function () {
+                                                                  var table = $('#datatabless').DataTable({                                                                      
+                                                                      'columnDefs': [{
+                                                                          'targets': 0,
+                                                                          'searchable': false,
+                                                                          'orderable': false,
+                                                                          'className': 'dt-body-center',
+                                                                          'render': function (data, type, full, meta) {
+                                                                              return '<input type="checkbox" name="id[]" value="'
+                                                                                  + $('<div/>').text(data).html() + '">';
+                                                                          }
+                                                                      }],
+                                                                      'order': [1, 'asc']
+                                                                  });
+
+                                                                  // Handle click on "Select all" control
+                                                                  $('#example-select-all').on('click', function () {
+                                                                      // Check/uncheck all checkboxes in the table
+                                                                      var rows = table.rows({ 'search': 'applied' }).nodes();
+                                                                      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                                                                  });
+
+                                                                  // Handle click on checkbox to set state of "Select all" control
+                                                                  $('#example tbody').on('change', 'input[type="checkbox"]', function () {
+                                                                      // If checkbox is not checked
+                                                                      if (!this.checked) {
+                                                                          var el = $('#example-select-all').get(0);
+                                                                          // If "Select all" control is checked and has 'indeterminate' property
+                                                                          if (el && el.checked && ('indeterminate' in el)) {
+                                                                              // Set visual state of "Select all" control 
+                                                                              // as 'indeterminate'
+                                                                              el.indeterminate = true;
+                                                                          }
+                                                                      }
+                                                                  });
+
+                                                                  $('#frm-example').on('submit', function (e) {
+                                                                      var form = this;
+
+                                                                      // Iterate over all checkboxes in the table
+                                                                      table.$('input[type="checkbox"]').each(function () {
+                                                                          // If checkbox doesn't exist in DOM
+                                                                          if (!$.contains(document, this)) {
+                                                                              // If checkbox is checked
+                                                                              if (this.checked) {
+                                                                                  // Create a hidden element 
+                                                                                  $(form).append(
+                                                                                      $('<input>')
+                                                                                          .attr('type', 'hidden')
+                                                                                          .attr('name', this.name)
+                                                                                          .val(this.value)
+                                                                                  );
+                                                                              }
+                                                                          }
+                                                                      });
+
+                                                                      // FOR TESTING ONLY
+
+                                                                      // Output form data to a console
+                                                                      $('#example-console').text($(form).serialize());
+                                                                      console.log("Form submission", $(form).serialize());
+
+                                                                      // Prevent actual form submission
+                                                                      e.preventDefault();
+                                                                  });
+                                                              });
+                                                          </script>
+
                                  <div id="divResult" runat="server" class="table-responsive">
                                      <asp:Repeater ID="RepterDetails" runat="server">
                                          <HeaderTemplate>
-                                             <table id='datatable' class='table table-striped table-bordered' style='width: 100%'>
+                                             <table id='datatabless' class='table table-striped table-bordered' style='width: 100%'>
                                                  <thead>
                                                      <tr class='headings'>
+                                                         <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
                                                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">#</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">ID</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Student Name</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Major</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Account No.</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Phone No.</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Email</th>
@@ -118,9 +198,11 @@
                                          </HeaderTemplate>
                                          <ItemTemplate>
                                              <tr>
+                                                 <td></td>
                                                  <td align='center'><%# Container.ItemIndex+1 %></td>
                                                  <td><%#Eval("sNo")%></td>
                                                  <td><%#Eval("sName")%></td>
+                                                 <td><%#Eval("strCaption")%></td>
                                                  <td><%#Eval("sAccount")%></td>
                                                  <td><%#Eval("sPhone1")%></td>
                                                  <td><%#Eval("ECTEmail")%></td>

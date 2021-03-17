@@ -60,6 +60,24 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList Terms;
 
         /// <summary>
+        /// lbl_AT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_AT;
+
+        /// <summary>
+        /// lbl_AC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_AC;
+
+        /// <summary>
         /// btnCopy control.
         /// </summary>
         /// <remarks>

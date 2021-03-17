@@ -303,6 +303,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// RequiredFieldValidator18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator18;
+
+        /// <summary>
         /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
@@ -393,6 +402,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtEthbara;
 
         /// <summary>
+        /// RequiredFieldValidator29 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator29;
+
+        /// <summary>
         /// txtCityNo control.
         /// </summary>
         /// <remarks>
@@ -474,6 +492,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList ddlBirthCountry;
 
         /// <summary>
+        /// RequiredFieldValidator1111 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1111;
+
+        /// <summary>
         /// ddlBirthCity control.
         /// </summary>
         /// <remarks>
@@ -481,6 +508,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBirthCity;
+
+        /// <summary>
+        /// RequiredFieldValidator222 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator222;
 
         /// <summary>
         /// ddlResidentCountry control.
@@ -492,6 +528,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList ddlResidentCountry;
 
         /// <summary>
+        /// RequiredFieldValidator33 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator33;
+
+        /// <summary>
         /// ddlResidentCity control.
         /// </summary>
         /// <remarks>
@@ -499,6 +544,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlResidentCity;
+
+        /// <summary>
+        /// RequiredFieldValidator44 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator44;
 
         /// <summary>
         /// ddlHomeCountry control.
@@ -510,6 +564,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList ddlHomeCountry;
 
         /// <summary>
+        /// RequiredFieldValidator55 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator55;
+
+        /// <summary>
         /// ddlHomeCity control.
         /// </summary>
         /// <remarks>
@@ -517,6 +580,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlHomeCity;
+
+        /// <summary>
+        /// RequiredFieldValidator66 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator66;
 
         /// <summary>
         /// ddlNationality control.
@@ -528,6 +600,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList ddlNationality;
 
         /// <summary>
+        /// RequiredFieldValidator67 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator67;
+
+        /// <summary>
         /// ddlNationalityofMother control.
         /// </summary>
         /// <remarks>
@@ -535,6 +616,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNationalityofMother;
+
+        /// <summary>
+        /// RequiredFieldValidator68 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator68;
 
         /// <summary>
         /// ddlLanguage control.
@@ -555,6 +645,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.RadioButtonList rbnEmploymentStatus;
 
         /// <summary>
+        /// RequiredFieldValidator19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator19;
+
+        /// <summary>
         /// ddlIWork control.
         /// </summary>
         /// <remarks>
@@ -571,6 +670,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCompany;
+
+        /// <summary>
+        /// RequiredFieldValidator20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator20;
 
         /// <summary>
         /// ddlEmployerCountry control.
@@ -609,6 +717,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtEmployerIndustry;
 
         /// <summary>
+        /// RequiredFieldValidator21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator21;
+
+        /// <summary>
         /// txtWorkPhone control.
         /// </summary>
         /// <remarks>
@@ -618,6 +735,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtWorkPhone;
 
         /// <summary>
+        /// RequiredFieldValidator22 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator22;
+
+        /// <summary>
         /// txtJob control.
         /// </summary>
         /// <remarks>
@@ -625,6 +751,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtJob;
+
+        /// <summary>
+        /// RequiredFieldValidator23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator23;
 
         /// <summary>
         /// ddlVisa control.
@@ -654,6 +789,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator2;
 
         /// <summary>
+        /// RequiredFieldValidator24 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator24;
+
+        /// <summary>
         /// ddlSponsor control.
         /// </summary>
         /// <remarks>
@@ -672,6 +816,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtEmployerName;
 
         /// <summary>
+        /// RequiredFieldValidator25 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator25;
+
+        /// <summary>
         /// txtEmployerPos control.
         /// </summary>
         /// <remarks>
@@ -681,6 +834,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txtEmployerPos;
 
         /// <summary>
+        /// RequiredFieldValidator26 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator26;
+
+        /// <summary>
         /// txtEmployerPhone control.
         /// </summary>
         /// <remarks>
@@ -688,6 +850,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmployerPhone;
+
+        /// <summary>
+        /// RequiredFieldValidator27 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator27;
 
         /// <summary>
         /// txtEmployeremail control.
@@ -706,6 +877,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+
+        /// <summary>
+        /// RequiredFieldValidator28 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator28;
 
         /// <summary>
         /// lnk_Save control.

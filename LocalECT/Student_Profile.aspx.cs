@@ -339,6 +339,44 @@ namespace LocalECT
                     {
                         btnCreateEmail.Visible = false;
                     }
+                    if(!IsPostBack)
+                    {
+                        if (ddlNationality.SelectedValue == "1")//UAE
+                        {
+                            RequiredFieldValidator29.Enabled = true;
+                        }
+                        else
+                        {
+                            RequiredFieldValidator29.Enabled = false;
+                        }
+
+                        if (rbnEmploymentStatus.SelectedValue == "0")//Not Employed
+                        {
+                            ddlIWork.SelectedValue = "0";
+                            RequiredFieldValidator20.Enabled = false;
+                            RequiredFieldValidator21.Enabled = false;
+                            RequiredFieldValidator22.Enabled = false;
+                            RequiredFieldValidator23.Enabled = false;
+                            RequiredFieldValidator24.Enabled = false;
+                            RequiredFieldValidator25.Enabled = false;
+                            RequiredFieldValidator26.Enabled = false;
+                            RequiredFieldValidator27.Enabled = false;
+                            RequiredFieldValidator28.Enabled = false;
+                        }
+                        else if (rbnEmploymentStatus.SelectedValue == "1")//Employed
+                        {
+                            ddlIWork.SelectedValue = "1";
+                            RequiredFieldValidator20.Enabled = true;
+                            RequiredFieldValidator21.Enabled = true;
+                            RequiredFieldValidator22.Enabled = true;
+                            RequiredFieldValidator23.Enabled = true;
+                            RequiredFieldValidator24.Enabled = true;
+                            RequiredFieldValidator25.Enabled = true;
+                            RequiredFieldValidator26.Enabled = true;
+                            RequiredFieldValidator27.Enabled = true;
+                            RequiredFieldValidator28.Enabled = true;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -852,7 +890,18 @@ namespace LocalECT
                     ddlVisa.SelectedValue = Rd["intSponsor"].ToString();
                     txtExpiry.Text = string.Format("{0:yyyy-MM-dd}", Rd["dateEndSponsorship"]);
 
-                    rbnEmploymentStatus.SelectedValue = Rd["isWorking"].ToString();
+                    string isWorking= Rd["isWorking"].ToString();
+                    string working = "1";
+                    if(isWorking=="True")
+                    {
+                        working = "1";
+                    }
+                    else
+                    {
+                        working = "0";
+                    }
+
+                    rbnEmploymentStatus.SelectedValue = working;
                     txtEthbara.Text = Rd["EthbaraNo"].ToString();
                     rbnFitnessStatus.SelectedValue = Rd["FitnessStatus"].ToString();
                     ddlMaritalStatus.SelectedValue = Rd["MaritalStatus"].ToString();
@@ -983,14 +1032,18 @@ namespace LocalECT
                 ddlAcceptanceCondition.SelectedIndex = 0;
                 ddlAdmissionStatus.SelectedIndex = 0;
 
-                ddlBirthCountry.SelectedValue = "1";
+                
+                ddlBirthCountry.SelectedValue = "0";
+                //ddlBirthCountry.SelectedIndex = 0;
                 ddlEnrollmentTerm.SelectedValue = (iRegYear * 10 + iRegSem).ToString();
 
-                ddlHomeCountry.SelectedValue = "1";
+                ddlHomeCountry.SelectedValue = "0";
+                //ddlHomeCountry.SelectedIndex = 0;
                 //ddlIdentityType.SelectedValue = "0";
                 ddlIWork.SelectedValue = "0";
                 ddlEmploymentSector.SelectedValue = "0";
-                ddlNationalityofMother.SelectedValue = "1";
+                ddlNationalityofMother.SelectedValue = "0";
+                //ddlNationalityofMother.SelectedIndex = 0;
 
                 ddlMaritalStatus.SelectedValue = "0";
 
@@ -999,9 +1052,11 @@ namespace LocalECT
                 MajorDS.DataBind();
                 ddlMajor.DataBind();
                 ddlMajor.SelectedValue = "010120";
-                ddlNationality.SelectedValue = "1";
+                ddlNationality.SelectedValue = "0";
+                //ddlNationality.SelectedIndex = 0;
                 ddlReason.SelectedValue = "0";
-                ddlResidentCountry.SelectedValue = "1";
+                ddlResidentCountry.SelectedValue = "0";
+                //ddlResidentCountry.SelectedIndex = 0;
 
                 switch (Campus)
                 {
@@ -1029,7 +1084,7 @@ namespace LocalECT
 
                 BirthCityDS.DataBind();
                 ddlBirthCity.DataBind();
-                ddlBirthCity.SelectedValue = "1";
+                ddlBirthCity.SelectedValue = "0";
                 HomeCityDS.DataBind();
                 ddlQCity.DataBind();
                 ddlQEngGrade.DataBind();
@@ -1039,10 +1094,10 @@ namespace LocalECT
 
 
                 ddlHomeCity.DataBind();
-                ddlHomeCity.SelectedValue = "1";
+                ddlHomeCity.SelectedValue = "0";
                 ResidentCityDS.DataBind();
                 ddlResidentCity.DataBind();
-                ddlResidentCity.SelectedValue = "1";
+                ddlResidentCity.SelectedValue = "0";
 
                 ChkIsMilitaryService.Checked = false;
                 mtvQualification.ActiveViewIndex = 0;
@@ -1389,6 +1444,9 @@ namespace LocalECT
                     ddlLastCountry.Items.Add(new ListItem(myCountries[i].strCountryDescEn, myCountries[i].byteCountry.ToString()));
                 }
 
+                //ddlHomeCountry.Items.Insert(0, (new ListItem("Select any", "1")));
+                //ddlResidentCountry.Items.Insert(0, (new ListItem("Select any", "1")));
+                //ddlBirthCountry.Items.Insert(0, (new ListItem("Select any", "1")));
             }
             catch (Exception ex)
             {
@@ -1484,6 +1542,8 @@ namespace LocalECT
                     ddlNationalityofMother.Items.Add(new ListItem(myNationalities[i].strNationalityDescEn, myNationalities[i].byteNationality.ToString()));
                 }
 
+                //ddlNationality.Items.Insert(0, (new ListItem("Select any", "1")));
+                //ddlNationalityofMother.Items.Insert(0, (new ListItem("Select any", "1")));
             }
             catch (Exception ex)
             {
@@ -2400,103 +2460,113 @@ namespace LocalECT
         //Start Student Information
         protected void lnk_Save_Click(object sender, EventArgs e)
         {
-            try
+            //Page.Validate();
+            //if (!Page.IsValid)
+            //{
+            Page.Validate("SD");
+            if (Page.IsValid)
             {
-
-                int iEffected = 0;
-                TimeSpan difference = DateTime.Today - Convert.ToDateTime(txtBirthDate.Text);
-
-                var days = difference.TotalDays;
-
-                if (days / 365 < 16)
+                try
                 {
-                    lbl_Msg.Text = "Invalid birth date - Age less than 16 years";
-                    div_msg.Visible = true;
-                    return;
-                }
 
-                if (txtIDNo.Text.Length < 15)
-                {
-                    txtIDNo.Text = "999999999999999";
-                    lbl_Msg.Text = "EID need to be scanned";
-                    div_msg.Visible = true;
-                }
-                else if (txtIDNo.Text.Length > 15)
-                {
-                    txtIDNo.Text = txtIDNo.Text.Replace("-", "");
-                }
+                    int iEffected = 0;
+                    TimeSpan difference = DateTime.Today - Convert.ToDateTime(txtBirthDate.Text);
 
-                if (txtPhone1.Text.Length < 10)
-                {
-                    lbl_Msg.Text = "Invalid Phone number, shold be at least 10 numbers: [0001234567]";
-                    div_msg.Visible = true;
-                    return;
-                }
-                txtPhone1.Text = LibraryMOD.CleanPhone(txtPhone1.Text);
-                txtPhone2.Text = LibraryMOD.CleanPhone(txtPhone2.Text);
+                    var days = difference.TotalDays;
 
-                if (hdnSerial.Value == "")//New
-                {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                        InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                    if (days / 365 < 16)
                     {
-                        lbl_Msg.Text = "Sorry you cannot add students";
+                        lbl_Msg.Text = "Invalid birth date - Age less than 16 years";
                         div_msg.Visible = true;
                         return;
                     }
-                    else//Apply permission here later
+
+                    if (txtIDNo.Text.Length < 15)
                     {
-                        lblReference.Enabled = true;
-                    }
-                    iEffected = StudentDS.Insert();
-                    if (iEffected > 0)
-                    {
-                        lbl_Msg.Text = "Student Added Successfully";
-                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        txtIDNo.Text = "999999999999999";
+                        lbl_Msg.Text = "EID need to be scanned";
                         div_msg.Visible = true;
-                        QualificationDS.DataBind();
-                        grdQualification.DataBind();
-                        DocumentsDS.DataBind();
-                        grdDocs.DataBind();
-                        DocsEditDS.DataBind();
-                        EnrollmentDS.DataBind();
-                        Session["StudentSerialNo"] = hdnSerial.Value;
+                    }
+                    else if (txtIDNo.Text.Length > 15)
+                    {
+                        txtIDNo.Text = txtIDNo.Text.Replace("-", "");
                     }
 
-                }
-                else//Update
-                {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                    if (txtPhone1.Text.Length < 10)
                     {
-                        lbl_Msg.Text = "Sorry you cannot update students";
+                        lbl_Msg.Text = "Invalid Phone number, shold be at least 10 numbers: [0001234567]";
                         div_msg.Visible = true;
                         return;
                     }
-                    else//Apply permission here later
-                    {
-                        lblReference.Enabled = true;
-                    }
+                    txtPhone1.Text = LibraryMOD.CleanPhone(txtPhone1.Text);
+                    txtPhone2.Text = LibraryMOD.CleanPhone(txtPhone2.Text);
 
-                    iEffected = StudentDS.Update();
-                    if (iEffected > 0)
+                    if (hdnSerial.Value == "")//New
                     {
-                        lbl_Msg.Text = "Student Saved Successfully";
-                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                        div_msg.Visible = true;
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                        {
+                            lbl_Msg.Text = "Sorry you cannot add students";
+                            div_msg.Visible = true;
+                            return;
+                        }
+                        else//Apply permission here later
+                        {
+                            lblReference.Enabled = true;
+                        }
+                        iEffected = StudentDS.Insert();
+                        if (iEffected > 0)
+                        {
+                            lbl_Msg.Text = "Student Added Successfully";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                            QualificationDS.DataBind();
+                            grdQualification.DataBind();
+                            DocumentsDS.DataBind();
+                            grdDocs.DataBind();
+                            DocsEditDS.DataBind();
+                            EnrollmentDS.DataBind();
+                            Session["StudentSerialNo"] = hdnSerial.Value;
+                        }
+
+                    }
+                    else//Update
+                    {
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                        {
+                            lbl_Msg.Text = "Sorry you cannot update students";
+                            div_msg.Visible = true;
+                            return;
+                        }
+                        else//Apply permission here later
+                        {
+                            lblReference.Enabled = true;
+                        }
+
+                        iEffected = StudentDS.Update();
+                        if (iEffected > 0)
+                        {
+                            lbl_Msg.Text = "Student Saved Successfully";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
-            }
-            finally
-            {
+                catch (Exception ex)
+                {
+                    LibraryMOD.ShowErrorMessage(ex);
+                    lbl_Msg.Text = ex.Message;
+                    div_msg.Visible = true;
+                }
+                finally
+                {
 
+                }
             }
+         
+            //}
+                
         }
         protected void StudentDS_Inserted(object sender, SqlDataSourceStatusEventArgs e)
         {
@@ -4108,225 +4178,294 @@ namespace LocalECT
         }
         protected void SaveE_btn_Click(object sender, EventArgs e)
         {
-            try
+            Page.Validate("E");
+            if (Page.IsValid)
             {
-
-                if (hdnSerial.Value == "")
+                try
                 {
-                    lbl_Msg.Text = "Select or Add Student Please ...";
-                    div_msg.Visible = true;
-                    return;
-                }
-                int iEffected = 0;
 
-
-                if (ddlEnrollmentSource.SelectedValue == "0")
-                {
-                    lbl_Msg.Text = "Please choose how did you hear about ECT?";
-                    div_msg.Visible = true;
-                    ddlEnrollmentSource.Focus();
-                    return;
-                }
-
-                if (ddlEnrollmentSource.SelectedValue == "51")
-                {
-                    if (txtEnrollmentSource.Text == "-")
+                    if (hdnSerial.Value == "")
                     {
-                        lbl_Msg.Text = "Please Enter the Other Source?";
-                        div_msg.Visible = true;
-                        txtEnrollmentSource.Focus();
-                        return;
-                    }
-                }
-                else
-                {
-                    txtEnrollmentSource.Text = "-";
-                }
-
-                if (Session["CurrentStudent"] == null)
-                {
-                    Session["CurrentStudent"] = "";
-                }
-                if (Session["CurrentStudent"].ToString() == "") //Insert //string.IsNullOrEmpty(Session["CurrentStudent"].ToString ()
-                {
-
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                        InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
-                    {
-                        lbl_Msg.Text = "Sorry you cannot enrolled students";
+                        lbl_Msg.Text = "Select or Add Student Please ...";
                         div_msg.Visible = true;
                         return;
                     }
+                    int iEffected = 0;
 
-                    string sKey = ddlMajor.SelectedValue;
 
-                    if (isMajorAvailable(sKey) == false)
+                    if (ddlEnrollmentSource.SelectedValue == "0")
                     {
-                        lbl_Msg.Text = "The selected major is not available !";
+                        lbl_Msg.Text = "Please choose how did you hear about ECT?";
                         div_msg.Visible = true;
+                        ddlEnrollmentSource.Focus();
                         return;
                     }
 
-                    if (ddlWMajor1.SelectedValue == "0")
+                    if (ddlEnrollmentSource.SelectedValue == "51")
                     {
-                        lbl_Msg.Text = "Select the First Preferred Major Please.";
-                        div_msg.Visible = true;
-                        ddlWMajor1.Focus();
-                        return;
-                    }
-
-                    if (ddlWMajor2.SelectedValue == "0")
-                    {
-                        lbl_Msg.Text = "Select the Second Preferred Major Please.";
-                        div_msg.Visible = true;
-                        ddlWMajor2.Focus();
-                        return;
-                    }
-
-                    if (ddlWMajor3.SelectedValue == "0")
-                    {
-                        lbl_Msg.Text = "Select the Third Preferred Major Please.";
-                        div_msg.Visible = true;
-                        ddlWMajor3.Focus();
-                        return;
-                    }
-
-
-                    string sCollege, sDegree, sMajor;
-                    int iHours = 0;
-                    sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
-                    sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
-                    sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
-                    int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
-
-                    bool isLegal = true;
-
-                    //Set ESL plan depending on prefered major
-                    if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
-                    {
-                        ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
-                        sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
-
-                    }
-
-                    //========================================
-
-                    if (sDegree == "2" && sMajor == "3")
-                    {
-                        isLegal = true;
+                        if (txtEnrollmentSource.Text == "-")
+                        {
+                            lbl_Msg.Text = "Please Enter the Other Source?";
+                            div_msg.Visible = true;
+                            txtEnrollmentSource.Focus();
+                            return;
+                        }
                     }
                     else
                     {
+                        txtEnrollmentSource.Text = "-";
+                    }
 
-                        if (sMajor != "99")//Visiting
+                    if (Session["CurrentStudent"] == null)
+                    {
+                        Session["CurrentStudent"] = "";
+                    }
+                    if (Session["CurrentStudent"].ToString() == "") //Insert //string.IsNullOrEmpty(Session["CurrentStudent"].ToString ()
+                    {
+
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
                         {
-                            //Check HS if it is meeting the major requirement
-                            isLegal = isQualified(int.Parse(hdnSerial.Value), sDegree, sMajor);
+                            lbl_Msg.Text = "Sorry you cannot enrolled students";
+                            div_msg.Visible = true;
+                            return;
+                        }
+
+                        string sKey = ddlMajor.SelectedValue;
+
+                        if (isMajorAvailable(sKey) == false)
+                        {
+                            lbl_Msg.Text = "The selected major is not available !";
+                            div_msg.Visible = true;
+                            return;
+                        }
+
+                        if (ddlWMajor1.SelectedValue == "0")
+                        {
+                            lbl_Msg.Text = "Select the First Preferred Major Please.";
+                            div_msg.Visible = true;
+                            ddlWMajor1.Focus();
+                            return;
+                        }
+
+                        if (ddlWMajor2.SelectedValue == "0")
+                        {
+                            lbl_Msg.Text = "Select the Second Preferred Major Please.";
+                            div_msg.Visible = true;
+                            ddlWMajor2.Focus();
+                            return;
+                        }
+
+                        if (ddlWMajor3.SelectedValue == "0")
+                        {
+                            lbl_Msg.Text = "Select the Third Preferred Major Please.";
+                            div_msg.Visible = true;
+                            ddlWMajor3.Focus();
+                            return;
+                        }
+
+
+                        string sCollege, sDegree, sMajor;
+                        int iHours = 0;
+                        sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
+                        sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
+                        sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+                        int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
+
+                        bool isLegal = true;
+
+                        //Set ESL plan depending on prefered major
+                        if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
+                        {
+                            ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                            sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+
+                        }
+
+                        //========================================
+
+                        if (sDegree == "2" && sMajor == "3")
+                        {
+                            isLegal = true;
                         }
                         else
                         {
-                            sMajor = "999";
-                        }
-                    }
-                    //isLegal = true;//delete later
-                    if (isLegal)
-                    {
-                        SpecializationsDAL mySpecDAL = new SpecializationsDAL();
-                        iHours = mySpecDAL.GetHours(Campus, sCollege, sDegree, sMajor);
-                        int iEnTerm = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);
 
-                        int iRegTerm = iRegYear * 10 + iRegSem;
-
-                        if (iEnTerm < iRegTerm)
-                        {
-                            lbl_Msg.Text = "Sorry you cannot enrolled a students on old term ...";
-                            div_msg.Visible = true;
-                            return;
-
-                        }
-
-                        int iEnYear = 0;
-                        int iEnSem = 0;
-                        iEnYear = LibraryMOD.SeperateTerm(iEnTerm, out iEnSem);
-
-
-
-                        CreateNewId(int.Parse(ddlType.SelectedValue), iEnYear, iEnSem);
-                        if (lblStudentId.Text != "")
-                        {
-
-                            EnrollmentDS.InsertParameters["intStudyYear"].DefaultValue = iEnYear.ToString();
-                            EnrollmentDS.InsertParameters["byteSemester"].DefaultValue = iEnSem.ToString();
-                            EnrollmentDS.InsertParameters["strCollege"].DefaultValue = sCollege;
-                            EnrollmentDS.InsertParameters["strDegree"].DefaultValue = sDegree;
-                            EnrollmentDS.InsertParameters["strSpecialization"].DefaultValue = sMajor;
-                            EnrollmentDS.InsertParameters["intRemind"].DefaultValue = iHours.ToString();
-
-                            iEffected = EnrollmentDS.Insert();
-                            if (iEffected > 0)
+                            if (sMajor != "99")//Visiting
                             {
-                                lbl_Msg.Text = "Student Enrolled Successfully ...";
-                                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                //Check HS if it is meeting the major requirement
+                                isLegal = isQualified(int.Parse(hdnSerial.Value), sDegree, sMajor);
+                            }
+                            else
+                            {
+                                sMajor = "999";
+                            }
+                        }
+                        //isLegal = true;//delete later
+                        if (isLegal)
+                        {
+                            SpecializationsDAL mySpecDAL = new SpecializationsDAL();
+                            iHours = mySpecDAL.GetHours(Campus, sCollege, sDegree, sMajor);
+                            int iEnTerm = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);
+
+                            int iRegTerm = iRegYear * 10 + iRegSem;
+
+                            if (iEnTerm < iRegTerm)
+                            {
+                                lbl_Msg.Text = "Sorry you cannot enrolled a students on old term ...";
                                 div_msg.Visible = true;
-                                grdMarks.DataBind();
-                                FillCourses(sCollege, sDegree, sMajor);
-                                Session["CurrentStudent"] = lblStudentId.Text;
-                                //Create Financial Account or Connect to Old one if Reference ID is there.
-                                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
-                                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-                                //SqlTransaction objTrans = null;
-                                if (lblReference.Text.Length >0)
+                                return;
+
+                            }
+
+                            int iEnYear = 0;
+                            int iEnSem = 0;
+                            iEnYear = LibraryMOD.SeperateTerm(iEnTerm, out iEnSem);
+
+
+
+                            CreateNewId(int.Parse(ddlType.SelectedValue), iEnYear, iEnSem);
+                            if (lblStudentId.Text != "")
+                            {
+
+                                EnrollmentDS.InsertParameters["intStudyYear"].DefaultValue = iEnYear.ToString();
+                                EnrollmentDS.InsertParameters["byteSemester"].DefaultValue = iEnSem.ToString();
+                                EnrollmentDS.InsertParameters["strCollege"].DefaultValue = sCollege;
+                                EnrollmentDS.InsertParameters["strDegree"].DefaultValue = sDegree;
+                                EnrollmentDS.InsertParameters["strSpecialization"].DefaultValue = sMajor;
+                                EnrollmentDS.InsertParameters["intRemind"].DefaultValue = iHours.ToString();
+
+                                iEffected = EnrollmentDS.Insert();
+                                if (iEffected > 0)
                                 {
-                                    //Reference Found-Update Existing Student Account 
-                                    string sAcc = "";
-                                    SqlCommand cmd1 = new SqlCommand("SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber", sc);
-                                    cmd1.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
-                                    DataTable dt1 = new DataTable();
-                                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
-                                    try
+                                    lbl_Msg.Text = "Student Enrolled Successfully ...";
+                                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                    div_msg.Visible = true;
+                                    grdMarks.DataBind();
+                                    FillCourses(sCollege, sDegree, sMajor);
+                                    Session["CurrentStudent"] = lblStudentId.Text;
+                                    //Create Financial Account or Connect to Old one if Reference ID is there.
+                                    Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                                    SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                                    //SqlTransaction objTrans = null;
+                                    if (lblReference.Text.Length > 0)
                                     {
-                                        sc.Open();
-                                        da1.Fill(dt1);
-                                        sc.Close();
-
-                                        if (dt1.Rows.Count > 0)
+                                        //Reference Found-Update Existing Student Account 
+                                        string sAcc = "";
+                                        SqlCommand cmd1 = new SqlCommand("SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber", sc);
+                                        cmd1.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
+                                        DataTable dt1 = new DataTable();
+                                        SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                                        try
                                         {
-                                            sAcc = dt1.Rows[0]["strAccountNo"].ToString();
-                                            Session["sAcc"] = sAcc;
-                                            SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
-                                            cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
-                                            cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text.Trim());
-                                            cmd.Parameters.AddWithValue("@strPhone1", txtPhone1.Text.Trim());
-                                            cmd.Parameters.AddWithValue("@strPhone2", txtPhone2.Text.Trim());
-                                            cmd.Parameters.AddWithValue("@intRegYear", Convert.ToInt32(Session["CurrentYear"]));
-                                            cmd.Parameters.AddWithValue("@byteRegSem", Session["CurrentSemester"].ToString());
-                                            cmd.Parameters.AddWithValue("@strUserSave", Session["CurrentUserName"].ToString());
-                                            //cmd.Parameters.AddWithValue("@dateCreate", DateTime.Now);
-                                            cmd.Parameters.AddWithValue("@dateLastSave", DateTime.Now);
-                                            try
-                                            {
-                                                sc.Open();
-                                               // objTrans = sc.BeginTransaction();
-                                                cmd.ExecuteNonQuery();
-                                                //Select Account Number of Student
-                                                sc.Close();
+                                            sc.Open();
+                                            da1.Fill(dt1);
+                                            sc.Close();
 
-                                                //Create SIS User(111)
-                                                SqlCommand Cmd = new SqlCommand();
-                                                Cmd.Connection = sc;
-                                                Cmd.CommandText = "Create_Online_User";
-                                                Cmd.CommandType = CommandType.StoredProcedure;
-                                                Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
-                                                Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
-                                                Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                                            if (dt1.Rows.Count > 0)
+                                            {
+                                                sAcc = dt1.Rows[0]["strAccountNo"].ToString();
+                                                Session["sAcc"] = sAcc;
+                                                SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
+                                                cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
+                                                cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text.Trim());
+                                                cmd.Parameters.AddWithValue("@strPhone1", txtPhone1.Text.Trim());
+                                                cmd.Parameters.AddWithValue("@strPhone2", txtPhone2.Text.Trim());
+                                                cmd.Parameters.AddWithValue("@intRegYear", Convert.ToInt32(Session["CurrentYear"]));
+                                                cmd.Parameters.AddWithValue("@byteRegSem", Session["CurrentSemester"].ToString());
+                                                cmd.Parameters.AddWithValue("@strUserSave", Session["CurrentUserName"].ToString());
+                                                //cmd.Parameters.AddWithValue("@dateCreate", DateTime.Now);
+                                                cmd.Parameters.AddWithValue("@dateLastSave", DateTime.Now);
                                                 try
                                                 {
                                                     sc.Open();
-                                                    Cmd.ExecuteNonQuery();
+                                                    // objTrans = sc.BeginTransaction();
+                                                    cmd.ExecuteNonQuery();
+                                                    //Select Account Number of Student
                                                     sc.Close();
+
+                                                    //Create SIS User(111)
+                                                    SqlCommand Cmd = new SqlCommand();
+                                                    Cmd.Connection = sc;
+                                                    Cmd.CommandText = "Create_Online_User";
+                                                    Cmd.CommandType = CommandType.StoredProcedure;
+                                                    Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
+                                                    Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                                                    Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                                                    try
+                                                    {
+                                                        sc.Open();
+                                                        Cmd.ExecuteNonQuery();
+                                                        sc.Close();
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        sc.Close();
+                                                        Console.WriteLine(ex.Message);
+                                                    }
+                                                    finally
+                                                    {
+                                                        sc.Close();
+                                                    }
+
+                                                    int iStatus = 1;
+                                                    string sSQL = "UPDATE Reg_Student_Accounts";
+                                                    sSQL += " SET intOnlineStatus =" + iStatus;
+                                                    sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                                                    sSQL += " Where strAccountNo='" + sAcc + "'";
+                                                    Cmd.CommandType = CommandType.Text;
+                                                    Cmd.CommandText = sSQL;
+                                                    try
+                                                    {
+                                                        sc.Open();
+                                                        Cmd.ExecuteNonQuery();
+                                                        sc.Close();
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        sc.Close();
+                                                        Console.WriteLine(ex.Message);
+                                                    }
+                                                    finally
+                                                    {
+                                                        sc.Close();
+                                                    }
+                                                    string sFName = "";
+                                                    int iSerial = GetSerial(lblReference.Text.Trim());
+                                                    //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, iSerial, out sFName);
+                                                    //update Unified ID
+                                                    if (iUnifiedID > 0)
+                                                    {
+                                                        LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                        //check reference number
+                                                        if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                        {
+                                                            //Get updated UnifiedID
+                                                            iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                        if (iUnifiedID == 0)
+                                                        {
+                                                            iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                        }
+                                                        LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                    }
+
+                                                    //Update CX API Registration Status
+                                                    if (txtContactID.Text != "0" || txtContactID.Text != "" || txtContactID.Text != null)
+                                                    {
+                                                        updatecxapiregistration(txtContactID.Text);
+                                                    }
+                                                    //Sharepoint List Creation
+                                                    sentdatatoSPLIst();
                                                 }
                                                 catch (Exception ex)
                                                 {
+                                                    //objTrans.Rollback();
                                                     sc.Close();
                                                     Console.WriteLine(ex.Message);
                                                 }
@@ -4334,130 +4473,7 @@ namespace LocalECT
                                                 {
                                                     sc.Close();
                                                 }
-
-                                                int iStatus = 1;
-                                                string sSQL = "UPDATE Reg_Student_Accounts";
-                                                sSQL += " SET intOnlineStatus =" + iStatus;
-                                                sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
-                                                sSQL += " Where strAccountNo='" + sAcc + "'";
-                                                Cmd.CommandType = CommandType.Text;
-                                                Cmd.CommandText = sSQL;
-                                                try
-                                                {
-                                                    sc.Open();
-                                                    Cmd.ExecuteNonQuery();
-                                                    sc.Close();
-                                                }
-                                                catch (Exception ex)
-                                                {
-                                                    sc.Close();
-                                                    Console.WriteLine(ex.Message);
-                                                }
-                                                finally
-                                                {
-                                                    sc.Close();
-                                                }
-                                                string sFName = "";
-                                                int iSerial = GetSerial(lblReference.Text.Trim());                                             
-                                                //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, iSerial, out sFName);
-                                                //update Unified ID
-                                                if (iUnifiedID > 0)
-                                                {
-                                                    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                                    //check reference number
-                                                    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
-                                                    {
-                                                        //Get updated UnifiedID
-                                                        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                    if (iUnifiedID == 0)
-                                                    {
-                                                        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                    }
-                                                    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                                }
-
-                                                //Update CX API Registration Status
-                                                if (txtContactID.Text!="0"||txtContactID.Text!=""||txtContactID.Text!=null)
-                                                {
-                                                    updatecxapiregistration(txtContactID.Text);
-                                                }
-                                                //Sharepoint List Creation
-                                                sentdatatoSPLIst();
                                             }
-                                            catch (Exception ex)
-                                            {
-                                                //objTrans.Rollback();
-                                                sc.Close();
-                                                Console.WriteLine(ex.Message);
-                                            }
-                                            finally
-                                            {
-                                                sc.Close();
-                                            }
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        sc.Close();
-                                        Console.WriteLine(ex.Message);
-                                    }
-                                    finally
-                                    {
-                                        sc.Close();
-                                    }
-                                }
-                                else
-                                {
-                                    //Create New Student Account
-
-                                    string sAcc = Update_Acc();
-
-                                    if(sAcc!=null || sAcc!=""||sAcc!="0")
-                                    {
-                                        Session["sAcc"] = sAcc;
-                                        //Create SIS User(111)
-                                        SqlCommand Cmd = new SqlCommand();
-                                        Cmd.Connection = sc;
-                                        Cmd.CommandText = "Create_Online_User";
-                                        Cmd.CommandType = CommandType.StoredProcedure;
-                                        Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
-                                        Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
-                                        Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
-                                        try
-                                        {
-                                            sc.Open();
-                                            Cmd.ExecuteNonQuery();
-                                            sc.Close();
-                                        }
-                                        catch(Exception ex)
-                                        {
-                                            sc.Close();
-                                            Console.WriteLine(ex.Message);
-                                        }
-                                        finally
-                                        {
-                                            sc.Close();
-                                        }
-
-
-                                        int iStatus = 1;
-                                        string sSQL = "UPDATE Reg_Student_Accounts";
-                                        sSQL += " SET intOnlineStatus =" + iStatus;
-                                        sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
-                                        sSQL += " Where strAccountNo='" + sAcc + "'";
-                                        Cmd.CommandType = CommandType.Text;
-                                        Cmd.CommandText = sSQL;
-                                        try
-                                        {
-                                            sc.Open();
-                                            Cmd.ExecuteNonQuery();
-                                            sc.Close();
                                         }
                                         catch (Exception ex)
                                         {
@@ -4468,125 +4484,242 @@ namespace LocalECT
                                         {
                                             sc.Close();
                                         }
-
-                                        string sFName = "";
-                                        int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                        //update Unified ID
-                                        if (iUnifiedID > 0)
-                                        {
-                                            LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                            //check reference number
-                                            if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
-                                            {
-                                                //Get updated UnifiedID
-                                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                            if (iUnifiedID == 0)
-                                            {
-                                                iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                            }
-                                            LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                        }
-
-                                        //Update CX API Registration Status
-                                        if (txtContactID.Text != "0" || txtContactID.Text != "" || txtContactID.Text != null)
-                                        {
-                                            updatecxapiregistration(txtContactID.Text);
-                                        }
-                                        //Sharepoint List Creation
-                                        sentdatatoSPLIst();
                                     }
+                                    else
+                                    {
+                                        //Create New Student Account
+
+                                        string sAcc = Update_Acc();
+
+                                        if (sAcc != null || sAcc != "" || sAcc != "0")
+                                        {
+                                            Session["sAcc"] = sAcc;
+                                            //Create SIS User(111)
+                                            SqlCommand Cmd = new SqlCommand();
+                                            Cmd.Connection = sc;
+                                            Cmd.CommandText = "Create_Online_User";
+                                            Cmd.CommandType = CommandType.StoredProcedure;
+                                            Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = lblStudentId.Text;
+                                            Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                                            Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                                            try
+                                            {
+                                                sc.Open();
+                                                Cmd.ExecuteNonQuery();
+                                                sc.Close();
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                sc.Close();
+                                                Console.WriteLine(ex.Message);
+                                            }
+                                            finally
+                                            {
+                                                sc.Close();
+                                            }
+
+
+                                            int iStatus = 1;
+                                            string sSQL = "UPDATE Reg_Student_Accounts";
+                                            sSQL += " SET intOnlineStatus =" + iStatus;
+                                            sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                                            sSQL += " Where strAccountNo='" + sAcc + "'";
+                                            Cmd.CommandType = CommandType.Text;
+                                            Cmd.CommandText = sSQL;
+                                            try
+                                            {
+                                                sc.Open();
+                                                Cmd.ExecuteNonQuery();
+                                                sc.Close();
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                sc.Close();
+                                                Console.WriteLine(ex.Message);
+                                            }
+                                            finally
+                                            {
+                                                sc.Close();
+                                            }
+
+                                            string sFName = "";
+                                            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            //update Unified ID
+                                            if (iUnifiedID > 0)
+                                            {
+                                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                //check reference number
+                                                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                {
+                                                    //Get updated UnifiedID
+                                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                if (iUnifiedID == 0)
+                                                {
+                                                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                }
+                                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                            }
+
+                                            //Update CX API Registration Status
+                                            if (txtContactID.Text != "0" || txtContactID.Text != "" || txtContactID.Text != null)
+                                            {
+                                                updatecxapiregistration(txtContactID.Text);
+                                            }
+                                            //Sharepoint List Creation
+                                            sentdatatoSPLIst();
+                                            //Latest Update Added on 10-03-2021 as per Mr. Ihab
+                                            updateaccountpayemtpending(Convert.ToInt32(txtOpportunityID.Text), sAcc);
+                                        }
+                                    }
+
+
                                 }
-
-
+                            }
+                            else
+                            {
+                                lbl_Msg.Text = "Student not Enrolled !";
+                                div_msg.Visible = true;
                             }
                         }
                         else
                         {
-                            lbl_Msg.Text = "Student not Enrolled !";
+                            lbl_Msg.Text = "HS AVG or ENG Score doesn’t meet the major requirement …!";
                             div_msg.Visible = true;
+                            MultiTabs.ActiveViewIndex = 0;
                         }
                     }
-                    else
+                    else//Update
                     {
-                        lbl_Msg.Text = "HS AVG or ENG Score doesn’t meet the major requirement …!";
-                        div_msg.Visible = true;
-                        MultiTabs.ActiveViewIndex = 0;
-                    }
-                }
-                else//Update
-                {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                    {
-                        lbl_Msg.Text = "Sorry you cannot update students";
-                        div_msg.Visible = true;
-                        return;
-                    }
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                            InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                        {
+                            lbl_Msg.Text = "Sorry you cannot update students";
+                            div_msg.Visible = true;
+                            return;
+                        }
 
-                    if (ddlWMajor1.SelectedValue == "0")
-                    {
-                        lbl_Msg.Text = "Select the First Preferred Major Please.";
-                        div_msg.Visible = true;
-                        ddlWMajor1.Focus();
-                        return;
-                    }
+                        if (ddlWMajor1.SelectedValue == "0")
+                        {
+                            lbl_Msg.Text = "Select the First Preferred Major Please.";
+                            div_msg.Visible = true;
+                            ddlWMajor1.Focus();
+                            return;
+                        }
 
-                    //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                    //    InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
-                    //{
-                    //    divMsg.InnerText = "Sorry you cannot update enrollment data";
-                    //    return;
-                    //}
+                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                        //    InitializeModule.enumPrivilege.AcceptStudent, CurrentRole) != true)
+                        //{
+                        //    divMsg.InnerText = "Sorry you cannot update enrollment data";
+                        //    return;
+                        //}
 
-                    string sCollege, sDegree, sMajor;
+                        string sCollege, sDegree, sMajor;
 
-                    sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
-                    sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
-                    sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
-                    int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
-
-                    //Set ESL plan depending on prefered major
-                    if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
-                    {
-                        ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                        sCollege = int.Parse(ddlMajor.SelectedValue.Substring(0, 2)).ToString();
+                        sDegree = int.Parse(ddlMajor.SelectedValue.Substring(2, 2)).ToString();
                         sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
-                        LibraryMOD.UpdateStudentMajor(Campus, lblStudentId.Text, sMajor);
+                        int iWMajor1 = int.Parse(ddlWMajor1.SelectedValue.ToString());
+
+                        //Set ESL plan depending on prefered major
+                        if (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")//New
+                        {
+                            ddlMajor.SelectedValue = Get_ESL_Plan(sDegree, iWMajor1);
+                            sMajor = int.Parse(ddlMajor.SelectedValue.Substring(4, 2)).ToString();
+                            LibraryMOD.UpdateStudentMajor(Campus, lblStudentId.Text, sMajor);
+                        }
+
+                        int iTerm, iGraduationYear, iGraduationSem;
+                        iTerm = int.Parse(ddlStatusTerm.SelectedValue);
+                        iGraduationYear = LibraryMOD.SeperateTerm(iTerm, out iGraduationSem);
+
+                        //EnrollmentDS.UpdateParameters.Add("@intGraduationYear", iGraduationYear.ToString());
+                        //EnrollmentDS.UpdateParameters.Add("@byteGraduationSemester", iGraduationSem.ToString());
+
+                        iEffected = EnrollmentDS.Update();
+                        if (iEffected > 0)
+                        {
+                            lbl_Msg.Text = "Student Enrollment Updated Successfully ...";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
+                        LibraryMOD.UpdateCRM_StudentID(lblStudentId.Text, txtPhone1.Text);
+
                     }
-
-                    int iTerm, iGraduationYear, iGraduationSem;
-                    iTerm = int.Parse(ddlStatusTerm.SelectedValue);
-                    iGraduationYear = LibraryMOD.SeperateTerm(iTerm, out iGraduationSem);
-
-                    //EnrollmentDS.UpdateParameters.Add("@intGraduationYear", iGraduationYear.ToString());
-                    //EnrollmentDS.UpdateParameters.Add("@byteGraduationSemester", iGraduationSem.ToString());
-
-                    iEffected = EnrollmentDS.Update();
-                    if (iEffected > 0)
-                    {
-                        lbl_Msg.Text = "Student Enrollment Updated Successfully ...";
-                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                        div_msg.Visible = true;
-                    }
-                    LibraryMOD.UpdateCRM_StudentID(lblStudentId.Text, txtPhone1.Text);
+                }
+                catch (Exception ex)
+                {
+                    LibraryMOD.ShowErrorMessage(ex);
+                    lbl_Msg.Text = ex.Message;
+                    div_msg.Visible = true;
+                }
+                finally
+                {
 
                 }
             }
-            catch (Exception ex)
-            {
-                LibraryMOD.ShowErrorMessage(ex);
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
-            }
-            finally
-            {
 
+               
+        }
+
+        public void updateaccountpayemtpending(int iOpportunity,string sAcc)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            if (iOpportunity > 0)
+            {
+                //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.DefaultConnectionLimit = 9999;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                string accessToken = InitializeModule.CxPwd;
+
+                using (var httpClient = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                    {
+                        request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                        request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                        request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                        var task = httpClient.SendAsync(request);
+                        task.Wait();
+                        var response = task.Result;
+                        string s = response.Content.ReadAsStringAsync().Result;
+                        //If Status 200
+                        if (response.IsSuccessStatusCode == true)
+                        {
+                            //SetOpportunity(sSID);
+                            SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
+                            cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", "1");//Original Payment
+                            cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", "3500");
+                            cmd1.Parameters.AddWithValue("@strAccountNo", sAcc);
+                            try
+                            {
+                                Conn.Open();
+                                cmd1.ExecuteNonQuery();
+                                Conn.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                Conn.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                Conn.Close();
+                            }
+                        }
+                    }
+                }
             }
         }
+
         public void sentdatatoSPLIst()
         {
             int sem = 0;
@@ -4681,8 +4814,8 @@ namespace LocalECT
             myItem["CXID"] = txtContactID.Text.Trim();
             //myItem["AddedBy"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
             myItem["AddedBy"] = clientContext.Web.EnsureUser(Addedby);
-            myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
-            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
+            myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
             try
             {
                 myItem.Update();
@@ -5825,6 +5958,58 @@ namespace LocalECT
             {
                 txtCompany.Text = "NA";
                 txtCompany.Enabled = true;
+            }
+        }
+
+        protected void rbnEmploymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {           
+            if (rbnEmploymentStatus.SelectedValue == "0")//Not Employed
+            {
+                ddlIWork.SelectedValue = "0";
+                RequiredFieldValidator20.Enabled = false;
+                RequiredFieldValidator21.Enabled = false;
+                RequiredFieldValidator22.Enabled = false;
+                RequiredFieldValidator23.Enabled = false;
+                RequiredFieldValidator24.Enabled = false;
+                RequiredFieldValidator25.Enabled = false;
+                RequiredFieldValidator26.Enabled = false;
+                RequiredFieldValidator27.Enabled = false;
+                RequiredFieldValidator28.Enabled = false;
+            }
+            else if(rbnEmploymentStatus.SelectedValue == "1")//Employed
+            {
+                ddlIWork.SelectedValue = "1";
+                RequiredFieldValidator20.Enabled = true;
+                RequiredFieldValidator21.Enabled = true;
+                RequiredFieldValidator22.Enabled = true;
+                RequiredFieldValidator23.Enabled = true;
+                RequiredFieldValidator24.Enabled = true;
+                RequiredFieldValidator25.Enabled = true;
+                RequiredFieldValidator26.Enabled = true;
+                RequiredFieldValidator27.Enabled = true;
+                RequiredFieldValidator28.Enabled = true;
+            }
+        }
+
+        protected void ddlNationality_SelectedIndexChanged(object sender, EventArgs e)
+        {           
+            if(ddlNationality.SelectedValue=="1")//UAE
+            {
+                RequiredFieldValidator29.Enabled = true;
+            }
+            else
+            {
+                RequiredFieldValidator29.Enabled = false;
+            }
+        }
+
+        protected void dvDocs_ItemCommand(object sender, DetailsViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Cancel")
+            {
+                //this.DetailsView1.Visible = false;
+                grdDocs.DataBind();
+                mtvDocs.ActiveViewIndex = 0;
             }
         }
     }

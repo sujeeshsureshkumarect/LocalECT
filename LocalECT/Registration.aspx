@@ -91,6 +91,7 @@
                                 
                                 
                                  <div class="form-group row">
+                                      <%--<label class="col-form-label col-md-2 col-sm-2 ">Acceptance Type: </label>--%>
                                      <label class="col-form-label col-md-1 col-sm-1 ">Term</label>
                                     <div class="col-md-2 col-sm-2 ">
                                         <asp:DropDownList ID="Terms" runat="server" Width="150px" 
@@ -99,6 +100,18 @@
                                >
             </asp:DropDownList>
                                         </div>
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <b>Acceptance Type: </b>
+                                      <asp:Label ID="lbl_AT" runat="server"></asp:Label>
+                                        <b>Acceptance Condition: </b>
+                                        <asp:Label ID="lbl_AC" runat="server"></asp:Label>
+                                        </div>   
+                                        </div>
+                               <%--      <label class="col-form-label col-md-2 col-sm-2 ">Acceptance Condition: </label>--%>
+                                    <div class="col-md-4 col-sm-4 ">
+                                                                          
+                                     
+
                                     <div class="col-md-6 col-sm-6 ">
                                          <asp:Button ID="btnCopy" runat="server"   
                         onclick="btnCopy_Click" 

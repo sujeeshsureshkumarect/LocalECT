@@ -72,6 +72,7 @@ namespace LocalECT
                     if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
                     {
                         string sid = Request.QueryString["sid"];
+                        getregconditions(sid);
                         sSelectedValue.Value = sid;
                         sSelectedText.Value = getstudentname(sid);
                         sNo = sSelectedValue.Value;
@@ -166,6 +167,76 @@ namespace LocalECT
             {
                 Session.RemoveAll();
                 Response.Redirect("Login.aspx");
+            }
+        }
+
+        public void getregconditions(string studentid)
+        {
+            studentid = Request.QueryString["sid"];
+            string sSID = studentid;
+            int iSerial = GetSerial(sSID);
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd=new SqlCommand("select iAcceptanceCondition,iAcceptanceType from Reg_Applications where lngSerial=@lngSerial", Conn);
+            cmd.Parameters.AddWithValue("@lngSerial", iSerial);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                Conn.Open();
+                da.Fill(dt);
+                Conn.Close();
+
+                if(dt.Rows.Count>0)
+                {
+                    string acceptance_type = "";
+                    string acceptance_condition = "";
+
+                    if (dt.Rows[0]["iAcceptanceType"].ToString() == "1")
+                    {
+                        acceptance_type = "Permanently Accepted";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceType"].ToString() == "2")
+                    {
+                        acceptance_type = "One Academic Semester(Conditional)";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceType"].ToString() == "3")
+                    {
+                        acceptance_type = "Two Academic Semesters(Conditional)";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceType"].ToString() == "4")
+                    {
+                        acceptance_type = "One Academic Year(Conditional)";
+                    }
+
+                    if (dt.Rows[0]["iAcceptanceCondition"].ToString()=="1")
+                    {
+                        acceptance_condition = "All conditions have been met";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceCondition"].ToString() == "2")
+                    {
+                        acceptance_condition = "High school equivalency needed";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceCondition"].ToString() == "3")
+                    {
+                        acceptance_condition = "EmSAT needed";
+                    }
+                    else if (dt.Rows[0]["iAcceptanceCondition"].ToString() == "4")
+                    {
+                        acceptance_condition = "Major requirements are not met";
+                    }
+                    lbl_AT.Text = acceptance_type;
+                    lbl_AC.Text = acceptance_condition;
+                }
+            }
+            catch(Exception ex)
+            {
+                Conn.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Conn.Close();
             }
         }
         private void FillTerms()

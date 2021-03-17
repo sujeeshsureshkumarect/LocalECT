@@ -561,7 +561,21 @@ public class InitializeModule
         SetCurrentTerm = 172,//new
         SetMarksTerm = 173,//new
         CalculateFees = 174,//new
-        CalculateVAT = 175//new
+        CalculateVAT = 175,//new
+        //UpdateCRMOpportunity = 167,
+        //ChangeAcceptanceType = 168,//new
+        //ChangeCXID = 169,//new
+        //ChangeFirstPaymentType = 170,//new
+        //SetRegTerm = 171,//new
+        //SetCurrentTerm = 172,//new
+        //SetMarksTerm = 173,//new
+        //CalculateFees = 174,//new
+        //CalculateVAT = 175,//new
+        ChangeBulkSTDStatus = 176,//new
+        SendEmail = 178,//new
+        SendSMS = 179,//new
+        ContactAdvisor = 180,//new
+        ContactLecturer = 181//new
     }
 
     public enum enumPrivilegeObjects : int
