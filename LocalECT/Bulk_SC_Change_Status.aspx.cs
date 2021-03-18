@@ -210,7 +210,8 @@ namespace LocalECT
                             int selectedSemester = 0;
                             string SS = "NULL";
                             int selectedTerm = 0;
-                            string byteCancelReason = "NULL";
+                            string byteCancelReason = "IS NOT NULL";
+                            string byteCancelReason1 = "IS NOT NULL";
                             selectedTerm = Convert.ToInt32(ddlStatusTerm.SelectedValue);
                             selectedYear = LibraryMOD.SeperateTerm(selectedTerm, out selectedSemester);
                             int iMax = Convert.ToInt32(dt1.Rows[0]["iMax"]);
@@ -220,12 +221,14 @@ namespace LocalECT
                                 SY = "NULL";
                                 SS = "NULL";
                                 byteCancelReason = "NULL";
+                                byteCancelReason1 = "IS NOT NULL";
                             }
                             else
                             {
                                 SY = selectedYear.ToString();
                                 SS = selectedSemester.ToString();
                                 byteCancelReason = "SR.bStatus";
+                                byteCancelReason1 = "<> SR.bStatus";
                             }
 
                             string updatequery = "UPDATE    Reg_Applications ";
@@ -233,7 +236,7 @@ namespace LocalECT
                             updatequery += "dateGraduation2 = GETDATE(), strUserSave = '"+ Session["CurrentUserName"].ToString() + "', dateLastSave = GETDATE(), strNUser = '"+ Session["CurrentUserName"].ToString() + "', strMachine = 'LocalECT' ";
                             updatequery += "FROM Reg_Applications INNER JOIN ";
                             updatequery += "Reg_Students_Request AS SR ON Reg_Applications.lngStudentNumber = SR.sStudentNo ";
-                            updatequery += "WHERE (SR.iSerial ="+iMax+ ") AND ((Reg_Applications.byteCancelReason <> " + byteCancelReason + " and Reg_Applications.byteCancelReason <> 3) OR Reg_Applications.byteCancelReason IS NULL) ";
+                            updatequery += "WHERE (SR.iSerial ="+iMax+ ") AND ((Reg_Applications.byteCancelReason " + byteCancelReason1 + " and Reg_Applications.byteCancelReason <> 3) OR Reg_Applications.byteCancelReason IS NULL) ";
                             //(Reg_Applications.byteCancelReason<> " + ddlStatus.SelectedItem.Value + " and Reg_Applications.byteCancelReason <> 3 OR Reg_Applications.byteCancelReason IS NULL)
                             SqlCommand cmd2 = new SqlCommand(updatequery, sc);
                             try
