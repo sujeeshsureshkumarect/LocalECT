@@ -69,12 +69,15 @@ namespace LocalECT
                 sIDs = sIDs.Remove(iLen - 1, 1);
             }
             string s = sIDs;
-            if(s.Length<=10)
-            {
-                alertsearch.Visible = true;
-                lbl_IDs.Text = sIDs;
-            }
-
+            string[] uniqueItems = s.Split(',');
+            IEnumerable<string> splittedArray = uniqueItems.Distinct<string>();
+            //if (s.Length<=10)
+            //{
+            //    alertsearch.Visible = true;
+            //    lbl_IDs.Text = sIDs;
+            //}
+            alertsearch.Visible = true;
+            lbl_IDs.Text = splittedArray.Count().ToString()+" records selected for Bulk Action";
             //sIDs = "'" + s.Replace(",", "','") + "'";
 
         }
@@ -171,8 +174,10 @@ namespace LocalECT
                 sIDs = sIDs.Remove(iLen - 1, 1);
             }
             string s = sIDs;
-            string[] splittedArray = s.Split(',');
+            string[] uniqueItems  = s.Split(',');
+            IEnumerable<string> splittedArray = uniqueItems.Distinct<string>();
             // Start loop
+            int iEffected = 0;
             foreach (string sid in splittedArray)
             {
                 //1. insert Query
@@ -181,8 +186,8 @@ namespace LocalECT
                 insertquery += "FROM(SELECT     MAX(iSerial) + 1 AS iMax ";
                 insertquery += " FROM          Reg_Students_Request) AS LR CROSS JOIN ";
                 insertquery += "Reg_Applications AS A ";
-                insertquery += "WHERE(A.lngStudentNumber IN(N'"+ sid + "')) AND(A.byteCancelReason <> 3) ";
-                SqlCommand cmd = new SqlCommand("insert into Reg_Students_Request "+insertquery+ "", sc);
+                insertquery += "WHERE (A.lngStudentNumber IN(N'"+ sid + "')) AND (A.byteCancelReason <> " + ddlStatus.SelectedItem.Value + " and A.byteCancelReason <> 3 OR A.byteCancelReason IS NULL)";
+                SqlCommand cmd = new SqlCommand("insert into Reg_Students_Request "+insertquery+ "", sc);                
                 try
                 {
                     sc.Open();
@@ -201,23 +206,48 @@ namespace LocalECT
                         if (dt1.Rows.Count>0)
                         {
                             int selectedYear = 0;
+                            string SY = "NULL";
                             int selectedSemester = 0;
+                            string SS = "NULL";
                             int selectedTerm = 0;
+                            string byteCancelReason = "NULL";
                             selectedTerm = Convert.ToInt32(ddlStatusTerm.SelectedValue);
                             selectedYear = LibraryMOD.SeperateTerm(selectedTerm, out selectedSemester);
                             int iMax = Convert.ToInt32(dt1.Rows[0]["iMax"]);
+
+                            if(ddlStatus.SelectedItem.Text=="No Status")
+                            {
+                                SY = "NULL";
+                                SS = "NULL";
+                                byteCancelReason = "NULL";
+                            }
+                            else
+                            {
+                                SY = selectedYear.ToString();
+                                SS = selectedSemester.ToString();
+                                byteCancelReason = "SR.bStatus";
+                            }
+
                             string updatequery = "UPDATE    Reg_Applications ";
-                            updatequery += "SET intGraduationYear = "+selectedYear+", byteGraduationSemester = " + selectedSemester + ", byteCancelReason = SR.bStatus, byteMainReason = SR.bReason, byteSubReason = SR.bSubReason, ";
+                            updatequery += "SET intGraduationYear = "+ SY + ", byteGraduationSemester = " + SS + ", byteCancelReason = " + byteCancelReason + ", byteMainReason = SR.bReason, byteSubReason = SR.bSubReason, ";
                             updatequery += "dateGraduation2 = GETDATE(), strUserSave = '"+ Session["CurrentUserName"].ToString() + "', dateLastSave = GETDATE(), strNUser = '"+ Session["CurrentUserName"].ToString() + "', strMachine = 'LocalECT' ";
                             updatequery += "FROM Reg_Applications INNER JOIN ";
                             updatequery += "Reg_Students_Request AS SR ON Reg_Applications.lngStudentNumber = SR.sStudentNo ";
-                            updatequery += "WHERE(SR.iSerial ="+iMax+") AND(Reg_Applications.byteCancelReason <> 3) ";
+                            updatequery += "WHERE (SR.iSerial ="+iMax+ ") AND ((Reg_Applications.byteCancelReason <> " + byteCancelReason + " and Reg_Applications.byteCancelReason <> 3) OR Reg_Applications.byteCancelReason IS NULL) ";
+                            //(Reg_Applications.byteCancelReason<> " + ddlStatus.SelectedItem.Value + " and Reg_Applications.byteCancelReason <> 3 OR Reg_Applications.byteCancelReason IS NULL)
                             SqlCommand cmd2 = new SqlCommand(updatequery, sc);
                             try
                             {
                                 sc.Open();
-                                cmd2.ExecuteNonQuery();
+                                //cmd2.ExecuteNonQuery();
+                                int irow = 0;
+                                irow = cmd2.ExecuteNonQuery();
                                 sc.Close();
+                                if(irow>0)
+                                {
+                                    iEffected++;
+                                }
+
                             }
                             catch(Exception ex)
                             {
@@ -250,7 +280,7 @@ namespace LocalECT
                     sc.Close();
                 }
             }
-            lbl_Msg.Text = "Bulk Operation (Change Status) Completed Successfully";
+            lbl_Msg.Text = "Bulk Operation (Change Status) Completed Successfully-"+ iEffected + " records updated";
             div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
             div_msg.Visible = true;
             lnk_BulkUpdate.Visible = false;

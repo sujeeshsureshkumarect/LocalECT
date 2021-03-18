@@ -185,9 +185,11 @@ StudentID3"></asp:TextBox>
                                                              }                                                             
                                                          });
 
-                                                         function selected() {                                                             
+                                                         function selected() {   
+                                                             var form = this;
                                                              var sid = "";
                                                              // Iterate over all checkboxes in the table
+                                                             //$.each($('input[type="checkbox"]'), function () {
                                                              table.$('input[type="checkbox"]').each(function () {
                                                                  // If checkbox doesn't exist in DOM                                                                 
                                                                  if ($.contains(document, this)) {
@@ -196,7 +198,14 @@ StudentID3"></asp:TextBox>
                                                                          sid += this.value + ',';                                                                         
                                                                      }
                                                                  }
-                                                             });                                                             
+                                                                 if (!$.contains(document, this)) {
+                                                                     // If checkbox is checked                                                                     
+                                                                     if (this.checked) {
+                                                                         sid += this.value + ',';
+                                                                     }
+                                                                 }
+                                                             }); 
+                                                             //alert(sid);
                                                              setCookie("sids", sid, "1");                                                           
                                                          }
                                                      });
@@ -229,6 +238,8 @@ StudentID3"></asp:TextBox>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Account No.</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Phone No.</th>                                                         
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Email</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">LTR</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
                                                      </tr>
                                                  </thead>
@@ -247,6 +258,8 @@ StudentID3"></asp:TextBox>
                                                  <td><%#Eval("sAccount")%></td>
                                                  <td><%#Eval("sPhone1")%></td>
                                                  <td><%#Eval("ECTEmail")%></td>
+                                                  <td><%#Eval("LTR")%></td>
+                                                  <td><%#Eval("Status")%></td>
                                                  <td>
                                                      <div class="btn-group">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -284,7 +297,7 @@ StudentID3"></asp:TextBox>
                                     <asp:ListItem Text="Action 5" Value="#"></asp:ListItem>
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator44" runat="server" ControlToValidate="drp_Bulk" ErrorMessage="*Select any bulk action" Display="Dynamic" ForeColor="Red" ValidationGroup="no1" InitialValue="Bulk Actions"/>
-                                <asp:LinkButton ID="lnk_Execute" runat="server" OnClick="lnk_Execute_Click" CssClass="btn btn-secondary btn-sm" OnClientClick="document.forms[0].target = '_blank';" ValidationGroup="no1"><i class="fa fa-flash"></i> Execute</asp:LinkButton>
+                                <asp:LinkButton ID="lnk_Execute" runat="server" OnClick="lnk_Execute_Click" CssClass="btn btn-secondary btn-sm"  ValidationGroup="no1"><i class="fa fa-flash"></i> Execute</asp:LinkButton>
                               <%--  <div class="btn-group">
                                     <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Bulk Actions
