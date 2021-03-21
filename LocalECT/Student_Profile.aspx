@@ -603,7 +603,7 @@
                                                          <label class="col-form-label col-md-3 col-sm-3">Sector</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlEmploymentSector" runat="server" TabIndex="40"
-                                                                 CssClass="form-control" DataTextField="SectorNameEn" DataValueField="SectorID">
+                                                                 CssClass="form-control" DataTextField="sEmpSector" DataValueField="iSector">
                                                              </asp:DropDownList>
                                                          </div>
                                                      </div>

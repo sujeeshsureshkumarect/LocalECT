@@ -69,6 +69,7 @@ namespace LocalECT
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             bool bResult = false;
             try
             {
@@ -387,6 +388,7 @@ namespace LocalECT
             {
 
             }
+            //sentdatatoSPLIstNewStudentsTracking();
         }
         private void getEIDData()
         {
@@ -1588,26 +1590,51 @@ namespace LocalECT
 
         private void FillEmploymentSector()
         {
-            List<Sector> mySector = new List<Sector>();
-            SectorDAL mySectorDAL = new SectorDAL();
+            //List<Sector> mySector = new List<Sector>();
+            //SectorDAL mySectorDAL = new SectorDAL();
+            //try
+            //{
+            //    mySector = mySectorDAL.GetSector(Campus, "", false);
+            //    for (int i = 0; i < mySector.Count; i++)
+            //    {
+            //        ddlEmploymentSector.Items.Add(new ListItem(mySector[i].SectorNameEn, mySector[i].SectorID.ToString()));
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    LibraryMOD.ShowErrorMessage(ex);
+            //    //lbl_Msg.Text = ex.Message;
+            //    //div_msg.Visible = true;
+            //}
+            //finally
+            //{
+            //    mySector.Clear();
+            //}
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT [iSector] ,[sEmpSector] FROM [ECTData].[dbo].[Lkp_Employment_Sector]", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
             {
-                mySector = mySectorDAL.GetSector(Campus, "", false);
-                for (int i = 0; i < mySector.Count; i++)
-                {
-                    ddlEmploymentSector.Items.Add(new ListItem(mySector[i].SectorNameEn, mySector[i].SectorID.ToString()));
-                }
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
 
+                ddlEmploymentSector.DataSource = dt;
+                ddlEmploymentSector.DataTextField = "sEmpSector";
+                ddlEmploymentSector.DataValueField = "iSector";
+                ddlEmploymentSector.DataBind();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                LibraryMOD.ShowErrorMessage(ex);
-                //lbl_Msg.Text = ex.Message;
-                //div_msg.Visible = true;
+                sc.Close();
+                Console.WriteLine(ex.Message);
             }
             finally
             {
-                mySector.Clear();
+                sc.Close();
             }
 
         }
@@ -4572,6 +4599,12 @@ namespace LocalECT
                                             }
                                             //Sharepoint List Creation
                                             sentdatatoSPLIst();
+
+                                            if(!string.IsNullOrEmpty(txtECTEmail.Text))
+                                            {
+                                                sentdatatoSPLIstNewStudentsTracking();
+                                            }
+
                                             //Latest Update Added on 10-03-2021 as per Mr. Ihab
                                             updateaccountpayemtpending(Convert.ToInt32(txtOpportunityID.Text), sAcc);
                                         }
@@ -4732,7 +4765,7 @@ namespace LocalECT
 
             string Addedby = "";
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);            
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -4743,7 +4776,7 @@ namespace LocalECT
 
                 if (dt.Rows.Count > 0)
                 {
-                    Addedby= dt.Rows[0]["Email"].ToString();
+                    Addedby = dt.Rows[0]["EmployeeEmail"].ToString();
                 }
             }
             catch (Exception ex)
@@ -4822,6 +4855,117 @@ namespace LocalECT
                 var onlineCredentials = new SharePointOnlineCredentials(login, securePassword);
                 clientContext.Credentials = onlineCredentials;
                 clientContext.ExecuteQuery();        
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            //Console.ReadLine();
+        }
+
+        public void sentdatatoSPLIstNewStudentsTracking()
+        {
+            int sem = 0;
+            int Year = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out sem);
+
+            int iYear = Year;
+            int iSem = sem;
+            string sSemester = LibraryMOD.GetSemesterString(iSem);
+            int iTerm = iYear * 10 + iSem;
+
+            string Addedby = "";
+            SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    Addedby = dt.Rows[0]["EmployeeEmail"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+
+            string SIS_PWD = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc1 = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd1 = new SqlCommand("SELECT strOnlinePWD from Reg_Student_Accounts where lngStudentNumber=@lngStudentNumber", sc1);
+            cmd1.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text.Trim());
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            try
+            {
+                sc1.Open();
+                da1.Fill(dt1);
+                sc1.Close();
+
+                if (dt1.Rows.Count > 0)
+                {
+                    SIS_PWD = dt1.Rows[0]["strOnlinePWD"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc1.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc1.Close();
+            }
+
+            string login = "ets.services.admin@ect.ac.ae"; //give your username here  
+            string password = "Ser71ces@328"; //give your password  
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            string siteUrl = "https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices";
+            ClientContext clientContext = new ClientContext(siteUrl);
+            Microsoft.SharePoint.Client.List myList = clientContext.Web.Lists.GetByTitle("New Students Tracking");
+            ListItemCreationInformation itemInfo = new ListItemCreationInformation();
+            Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
+            myItem["Title"] = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);//Term                     
+            myItem["SID"] = lblStudentId.Text.Trim();//SID
+            myItem["Email"] = clientContext.Web.EnsureUser(txtECTEmail.Text.Trim());//Student Email   
+            //myItem["Email"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//Student Email  
+            myItem["Password"] = SIS_PWD;//SIS Password
+            myItem["Phone1"] = txtPhone1.Text.Trim();//Phone1
+            myItem["Phone2"] = txtPhone2.Text.Trim();//Phone2  
+            myItem["Author"] = clientContext.Web.EnsureUser(Addedby);//Added By
+            //myItem["Author"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
+            myItem["FirstUpdate"] = null;//1st Update
+            myItem["SecondUpdate"] = null;//2nd Update
+            myItem["ThirdUpdate"] = null;//3rd Update
+            myItem["Remarks"] = "";//Remarks
+            myItem["Status"] = "Initiated";//Status
+            myItem["StudentName"] = txtNameEn.Text.Trim();//Student Name
+            //myItem["Modified"] = null;//Updated
+            //myItem["Created"] = DateTime.Now;//Created
+            myItem["Editor"] = clientContext.Web.EnsureUser(Addedby);//Updated By
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            try
+            {
+                myItem.Update();
+                var onlineCredentials = new SharePointOnlineCredentials(login, securePassword);
+                clientContext.Credentials = onlineCredentials;
+                clientContext.ExecuteQuery();
             }
             catch (Exception e)
             {

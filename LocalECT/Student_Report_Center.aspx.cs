@@ -54,6 +54,22 @@ namespace LocalECT
                 //FillMajors();
                 //FillStatuses();
                 //FillGroup();
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentCenter,
+       InitializeModule.enumPrivilege.ShowPhones, CurrentRole) != true)
+                {
+
+                    for (int i = 0; i < chk_Fields.Items.Count; i++)
+                    {
+                        if (chk_Fields.Items[i].Value == "SD.Phone1")
+                        {
+                            chk_Fields.Items.RemoveAt(i);
+                        }
+                        if (chk_Fields.Items[i].Value == "SD.Phone2")
+                        {
+                            chk_Fields.Items.RemoveAt(i);
+                        }
+                    }
+                }
             }
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentCenter,
            InitializeModule.enumPrivilege.ShowUnRegisteredStudents, CurrentRole) != true)
@@ -63,6 +79,7 @@ namespace LocalECT
 
                 //ddlJoinTerm.Enabled = false;
             }
+                     
         }
 
         protected void lnk_FieldGenerate_Click(object sender, EventArgs e)
