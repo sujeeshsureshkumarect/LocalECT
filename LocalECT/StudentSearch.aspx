@@ -91,6 +91,8 @@
                                              <asp:ListItem Text="Major Name" Value="strCaption" />  
                                             <asp:ListItem Text="Phone Number" Value="sPhone1" />  
                                             <asp:ListItem Text="ECT Email" Value="ECTEmail" />   
+                                             <asp:ListItem Text="LTR" Value="LTR" /> 
+                                             <asp:ListItem Text="Status" Value="Status" /> 
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -273,6 +275,8 @@ StudentID3"></asp:TextBox>
                                                              <a class="dropdown-item" href="CourseCalc?sid=<%#Eval("sNo")%>">Course Calc</a>
                                                              <a class="dropdown-item" href="GradesEdit_Alt?sid=<%#Eval("sNo")%>">Alternative Setup</a>
                                                              <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Grades Edit</a>
+                                                            <%-- <a class="dropdown-item" href="Transcript.aspx?PreviousTerm">Transcript</a>--%>
+                                                             <asp:LinkButton ID="lnk_Transcript_Menu" runat="server" Text="Transcript" OnClick="lnk_Transcript_Menu_Click" CssClass="dropdown-item" CommandArgument=<%#Eval("sNo")%> CommandName=<%#Eval("sName")%>></asp:LinkButton>
                                                          </div>
                                                      </div>
                                                  </td>

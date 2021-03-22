@@ -5,11 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Configuration;
 
 namespace LocalECT
 {
     public partial class Login : System.Web.UI.Page
     {
+        SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,12 +27,37 @@ namespace LocalECT
                 int iCYear = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out iCSem);
                 Session["CurrentYear"] = iCYear;
                 Session["CurrentSemester"] = iCSem;
+                get_sCSemester();
                 Fill_SystemsCBO();
                 SystemsCBO.SelectedValue = ((int)InitializeModule.EnumSystems.ECTLocal).ToString();
             }
             if (SystemsCBO.SelectedValue == "0")
             {
                 SystemsCBO.SelectedValue = ((int)InitializeModule.EnumSystems.ECTLocal).ToString();
+            }
+        }
+
+        public void get_sCSemester()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT sAdvisingTerm FROM Cmn_Firm", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                Session["sCSemester"] = dt.Rows[0]["sAdvisingTerm"].ToString();
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
         protected void Btn_Signin_Click(object sender, EventArgs e)

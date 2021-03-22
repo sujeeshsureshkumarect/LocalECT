@@ -366,7 +366,7 @@ namespace LocalECT
 
                 bool isHidden = LibraryMOD.isGradesHidden(Campus);
                 bool isRecIncluded = true;// (Type_ddl.SelectedIndex == 0);
-                myMirror = myAdvising.GetAdvising(sNo, isRecIncluded, iYear, iSem, true, isHidden, out Plan, Campus);
+                myMirror = myAdvising.GetAdvising(sNo, isRecIncluded, iYear, iSem, true, isHidden, out Plan, Campus, Session["sCSemester"].ToString());
                 int iRec = myMirror[0].Recommended.Count;
                 if (iRec > 0)
                 {
@@ -1572,7 +1572,7 @@ namespace LocalECT
                 iYear = LibraryMOD.SeperateTerm(int.Parse(Term_ddl.SelectedValue), out iSem);
                 bool isHidden = LibraryMOD.isGradesHidden(Campus);
                 bool isRecIncluded = true;// (Type_ddl.SelectedIndex == 0);
-                myMirror = myAdvising.GetAdvising(sNo, isRecIncluded, iYear, iSem, true, isHidden, out Plan, Campus);
+                myMirror = myAdvising.GetAdvising(sNo, isRecIncluded, iYear, iSem, true, isHidden, out Plan, Campus, Session["sCSemester"].ToString());
                 int iRec = myMirror[0].Recommended.Count;
 
                 TableRow Tr = new TableRow();

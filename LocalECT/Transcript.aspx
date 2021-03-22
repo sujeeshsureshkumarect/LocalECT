@@ -32,7 +32,17 @@
                                         width: 100%;
                                         float: left;
                                         display: block;
-                                    }                                  
+                                    }   
+                                     .table {
+                        color: #444444;
+                    }
+                    table{
+                        border: 1px solid #dee2e6
+                    }
+                      #ContentPlaceHolder1_tblDetail  th, td {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
                                 </style>
                             </div>
                             <div class="clearfix"></div>
@@ -42,6 +52,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-dashboard"></i> Student Transcript</h2>
                                             <ul class="nav navbar-right panel_toolbox">
+                                                <a href="StudentSearch.aspx" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Student Search</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -58,6 +69,11 @@
                                                     <asp:Label ID="lbl_Msg" runat="server" Text="" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                                 </div>
                                             </div>
+                                            <div class="x_panel" id="student_Details">
+                                                  <div id="divPlan" runat="server">
+                                                </div>
+                                                </div>
+
                                             <div class="x_panel">
                                                   <table width="100%">
         <tr>
@@ -89,33 +105,23 @@
                                          <asp:Label ID="Label3" runat="server" Text="Term :"></asp:Label>
                                      </td>
             <td>
-                                         <asp:DropDownList ID="Term_ddl" runat="server" Width="120px">
+                                         <asp:DropDownList ID="Term_ddl" runat="server" CssClass="form-control" Width="120px">
                                          </asp:DropDownList>
-                                         <asp:CheckBox ID="isCurrent_chk" runat="server" Text="Current Term" 
-                                             Checked="True" />
+                <asp:CheckBox ID="isCurrent_chk" runat="server" Text="Current Term" 
+                                             Checked="True"/>
+                                         
                                      </td>
-            <td>
-                                         &nbsp;</td>
+            <td > &nbsp;
+                                        </td>
             <td>
                                          &nbsp;</td>
         </tr>
-  <%--      <tr>
-            <td valign="top">
-                                         <asp:Label ID="Label19" runat="server" 
-                    Text="Student :"></asp:Label>
-                                     </td>
-            <td colspan="3">
-                                        <ihab:Search ID="Search1" runat="server" Campus="Females" IsSelected="False" 
-                                            SCaption1="No" SCaption2="Name" SField1="sNo" SField2="sName" 
-                                            SSQL="SELECT sNo, sName FROM Web_Students_Search" />
-                                     </td>
-        </tr>--%>
-        <tr>
+        <%--<tr>
             <td>
                 &nbsp;</td>
             <td colspan="3">
                                          &nbsp;</td>
-        </tr>
+        </tr>--%>
         <tr>
             <td>
                 &nbsp;</td>
@@ -129,7 +135,7 @@
                 <asp:Label ID="lblPath" runat="server" Text="Path:"></asp:Label>
                                      </td>
             <td colspan="3">
-                <asp:TextBox ID="Path_txt" runat="server" Width="606px"></asp:TextBox>
+                <asp:TextBox ID="Path_txt" runat="server" Width="606px" CssClass="form-control"></asp:TextBox>
                     </td>
         </tr>
         <tr>
@@ -140,36 +146,35 @@
                         style="text-align: center"></asp:Label>
                     </td>
         </tr>
-        <tr>
+       <%-- <tr>
             <td>
                 &nbsp;</td>
             <td colspan="3">
-                    <asp:HiddenField ID="sSelectedValue" runat="server" />
-                    <asp:HiddenField ID="sSelectedText" runat="server" />
+                   
                     </td>
-        </tr>
-        <tr>
+        </tr>--%>
+       <%-- <tr>
             <td >
                     
             </td>
             <td align="right" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
+        </tr>--%>
+       <%-- <tr>
             <td colspan="4">
                 <hr /></td>
-        </tr>
+        </tr>--%>
         <tr>
             <td colspan="4">
                         <div id="divDetail" runat="server" ></div></td>
         </tr>
-        <tr>
+       <%-- <tr>
             <td colspan="4">
                 <hr /></td>
-        </tr>
+        </tr>--%>
         <tr>
             <td>
                 &nbsp;</td>
-            <td align="right" colspan="3">
+            <td align="middle" colspan="3">
                     <table>
                         <tr>
                             <td>
@@ -195,6 +200,8 @@
                                                 </td>
         </tr>
     </table>
+                                                 <asp:HiddenField ID="sSelectedValue" runat="server" />
+                    <asp:HiddenField ID="sSelectedText" runat="server" />
                                             </div>
                                         </div>
                                     </div>

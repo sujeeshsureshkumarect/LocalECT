@@ -308,7 +308,7 @@ namespace LocalECT
                 int iSem = iRegSem;
                 //Is Grades Hidden
                 bool isHidden = LibraryMOD.isGradesHidden(Campus);
-                myMirror = myAdvising.GetAdvising(sNo, true, iYear, iSem, true, isHidden, out Plan, Campus);
+                myMirror = myAdvising.GetAdvising(sNo, true, iYear, iSem, true, isHidden, out Plan, Campus, Session["sCSemester"].ToString());
                 int i = myMirror.Count;
                 int iRec = myMirror[0].Recommended.Count;
 

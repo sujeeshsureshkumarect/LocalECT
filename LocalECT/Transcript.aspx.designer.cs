@@ -42,6 +42,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
+        /// divPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPlan;
+
+        /// <summary>
         /// divMsg control.
         /// </summary>
         /// <remarks>
@@ -114,24 +123,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lblProgress;
 
         /// <summary>
-        /// sSelectedValue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField sSelectedValue;
-
-        /// <summary>
-        /// sSelectedText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField sSelectedText;
-
-        /// <summary>
         /// divDetail control.
         /// </summary>
         /// <remarks>
@@ -184,5 +175,23 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton Print_btn;
+
+        /// <summary>
+        /// sSelectedValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField sSelectedValue;
+
+        /// <summary>
+        /// sSelectedText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField sSelectedText;
     }
 }

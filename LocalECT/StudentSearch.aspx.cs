@@ -18,11 +18,12 @@ namespace LocalECT
         int iCYear = 0;
         int iCSem = 0;
         int iTerm = 0;
+        int CurrentRole = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CurrentRole"] != null)
             {
-                int CurrentRole = (int)Session["CurrentRole"];
+                CurrentRole = (int)Session["CurrentRole"];
                 if (!IsPostBack)
                 {
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentSearch,
@@ -122,6 +123,16 @@ namespace LocalECT
                     //sqlcont = "strCaption like '%" + txt_Search.Text + "%'";
                     sIDsCon = getIDsCondition(sIDs, "strCaption");
                 }
+                else if (drp_Criteria.SelectedItem.Text == "LTR")
+                {
+                    //sqlcont = "strCaption like '%" + txt_Search.Text + "%'";
+                    sIDsCon = getIDsCondition(sIDs, "LTR");
+                }
+                else if (drp_Criteria.SelectedItem.Text == "Status")
+                {
+                    //sqlcont = "strCaption like '%" + txt_Search.Text + "%'";
+                    sIDsCon = getIDsCondition(sIDs, "Status");
+                }
             }
             else
             {
@@ -158,6 +169,14 @@ namespace LocalECT
                 else if (drp_Criteria.SelectedItem.Text == "Major Name")
                 {
                     sIDsCon = "strCaption in (" + sIDs + ")";
+                }
+                else if (drp_Criteria.SelectedItem.Text == "LTR")
+                {
+                    sIDsCon = "LTR in (" + sIDs + ")";
+                }
+                else if (drp_Criteria.SelectedItem.Text == "Status")
+                {
+                    sIDsCon = "Status in (" + sIDs + ")";
                 }
             }
             
@@ -249,6 +268,53 @@ namespace LocalECT
             {
 
             }
+        }
+
+        protected void lnk_Transcript_Menu_Click(object sender, EventArgs e)
+        {
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+            string CommandName = button.CommandName;
+
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Advising,
+                    InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+            {
+                //divMsg.InnerText = "Sorry you dont have a permissions to print the transcript";
+                //lbl_Msg.Text = "Sorry you dont have a permissions to print the transcript";
+                //div_msg.Visible = true;
+                Server.Transfer("Authorization.aspx");
+                //return;
+
+            }
+            int iYear = 0;
+            int iSem = 0;
+            int iPrevYear = 0;
+            byte bPrevSemester = 0;
+            int iTerm = LibraryMOD.GetCurrentTerm();
+            iYear = LibraryMOD.SeperateTerm(int.Parse(iTerm.ToString()), out iSem);
+
+            if (iSem == 1)
+            {
+                bPrevSemester = 4;
+                iPrevYear = iYear - 1;
+            }
+            else
+            {
+                bPrevSemester = byte.Parse((iSem - 1).ToString());
+                iPrevYear = iYear;
+            }
+
+            int iPrevTerm = (iPrevYear * 10) + bPrevSemester;
+
+            //Open transcript page
+
+            Session["CurrentStudent"] = commandArgument;
+            Session["CurrentStudentName"] = CommandName;
+
+            Response.Redirect("Transcript.aspx?PreviousTerm=" + iPrevTerm);
         }
     }
 }

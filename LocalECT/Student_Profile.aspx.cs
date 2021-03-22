@@ -353,7 +353,8 @@ namespace LocalECT
 
                         if (rbnEmploymentStatus.SelectedValue == "0")//Not Employed
                         {
-                            ddlIWork.SelectedValue = "0";
+                            //ddlIWork.SelectedValue = "0";
+                            txtCompany.Text = "Not Working";
                             RequiredFieldValidator20.Enabled = false;
                             RequiredFieldValidator21.Enabled = false;
                             RequiredFieldValidator22.Enabled = false;
@@ -366,7 +367,8 @@ namespace LocalECT
                         }
                         else if (rbnEmploymentStatus.SelectedValue == "1")//Employed
                         {
-                            ddlIWork.SelectedValue = "1";
+                            //ddlIWork.SelectedValue = "1";
+                            txtCompany.Text = "";
                             RequiredFieldValidator20.Enabled = true;
                             RequiredFieldValidator21.Enabled = true;
                             RequiredFieldValidator22.Enabled = true;
@@ -479,12 +481,13 @@ namespace LocalECT
                         txtEmployerIndustry.Text = Session["EIDWorkField"].ToString();
                     }
                     rbnEmploymentStatus.SelectedValue = "1";
-                    ddlIWork.SelectedValue = "1";
+                    //ddlIWork.SelectedValue = "1";
                 }
                 else
                 {
                     rbnEmploymentStatus.SelectedValue = "0";
-                    ddlIWork.SelectedValue = "0";
+                    //ddlIWork.SelectedValue = "0";
+                    txtCompany.Text = "Not Working";
                 }
 
                 if (Session["EIDFamilyID"] != null)
@@ -884,7 +887,7 @@ namespace LocalECT
                     txtAddress.Text = Rd["strAddress"].ToString();
                     ddlSession.SelectedValue = Rd["byteShift"].ToString();
                     txtIDNo.Text = Rd["strNationalID"].ToString();
-                    ddlIWork.SelectedValue = Rd["intWorkPlace"].ToString();
+                    //ddlIWork.SelectedValue = Rd["intWorkPlace"].ToString();
                     txtWorkPhone.Text = Rd["strWorkPhone"].ToString();
                     txtJob.Text = Rd["strJopTitle"].ToString();
                     //ddlSponsor.SelectedValue = Rd["intDelegation"].ToString();
@@ -1042,7 +1045,7 @@ namespace LocalECT
                 ddlHomeCountry.SelectedValue = "0";
                 //ddlHomeCountry.SelectedIndex = 0;
                 //ddlIdentityType.SelectedValue = "0";
-                ddlIWork.SelectedValue = "0";
+                //ddlIWork.SelectedValue = "0";
                 ddlEmploymentSector.SelectedValue = "0";
                 ddlNationalityofMother.SelectedValue = "0";
                 //ddlNationalityofMother.SelectedIndex = 0;
@@ -1647,7 +1650,7 @@ namespace LocalECT
                 myWork_Places = myWork_PlacesDAL.GetWork_Places(Campus, "", false);
                 for (int i = 0; i < myWork_Places.Count; i++)
                 {
-                    ddlIWork.Items.Add(new ListItem(myWork_Places[i].strWorkPlaceEn, myWork_Places[i].intWorkPlace.ToString()));
+                   // ddlIWork.Items.Add(new ListItem(myWork_Places[i].strWorkPlaceEn, myWork_Places[i].intWorkPlace.ToString()));
                 }
 
             }
@@ -6093,23 +6096,24 @@ namespace LocalECT
         }
         protected void ddlIWork_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ddlIWork.SelectedItem.Text!="Other")
-            {
-                txtCompany.Text = ddlIWork.SelectedItem.Text;
-                txtCompany.Enabled = false;
-            }
-            else
-            {
-                txtCompany.Text = "NA";
-                txtCompany.Enabled = true;
-            }
+            //if(ddlIWork.SelectedItem.Text!="Other")
+            //{
+            //    txtCompany.Text = ddlIWork.SelectedItem.Text;
+            //    txtCompany.Enabled = false;
+            //}
+            //else
+            //{
+            //    txtCompany.Text = "NA";
+            //    txtCompany.Enabled = true;
+            //}
         }
 
         protected void rbnEmploymentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {           
             if (rbnEmploymentStatus.SelectedValue == "0")//Not Employed
             {
-                ddlIWork.SelectedValue = "0";
+                //ddlIWork.SelectedValue = "0";
+                txtCompany.Text = "Not Working";
                 RequiredFieldValidator20.Enabled = false;
                 RequiredFieldValidator21.Enabled = false;
                 RequiredFieldValidator22.Enabled = false;
@@ -6122,7 +6126,8 @@ namespace LocalECT
             }
             else if(rbnEmploymentStatus.SelectedValue == "1")//Employed
             {
-                ddlIWork.SelectedValue = "1";
+                //ddlIWork.SelectedValue = "1";
+                txtCompany.Text = "";
                 RequiredFieldValidator20.Enabled = true;
                 RequiredFieldValidator21.Enabled = true;
                 RequiredFieldValidator22.Enabled = true;

@@ -142,7 +142,7 @@ namespace LocalECT
                     sSelectedValue.Value = Session["CurrentStudent"].ToString();
                     sSelectedText.Value = Session["CurrentStudentName"].ToString();
                     sNo = sSelectedValue.Value;
-                    Export(InitializeModule.ECT_Buttons.Print);
+                    //Export(InitializeModule.ECT_Buttons.Print);                    
                 }
                 else
                 {
@@ -173,6 +173,13 @@ namespace LocalECT
                 }
 
                 //=========================
+                Get_Student_Advising();
+                System.Web.UI.WebControls.Table myTable;
+                List<MirrorCLS> myList = (List<MirrorCLS>)Session["myList"];
+                myTable = Create_Table(myList[0]);
+                divPlan.Controls.Clear();
+                divPlan.Controls.Add(myTable);
+
             }
             else
             {
@@ -191,31 +198,200 @@ namespace LocalECT
             //Search1.Campus = Campus;
 
         }
+        private System.Web.UI.WebControls.Table Create_Table(MirrorCLS myMirror)
+        {
+            System.Web.UI.WebControls.Table MyTable = new System.Web.UI.WebControls.Table();
+            try
+            {
+                //First Row
+                MyTable.Width = Unit.Percentage(100);
+                MyTable.BorderWidth = 1;
+                MyTable.GridLines = GridLines.Horizontal;
+                MyTable.ID = "tblDetail";
 
+                TableHeaderRow Hr = new TableHeaderRow();
+                TableHeaderCell Hc = new TableHeaderCell();
+                TableCell Hd = new TableCell();
+                Hc.ColumnSpan = 4;
+                Hc.Text = "Student Information";
+                Hr.Cells.Add(Hc);
+                MyTable.Rows.Add(Hr);
+
+                //No
+                Hr = new TableHeaderRow();
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "No : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                Hd.Text = sNo;
+                Hr.Cells.Add(Hd);
+                //Name
+                Hc = new TableHeaderCell();
+                Hc.Text = "Name : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                Hd.Text = Session["CurrentStudentName"].ToString();
+                Hr.Cells.Add(Hd);
+
+                MyTable.Rows.Add(Hr);
+
+
+                //Second Row
+                Hr = new TableHeaderRow();
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "Major : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                Hd.ColumnSpan = 3;
+                Hd.Text = myMirror.Major;
+                Hr.Cells.Add(Hd);
+
+                MyTable.Rows.Add(Hr);
+                //----------------------------------------
+                //Hc = new TableHeaderCell();
+                //Hc.Text = "Registered Courses : ";
+                //Hr.Cells.Add(Hc);
+
+                //Hd = new TableCell();
+                ////Hd.ColumnSpan = 3;
+                //Hd.Text = Convert.ToString(LibraryMOD.GetRegCoursesPrevSem(sNo, iRegYear, iRegSem, (InitializeModule.EnumCampus)Campus));
+
+                //Hr.Cells.Add(Hd);
+
+                //MyTable.Rows.Add(Hr);
+                //-------------------------------------------
+                //Third Row
+                Hr = new TableHeaderRow();
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "CGPA : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                if (myMirror.CGPA != 101)
+                {
+                    Hd.Text = string.Format("{0:F}", myMirror.CGPA);
+                }
+
+                Hr.Cells.Add(Hd);
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "ESL : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                //Get Max Esl
+                for (int i = 0; i < 5; i++)
+                {
+                    if (myMirror.Mirror[i].isPassed)
+                    {
+                        Hd.Text = myMirror.Mirror[i].sCourse;
+                        myMirror.MaxESL = i;
+
+                    }
+
+                }
+                Hr.Cells.Add(Hd);
+
+                MyTable.Rows.Add(Hr);
+
+                //Fourth Row
+                Hr = new TableHeaderRow();
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "ENG : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+                Hd.Text = myMirror.ENG;
+                Hr.Cells.Add(Hd);
+
+                Hc = new TableHeaderCell();
+                Hc.Text = "Score : ";
+                Hr.Cells.Add(Hc);
+
+                Hd = new TableCell();
+
+                Hd.Text = string.Format("{0:F}", myMirror.Score); ;
+
+                Hr.Cells.Add(Hd);
+
+                MyTable.Rows.Add(Hr);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+
+            }
+            finally
+            {
+
+
+            }
+            return MyTable;
+        }
         private void FillTerms()
         {
+            //List<Semesters> myTerms = new List<Semesters>();
+            //SemesterDAL myTermsDAL = new SemesterDAL();
+            //try
+            //{
+            //    int iTerm = 0;
+
+            //    iTerm = LibraryMOD.GetCurrentTerm();
+            //    myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, " Where Term<" + iTerm, true);
+            //    for (int i = 0; i < myTerms.Count; i++)
+            //    {
+            //        Term_ddl.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    LibraryMOD.ShowErrorMessage(ex);
+            //    //divMsg.InnerText = ex.Message;
+            //    lbl_Msg.Text = ex.Message;
+            //    div_msg.Visible = true;
+            //}
+            //finally
+            //{
+            //    myTerms.Clear();
+
+            //}
             List<Semesters> myTerms = new List<Semesters>();
             SemesterDAL myTermsDAL = new SemesterDAL();
             try
             {
-                int iTerm = 0;
-
-                iTerm = LibraryMOD.GetCurrentTerm();
-                myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, " Where Term<" + iTerm, true);
+                myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", false);
                 for (int i = 0; i < myTerms.Count; i++)
                 {
                     Term_ddl.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
-
+                    //Term2_ddl.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
                 }
+                Term_ddl.SelectedIndex = 0;
+                //Term2_ddl.SelectedIndex = 0;
 
             }
             catch (Exception ex)
             {
 
+
                 LibraryMOD.ShowErrorMessage(ex);
                 //divMsg.InnerText = ex.Message;
                 lbl_Msg.Text = ex.Message;
                 div_msg.Visible = true;
+
             }
             finally
             {
@@ -226,7 +402,7 @@ namespace LocalECT
 
         protected void PrintCMD_Click(object sender, ImageClickEventArgs e)
         {
-
+            Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
 
             if (!chkPrintAllStudents.Checked)
             {
@@ -1049,7 +1225,42 @@ namespace LocalECT
                 Conn.Dispose();
             }
         }
+        private void Get_Student_Advising()
+        {
+            int iRegYear = 0;
+            int iRegSem = 0;
+            iRegYear = (int)Session["RegYear"];
+            iRegSem = (int)Session["RegSemester"];
+            List<MirrorCLS> myMirror = new List<MirrorCLS>();
+            Advising myAdvising = new Advising();
+            Plans Plan = new Plans();
+            try
+            {
+                Session["myList"] = null;
+                Session["myPlan"] = null;
 
+                int iYear = iRegYear;
+                int iSem = iRegSem;
+                //Is Grades Hidden
+                bool isHidden = LibraryMOD.isGradesHidden(Campus);
+                myMirror = myAdvising.GetAdvising(sNo, true, iYear, iSem, true, isHidden, out Plan, Campus, Session["sCSemester"].ToString());
+                int i = myMirror.Count;
+                int iRec = myMirror[0].Recommended.Count;
+
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+                lbl_Msg.Text = exp.Message;
+                div_msg.Visible = true;
+            }
+            finally
+            {
+                Session["myList"] = myMirror;
+                Session["myPlan"] = Plan;
+
+            }
+        }
         private DataSet Prepare_Report(int iTerm, bool isCurrent, string stdNO, string sSQL, string sDegree, string sMajor, bool isVisiting, InitializeModule.EnumCampus Campus)
         {
 

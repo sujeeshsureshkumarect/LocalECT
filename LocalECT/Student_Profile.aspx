@@ -567,7 +567,7 @@
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator19" ErrorMessage="*Employment Status is required" ControlToValidate="rbnEmploymentStatus" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="SD"/>
                                                          </div>
                                                      </div>
-                                                     <div class="form-group row">
+                                                  <%--   <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Work Place</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlIWork" runat="server" TabIndex="36"
@@ -575,12 +575,12 @@
                                                                  DataValueField="intWorkPlace" AutoPostBack="true" OnSelectedIndexChanged="ddlIWork_SelectedIndexChanged">
                                                              </asp:DropDownList>
                                                          </div>
-                                                     </div>
+                                                     </div>--%>
                                                      <div class="form-group row">
-                                                         <label class="col-form-label col-md-3 col-sm-3"  >Company Name</label>
+                                                         <label class="col-form-label col-md-3 col-sm-3"  >Work Place</label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                             <asp:TextBox ID="txtCompany" runat="server"  TabIndex="37" CssClass="form-control" ValidationGroup="SD">NA</asp:TextBox>
-                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator20" ErrorMessage="*Company Name is required" InitialValue="NA" ControlToValidate="txtCompany" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="SD"/>
+                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator20" ErrorMessage="*Work Place is required" InitialValue="NA" ControlToValidate="txtCompany" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="SD"/>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
@@ -2428,8 +2428,9 @@
                                         PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="txtIDNo" DefaultValue="0" Name="strNationalID" 
                                         PropertyName="Text" />
-                                    <asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
-                                        PropertyName="SelectedValue" />
+                                    <%--<asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
+                                        PropertyName="SelectedValue" />--%>
+                                    <asp:Parameter DefaultValue="181" Name="intWorkPlace" Type="String" />
                                     <asp:ControlParameter ControlID="txtWorkPhone" DefaultValue="" 
                                         Name="strWorkPhone" PropertyName="Text" />
                                     <asp:ControlParameter ControlID="txtJob" DefaultValue="-" Name="strJopTitle" 
@@ -2539,8 +2540,9 @@
                                         PropertyName="SelectedValue" />
                                     <asp:ControlParameter ControlID="txtIDNo" DefaultValue="0" Name="strNationalID" 
                                         PropertyName="Text" />
-                                    <asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
-                                        PropertyName="SelectedValue" />
+                       <%--             <asp:ControlParameter ControlID="ddlIWork" DefaultValue="0" Name="intWorkPlace" 
+                                        PropertyName="SelectedValue" />--%>
+                                    <asp:Parameter DefaultValue="181" Name="intWorkPlace" Type="String" />
                                     <asp:ControlParameter ControlID="txtWorkPhone" DefaultValue="" Name="strWorkPhone" 
                                         PropertyName="Text" />
                                     <asp:ControlParameter ControlID="txtJob" DefaultValue="-" Name="strJopTitle" 
