@@ -120,7 +120,7 @@ namespace LocalECT
                 grdStudentGrades.DataBind();
 
                 DataStatus.Value = ((int)InitializeModule.enumModes.NewMode).ToString();
-
+                SaveCMD.Text = "Add";
                 //CampusCBO.SelectedValue = Convert.ToString(iCampus);
 
             }
@@ -436,7 +436,7 @@ namespace LocalECT
                 }
 
                 DataStatus.Value = ((int)InitializeModule.enumModes.NewMode).ToString();
-
+                SaveCMD.Text = "Add";
             }
             catch (Exception ex)
             {
@@ -467,7 +467,7 @@ namespace LocalECT
                     if (grdStudentGrades.SelectedRow != null)
                     {
                         DataStatus.Value = ((int)InitializeModule.enumModes.EditMode).ToString();
-
+                        SaveCMD.Text = "Save";
                         SaveCMD.Enabled = true;
                         //SaveCMD.ImageUrl = "~/Images/Icons/Save.gif";
                         //DeleteCMD.ImageUrl = "~/Images/Icons/Delete.gif";
