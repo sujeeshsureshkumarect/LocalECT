@@ -8095,6 +8095,9 @@
     <Content Include="LPOPrint.xss">
       <DependentUpon>LPOPrint.xsd</DependentUpon>
     </Content>
+    <Content Include="News_Feed_Create.aspx" />
+    <Content Include="News_Feed_Home.aspx" />
+    <Content Include="News_Feed_Update.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="Reports\CrystalReport.mht" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -8691,6 +8694,27 @@
     </Compile>
     <Compile Include="MyProfile.aspx.designer.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_Feed_Create.aspx.cs">
+      <DependentUpon>News_Feed_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_Feed_Create.aspx.designer.cs">
+      <DependentUpon>News_Feed_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_Feed_Home.aspx.cs">
+      <DependentUpon>News_Feed_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_Feed_Home.aspx.designer.cs">
+      <DependentUpon>News_Feed_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News_Feed_Update.aspx.cs">
+      <DependentUpon>News_Feed_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News_Feed_Update.aspx.designer.cs">
+      <DependentUpon>News_Feed_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="PlainPage.aspx.cs">
       <DependentUpon>PlainPage.aspx</DependentUpon>
@@ -10021,6 +10045,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="NewsFeed\" />
     <Folder Include="Student_Files\Female\" />
     <Folder Include="Student_Files\Male\" />
     <Folder Include="Upload\" />

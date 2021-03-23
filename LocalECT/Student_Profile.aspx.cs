@@ -1201,7 +1201,7 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
-
+            sortddls(ddlEmployerEmirate);
 
         }
 
@@ -1280,7 +1280,7 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
-
+            sortddls(ddlLastDegree);
 
         }
 
@@ -1356,8 +1356,30 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
+            sortddls(ddlStatus);
         }
 
+        public void sortddls(DropDownList ddl)
+        {
+            //this line create a generic list data type ListItem
+            List<ListItem> list = new List<ListItem>();
+
+            foreach (ListItem li in ddl.Items)
+            {
+                list.Add(li);
+            }
+
+            //sort list items alphabetically/ascending
+            List<ListItem> sorted = list.OrderBy(b => b.Text).ToList();
+
+            //empty dropdownlist
+            ddl.Items.Clear();
+            //repopulate dropdownlist with sorted items.
+            foreach (ListItem li in sorted)
+            {
+                ddl.Items.Add(li);
+            }
+        }
         private void FillSessions()
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
@@ -1388,7 +1410,7 @@ namespace LocalECT
                 }
                 Rd.Close();
 
-
+                sortddls(ddlSession);
             }
             catch (Exception ex)
             {
@@ -1466,6 +1488,12 @@ namespace LocalECT
                 myCountries.Clear();
 
             }
+            sortddls(ddlHomeCountry);
+            sortddls(ddlResidentCountry);
+            sortddls(ddlQCountry);
+            sortddls(ddlBirthCountry);
+            sortddls(ddlEmployerCountry);
+            sortddls(ddlLastCountry);
         }
 
         //private void FillCities()
@@ -1561,6 +1589,8 @@ namespace LocalECT
                 myNationalities.Clear();
 
             }
+            sortddls(ddlNationality);
+            sortddls(ddlNationalityofMother);
         }
 
         private void FillLanguages()
@@ -1587,6 +1617,7 @@ namespace LocalECT
                 myLanguages.Clear();
 
             }
+            sortddls(ddlLanguage);
         }
 
 
@@ -1639,7 +1670,7 @@ namespace LocalECT
             {
                 sc.Close();
             }
-
+            sortddls(ddlEmploymentSector);
         }
         private void FillWork_Places()
         {
@@ -1690,6 +1721,7 @@ namespace LocalECT
             {
                 mySponsors.Clear();
             }
+            sortddls(ddlVisa);
         }
 
         private void FillSponsors()
@@ -1740,6 +1772,8 @@ namespace LocalECT
             {
                 sc.Close();
             }
+            sortddls(ddlSponsor);
+            sortddls(drp_determination);
         }
 
         private void FillCertificates()
@@ -1933,6 +1967,7 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
+            sortddls(ddlAdvisor);
         }
 
         private void FillCourses(string sCollege, string sDegree, string sMajor)
@@ -2020,6 +2055,7 @@ namespace LocalECT
             {
                 myMainReasons.Clear();
             }
+            sortddls(ddlReason);
         }
 
         private void FillMarkSource()

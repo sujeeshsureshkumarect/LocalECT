@@ -400,7 +400,7 @@ namespace LocalECT
             }
         }
 
-        protected void PrintCMD_Click(object sender, ImageClickEventArgs e)
+        protected void PrintCMD_Click(object sender, EventArgs e)
         {
             Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
 

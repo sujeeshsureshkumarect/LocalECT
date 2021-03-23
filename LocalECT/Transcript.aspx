@@ -74,8 +74,10 @@
                                                 </div>
                                                 </div>
 
-                                            <div class="x_panel">
-                                                  <table width="100%">
+                                            <div class="x_panel" style="background:#f7f7f7">
+                                                 
+                                                <div class="col-md-6">
+                                                     <table width="100%">
         <tr>
             <td colspan="4" >
             <div id="divMsg" runat="server" class="NoData"></div>
@@ -105,7 +107,7 @@
                                          <asp:Label ID="Label3" runat="server" Text="Term :"></asp:Label>
                                      </td>
             <td>
-                                         <asp:DropDownList ID="Term_ddl" runat="server" CssClass="form-control" Width="120px">
+                                         <asp:DropDownList ID="Term_ddl" runat="server" CssClass="form-control">
                                          </asp:DropDownList>
                 <asp:CheckBox ID="isCurrent_chk" runat="server" Text="Current Term" 
                                              Checked="True"/>
@@ -135,7 +137,7 @@
                 <asp:Label ID="lblPath" runat="server" Text="Path:"></asp:Label>
                                      </td>
             <td colspan="3">
-                <asp:TextBox ID="Path_txt" runat="server" Width="606px" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="Path_txt" runat="server"  CssClass="form-control"></asp:TextBox>
                     </td>
         </tr>
         <tr>
@@ -170,15 +172,11 @@
        <%-- <tr>
             <td colspan="4">
                 <hr /></td>
-        </tr>--%>
-        <tr>
-            <td>
-                &nbsp;</td>
-            <td align="middle" colspan="3">
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:RadioButton ID="Trans_rbn" runat="server" GroupName="Type" 
+        </tr>--%>       
+    </table>
+                                                </div>
+                                                <div class="col-md-6">
+ <asp:RadioButton ID="Trans_rbn" runat="server" GroupName="Type" 
                                     Text="Transcript" AutoPostBack="True" 
                                     oncheckedchanged="Trans_rbn_CheckedChanged" />
                                 <asp:RadioButton ID="Sheet_rbn" runat="server" Checked="True" GroupName="Type" 
@@ -188,18 +186,12 @@
                                 <asp:CheckBox ID="chkLogo" runat="server" Checked="True" Text="Show Logo" />
                                 <asp:CheckBox ID="chkSign" runat="server" Text="Show Signatures" 
                                     Enabled="False" Visible="False" />
-                            </td>
-                            <td>
-                                <asp:ImageButton ID="Print_btn" runat="server" 
-                                    ImageUrl="~/Images/Icons/Print_BW.jpg" ToolTip="Print" 
-                                    onclick="PrintCMD_Click" style="height: 40px" />
-                            </td>
-                            
-                        </tr>
-                    </table>
-                                                </td>
-        </tr>
-    </table>
+                                                    <br />
+                                                    <asp:LinkButton ID="Print_btn" runat="server" 
+                                     ToolTip="Print" 
+                                    onclick="PrintCMD_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                                </div>
+
                                                  <asp:HiddenField ID="sSelectedValue" runat="server" />
                     <asp:HiddenField ID="sSelectedText" runat="server" />
                                             </div>

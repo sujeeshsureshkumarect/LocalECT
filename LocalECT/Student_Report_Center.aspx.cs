@@ -70,6 +70,25 @@ namespace LocalECT
                         }
                     }
                 }
+
+                //this line create a generic list data type ListItem
+                List<ListItem> list = new List<ListItem>();
+
+                foreach (ListItem li in chk_Fields.Items)
+                {
+                    list.Add(li);
+                }
+
+                //sort list items alphabetically/ascending
+                List<ListItem> sorted = list.OrderBy(b => b.Text).ToList();
+
+                //empty dropdownlist
+                chk_Fields.Items.Clear();
+                //repopulate dropdownlist with sorted items.
+                foreach (ListItem li in sorted)
+                {
+                    chk_Fields.Items.Add(li);
+                }
             }
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentCenter,
            InitializeModule.enumPrivilege.ShowUnRegisteredStudents, CurrentRole) != true)

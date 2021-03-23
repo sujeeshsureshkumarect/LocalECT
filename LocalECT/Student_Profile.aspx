@@ -294,7 +294,7 @@
                                                             </asp:DropDownList>
                                                             <asp:SqlDataSource ID="AccessDs" runat="server"
                                                                 ConnectionString="<%$ ConnectionStrings:ECTDataNew %>"
-                                                                SelectCommand="SELECT [iAccessCategory], [sAccessCategory] FROM [ACMS_Category]"></asp:SqlDataSource>
+                                                                SelectCommand="SELECT [iAccessCategory], [sAccessCategory] FROM [ACMS_Category] order by [sAccessCategory] asc"></asp:SqlDataSource>
                                                         </div>
                                                     </div>
                                                     <hr />
@@ -453,8 +453,8 @@
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:DropDownList ID="ddlMaritalStatus" runat="server" TabIndex="10"
                                                                  CssClass="form-control">
-                                                                 <asp:ListItem Selected="True" Value="0">Not Married</asp:ListItem>
                                                                  <asp:ListItem Value="1">Married</asp:ListItem>
+                                                                 <asp:ListItem Selected="True" Value="0">Not Married</asp:ListItem>                                                                 
                                                              </asp:DropDownList>
                                                          </div>
                                                      </div>
@@ -1443,7 +1443,7 @@
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AcceptanceDs" runat="server"
                                                                                 ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
-                                                                                SelectCommand="SELECT [iAcceptanceType], [sAcceptanceTypeEn] FROM [Lkp_Acceptance_Type] ORDER BY [iAcceptanceType]"></asp:SqlDataSource>
+                                                                                SelectCommand="SELECT [iAcceptanceType], [sAcceptanceTypeEn] FROM [Lkp_Acceptance_Type] ORDER BY [sAcceptanceTypeEn] asc"></asp:SqlDataSource>
                                                                         </div>
                                                                     </div>
                                                                         <div class="form-group row">
@@ -1456,7 +1456,7 @@
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AcceptanceConditionDs" runat="server"
                                                                                 ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
-                                                                                SelectCommand="SELECT [iAcceptanceCondition], [sAcceptanceConditionEn] FROM [Lkp_Acceptance_Condition] ORDER BY [iAcceptanceCondition]"></asp:SqlDataSource>
+                                                                                SelectCommand="SELECT [iAcceptanceCondition], [sAcceptanceConditionEn] FROM [Lkp_Acceptance_Condition] ORDER BY [sAcceptanceConditionEn] asc"></asp:SqlDataSource>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -1469,7 +1469,7 @@
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AdmissionStatusDs" runat="server"
                                                                                 ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
-                                                                                SelectCommand="SELECT [iAdmissionStatus], [sAdmissionStatusEn] FROM [Lkp_Admission_Status] ORDER BY [iAdmissionStatus]"></asp:SqlDataSource>
+                                                                                SelectCommand="SELECT [iAdmissionStatus], [sAdmissionStatusEn] FROM [Lkp_Admission_Status] ORDER BY [sAdmissionStatusEn] asc"></asp:SqlDataSource>
                                                                         </div>
                                                                     </div>
                                                                         <div class="form-group row">
@@ -1480,10 +1480,10 @@
                                                                             </div>
                                                                         </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-form-label col-md-4 col-sm-4">Student ID</label>
+                                                                        <label class="col-form-label col-md-4 col-sm-4" style="color:red"><b>Student ID</b></label>
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:TextBox ID="lblStudentId" runat="server" ReadOnly="true"
-                                                                                CssClass="form-control"></asp:TextBox>
+                                                                                CssClass="form-control" Font-Bold="true" ForeColor="Red"></asp:TextBox>
                                                                         </div>
                                                                     </div>
                                                                         <div class="form-group row">
@@ -1615,12 +1615,12 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True"
                                                                                     TabIndex="74" CssClass="form-control">
-                                                                                    <asp:ListItem Value="2">Foundation</asp:ListItem>
-                                                                                    <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
-                                                                                    <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
-                                                                                    <asp:ListItem Value="3">Bachelor</asp:ListItem>
-                                                                                    <asp:ListItem Value="1">Visiting</asp:ListItem>
-                                                                                    <asp:ListItem Value="4">Language Center</asp:ListItem>
+                                                                                     <asp:ListItem Value="3">Bachelor</asp:ListItem>
+                                                                                     <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
+                                                                                     <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
+                                                                                    <asp:ListItem Value="2">Foundation</asp:ListItem>                                                                                                                                                                      
+                                                                                   <asp:ListItem Value="4">Language Center</asp:ListItem>
+                                                                                    <asp:ListItem Value="1">Visiting</asp:ListItem>                                                                                    
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1732,10 +1732,11 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlRegisteredThrough" runat="server"
                                                                                     CssClass="form-control" TabIndex="86">
-                                                                                    <asp:ListItem Selected="True" Value="1">General</asp:ListItem>
-                                                                                    <asp:ListItem Value="2">Corporate agreements</asp:ListItem>
-                                                                                    <asp:ListItem Value="3">Schools Visits</asp:ListItem>
                                                                                     <asp:ListItem Value="4">Ana Wasadeeqi</asp:ListItem>
+                                                                                    <asp:ListItem Value="2">Corporate agreements</asp:ListItem>
+                                                                                    <asp:ListItem Selected="True" Value="1">General</asp:ListItem>                                                                                    
+                                                                                    <asp:ListItem Value="3">Schools Visits</asp:ListItem>
+                                                                                    
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1806,12 +1807,12 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlLHEquivalencyIndicator" runat="server" TabIndex="98"
                                                                                     CssClass="form-control">
+                                                                                    <asp:ListItem Value="A">Applied</asp:ListItem>
                                                                                     <asp:ListItem Selected="True" Value="T">CAA accredited UAE universities</asp:ListItem>
                                                                                     <asp:ListItem Value="Y">Equivalency has been received</asp:ListItem>
-                                                                                    <asp:ListItem Value="R">Rejected</asp:ListItem>
-                                                                                    <asp:ListItem Value="A">Applied</asp:ListItem>
+                                                                                    <asp:ListItem Value="U">Equivalency status unknown</asp:ListItem>                                                                                                                                                                       
                                                                                     <asp:ListItem Value="N">Not Applied Yet</asp:ListItem>
-                                                                                    <asp:ListItem Value="U">Equivalency status unknown</asp:ListItem>
+                                                                                    <asp:ListItem Value="R">Rejected</asp:ListItem>                                                                                    
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -2348,10 +2349,10 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="WMajorDS" runat="server"
         ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>"
-        SelectCommand="SELECT [MajorID], [MajorDescEn] FROM [Lkp_FoundationMajors] ORDER BY [MajorID]"></asp:SqlDataSource>
+        SelectCommand="SELECT [MajorID], [MajorDescEn] FROM [Lkp_FoundationMajors] ORDER BY [MajorDescEn]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="MajorDS" runat="server"
         ConnectionString="<%$ ConnectionStrings:ECTDataMales %>"
-        SelectCommand="SELECT [strKey], [strMajor] FROM [Reg_Specializations] WHERE ([intCenter] = @intCenter) ORDER BY [intSerial]">
+        SelectCommand="SELECT [strKey], [strMajor] FROM [Reg_Specializations] WHERE ([intCenter] = @intCenter) ORDER BY [strMajor]">
         <SelectParameters>
             <asp:ControlParameter ControlID="ddlType" DefaultValue="0" Name="intCenter"
                 PropertyName="SelectedValue" Type="Int16" />
