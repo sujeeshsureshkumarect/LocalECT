@@ -269,6 +269,7 @@ StudentID3"></asp:TextBox>
                                                          </button>
                                                          <div class="dropdown-menu">
                                                              <a class="dropdown-item" href="Student_Profile?sid=<%#Eval("sNo")%>&isr=<%#Eval("iSerial")%>">Profile</a>
+                                                             <a class="dropdown-item" href="Student_Details?sid=<%#Eval("sNo")%>&sAcc=<%#Eval("sAccount")%>">Details</a>
                                                               <a class="dropdown-item" href="Students_Advising?sid=<%#Eval("sNo")%>">Advising</a>
                                                              <a class="dropdown-item" href="Registration?sid=<%#Eval("sNo")%>">Registration</a>
                                                              <a class="dropdown-item" href="ChangeMajor?sid=<%#Eval("sNo")%>">Change Major</a>

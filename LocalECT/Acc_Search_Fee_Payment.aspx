@@ -66,7 +66,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Student Account Number</label><a href="Acc_Search.aspx" class="btn btn-success btn-sm" style="float:right;"><i class="fa fa-search"></i> Account Search</a>
+                                                        <label>Student Account Number</label><%--<a href="Acc_Search.aspx" class="btn btn-success btn-sm" style="float:right;"><i class="fa fa-search"></i> Account Search</a>--%>
                                                         <div class="input-group">
                                                             <asp:TextBox ID="lblACC" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         </div>

@@ -4603,10 +4603,10 @@ namespace LocalECT
                                             //Sharepoint List Creation
                                             sentdatatoSPLIst();
 
-                                            if(!string.IsNullOrEmpty(txtECTEmail.Text))
-                                            {
-                                                sentdatatoSPLIstNewStudentsTracking();
-                                            }
+                                            //if(!string.IsNullOrEmpty(txtECTEmail.Text))
+                                            //{
+                                            //    sentdatatoSPLIstNewStudentsTracking();
+                                            //}
 
                                             //Latest Update Added on 10-03-2021 as per Mr. Ihab
                                             updateaccountpayemtpending(Convert.ToInt32(txtOpportunityID.Text), sAcc);

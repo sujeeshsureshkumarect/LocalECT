@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using Microsoft.SharePoint.Client;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -248,7 +250,7 @@ namespace LocalECT
                 myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
                 for (int i = 0; i < 3; i++)//for (int i = 0; i < myTerms.Count; i++)
                 {
-                    Terms.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+                    Terms.Items.Add(new System.Web.UI.WebControls.ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
 
                 }
 
@@ -1827,8 +1829,121 @@ namespace LocalECT
 
                 //AddUserToGroup(userLogonName, "Males");
                 AddUserToGroup(userLogonName, Ounames);
+
+                //Call Sharepoint function New Student
+                sentdatatoSPLIstNewStudentsTracking(emailAddress);
             }
             return 0;
+        }
+        public void sentdatatoSPLIstNewStudentsTracking(string mailid)
+        {
+            int sem = 0;
+            int Year = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out sem);
+
+            int iYear = Year;
+            int iSem = sem;
+            string sSemester = LibraryMOD.GetSemesterString(iSem);
+            int iTerm = iYear * 10 + iSem;
+
+            string Addedby = "";
+            SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    Addedby = dt.Rows[0]["EmployeeEmail"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+
+            string SIS_PWD = "";
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc1 = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd1 = new SqlCommand("SELECT strPhone1,strPhone2,strStudentName,strOnlinePWD from Reg_Student_Accounts where lngStudentNumber=@lngStudentNumber", sc1);
+            cmd1.Parameters.AddWithValue("@lngStudentNumber", sSelectedValue.Value);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            try
+            {
+                sc1.Open();
+                da1.Fill(dt1);
+                sc1.Close();
+
+                if (dt1.Rows.Count > 0)
+                {
+                    SIS_PWD = dt1.Rows[0]["strOnlinePWD"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc1.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc1.Close();
+            }
+
+            string login = "ets.services.admin@ect.ac.ae"; //give your username here  
+            string password = "Ser71ces@328"; //give your password  
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            string siteUrl = "https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices";
+            ClientContext clientContext = new ClientContext(siteUrl);
+            Microsoft.SharePoint.Client.List myList = clientContext.Web.Lists.GetByTitle("New Students Tracking");
+            ListItemCreationInformation itemInfo = new ListItemCreationInformation();
+            Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
+            myItem["Title"] = iTerm;//Term                     
+            myItem["SID"] = sSelectedValue.Value;//SID
+            myItem["Email"] = clientContext.Web.EnsureUser(mailid);//Student Email   
+            //myItem["Email"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//Student Email  
+            myItem["Password"] = SIS_PWD;//SIS Password
+            myItem["Phone1"] = dt1.Rows[0]["strPhone1"].ToString();//Phone1
+            myItem["Phone2"] = dt1.Rows[0]["strPhone2"].ToString();//Phone2  
+            myItem["Author"] = clientContext.Web.EnsureUser(Addedby);//Added By
+            //myItem["Author"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//Addedby
+            myItem["FirstUpdate"] = null;//1st Update
+            myItem["SecondUpdate"] = null;//2nd Update
+            myItem["ThirdUpdate"] = null;//3rd Update
+            myItem["Remarks"] = "";//Remarks
+            myItem["Status"] = "Initiated";//Status
+            myItem["StudentName"] = dt1.Rows[0]["strStudentName"].ToString();//Student Name
+            //myItem["Modified"] = null;//Updated
+            //myItem["Created"] = DateTime.Now;//Created
+            myItem["Editor"] = clientContext.Web.EnsureUser(Addedby);//Updated By
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser("ihab.awad@ect.ac.ae");//AlertTo  
+            //myItem["AlertTo"] = clientContext.Web.EnsureUser(AlertTo);
+            try
+            {
+                myItem.Update();
+                var onlineCredentials = new SharePointOnlineCredentials(login, securePassword);
+                clientContext.Credentials = onlineCredentials;
+                clientContext.ExecuteQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            //Console.ReadLine();
         }
         public static DirectoryEntry DirectEntry(string ouname)
         {
@@ -2527,7 +2642,7 @@ namespace LocalECT
                 myCourses = myCoursesDAL.GetCourses(InitializeModule.EnumCampus.Males, " WHERE VOCCode IS NULL", true);
                 for (int i = 0; i < myCourses.Count; i++)
                 {
-                    ddlAlt.Items.Add(new ListItem(myCourses[i].strCourse, myCourses[i].strCourse));
+                    ddlAlt.Items.Add(new System.Web.UI.WebControls.ListItem(myCourses[i].strCourse, myCourses[i].strCourse));
                 }
 
             }

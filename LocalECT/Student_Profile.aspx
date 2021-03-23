@@ -227,7 +227,7 @@
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <asp:DropDownList ID="ddlSession" runat="server" TabIndex="1"
                                                             DataTextField="strShiftEn"
-                                                            DataValueField="byteShift" CssClass="form-control">
+                                                            DataValueField="byteShift" CssClass="form-control" >
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
@@ -1150,10 +1150,10 @@
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
                                                                                     ControlToValidate="txtQScoreofChemistry" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
-                                                                                <asp:RangeValidator ID="RangeValidator5" runat="server" 
+                                                                           <%--     <asp:RangeValidator ID="RangeValidator5" runat="server" 
                                                                                     ControlToValidate="txtQScoreofChemistry" 
                                                                                     ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
-                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>--%>
                                                                                 </div>
                                                                                 <div class="col-md-5 col-sm-5 ">                                                                                   
                                                                                 </div>
@@ -1166,10 +1166,10 @@
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
                                                                                     ControlToValidate="txtQScoreofPhysics" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
-                                                                                <asp:RangeValidator ID="RangeValidator7" runat="server" 
+                                                                        <%--        <asp:RangeValidator ID="RangeValidator7" runat="server" 
                                                                                     ControlToValidate="txtQScoreofPhysics" 
                                                                                     ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
-                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>--%>
                                                                                 </div>
                                                                                 <div class="col-md-5 col-sm-5 ">                                                                                   
                                                                                 </div>
@@ -1274,10 +1274,10 @@
                                                                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
                                                                                     ControlToValidate="txtQScoreofMath" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
-                                                                                <asp:RangeValidator ID="RangeValidator4" runat="server" 
+                                                                           <%--     <asp:RangeValidator ID="RangeValidator4" runat="server" 
                                                                                     ControlToValidate="txtQScoreofMath" ErrorMessage="Score must be from 0 to 100" 
                                                                                     MaximumValue="100" MinimumValue="0" SetFocusOnError="True" Type="Integer" 
-                                                                                    ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>
+                                                                                    ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>--%>
                                                                                 </div>
                                                                                 <div class="col-md-5 col-sm-5 ">
                                                                                     <asp:Label ID="Label1" runat="server" ForeColor="#993300"
@@ -1291,10 +1291,10 @@
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
                                                                                     ControlToValidate="txtQScoreofBiology" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
-                                                                                <asp:RangeValidator ID="RangeValidator6" runat="server" 
+                                                                       <%--         <asp:RangeValidator ID="RangeValidator6" runat="server" 
                                                                                     ControlToValidate="txtQScoreofBiology" 
                                                                                     ErrorMessage="Score must be from 0 to 100" MaximumValue="100" MinimumValue="0" 
-                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>
+                                                                                    SetFocusOnError="True" Type="Integer" ValidationGroup="Q" Display="Dynamic">#</asp:RangeValidator>--%>
                                                                                 </div>
                                                                                 <div class="col-md-5 col-sm-5 ">                                                                                   
                                                                                 </div>
