@@ -78,6 +78,15 @@ namespace LocalECT
                     iRegYear = (int)Session["RegYear"];
                     iRegSem = (int)Session["RegSemester"];
                     CurrentRole = (int)Session["CurrentRole"];
+                    if(Session["CurrentCampus"] !=null)
+                    {
+                        Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    }
+                    else
+                    {
+                        Campus = InitializeModule.EnumCampus.Males;
+                    }
+                    
                     if (!IsPostBack)
                     {
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
@@ -184,24 +193,31 @@ namespace LocalECT
                             //New Student
                             else
                             {
-                                if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
+                                //if (Request.QueryString["cmp"] != null && Request.QueryString["cmp"] != "")
+                                //{
+                                //    if (Request.QueryString["cmp"] == "m")
+                                //    {                                       
+                                //        rbnGender.SelectedValue = "1";
+                                //        rbnGender.Enabled = false;
+                                //    }
+                                //    else
+                                //    {                                       
+                                //        rbnGender.SelectedValue = "0";
+                                //        rbnGender.Enabled = false;
+                                //    }
+                                //}
+                                //else
+                                //{                                    
+                                //    rbnGender.SelectedValue = "0";
+                                //    rbnGender.Enabled = false;
+                                //}
+                                if (Campus.ToString() == "Males")
                                 {
-                                    if (Request.QueryString["cmp"] == "m")
-                                    {
-                                        Campus = InitializeModule.EnumCampus.Males;
-                                        rbnGender.SelectedValue = "1";
-                                        rbnGender.Enabled = false;
-                                    }
-                                    else
-                                    {
-                                        Campus = InitializeModule.EnumCampus.Females;
-                                        rbnGender.SelectedValue = "0";
-                                        rbnGender.Enabled = false;
-                                    }
+                                    rbnGender.SelectedValue = "1";
+                                    rbnGender.Enabled = false;
                                 }
                                 else
                                 {
-                                    Campus = InitializeModule.EnumCampus.Females;
                                     rbnGender.SelectedValue = "0";
                                     rbnGender.Enabled = false;
                                 }
@@ -1490,7 +1506,7 @@ namespace LocalECT
             }
             sortddls(ddlHomeCountry);
             sortddls(ddlResidentCountry);
-            sortddls(ddlQCountry);
+           // sortddls(ddlQCountry);
             sortddls(ddlBirthCountry);
             sortddls(ddlEmployerCountry);
             sortddls(ddlLastCountry);
@@ -2439,8 +2455,8 @@ namespace LocalECT
 
             string userid = "";
 
-            string JWTaccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IktUUUpsM1ZiU0k2aVBPNDl0VmVma1EiLCJleHAiOjE3MzU3MTEyMDAsImlhdCI6MTYwMDI0NDY5MX0.GgRVMlmMsmf0j_d5TUY4jKKO-4xZfSt7u5hmQb9QFks";
-
+            //string JWTaccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IktUUUpsM1ZiU0k2aVBPNDl0VmVma1EiLCJleHAiOjE3MzU3MTEyMDAsImlhdCI6MTYwMDI0NDY5MX0.GgRVMlmMsmf0j_d5TUY4jKKO-4xZfSt7u5hmQb9QFks";
+            string JWTaccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IktUUUpsM1ZiU0k2aVBPNDl0VmVma1EiLCJleHAiOjE2NzUxODA4MDAsImlhdCI6MTYxNDA2OTU5Mn0.co_ApVI-0jkM3quY7igEvSZOsJIDkITCoRI0aoquHl8";
             using (var httpClient = new HttpClient())
             {
                 using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://api.zoom.us/v2/users"))
@@ -2593,6 +2609,40 @@ namespace LocalECT
                             DocsEditDS.DataBind();
                             EnrollmentDS.DataBind();
                             Session["StudentSerialNo"] = hdnSerial.Value;
+
+                            //New Immediate creation of Unified ID as per Mr. Ihab on 25-03-2021
+                            string sFName = "";
+                            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                            //update Unified ID
+                            if (iUnifiedID > 0)
+                            {
+                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                //check reference number
+                                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                {
+                                    //Get updated UnifiedID
+                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                }
+                            }
+                            else
+                            {
+                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                if (iUnifiedID == 0)
+                                {
+                                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                }
+                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                            }
+                            if (Campus.ToString() == "Males")
+                            {
+                                lblUnified.Text = "M" + iUnifiedID.ToString();
+                                //hdniUnifiedID.Value = iUnifiedID.ToString();
+                            }
+                            else
+                            {
+                                lblUnified.Text = "F" + iUnifiedID.ToString();
+                                //hdniUnifiedID.Value = iUnifiedID.ToString();
+                            }
                         }
 
                     }
@@ -3268,6 +3318,16 @@ namespace LocalECT
 
         protected void NewQ_btn_Click(object sender, EventArgs e)
         {
+            ddlQualification.DataBind();
+            ddlQInstitutionType.DataBind();
+            ddlHSSystem.DataBind();
+            ddlQCountry.DataBind();
+           // ddlQCountry_SelectedIndexChanged(null,null);
+            ddlQCity.DataBind();
+            ddlQMajor.DataBind();
+            ddlQEngGrade.DataBind();
+            ddlQEngExamCenter.DataBind();
+            ddlQG12_Stream.DataBind();
             try
             {
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
@@ -6048,12 +6108,14 @@ namespace LocalECT
             if (gender == "True")
             {
                 Campus = InitializeModule.EnumCampus.Males;
+                Session["CurrentCampus"] = Campus;
                 rbnGender.SelectedValue = "1";
                 rbnGender.Enabled = false;
             }
             else
             {
                 Campus = InitializeModule.EnumCampus.Females;
+                Session["CurrentCampus"] = Campus;
                 rbnGender.SelectedValue = "0";
                 rbnGender.Enabled = false;
             }
@@ -6061,6 +6123,9 @@ namespace LocalECT
             ddlAcceptance.DataBind();
             ddlAcceptanceCondition.DataBind();
             ddlAdmissionStatus.DataBind();
+            ddlQCity.DataBind();
+            ddlQEngGrade.DataBind();
+            ddlQEngExamCenter.DataBind();
             int iKey = int.Parse(e.CommandArgument.ToString());
             GetStudent(iKey);
             lblReference.Enabled = true;

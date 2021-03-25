@@ -247,14 +247,16 @@ namespace LocalECT
         }      
         protected void lnk_add_Click(object sender, EventArgs e)
         {
-            if(drp_Campus.SelectedItem.Text=="Males")
-            {
-                Response.Redirect("Student_Profile.aspx?cmp=m");
-            }
-            else
-            {
-                Response.Redirect("Student_Profile.aspx?cmp=f");
-            }
+            Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+            Session["CurrentCampus"] = Campus;
+            //if (drp_Campus.SelectedItem.Text=="Males")
+            //{
+            Response.Redirect("Student_Profile.aspx");
+            //}
+            //else
+            //{
+            //    Response.Redirect("Student_Profile.aspx");
+            //}
         }     
         protected void lnk_Execute_Click(object sender, EventArgs e)
         {
