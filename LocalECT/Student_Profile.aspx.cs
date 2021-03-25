@@ -1356,7 +1356,7 @@ namespace LocalECT
                 Conn.Close();
                 Conn.Dispose();
             }
-            sortddls(ddlStatus);
+            //sortddls(ddlStatus);
         }
 
         public void sortddls(DropDownList ddl)
@@ -6044,6 +6044,23 @@ namespace LocalECT
         }
         protected void lnkSelect_Command(object sender, CommandEventArgs e)
         {
+            string gender = e.CommandName.ToString();
+            if (gender == "True")
+            {
+                Campus = InitializeModule.EnumCampus.Males;
+                rbnGender.SelectedValue = "1";
+                rbnGender.Enabled = false;
+            }
+            else
+            {
+                Campus = InitializeModule.EnumCampus.Females;
+                rbnGender.SelectedValue = "0";
+                rbnGender.Enabled = false;
+            }
+            FillDDLs();
+            ddlAcceptance.DataBind();
+            ddlAcceptanceCondition.DataBind();
+            ddlAdmissionStatus.DataBind();
             int iKey = int.Parse(e.CommandArgument.ToString());
             GetStudent(iKey);
             lblReference.Enabled = true;
@@ -6093,7 +6110,7 @@ namespace LocalECT
         {
             try
             {
-                string sSQL = "SELECT  SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate";
+                string sSQL = "SELECT  SD.bSex, SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate";
                 sSQL += " FROM Reg_Applications AS A RIGHT OUTER JOIN Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial";
                 if (!string.IsNullOrEmpty(txtSearchID.Text) || !string.IsNullOrEmpty(txtSearchName.Text))
                 {
@@ -6114,7 +6131,58 @@ namespace LocalECT
                 }
                 sSQL += " ORDER BY SD.dateCreate DESC";
 
+                string constr1 = ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString;
+                string constr2 = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
+
+                SqlConnection scmale = new SqlConnection(constr1);
+                SqlConnection scfemale = new SqlConnection(constr2);
+                SqlCommand cmdmale = new SqlCommand(sSQL, scmale);
+                DataTable dtmale = new DataTable();
+                SqlDataAdapter damale = new SqlDataAdapter(cmdmale);
+                try
+                {
+                    scmale.Open();
+                    damale.Fill(dtmale);
+                    scmale.Close();
+                }
+                catch(Exception ex)
+                {
+                    scmale.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    scmale.Close();
+                }
+                SqlCommand cmdfemale = new SqlCommand(sSQL, scfemale);
+                DataTable dtfemale = new DataTable();
+                SqlDataAdapter dafemale = new SqlDataAdapter(cmdfemale);
+                try
+                {
+                    scfemale.Open();
+                    dafemale.Fill(dtfemale);
+                    scfemale.Close();
+                }
+                catch (Exception ex)
+                {
+                    scfemale.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    scfemale.Close();
+                }
+
+
                 SearchDS.SelectCommand = sSQL;
+                if (dtmale.Rows.Count > 0)
+                {
+                    SearchDS.ConnectionString = ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString;
+                }
+                else
+                {
+                    SearchDS.ConnectionString = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
+                }
                 SearchDS.DataBind();
                 grdSearch.DataBind();
             }

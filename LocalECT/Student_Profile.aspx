@@ -2244,7 +2244,7 @@
                                         <tr>
                                             <td align="center" class="style9" colspan="3">
                                                 <asp:GridView ID="grdSearch" runat="server" AutoGenerateColumns="False" 
-                                                    CellPadding="4" DataKeyNames="lngSerial" DataSourceID="SearchDS" 
+                                                    CellPadding="4" DataKeyNames="lngSerial, bSex" DataSourceID="SearchDS" 
                                                     ForeColor="#444444" GridLines="None">
                                                     <RowStyle BackColor="#EFF3FB" />
                                                     <Columns>
@@ -2254,7 +2254,7 @@
                                                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("lngSerial") %>'></asp:Label>
                                                             </EditItemTemplate>
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="lnkSelect" runat="server" CausesValidation="False" 
+                                                                <asp:LinkButton ID="lnkSelect" runat="server" CausesValidation="False"  CommandName='<%# Bind("bSex") %>'
                                                                     CommandArgument='<%# Bind("lngSerial") %>' oncommand="lnkSelect_Command" Font-Underline="true" ForeColor="Blue">Select</asp:LinkButton>
                                                             </ItemTemplate>
                                                             <ItemStyle  Width="100px" />
@@ -2297,7 +2297,7 @@
                                             <td align="left" width="50%">
                                                 <asp:SqlDataSource ID="SearchDS" runat="server" 
                                                     ConnectionString="<%$ ConnectionStrings:ECTDataMales %>" 
-                                                    SelectCommand="SELECT SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate FROM Reg_Applications AS A RIGHT OUTER JOIN Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial WHERE (1 &lt;&gt; 1)">
+                                                    SelectCommand="SELECT SD.bSex, SD.lngSerial, A.lngStudentNumber, SD.strLastDescEn, SD.dateCreate FROM Reg_Applications AS A RIGHT OUTER JOIN Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial WHERE (1 &lt;&gt; 1)">
                                                 </asp:SqlDataSource>
                                             </td>
                                             <td align="left" width="10%">
