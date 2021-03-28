@@ -30,17 +30,23 @@ namespace LocalECT
                 }
                 if (!IsPostBack)
                 {
-                    if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
+                    if (Request.QueryString["sEmail"] != null && Request.QueryString["sEmail"] != "" && Request.QueryString["sEmail"] != "-")
                     {
-                        Connection_StringCLS connstr = new Connection_StringCLS(Campus);
-                        string studentid = Request.QueryString["sid"].ToString();
-                        var services = new DAL.DAL();
-                        DataTable dtStudentServices = services.GetStudentDetailsID(studentid, connstr.Conn_string);
-                        if (dtStudentServices.Rows.Count > 0)
-                        {                           
-                           Session["Student_emails"] = dtStudentServices.Rows[0]["sECTemail"].ToString();
-                           bindmyrequests(Session["Student_emails"].ToString());
-                        }
+                        //Connection_StringCLS connstr = new Connection_StringCLS(Campus);
+                        //string studentid = Request.QueryString["sid"].ToString();
+                        //var services = new DAL.DAL();
+                        //DataTable dtStudentServices = services.GetStudentDetailsID(studentid, connstr.Conn_string);
+                        //if (dtStudentServices.Rows.Count > 0)
+                        //{                           
+                        //   Session["Student_emails"] = dtStudentServices.Rows[0]["sECTemail"].ToString();
+                           bindmyrequests(Request.QueryString["sEmail"].ToString());
+                        
+                    }
+                    else
+                    {
+                        DataTable dt = new DataTable();
+                        Repeater1.DataSource = dt;
+                        Repeater1.DataBind();
                     }
                 }
             }
@@ -52,9 +58,18 @@ namespace LocalECT
         }
         protected void lnk_refresh_Click(object sender, EventArgs e)
         {
-            bindmyrequests(Session["Student_emails"].ToString());
+            if (Request.QueryString["sEmail"] != null && Request.QueryString["sEmail"] != "" && Request.QueryString["sEmail"] != "-")
+            {
+                bindmyrequests(Request.QueryString["sEmail"].ToString());
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                Repeater1.DataSource = dt;
+                Repeater1.DataBind();
+            }
         }
-        public void bindmyrequests(string studnetemail)
+        public void bindmyrequests(string studentemail)
         {
             string login = "ets.services.admin@ect.ac.ae"; //give your username here  
             string password = "Ser71ces@328"; //give your password  
@@ -69,7 +84,7 @@ namespace LocalECT
             clientContext.Credentials = onlineCredentials;
             List list = clientContext.Web.Lists.GetByTitle("Students_Requests");
             CamlQuery query = new CamlQuery();
-            string mail = studnetemail;
+            string mail = studentemail;
 
             Microsoft.SharePoint.Client.User user = clientContext.Web.EnsureUser(mail);
             clientContext.Load(user, x => x.Id);
@@ -85,6 +100,17 @@ namespace LocalECT
             clientContext.Load(items);
             clientContext.ExecuteQuery();
 
+            string show = "N";
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+              InitializeModule.enumPrivilege.FetchRequest, CurrentRole) != true)
+            {
+                show = "N";
+            }
+            else
+            {
+                show = "Y";
+            }
+
             // create a data table
             DataTable LDT = new DataTable();
             LDT.Columns.Add("ID");
@@ -93,6 +119,7 @@ namespace LocalECT
             LDT.Columns.Add("ServiceID");
             LDT.Columns.Add("Requester");
             LDT.Columns.Add("Created", System.Type.GetType("System.DateTime"));
+            LDT.Columns.Add("Show");
             //fill datatatable
             foreach (Microsoft.SharePoint.Client.ListItem item in items)
             {
@@ -102,7 +129,7 @@ namespace LocalECT
                 //clientContext.ExecuteQuery();
                 //string thisWillBeUsersLoginName = user.LoginName;
                 //string request = item["Request"].ToString();
-                LDT.Rows.Add(item["ID"],item["Title"], item["Status"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]));
+                LDT.Rows.Add(item["ID"], item["Title"], item["Status"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
             }
             LDT.DefaultView.Sort = "Created DESC";
             Repeater1.DataSource = LDT;

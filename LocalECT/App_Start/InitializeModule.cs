@@ -575,7 +575,10 @@ public class InitializeModule
         SendEmail = 178,//new
         SendSMS = 179,//new
         ContactAdvisor = 180,//new
-        ContactLecturer = 181//new
+        ContactLecturer = 181,//new
+
+        FetchRequest = 182//new
+
     }
 
     public enum enumPrivilegeObjects : int

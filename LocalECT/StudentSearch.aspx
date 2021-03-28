@@ -219,6 +219,12 @@ StudentID3"></asp:TextBox>
                                                          document.getElementById("hdn_Selected_Sids").value = cvalue;
                                                      }
                                                  </script>
+                                 <style>
+                                     .dropdown-menu.show{
+                                         overflow-y:scroll;
+                                         max-height:200px !important;
+                                     }
+                                 </style>
                                  <asp:HiddenField ID="hdn_Selected_Sids" runat="server" ClientIDMode="Static"/>
                                  <div id="divResult" runat="server" class="table-responsive">
                                      <asp:Repeater ID="RepterDetails" runat="server">
@@ -278,7 +284,8 @@ StudentID3"></asp:TextBox>
                                                              <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Grades Edit</a>
                                                             <%-- <a class="dropdown-item" href="Transcript.aspx?PreviousTerm">Transcript</a>--%>
                                                              <asp:LinkButton ID="lnk_Transcript_Menu" runat="server" Text="Transcript" OnClick="lnk_Transcript_Menu_Click" CssClass="dropdown-item" CommandArgument=<%#Eval("sNo")%> CommandName=<%#Eval("sName")%>></asp:LinkButton>
-                                                             <a class="dropdown-item" href="Student_Service_Requests?sid=<%#Eval("sNo")%>">Student Service Requests</a>
+                                                             <a class="dropdown-item" href="Student_Service_Requests?sEmail=<%#Eval("ECTEmail")%>">Requested Services</a>
+                                                             <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Attendance Warnings</a>
                                                          </div>
                                                      </div>
                                                  </td>

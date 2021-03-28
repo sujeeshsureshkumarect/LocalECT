@@ -57,7 +57,6 @@ max-height:100px !important;
 overflow:scroll;
 white-space: nowrap;
 }
-
                     </style>
                         <div class="row">
                             <div class="col-sm-12">
@@ -72,6 +71,7 @@ white-space: nowrap;
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Created on</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Link</th>
+                                            <th style="display:none;" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Show</th>
                                         </tr>
                                     </thead>
                                     </HeaderTemplate>
@@ -82,6 +82,7 @@ white-space: nowrap;
                                                     <td><%#Eval("Status")%></td>                                                                                                        
                                                     <td><span style="display: none;"><%#Eval("Created","{0:yyyyMMdd}")%></span><%#Eval("Created","{0:dd/MM/yyyy hh:mm tt}")%></td>
                                                     <td><a class="btn btn-success btn-sm" href="https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices/Lists/Students_Requests/EditForm.aspx?ID=<%#Eval("ID")%>" target="_blank">Link to Item</a></td>
+                                                    <td style="display:none;"><%#Eval("Show")%></td>
                                                 </tr>
                                         
                                    </ItemTemplate>
@@ -98,10 +99,14 @@ white-space: nowrap;
        var table = document.getElementById("datatable");
        if (table != null) {
            for (var i = 1; i < table.rows.length; i++) {              
-               var status = table.rows[i].cells[2].textContent;               
+               var status = table.rows[i].cells[2].textContent;          
+               var show = table.rows[i].cells[5].textContent;          
                if (status == "Completed") {
                    table.rows[i].cells[2].innerHTML = '<span class="badge badge-success">Completed</span>';
-               }                 
+               }
+               if (show == "N") {
+                   table.rows[i].cells[4].innerHTML = '&nbsp;';
+               }
            }
        }
                                          </script>
