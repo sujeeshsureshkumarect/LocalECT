@@ -8216,6 +8216,7 @@
     <Content Include="Student_Details.aspx" />
     <Content Include="Student_Profile.aspx" />
     <Content Include="Student_Report_Center.aspx" />
+    <Content Include="Student_Service_Requests.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="test.aspx" />
     <Content Include="Track_Classes.aspx" />
@@ -10007,6 +10008,13 @@
     </Compile>
     <Compile Include="Student_Report_Center.aspx.designer.cs">
       <DependentUpon>Student_Report_Center.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Service_Requests.aspx.cs">
+      <DependentUpon>Student_Service_Requests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_Service_Requests.aspx.designer.cs">
+      <DependentUpon>Student_Service_Requests.aspx</DependentUpon>
     </Compile>
     <Compile Include="test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>

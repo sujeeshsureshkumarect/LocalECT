@@ -139,10 +139,10 @@ namespace LocalECT
                 }
             }
 
-            if(selectcount>10)
+            if(selectcount>15)//Limit Increased to 15 on 28-03-2021 as per Mr. Ihab
             {
                 //You exceeds the maximum limit of allowed selection.
-                lbl_Msg.Text = "You exceeds the maximum limit (10) of allowed selections.";
+                lbl_Msg.Text = "You exceeds the maximum limit (15) of allowed selections.";
                 div_msg.Visible = true;
                 DynamicTable.Text = "";
             }
