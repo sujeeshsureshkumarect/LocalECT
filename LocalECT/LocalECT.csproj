@@ -7723,6 +7723,7 @@
     <Content Include="Acc_Voucher.xsc">
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
+    <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -10065,6 +10066,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1test.aspx.cs">
+      <DependentUpon>WebForm1test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1test.aspx.designer.cs">
+      <DependentUpon>WebForm1test.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
