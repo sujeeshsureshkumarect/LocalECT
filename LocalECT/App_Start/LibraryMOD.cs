@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Configuration;
 //using System.Linq;
@@ -12,7 +12,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.IO;
-using office = Microsoft.Office.Core;
+//using office = Microsoft.Office.Core;
 using System.Text.RegularExpressions;
 //using Microsoft.Office.Interop.Word;
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
