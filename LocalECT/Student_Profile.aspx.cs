@@ -959,7 +959,7 @@ namespace LocalECT
                     }
                     else
                     {
-                        imgStudent.ImageUrl = "~/Images/Students/Student.jpg";
+                        imgStudent.ImageUrl = "~/Images/Students/Student.jpeg";
                     }
 
                 }
@@ -1419,7 +1419,7 @@ namespace LocalECT
 
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
-
+                ddlSession.Items.Clear();
                 while (Rd.Read())
                 {
                     ddlSession.Items.Add(new ListItem(Rd["strShiftEn"].ToString(), Rd["byteShift"].ToString()));
@@ -1472,6 +1472,12 @@ namespace LocalECT
 
         private void FillCountries()
         {
+            ddlHomeCountry.Items.Clear();
+            ddlResidentCountry.Items.Clear();
+            ddlQCountry.Items.Clear();
+            ddlBirthCountry.Items.Clear();
+            ddlEmployerCountry.Items.Clear();
+            ddlLastCountry.Items.Clear();
             List<Countries> myCountries = new List<Countries>();
             CountriesDAL myCountriesDAL = new CountriesDAL();
             try
@@ -1580,6 +1586,8 @@ namespace LocalECT
         }
         private void FillNationalities()
         {
+            ddlNationality.Items.Clear();
+            ddlNationalityofMother.Items.Clear();
             List<Nationalities> myNationalities = new List<Nationalities>();
             NationalitiesDAL myNationalitiesDAL = new NationalitiesDAL();
             try
@@ -1611,6 +1619,7 @@ namespace LocalECT
 
         private void FillLanguages()
         {
+            ddlLanguage.Items.Clear();
             List<Languages> myLanguages = new List<Languages>();
             LanguagesDAL myLanguagesDAL = new LanguagesDAL();
             try
@@ -1716,6 +1725,7 @@ namespace LocalECT
 
         private void FillVisa()
         {
+            ddlVisa.Items.Clear();
             List<Sponsors> mySponsors = new List<Sponsors>();
             SponsorsDAL mySponsorsDAL = new SponsorsDAL();
             try
@@ -1742,6 +1752,7 @@ namespace LocalECT
 
         private void FillSponsors()
         {
+            ddlSponsor.Items.Clear();
             List<Delegations> myDelegations = new List<Delegations>();
             DelegationsDAL myDelegationsDAL = new DelegationsDAL();
             try
@@ -1794,6 +1805,7 @@ namespace LocalECT
 
         private void FillCertificates()
         {
+            ddlQualification.Items.Clear();
             List<Certificates> myCertificates = new List<Certificates>();
             CertificatesDAL myCertificatesDAL = new CertificatesDAL();
             try
@@ -1819,6 +1831,7 @@ namespace LocalECT
         }
         private void FillQInstitutionType()
         {
+            ddlQInstitutionType.Items.Clear();
             List<InstitutionType> myInstitutionType = new List<InstitutionType>();
             InstitutionTypeDAL myInstitutionTypeDAL = new InstitutionTypeDAL();
             try
@@ -1845,6 +1858,7 @@ namespace LocalECT
 
         private void FillQEngGrade()
         {
+            ddlQEngGrade.Items.Clear();
             List<IESOL_Equivalency> myIESOL_Equivalency = new List<IESOL_Equivalency>();
             IESOL_EquivalencyDAL myIESOL_EquivalencyDAL = new IESOL_EquivalencyDAL();
             try
@@ -1871,6 +1885,7 @@ namespace LocalECT
 
         private void FillQEngExamCenter()
         {
+            ddlQEngExamCenter.Items.Clear();
             List<EngCertificate_ExamCenter> myEngCertificate_ExamCenter = new List<EngCertificate_ExamCenter>();
             EngCertificate_ExamCenterDAL myEngCertificate_ExamCenterDAL = new EngCertificate_ExamCenterDAL();
             try
@@ -1894,6 +1909,7 @@ namespace LocalECT
         }
         private void FillQG12Stream()
         {
+            ddlQG12_Stream.Items.Clear();
             List<G12_Stream> myG12_Stream = new List<G12_Stream>();
             G12_StreamDAL myG12_StreamDAL = new G12_StreamDAL();
             try
@@ -1928,7 +1944,7 @@ namespace LocalECT
                 sSQL += " ORDER BY strSpecializationDescEn";
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
-
+                ddlQMajor.Items.Clear();
                 while (Rd.Read())
                 {
                     ddlQMajor.Items.Add(new ListItem(Rd["strSpecializationDescEn"].ToString(), Rd["intSpecialization"].ToString()));
@@ -1962,7 +1978,7 @@ namespace LocalECT
                 sSQL += " ORDER BY strLecturerDescEn";
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
-
+                ddlAdvisor.Items.Clear();
                 while (Rd.Read())
                 {
                     ddlAdvisor.Items.Add(new ListItem(Rd["strLecturerDescEn"].ToString(), Rd["intLecturer"].ToString()));
@@ -2026,6 +2042,8 @@ namespace LocalECT
 
         private void FillTerms()
         {
+            ddlStatusTerm.Items.Clear();
+            ddlEnrollmentTerm.Items.Clear();
             List<Semesters> myTerms = new List<Semesters>();
             SemesterDAL myTermsDAL = new SemesterDAL();
             try
@@ -2051,6 +2069,7 @@ namespace LocalECT
 
         private void FillMainReasons()
         {
+            ddlReason.Items.Clear();
             List<MainReasons> myMainReasons = new List<MainReasons>();
             MainReasonsDAL myMainReasonsDAL = new MainReasonsDAL();
             try
@@ -4092,7 +4111,7 @@ namespace LocalECT
                 Cmd.CommandText = sSQL;
                 iHSPassed = (int)Cmd.ExecuteScalar();
 
-                if ((sDegree == "1" || sDegree == "3" || (sDegree == "2" && (sMajor == "1" || sMajor == "5" || sMajor == "6" || sMajor == "7"))) && (iHSPassed == 1 || iCert > 0))
+                if ((sDegree == "1" || sDegree == "3" || (sDegree == "2" && sMajor != "2" && sMajor != "3" && sMajor != "4")) && (iHSPassed == 1 || iCert > 0))
                 {
                     isIt = true;
                 }
@@ -6119,6 +6138,7 @@ namespace LocalECT
                 rbnGender.SelectedValue = "0";
                 rbnGender.Enabled = false;
             }
+
             FillDDLs();
             ddlAcceptance.DataBind();
             ddlAcceptanceCondition.DataBind();

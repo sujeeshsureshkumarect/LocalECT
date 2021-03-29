@@ -202,7 +202,7 @@
                                                         <asp:LinkButton ID="btnGetEID" runat="server" CssClass="btn btn-success btn-sm" OnClick="btnGetEID_Click"><i class="fa fa-download"></i> Read from EID</asp:LinkButton>
                                                         <br />
                                                         <asp:Image ID="imgStudent" runat="server" ClientIDMode="Static" Height="130px" 
-                                ImageUrl="~/Images/Students/Student.jpg" Width="110px" />
+                                ImageUrl="~/Images/Students/Student.jpeg" Width="110px" />
                                                         <hr />
                                                     </div>
                                                     <style>
