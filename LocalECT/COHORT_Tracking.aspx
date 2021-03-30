@@ -7,7 +7,7 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="Student_Report_Center">&nbsp;Student Report Center</a>
+                        <a href="COHORT_Tracking">&nbsp;COHORT Tracking</a>
 
                     </h3>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-calendar"></i> Cohort Tracking</h2>
+                            <h2><i class="fa fa-calendar"></i> COHORT Tracking</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>

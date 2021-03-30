@@ -285,7 +285,7 @@ StudentID3"></asp:TextBox>
                                                             <%-- <a class="dropdown-item" href="Transcript.aspx?PreviousTerm">Transcript</a>--%>
                                                              <asp:LinkButton ID="lnk_Transcript_Menu" runat="server" Text="Transcript" OnClick="lnk_Transcript_Menu_Click" CssClass="dropdown-item" CommandArgument=<%#Eval("sNo")%> CommandName=<%#Eval("sName")%>></asp:LinkButton>
                                                              <a class="dropdown-item" href="Student_Service_Requests?sEmail=<%#Eval("ECTEmail")%>">Requested Services</a>
-                                                             <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Attendance Warnings</a>
+                                                             <a class="dropdown-item" href="Attendance_Warning?sid=<%#Eval("sNo")%>">Attendance Warnings</a>
                                                          </div>
                                                      </div>
                                                  </td>
