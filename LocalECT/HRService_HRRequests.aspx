@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Student_Service_Requests.aspx.cs" Inherits="LocalECT.Student_Service_Requests" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HRService_HRRequests.aspx.cs" Inherits="LocalECT.HRService_HRRequests" MasterPageFile="~/LocalECT.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -6,10 +6,8 @@
                             <div class="page-title">
                                 <div class="title_left">
                                     <h3 class="breadcrumb">
-                        <a href="Home">Home /</a>
-                        <a href="#">&nbsp;Registration /</a>
-                        <a href="StudentSearch">&nbsp;Student Search /</a>
-                        <a href="#">&nbsp;Student Service Requests</a>
+                        <a href="Home">Home /</a>                       
+                        <a href="HRService_HRRequests">&nbsp;HR Service Requests</a>
                     </h3>
                                 </div>
                                 <style>
@@ -31,14 +29,14 @@
         }
                                 </style>
                             </div>
+                            <asp:HiddenField ID="UserEmail" runat="server" />
                             <div class="clearfix"></div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-dashboard"></i> Student Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton></h2>
-                                            <ul class="nav navbar-right panel_toolbox">
-                                                 <a href="StudentSearch.aspx" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Student Search</a>
+                                            <h2><i class="fa fa-users"></i>  HR Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton></h2>
+                                            <ul class="nav navbar-right panel_toolbox">                                                 
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -52,7 +50,7 @@
                          <div id="datatable_wrapper" class="table-responsive">
                     <style>                      
                         #datatable tbody td div{
-width:490px;
+width:300px;
 max-height:100px !important;
 overflow:scroll;
 white-space: nowrap;
@@ -66,23 +64,27 @@ white-space: nowrap;
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service Name</th>
-                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Status</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service ID</th>--%>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service Request Details</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Created by</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Created on</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Link</th>
-                                            <th style="display:none;" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Show</th>
+                                           <%-- <th style="display:none;" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Show</th>--%>
                                         </tr>
                                     </thead>
                                     </HeaderTemplate>
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td><%#Eval("ServiceID")%></td>                                                                                                         
-                                                    <td><%#Eval("Status")%></td>                                                                                                        
+                                                     <td><%#Eval("Status")%></td>    
+                                                    <%--<td><%#Eval("ServiceID")%></td>  --%> 
+                                                    <td><div><%#Eval("Request")%></div></td>                                                                                                                                                            
+                                                     <td><%#Eval("EmpID")%>-<%#Eval("EmployeeName")%></td>    
                                                     <td><span style="display: none;"><%#Eval("Created","{0:yyyyMMdd}")%></span><%#Eval("Created","{0:dd/MM/yyyy hh:mm tt}")%></td>
-                                                    <td><a class="btn btn-success btn-lg" href="https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices/Lists/Students_Requests/EditForm.aspx?ID=<%#Eval("ID")%>" target="_blank" title="Link to Item"><i class="fa fa-globe"></i></a></td>
-                                                    <td style="display:none;"><%#Eval("Show")%></td>
+                                                    <td><a class="btn btn-success btn-lg" href="https://ectacae.sharepoint.com/sites/ECTPortal/eservices/hrservices/SitePages/HRServices-Edit.aspx?ID=<%#Eval("Reference")%>&Source" target="_blank" title="Link to Item"><i class="fa fa-globe"></i></a></td>
+                                                    <%--<td style="display:none;"><%#Eval("Show")%></td>--%>
                                                 </tr>
                                         
                                    </ItemTemplate>
@@ -99,13 +101,15 @@ white-space: nowrap;
        var table = document.getElementById("datatable");
        if (table != null) {
            for (var i = 1; i < table.rows.length; i++) {              
-               var status = table.rows[i].cells[2].textContent;          
-               var show = table.rows[i].cells[5].textContent;          
+               var status = table.rows[i].cells[1].textContent;                               
                if (status == "Completed") {
-                   table.rows[i].cells[2].innerHTML = '<span class="badge badge-success">Completed</span>';
+                   table.rows[i].cells[1].innerHTML = '<span class="badge badge-success">Completed</span>';
                }
-               if (show == "N") {
-                   table.rows[i].cells[4].innerHTML = '&nbsp;';
+               else {
+                   table.rows[i].cells[1].innerHTML = '<span class="badge badge-warning">' + status + '</span>';
+               }   
+               if (status.indexOf('Rejected ') >= 0) {              
+                   table.rows[i].cells[1].innerHTML = '<span class="badge badge-danger">' + status + '</span>';
                }
            }
        }

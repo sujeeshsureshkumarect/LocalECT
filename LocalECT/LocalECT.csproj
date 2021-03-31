@@ -3957,6 +3957,8 @@
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="HRService_HRRequests.aspx" />
+    <Content Include="HRService_MyRequests.aspx" />
     <Content Include="HR_Cancellation_Leave_Form.aspx" />
     <Content Include="HR_Children_Education_Allowance_Claim_Form.aspx" />
     <Content Include="HR_Employee_Leaving_Clearance_Form.aspx" />
@@ -8581,6 +8583,20 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HRService_HRRequests.aspx.cs">
+      <DependentUpon>HRService_HRRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HRService_HRRequests.aspx.designer.cs">
+      <DependentUpon>HRService_HRRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HRService_MyRequests.aspx.cs">
+      <DependentUpon>HRService_MyRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HRService_MyRequests.aspx.designer.cs">
+      <DependentUpon>HRService_MyRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="HR_Cancellation_Leave_Form.aspx.cs">
       <DependentUpon>HR_Cancellation_Leave_Form.aspx</DependentUpon>
