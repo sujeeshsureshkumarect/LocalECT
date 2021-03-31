@@ -407,6 +407,38 @@ namespace LocalECT
 
             }
             //sentdatatoSPLIstNewStudentsTracking();
+            //testsiscredentials();
+        }
+
+        public void testsiscredentials()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+            cmd.Parameters.AddWithValue("@lngStudentNumber", "ESF2106002");
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    //sisusername = dt.Rows[0]["UserName"].ToString();
+                    //sispassword = dt.Rows[0]["Password"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
         }
         private void getEIDData()
         {
@@ -5193,7 +5225,7 @@ namespace LocalECT
 
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-            SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+            SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
             cmd.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
