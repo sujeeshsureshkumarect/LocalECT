@@ -166,6 +166,12 @@
     <Content Include="Bulk_SC_Change_Status.aspx" />
     <Content Include="ChangeMajor.aspx" />
     <Content Include="ChangePwd.aspx" />
+    <Content Include="CHEDS_Enrollment.aspx" />
+    <Content Include="CHEDS_New_Applicants.aspx" />
+    <Content Include="CHEDS_New_Attrition.aspx" />
+    <Content Include="CHEDS_New_Graduated.aspx" />
+    <Content Include="CHEDS_New_Internship.aspx" />
+    <Content Include="CHEDS_New_Scholarship.aspx" />
     <Content Include="ClassAttendance.aspx" />
     <Content Include="ClassAttendanceDM.aspx" />
     <Content Include="Contact.aspx" />
@@ -8478,6 +8484,48 @@
     </Compile>
     <Compile Include="ChangePwd.aspx.designer.cs">
       <DependentUpon>ChangePwd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_Enrollment.aspx.cs">
+      <DependentUpon>CHEDS_Enrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_Enrollment.aspx.designer.cs">
+      <DependentUpon>CHEDS_Enrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_New_Applicants.aspx.cs">
+      <DependentUpon>CHEDS_New_Applicants.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_New_Applicants.aspx.designer.cs">
+      <DependentUpon>CHEDS_New_Applicants.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_New_Attrition.aspx.cs">
+      <DependentUpon>CHEDS_New_Attrition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_New_Attrition.aspx.designer.cs">
+      <DependentUpon>CHEDS_New_Attrition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_New_Graduated.aspx.cs">
+      <DependentUpon>CHEDS_New_Graduated.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_New_Graduated.aspx.designer.cs">
+      <DependentUpon>CHEDS_New_Graduated.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_New_Internship.aspx.cs">
+      <DependentUpon>CHEDS_New_Internship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_New_Internship.aspx.designer.cs">
+      <DependentUpon>CHEDS_New_Internship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CHEDS_New_Scholarship.aspx.cs">
+      <DependentUpon>CHEDS_New_Scholarship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_New_Scholarship.aspx.designer.cs">
+      <DependentUpon>CHEDS_New_Scholarship.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClassAttendance.aspx.cs">
       <DependentUpon>ClassAttendance.aspx</DependentUpon>

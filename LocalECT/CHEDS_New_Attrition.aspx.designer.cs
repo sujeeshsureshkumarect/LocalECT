@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class Student_Report_Center
+    public partial class CHEDS_New_Attrition
     {
 
         /// <summary>
@@ -58,24 +58,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRegTerm;
-
-        /// <summary>
-        /// drp_Type control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Type;
-
-        /// <summary>
-        /// chk_Fields control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chk_Fields;
 
         /// <summary>
         /// lnk_FieldGenerate control.

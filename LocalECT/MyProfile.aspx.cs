@@ -33,7 +33,7 @@ namespace LocalECT
 
         public void bindemployeeprofile()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * from ACMS_User where ACMS_User.Personnelnr='E" + Session["EmployeeID"].ToString() + "'", sc);
+            SqlCommand cmd = new SqlCommand("SELECT * from Hr_EmployeeProfileRpt where EmployeeID=" + Session["EmployeeID"].ToString() + "", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -44,14 +44,21 @@ namespace LocalECT
 
                 if(dt.Rows.Count>0)
                 {
-                    txt_EmployeeID.Text = dt.Rows[0]["Personnelnr"].ToString();
-                    txtEmployeeName.Text = dt.Rows[0]["Name"].ToString();
-                    txt_Designation.Text = dt.Rows[0]["Designation"].ToString();
-                    txt_Department.Text = dt.Rows[0]["DepartmentName"].ToString();
-                    txt_Gender.Text = dt.Rows[0]["Gender"].ToString();
-                    txtCategory.Text = dt.Rows[0]["Category"].ToString();
-                    txtPhoneNumber.Text = dt.Rows[0]["MobilePhoneNumber"].ToString();
-                    txtEmail.Text = dt.Rows[0]["Email"].ToString();
+                    txt_EmployeeID.Text = dt.Rows[0]["EmpID_ACMS"].ToString();
+                    txtEmployeeName.Text = dt.Rows[0]["EmployeeDisplayName"].ToString();
+                    txt_Designation.Text = dt.Rows[0]["JobTitleEn"].ToString();
+                    txt_Department.Text = dt.Rows[0]["DepartmentDesc"].ToString();
+                    if(dt.Rows[0]["Sex"].ToString()=="1")
+                    {
+                        txt_Gender.Text = "Male";
+                    }
+                    else
+                    {
+                        txt_Gender.Text = "Female";
+                    }                    
+                    txtCategory.Text = dt.Rows[0]["EmpGroup"].ToString();
+                    txtPhoneNumber.Text = dt.Rows[0]["Mobile"].ToString();
+                    txtEmail.Text = dt.Rows[0]["InternalEmail"].ToString();
                 }
             }
             catch(Exception ex)
