@@ -73,6 +73,18 @@
                                     </div>  
                                     <div class="col-sm-3 col-md-3 col-xs-12">
                                         <div class="form-group">
+                                            <label>Type</label>
+                                            <div class="input-group">
+                                                <asp:DropDownList ID="drp_Type" runat="server" CssClass="form-control">
+                                                    <asp:ListItem Text="Applicants-Full Details" Value="Applicants-Full Details" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Applicants-Academic Proficiency" Value="Applicants-Academic Proficiency"></asp:ListItem>
+                                                    <asp:ListItem Text="Applicants-Basic Details" Value="Applicants-Basic Details"></asp:ListItem>                                                    
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-xs-12">
+                                        <div class="form-group">
                                             <label>&nbsp;</label>
                                             <div class="input-group">
                                      <asp:LinkButton ID="lnk_FieldGenerate" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_FieldGenerate_Click"><i class="fa fa-print"></i> Generate Report</asp:LinkButton>

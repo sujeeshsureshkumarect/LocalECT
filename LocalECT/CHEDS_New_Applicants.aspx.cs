@@ -99,26 +99,107 @@ namespace LocalECT
             remainquery += "SET @iRegYear="+ iRegYear + " ";
             remainquery += "SET @iRegSem="+ iRegSem + " ";
             remainquery += "SET @iRegTerm=@iRegYear*10+@iRegSem ";
-            remainquery += "SELECT        32 AS [Institution Code], 'Emirates College of Technology' AS [Institution Name], RS.iCHEDSCode AS [Academic Period], (CASE WHEN ISNULL(SM.strDegree, A.strDegree) = '3' THEN 'BA' WHEN ISNULL(SM.strDegree,  ";
-            remainquery += "                         A.strDegree) = '2' THEN 'FD' WHEN ISNULL(SM.strDegree, A.strDegree) = '1' AND ISNULL(SM.strMajor, A.strSpecialization) <> '999' THEN 'DP' ELSE 'UD' END) AS [Student Degree], LEFT(ISNULL(RM.strClass, CM.strClass), 2)  ";
-            remainquery += "                         AS [Area of Specialization], MEC.iCHEDSCode AS [Test/Exam], MEC.Mark AS [Exam Score],A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, RBS.MCRS + RBS.FCRS AS Registered,   ";
-            remainquery += "                         Lkp_Reasons.strReasonDesc ";
-            remainquery += "FROM            Reg_Semesters AS RS INNER JOIN ";
-            remainquery += "                         Reg_Students_Data AS SD INNER JOIN ";
-            remainquery += "                         Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
-            remainquery += "                         Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON RS.intStudyYear = A.intStudyYear AND  ";
-            remainquery += "                         RS.byteSemester = A.byteSemester LEFT OUTER JOIN ";
-            remainquery += "                         Lkp_Reasons ON A.byteCancelReason = Lkp_Reasons.byteReason LEFT OUTER JOIN ";
-            remainquery += "                         MaxEngCertMark AS MEC ON SD.lngSerial = MEC.lngSerial LEFT OUTER JOIN ";
-            remainquery += "                         Reg_Applications AS EXS ON A.intStudyYear = EXS.intStudyYear AND A.byteSemester = EXS.byteSemester AND A.lngStudentNumber = EXS.sReference LEFT OUTER JOIN ";
-            remainquery += "                         Reg_Both_Side AS RBS ON A.lngStudentNumber = RBS.Student AND A.intStudyYear = RBS.iYear AND A.byteSemester = RBS.Sem LEFT OUTER JOIN ";
-            remainquery += "                         Reg_Specializations AS RM RIGHT OUTER JOIN ";
-            remainquery += "                         Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND RBS.Student = SM.lngStudentNumber ";
-            remainquery += "WHERE        (SD.byteShift = "+ byteShift1 + " OR ";
-            remainquery += "                         SD.byteShift = "+ byteShift2 + " OR ";
-            remainquery += "                         SD.byteShift = "+ byteShift3 + ") AND (EXS.sReference IS NULL) AND (A.intStudyYear = @iRegYear) AND (A.byteSemester = @iRegSem)	 ";
-            remainquery += "						 ";
-            remainquery += "ORDER BY Name ";
+
+            if(drp_Type.SelectedItem.Text=="Applicants-Full Details")
+            {
+                remainquery += "SELECT     TOP (100) PERCENT 32 AS [Institution Code], 'Emirates College of Technology' AS [Institution Name], RS.iCHEDSCode AS [Academic Period], ";
+                remainquery += "                      (CASE WHEN ISNULL(SM.strDegree, A.strDegree) = '3' THEN 'BA' WHEN ISNULL(SM.strDegree, A.strDegree) = '2' THEN 'FD' WHEN ISNULL(SM.strDegree, ";
+                remainquery += "                      A.strDegree) = '1' AND ISNULL(SM.strMajor, A.strSpecialization) <> '999' THEN 'DP' ELSE 'UD' END) AS [Student Degree], LEFT(ISNULL(RM.strClass, CM.strClass), 2) ";
+                remainquery += "                      AS [Area of Specialization], MEC.strCert AS Test, MEC.iCHEDSCode AS [Test/Exam], MEC.Mark AS [Exam Score], A.lngStudentNumber AS SID, ";
+                remainquery += "                      SD.strLastDescEn AS Name, RBS.MCRS + RBS.FCRS AS Registered, S.strReasonDesc AS Status ";
+                remainquery += "FROM         Reg_Semesters AS RS INNER JOIN ";
+                remainquery += "                      Reg_Students_Data AS SD INNER JOIN ";
+                remainquery += "                      Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
+                remainquery += "                      Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON ";
+                remainquery += "                      RS.intStudyYear = A.intStudyYear AND RS.byteSemester = A.byteSemester LEFT OUTER JOIN ";
+                remainquery += "                      Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason LEFT OUTER JOIN ";
+                remainquery += "                      MaxEngCertMark AS MEC ON SD.lngSerial = MEC.lngSerial LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Applications AS EXS ON A.intStudyYear = EXS.intStudyYear AND A.byteSemester = EXS.byteSemester AND ";
+                remainquery += "                      A.lngStudentNumber = EXS.sReference LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Both_Side AS RBS ON A.lngStudentNumber = RBS.Student AND A.intStudyYear = RBS.iYear AND A.byteSemester = RBS.Sem LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Specializations AS RM RIGHT OUTER JOIN ";
+                remainquery += "                      Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND ";
+                remainquery += "                      RBS.Sem = SM.byteSemester AND RBS.Student = SM.lngStudentNumber ";
+                remainquery += "WHERE     (SD.byteShift = "+ byteShift1 + " OR ";
+                remainquery += "                      SD.byteShift = "+ byteShift2 + " OR ";
+                remainquery += "                      SD.byteShift = "+ byteShift3 + ") AND (EXS.sReference IS NULL) AND (A.intStudyYear = @iRegYear) AND (A.byteSemester = @iRegSem) ";
+                remainquery += "ORDER BY Name ";
+            }
+            else if(drp_Type.SelectedItem.Text== "Applicants-Basic Details")
+            {
+                remainquery += "SELECT     [Institution Code], [Institution Name], [Academic Period], [Student Degree], [Area of Specialization], COUNT(SID) AS App_Applicants,SUM((CASE WHEN ISNULL(D.byteCancelReason,0)<>100 THEN 1 ELSE 0 END)) AS App_Acceptances ";
+                remainquery += "            ,SUM((CASE WHEN ISNULL(D.byteCancelReason,0)<>100 AND D.Registered>0 THEN 1 ELSE 0 END)) AS App_Enrolled ";
+                remainquery += "FROM         (SELECT     TOP (100) PERCENT 32 AS [Institution Code], 'Emirates College of Technology' AS [Institution Name], RS.iCHEDSCode AS [Academic Period], ";
+                remainquery += "                      (CASE WHEN ISNULL(SM.strDegree, A.strDegree) = '3' THEN 'BA' WHEN ISNULL(SM.strDegree, A.strDegree) = '2' THEN 'FD' WHEN ISNULL(SM.strDegree, ";
+                remainquery += "                      A.strDegree) = '1' AND ISNULL(SM.strMajor, A.strSpecialization) <> '999' THEN 'DP' ELSE 'UD' END) AS [Student Degree], LEFT(ISNULL(RM.strClass, CM.strClass), 2) ";
+                remainquery += "                      AS [Area of Specialization], MEC.strCert AS Test, MEC.iCHEDSCode AS [Test/Exam], MEC.Mark AS [Exam Score], A.lngStudentNumber AS SID, ";
+                remainquery += "                      SD.strLastDescEn AS Name, RBS.MCRS + RBS.FCRS AS Registered, A.byteCancelReason ";
+                remainquery += "FROM         Reg_Semesters AS RS INNER JOIN ";
+                remainquery += "                      Reg_Students_Data AS SD INNER JOIN ";
+                remainquery += "                      Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
+                remainquery += "                      Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON ";
+                remainquery += "                      RS.intStudyYear = A.intStudyYear AND RS.byteSemester = A.byteSemester LEFT OUTER JOIN ";
+                remainquery += "                      MaxEngCertMark AS MEC ON SD.lngSerial = MEC.lngSerial LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Applications AS EXS ON A.intStudyYear = EXS.intStudyYear AND A.byteSemester = EXS.byteSemester AND ";
+                remainquery += "                      A.lngStudentNumber = EXS.sReference LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Both_Side AS RBS ON A.lngStudentNumber = RBS.Student AND A.intStudyYear = RBS.iYear AND A.byteSemester = RBS.Sem LEFT OUTER JOIN ";
+                remainquery += "                      Reg_Specializations AS RM RIGHT OUTER JOIN ";
+                remainquery += "                      Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND ";
+                remainquery += "                      RBS.Sem = SM.byteSemester AND RBS.Student = SM.lngStudentNumber ";
+                remainquery += "WHERE     (SD.byteShift = "+ byteShift1 + " OR ";
+                remainquery += "                      SD.byteShift = "+ byteShift2 + " OR ";
+                remainquery += "                      SD.byteShift = "+ byteShift3 + ") AND (EXS.sReference IS NULL) AND (A.intStudyYear = @iRegYear) AND (A.byteSemester = @iRegSem) ";
+                remainquery += "ORDER BY Name) AS D ";
+                remainquery += "GROUP BY [Institution Code], [Institution Name], [Academic Period], [Student Degree], [Area of Specialization] ";
+            }
+            else if(drp_Type.SelectedItem.Text== "Applicants-Academic Proficiency")
+            {
+                remainquery += "SELECT     [Institution Code], [Institution Name], [Academic Period], [Student Degree], [Area of Specialization], Test, [Test/Exam], AVG([Exam Score]) AS [Exam Score] ";
+                remainquery += "FROM         (SELECT     TOP (100) PERCENT 32 AS [Institution Code], 'Emirates College of Technology' AS [Institution Name], RS.iCHEDSCode AS [Academic Period], ";
+                remainquery += "                                              (CASE WHEN ISNULL(SM.strDegree, A.strDegree) = '3' THEN 'BA' WHEN ISNULL(SM.strDegree, A.strDegree) = '2' THEN 'FD' WHEN ISNULL(SM.strDegree, ";
+                remainquery += "                                              A.strDegree) = '1' AND ISNULL(SM.strMajor, A.strSpecialization) <> '999' THEN 'DP' ELSE 'UD' END) AS [Student Degree], LEFT(ISNULL(RM.strClass, ";
+                remainquery += "                                              CM.strClass), 2) AS [Area of Specialization], MEC.strCert AS Test, MEC.iCHEDSCode AS [Test/Exam], MEC.Mark AS [Exam Score], ";
+                remainquery += "                                              A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, RBS.MCRS + RBS.FCRS AS Registered ";
+                remainquery += "                       FROM          Reg_Semesters AS RS INNER JOIN ";
+                remainquery += "                                              Reg_Students_Data AS SD INNER JOIN ";
+                remainquery += "                                              Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
+                remainquery += "                                              Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON ";
+                remainquery += "                                              RS.intStudyYear = A.intStudyYear AND RS.byteSemester = A.byteSemester LEFT OUTER JOIN ";
+                remainquery += "                                              MaxEngCertMark AS MEC ON SD.lngSerial = MEC.lngSerial LEFT OUTER JOIN ";
+                remainquery += "                                              Reg_Applications AS EXS ON A.intStudyYear = EXS.intStudyYear AND A.byteSemester = EXS.byteSemester AND ";
+                remainquery += "                                              A.lngStudentNumber = EXS.sReference LEFT OUTER JOIN ";
+                remainquery += "                                              Reg_Both_Side AS RBS ON A.lngStudentNumber = RBS.Student AND A.intStudyYear = RBS.iYear AND A.byteSemester = RBS.Sem LEFT OUTER JOIN ";
+                remainquery += "                                              Reg_Specializations AS RM RIGHT OUTER JOIN ";
+                remainquery += "                                              Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND ";
+                remainquery += "                                              RBS.Sem = SM.byteSemester AND RBS.Student = SM.lngStudentNumber ";
+                remainquery += "                       WHERE      (SD.byteShift = "+ byteShift1 + " OR ";
+                remainquery += "                                              SD.byteShift = "+ byteShift2 + " OR ";
+                remainquery += "                                              SD.byteShift = "+ byteShift3 + ") AND (EXS.sReference IS NULL) AND (A.intStudyYear = @iRegYear) AND (A.byteSemester = @iRegSem) ";
+                remainquery += "                       ORDER BY Name) AS D ";
+                remainquery += "GROUP BY [Institution Code], [Institution Name], [Academic Period], [Student Degree], [Area of Specialization], [Test/Exam], Test ";
+            }
+
+
+            //remainquery += "SELECT        32 AS [Institution Code], 'Emirates College of Technology' AS [Institution Name], RS.iCHEDSCode AS [Academic Period], (CASE WHEN ISNULL(SM.strDegree, A.strDegree) = '3' THEN 'BA' WHEN ISNULL(SM.strDegree,  ";
+            //remainquery += "                         A.strDegree) = '2' THEN 'FD' WHEN ISNULL(SM.strDegree, A.strDegree) = '1' AND ISNULL(SM.strMajor, A.strSpecialization) <> '999' THEN 'DP' ELSE 'UD' END) AS [Student Degree], LEFT(ISNULL(RM.strClass, CM.strClass), 2)  ";
+            //remainquery += "                         AS [Area of Specialization], MEC.iCHEDSCode AS [Test/Exam], MEC.Mark AS [Exam Score],A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, RBS.MCRS + RBS.FCRS AS Registered,   ";
+            //remainquery += "                         Lkp_Reasons.strReasonDesc ";
+            //remainquery += "FROM            Reg_Semesters AS RS INNER JOIN ";
+            //remainquery += "                         Reg_Students_Data AS SD INNER JOIN ";
+            //remainquery += "                         Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
+            //remainquery += "                         Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON RS.intStudyYear = A.intStudyYear AND  ";
+            //remainquery += "                         RS.byteSemester = A.byteSemester LEFT OUTER JOIN ";
+            //remainquery += "                         Lkp_Reasons ON A.byteCancelReason = Lkp_Reasons.byteReason LEFT OUTER JOIN ";
+            //remainquery += "                         MaxEngCertMark AS MEC ON SD.lngSerial = MEC.lngSerial LEFT OUTER JOIN ";
+            //remainquery += "                         Reg_Applications AS EXS ON A.intStudyYear = EXS.intStudyYear AND A.byteSemester = EXS.byteSemester AND A.lngStudentNumber = EXS.sReference LEFT OUTER JOIN ";
+            //remainquery += "                         Reg_Both_Side AS RBS ON A.lngStudentNumber = RBS.Student AND A.intStudyYear = RBS.iYear AND A.byteSemester = RBS.Sem LEFT OUTER JOIN ";
+            //remainquery += "                         Reg_Specializations AS RM RIGHT OUTER JOIN ";
+            //remainquery += "                         Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND RBS.Student = SM.lngStudentNumber ";
+            //remainquery += "WHERE        (SD.byteShift = "+ byteShift1 + " OR ";
+            //remainquery += "                         SD.byteShift = "+ byteShift2 + " OR ";
+            //remainquery += "                         SD.byteShift = "+ byteShift3 + ") AND (EXS.sReference IS NULL) AND (A.intStudyYear = @iRegYear) AND (A.byteSemester = @iRegSem)	 ";
+            //remainquery += "						 ";
+            //remainquery += "ORDER BY Name ";
             SqlCommand cmd1 = new SqlCommand(remainquery, sc);
             cmd1.CommandTimeout = 180;
             DataTable dt1 = new DataTable();
@@ -141,7 +222,37 @@ namespace LocalECT
                     //    }
                     //}
 
-                    StringBuilder sb = new StringBuilder();
+                    if (drp_Type.SelectedItem.Text == "Applicants-Full Details")
+                    {
+                        //No Action
+                    }
+                    else if (drp_Type.SelectedItem.Text == "Applicants-Basic Details")
+                    {
+                        string columnnames = "App_Institution_Code,App_Institution_Name,App_Academic_Period,App_Degrees,App_Area_of_Specialization,App_Applicants,App_Acceptances,App_Enrolled";
+                        string[] columns = columnnames.Split(new string[] { "," }, StringSplitOptions.None);
+                        if (dt1.Columns.Count > 0)
+                        {
+                            for (int j = 0; j < dt1.Columns.Count; j++)
+                            {
+                                dt1.Columns[j].ColumnName = columns[j].ToString();
+                            }
+                        }
+                    }
+                    else if (drp_Type.SelectedItem.Text == "Applicants-Academic Proficiency")
+                    {
+                        string columnnames = "App_Institution_Code,App_Institution_Name,App_Academic_Period,App_Degrees,App_Area_of_Specialization,App_Language_Test_Name,Test_Exam,App_Language_Test_Score";
+                        string[] columns = columnnames.Split(new string[] { "," }, StringSplitOptions.None);
+                        if (dt1.Columns.Count > 0)
+                        {
+                            for (int j = 0; j < dt1.Columns.Count; j++)
+                            {
+                                dt1.Columns[j].ColumnName = columns[j].ToString();
+                            }
+                        }
+                    }
+
+
+                        StringBuilder sb = new StringBuilder();
                     sb.Append("<table id='example' class='table table-striped table-bordered' style='width: 100%'>" + Environment.NewLine + "");
 
                     //Add Table Header
