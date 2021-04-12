@@ -7,7 +7,7 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="CHEDS_New_Attrition">&nbsp;CHEDS New Attrition</a>
+                        <a href="CHEDS_New_Attrition">&nbsp;CHEDS Attrition</a>
                     </h3>
                 </div>
                 <style>
@@ -32,7 +32,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-calendar"></i> CHEDS New Attrition</h2>
+                            <h2><i class="fa fa-calendar"></i> CHEDS Attrition</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>

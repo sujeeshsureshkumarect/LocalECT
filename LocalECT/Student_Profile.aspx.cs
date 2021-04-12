@@ -354,7 +354,7 @@ namespace LocalECT
 
                     if (txtECTEmail.Text != "" && txtECTEmail.Text != null)
                     {
-                        btnCreateEmail.Visible = false;
+                        btnCreateEmail.Visible = false;//false
                     }
                     if(!IsPostBack)
                     {
@@ -2202,13 +2202,13 @@ namespace LocalECT
             {
                 lbl_Msg.Text = "Student must register courses before creating email.";
                 div_msg.Visible = true;
-                return;
+               return;
             }
             //======= Generate Student email
             CreateStudentEmail();
             if (txtECTEmail.Text.Length < 17)
             {
-                return;
+               return;
             }
             //======= Create email in Office365 & AD 
             CreateStudentEmailAD(this.Campus, lblStudentId.Text);

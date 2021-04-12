@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CHEDS_New_Internship.aspx.cs" Inherits="LocalECT.CHEDS_New_Internship" MasterPageFile="~/LocalECT.Master"%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ACC_STD_Balance.aspx.cs" Inherits="LocalECT.ACC_STD_Balance" MasterPageFile="~/LocalECT.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -7,7 +7,8 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="CHEDS_New_Internship">&nbsp;CHEDS Internship</a>
+                        <a href="#">&nbsp;Accounting /</a>
+                      <a href="ACC_STD_Balance">&nbsp;STD Balance </a>
                     </h3>
                 </div>
                 <style>
@@ -25,6 +26,8 @@
                         float: left;
                         display: block;
                     }
+
+                    
                 </style>
             </div>
             <div class="clearfix"></div>
@@ -32,7 +35,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-calendar"></i> CHEDS Internship</h2>
+                            <h2><i class="fa fa-bar-chart"></i> STD Balance </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -52,26 +55,69 @@
                             </div>
                             <div id="Headers">
                                 <div class="row">  
-                                     <div class="col-sm-3 col-md-3 col-xs-12">
+                                     <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>Campus</label>
                                             <div class="input-group">
-                                        <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control">
+                                                 <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control">
                                             <asp:ListItem Text="Males" Value="1" Selected="True"/>
                                             <asp:ListItem Text="Females" Value="2" />
                                         </asp:DropDownList>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-xs-12">
+                                                                  
+
+                                      
+
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
-                                            <label>Term</label>
+                                            <label>From Term</label>
                                             <div class="input-group">
-                                                <asp:DropDownList ID="ddlRegTerm" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                 <asp:DropDownList ID="ddlFromTerm" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Begenning" Value="0" Selected="True"/>
+                                            <asp:ListItem Text="End" Value="30000" />
+                                        </asp:DropDownList>
                                             </div>
                                         </div>
-                                    </div>  
-                                    <div class="col-sm-3 col-md-3 col-xs-12">
+                                    </div>
+
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>To Term</label>
+                                            <div class="input-group">
+                                                 <asp:DropDownList ID="ddlToTerm" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="End" Value="30000" Selected="True"/>
+                                            <asp:ListItem Text="Beginning" Value="0" />
+                                        </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>SID</label>
+                                  <asp:DropDownList ID="drp_Type" runat="server" CssClass="form-control" Width="100px">
+                                            <asp:ListItem Selected="True" Text="Like" Value="Like"></asp:ListItem>
+                                            <asp:ListItem Text="In" Value="In"></asp:ListItem>
+                                        </asp:DropDownList>
+                                            <div class="input-group">
+                                                <asp:TextBox ID="txtSID" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>ACC</label>
+                                            <div class="input-group">
+                                                <asp:TextBox ID="txtACC" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
                                             <div class="input-group">
@@ -97,42 +143,57 @@
                                thead input {
         width: 100%;
     }
-                            </style>
-                           <%-- <script src="Scripts/jquery-3.4.1.min.js"></script>--%>
-                      <%--      <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-                            <script src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
-                            <link href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css" rel="stylesheet" />--%>
-            <%--               <script>
-                               $(document).ready(function () {
-                                   // Setup - add a text input to each footer cell
-                                   $('#datatable thead tr').clone().prependTo('#datatable thead');
-                                   $('#datatable thead tr:eq(0) th').each(function (i) {
-                                       var title = $(this).text();
 
-                                       $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-
-                                       $('input', this).on('keyup change', function () {
-                                           if (table.column(i).search() !== this.value) {
-                                               table
-                                                   .column(i)
-                                                   .search(this.value)
-                                                   .draw();
-                                           }
-                                       });
-                                   });
-
-                                   var table;
-                                   if ($.fn.dataTable.isDataTable('#datatable')) {
-                                       table = $('#datatable').DataTable();
-                                   }
-                                   else {
-                                       table = $('#datatable').DataTable({
-                                           orderCellsTop: true,
-                                           fixedHeader: true
-                                       });
-                                   }
-                               });
-                           </script>--%>
+      .modal
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: black;
+        z-index: 99;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        -moz-opacity: 0.8;
+        min-height: 100%;
+        width: 100%;
+    }
+    .loading
+    {
+        font-family: Arial;
+        font-size: 10pt;
+        border: 5px solid #67CFF5;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        background-color: White;
+        z-index: 999;
+    }
+                               </style>
+                          
+                           <div class="loading" align="center">
+    
+    <img src="C:\Users\abdul.shukkoor\Desktop\LocalECT\LocalECT\images\ajax-loader.gif/ajax-loader.gif" alt="" />
+</div>
+                          
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+  function ShowProgress() {
+    setTimeout(function () {
+      var modal = $('<div />');
+      modal.addClass("modal");
+      $('body').append(modal);
+      var loading = $(".loading");
+      loading.show();
+      var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+      var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+      loading.css({ top: top, left: left });
+    }, 200);
+  }
+  $('form').live("submit", function () {
+    ShowProgress();
+  });
+</script>
 
                         <div id="details">
                             <hr />
@@ -204,21 +265,7 @@
         }
                                         </style>
                                         
-                                        </div>
-                                   <%--  <script>
-                                         var table = document.getElementById("example");
-                                         if (table != null) {
-                                             for (var i = 1; i < table.rows.length; i++) {
-                                                 var status = table.rows[i].cells[9].textContent;
-                                                 if (status == "Graduated" || status == "Expected to Graduate") {                                                     
-                                                     table.rows[i].cells[9].innerHTML = '<span class="badge badge-success">'+status+'</span>';
-                                                 }
-                                                 else {
-                                                     table.rows[i].cells[9].innerHTML = '<span class="badge badge-danger">' + status +'</span>';
-                                                 }                                                 
-                                             }
-                                         }
-                                     </script>--%>
+                                        </div>                              
                                     
                                 </div>
                             </div>
@@ -230,3 +277,4 @@
     </div>
     </div>
 </asp:Content>
+

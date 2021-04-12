@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CHEDS_New_Internship.aspx.cs" Inherits="LocalECT.CHEDS_New_Internship" MasterPageFile="~/LocalECT.Master"%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ACC_Reg_Balance.aspx.cs" Inherits="LocalECT.ACC_Reg_Balance"  MasterPageFile="~/LocalECT.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -7,7 +7,8 @@
                 <div class="title_left">
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
-                        <a href="CHEDS_New_Internship">&nbsp;CHEDS Internship</a>
+                        <a href="#">&nbsp;Accounting /</a>
+                      <a href="ACC_Reg_Balance">&nbsp;Reg Balances </a>
                     </h3>
                 </div>
                 <style>
@@ -25,6 +26,9 @@
                         float: left;
                         display: block;
                     }
+
+
+
                 </style>
             </div>
             <div class="clearfix"></div>
@@ -32,7 +36,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-calendar"></i> CHEDS Internship</h2>
+                            <h2><i class="fa fa-bar-chart"></i> Registered Balances</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -52,26 +56,53 @@
                             </div>
                             <div id="Headers">
                                 <div class="row">  
-                                     <div class="col-sm-3 col-md-3 col-xs-12">
+                                     <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>Campus</label>
                                             <div class="input-group">
-                                        <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control">
+                                                 <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control">
                                             <asp:ListItem Text="Males" Value="1" Selected="True"/>
                                             <asp:ListItem Text="Females" Value="2" />
                                         </asp:DropDownList>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-xs-12">
+                                       <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>Term</label>
                                             <div class="input-group">
                                                 <asp:DropDownList ID="ddlRegTerm" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
                                         </div>
-                                    </div>  
-                                    <div class="col-sm-3 col-md-3 col-xs-12">
+                                    </div>
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Report Type</label>
+                                            <div class="input-group">
+                                                 <asp:DropDownList ID="ddlRptType" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Semester Balance" Value="1" Selected="True"/>
+                                            <asp:ListItem Text="Over all Balance" Value="2" />
+                                        </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>SID</label>
+                                            <div class="input-group">
+                                                <asp:TextBox ID="txtSID" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>ACC</label>
+                                            <div class="input-group">
+                                                <asp:TextBox ID="txtACC" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
                                             <div class="input-group">
@@ -204,21 +235,7 @@
         }
                                         </style>
                                         
-                                        </div>
-                                   <%--  <script>
-                                         var table = document.getElementById("example");
-                                         if (table != null) {
-                                             for (var i = 1; i < table.rows.length; i++) {
-                                                 var status = table.rows[i].cells[9].textContent;
-                                                 if (status == "Graduated" || status == "Expected to Graduate") {                                                     
-                                                     table.rows[i].cells[9].innerHTML = '<span class="badge badge-success">'+status+'</span>';
-                                                 }
-                                                 else {
-                                                     table.rows[i].cells[9].innerHTML = '<span class="badge badge-danger">' + status +'</span>';
-                                                 }                                                 
-                                             }
-                                         }
-                                     </script>--%>
+                                        </div>                              
                                     
                                 </div>
                             </div>
@@ -230,3 +247,4 @@
     </div>
     </div>
 </asp:Content>
+

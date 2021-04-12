@@ -796,5 +796,10 @@ namespace LocalECT
             InitializeModule.EnumCampus Campus = (InitializeModule.EnumCampus)iCampus;
             Export(Prepare_Report(getSQL(), Campus));
         }
+
+        protected void NewCMD_Click(object sender, EventArgs e)
+        {
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
     }
 }

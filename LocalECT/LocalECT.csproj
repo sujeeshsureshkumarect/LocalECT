@@ -155,11 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ACC_Adjustments.aspx" />
+    <Content Include="ACC_Balance_Tracking.aspx" />
+    <Content Include="ACC_Daily_Receipt.aspx" />
+    <Content Include="ACC_Reg_Balance.aspx" />
+    <Content Include="ACC_Reg_Discount.aspx" />
+    <Content Include="ACC_Reg_Fees.aspx" />
     <Content Include="Acc_Search.aspx" />
     <Content Include="Acc_Search_Details.aspx" />
     <Content Include="Acc_Search_Edit.aspx" />
     <Content Include="Acc_Search_Fee_Payment.aspx" />
     <Content Include="Acc_Search_Other_Revenue_Payment.aspx" />
+    <Content Include="ACC_STD_Balance.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
@@ -8239,6 +8246,48 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACC_Adjustments.aspx.cs">
+      <DependentUpon>ACC_Adjustments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Adjustments.aspx.designer.cs">
+      <DependentUpon>ACC_Adjustments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_Balance_Tracking.aspx.cs">
+      <DependentUpon>ACC_Balance_Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Balance_Tracking.aspx.designer.cs">
+      <DependentUpon>ACC_Balance_Tracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_Daily_Receipt.aspx.cs">
+      <DependentUpon>ACC_Daily_Receipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Daily_Receipt.aspx.designer.cs">
+      <DependentUpon>ACC_Daily_Receipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_Reg_Balance.aspx.cs">
+      <DependentUpon>ACC_Reg_Balance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Reg_Balance.aspx.designer.cs">
+      <DependentUpon>ACC_Reg_Balance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_Reg_Discount.aspx.cs">
+      <DependentUpon>ACC_Reg_Discount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Reg_Discount.aspx.designer.cs">
+      <DependentUpon>ACC_Reg_Discount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_Reg_Fees.aspx.cs">
+      <DependentUpon>ACC_Reg_Fees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_Reg_Fees.aspx.designer.cs">
+      <DependentUpon>ACC_Reg_Fees.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Acc_Search.aspx.cs">
       <DependentUpon>Acc_Search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8273,6 +8322,13 @@
     </Compile>
     <Compile Include="Acc_Search_Other_Revenue_Payment.aspx.designer.cs">
       <DependentUpon>Acc_Search_Other_Revenue_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ACC_STD_Balance.aspx.cs">
+      <DependentUpon>ACC_STD_Balance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACC_STD_Balance.aspx.designer.cs">
+      <DependentUpon>ACC_STD_Balance.aspx</DependentUpon>
     </Compile>
     <Compile Include="Acc_Voucher.Designer.cs">
       <AutoGen>True</AutoGen>

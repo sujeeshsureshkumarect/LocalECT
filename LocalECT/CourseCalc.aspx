@@ -242,6 +242,11 @@
                            onclick="printCMD_Click"                           
                           ToolTip="Print" CssClass="btn btn-success btn-sm"><i class="fa fa-print"></i> Print</asp:LinkButton>
                   </td>
+                   <td>
+                      <asp:LinkButton ID="NewCMD" runat="server" 
+                           onclick="NewCMD_Click"                           
+                          ToolTip="New" CssClass="btn btn-success btn-sm"><i class="fa fa-plus"></i> New</asp:LinkButton>
+                  </td>
               </tr>
             </table>
         </div>        

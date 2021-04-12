@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class CourseCalc
+    public partial class ACC_Daily_Receipt
     {
 
         /// <summary>
@@ -42,174 +42,120 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// ValidationSummary1 control.
+        /// drp_Campus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Campus;
 
         /// <summary>
-        /// txtCourse control.
+        /// txtSID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCourse;
+        protected global::System.Web.UI.WebControls.TextBox txtSID;
 
         /// <summary>
-        /// DdlCourses control.
+        /// txtACC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlCourses;
+        protected global::System.Web.UI.WebControls.TextBox txtACC;
 
         /// <summary>
-        /// DdlCourseName control.
+        /// ddlDateType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlCourseName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDateType;
 
         /// <summary>
-        /// DdlInstitute control.
+        /// StartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlInstitute;
+        protected global::System.Web.UI.WebControls.TextBox StartDate;
 
         /// <summary>
-        /// DdlGrade control.
+        /// StartDateValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlGrade;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator StartDateValidator;
 
         /// <summary>
-        /// SaveCMD control.
+        /// EndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SaveCMD;
+        protected global::System.Web.UI.WebControls.TextBox EndDate;
 
         /// <summary>
-        /// DeleteCMD control.
+        /// EndDateValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DeleteCMD;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EndDateValidator;
 
         /// <summary>
-        /// printCMD control.
+        /// PaymentMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton printCMD;
+        protected global::System.Web.UI.WebControls.CheckBoxList PaymentMode;
 
         /// <summary>
-        /// NewCMD control.
+        /// Status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton NewCMD;
+        protected global::System.Web.UI.WebControls.CheckBoxList Status;
 
         /// <summary>
-        /// grdStudentGrades control.
+        /// lnk_FieldGenerate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdStudentGrades;
+        protected global::System.Web.UI.WebControls.LinkButton lnk_FieldGenerate;
 
         /// <summary>
-        /// btnESLExemption control.
+        /// divResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnESLExemption;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divResult;
 
         /// <summary>
-        /// SDSCourses control.
+        /// DynamicTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SDSCourses;
-
-        /// <summary>
-        /// SqlDataSourceInstitute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceInstitute;
-
-        /// <summary>
-        /// DataStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField DataStatus;
-
-        /// <summary>
-        /// isDataChanged control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField isDataChanged;
-
-        /// <summary>
-        /// sSelectedText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField sSelectedText;
-
-        /// <summary>
-        /// sSelectedValue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField sSelectedValue;
-
-        /// <summary>
-        /// SqlDataSourceStudentGrades control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceStudentGrades;
+        protected global::System.Web.UI.WebControls.Literal DynamicTable;
     }
 }
