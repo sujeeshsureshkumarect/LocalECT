@@ -103,7 +103,10 @@
                                             <asp:ListItem Text="In" Value="In"></asp:ListItem>
                                         </asp:DropDownList>
                                             <div class="input-group">
-                                                <asp:TextBox ID="txtSID" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                                                <asp:TextBox ID="txtSID" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Example:
+StudentID1
+StudentID2
+StudentID3" Height="100px"></asp:TextBox>
                                               
                                             </div>
                                         </div>
@@ -113,7 +116,7 @@
                                         <div class="form-group">
                                             <label>ACC</label>
                                             <div class="input-group">
-                                                <asp:TextBox ID="txtACC" runat="server" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtACC" runat="server" CssClass="form-control" ></asp:TextBox>
                                             </div>
                                         </div>
                                     </div> 
@@ -173,7 +176,7 @@
                           
                            <div class="loading" align="center">
     
-    <img src="C:\Users\abdul.shukkoor\Desktop\LocalECT\LocalECT\images\ajax-loader.gif/ajax-loader.gif" alt="" />
+   
 </div>
                           
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -202,6 +205,7 @@
                                     <div class="x_panel">
                                         <div class="x_title">
                                             <h2><i class="fa fa-tasks"></i> Results</h2>
+                                            <asp:LinkButton ID="lnk_ExportPDF" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_ExportPDF_Click" Style="float:right;" Visible="false"><i class="fa fa-file-pdf-o"></i> Export to PDF</asp:LinkButton>
                                             <div class="clearfix"></div>
                                         </div>
                                        <%-- <asp:GridView ID="Results" runat="server" AutoGenerateColumns="true"                                           
@@ -243,7 +247,7 @@
                                                         },
                                                         dom: 'QlBfrtip',
                                                         buttons: [
-                                                            'csv', 'excel', 'print'
+                                                           
                                                         ]
                                                     });
                                                 });

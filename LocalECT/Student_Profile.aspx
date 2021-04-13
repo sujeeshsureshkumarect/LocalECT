@@ -219,13 +219,13 @@
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-md-3 col-sm-3">Unified No.</label>
                                                     <div class="col-md-9 col-sm-9 ">
-                                                        <asp:TextBox ID="lblUnified" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        <asp:TextBox ID="lblUnified" runat="server" CssClass="form-control" ReadOnly="true" TabIndex="1"></asp:TextBox>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-md-3 col-sm-3">Student Session</label>
                                                     <div class="col-md-9 col-sm-9 ">
-                                                        <asp:DropDownList ID="ddlSession" runat="server" TabIndex="1"
+                                                        <asp:DropDownList ID="ddlSession" runat="server" TabIndex="0"
                                                             DataTextField="strShiftEn"
                                                             DataValueField="byteShift" CssClass="form-control" >
                                                         </asp:DropDownList>
@@ -302,7 +302,7 @@
                                                          <label class="col-form-label col-md-5 col-sm-5">Health Fitness Certificate ?</label>
                                                          <div class="col-md-7 col-sm-7 ">
                                                              <asp:RadioButtonList ID="rbnFitnessStatus" runat="server"
-                                                                 RepeatDirection="Horizontal" TabIndex="20" CssClass="form-control">
+                                                                 RepeatDirection="Horizontal" TabIndex="9" CssClass="form-control">
                                                                  <asp:ListItem Value="0">Yes</asp:ListItem>
                                                                  <asp:ListItem Selected="True" Value="1">No</asp:ListItem>
                                                              </asp:RadioButtonList>
@@ -311,7 +311,7 @@
                                                     <div class="form-group row">
                                                     <label class="col-form-label col-md-5 col-sm-5">People of Determination ?</label>
                                                     <div class="col-md-7 col-sm-7 ">
-                                                        <asp:DropDownList ID="drp_determination" runat="server" TabIndex="21"
+                                                        <asp:DropDownList ID="drp_determination" runat="server" TabIndex="10"
                                                             DataTextField="DeterminationType"
                                                             DataValueField="iSerial" CssClass="form-control">
                                                         </asp:DropDownList>
@@ -321,7 +321,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Phone 1<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtPhone1" runat="server" CssClass="form-control" TabIndex="22" ValidationGroup="SD">9999999999</asp:TextBox>
+                                                            <asp:TextBox ID="txtPhone1" runat="server" CssClass="form-control" TabIndex="11" ValidationGroup="SD">9999999999</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
                                                                 ControlToValidate="txtPhone1" ErrorMessage="Phone 1  is requied."
                                                                 SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Phone 1  is requied.</asp:RequiredFieldValidator>
@@ -330,13 +330,13 @@
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Phone 2</label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtPhone2" runat="server" CssClass="form-control" TabIndex="23">NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtPhone2" runat="server" CssClass="form-control" TabIndex="12">NA</asp:TextBox>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">E-Mail<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TabIndex="24" ValidationGroup="SD">xyz@xyz.com</asp:TextBox>
+                                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TabIndex="13" ValidationGroup="SD">xyz@xyz.com</asp:TextBox>
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server"
                                                                 ControlToValidate="txtEmail" ErrorMessage="*Email is requied."
                                                                 SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Email is requied.</asp:RequiredFieldValidator>
@@ -350,7 +350,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">ECT E-Mail</label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtECTEmail" runat="server" CssClass="form-control" TabIndex="25"
+                                                            <asp:TextBox ID="txtECTEmail" runat="server" CssClass="form-control" TabIndex="14"
                                                                 Enabled="False" ReadOnly="True"></asp:TextBox>
                                                             <asp:LinkButton ID="btnCreateEmail" runat="server" ForeColor="blue"
                                                                 Text="Create Email" Visible="true" onclick="btnCreateEmail_Click" Enabled="false"/>
@@ -359,7 +359,7 @@
                                                        <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Address</label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="26">NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="15">NA</asp:TextBox>
                                                         </div>
                                                     </div>   
                                                     <hr />
@@ -367,7 +367,7 @@
                                                       <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Emirates ID<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtIDNo" runat="server" CssClass="form-control" TabIndex="27" ValidationGroup="SD">999999999999999</asp:TextBox>
+                                                            <asp:TextBox ID="txtIDNo" runat="server" CssClass="form-control" TabIndex="16" ValidationGroup="SD">999999999999999</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server"
                                                                 ControlToValidate="txtIDNo" ErrorMessage="EID is required."
                                                                 SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*EID is required.</asp:RequiredFieldValidator>
@@ -376,7 +376,7 @@
                                                      <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Passport No<span style="color: red">*</span></label>
                                                         <div class="col-md-9 col-sm-9 ">
-                                                            <asp:TextBox ID="txtIdentityNo" runat="server" CssClass="form-control" TabIndex="28" ValidationGroup="SD">NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtIdentityNo" runat="server" CssClass="form-control" TabIndex="17" ValidationGroup="SD">NA</asp:TextBox>
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
                                                                 ControlToValidate="txtIdentityNo" ErrorMessage="Passport no is required."
                                                                 SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Passport no is required.</asp:RequiredFieldValidator>
@@ -385,7 +385,7 @@
                                                      <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3"  >Unified No</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtUnifiedNo" runat="server" CssClass="form-control" TabIndex="29" ToolTip="Passport Unified No or Visa Unified No">NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtUnifiedNo" runat="server" CssClass="form-control" TabIndex="18" ToolTip="Passport Unified No or Visa Unified No">NA</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">locals passport or expats visa</label>
                                                     </div> 
@@ -393,7 +393,7 @@
                                                      <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3">Al Ethbara#</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtEthbara" runat="server" CssClass="form-control" TabIndex="30" ValidationGroup="SD">NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtEthbara" runat="server" CssClass="form-control" TabIndex="19" ValidationGroup="SD">NA</asp:TextBox>
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator29" ErrorMessage="*Al Ethbara# is required" ControlToValidate="txtEthbara" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="SD" InitialValue="NA"/>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from locals only</label>
@@ -402,7 +402,7 @@
                                                       <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3"  >City No</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtCityNo" runat="server" CssClass="form-control" TabIndex="31" >999</asp:TextBox>
+                                                            <asp:TextBox ID="txtCityNo" runat="server" CssClass="form-control" TabIndex="20" >999</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from Family Book</label>
                                                     </div> 
@@ -410,14 +410,14 @@
                                                        <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3"  >Family No</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtFamilyNo" runat="server" CssClass="form-control" TabIndex="32" >999</asp:TextBox>
+                                                            <asp:TextBox ID="txtFamilyNo" runat="server" CssClass="form-control" TabIndex="21" >999</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from Family Book</label>
                                                     </div>
                                                        <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3"  >Family Book No</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtFamilyBookNo" runat="server" CssClass="form-control" TabIndex="33" >999999</asp:TextBox>
+                                                            <asp:TextBox ID="txtFamilyBookNo" runat="server" CssClass="form-control" TabIndex="22" >999999</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from locals only</label>
                                                     </div>
@@ -425,7 +425,7 @@
                                                       <div class="form-group row">
                                                         <label class="col-form-label col-md-3 col-sm-3"  >National No</label>
                                                         <div class="col-md-4 col-sm-4 ">
-                                                            <asp:TextBox ID="txtNationalNo" runat="server" CssClass="form-control" TabIndex="34" >NA</asp:TextBox>
+                                                            <asp:TextBox ID="txtNationalNo" runat="server" CssClass="form-control" TabIndex="23" >NA</asp:TextBox>
                                                         </div>
                                                           <label class="col-form-label col-md-5 col-sm-5" style="color:#993300;">from expat passport if founded</label>
                                                     </div>
@@ -442,7 +442,7 @@
                                                          <label class="col-form-label col-md-3 col-sm-3">Gender<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
                                                              <asp:RadioButtonList ID="rbnGender" runat="server"
-                                                                 RepeatDirection="Horizontal" TabIndex="9" CssClass="form-control">
+                                                                 RepeatDirection="Horizontal" TabIndex="24" CssClass="form-control">
                                                                  <asp:ListItem Value="0">Female</asp:ListItem>
                                                                  <asp:ListItem Selected="True" Value="1">Male</asp:ListItem>
                                                              </asp:RadioButtonList>
@@ -451,7 +451,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Marital Status</label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlMaritalStatus" runat="server" TabIndex="10"
+                                                             <asp:DropDownList ID="ddlMaritalStatus" runat="server" TabIndex="25"
                                                                  CssClass="form-control">
                                                                  <asp:ListItem Value="1">Married</asp:ListItem>
                                                                  <asp:ListItem Selected="True" Value="0">Not Married</asp:ListItem>                                                                 
@@ -461,7 +461,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Birth Date<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control" TabIndex="11" ValidationGroup="SD" ToolTip="mm/dd/yyyy" TextMode="Date"></asp:TextBox>
+                                                             <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control" TabIndex="26" ValidationGroup="SD" ToolTip="mm/dd/yyyy" TextMode="Date"></asp:TextBox>
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
                                                                  ControlToValidate="txtBirthDate" ErrorMessage="Birth Date is requied."
                                                                  SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Birth Date is requied.</asp:RequiredFieldValidator>
@@ -470,7 +470,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Birth Country<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlBirthCountry" runat="server" TabIndex="12"
+                                                             <asp:DropDownList ID="ddlBirthCountry" runat="server" TabIndex="27"
                                                                  CssClass="form-control" AutoPostBack="True"
                                                                  DataTextField="strCountryDescEn" DataValueField="byteCountry" ValidationGroup="SD">
                                                              </asp:DropDownList>
@@ -480,7 +480,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Birth City<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlBirthCity" runat="server" TabIndex="13" CssClass="form-control" ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlBirthCity" runat="server" TabIndex="28" CssClass="form-control" ValidationGroup="SD"
                                                                  DataSourceID="BirthCityDS" DataTextField="strCityDescEn"
                                                                  DataValueField="byteCity">
                                                              </asp:DropDownList>
@@ -490,7 +490,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Resident Country<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlResidentCountry" runat="server" TabIndex="14" ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlResidentCountry" runat="server" TabIndex="29" ValidationGroup="SD"
                                                                  AutoPostBack="True"
                                                                  DataTextField="strCountryDescEn" DataValueField="byteCountry" CssClass="form-control">
                                                              </asp:DropDownList>
@@ -500,7 +500,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Resident City<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlResidentCity" runat="server" TabIndex="15" ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlResidentCity" runat="server" TabIndex="30" ValidationGroup="SD"
                                                                  CssClass="form-control" DataSourceID="ResidentCityDS" DataTextField="strCityDescEn"
                                                                  DataValueField="byteCity">
                                                              </asp:DropDownList>
@@ -510,7 +510,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Home Country<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlHomeCountry" runat="server" TabIndex="16" ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlHomeCountry" runat="server" TabIndex="31" ValidationGroup="SD"
                                                                  CssClass="form-control" AutoPostBack="True"
                                                                  DataTextField="strCountryDescEn" DataValueField="byteCountry">
                                                              </asp:DropDownList>
@@ -520,7 +520,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Home City<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlHomeCity" runat="server" TabIndex="17" CssClass="form-control"  ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlHomeCity" runat="server" TabIndex="32" CssClass="form-control"  ValidationGroup="SD"
                                                                  DataSourceID="HomeCityDS" DataTextField="strCityDescEn"
                                                                  DataValueField="byteCity">
                                                              </asp:DropDownList>
@@ -530,7 +530,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Nationality<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlNationality" runat="server" TabIndex="18" ValidationGroup="SD"
+                                                             <asp:DropDownList ID="ddlNationality" runat="server" TabIndex="33" ValidationGroup="SD"
                                                                  CssClass="form-control"
                                                                  DataTextField="strNationalityDescEn" DataValueField="byteNationality" OnSelectedIndexChanged="ddlNationality_SelectedIndexChanged" AutoPostBack="true">
                                                              </asp:DropDownList>
@@ -540,7 +540,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Nationality of Mother<span style="color: red">*</span></label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlNationalityofMother" runat="server" TabIndex="19"
+                                                             <asp:DropDownList ID="ddlNationalityofMother" runat="server" TabIndex="34"
                                                                  CssClass="form-control"
                                                                  DataTextField="strNationalityDescEn" DataValueField="byteNationality" ValidationGroup="SD">
                                                              </asp:DropDownList>
@@ -550,7 +550,7 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-3 col-sm-3">Language</label>
                                                          <div class="col-md-9 col-sm-9 ">
-                                                             <asp:DropDownList ID="ddlLanguage" runat="server" TabIndex="21" CssClass="form-control" DataTextField="strLanguageDescEn"
+                                                             <asp:DropDownList ID="ddlLanguage" runat="server" TabIndex="35" CssClass="form-control" DataTextField="strLanguageDescEn"
                                                                  DataValueField="byteLanguage">
                                                              </asp:DropDownList>
                                                          </div>
@@ -560,7 +560,7 @@
                                                          <label class="col-form-label col-md-4 col-sm-4">Employment Status<span style="color: red">*</span></label>
                                                          <div class="col-md-8 col-sm-8 ">
                                                              <asp:RadioButtonList ID="rbnEmploymentStatus" runat="server" ValidationGroup="SD"
-                                                                 RepeatDirection="Horizontal" TabIndex="35" CssClass="form-control" OnSelectedIndexChanged="rbnEmploymentStatus_SelectedIndexChanged" AutoPostBack="true">
+                                                                 RepeatDirection="Horizontal" TabIndex="36" CssClass="form-control" OnSelectedIndexChanged="rbnEmploymentStatus_SelectedIndexChanged" AutoPostBack="true">
                                                                  <asp:ListItem Value="0">Not Employed</asp:ListItem>
                                                                  <asp:ListItem Value="1">Employed</asp:ListItem>
                                                              </asp:RadioButtonList>
@@ -674,14 +674,14 @@
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-5 col-sm-5"  >Employer Phone</label>
                                                          <div class="col-md-7 col-sm-7 ">
-                                                            <asp:TextBox ID="txtEmployerPhone" runat="server"  TabIndex="48" CssClass="form-control" ValidationGroup="SD">999999999</asp:TextBox>
+                                                            <asp:TextBox ID="txtEmployerPhone" runat="server"  TabIndex="49" CssClass="form-control" ValidationGroup="SD">999999999</asp:TextBox>
                                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator27" ErrorMessage="*Employer Phone is required" ControlToValidate="txtEmployerPhone" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="SD" InitialValue="NA"/>
                                                          </div>
                                                      </div>
                                                      <div class="form-group row">
                                                          <label class="col-form-label col-md-5 col-sm-5" >Employer E-Mail</label>
                                                          <div class="col-md-7 col-sm-7 ">
-                                                             <asp:TextBox ID="txtEmployeremail" runat="server" TabIndex="48" CssClass="form-control" ValidationGroup="SD">xyz@xyz.com</asp:TextBox>
+                                                             <asp:TextBox ID="txtEmployeremail" runat="server" TabIndex="50" CssClass="form-control" ValidationGroup="SD">xyz@xyz.com</asp:TextBox>
                                                              <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
                                                                  ControlToValidate="txtEmployeremail" ErrorMessage="Valid email only."
                                                                  SetFocusOnError="True"
@@ -1071,7 +1071,7 @@
                                                                             <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Year<span style="color: red">*</span></label>
                                                                                 <div class="col-md-9 col-sm-9 ">
-                                                                                      <asp:TextBox ID="txtQYear" runat="server" TabIndex="53" ValidationGroup="Q" 
+                                                                                      <asp:TextBox ID="txtQYear" runat="server" TabIndex="52" ValidationGroup="Q" 
                                                                                     CssClass="form-control">9999</asp:TextBox>
                                                                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
                                                                                     ControlToValidate="txtQYear" ErrorMessage="Qualification Year is required." 
@@ -1081,7 +1081,7 @@
                                                                             <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Source<span style="color: red">*</span></label>
                                                                                 <div class="col-md-9 col-sm-9 ">
-                                                                                     <asp:TextBox ID="txtSource" runat="server" TabIndex="55" ValidationGroup="Q" 
+                                                                                     <asp:TextBox ID="txtSource" runat="server" TabIndex="53" ValidationGroup="Q" 
                                                                                     CssClass="form-control">NA</asp:TextBox>
                                                                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
                                                                                     ControlToValidate="txtSource" ErrorMessage="Qualification Source is required." 
@@ -1093,7 +1093,7 @@
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                      <asp:DropDownList ID="ddlQInstitutionType" runat="server" 
                                                                                     DataTextField="InstitutionTypeDesc" DataValueField="InstitutionTypeID" 
-                                                                                    TabIndex="57" CssClass="form-control">
+                                                                                    TabIndex="54" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                                 </div>
                                                                             </div>
@@ -1101,7 +1101,7 @@
                                                                                 <label class="col-form-label col-md-3 col-sm-3"  >HS System<br />&nbsp;</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
                                                                                      <asp:DropDownList ID="ddlHSSystem" runat="server" 
-                                                                                    DataTextField="sSystem" DataValueField="iSerial" TabIndex="59" 
+                                                                                    DataTextField="sSystem" DataValueField="iSerial" TabIndex="55" 
                                                                                     CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                                 </div>
@@ -1113,7 +1113,7 @@
                                                                                 <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3"  >Equivalency App No.</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
-                                                                                      <asp:TextBox ID="txtEquivalencyAppNo" runat="server" TabIndex="61" 
+                                                                                      <asp:TextBox ID="txtEquivalencyAppNo" runat="server" TabIndex="56" 
                                                                                     ValidationGroup="Q" CssClass="form-control">NA</asp:TextBox>                                                                              
                                                                                 </div>
                                                                                  <div class="col-md-4 col-sm-4 ">
@@ -1125,7 +1125,7 @@
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Country</label>
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                    <asp:DropDownList ID="ddlQCountry" runat="server" 
-                                                                                    DataTextField="strCountryDescEn" DataValueField="byteCountry" TabIndex="62" 
+                                                                                    DataTextField="strCountryDescEn" DataValueField="byteCountry" TabIndex="57" 
                                                                                    CssClass="form-control" AutoPostBack="True" 
                                                                                     onselectedindexchanged="ddlQCountry_SelectedIndexChanged">
                                                                                 </asp:DropDownList>                                                                                
@@ -1134,7 +1134,7 @@
                                                                             <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Score<span style="color: red">*</span></label>
                                                                                 <div class="col-md-4 col-sm-4 ">
-                                                                                    <asp:TextBox ID="txtQScore" runat="server" TabIndex="65" CssClass="form-control"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtQScore" runat="server" TabIndex="58" CssClass="form-control"></asp:TextBox>
 
                                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server"
                                                                                         ControlToValidate="txtQScore" ErrorMessage="Qualification Score is required."
@@ -1144,7 +1144,7 @@
                                                                               <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Score of Chemistry</label>
                                                                                 <div class="col-md-4 col-sm-4 ">
-                                                                                    <asp:TextBox ID="txtQScoreofChemistry" runat="server" TabIndex="66" 
+                                                                                    <asp:TextBox ID="txtQScoreofChemistry" runat="server" TabIndex="59" 
                                                                                     CssClass="form-control">0</asp:TextBox>
                                                                            
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
@@ -1161,7 +1161,7 @@
                                                                               <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Score of Physics</label>
                                                                                 <div class="col-md-4 col-sm-4 ">
-                                                                                    <asp:TextBox ID="txtQScoreofPhysics" runat="server" TabIndex="66" CssClass="form-control">0</asp:TextBox>
+                                                                                    <asp:TextBox ID="txtQScoreofPhysics" runat="server" TabIndex="60" CssClass="form-control">0</asp:TextBox>
                                                                            
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" 
                                                                                     ControlToValidate="txtQScoreofPhysics" ErrorMessage="Enter numbers only" 
@@ -1183,14 +1183,14 @@
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                     <asp:DropDownList ID="ddlQMajor" runat="server" 
                                                                                     DataTextField="strSpecializationDescEn" DataValueField="intSpecialization" 
-                                                                                    TabIndex="52" CssClass="form-control">
+                                                                                    TabIndex="61" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Date</label>
                                                                                 <div class="col-md-9 col-sm-9 ">
-                                                                                     <asp:TextBox ID="txtQDate" runat="server" TabIndex="54" 
+                                                                                     <asp:TextBox ID="txtQDate" runat="server" TabIndex="62" 
                                                                                     CssClass="form-control" ToolTip="mm/dd/yyyy" TextMode="Date"></asp:TextBox>
                                                                                
                                                                                 <asp:RangeValidator ID="RangeValidator3" runat="server" 
@@ -1205,7 +1205,7 @@
                                                                              <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Exam Center</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
-                                                                                     <asp:DropDownList ID="ddlQEngExamCenter" runat="server" TabIndex="56" 
+                                                                                     <asp:DropDownList ID="ddlQEngExamCenter" runat="server" TabIndex="63" 
                                                                                     CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                                 </div>
@@ -1218,7 +1218,7 @@
                                                                                 <label class="col-form-label col-md-3 col-sm-3">12th Grade Stream</label>
                                                                                 <div class="col-md-3 col-sm-3 ">
                                                                                      <asp:DropDownList ID="ddlQG12_Stream" runat="server" 
-                                                                                    DataTextField="G12_StreamDesc" DataValueField="G12_StreamID" TabIndex="58" 
+                                                                                    DataTextField="G12_StreamDesc" DataValueField="G12_StreamID" TabIndex="64" 
                                                                                    CssClass="form-control">
                                                                                 </asp:DropDownList>                                                                               
                                                                                 </div>
@@ -1230,7 +1230,7 @@
                                                                               <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3"  >Equivalency Indicator</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
-                                                                                      <asp:DropDownList ID="ddlEquivalencyIndicator" runat="server" TabIndex="60" 
+                                                                                      <asp:DropDownList ID="ddlEquivalencyIndicator" runat="server" TabIndex="65" 
                                                                                    CssClass="form-control">
                                                                                     <asp:ListItem Selected="True" Value="M">UAE-MOE national curriculum</asp:ListItem>
                                                                                     <asp:ListItem Value="Y">Equivalency has been received</asp:ListItem>
@@ -1249,7 +1249,7 @@
                                                                                 <label class="col-form-label col-md-3 col-sm-3">City<br />&nbsp;</label>
                                                                                 <div class="col-md-9 col-sm-9 ">
                                                                                     <asp:DropDownList ID="ddlQCity" runat="server" DataTextField="strCityDescEn" 
-                                                                                    DataValueField="byteCity" TabIndex="63" CssClass="form-control"
+                                                                                    DataValueField="byteCity" TabIndex="66" CssClass="form-control"
                                                                                     DataSourceID="QCityDS">
                                                                                 </asp:DropDownList>                                                                             
                                                                                 </div>
@@ -1257,7 +1257,7 @@
                                                                             <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Grade</label>
                                                                                 <div class="col-md-5 col-sm-5 ">
-                                                                                    <asp:DropDownList ID="ddlQEngGrade" runat="server" TabIndex="64"
+                                                                                    <asp:DropDownList ID="ddlQEngGrade" runat="server" TabIndex="67"
                                                                                         CssClass="form-control" OnSelectedIndexChanged="ddlQEngGrade_SelectedIndexChanged"
                                                                                         AutoPostBack="True">
                                                                                     </asp:DropDownList>
@@ -1270,7 +1270,7 @@
                                                                               <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Score of Math</label>
                                                                                 <div class="col-md-4 col-sm-4 ">
-                                                                                    <asp:TextBox ID="txtQScoreofMath" runat="server" TabIndex="66" CssClass="form-control">0</asp:TextBox>
+                                                                                    <asp:TextBox ID="txtQScoreofMath" runat="server" TabIndex="68" CssClass="form-control">0</asp:TextBox>
                                                                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
                                                                                     ControlToValidate="txtQScoreofMath" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
@@ -1287,7 +1287,7 @@
                                                                              <div class="form-group row">
                                                                                 <label class="col-form-label col-md-3 col-sm-3">Score of Biology</label>
                                                                                 <div class="col-md-4 col-sm-4 ">
-                                                                                     <asp:TextBox ID="txtQScoreofBiology" runat="server" TabIndex="66" CssClass="form-control">0</asp:TextBox>                                                                           
+                                                                                     <asp:TextBox ID="txtQScoreofBiology" runat="server" TabIndex="69" CssClass="form-control">0</asp:TextBox>                                                                           
                                                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" 
                                                                                     ControlToValidate="txtQScoreofBiology" ErrorMessage="Enter numbers only" 
                                                                                     ValidationExpression="\d+" ValidationGroup="Q" Display="Dynamic">#</asp:RegularExpressionValidator>
@@ -1312,7 +1312,7 @@
                                                                                       </div>
                                                                                       <div class="col-md-8 col-sm-8 ">
                                                                                           <asp:CheckBox ID="chkRegistrarVerfication" runat="server"
-                                                                                              TabIndex="67" Text="Verified By Registrar" Visible="false" />
+                                                                                              TabIndex="70" Text="Verified By Registrar" Visible="false" />
                                                                                       </div>
                                                                                   </div>
                                                                                   <div class="form-group row">
@@ -1321,7 +1321,7 @@
                                                                                               Text="Registrar Comments" Visible="false"></asp:Label>
                                                                                       </div>
                                                                                       <div class="col-md-8 col-sm-8 ">
-                                                                                          <asp:TextBox ID="txtRegistrarComments" runat="server" TabIndex="68"
+                                                                                          <asp:TextBox ID="txtRegistrarComments" runat="server" TabIndex="71"
                                                                                               CssClass="form-control" Visible="false"></asp:TextBox>
                                                                                       </div>
                                                                                   </div>
@@ -1343,7 +1343,7 @@
                                                                                               Text="Auditor Comments" Visible="false"></asp:Label>
                                                                                       </div>
                                                                                       <div class="col-md-8 col-sm-8 ">
-                                                                                          <asp:TextBox ID="txtAdmissionComments" runat="server" TabIndex="70"
+                                                                                          <asp:TextBox ID="txtAdmissionComments" runat="server" TabIndex="72"
                                                                                               CssClass="form-control" Visible="false"></asp:TextBox><br />
                                                                                           <asp:HiddenField ID="HiddenFieldQMode" runat="server" />
                                                                                       </div>
@@ -1379,22 +1379,22 @@
                                                                         <label class="col-form-label col-md-4 col-sm-4">Term</label>
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:DropDownList ID="ddlEnrollmentTerm" runat="server"
-                                                                                DataTextField="LongDesc" DataValueField="Term" TabIndex="71" CssClass="form-control">
+                                                                                DataTextField="LongDesc" DataValueField="Term" TabIndex="73" CssClass="form-control">
                                                                             </asp:DropDownList>
                                                                         </div>
                                                                     </div>
                                                                            <div class="form-group row">
                                                                                &nbsp;&nbsp; &nbsp;
                                                                     <asp:CheckBox ID="chkActive" runat="server" Checked="True" Text="&nbsp;&nbsp;Active"
-                                                                        TabIndex="72"  ForeColor="Blue"
+                                                                        TabIndex="74"  ForeColor="Blue"
                                                                         AutoPostBack="True" OnCheckedChanged="chkActive_CheckedChanged" />&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <asp:CheckBox ID="chkMissing" runat="server" Text="&nbsp;&nbsp;Is File Not Complete"
-                                                                        TabIndex="73"  ForeColor="Black" OnCheckedChanged="chkMissing_CheckedChanged" />
+                                                                        TabIndex="75"  ForeColor="Black" OnCheckedChanged="chkMissing_CheckedChanged" />
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-4 col-sm-4">Opportunity ID<span style="color: red">*</span></label>
                                                                         <div class="col-md-8 col-sm-8 ">
-                                                                            <asp:TextBox ID="txtOpportunityID" runat="server" TabIndex="75"
+                                                                            <asp:TextBox ID="txtOpportunityID" runat="server" TabIndex="76"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
                                                                             <asp:LinkButton ID="lnkOpportunity" runat="server" 
                                                                             Font-Underline="True" OnCommand="lnkOpportunity_Command"
@@ -1413,7 +1413,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-4 col-sm-4">Contact ID<span style="color: red">*</span></label>
                                                                         <div class="col-md-8 col-sm-8 ">
-                                                                            <asp:TextBox ID="txtContactID" runat="server" TabIndex="75"
+                                                                            <asp:TextBox ID="txtContactID" runat="server" TabIndex="77"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control"></asp:TextBox>
                                                                             <asp:LinkButton ID="lnkGet" runat="server" OnCommand="lnkGet_Command"
                                                                              Font-Strikeout="False" Font-Underline="True"
@@ -1438,7 +1438,7 @@
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:DropDownList ID="ddlAcceptance" runat="server" DataSourceID="AcceptanceDs"
                                                                                 DataTextField="sAcceptanceTypeEn" DataValueField="iAcceptanceType"
-                                                                                TabIndex="71" ToolTip="Can be changed by Admission and Head of Registration"
+                                                                                TabIndex="78" ToolTip="Can be changed by Admission and Head of Registration"
                                                                                 CssClass="form-control">
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AcceptanceDs" runat="server"
@@ -1451,7 +1451,7 @@
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:DropDownList ID="ddlAcceptanceCondition" runat="server"
                                                                                 DataSourceID="AcceptanceConditionDs" DataTextField="sAcceptanceConditionEn"
-                                                                                DataValueField="iAcceptanceCondition" TabIndex="71"
+                                                                                DataValueField="iAcceptanceCondition" TabIndex="79"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control">
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AcceptanceConditionDs" runat="server"
@@ -1464,7 +1464,7 @@
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:DropDownList ID="ddlAdmissionStatus" runat="server"
                                                                                 DataSourceID="AdmissionStatusDs" DataTextField="sAdmissionStatusEn"
-                                                                                DataValueField="iAdmissionStatus" TabIndex="71"
+                                                                                DataValueField="iAdmissionStatus" TabIndex="80"
                                                                                 ToolTip="Can be changed by Admission and Head of Registration" CssClass="form-control">
                                                                             </asp:DropDownList>
                                                                             <asp:SqlDataSource ID="AdmissionStatusDs" runat="server"
@@ -1476,35 +1476,35 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Application No</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="lblECTId" runat="server" ReadOnly="true"
-                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                                    CssClass="form-control" TabIndex="81"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-4 col-sm-4" style="color:red"><b>Student ID</b></label>
                                                                         <div class="col-md-8 col-sm-8 ">
                                                                             <asp:TextBox ID="lblStudentId" runat="server" ReadOnly="true"
-                                                                                CssClass="form-control" Font-Bold="true" ForeColor="Red"></asp:TextBox>
+                                                                                CssClass="form-control" Font-Bold="true" ForeColor="Red" TabIndex="82"></asp:TextBox>
                                                                         </div>
                                                                     </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Date</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="lblDateEnrolled" runat="server" ReadOnly="true"
-                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                                    CssClass="form-control" TabIndex="83"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Reference ID</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="lblReference" runat="server" 
-                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                                    CssClass="form-control" TabIndex="84"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                        
                                                                          <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4" >ORCID</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="txtORCID" runat="server"  TabIndex="75"
+                                                                                <asp:TextBox ID="txtORCID" runat="server"  TabIndex="85"
                                                                                     CssClass="form-control">NA</asp:TextBox>
                                                                             </div>
                                                                         </div>
@@ -1513,13 +1513,13 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Is Military Service</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:CheckBox ID="ChkIsMilitaryService" runat="server" AutoPostBack="True"
-                                                                                    OnCheckedChanged="ChkIsMilitaryService_CheckedChanged" />
+                                                                                    OnCheckedChanged="ChkIsMilitaryService_CheckedChanged" TabIndex="86"/>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Date of Military Service</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="txtMilitaryServiceDate" runat="server" TabIndex="45"
+                                                                                <asp:TextBox ID="txtMilitaryServiceDate" runat="server" TabIndex="87"
                                                                                     ToolTip="mm/dd/yyyy" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                                                                 <asp:RangeValidator ID="RangeValidator8" runat="server"
                                                                                     ControlToValidate="txtMilitaryServiceDate" Display="Dynamic"
@@ -1535,7 +1535,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Status</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlStatus" runat="server" DataTextField="strReasonDesc"
-                                                                                    DataValueField="byteReason" Enabled="False" TabIndex="87" CssClass="form-control">
+                                                                                    DataValueField="byteReason" Enabled="False" TabIndex="88" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1543,7 +1543,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Term</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlStatusTerm" runat="server" DataTextField="LongDesc"
-                                                                                    DataValueField="Term" Enabled="False" TabIndex="88" CssClass="form-control">
+                                                                                    DataValueField="Term" Enabled="False" TabIndex="89" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1552,7 +1552,7 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlReason" runat="server" AutoPostBack="True"
                                                                                     DataTextField="strMainReasonEn" DataValueField="byteMainReason" Enabled="False"
-                                                                                    TabIndex="89" CssClass="form-control">
+                                                                                    TabIndex="90" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1561,7 +1561,7 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlSubReason" runat="server" DataSourceID="SubReasonDS"
                                                                                     DataTextField="strSubReasonEn" DataValueField="byteSubReson" Enabled="False"
-                                                                                    TabIndex="90" CssClass="form-control">
+                                                                                    TabIndex="91" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1569,14 +1569,14 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Date</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="lblDateStatus" runat="server" ReadOnly="true"
-                                                                                    CssClass="form-control"></asp:TextBox>
+                                                                                    CssClass="form-control" TabIndex="92"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4"></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:CheckBox ID="chkCompleteBAFromOtherInstitution" runat="server"
-                                                                                    Enabled="False" Style="font-weight: bold" TabIndex="91"
+                                                                                    Enabled="False" Style="font-weight: bold" TabIndex="93"
                                                                                     Text="&nbsp;&nbsp;Is complete BA from other  institution" />
                                                                             </div>
                                                                         </div>
@@ -1584,7 +1584,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4"></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:CheckBox ID="chkCompleteMasterFromOtherInstitution" runat="server" 
-                                                        Enabled="False" style="font-weight: bold" TabIndex="92" 
+                                                        Enabled="False" style="font-weight: bold" TabIndex="94" 
                                                         Text="&nbsp;&nbsp;Is complete Master from other  institution" />
                                                                             </div>
                                                                         </div>
@@ -1614,7 +1614,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Type<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True"
-                                                                                    TabIndex="74" CssClass="form-control">
+                                                                                    TabIndex="95" CssClass="form-control">
                                                                                      <asp:ListItem Value="3">Bachelor</asp:ListItem>
                                                                                      <asp:ListItem Selected="True" Value="0">Diploma</asp:ListItem>
                                                                                      <asp:ListItem Value="5">ESL (Re-medial)</asp:ListItem>
@@ -1628,7 +1628,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Current Major<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlMajor" runat="server" DataSourceID="MajorDS"
-                                                                                    DataTextField="strMajor" DataValueField="strKey" TabIndex="76"
+                                                                                    DataTextField="strMajor" DataValueField="strKey" TabIndex="96"
                                                                                     CssClass="form-control" OnSelectedIndexChanged="ddlMajor_SelectedIndexChanged">
                                                                                 </asp:DropDownList>
                                                                             </div>
@@ -1637,7 +1637,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Preferred Major 1<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlWMajor1" runat="server" DataSourceID="WMajorDS"
-                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="77"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="97"
                                                                                     CssClass="form-control" AutoPostBack="True"
                                                                                     OnSelectedIndexChanged="ddlWMajor1_SelectedIndexChanged">
                                                                                 </asp:DropDownList>
@@ -1647,7 +1647,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Preferred Major 2<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlWMajor2" runat="server" DataSourceID="WMajorDS"
-                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="78"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="98"
                                                                                     CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
@@ -1656,7 +1656,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Preferred Major 3<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlWMajor3" runat="server" DataSourceID="WMajorDS"
-                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="79"
+                                                                                    DataTextField="MajorDescEn" DataValueField="MajorID" TabIndex="99"
                                                                                     CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
@@ -1665,7 +1665,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Advisor<span style="color: red">*</span></label>
                                                                             <div class="col-md-6 col-sm-6 ">
                                                                                 <asp:DropDownList ID="ddlAdvisor" runat="server"
-                                                                                    DataTextField="strLecturerDescEn" DataValueField="intLecturer" TabIndex="80"
+                                                                                    DataTextField="strLecturerDescEn" DataValueField="intLecturer" TabIndex="100"
                                                                                     CssClass="form-control" Enabled="False">
                                                                                 </asp:DropDownList>
                                                                             </div>
@@ -1677,7 +1677,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Note</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="txtNote" runat="server" Height="90px" TabIndex="81"
+                                                                                <asp:TextBox ID="txtNote" runat="server" Height="90px" TabIndex="101"
                                                                                     TextMode="MultiLine" CssClass="form-control">-</asp:TextBox>
                                                                             </div>
                                                                         </div>
@@ -1686,7 +1686,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Referred By</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="txtReferredBy" runat="server" TabIndex="82"
+                                                                                <asp:TextBox ID="txtReferredBy" runat="server" TabIndex="102"
                                                                                     ToolTip="The ID of the studet that referred the current" CssClass="form-control">NA</asp:TextBox>
                                                                             </div>
                                                                         </div>
@@ -1696,7 +1696,7 @@
                                                                                 <asp:DropDownList ID="ddlEnrollmentSource" runat="server" CssClass="form-control"
                                                                                     OnSelectedIndexChanged="ddlEnrollmentSource_SelectedIndexChanged"
                                                                                     DataSourceID="SourcesDS"
-                                                                                    DataTextField="DescEn" DataValueField="MinorID" TabIndex="83">
+                                                                                    DataTextField="DescEn" DataValueField="MinorID" TabIndex="103">
                                                                                 </asp:DropDownList>
                                                                                 <asp:SqlDataSource ID="SourcesDS" runat="server"
                                                                                     ConnectionString="<%$ ConnectionStrings:ECTDataNew %>"
@@ -1711,7 +1711,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Other Source<span style="color: red">*</span></label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:TextBox ID="txtEnrollmentSource" runat="server" OnTextChanged="txtEnrollmentSource_TextChanged"
-                                                                                    CssClass="form-control" TabIndex="84">-</asp:TextBox>
+                                                                                    CssClass="form-control" TabIndex="104">-</asp:TextBox>
                                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server"
                                                                                     ControlToValidate="txtEnrollmentSource"
                                                                                     ErrorMessage="Please enter the other source" ValidationGroup="E">*</asp:RequiredFieldValidator>
@@ -1723,7 +1723,7 @@
                                                                                 <asp:DropDownList ID="ddlEnrollmentSource2" runat="server"
                                                                                     DataSourceID="SourcesDS" DataTextField="DescEn" DataValueField="MinorID"
                                                                                     OnSelectedIndexChanged="ddlEnrollmentSource_SelectedIndexChanged"
-                                                                                    CssClass="form-control" TabIndex="85">
+                                                                                    CssClass="form-control" TabIndex="105">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1731,7 +1731,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Registered through</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlRegisteredThrough" runat="server"
-                                                                                    CssClass="form-control" TabIndex="86">
+                                                                                    CssClass="form-control" TabIndex="106">
                                                                                     <asp:ListItem Value="4">Ana Wasadeeqi</asp:ListItem>
                                                                                     <asp:ListItem Value="2">Corporate agreements</asp:ListItem>
                                                                                     <asp:ListItem Selected="True" Value="1">General</asp:ListItem>                                                                                    
@@ -1768,7 +1768,7 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlLastDegree" runat="server"
                                                                                     DataTextField="strDegreeDescEn" DataValueField="strDegree"
-                                                                                    TabIndex="93" CssClass="form-control">
+                                                                                    TabIndex="107" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1776,7 +1776,7 @@
                                                                             <label class="col-form-label col-md-4 col-sm-4">Institution</label>
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlLastInistitution" runat="server" DataTextField="strCollegeDescEn"
-                                                                                    DataValueField="byteCollege" TabIndex="94" CssClass="form-control">
+                                                                                    DataValueField="byteCollege" TabIndex="108" CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
                                                                         </div>
@@ -1785,7 +1785,7 @@
                                                                             <div class="col-md-8 col-sm-8 ">
                                                                                 <asp:DropDownList ID="ddlLastCountry" runat="server" AutoPostBack="True" DataTextField="strCountryDescEn"
                                                                                     DataValueField="byteCountry"
-                                                                                    OnSelectedIndexChanged="ddlQCountry_SelectedIndexChanged" TabIndex="95"
+                                                                                    OnSelectedIndexChanged="ddlQCountry_SelectedIndexChanged" TabIndex="109"
                                                                                     CssClass="form-control">
                                                                                 </asp:DropDownList>
                                                                             </div>
@@ -1793,19 +1793,19 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Year</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                 <asp:TextBox ID="txtLastYear" runat="server" TabIndex="96" CssClass="form-control">9999</asp:TextBox>
+                                                                                 <asp:TextBox ID="txtLastYear" runat="server" TabIndex="110" CssClass="form-control">9999</asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">CGPA</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                 <asp:TextBox ID="txtLastCGPA" runat="server" TabIndex="97" CssClass="form-control"></asp:TextBox>
+                                                                                 <asp:TextBox ID="txtLastCGPA" runat="server" TabIndex="111" CssClass="form-control"></asp:TextBox>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Equivalency Indicator</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:DropDownList ID="ddlLHEquivalencyIndicator" runat="server" TabIndex="98"
+                                                                                <asp:DropDownList ID="ddlLHEquivalencyIndicator" runat="server" TabIndex="112"
                                                                                     CssClass="form-control">
                                                                                     <asp:ListItem Value="A">Applied</asp:ListItem>
                                                                                     <asp:ListItem Selected="True" Value="T">CAA accredited UAE universities</asp:ListItem>
@@ -1819,7 +1819,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-form-label col-md-4 col-sm-4">Equivalency App No.</label>
                                                                             <div class="col-md-8 col-sm-8 ">
-                                                                                <asp:TextBox ID="txtLHEquivalencyAppNo" runat="server" TabIndex="99"
+                                                                                <asp:TextBox ID="txtLHEquivalencyAppNo" runat="server" TabIndex="113"
                                                                                     CssClass="form-control">NA</asp:TextBox>
                                                                             </div>
                                                                         </div>
@@ -2104,7 +2104,7 @@
                                                                                     Width="100px"></asp:Label>
                                                                             </td>
                                                                             <td align="left" width="50%">
-                                                                                <asp:DropDownList ID="ddlCourses" runat="server" TabIndex="101" Width="100px">
+                                                                                <asp:DropDownList ID="ddlCourses" runat="server" TabIndex="114" Width="100px">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                             <td align="left" width="10%">
@@ -2117,7 +2117,7 @@
                                                                             </td>
                                                                             <td align="left" width="50%">
                                                                                 <asp:DropDownList ID="ddlMark" runat="server" DataTextField="LongDesc" 
-                                                                                    DataValueField="Term" TabIndex="102" Width="75px">
+                                                                                    DataValueField="Term" TabIndex="115" Width="75px">
                                                                                     <asp:ListItem Selected="True">EX</asp:ListItem>
                                                                                     <asp:ListItem>TC</asp:ListItem>
                                                                                 </asp:DropDownList>
@@ -2131,7 +2131,7 @@
                                                                                     Width="100px"></asp:Label>
                                                                             </td>
                                                                             <td align="left" width="50%">
-                                                                                <asp:DropDownList ID="ddlMSource" runat="server" TabIndex="103" Width="200px">
+                                                                                <asp:DropDownList ID="ddlMSource" runat="server" TabIndex="116" Width="200px">
                                                                                 </asp:DropDownList>
                                                                             </td>
                                                                             <td align="left" width="10%">
@@ -2210,7 +2210,7 @@
                                                     Width="100px"></asp:Label>
                                             </td>
                                             <td align="left" width="50%">
-                                                <asp:TextBox ID="txtSearchID" runat="server" Width="250px" TabIndex="104" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtSearchID" runat="server" Width="250px" TabIndex="117" CssClass="form-control"></asp:TextBox>
                                             </td>
                                             <td align="left" width="10%">
                                                 &nbsp;</td>
@@ -2221,7 +2221,7 @@
                                                     Width="100px"></asp:Label>
                                             </td>
                                             <td align="left" width="50%">
-                                                <asp:TextBox ID="txtSearchName" runat="server" Width="250px" TabIndex="105" CssClass="form-control"></asp:TextBox>
+                                                <asp:TextBox ID="txtSearchName" runat="server" Width="250px" TabIndex="118" CssClass="form-control"></asp:TextBox>
                                             </td>
                                             <td align="left" width="10%">
                                                 &nbsp;</td>

@@ -36,7 +36,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-bar-chart"></i>Daily Receipt</h2>
+                            <h2><i class="fa fa-bar-chart"></i> Daily Receipt</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -216,7 +216,7 @@
                           
                            <div class="loading" align="center">
     
-    <img src="C:\Users\abdul.shukkoor\Desktop\LocalECT\LocalECT\images\ajax-loader.gif/ajax-loader.gif" alt="" />
+  
 </div>
                           
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -253,6 +253,7 @@
                                     <div class="x_panel">
                                         <div class="x_title">
                                             <h2><i class="fa fa-tasks"></i> Results</h2>
+                                              <asp:LinkButton ID="lnk_ExportPDF" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_ExportPDF_Click" Style="float:right;" Visible="false"><i class="fa fa-file-pdf-o"></i> Export to PDF</asp:LinkButton>
                                             <div class="clearfix"></div>
                                         </div>
                                        <%-- <asp:GridView ID="Results" runat="server" AutoGenerateColumns="true"                                           
@@ -294,7 +295,7 @@
                                                         },
                                                         dom: 'QlBfrtip',
                                                         buttons: [
-                                                            'csv', 'excel', 'print'
+                                                            
                                                         ]
                                                     });
                                                 });
