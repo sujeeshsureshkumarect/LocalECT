@@ -295,7 +295,7 @@
                                                         },
                                                         dom: 'QlBfrtip',
                                                         buttons: [
-                                                            
+                                                            'csv', 'excel'
                                                         ]
                                                     });
                                                 });

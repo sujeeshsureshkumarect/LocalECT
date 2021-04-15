@@ -179,6 +179,7 @@
     <Content Include="CHEDS_New_Graduated.aspx" />
     <Content Include="CHEDS_New_Internship.aspx" />
     <Content Include="CHEDS_New_Scholarship.aspx" />
+    <Content Include="CHEDS_Operations.aspx" />
     <Content Include="ClassAttendance.aspx" />
     <Content Include="ClassAttendanceDM.aspx" />
     <Content Include="Contact.aspx" />
@@ -7738,6 +7739,7 @@
     <Content Include="Acc_Voucher.xsc">
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
+    <Content Include="Online_Payment_Tracking.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
       <SubType>Designer</SubType>
@@ -8583,6 +8585,13 @@
     <Compile Include="CHEDS_New_Scholarship.aspx.designer.cs">
       <DependentUpon>CHEDS_New_Scholarship.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CHEDS_Operations.aspx.cs">
+      <DependentUpon>CHEDS_Operations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CHEDS_Operations.aspx.designer.cs">
+      <DependentUpon>CHEDS_Operations.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ClassAttendance.aspx.cs">
       <DependentUpon>ClassAttendance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8846,6 +8855,13 @@
     </Compile>
     <Compile Include="News_Feed_Update.aspx.designer.cs">
       <DependentUpon>News_Feed_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Online_Payment_Tracking.aspx.cs">
+      <DependentUpon>Online_Payment_Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Online_Payment_Tracking.aspx.designer.cs">
+      <DependentUpon>Online_Payment_Tracking.aspx</DependentUpon>
     </Compile>
     <Compile Include="PlainPage.aspx.cs">
       <DependentUpon>PlainPage.aspx</DependentUpon>
