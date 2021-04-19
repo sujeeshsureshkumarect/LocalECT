@@ -3971,6 +3971,7 @@
     <Content Include="GradesEdit_Alt.aspx" />
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
+    <Content Include="Graduates_Tracking.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="HRService_HRRequests.aspx" />
     <Content Include="HRService_MyRequests.aspx" />
@@ -7741,6 +7742,7 @@
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
     <Content Include="Online_Payment_Tracking.aspx" />
+    <Content Include="Registered_Tracking.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
@@ -8696,6 +8698,13 @@
     <Compile Include="GradesView.aspx.designer.cs">
       <DependentUpon>GradesView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Graduates_Tracking.aspx.cs">
+      <DependentUpon>Graduates_Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graduates_Tracking.aspx.designer.cs">
+      <DependentUpon>Graduates_Tracking.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Handler1.ashx.cs">
       <DependentUpon>Handler1.ashx</DependentUpon>
     </Compile>
@@ -8915,6 +8924,13 @@
       <DependentUpon>Procurement_Supplier_Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registered_Tracking.aspx.cs">
+      <DependentUpon>Registered_Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registered_Tracking.aspx.designer.cs">
+      <DependentUpon>Registered_Tracking.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -138,7 +138,8 @@ namespace LocalECT
                     if (value == "condition1")
                     {
                         //value = "dbo.GetCHEDSSTTypeNew("+ selectedYear + ", "+ selectedSemester + ", SD.SID) AS STtype";
-                        value = "(CASE WHEN ISNULL(LT.LTR, 0) = 0 THEN 'NEW' WHEN ISNULL(LT.LTR, 0) <> 0 AND (SD.RSTATUS = 3 OR SD.RSTATUS = 25) AND SD.Joined = " + selectedTerm + " THEN 'Extended' WHEN ISNULL(LT.LTR, 0) <> 0 AND SD.RSTATUS <> 0 AND SD.RSTATUS <> 3 AND SD.RSTATUS <> 25 AND SD.RSTATUS <> 29 AND SD.RSTATUS <> 20 AND SD.RSTATUS <> 27 AND SD.RSTATUS <> 28 AND SD.RSTATUS <> 31 AND SD.Joined = " + selectedTerm + " THEN 'Re-admitted' ELSE 'Continuing' END) AS STType";
+                        //value = "(CASE WHEN ISNULL(LT.LTR, 0) = 0 THEN 'NEW' WHEN ISNULL(LT.LTR, 0) <> 0 AND (SD.RSTATUS = 3 OR SD.RSTATUS = 25) AND SD.Joined = " + selectedTerm + " THEN 'Extended' WHEN ISNULL(LT.LTR, 0) <> 0 AND SD.RSTATUS <> 0 AND SD.RSTATUS <> 3 AND SD.RSTATUS <> 25 AND SD.RSTATUS <> 29 AND SD.RSTATUS <> 20 AND SD.RSTATUS <> 27 AND SD.RSTATUS <> 28 AND SD.RSTATUS <> 31 AND SD.Joined = " + selectedTerm + " THEN 'Re-admitted' ELSE 'Continuing' END) AS STType";
+                        value = "dbo.GetStType(RBS.iYear * 10 + RBS.Sem, SD.Joined, SD.RJoined, SD.RStatus) as STType";
                     }
                     if (drp_Type.SelectedItem.Text == "Registered")
                     {

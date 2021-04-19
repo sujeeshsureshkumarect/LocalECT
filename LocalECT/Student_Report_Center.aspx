@@ -89,7 +89,7 @@
                             <div class="clearfix"></div>
                         </div>
                                     <asp:CheckBoxList id="chk_Fields" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CellPadding="5">
-                                        <asp:ListItem Text="UID" Value="SD.UID"></asp:ListItem>
+                                        <asp:ListItem Text="UID" Value="'M' + CONVERT(VARCHAR, SD.UID) AS UID"></asp:ListItem>
                                         <asp:ListItem Text="SID" Value="SD.SID"></asp:ListItem>
                                         <asp:ListItem Text="CXID" Value="SD.CXID"></asp:ListItem>
                                         <asp:ListItem Text="EID" Value="SD.EID"></asp:ListItem>

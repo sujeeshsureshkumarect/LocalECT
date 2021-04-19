@@ -160,7 +160,7 @@ namespace LocalECT
 
 
             SqlCommand cmd1 = new SqlCommand(remainquery, sc);
-            cmd1.CommandTimeout = 180;
+            cmd1.CommandTimeout = 300;
             DataTable dt1 = new DataTable();
             SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
             try
