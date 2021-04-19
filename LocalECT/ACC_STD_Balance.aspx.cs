@@ -219,6 +219,8 @@ namespace LocalECT
                         dt1.Columns.Remove("Phone2");
                     }
 
+                    Session["ACC_STD_Balance"] = dt1;
+
                     StringBuilder sb = new StringBuilder();
                     sb.Append("<table id='example' class='table table-striped table-bordered' style='width: 100%'>" + Environment.NewLine + "");
 
@@ -252,6 +254,7 @@ namespace LocalECT
                 }
                 else
                 {
+                    Session["ACC_STD_Balance"] = null;
                     DynamicTable.Text = "<p><b>No Results to show</b></p>";
                     lnk_ExportPDF.Visible = false;
                 }
@@ -275,12 +278,28 @@ namespace LocalECT
                 string sWhere = " WHERE (1=1)";
                 string sSQL = "";
 
-                sSQL = "SELECT     A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, M.strCaption AS Major, AC.strAccountNo AS MainACC, D.strDelegationDescEn AS Sponsor,  ";
-                sSQL += " S.strReasonDesc AS Status, BTS.intFy as FYear, BTS.byteFSemester AS FSemester, T.Term, T.LongDesc AS TermDesc, BTS.Debit, BTS.Credit, BTS.VAT, CD.sDiscounts AS Discounts, dbo.CleanPhone(SD.strPhone1) AS Phone1, dbo.CleanPhone(SD.strPhone2) AS Phone2, SD.sECTemail AS Email  ";
-                sSQL += " FROM         Lkp_Reasons AS S RIGHT OUTER JOIN  Reg_Applications AS A INNER JOIN  Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial INNER JOIN  Reg_Specializations AS M ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization INNER JOIN ";
-                sSQL += " Reg_Student_Accounts AS AC ON A.strAccountNo = AC.strAccountNo INNER JOIN   AccBalanceSemBothSide AS BTS INNER JOIN ";
-                sSQL += " (SELECT     AcademicYear, Semester, Term, ShortDesc, LongDesc, sTerm FROM localect.ECTDataNew.dbo.Reg_Semester) AS T ON BTS.intFy = T.AcademicYear AND BTS.byteFSemester = T.Semester ON  A.lngStudentNumber = BTS.lngStudentNumber LEFT OUTER JOIN ";
-                sSQL += " dbo.Collect_Discounts() AS CD ON BTS.intFy = CD.intStudyYear AND BTS.byteFSemester = CD.byteSemester AND BTS.lngStudentNumber = CD.lngStudentNumber ON S.byteReason = A.byteCancelReason LEFT OUTER JOIN  Lkp_Delegations AS D ON AC.intDelegation = D.intDelegation ";
+                //sSQL = "SELECT     A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, M.strCaption AS Major, AC.strAccountNo AS MainACC, D.strDelegationDescEn AS Sponsor,  ";
+                //sSQL += " S.strReasonDesc AS Status, BTS.intFy as FYear, BTS.byteFSemester AS FSemester, T.Term, T.LongDesc AS TermDesc, BTS.Debit, BTS.Credit, BTS.VAT, CD.sDiscounts AS Discounts, dbo.CleanPhone(SD.strPhone1) AS Phone1, dbo.CleanPhone(SD.strPhone2) AS Phone2, SD.sECTemail AS Email  ";
+                //sSQL += " FROM         Lkp_Reasons AS S RIGHT OUTER JOIN  Reg_Applications AS A INNER JOIN  Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial INNER JOIN  Reg_Specializations AS M ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization INNER JOIN ";
+                //sSQL += " Reg_Student_Accounts AS AC ON A.strAccountNo = AC.strAccountNo INNER JOIN   AccBalanceSemBothSide AS BTS INNER JOIN ";
+                //sSQL += " (SELECT     AcademicYear, Semester, Term, ShortDesc, LongDesc, sTerm FROM localect.ECTDataNew.dbo.Reg_Semester) AS T ON BTS.intFy = T.AcademicYear AND BTS.byteFSemester = T.Semester ON  A.lngStudentNumber = BTS.lngStudentNumber LEFT OUTER JOIN ";
+                //sSQL += " dbo.Collect_Discounts() AS CD ON BTS.intFy = CD.intStudyYear AND BTS.byteFSemester = CD.byteSemester AND BTS.lngStudentNumber = CD.lngStudentNumber ON S.byteReason = A.byteCancelReason LEFT OUTER JOIN  Lkp_Delegations AS D ON AC.intDelegation = D.intDelegation ";
+
+                sSQL += " SELECT     A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, M.strCaption AS Major, AC.strAccountNo AS MainACC, D.strDelegationDescEn AS Sponsor, ";
+                sSQL += "                       S.strReasonDesc AS Status, B.intFy AS FY, B.byteFSemester AS FS, T.Term, T.LongDesc AS TermDesc, B.Side, B.strAccountNo AS SubACC, B.curDebitSum AS Debit, ";
+                sSQL += "                       B.curCreditSum AS Credit, B.curVATSum AS VAT, CD.sDiscounts AS Discounts, dbo.CleanPhone(SD.strPhone1) AS Phone1, dbo.CleanPhone(SD.strPhone2) AS Phone2, ";
+                sSQL += "                       SD.sECTemail AS Email ";
+                sSQL += " FROM         Reg_Applications AS A INNER JOIN ";
+                sSQL += "                       Reg_Students_Data AS SD ON A.lngSerial = SD.lngSerial INNER JOIN ";
+                sSQL += "                       Reg_Specializations AS M ON A.strCollege = M.strCollege AND A.strDegree = M.strDegree AND A.strSpecialization = M.strSpecialization INNER JOIN ";
+                sSQL += "                       Reg_Student_Accounts AS AC ON A.lngStudentNumber = AC.lngStudentNumber INNER JOIN ";
+                sSQL += "                       ACC_Balance_Semester_BTS AS B ON A.lngStudentNumber = B.lngStudentNumber INNER JOIN ";
+                sSQL += "                           (SELECT     AcademicYear, Semester, Term, ShortDesc, LongDesc, sTerm ";
+                sSQL += "                             FROM          LOCALECT.ECTDataNew.dbo.Reg_Semester) AS T ON B.intFy = T.AcademicYear AND B.byteFSemester = T.Semester LEFT OUTER JOIN ";
+                sSQL += "                       dbo.Collect_Discounts() AS CD ON B.intFy = CD.intStudyYear AND B.byteFSemester = CD.byteSemester AND ";
+                sSQL += "                       B.lngStudentNumber = CD.lngStudentNumber LEFT OUTER JOIN ";
+                sSQL += "                       Lkp_Delegations AS D ON AC.intDelegation = D.intDelegation LEFT OUTER JOIN ";
+                sSQL += "                       Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason ";
 
 
                 if (txtSID.Text != "")
@@ -363,9 +382,9 @@ namespace LocalECT
         private DataSet Prepare_Report(string sSQL, InitializeModule.EnumCampus Campus)
         {
 
-            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
-            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
-            Conn.Open();
+            //Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            //SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            //Conn.Open();
 
             DataTable dt = new DataTable();
             DataRow dr;
@@ -394,10 +413,10 @@ namespace LocalECT
                 dt.Columns.Add(dc);
                 dc = new DataColumn("TermDesc", Type.GetType("System.String"));
                 dt.Columns.Add(dc);
-                //dc = new DataColumn("Side", Type.GetType("System.String"));
-                //dt.Columns.Add(dc);
-                //dc = new DataColumn("SubACC", Type.GetType("System.String"));
-                //dt.Columns.Add(dc);
+                dc = new DataColumn("Side", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("SubACC", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
                 dc = new DataColumn("Debit", Type.GetType("System.Decimal"));
                 dt.Columns.Add(dc);
                 dc = new DataColumn("Credit", Type.GetType("System.Decimal"));
@@ -415,10 +434,16 @@ namespace LocalECT
                 dc = new DataColumn("CurrentBalance", Type.GetType("System.Decimal"));
                 dt.Columns.Add(dc);
 
+                DataTable dt1 = new DataTable();
+                if (Session["ACC_STD_Balance"] != null)
+                {
+                    dt1 = (DataTable)Session["ACC_STD_Balance"];                   
+                }
 
                 //Retrieve Data
-                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
-                SqlDataReader Rd = Cmd.ExecuteReader();
+                //SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                //SqlDataReader Rd = Cmd.ExecuteReader();
+                DataTableReader Rd = dt1.CreateDataReader();
                 int i = 0;
                 while (Rd.Read())
                 {
@@ -433,8 +458,8 @@ namespace LocalECT
                     dr["Status"] = Rd["Status"].ToString();
                     dr["Term"] = Convert.ToInt32(Rd["Term"].ToString());
                     dr["TermDesc"] = Rd["TermDesc"].ToString();
-                    //dr["Side"] = Rd["Side"].ToString();
-                    //dr["SubACC"] = Rd["SubACC"].ToString();
+                    dr["Side"] = Rd["Side"].ToString();
+                    dr["SubACC"] = Rd["SubACC"].ToString();
 
                     if (!Rd["Debit"].Equals(DBNull.Value))
                     {
@@ -474,12 +499,12 @@ namespace LocalECT
             }
             catch (Exception exp)
             {
-                //Console.WriteLine("{0} Exception caught.", exp);
+                Console.WriteLine("{0} Exception caught.", exp);
             }
             finally
             {
-                Conn.Close();
-                Conn.Dispose();
+                //Conn.Close();
+                //Conn.Dispose();
             }
             return ds;
         }

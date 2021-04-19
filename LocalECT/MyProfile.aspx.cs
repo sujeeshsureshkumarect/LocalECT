@@ -70,7 +70,6 @@ namespace LocalECT
             {
                 sc.Close();
             }
-
         }
             
     }

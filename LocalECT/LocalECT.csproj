@@ -167,6 +167,7 @@
     <Content Include="Acc_Search_Fee_Payment.aspx" />
     <Content Include="Acc_Search_Other_Revenue_Payment.aspx" />
     <Content Include="ACC_STD_Balance.aspx" />
+    <Content Include="Applicants_Tracking.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
@@ -7740,6 +7741,7 @@
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
     <Content Include="Online_Payment_Tracking.aspx" />
+    <Content Include="Student_Service_Requests_Approvers.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
       <SubType>Designer</SubType>
@@ -8336,6 +8338,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Applicants_Tracking.aspx.cs">
+      <DependentUpon>Applicants_Tracking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Applicants_Tracking.aspx.designer.cs">
+      <DependentUpon>Applicants_Tracking.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\AcademicAdvisingCls.cs" />
     <Compile Include="App_Start\AcademicAdvising_RecommendedCoursesCls.cs" />
@@ -10160,6 +10169,13 @@
     </Compile>
     <Compile Include="Student_Service_Requests.aspx.designer.cs">
       <DependentUpon>Student_Service_Requests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Service_Requests_Approvers.aspx.cs">
+      <DependentUpon>Student_Service_Requests_Approvers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_Service_Requests_Approvers.aspx.designer.cs">
+      <DependentUpon>Student_Service_Requests_Approvers.aspx</DependentUpon>
     </Compile>
     <Compile Include="test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>

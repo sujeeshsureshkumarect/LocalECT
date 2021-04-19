@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace LocalECT
 {
-  public partial class CHEDS_Operations : System.Web.UI.Page
+  public partial class Applicants_Tracking : System.Web.UI.Page
   {
     int CurrentRole = 0;
     InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
@@ -41,10 +42,34 @@ namespace LocalECT
 
         }
         FillTerms();
-        ddlRegTerm.SelectedValue = Session["CurrentYear"].ToString() + Session["CurrentSemester"].ToString();
+        FacultyFill();
       }
     }
-    private void FillTerms()
+    private void FacultyFill()
+    {
+
+      SqlConnection sc = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ECTDataMales"].ConnectionString);
+     
+      string sSQL;
+      sSQL = " SELECT   FacultyID, FacultyName FROM Reg_Faculty WHERE(FacultyID = 0  OR FacultyID = 1 OR  FacultyID = 2 OR FacultyID = 3 OR FacultyID = 4 OR  FacultyID = 7)";
+      SqlCommand cmd1 = new SqlCommand(sSQL,sc );
+      cmd1.CommandTimeout = 180;
+      DataTable dt1 = new DataTable();
+      SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            
+        sc.Open();
+        da1.Fill(dt1);
+        sc.Close();
+      
+      ddlfaculty.DataSource = dt1;
+      ddlfaculty.DataTextField = "FacultyName";
+      ddlfaculty.DataValueField = "FacultyID";
+      ddlfaculty.DataBind();
+
+
+
+    }
+      private void FillTerms()
     {
       List<Semesters> myTerms = new List<Semesters>();
       SemesterDAL myTermsDAL = new SemesterDAL();
@@ -53,8 +78,8 @@ namespace LocalECT
         myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
         for (int i = 0; i < myTerms.Count; i++)
         {
-          ddlRegTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
-
+          ddlRegTermFrom.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+          ddlRegTermTo.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
         }
         int iYear = 0;
         int iSem = 0;
@@ -62,7 +87,8 @@ namespace LocalECT
         iYear = (int)Session["RegYear"];
         iSem = (int)Session["RegSemester"];
         iTerm = iYear * 10 + iSem;
-        ddlRegTerm.SelectedValue = iTerm.ToString();
+       // ddlRegTermFrom.SelectedValue = iTerm.ToString();
+
       }
       catch (Exception ex)
       {
@@ -77,10 +103,7 @@ namespace LocalECT
     }
 
     protected void lnk_FieldGenerate_Click(object sender, EventArgs e)
-    {
-
-    
-
+    {     
       if (drp_Campus.SelectedItem.Text == "Males")
       {
         Campus = InitializeModule.EnumCampus.Males;
@@ -89,40 +112,42 @@ namespace LocalECT
       {
         Campus = InitializeModule.EnumCampus.Females;
       }
-      string sWhere = " WHERE 1=1";
-      int iRegTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
-      int iYear, iSem;
-      iYear = LibraryMOD.SeperateTerm(iRegTerm, out iSem);
-      int iPYear, iPSem;
-      iPYear = iYear;
-      iPSem = iSem;
-      if (iSem == 1)
-      {
-        iPSem = 4;
-        iPYear -= 1;
-      }
-      else
-      {
-        iPSem -= 1;
-      }
+      //string sWhere = " WHERE 1=1";
+      //int iRegTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
+      //int iYear, iSem;
+      //iYear = LibraryMOD.SeperateTerm(iRegTerm, out iSem);
+      //int iPYear, iPSem;
+      //iPYear = iYear;
+      //iPSem = iSem;
+      //if (iSem == 1)
+      //{
+      //  iPSem = 4;
+      //  iPYear -= 1;
+      //}
+      //else
+      //{
+      //  iPSem -= 1;
+      //}
 
       Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
       SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
       string sSQL = "";
+      if (ddlfaculty.SelectedValue == "0")
+      {
 
-      sSQL += "SELECT     [Institution Code], [Institution Name], [Academic Period], [Program Level], Area, SUM(STDs) AS STDs, Course, Session, Class, IsLab  ";
-      sSQL += "FROM  (SELECT     [Institution Code], [Institution Name], [Academic Period], [Program Level], Area, STDs, IsLab, Course, (CASE WHEN Session = 2 AND  ";
-      sSQL += " IsJoint = 1 THEN 4 WHEN Session = 9 AND IsJoint = 1 THEN 8 ELSE Session END) AS Session, Class  ";
-      sSQL += " FROM  (SELECT     [Institution Code], [Institution Name], [Academic Period], [Program Level], Area, STDs, IsLab, IsJoint, iYear, Sem, Course, Session, Class  ";
-      sSQL += " FROM  CHEDS_Operation AS COP  ";
-      sSQL += " WHERE      (iYear = "+iYear+") AND (Sem = "+iSem+")  ";
-      sSQL += " UNION  ";
-      sSQL += " SELECT     [Institution Code], [Institution Name], [Academic Period], [Program Level], Area, STDs, IsLab, IsJoint, iYear, Sem, Course, Session, Class  ";
-      sSQL += " FROM         SQL_SERVER.ECTDATA.DBO.CHEDS_Operation AS COP  ";
-      sSQL += " WHERE     (iYear = "+iYear+") AND (Sem = "+iSem+")) AS TM) AS CNT  ";
-      sSQL += "GROUP BY [Institution Code], [Institution Name], [Academic Period], [Program Level], Area, Course, Session, Class, IsLab  ";
-      sSQL += "ORDER BY Course, Session, Class  ";
+        sSQL = "SELECT        UID,Accepted, InTerm, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
+        sSQL += "  CertDate, RegDate, ExamcenterName, SchoolName, G12, G12_StreamDesc, HSScore, HSYear, Faculty, UserCreate_A, DateCreated_A, UserCreate_SD, DateCreated_SD   ";
+        sSQL += "FROM    Applicants_Tracking AS T   WHERE (intStudyYear * 10 + byteSemester BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ")  ";
 
+      }
+      else
+      {
+
+        sSQL = "SELECT        UID,Accepted, InTerm, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
+        sSQL += "  CertDate, RegDate, ExamcenterName, SchoolName, G12, G12_StreamDesc, HSScore, HSYear, Faculty, UserCreate_A, DateCreated_A, UserCreate_SD, DateCreated_SD   ";
+        sSQL += "FROM    Applicants_Tracking AS T   WHERE (intStudyYear * 10 + byteSemester BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ") AND T.Faculty = "+ddlfaculty.SelectedValue+" ";
+
+      }
 
       SqlCommand cmd1 = new SqlCommand(sSQL, sc);
       cmd1.CommandTimeout = 180;

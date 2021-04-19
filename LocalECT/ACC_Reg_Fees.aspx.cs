@@ -79,7 +79,7 @@ namespace LocalECT
     protected void lnk_FieldGenerate_Click(object sender, EventArgs e)
     {
 
-      System.Threading.Thread.Sleep(5000);
+     
 
       if (drp_Campus.SelectedItem.Text == "Males")
       {

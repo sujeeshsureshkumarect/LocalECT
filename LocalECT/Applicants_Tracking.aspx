@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ACC_STD_Balance.aspx.cs" Inherits="LocalECT.ACC_STD_Balance" MasterPageFile="~/LocalECT.Master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Applicants_Tracking.aspx.cs" Inherits="LocalECT.Applicants_Tracking" MasterPageFile="~/LocalECT.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -8,7 +8,7 @@
                     <h3 class="breadcrumb">
                         <a href="Home">Home /</a>
                         <a href="#">&nbsp;Accounting /</a>
-                      <a href="ACC_STD_Balance">&nbsp;STD Balance </a>
+                      <a href="Applicants_Tracking">&nbsp;Appicants Tracking </a>
                     </h3>
                 </div>
                 <style>
@@ -35,7 +35,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-bar-chart"></i> STD Balance </h2>
+                            <h2><i class="fa fa-bar-chart"></i> Applicants Tracking</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -66,18 +66,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                  
-
-                                      
-
-                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                                                     
+                                       <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>From Term</label>
                                             <div class="input-group">
-                                                 <asp:DropDownList ID="ddlFromTerm" runat="server" CssClass="form-control">
-                                            <asp:ListItem Text="Beginning" Value="0" Selected="True"/>
-                                            
-                                        </asp:DropDownList>
+                                                <asp:DropDownList ID="ddlRegTermFrom" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
                                         </div>
                                     </div>
@@ -86,8 +80,17 @@
                                         <div class="form-group">
                                             <label>To Term</label>
                                             <div class="input-group">
-                                                 <asp:DropDownList ID="ddlToTerm" runat="server" CssClass="form-control">
-                                            <asp:ListItem Text="End" Value="30000" Selected="True"/>
+                                                <asp:DropDownList ID="ddlRegTermTo" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Faculty</label>
+                                            <div class="input-group">
+                                                 <asp:DropDownList ID="ddlfaculty" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="Select" Value=" " Selected="True"/>
                                             
                                         </asp:DropDownList>
                                             </div>
@@ -95,31 +98,6 @@
                                     </div>
 
                                   
-                                    <div class="col-sm-2 col-md-2 col-xs-12">
-                                        <div class="form-group">
-                                            <label>SID</label>
-                                  <asp:DropDownList ID="drp_Type" runat="server" CssClass="form-control" Width="100px">
-                                            <asp:ListItem Selected="True" Text="Like" Value="Like"></asp:ListItem>
-                                            <asp:ListItem Text="In" Value="In"></asp:ListItem>
-                                        </asp:DropDownList>
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtSID" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Example:
-StudentID1
-StudentID2
-StudentID3" Height="100px"></asp:TextBox>
-                                              
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-2 col-md-2 col-xs-12">
-                                        <div class="form-group">
-                                            <label>ACC</label>
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtACC" runat="server" CssClass="form-control" ></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div> 
                                     <div class="col-sm-2 col-md-2 col-xs-12">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
@@ -176,7 +154,7 @@ StudentID3" Height="100px"></asp:TextBox>
                           
                            <div class="loading" align="center">
     
-   
+   <%-- <img src="C:\Users\abdul.shukkoor\Desktop\LocalECT\LocalECT\images\ajax-loader.gif/ajax-loader.gif" alt="" />--%>
 </div>
                           
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -205,7 +183,6 @@ StudentID3" Height="100px"></asp:TextBox>
                                     <div class="x_panel">
                                         <div class="x_title">
                                             <h2><i class="fa fa-tasks"></i> Results</h2>
-                                            <asp:LinkButton ID="lnk_ExportPDF" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_ExportPDF_Click" Style="float:right;" Visible="false"><i class="fa fa-file-pdf-o"></i> Export to PDF</asp:LinkButton>
                                             <div class="clearfix"></div>
                                         </div>
                                        <%-- <asp:GridView ID="Results" runat="server" AutoGenerateColumns="true"                                           
@@ -247,7 +224,7 @@ StudentID3" Height="100px"></asp:TextBox>
                                                         },
                                                         dom: 'QlBfrtip',
                                                         buttons: [
-                                                            'csv', 'excel'
+                                                            'csv', 'excel', 'print'
                                                         ]
                                                     });
                                                 });
@@ -281,4 +258,3 @@ StudentID3" Height="100px"></asp:TextBox>
     </div>
     </div>
 </asp:Content>
-
