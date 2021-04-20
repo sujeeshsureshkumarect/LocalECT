@@ -577,7 +577,9 @@ public class InitializeModule
         ContactAdvisor = 180,//new
         ContactLecturer = 181,//new
 
-        FetchRequest = 182//new
+        FetchRequest = 182,//new
+        AddOnlinePayment = 183,//new
+        CreateOnlineRequest = 184//new
 
     }
 
@@ -858,7 +860,13 @@ public class InitializeModule
         //Procurment
         Procurment_Procurment = 1271,
         Procurment_SupplierManager = 1272,
-        Procurment_LPOManager = 1273
+        Procurment_LPOManager = 1273,
+
+        //Change_Password=1274,
+        //Services=1275,
+        //News_Feed_Manager=1276,
+        //My_Requests=1277,
+        Online_Payment_Tracking= 1289
     }
 
     public enum enumEmployeeGroups : int

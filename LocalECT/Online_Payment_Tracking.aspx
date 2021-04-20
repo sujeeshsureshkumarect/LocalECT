@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Online_Payment_Tracking.aspx.cs" Inherits="LocalECT.Online_Payment_Tracking" MasterPageFile="~/LocalECT.Master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Online_Payment_Tracking.aspx.cs" Inherits="LocalECT.Online_Payment_Tracking" MasterPageFile="~/LocalECT.Master" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -183,7 +183,7 @@
       });
     </script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
   function ShowProgress() {
     setTimeout(function () {
@@ -200,7 +200,7 @@
   $('form').live("submit", function () {
     ShowProgress();
   });
-</script>
+</script>--%>
 
                         <div id="details">
                             <hr />
@@ -236,7 +236,8 @@
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">isCanceled</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">cAmount</th>
                                                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="display:none;">cVAT</th>
-                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Actions</th>
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >Actions</th>                                                         
+                                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="display:none;">tOrder</th>
                                                      </tr>
                                                  </thead>
                                          </HeaderTemplate>
@@ -266,8 +267,9 @@
                                                              <a class="dropdown-item" href="Acc_Search_Edit?sAcc">Edit</a>                                                             
                                                          </div>
                                                      </div>--%>
-                                                     <asp:LinkButton ID="lnk_Create_Voucher" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Voucher_Click" OnClientClick="return confirm('Are you sure you want to add this voucher?');" CommandArgument=<%#Eval("Order")%>><i class="fa fa-plus"></i> Add Voucher</asp:LinkButton>
-                                                 </td>
+                                                     <asp:LinkButton ID="lnk_Create_Voucher" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Voucher_Click" OnClientClick="return confirm('Are you sure you want to add this voucher?');" CommandArgument=<%#Eval("Order")%> ToolTip=<%#Eval("VoucherNo")%>>Add Voucher</asp:LinkButton>                                                     
+                                                 </td>                                                
+                                                  <td style="display:none;"><%#Eval("tOrder")%></td>
                                              </tr>
                                          </ItemTemplate>
                                          <FooterTemplate>
@@ -324,48 +326,72 @@
                                             </script>
 
 
-                                      <script>
-                                        var table = document.getElementById("example");
-                                        if (table != null) {
-                                          for (var i = 1; i < table.rows.length; i++) {
-                                              var status = table.rows[i].cells[7].textContent;   
-                                              var isCanceled = table.rows[i].cells[10].textContent;  
-                                              var isCaptured = table.rows[i].cells[7].textContent;  
-                                              var cAmount = table.rows[i].cells[11].textContent;                                              
-                                              var cVAT = table.rows[i].cells[12].textContent;
-                                            if ( status == "Yes") {
-                                              table.rows[i].cells[7].innerHTML = '<span class="badge badge-success">' + status + '</span>';
+                                        <script>
+                                            var table = document.getElementById("example");
+                                            if (table != null) {
+                                                for (var i = 1; i < table.rows.length; i++) {
+                                                    var status = table.rows[i].cells[7].textContent;
+                                                    var isCanceled = table.rows[i].cells[10].textContent;
+                                                    var isCaptured = table.rows[i].cells[7].textContent;
+                                                    var cAmount = table.rows[i].cells[11].textContent;
+                                                    var cVAT = table.rows[i].cells[12].textContent;
+                                                    var voucherNumber = table.rows[i].cells[9].textContent;
+                                                    var service = table.rows[i].cells[5].textContent;
+                                                    var tOrder = table.rows[i].cells[14].textContent;
+                                                    if (status == "Yes") {
+                                                        table.rows[i].cells[7].innerHTML = '<span class="badge badge-success">' + status + '</span>';
+                                                    }
+                                                    else {
+                                                        table.rows[i].cells[7].innerHTML = '<span class="badge badge-danger">' + status + '</span>';
+                                                    }
+                                                    if (isCanceled == "Yes") {
+                                                        table.rows[i].cells[10].innerHTML = '<span class="badge badge-success">' + isCanceled + '</span>';
+                                                    }
+                                                    else {
+                                                        table.rows[i].cells[10].innerHTML = '<span class="badge badge-danger">' + isCanceled + '</span>';
+                                                    }
+
+                                                    if (cAmount == "" || cAmount == null) {
+                                                        table.rows[i].cells[11].innerHTML = 0;
+                                                    }
+                                                    if (cVAT == "" || cVAT == null) {
+                                                        table.rows[i].cells[12].innerHTML = 0;
+                                                    }
+
+                                                    if (isCaptured == "No" && isCanceled == "No") {
+
+                                                    }
+                                                    else if (isCaptured == "Yes" && isCanceled == "No") {
+                                                        if (service == "Tution Fees") {
+                                                            table.rows[i].cells[13].innerHTML = "";
+                                                        }
+                                                        else {
+                                                            var btntext = table.rows[i].cells[13].innerHTML;                                                            
+                                                            if ((tOrder == "" || tOrder == null)) {
+                                                                table.rows[i].cells[13].innerHTML = "";
+                                                            }
+                                                            else {
+                                                                if ((voucherNumber == "" || voucherNumber == null)) {
+                                                                    table.rows[i].cells[13].innerHTML = "";
+                                                                }
+                                                                else {
+                                                                    btntext = btntext.replaceAll("Add Voucher", "Create Request");
+                                                                    btntext = btntext.replaceAll("add this voucher", "create this request");
+                                                                    table.rows[i].cells[13].innerHTML = btntext;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else {
+                                                        table.rows[i].cells[13].innerHTML = "";
+                                                    }
+
+                                                    if (isCanceled == "Yes") {
+                                                        table.rows[i].cells[13].innerHTML = "";
+                                                    }
+                                                }
                                             }
-                                            else {
-                                              table.rows[i].cells[7].innerHTML = '<span class="badge badge-danger">' + status + '</span>';
-                                              }
-                                              if (isCanceled == "Yes") {
-                                                  table.rows[i].cells[10].innerHTML = '<span class="badge badge-success">' + isCanceled + '</span>';
-                                              }
-                                              else {
-                                                  table.rows[i].cells[10].innerHTML = '<span class="badge badge-danger">' + isCanceled + '</span>';
-                                              }
-
-                                              if (cAmount == "" || cAmount == null) {
-                                                  table.rows[i].cells[11].innerHTML = 0;
-                                              }
-                                              if (cVAT == "" || cVAT == null) {
-                                                  table.rows[i].cells[12].innerHTML = 0;
-                                              }
-
-                                              if (isCaptured == "No" && isCanceled == "No") {
-
-                                              }
-                                              else {
-                                                  table.rows[i].cells[13].innerHTML = "";
-                                              }
-
-                                              if (isCanceled == "Yes") {
-                                                  table.rows[i].cells[13].innerHTML = "";
-                                              }
-                                          }
-                                        }
-                                      </script>
+                                        </script>
                                         <style>
                                             div.dtsb-searchBuilder button.dtsb-button{
                                                 font-size:12px !important;

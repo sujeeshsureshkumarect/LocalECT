@@ -1,13 +1,16 @@
+using Microsoft.SharePoint.Client;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -130,7 +133,7 @@ namespace LocalECT
 
 
             sSQL = "SELECT  iSerial AS [Serial#], sOrder AS [Order], sACC AS Account, sSID AS SID, sService AS Service, dDate AS RDate, (CASE WHEN isCaptured = 1 THEN 'Yes' ELSE 'No' END) ";
-            sSQL += " AS isCaptured, dCaptured AS Captured, sVoucherNo AS VoucherNo, (CASE WHEN isCanceled = 1 THEN 'Yes' ELSE 'No' END) AS isCanceled,cAmount,cVAT FROM Acc_Payment_Order AS PO  ";
+            sSQL += " AS isCaptured, dCaptured AS Captured, sVoucherNo AS VoucherNo, (CASE WHEN isCanceled = 1 THEN 'Yes' ELSE 'No' END) AS isCanceled,cAmount,cVAT,tOrder FROM Acc_Payment_Order AS PO  ";
 
             if (txtSID.Text != "")
             {
@@ -145,8 +148,7 @@ namespace LocalECT
             }
 
             sSQL += sWhere;
-
-            sSQL += " AND dDate BETWEEN '" + DDateFrom.Text + "' AND '" + DDateTo.Text + "'  ORDER BY RDate DESC ";
+            sSQL += " AND dDate BETWEEN '" + DDateFrom.Text + " 00:00:00.000' AND '" + DDateTo.Text + " 23:59:59.999'  ORDER BY RDate DESC ";
 
             SqlCommand cmd1 = new SqlCommand(sSQL, sc);
             cmd1.CommandTimeout = 180;
@@ -217,7 +219,7 @@ namespace LocalECT
             LinkButton button = (sender as LinkButton);
             string orderid = button.CommandArgument;
             DateTime creationTime;
-            string amount= trackorder(orderid, out creationTime);
+            string voucherNumber = button.ToolTip;
             if (drp_Campus.SelectedItem.Text == "Males")
             {
                 Campus = InitializeModule.EnumCampus.Males;
@@ -228,111 +230,267 @@ namespace LocalECT
             }
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-            if (amount!= "ERROR")
+
+            if (string.IsNullOrEmpty(voucherNumber))//Add Voucher
             {
-                //Create Voucher
-                SqlCommand cmd = new SqlCommand("select * from Acc_Payment_Order where sOrder=@sOrder", sc);
-                cmd.Parameters.AddWithValue("@sOrder", orderid);
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                try
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Online_Payment_Tracking,
+                InitializeModule.enumPrivilege.AddOnlinePayment, CurrentRole) != true)
                 {
-                    sc.Open();
-                    da.Fill(dt);
-                    sc.Close();
-
-                    if(dt.Rows.Count>0)
+                    lbl_Msg.Text = "You don't have the permission to Add Voucher";
+                    div_msg.Visible = true;
+                    return;
+                }
+                else
+                {
+                    //Create Voucher
+                    string amount = trackorder(orderid, out creationTime);                   
+                    if (amount != "ERROR")
                     {
-                        double totalCapturedAmount = Convert.ToDouble(amount);
-                        double cAmount = 0;
-                        double cVAT = 0;
-                        int iPaidfor = 0;
-                        if (dt.Rows[0]["sService"].ToString()== "Tution Fees")
+                        //Create Voucher
+                        SqlCommand cmd = new SqlCommand("select * from Acc_Payment_Order where sOrder=@sOrder", sc);
+                        cmd.Parameters.AddWithValue("@sOrder", orderid);
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        try
                         {
-                            cAmount = totalCapturedAmount;
-                            cVAT = 0;
-                            iPaidfor = 0;
-                        }
-                        else//Student Services: 1XXX
-                        {
-                            double dGrossAmount = totalCapturedAmount;
-                            double dPmtAmount = Math.Round((dGrossAmount / 1.05), 2);
-                            double dVAT = Math.Round((dGrossAmount - dPmtAmount), 2);
-                            cAmount = dPmtAmount;
-                            cVAT = dVAT;
-                            string serviceID= dt.Rows[0]["sService"].ToString().Substring(dt.Rows[0]["sService"].ToString().LastIndexOf(' ') + 1);
-                            SqlCommand cmd1 = new SqlCommand("select * from [ECTDataNew].[dbo].[ECT_Services] where ServiceID=@ServiceID", sc);
-                            cmd1.Parameters.AddWithValue("@ServiceID", serviceID);
-                            DataTable dt1 = new DataTable();
-                            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
-                            try
-                            {
-                                sc.Open();
-                                da1.Fill(dt1);
-                                sc.Close();
+                            sc.Open();
+                            da.Fill(dt);
+                            sc.Close();
 
-                                if(dt1.Rows.Count>0)
+                            if (dt.Rows.Count > 0)
+                            {
+                                double totalCapturedAmount = Convert.ToDouble(amount);
+                                double cAmount = 0;
+                                double cVAT = 0;
+                                int iPaidfor = 0;
+                                if (dt.Rows[0]["sService"].ToString() == "Tution Fees")
                                 {
-                                    iPaidfor = Convert.ToInt32(dt1.Rows[0]["FeesType"]);
+                                    cAmount = totalCapturedAmount;
+                                    cVAT = 0;
+                                    iPaidfor = 0;
                                 }
+                                else//Student Services: 1XXX
+                                {
+                                    double dGrossAmount = totalCapturedAmount;
+                                    double dPmtAmount = Math.Round((dGrossAmount / 1.05), 2);
+                                    double dVAT = Math.Round((dGrossAmount - dPmtAmount), 2);
+                                    cAmount = dPmtAmount;
+                                    cVAT = dVAT;
+                                    string serviceID = dt.Rows[0]["sService"].ToString().Substring(dt.Rows[0]["sService"].ToString().LastIndexOf(' ') + 1);
+                                    SqlCommand cmd1 = new SqlCommand("select * from [ECTDataNew].[dbo].[ECT_Services] where ServiceID=@ServiceID", sc);
+                                    cmd1.Parameters.AddWithValue("@ServiceID", serviceID);
+                                    DataTable dt1 = new DataTable();
+                                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                                    try
+                                    {
+                                        sc.Open();
+                                        da1.Fill(dt1);
+                                        sc.Close();
+
+                                        if (dt1.Rows.Count > 0)
+                                        {
+                                            iPaidfor = Convert.ToInt32(dt1.Rows[0]["FeesType"]);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        sc.Close();
+                                        Console.WriteLine(ex.Message);
+                                        lbl_Msg.Text = ex.Message;
+                                        div_msg.Visible = true;
+                                    }
+                                    finally
+                                    {
+                                        sc.Close();
+                                    }
+                                }
+                                createvouchers(dt.Rows[0]["sACC"].ToString(), dt.Rows[0]["sSID"].ToString(), orderid, cAmount, cVAT, iPaidfor, creationTime);
                             }
-                            catch(Exception ex)
-                            {
-                                sc.Close();
-                                Console.WriteLine(ex.Message);
-                                lbl_Msg.Text = ex.Message;
-                                div_msg.Visible = true;
-                            }
-                            finally
-                            {
-                                sc.Close();
-                            }                           
                         }
-                        createvouchers(dt.Rows[0]["sACC"].ToString(), dt.Rows[0]["sSID"].ToString(), orderid, cAmount, cVAT, iPaidfor, creationTime);
+                        catch (Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                            lbl_Msg.Text = ex.Message;
+                            div_msg.Visible = true;
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+                    }
+                    else
+                    {
+                        //Unable to find payment for Order# LGKPF2I2mBlAJxqQ
+                        SqlCommand cmd = new SqlCommand("update Acc_Payment_Order set isCanceled='True' where sOrder=@sOrder", sc);
+                        cmd.Parameters.AddWithValue("@sOrder", orderid);
+                        try
+                        {
+                            sc.Open();
+                            cmd.ExecuteNonQuery();
+                            sc.Close();
+
+                            //Response.Write("<script>alert('Unable to find payment for Order# " + orderid + "');</script>");
+                            lbl_Msg.Text = "Unable to find payment for Order# " + orderid + "";
+                            div_msg.Visible = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                            lbl_Msg.Text = ex.Message;
+                            div_msg.Visible = true;
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
                     }
                 }
-                catch(Exception ex)
+            }
+            else //Create Request
+            {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Online_Payment_Tracking,
+                InitializeModule.enumPrivilege.CreateOnlineRequest, CurrentRole) != true)
                 {
-                    sc.Close();
-                    Console.WriteLine(ex.Message);
-                    lbl_Msg.Text = ex.Message;
+                    lbl_Msg.Text = "You don't have the permission to Create Request";
                     div_msg.Visible = true;
+                    return;
                 }
-                finally
+                else
                 {
-                    sc.Close();
+                    SqlCommand cmd = new SqlCommand("select * from Acc_Payment_Order where sOrder=@sOrder", sc);
+                    cmd.Parameters.AddWithValue("@sOrder", orderid);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    try
+                    {
+                        sc.Open();
+                        da.Fill(dt);
+                        sc.Close();
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            if (!string.IsNullOrEmpty(dt.Rows[0]["tOrder"].ToString())&& !string.IsNullOrEmpty(dt.Rows[0]["sVoucherNo"].ToString()))
+                            {
+                                //Create Request
+                                StringReader theReader = new StringReader(dt.Rows[0]["tOrder"].ToString());
+                                DataSet theDataSet = new DataSet();
+                                theDataSet.ReadXml(theReader);
+                                sentdatatoSPLIst(dt.Rows[0]["sVoucherNo"].ToString(), theDataSet.Tables[0], orderid);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                        lbl_Msg.Text = ex.Message;
+                        div_msg.Visible = true;
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
                 }
+            }          
+            lnk_FieldGenerate_Click(null, null);
+        }
+        public void sentdatatoSPLIst(string sVoucher,DataTable dt,string sOrder)
+        {
+            if (drp_Campus.SelectedItem.Text == "Males")
+            {
+                Campus = InitializeModule.EnumCampus.Males;
             }
             else
             {
-                //Unable to find payment for Order# LGKPF2I2mBlAJxqQ
-                SqlCommand cmd = new SqlCommand("update Acc_Payment_Order set isCanceled='True' where sOrder=@sOrder", sc);
-                cmd.Parameters.AddWithValue("@sOrder", orderid);
+                Campus = InitializeModule.EnumCampus.Females;
+            }
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+
+            DataTable CurrentdtSPList = dt;
+
+            string login = "ets.services.admin@ect.ac.ae"; //give your username here  
+            string password = "Ser71ces@328"; //give your password
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            string siteUrl = "https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices";
+            ClientContext clientContext = new ClientContext(siteUrl);
+            Microsoft.SharePoint.Client.List myList = clientContext.Web.Lists.GetByTitle("Students_Requests");
+            ListItemCreationInformation itemInfo = new ListItemCreationInformation();
+            Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
+            //string refno = Create16DigitString();
+            myItem["Title"] = CurrentdtSPList.Rows[0]["Title"].ToString();
+            //myItem["RequestID"] = refno;
+            myItem["Year"] = CurrentdtSPList.Rows[0]["Year"].ToString();
+            myItem["Semester"] = CurrentdtSPList.Rows[0]["Semester"].ToString();
+            myItem["Request"] = CurrentdtSPList.Rows[0]["Request"].ToString();
+            myItem["RequestNote"] = CurrentdtSPList.Rows[0]["RequestNote"].ToString();
+            myItem["ServiceID"] = CurrentdtSPList.Rows[0]["ServiceID"].ToString();
+            myItem["Fees"] = CurrentdtSPList.Rows[0]["Fees"].ToString();
+            //myItem["Requester"] = clientContext.Web.EnsureUser(hdf_StudentEmail.Value);
+            myItem["Requester"] = clientContext.Web.EnsureUser(CurrentdtSPList.Rows[0]["Requester"].ToString());
+            myItem["StudentID"] = CurrentdtSPList.Rows[0]["StudentID"].ToString();
+            myItem["StudentName"] = CurrentdtSPList.Rows[0]["StudentName"].ToString();
+            myItem["Contact"] = CurrentdtSPList.Rows[0]["Contact"].ToString();
+            myItem["Finance"] = clientContext.Web.EnsureUser(CurrentdtSPList.Rows[0]["Finance"].ToString());
+            myItem["FinanceAction"] = CurrentdtSPList.Rows[0]["FinanceAction"].ToString();
+            myItem["FinanceNote"] = "";
+            myItem["Host"] = clientContext.Web.EnsureUser(CurrentdtSPList.Rows[0]["Host"].ToString());
+            myItem["HostAction"] = CurrentdtSPList.Rows[0]["HostAction"].ToString();
+            myItem["HostNote"] = "";
+            //myItem["Provider"] = "";
+            myItem["ProviderAction"] = CurrentdtSPList.Rows[0]["ProviderAction"].ToString();
+            myItem["ProviderNote"] = "";
+            myItem["Status"] = CurrentdtSPList.Rows[0]["Status"].ToString();
+            myItem["Payment_Ref"] = sVoucher;
+            //myItem["Modified"] = DateTime.Now;
+            //myItem["Created"] = DateTime.Now;
+            //myItem["Created By"] = hdf_StudentEmail.Value;
+            //myItem["Modified By"] = hdf_StudentEmail.Value;
+            try
+            {
+                myItem.Update();
+
+                
+
+                var onlineCredentials = new SharePointOnlineCredentials(login, securePassword);
+                clientContext.Credentials = onlineCredentials;
+                clientContext.ExecuteQuery();
+
+                SqlCommand cmd = new SqlCommand("update Acc_Payment_Order set tOrder=@tOrder where sOrder=@sOrder", sc);
+                cmd.Parameters.AddWithValue("@tOrder", DBNull.Value);
+                cmd.Parameters.AddWithValue("@sOrder", sOrder);
                 try
                 {
                     sc.Open();
                     cmd.ExecuteNonQuery();
                     sc.Close();
-
-                    //Response.Write("<script>alert('Unable to find payment for Order# " + orderid + "');</script>");
-                    lbl_Msg.Text = "Unable to find payment for Order# " + orderid + "";
-                    div_msg.Visible = true;
                 }
                 catch(Exception ex)
                 {
                     sc.Close();
                     Console.WriteLine(ex.Message);
-                    lbl_Msg.Text = ex.Message;
-                    div_msg.Visible = true;
                 }
                 finally
                 {
                     sc.Close();
-                }                
-            }
-            lnk_FieldGenerate_Click(null, null);
-        }
+                }
 
+
+                lbl_Msg.Text = "Request (ID# " + CurrentdtSPList.Rows[0]["Title"].ToString() + ") Generated Successfully";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }            
+        }
         public void createvouchers(string sAcc,string sSID,string sPmtOrder,double dPmtAmount,double dVAT,int iPaidfor,DateTime creationTime)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
@@ -530,6 +688,11 @@ namespace LocalECT
                 Conn.Dispose();
             }
             return iEffected;
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

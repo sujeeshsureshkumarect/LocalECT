@@ -248,7 +248,7 @@ namespace LocalECT
                     sWhere += " AND R.sACC like '%" + txtACC.Text + "%' ";
                 }
 
-                sSQL += "" + sWhere + "AND VD.bytePaymentWay In(" + PaymentModevalues + ") AND VD.byteStatus In(" + Statusvalues + ") AND (CONVERT(DATE, CONVERT(VARCHAR, YEAR(VD.datePayment)) + '-' + CONVERT(VARCHAR, MONTH(VD.datePayment)) + '-' + CONVERT(VARCHAR, DAY(VD.datePayment))) Between '" + StartDate.Text.Trim() + "' AND '" + EndDate.Text.Trim() + "') ORDER BY " + ddlDateType.SelectedValue + ", Serial ";
+                sSQL += "" + sWhere + "AND VD.bytePaymentWay In(" + PaymentModevalues + ") AND VD.byteStatus In(" + Statusvalues + ") AND (CONVERT(DATE, CONVERT(VARCHAR, YEAR(VD.datePayment)) + '-' + CONVERT(VARCHAR, MONTH(VD.datePayment)) + '-' + CONVERT(VARCHAR, DAY(VD.datePayment))) Between '" + StartDate.Text.Trim() + " 00:00:00.000' AND '" + EndDate.Text.Trim() + " 23:59:59.999') ORDER BY " + ddlDateType.SelectedValue + ", Serial ";
 
                 sReturn = sSQL;
             }
