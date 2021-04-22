@@ -78,15 +78,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_AC;
 
         /// <summary>
-        /// btnCopy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCopy;
-
-        /// <summary>
         /// Loading control.
         /// </summary>
         /// <remarks>
@@ -202,6 +193,24 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton crsSearch;
+
+        /// <summary>
+        /// btnCopy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCopy;
+
+        /// <summary>
+        /// drp_Campus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Campus;
 
         /// <summary>
         /// MultiAdd control.

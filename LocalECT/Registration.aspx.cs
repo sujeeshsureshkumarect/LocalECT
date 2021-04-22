@@ -56,6 +56,14 @@ namespace LocalECT
                     {
                         string sCampus = Session["CurrentCampus"].ToString();
                         Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                        if(sCampus=="Males")
+                        {
+                            drp_Campus.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            drp_Campus.SelectedIndex = 1;
+                        }
                     }
                     Session["myList"] = null;
                     Session["myPlan"] = null;
@@ -2287,6 +2295,16 @@ namespace LocalECT
         }
         protected void crsSearch_Click(object sender, EventArgs e)
         {
+            //InitializeModule.EnumCampus Campus1 = InitializeModule.EnumCampus.Females;
+            //if (drp_Campus.SelectedItem.Text == "Males")
+            //{               
+            //    Campus1 = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+            //}
+            //else
+            //{                
+            //    Campus1 = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+            //}
+
             MultiAdd.ActiveViewIndex = 0;
             CTMDS.DataBind();
             grdCourses.DataBind();
@@ -2716,9 +2734,24 @@ namespace LocalECT
             {                
                 lbl_Msg.Text = "Female student copied or updated to Males and Campus changed to Males.";
                 Session["CurrentCampus"] = InitializeModule.EnumCampus.Males;
+                drp_Campus.SelectedIndex = 0;//Males
                 div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 div_msg.Visible = true;
                 btnCopy.Visible = false;
+            }
+        }
+
+        protected void drp_Campus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drp_Campus.SelectedItem.Text == "Males")
+            {
+                Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+                Session["CurrentCampus"] = InitializeModule.EnumCampus.Males;
+            }
+            else
+            {
+                Campus = (InitializeModule.EnumCampus)int.Parse(drp_Campus.SelectedItem.Value);
+                Session["CurrentCampus"] = InitializeModule.EnumCampus.Females;
             }
         }
     }

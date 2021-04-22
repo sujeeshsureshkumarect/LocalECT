@@ -7743,6 +7743,8 @@
     </Content>
     <Content Include="Online_Payment_Tracking.aspx" />
     <Content Include="Registered_Tracking.aspx" />
+    <Content Include="Semester_In_Out.aspx" />
+    <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
@@ -10130,6 +10132,13 @@
     <Compile Include="Security_Roles.aspx.designer.cs">
       <DependentUpon>Security_Roles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Semester_In_Out.aspx.cs">
+      <DependentUpon>Semester_In_Out.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Semester_In_Out.aspx.designer.cs">
+      <DependentUpon>Semester_In_Out.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10164,6 +10173,13 @@
     </Compile>
     <Compile Include="Student_Details.aspx.designer.cs">
       <DependentUpon>Student_Details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_GPAs.aspx.cs">
+      <DependentUpon>Student_GPAs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_GPAs.aspx.designer.cs">
+      <DependentUpon>Student_GPAs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Student_Profile.aspx.cs">
       <DependentUpon>Student_Profile.aspx</DependentUpon>

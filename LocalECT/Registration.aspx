@@ -108,16 +108,7 @@
                                         </div>   
                                         </div>
                                <%--      <label class="col-form-label col-md-2 col-sm-2 ">Acceptance Condition: </label>--%>
-                                    <div class="col-md-4 col-sm-4 ">
-                                                                          
-                                     
-
-                                    <div class="col-md-6 col-sm-6 ">
-                                         <asp:Button ID="btnCopy" runat="server"   
-                        onclick="btnCopy_Click" 
-                        Text="Register Student in Males" CssClass="btn btn-success btn-sm" />
-                                    </div>
-                                </div>
+                                   
                                 <hr />
                                 <div id="Loading" runat="server"
                                     style="vertical-align: middle; text-align: center">
@@ -183,12 +174,21 @@
                                                    <div class="form-group row">
                                      <label class="col-form-label col-md-1 col-sm-1 ">Course</label>
                                     <div class="col-md-3 col-sm-3 ">
-                                        <asp:TextBox ID="txtCourse" runat="server" AutoPostBack="True" CssClass="form-control" Width="250px"></asp:TextBox>
+                                        <asp:TextBox ID="txtCourse" runat="server" AutoPostBack="True" CssClass="form-control"></asp:TextBox>
                                         </div>
-                                    <div class="col-md-6 col-sm-6 ">
-                                          <asp:LinkButton ID="crsSearch" runat="server" CssClass="btn btn-success btn-sm"
+                                                       <div class="col-md-4 col-sm-4 ">
+                                                           <asp:LinkButton ID="crsSearch" runat="server" CssClass="btn btn-success btn-sm"
                                                     OnClick="crsSearch_Click"><i class="fa fa-search"></i> Search</asp:LinkButton>
-                                    </div>
+                                                             <asp:LinkButton ID="btnCopy" runat="server"   
+                        OnClick="btnCopy_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-male"></i> Register Student in Males</asp:LinkButton>
+                                                           </div>                                                      
+                                    <div class="col-md-3 col-sm-3 "> 
+                                        Campus
+                                        <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Campus_SelectedIndexChanged">
+                                            <asp:ListItem Text="Males" Value="1" />
+                                            <asp:ListItem Text="Females" Value="2" />
+                                        </asp:DropDownList>
+                                    </div>                                                       
                                 </div>
 
 
