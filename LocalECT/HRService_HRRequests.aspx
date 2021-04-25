@@ -35,7 +35,9 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-users"></i>  HR Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton></h2>
+                                            <h2><i class="fa fa-users"></i>  HR Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton>
+<a href="https://ectacae.sharepoint.com/sites/ECTPortal/eservices/hrservices/SitePages/Home.aspx" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-external-link"></i> All HR Service Requests</a>
+                                            </h2>
                                             <ul class="nav navbar-right panel_toolbox">                                                 
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              

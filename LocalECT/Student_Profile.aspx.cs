@@ -894,6 +894,14 @@ namespace LocalECT
                 while (Rd.Read())
                 {
                     hdnSerial.Value = Rd["lngSerial"].ToString();
+                    if(string.IsNullOrEmpty(Rd["iUnifiedID"].ToString())|| Rd["iUnifiedID"].ToString()=="0")
+                    {
+                        LinkButton1.Visible = true;
+                    }
+                    else
+                    {
+                        LinkButton1.Visible = false;
+                    }
                     if (Campus.ToString() == "Males")
                     {
                         lblUnified.Text = "M" + Rd["iUnifiedID"].ToString();
@@ -6380,6 +6388,60 @@ namespace LocalECT
                 //this.DetailsView1.Visible = false;
                 grdDocs.DataBind();
                 mtvDocs.ActiveViewIndex = 0;
+            }
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            string sFName = "";
+            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            //update Unified ID
+            if (iUnifiedID > 0)
+            {
+                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+                //check reference number
+                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(hdnSerial.Value)) == true)
+                {
+                    //Get updated UnifiedID
+                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value));
+                }
+                if (Campus.ToString() == "Males")
+                {
+                    lblUnified.Text = "M" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
+                }
+                else
+                {
+                    lblUnified.Text = "F" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
+                }
+            }
+            else
+            {
+                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+                if (iUnifiedID == 0)
+                {
+                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+                }
+                if (Campus.ToString() == "Males")
+                {
+                    lblUnified.Text = "M" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
+                }
+                else
+                {
+                    lblUnified.Text = "F" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
+                }
+                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+            }
+            if (string.IsNullOrEmpty(iUnifiedID.ToString()) || iUnifiedID.ToString() == "0")
+            {
+                LinkButton1.Visible = true;
+            }
+            else
+            {
+                LinkButton1.Visible = false;
             }
         }
     }

@@ -455,6 +455,7 @@ namespace LocalECT
                 lbl_Object.Text = DescTXT.Text;
                 fillObjectPrivilegeslst(true);
             }
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
 
         private int AddPrivileges(int iObjectID)

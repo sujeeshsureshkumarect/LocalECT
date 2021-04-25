@@ -220,6 +220,8 @@
                                                     <label class="col-form-label col-md-3 col-sm-3">Unified No.</label>
                                                     <div class="col-md-9 col-sm-9 ">
                                                         <asp:TextBox ID="lblUnified" runat="server" CssClass="form-control" ReadOnly="true" TabIndex="1"></asp:TextBox>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="blue"
+                                                                Text="GET UID" Visible="true" onclick="LinkButton1_Click" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

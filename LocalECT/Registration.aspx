@@ -100,12 +100,21 @@
                                >
             </asp:DropDownList>
                                         </div>
-                                    <div class="col-md-4 col-sm-4 ">
+                                     <br />
+                                      <label class="col-form-label col-md-1 col-sm-1 ">Campus</label>
+                                     <div class="col-md-2 col-sm-2 ">
+                                     <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Campus_SelectedIndexChanged">
+                                            <asp:ListItem Text="Males" Value="1" />
+                                            <asp:ListItem Text="Females" Value="2" />
+                                        </asp:DropDownList>
+                                         </div>
+                                    <div class="col-md-5 col-sm-5 ">
                                         <b>Acceptance Type: </b>
                                       <asp:Label ID="lbl_AT" runat="server"></asp:Label>
+                                        <br />
                                         <b>Acceptance Condition: </b>
                                         <asp:Label ID="lbl_AC" runat="server"></asp:Label>
-                                        </div>   
+                                        </div>                                
                                         </div>
                                <%--      <label class="col-form-label col-md-2 col-sm-2 ">Acceptance Condition: </label>--%>
                                    
@@ -182,13 +191,13 @@
                                                              <asp:LinkButton ID="btnCopy" runat="server"   
                         OnClick="btnCopy_Click" CssClass="btn btn-success btn-sm"><i class="fa fa-male"></i> Register Student in Males</asp:LinkButton>
                                                            </div>                                                      
-                                    <div class="col-md-3 col-sm-3 "> 
+                                  <%--  <div class="col-md-3 col-sm-3 "> 
                                         Campus
                                         <asp:DropDownList ID="drp_Campus" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Campus_SelectedIndexChanged">
                                             <asp:ListItem Text="Males" Value="1" />
                                             <asp:ListItem Text="Females" Value="2" />
                                         </asp:DropDownList>
-                                    </div>                                                       
+                                    </div> --%>                                                      
                                 </div>
 
 
