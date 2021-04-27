@@ -63,6 +63,32 @@
                                     <asp:Label ID="lbl_Msg" runat="server" Text="" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                 </div>
                             </div>
+
+                             <asp:HiddenField ID="HiddenScrollTop" runat="server" Value="0" ClientIDMode="Static"/>
+                        <asp:HiddenField ID="HiddenScrollTop1" runat="server" Value="0" ClientIDMode="Static"/>
+                        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>                         
+                         <script>
+                             $(function () {
+                                 //recover the scroll postion                                 
+                                 if ($("#HiddenScrollTop").val() > 0) {
+                                     $("#div1").scrollTop($("#HiddenScrollTop").val());
+                                 }
+                                 if ($("#HiddenScrollTop1").val() > 0) {
+                                     $("#div2").scrollTop($("#HiddenScrollTop1").val());
+                                 }
+
+                             })
+                             $(function () {
+                                 //save the scroll position
+                                 $("#div1").scroll(function () {
+                                     $("#HiddenScrollTop").val($(this).scrollTop());
+                                 });
+                                 $("#div2").scroll(function () {
+                                     $("#HiddenScrollTop1").val($(this).scrollTop());
+                                 });
+                             })
+                         </script>
+
                             <div class="row">
                                 <div class="col-md-5 col-sm-5">
                                     <div class="x_panel">
@@ -81,7 +107,7 @@
 														<asp:LinkButton ID="SearchCMD" runat="server" OnClick="SearchCMD_Click" CssClass="btn btn-success btn-sm" style="float: right;" ToolTip="Users Search"><i class="fa fa-search"></i></asp:LinkButton>                                                
 													</span>
 												</div>
-                                            <div>
+                                            <div id="div1">
 <asp:ListBox ID="UsersLST" runat="server" Width="100%" Height="288px" SelectionMode="Multiple" CssClass="select2_multiple form-control"></asp:ListBox>
                                             </div>
                                         </div>
@@ -110,7 +136,7 @@
                                         <div class="x_content">
                                             <br />
                                             <br />
-                                            <div>
+                                            <div id="div2">
                                                 <asp:ListBox ID="RoleUsersLST" runat="server" Height="288px" Width="100%" SelectionMode="Multiple" CssClass="select2_multiple form-control" style="float:right"></asp:ListBox>
                                                 </div>
                                         </div>

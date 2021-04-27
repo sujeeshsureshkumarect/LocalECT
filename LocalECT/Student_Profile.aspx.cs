@@ -352,10 +352,25 @@ namespace LocalECT
                         lblIsVerfiedFromRegistrar.ForeColor = Color.Green;  //#009933
                     }
 
-                    if (txtECTEmail.Text != "" && txtECTEmail.Text != null)
+
+                    if (txtECTEmail.Text != "" && txtECTEmail.Text != null && txtECTEmail.Text != "000000@ect.ac.ae")
                     {
                         btnCreateEmail.Visible = false;//false
                     }
+                    else
+                    {
+                        if (Session["CurrentRole"].ToString() == "91")//SIS Admin
+                        {
+                            btnCreateEmail.Visible = true;
+                            btnCreateEmail.Enabled = true;
+                        }
+                        else
+                        {
+                            btnCreateEmail.Visible = false;
+                            btnCreateEmail.Enabled = false;
+                        }
+                    }
+
                     if(!IsPostBack)
                     {
                         if (ddlNationality.SelectedValue == "1")//UAE
@@ -2201,8 +2216,8 @@ namespace LocalECT
         {
             int iYear = 0;
             int iSemester = 0;
-            iSemester = Convert.ToInt32(Session["CurrentSemester"].ToString());
-            iYear = Convert.ToInt32(Session["CurrentYear"].ToString());
+            iSemester = Convert.ToInt32(Session["RegSemester"].ToString());//Session["CurrentSemester"]
+            iYear = Convert.ToInt32(Session["RegYear"].ToString());//Session["CurrentYear"]
 
             int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, lblStudentId.Text, iYear, iSemester);
 
@@ -2235,6 +2250,7 @@ namespace LocalECT
             string sFirstName = txtFNameEn.Text + " " + txtLNameEn.Text;
             string sLastName = " - " + lblStudentId.Text;
             CreateZoomAccount(txtECTEmail.Text, sFirstName, sLastName);
+            lbl_Msg.Text += " & Zoom";
             div_msg.Visible = true;
             div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
         }
@@ -2255,27 +2271,46 @@ namespace LocalECT
             }
 
 
-            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            ////update Unified ID
+            //if (iUnifiedID > 0)
+            //{
+            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+            //    //check reference number
+            //    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(hdnSerial.Value)) == true)
+            //    {
+            //        //Get updated UnifiedID
+            //        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value));
+            //    }
+            //}
+            //else
+            //{
+            //    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            //    if (iUnifiedID == 0)
+            //    {
+            //        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            //    }
+            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+            //}
+
+            //New Code on 25-04-2021 by Mr. Ihab new Query           
+            int iUnifiedID = LibraryMOD.GetNewUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
             //update Unified ID
             if (iUnifiedID > 0)
             {
                 LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
-                //check reference number
-                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(hdnSerial.Value)) == true)
+                if (Campus.ToString() == "Males")
                 {
-                    //Get updated UnifiedID
-                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value));
+                    lblUnified.Text = "M" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
+                }
+                else
+                {
+                    lblUnified.Text = "F" + iUnifiedID.ToString();
+                    hdniUnifiedID.Value = iUnifiedID.ToString();
                 }
             }
-            else
-            {
-                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
-                if (iUnifiedID == 0)
-                {
-                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
-                }
-                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
-            }
+
             //Update student email    
             sECTEmail = sFName.ToString().Trim().Replace(" ", string.Empty) + iUnifiedID.ToString().PadLeft(6, Convert.ToChar("0")) + "@ect.ac.ae";
             if (LibraryMOD.UpdateStudentEmail(Campus, Convert.ToInt32(hdnSerial.Value), sECTEmail) == true)
@@ -2670,37 +2705,56 @@ namespace LocalECT
                             Session["StudentSerialNo"] = hdnSerial.Value;
 
                             //New Immediate creation of Unified ID as per Mr. Ihab on 25-03-2021
+                            //string sFName = "";
+                            //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                            ////update Unified ID
+                            //if (iUnifiedID > 0)
+                            //{
+                            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                            //    //check reference number
+                            //    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                            //    {
+                            //        //Get updated UnifiedID
+                            //        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                            //    if (iUnifiedID == 0)
+                            //    {
+                            //        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                            //    }
+                            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                            //}
+                            //if (Campus.ToString() == "Males")
+                            //{
+                            //    lblUnified.Text = "M" + iUnifiedID.ToString();
+                            //    //hdniUnifiedID.Value = iUnifiedID.ToString();
+                            //}
+                            //else
+                            //{
+                            //    lblUnified.Text = "F" + iUnifiedID.ToString();
+                            //    //hdniUnifiedID.Value = iUnifiedID.ToString();
+                            //}
+
+                            //New Code on 25-04-2021 by Mr. Ihabs new Query
                             string sFName = "";
-                            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                            int iUnifiedID = LibraryMOD.GetNewUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
                             //update Unified ID
                             if (iUnifiedID > 0)
                             {
-                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                //check reference number
-                                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+                                if (Campus.ToString() == "Males")
                                 {
-                                    //Get updated UnifiedID
-                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                    lblUnified.Text = "M" + iUnifiedID.ToString();
+                                    hdniUnifiedID.Value = iUnifiedID.ToString();
                                 }
-                            }
-                            else
-                            {
-                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                if (iUnifiedID == 0)
+                                else
                                 {
-                                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                    lblUnified.Text = "F" + iUnifiedID.ToString();
+                                    hdniUnifiedID.Value = iUnifiedID.ToString();
                                 }
-                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                            }
-                            if (Campus.ToString() == "Males")
-                            {
-                                lblUnified.Text = "M" + iUnifiedID.ToString();
-                                //hdniUnifiedID.Value = iUnifiedID.ToString();
-                            }
-                            else
-                            {
-                                lblUnified.Text = "F" + iUnifiedID.ToString();
-                                //hdniUnifiedID.Value = iUnifiedID.ToString();
                             }
                         }
 
@@ -4550,7 +4604,8 @@ namespace LocalECT
                                             if (dt1.Rows.Count > 0)
                                             {
                                                 sAcc = dt1.Rows[0]["strAccountNo"].ToString();
-                                                Session["sAcc"] = sAcc;
+                                                Session["sAcc"] = sAcc;                                                
+
                                                 SqlCommand cmd = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,strPhone1=@strPhone1,strPhone2=@strPhone2,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
                                                 cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
                                                 cmd.Parameters.AddWithValue("@lngStudentNumbernew", lblStudentId.Text.Trim());
@@ -4568,6 +4623,25 @@ namespace LocalECT
                                                     cmd.ExecuteNonQuery();
                                                     //Select Account Number of Student
                                                     sc.Close();
+
+
+                                                    SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", sc);
+                                                    cmd11.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text.Trim());
+                                                    try
+                                                    {
+                                                        sc.Open();
+                                                        cmd11.ExecuteNonQuery();
+                                                        sc.Close();
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        sc.Close();
+                                                        Console.WriteLine(ex.Message);
+                                                    }
+                                                    finally
+                                                    {
+                                                        sc.Close();
+                                                    }
 
                                                     //Create SIS User(111)
                                                     SqlCommand Cmd = new SqlCommand();
@@ -4615,29 +4689,48 @@ namespace LocalECT
                                                     {
                                                         sc.Close();
                                                     }
+                                                    //string sFName = "";
+                                                    //int iSerial = GetSerial(lblReference.Text.Trim());
+                                                    ////int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, iSerial, out sFName);
+                                                    ////update Unified ID
+                                                    //if (iUnifiedID > 0)
+                                                    //{
+                                                    //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                    //    //check reference number
+                                                    //    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                    //    {
+                                                    //        //Get updated UnifiedID
+                                                    //        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                    //    }
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    //    if (iUnifiedID == 0)
+                                                    //    {
+                                                    //        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    //    }
+                                                    //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                                    //}
+
+                                                    //New Code as per Mr. Ihab on 25-04-2021
                                                     string sFName = "";
-                                                    int iSerial = GetSerial(lblReference.Text.Trim());
-                                                    //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                    int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, iSerial, out sFName);
+                                                    int iUnifiedID = LibraryMOD.GetNewUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
                                                     //update Unified ID
                                                     if (iUnifiedID > 0)
                                                     {
-                                                        LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                                        //check reference number
-                                                        if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                        LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+                                                        if (Campus.ToString() == "Males")
                                                         {
-                                                            //Get updated UnifiedID
-                                                            iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                            lblUnified.Text = "M" + iUnifiedID.ToString();
+                                                            hdniUnifiedID.Value = iUnifiedID.ToString();
                                                         }
-                                                    }
-                                                    else
-                                                    {
-                                                        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                        if (iUnifiedID == 0)
+                                                        else
                                                         {
-                                                            iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                            lblUnified.Text = "F" + iUnifiedID.ToString();
+                                                            hdniUnifiedID.Value = iUnifiedID.ToString();
                                                         }
-                                                        LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
                                                     }
 
                                                     //Update CX API Registration Status
@@ -4727,27 +4820,46 @@ namespace LocalECT
                                                 sc.Close();
                                             }
 
+                                            //string sFName = "";
+                                            //int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            ////update Unified ID
+                                            //if (iUnifiedID > 0)
+                                            //{
+                                            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                            //    //check reference number
+                                            //    if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                            //    {
+                                            //        //Get updated UnifiedID
+                                            //        iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                            //    }
+                                            //}
+                                            //else
+                                            //{
+                                            //    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            //    if (iUnifiedID == 0)
+                                            //    {
+                                            //        iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            //    }
+                                            //    LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
+                                            //}
+
+                                            //New Code by Mr. Ihab on 25-04-2021
                                             string sFName = "";
-                                            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                            int iUnifiedID = LibraryMOD.GetNewUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
                                             //update Unified ID
                                             if (iUnifiedID > 0)
                                             {
-                                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
-                                                //check reference number
-                                                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"])) == true)
+                                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
+                                                if (Campus.ToString() == "Males")
                                                 {
-                                                    //Get updated UnifiedID
-                                                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]));
+                                                    lblUnified.Text = "M" + iUnifiedID.ToString();
+                                                    hdniUnifiedID.Value = iUnifiedID.ToString();
                                                 }
-                                            }
-                                            else
-                                            {
-                                                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
-                                                if (iUnifiedID == 0)
+                                                else
                                                 {
-                                                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), out sFName);
+                                                    lblUnified.Text = "F" + iUnifiedID.ToString();
+                                                    hdniUnifiedID.Value = iUnifiedID.ToString();
                                                 }
-                                                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(Session["StudentSerialNo"]), iUnifiedID);
                                             }
 
                                             //Update CX API Registration Status
@@ -5195,7 +5307,25 @@ namespace LocalECT
                 Cmd.Parameters.Add("@sUser", SqlDbType.VarChar).Value = sUser;
                 Cmd.ExecuteNonQuery();
 
-                
+
+                SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", Conn);
+                cmd11.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text.Trim());
+                try
+                {
+                    Conn.Open();
+                    cmd11.ExecuteNonQuery();
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Conn.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Conn.Close();
+                }
+
                 //if (ddlIDs.SelectedValue != "0")
                 //{
                 //    Cmd.CommandText = "UPDATE Reg_Applications SET bOtherCollege =" + rbnStatus.SelectedValue + "  WHERE lngStudentNumber='" + ddlIDs.SelectedValue + "'";
@@ -6394,17 +6524,11 @@ namespace LocalECT
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             string sFName = "";
-            int iUnifiedID = LibraryMOD.GetMaxUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
+            int iUnifiedID = LibraryMOD.GetNewUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
             //update Unified ID
             if (iUnifiedID > 0)
             {
-                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
-                //check reference number
-                if (LibraryMOD.UpdateStudentUnifiedIDIfHasRefID(Campus, Convert.ToInt32(hdnSerial.Value)) == true)
-                {
-                    //Get updated UnifiedID
-                    iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value));
-                }
+                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);                
                 if (Campus.ToString() == "Males")
                 {
                     lblUnified.Text = "M" + iUnifiedID.ToString();
@@ -6415,26 +6539,10 @@ namespace LocalECT
                     lblUnified.Text = "F" + iUnifiedID.ToString();
                     hdniUnifiedID.Value = iUnifiedID.ToString();
                 }
-            }
-            else
-            {
-                iUnifiedID = LibraryMOD.GetUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
-                if (iUnifiedID == 0)
-                {
-                    iUnifiedID = LibraryMOD.GetMaxUnifiedID_withoutCheckRefID(Campus, Convert.ToInt32(hdnSerial.Value), out sFName);
-                }
-                if (Campus.ToString() == "Males")
-                {
-                    lblUnified.Text = "M" + iUnifiedID.ToString();
-                    hdniUnifiedID.Value = iUnifiedID.ToString();
-                }
-                else
-                {
-                    lblUnified.Text = "F" + iUnifiedID.ToString();
-                    hdniUnifiedID.Value = iUnifiedID.ToString();
-                }
-                LibraryMOD.UpdateStudentUnifiedID(Campus, Convert.ToInt32(hdnSerial.Value), iUnifiedID);
-            }
+                lbl_Msg.Text = "UID ("+ lblUnified.Text + ") Generated Successfully.";
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                div_msg.Visible = true;
+            }           
             if (string.IsNullOrEmpty(iUnifiedID.ToString()) || iUnifiedID.ToString() == "0")
             {
                 LinkButton1.Visible = true;

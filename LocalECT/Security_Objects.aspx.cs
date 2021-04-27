@@ -314,7 +314,7 @@ namespace LocalECT
 
             }
 
-
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
         protected void SaveCMD_Click(object sender, EventArgs e)
         {
@@ -386,8 +386,7 @@ namespace LocalECT
 
 
             }
-
-
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
         protected void DeleteCMD_Click(object sender, EventArgs e)
         {
@@ -442,7 +441,7 @@ namespace LocalECT
 
 
             }
-
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
         protected void myTree_SelectedNodeChanged(object sender, EventArgs e)
         {
@@ -576,6 +575,7 @@ namespace LocalECT
                 lbl_Msg.Text = "Select any Object First !";
                 div_msg.Visible = true;
             }
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
         private void Clear_Controls()
         {

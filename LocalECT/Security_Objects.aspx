@@ -184,6 +184,26 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <asp:HiddenField ID="HiddenScrollTop" runat="server" Value="0" ClientIDMode="Static"/>                       
+                        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+                         <script>
+                             $(function () {
+                                 //recover the scroll postion                                 
+                                 if ($("#HiddenScrollTop").val() > 0) {
+                                     $("#ContentPlaceHolder1_divTree").scrollTop($("#HiddenScrollTop").val());    
+                                 }
+                                                                   
+                             })
+                             $(function () {
+                                 //save the scroll position
+                                 $("#ContentPlaceHolder1_divTree").scroll(function () {                                                                           
+                                         $("#HiddenScrollTop").val($(this).scrollTop());                                                                         
+                                 });                                
+                             })
+                         </script>
+
                                 <div class="col-md-6 col-sm-6">
                                     <div class="x_panel">
                                         <div class="x_title">

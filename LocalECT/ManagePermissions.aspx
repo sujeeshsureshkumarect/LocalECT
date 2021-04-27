@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagePermissions.aspx.cs" Inherits="LocalECT.ManagePermissions" MasterPageFile="~/LocalECT.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManagePermissions.aspx.cs" Inherits="LocalECT.ManagePermissions" MasterPageFile="~/LocalECT.Master" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -44,7 +44,32 @@
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
-                        </div>
+                        </div>                        
+                        <asp:HiddenField ID="HiddenScrollTop" runat="server" Value="0" ClientIDMode="Static"/>
+                        <asp:HiddenField ID="HiddenScrollTop1" runat="server" Value="0" ClientIDMode="Static"/>
+                        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>                         
+                         <script>
+                             $(function () {
+                                 //recover the scroll postion                                 
+                                 if ($("#HiddenScrollTop").val() > 0) {
+                                     $("#ContentPlaceHolder1_divTree").scrollTop($("#HiddenScrollTop").val());
+                                 }
+                                 if ($("#HiddenScrollTop1").val() > 0) {
+                                     $("#ContentPlaceHolder1_divTree0").scrollTop($("#HiddenScrollTop1").val());
+                                 }
+
+                             })
+                             $(function () {
+                                 //save the scroll position
+                                 $("#ContentPlaceHolder1_divTree").scroll(function () {
+                                     $("#HiddenScrollTop").val($(this).scrollTop());
+                                 });
+                                 $("#ContentPlaceHolder1_divTree0").scroll(function () {
+                                     $("#HiddenScrollTop1").val($(this).scrollTop());
+                                 });
+                             })
+                         </script>
+
                         <div class="x_content">   
                             <div id="divHeader" runat="server"                     
                     style="color: #444444;  text-transform: capitalize; font-size: large;" 

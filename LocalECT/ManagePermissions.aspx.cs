@@ -376,6 +376,7 @@ namespace LocalECT
             //divMsg.InnerText = myTree.SelectedNode.ValuePath;
             Session["myValuePath"] = myTree.SelectedNode.ValuePath;
             //get_Node();
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
 
         protected void AddObjCMD_Click(object sender, EventArgs e)
@@ -411,6 +412,8 @@ namespace LocalECT
             {
 
             }
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + RoleTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
 
         protected void RemoveObjCMD_Click(object sender, EventArgs e)
@@ -453,15 +456,16 @@ namespace LocalECT
             {
                 Conn.Close();
                 Conn.Dispose();
-
             }
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + myTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + RoleTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
 
         protected void RoleTree_SelectedNodeChanged(object sender, EventArgs e)
         {
             Session["ValuePath"] = RoleTree.SelectedNode.ValuePath;
             get_RoleObjNode();
-
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + RoleTree.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
         }
 
         private void AddObjsToRole(int ObjStart)

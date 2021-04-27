@@ -3971,6 +3971,7 @@
     <Content Include="GradesEdit_Alt.aspx" />
     <Content Include="GradesEntry.aspx" />
     <Content Include="GradesView.aspx" />
+    <Content Include="Grades_Stat.aspx" />
     <Content Include="Graduates_Tracking.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="HRService_HRRequests.aspx" />
@@ -8699,6 +8700,13 @@
     </Compile>
     <Compile Include="GradesView.aspx.designer.cs">
       <DependentUpon>GradesView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Grades_Stat.aspx.cs">
+      <DependentUpon>Grades_Stat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grades_Stat.aspx.designer.cs">
+      <DependentUpon>Grades_Stat.aspx</DependentUpon>
     </Compile>
     <Compile Include="Graduates_Tracking.aspx.cs">
       <DependentUpon>Graduates_Tracking.aspx</DependentUpon>

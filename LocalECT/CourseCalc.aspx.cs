@@ -97,7 +97,7 @@ namespace LocalECT
                 }
                 else
                 {
-                    iCampus = 0;                    
+                    iCampus = 2;                    
                 }
 
                 //iCampus = Convert.ToInt32(Session["CurrentCampus"]);
@@ -133,9 +133,9 @@ namespace LocalECT
                 }
                 else
                 {
-                    iCampus = 0;
+                    iCampus = 2;
                 }
-                Session["CurrentCampus"] = iCampus;
+               Session["CurrentCampus"] = Campus;//iCampus
             }
             string sConn = "";
 

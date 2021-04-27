@@ -318,5 +318,297 @@ namespace LocalECT
 
             Response.Redirect("Transcript.aspx?PreviousTerm=" + iPrevTerm);
         }
+        private string Get_New_Acc()
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS((InitializeModule.EnumCampus)Session["CurrentCampus"]);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            string sNewAcc = "";
+            try
+            {
+
+                string sSQL = "SELECT sNewACC FROM New_ACC";
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+
+                sNewAcc = Cmd.ExecuteScalar().ToString();
+
+            }
+            catch (Exception exp)
+            {
+                //Console.WriteLine("{0} Exception caught.", exp);
+                //divMsg.InnerText = exp.Message;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return sNewAcc;
+        }
+        protected void lnk_Create_ACC_Click(object sender, EventArgs e)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS((InitializeModule.EnumCampus)Session["CurrentCampus"]);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;//lngStudentNumber
+            string CommandName = button.CommandName;//sName
+            string sPhone1 = button.ValidationGroup;
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentSearch,
+                    InitializeModule.enumPrivilege.CreateAccount, CurrentRole) != true)
+            {
+                Server.Transfer("Authorization.aspx");
+            }
+            //Get Account Number
+            SqlCommand cmd = new SqlCommand("SELECT A.lngStudentNumber, AC.strAccountNo FROM Reg_Applications AS A INNER JOIN Reg_Student_Accounts AS AC ON A.lngStudentNumber = AC.lngStudentNumber where A.lngStudentNumber=@lngStudentNumber;SELECT A.lngStudentNumber, AC.strAccountNo FROM Reg_Applications AS A INNER JOIN Reg_Student_Accounts AS AC ON A.lngStudentNumber = AC.lngStudentNumber where A.lngStudentNumber in (select sReference from Reg_Applications where lngStudentNumber=@lngStudentNumber)", sc);
+            cmd.Parameters.AddWithValue("@lngStudentNumber", commandArgument);
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(ds);
+                sc.Close();
+
+                if (ds.Tables[0].Rows.Count > 0) //If Student has Account Number
+                {
+                    //No Actions
+                    Response.Write("<script>alert('Student already has an account (# "+ ds.Tables[0].Rows[0]["strAccountNo"].ToString() + ").');</script>");
+                    return;
+                }
+                else if (ds.Tables[1].Rows.Count > 0)
+                {
+                    //If Reference has Account Number
+                    //Then update it.
+                    string sAcc = ds.Tables[1].Rows[0]["strAccountNo"].ToString();
+
+                    SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set lngStudentNumber=@lngStudentNumbernew,intRegYear=@intRegYear,byteRegSem=@byteRegSem,strUserSave=@strUserSave,dateLastSave=@dateLastSave where strAccountNo=@strAccountNo", sc);
+                    cmd1.Parameters.AddWithValue("@strAccountNo", sAcc);
+                    cmd1.Parameters.AddWithValue("@lngStudentNumbernew", commandArgument);                    
+                    cmd1.Parameters.AddWithValue("@intRegYear", Convert.ToInt32(Session["CurrentYear"]));
+                    cmd1.Parameters.AddWithValue("@byteRegSem", Session["CurrentSemester"].ToString());
+                    cmd1.Parameters.AddWithValue("@strUserSave", Session["CurrentUserName"].ToString());
+                    cmd1.Parameters.AddWithValue("@dateLastSave", DateTime.Now);
+                    try
+                    {
+                        sc.Open();                        
+                        cmd1.ExecuteNonQuery();
+                        sc.Close();
+
+
+                        SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", sc);
+                        cmd11.Parameters.AddWithValue("@lngStudentNumber", commandArgument);
+                        try
+                        {
+                            sc.Open();
+                            cmd11.ExecuteNonQuery();
+                            sc.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+
+                        if (sAcc != null || sAcc != "" || sAcc != "0")
+                        {
+                            //Create SIS User(111)
+                            SqlCommand Cmd = new SqlCommand();
+                            Cmd.Connection = sc;
+                            Cmd.CommandText = "Create_Online_User";
+                            Cmd.CommandType = CommandType.StoredProcedure;
+                            Cmd.Parameters.Add("@sNo", SqlDbType.VarChar).Value = commandArgument;
+                            Cmd.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = sAcc;
+                            Cmd.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                            try
+                            {
+                                sc.Open();
+                                Cmd.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+                            int iStatus = 1;
+                            string sSQL = "UPDATE Reg_Student_Accounts";
+                            sSQL += " SET intOnlineStatus =" + iStatus;
+                            sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                            sSQL += " Where strAccountNo='" + sAcc + "'";
+                            Cmd.CommandType = CommandType.Text;
+                            Cmd.CommandText = sSQL;
+                            try
+                            {
+                                sc.Open();
+                                Cmd.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+                        }                     
+                        Response.Write("<script>alert('Student account (# " + sAcc + ") created Successfully-(From Reference).');</script>");
+                        Response.Redirect("Acc_Search_Edit?sAcc="+ sAcc + "");
+                    }
+                    catch (Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
+                }
+                else //Student have no accounts yet
+                {                   
+                    SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);                    
+                    string newAcc = Get_New_Acc();
+                    try
+                    {
+                        SqlCommand Cmd = new SqlCommand();
+                        Cmd.CommandText = "Add_Account";
+                        Cmd.CommandType = CommandType.StoredProcedure;
+                        Cmd.Connection = Conn;
+                        Cmd.Parameters.Add("@strAccountNo", SqlDbType.VarChar).Value = newAcc;
+                        Cmd.Parameters.Add("@strStudentName", SqlDbType.VarChar).Value = CommandName;
+                        Cmd.Parameters.Add("@lngStudentNumber", SqlDbType.VarChar).Value = commandArgument;
+                        Cmd.Parameters.Add("@strPhone1", SqlDbType.VarChar).Value = sPhone1;
+                        Cmd.Parameters.Add("@byteAccountStatus", SqlDbType.SmallInt).Value = 0;
+                        //int iTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
+                        //int iYear = 0;
+                        //int iSem = 0;
+                        //iYear = LibraryMOD.SeperateTerm(iTerm, out iSem);
+                        int iCSem = 0;
+                        int iCYear = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out iCSem);
+                        Cmd.Parameters.Add("@intRegYear", SqlDbType.Int).Value = iCYear;
+                        Cmd.Parameters.Add("@byteRegSem", SqlDbType.SmallInt).Value = iCSem;
+                        Cmd.Parameters.Add("@intDelegation", SqlDbType.Int).Value = 0;
+                        Cmd.Parameters.Add("@curDelegation", SqlDbType.Decimal).Value = 0;
+                        Cmd.Parameters.Add("@strDelegationNote", SqlDbType.VarChar).Value = DBNull.Value;
+                        Cmd.Parameters.Add("@strNote", SqlDbType.VarChar).Value = DBNull.Value;
+                        Cmd.Parameters.Add("@byteType", SqlDbType.SmallInt).Value = 0;
+                        Cmd.Parameters.Add("@intOnlineStatus", SqlDbType.Int).Value = 1;
+                        //Cmd.Parameters.Add("@intOnlineUser", SqlDbType.Int).Value = 0;
+                        //Cmd.Parameters.Add("@strOnlinePWD", SqlDbType.VarChar).Value = "";
+                        string sUser = Session["CurrentUserName"].ToString();
+                        Cmd.Parameters.Add("@sUser", SqlDbType.VarChar).Value = sUser;
+                        Conn.Open();
+                        Cmd.ExecuteNonQuery();
+                        Conn.Close();
+
+
+                        SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", Conn);
+                        cmd11.Parameters.AddWithValue("@lngStudentNumber", commandArgument);
+                        try
+                        {
+                            Conn.Open();
+                            cmd11.ExecuteNonQuery();
+                            Conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Conn.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            Conn.Close();
+                        }
+
+                        if (newAcc != null || newAcc != "" || newAcc != "0")
+                        {
+                            //Create SIS User(111)
+                            SqlCommand Cmd5 = new SqlCommand();
+                            Cmd5.Connection = sc;
+                            Cmd5.CommandText = "Create_Online_User";
+                            Cmd5.CommandType = CommandType.StoredProcedure;
+                            Cmd5.Parameters.Add("@sNo", SqlDbType.VarChar).Value = commandArgument;
+                            Cmd5.Parameters.Add("@sAccount", SqlDbType.VarChar).Value = newAcc;
+                            Cmd5.Parameters.Add("@iRole", SqlDbType.Int).Value = 111;
+                            try
+                            {
+                                sc.Open();
+                                Cmd5.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+
+                            int iStatus = 1;
+                            string sSQL = "UPDATE Reg_Student_Accounts";
+                            sSQL += " SET intOnlineStatus =" + iStatus;
+                            sSQL += ",strUserSave='" + Session["CurrentUserName"].ToString() + "',dateLastSave=getDate()";
+                            sSQL += " Where strAccountNo='" + newAcc + "'";
+                            Cmd.CommandType = CommandType.Text;
+                            Cmd.CommandText = sSQL;
+                            try
+                            {
+                                sc.Open();
+                                Cmd.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+                        }                        
+                    }
+                    catch (Exception exp)
+                    {
+                        Console.WriteLine("{0} Exception caught.", exp);
+                        //divMsg.InnerText = exp.Message;
+                    }
+                    finally
+                    {
+                        Conn.Close();
+                        Conn.Dispose();
+                    }
+                    // return newAcc;
+                    Response.Write("<script>alert('Student account (# " + newAcc + ") created Successfully.');</script>");
+                    Response.Redirect("Acc_Search_Edit?sAcc=" + newAcc + "");
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
     }
 }

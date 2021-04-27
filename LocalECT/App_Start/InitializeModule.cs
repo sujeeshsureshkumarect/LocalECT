@@ -579,7 +579,8 @@ public class InitializeModule
 
         FetchRequest = 182,//new
         AddOnlinePayment = 183,//new
-        CreateOnlineRequest = 184//new
+        CreateOnlineRequest = 184,//new
+        CreateAccount=185//New
 
     }
 
