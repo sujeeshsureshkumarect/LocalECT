@@ -1556,7 +1556,7 @@ namespace LocalECT
         protected void SidDS_Selected(object sender, SqlDataSourceStatusEventArgs e)
         {
             DbCommand command = e.Command;
-            //lnkNewId.Text = command.Parameters["@RETURN_VALUE"].Value.ToString();
+            lnkNewId.Text = command.Parameters["@RETURN_VALUE"].Value.ToString();
         }
         protected void CopyDS_Inserted(object sender, SqlDataSourceStatusEventArgs e)
         {

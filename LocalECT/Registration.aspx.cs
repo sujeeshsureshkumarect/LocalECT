@@ -42,6 +42,7 @@ namespace LocalECT
                 iRegSem = (int)Session["RegSemester"];
                 CurrentRole = (int)Session["CurrentRole"];
 
+
                 if (!IsPostBack)
                 {
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Registration,
@@ -65,6 +66,10 @@ namespace LocalECT
                             drp_Campus.SelectedIndex = 1;
                         }
                     }
+
+                    
+
+
                     Session["myList"] = null;
                     Session["myPlan"] = null;
                     //if (Session["CurrentStudent"] != null)
@@ -172,6 +177,8 @@ namespace LocalECT
                 }
                 CTMDS.ConnectionString = sConn;
                 TMDS.ConnectionString = sConn;
+
+               // sentdatatoSPLIstNewStudentsTracking("Salem012832@ect.ac.ae");
             }
             else
             {
@@ -1511,7 +1518,13 @@ namespace LocalECT
                         int iCYear = LibraryMOD.SeperateTerm(iTerm, out iCSem);
                         Session["CurrentYear"] = iCYear;
                         Session["CurrentSemester"] = iCSem;
-                        int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, sSID, iCYear, iCSem);
+
+                        int iYear = 0;
+                        int iSemester = 0;
+                        iSemester = Convert.ToInt32(Session["RegSemester"].ToString());//Session["CurrentSemester"]
+                        iYear = Convert.ToInt32(Session["RegYear"].ToString());//Session["CurrentYear"]
+
+                        int iRegisteredHours = LibraryMOD.GetCurrentRegisteredCourses(this.Campus, sSID, iYear, iSemester);
                         if (iRegisteredHours == 0)
                         {
                             //lbl_Msg.Text = "Student must register courses before creating email.";
@@ -1882,7 +1895,7 @@ namespace LocalECT
 
 
             string SIS_PWD = "";
-            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            Connection_StringCLS myConnection_String = new Connection_StringCLS((InitializeModule.EnumCampus)Session["CurrentCampus"]);
             SqlConnection sc1 = new SqlConnection(myConnection_String.Conn_string);
             SqlCommand cmd1 = new SqlCommand("SELECT strPhone1,strPhone2,strStudentName,strOnlinePWD from Reg_Student_Accounts where lngStudentNumber=@lngStudentNumber", sc1);
             cmd1.Parameters.AddWithValue("@lngStudentNumber", sSelectedValue.Value);

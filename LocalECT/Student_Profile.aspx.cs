@@ -21,6 +21,7 @@ using System.Web.UI.WebControls;
 using Microsoft.SharePoint.Client;
 using Microsoft.SharePoint;
 using ListItem = System.Web.UI.WebControls.ListItem;
+using EmiratesId.AE.PublicData;
 
 class ENGCourse
 {
@@ -323,15 +324,7 @@ namespace LocalECT
                     }
 
 
-                    //EID Data
-
-                    if (Session["CallerID"] != null)
-                    {
-                        if (Session["CallerID"].ToString() == "STD")
-                            getEIDData();
-                    }
-
-                    //End EID Data
+                    
 
 
                     int iVerificationResult = 0;
@@ -411,6 +404,15 @@ namespace LocalECT
                             RequiredFieldValidator28.Enabled = true;
                         }
                     }
+                    //EID Data
+
+                    if (Session["CallerID"] != null)
+                    {
+                        if (Session["CallerID"].ToString() == "STD")
+                            getEIDData();
+                    }
+
+                    //End EID Data
                 }
             }
             catch (Exception ex)
@@ -2508,6 +2510,9 @@ namespace LocalECT
 
                 //AddUserToGroup(userLogonName, "Males");
                 AddUserToGroup(userLogonName, Ounames);
+
+                //Call Sharepoint function New Student
+                sentdatatoSPLIstNewStudentsTracking(emailAddress);
             }
             return 0;
         }
@@ -2630,7 +2635,7 @@ namespace LocalECT
                 div_msg.Visible = true;
                 return;
             }
-            Response.Redirect("EIDInterface.aspx?CallerID=STD");
+            Response.Redirect("EIDInterface.aspx?CallerID=STD&sid="+ Request.QueryString["sid"] + "&isr=" + Request.QueryString["isr"] + "");
         }
 
         //Start Student Information
@@ -5133,7 +5138,7 @@ namespace LocalECT
             //Console.ReadLine();
         }
 
-        public void sentdatatoSPLIstNewStudentsTracking()
+        public void sentdatatoSPLIstNewStudentsTracking(string emailAddress)
         {
             int sem = 0;
             int Year = LibraryMOD.SeperateTerm(LibraryMOD.GetCurrentTerm(), out sem);
@@ -5212,7 +5217,7 @@ namespace LocalECT
             Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
             myItem["Title"] = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);//Term                     
             myItem["SID"] = lblStudentId.Text.Trim();//SID
-            myItem["Email"] = clientContext.Web.EnsureUser(txtECTEmail.Text.Trim());//Student Email   
+            myItem["Email"] = clientContext.Web.EnsureUser(emailAddress);//Student Email   
             //myItem["Email"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//Student Email  
             myItem["Password"] = SIS_PWD;//SIS Password
             myItem["Phone1"] = txtPhone1.Text.Trim();//Phone1

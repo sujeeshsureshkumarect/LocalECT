@@ -132,6 +132,14 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="UAE_IDCardCSharpAPI, Version=2.8.2.0, Culture=neutral, PublicKeyToken=1cc314aa30999ae9, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\UAE_IDCardCSharpAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="UAE_IDCardCSharpWrapper, Version=2.8.2.0, Culture=neutral, PublicKeyToken=78d91bbdf4a27f5a, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\UAE_IDCardCSharpWrapper.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -146,6 +154,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="ZFDemoSite">
+      <HintPath>..\..\..\Support Files\Old Version\ECTLocal_Sujeesh\ECTLocal_Sujeesh\Bin\ZFDemoSite.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +205,7 @@
     <Content Include="ECTSystems_Create.aspx" />
     <Content Include="ECTSystems_Home.aspx" />
     <Content Include="ECTSystems_Update.aspx" />
+    <Content Include="EIDInterface.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gentelella-master\build\css\custom.css" />
@@ -4308,6 +4320,8 @@
     <Content Include="images\Icons\x.jpg" />
     <Content Include="images\Icons\xml.gif" />
     <Content Include="images\InitialImage.png" />
+    <Content Include="images\Logos\ECTlogo.jpg" />
+    <Content Include="images\Logos\EIDLogo.jpg" />
     <Content Include="images\Majors\010103.bmp" />
     <Content Include="images\Majors\ACC100.bmp" />
     <Content Include="images\Majors\ACC101.bmp" />
@@ -6575,6 +6589,11 @@
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.css" />
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.v1.2.jquery.js" />
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\sexyalertbox.v1.2.jquery.mini.js" />
+    <Content Include="js\base64.js" />
+    <Content Include="js\errors.js" />
+    <Content Include="js\jquery-1.8.2.js" />
+    <Content Include="js\jquery-ui-1.9.0.js" />
+    <Content Include="js\zfcomponent.js" />
     <Content Include="Login.aspx" />
     <Content Include="LocalECT.Master" />
     <Content Include="images\Icons\vssver2.scc" />
@@ -8113,6 +8132,14 @@
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\Thumbs.db" />
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\images\vssver2.scc" />
     <Content Include="Includes\jQuery\sexy-alert-box-1.2.2\vssver2.scc" />
+    <Content Include="data_signing_certs\Data Signature-1-Prod.cer" />
+    <Content Include="data_signing_certs\Data Signature-2-Prod.cer" />
+    <Content Include="data_signing_certs\Data Signature-3-Prod.cer" />
+    <Content Include="data_signing_certs\Data Signature-4-Prod.cer" />
+    <Content Include="data_signing_certs\Test-TCA1.cer" />
+    <Content Include="data_signing_certs\Test-TCA2.cer" />
+    <Content Include="data_signing_certs\Test-TCA_V2.cer" />
+    <Content Include="data_signing_certs\Test-TCA_V2_1.cer" />
     <None Include="LPOPrint.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
