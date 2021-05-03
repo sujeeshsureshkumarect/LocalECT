@@ -180,6 +180,7 @@
     <Content Include="ACC_STD_Balance.aspx" />
     <Content Include="Applicants_Tracking.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
+    <Content Include="Attendance_Grades.aspx" />
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
     <Content Include="Bulk_SC_Change_Status.aspx" />
@@ -7765,6 +7766,7 @@
     <Content Include="Registered_Tracking.aspx" />
     <Content Include="Semester_In_Out.aspx" />
     <Content Include="Student_GPAs.aspx" />
+    <Content Include="Student_Search_SMSSent.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
@@ -8549,6 +8551,13 @@
     <Compile Include="App_Start\UserCls.cs" />
     <Compile Include="App_Start\Work_PlacesCls.cs" />
     <Compile Include="App_Start\XLS.cs" />
+    <Compile Include="Attendance_Grades.aspx.cs">
+      <DependentUpon>Attendance_Grades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendance_Grades.aspx.designer.cs">
+      <DependentUpon>Attendance_Grades.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Attendance_Warning.aspx.cs">
       <DependentUpon>Attendance_Warning.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10229,6 +10238,13 @@
     </Compile>
     <Compile Include="Student_Report_Center.aspx.designer.cs">
       <DependentUpon>Student_Report_Center.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student_Search_SMSSent.aspx.cs">
+      <DependentUpon>Student_Search_SMSSent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student_Search_SMSSent.aspx.designer.cs">
+      <DependentUpon>Student_Search_SMSSent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Student_Service_Requests.aspx.cs">
       <DependentUpon>Student_Service_Requests.aspx</DependentUpon>
