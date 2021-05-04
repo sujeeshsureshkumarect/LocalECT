@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class Student_Search_SMSSent
+    public partial class Bulk_SC_Send_SMS
     {
 
         /// <summary>
@@ -42,22 +42,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// txt_SID control.
+        /// alertsearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_SID;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertsearch;
 
         /// <summary>
-        /// txt_Mobile control.
+        /// lbl_IDs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Mobile;
+        protected global::System.Web.UI.WebControls.Label lbl_IDs;
 
         /// <summary>
         /// rdb_Lang control.
@@ -78,13 +78,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Text;
 
         /// <summary>
-        /// lnk_Sent control.
+        /// flp_upload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Sent;
+        protected global::System.Web.UI.WebControls.FileUpload flp_upload;
+
+        /// <summary>
+        /// lnk_BulkUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_BulkUpdate;
 
         /// <summary>
         /// lnk_Cancel control.

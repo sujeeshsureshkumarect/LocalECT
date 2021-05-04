@@ -266,6 +266,10 @@ namespace LocalECT
             {
                 Response.Redirect(drp_Bulk.SelectedItem.Value);
             }
+            else if(drp_Bulk.SelectedItem.Text == "Send SMS")
+            {
+                Response.Redirect(drp_Bulk.SelectedItem.Value);
+            }
             else
             {
 

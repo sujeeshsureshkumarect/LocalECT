@@ -25,7 +25,7 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                         InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
                 {
-                   Server.Transfer("Authorization.aspx");
+                  Server.Transfer("Authorization.aspx");
                 }
                 if (Session["CurrentCampus"] != null)
                 {
@@ -81,35 +81,48 @@ namespace LocalECT
             ServicePointManager.DefaultConnectionLimit = 9999;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            if (txt_Mobile.Text.Trim().StartsWith("+971"))
-            {
-                using (var httpClient = new HttpClient())
-                {
-                    using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://c-eu.linkmobility.io/sms/send"))
-                    {
-                        request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
+            //string a = txt_Mobile.Text.Substring(4, 1);
 
-                        request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
-                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                        var task = httpClient.SendAsync(request);
-                        task.Wait();
-                        var response = task.Result;
-                        string s = response.Content.ReadAsStringAsync().Result;
-                        if (response.IsSuccessStatusCode == true)
+            if(txt_Text.Text.Length>0)
+            {
+                if (txt_Mobile.Text.Trim().StartsWith("+971") && txt_Mobile.Text.Substring(4, 1) == "5")
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://c-eu.linkmobility.io/sms/send"))
                         {
-                            //Success
-                            lbl_Msg.Text = "SMS Sent";
-                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                            div_msg.Visible = true;
+                            request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
+
+                            request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
+                            //request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
+                            request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                            var task = httpClient.SendAsync(request);
+                            task.Wait();
+                            var response = task.Result;
+                            string s = response.Content.ReadAsStringAsync().Result;
+                            if (response.IsSuccessStatusCode == true)
+                            {
+                                //Success
+                                lbl_Msg.Text = "SMS Sent";
+                                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                div_msg.Visible = true;
+                            }
                         }
                     }
                 }
-            }
+                else
+                {
+                    lbl_Msg.Text = "Invalid Mobile Number";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                    return;
+                }
+            } 
             else
             {
-                lbl_Msg.Text = "Mobile number format incorrect.";
-                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-            }                     
+                lbl_Msg.Text = "SMS Text cannot be empty";
+                div_msg.Visible = true;
+                return;
+            }
         }
 
         protected void lnk_Cancel_Click(object sender, EventArgs e)

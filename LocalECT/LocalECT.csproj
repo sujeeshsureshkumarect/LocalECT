@@ -184,6 +184,7 @@
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
     <Content Include="Bulk_SC_Change_Status.aspx" />
+    <Content Include="Bulk_SC_Send_SMS.aspx" />
     <Content Include="ChangeMajor.aspx" />
     <Content Include="ChangePwd.aspx" />
     <Content Include="CHEDS_Enrollment.aspx" />
@@ -8579,6 +8580,13 @@
     <Compile Include="Bulk_SC_Change_Status.aspx.designer.cs">
       <DependentUpon>Bulk_SC_Change_Status.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Bulk_SC_Send_SMS.aspx.cs">
+      <DependentUpon>Bulk_SC_Send_SMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bulk_SC_Send_SMS.aspx.designer.cs">
+      <DependentUpon>Bulk_SC_Send_SMS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangeMajor.aspx.cs">
       <DependentUpon>ChangeMajor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10315,12 +10323,12 @@
     <Folder Include="NewsFeed\" />
     <Folder Include="Student_Files\Female\" />
     <Folder Include="Student_Files\Male\" />
-    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Upload\Bulk SMS Sample.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

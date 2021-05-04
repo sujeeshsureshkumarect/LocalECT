@@ -306,7 +306,7 @@ StudentID3"></asp:TextBox>
                                 <asp:DropDownList ID="drp_Bulk" runat="server" CssClass="btn btn-secondary btn-sm" ValidationGroup="no1">
                                     <asp:ListItem Text="Bulk Actions" Value="Bulk Actions" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="Change Status" Value="Bulk_SC_Change_Status"></asp:ListItem>
-                                    <asp:ListItem Text="Action 2" Value="#"></asp:ListItem>
+                                    <asp:ListItem Text="Send SMS" Value="Bulk_SC_Send_SMS"></asp:ListItem>
                                     <asp:ListItem Text="Action 3" Value="#"></asp:ListItem>
                                     <asp:ListItem Text="Action 4" Value="#"></asp:ListItem>
                                     <asp:ListItem Text="Action 5" Value="#"></asp:ListItem>

@@ -36,7 +36,10 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-dashboard"></i> Student Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton></h2>
+                                            <h2><i class="fa fa-dashboard"></i> Student Service Requests <asp:LinkButton ID="lnk_refresh" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_refresh_Click" ToolTip="Refresh"><i class="fa fa-refresh"></i></asp:LinkButton>
+                                                <a href="https://ectacae.sharepoint.com/sites/ECTPortal/eservices/studentservices/SitePages/StudentsRequest.aspx" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-external-link"></i> All Student Requests</a>
+
+                                            </h2>
                                             <ul class="nav navbar-right panel_toolbox">
                                                  <%--<a href="StudentSearch.aspx" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Student Search</a>--%>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
