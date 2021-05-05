@@ -4743,6 +4743,8 @@ namespace LocalECT
                                                     {
                                                         updatecxapiregistration(txtContactID.Text);
                                                     }
+                                                    //Sent SMS
+                                                    sentsms(txtPhone1.Text.Trim(), lblStudentId.Text);
                                                     //Sharepoint List Creation
                                                     sentdatatoSPLIst();
                                                 }
@@ -4872,6 +4874,8 @@ namespace LocalECT
                                             {
                                                 updatecxapiregistration(txtContactID.Text);
                                             }
+                                            //Sent SMS
+                                            sentsms(txtPhone1.Text.Trim(), lblStudentId.Text);
                                             //Sharepoint List Creation
                                             sentdatatoSPLIst();
 
@@ -4974,6 +4978,89 @@ namespace LocalECT
                
         }
 
+        public void sentsms(string phone1,string sID)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            if (!string.IsNullOrEmpty(phone1))
+            {
+                phone1 = LibraryMOD.CleanPhone(phone1);
+                if (phone1.Substring(0, 1) == "0")
+                {
+                    phone1 = "+971" + phone1.Remove(0, 1);
+                }
+                phone1 = phone1.Trim();
+                string sisusername = sID;
+                string sispassword = "";
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+                cmd.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        sisusername = dt.Rows[0]["UserName"].ToString();
+                        sispassword = dt.Rows[0]["Password"].ToString();
+
+                        string txt = "Welcome to ECT\r\nKindly find the following ECT SIS Credentials:\r\nUser : " + sisusername + "\r\nPassword : " + sispassword + "\r\nLink : https://ectsis.ect.ac.ae/Balance";
+                        string textmessage = txt.Trim().Replace("\r\n", "\\r\\n");
+                        if (phone1.Trim().StartsWith("+971") && phone1.Substring(4, 1) == "5")
+                        {
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://c-eu.linkmobility.io/sms/send"))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
+
+                                    request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + phone1.Trim() + "\",\n    \"userData\": \"" + textmessage + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
+                                    //request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    if (response.IsSuccessStatusCode == true)
+                                    {
+                                        //Success
+                                        //lbl_Msg.Text = "SMS Sent";
+                                        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                        //div_msg.Visible = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //lbl_Msg.Text = "Invalid Mobile Number";
+                            //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            //return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }                
+            }
+            else
+            {
+                
+            }
+        }
         public void updateaccountpayemtpending(int iOpportunity,string sAcc)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);

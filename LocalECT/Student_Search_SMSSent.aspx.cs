@@ -85,6 +85,7 @@ namespace LocalECT
 
             if(txt_Text.Text.Length>0)
             {
+                string textmessage = txt_Text.Text.Trim().Replace("\r\n", "\\r\\n");
                 if (txt_Mobile.Text.Trim().StartsWith("+971") && txt_Mobile.Text.Substring(4, 1) == "5")
                 {
                     using (var httpClient = new HttpClient())
@@ -93,7 +94,7 @@ namespace LocalECT
                         {
                             request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
 
-                            request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
+                            request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + textmessage + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
                             //request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
                             request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
                             var task = httpClient.SendAsync(request);

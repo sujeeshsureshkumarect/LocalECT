@@ -5,6 +5,9 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -841,7 +844,14 @@ namespace LocalECT
             {
                 string sSQL = "SELECT GPA FROM GPA_Until WHERE lngStudentNumber='" + sID + "'";
                 SqlCommand cmd = new SqlCommand(sSQL, Conn);
-                CGPA = Convert.ToDouble("0" + cmd.ExecuteScalar().ToString());
+                var value = cmd.ExecuteScalar();
+                string result = "0";
+                if (value != null)
+                {
+                    result = value.ToString();
+                }
+
+                CGPA = Convert.ToDouble("0" + result);
             }
             catch (Exception ex)
             {
@@ -1264,6 +1274,7 @@ namespace LocalECT
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
             Conn.Open();
             string sCreated = "";
             try
@@ -1335,6 +1346,120 @@ namespace LocalECT
                 if (iEffected > 0)
                 {
                     sCreated = sNewId;
+
+                    SqlCommand cmd1 = new SqlCommand("Select strAccountNo from Reg_Student_Accounts where lngStudentNumber=@lngStudentNumber", sc);
+                    cmd1.Parameters.AddWithValue("@lngStudentNumber", lblStudentNo.Text);
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                    try
+                    {
+                        sc.Open();
+                        da1.Fill(dt1);
+                        sc.Close();
+
+                        if(dt1.Rows.Count>0)
+                        {
+                            SqlCommand cmd2 = new SqlCommand("UPDATE Reg_Student_Accounts SET lngStudentNumber=@sNewId WHERE lngStudentNumber=@lngStudentNumber", sc);
+                            cmd2.Parameters.AddWithValue("@sNewId", sNewId);
+                            cmd2.Parameters.AddWithValue("@lngStudentNumber", lblStudentNo.Text);
+                            try
+                            {
+                                sc.Open();
+                                cmd2.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch(Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+                            SqlCommand cmd3 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo=@sACC where lngStudentNumber=@lngStudentNumber", sc);
+                            cmd3.Parameters.AddWithValue("@sACC", dt1.Rows[0]["strAccountNo"].ToString());
+                            cmd3.Parameters.AddWithValue("@lngStudentNumber", sNewId);
+                            try
+                            {
+                                sc.Open();
+                                cmd3.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+                            SqlCommand cmd4 = new SqlCommand("UPDATE [ECTDataNew].dbo.Cmn_User set UserName= replace(@sNewId,'.','') where UserName=@UserName", sc);
+                            cmd4.Parameters.AddWithValue("@sNewId", sNewId);
+                            cmd4.Parameters.AddWithValue("@UserName", lblStudentNo.Text);
+                            try
+                            {
+                                sc.Open();
+                                cmd4.ExecuteNonQuery();
+                                sc.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+                            //Sent SMS
+                            sentsms(sNewId);
+
+                            //Get ContactID
+                            SqlCommand cmd5 = new SqlCommand("select iContactID from Reg_Applications where lngStudentNumber=@lngStudentNumber", sc);
+                            cmd5.Parameters.AddWithValue("@lngStudentNumber", sNewId);
+                            DataTable dt5 = new DataTable();
+                            SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
+                            try
+                            {
+                                sc.Open();
+                                da5.Fill(dt5);
+                                sc.Close();
+
+                                if(dt5.Rows.Count>0)
+                                {
+                                    string iContactID = dt5.Rows[0]["iContactID"].ToString();
+                                    if (iContactID != "0" || iContactID != "" || iContactID != null)
+                                    {
+                                        updatecxapiregistration(iContactID,sNewId);
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                sc.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                sc.Close();
+                            }
+
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
                 }
 
                 if ((sCDegree == "2" && (sCMajor == "2") || (sCMajor == "3") || (sCMajor == "4")) || iStatus == 20 || iStatus == 7)//Not Foundation
@@ -1364,6 +1489,159 @@ namespace LocalECT
                 Conn.Dispose();
             }
             return sCreated;
+        }
+        public void sentsms(string sID)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            string phone1 = LibraryMOD.GetStudentMobileNo(Campus, sID);
+            if (!string.IsNullOrEmpty(phone1))
+            {
+                phone1 = LibraryMOD.CleanPhone(phone1);
+                if (phone1.Substring(0, 1) == "0")
+                {
+                    phone1 = "+971" + phone1.Remove(0, 1);
+                }
+                phone1 = phone1.Trim();
+                string sisusername = sID;
+                string sispassword = "";
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+                cmd.Parameters.AddWithValue("@lngStudentNumber", sID);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        sisusername = dt.Rows[0]["UserName"].ToString();
+                        sispassword = dt.Rows[0]["Password"].ToString();
+
+                        string txt = "Welcome to ECT\r\nKindly find the following ECT SIS Credentials:\r\nUser : " + sisusername + "\r\nPassword : " + sispassword + "\r\nLink : https://ectsis.ect.ac.ae/Balance";
+                        string textmessage = txt.Trim().Replace("\r\n", "\\r\\n");
+                        if (phone1.Trim().StartsWith("+971") && phone1.Substring(4, 1) == "5")
+                        {
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://c-eu.linkmobility.io/sms/send"))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
+
+                                    request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + phone1.Trim() + "\",\n    \"userData\": \"" + textmessage + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
+                                    //request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    if (response.IsSuccessStatusCode == true)
+                                    {
+                                        //Success
+                                        //lbl_Msg.Text = "SMS Sent";
+                                        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                        //div_msg.Visible = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //lbl_Msg.Text = "Invalid Mobile Number";
+                            //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            //return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+            }
+            else
+            {
+
+            }
+        }
+        public void updatecxapiregistration(string contactid,string sID)
+        {
+            string registrationstatus = "Unregistered";
+            string retention_status = "Opened";
+            string numberofregisteredcourses = "0";
+            string cgpa = "0";
+            string ect_student_id = sID;
+            string financialbalance = "A";
+            string sisusername = sID;
+            string sispassword = "ect@12345";
+            string ectemailpassword = "ect@12345";
+            string major = ddlMajor.SelectedItem.Text;
+            string Credit_Completed = "0";
+
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+            cmd.Parameters.AddWithValue("@lngStudentNumber", sID);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    sisusername = dt.Rows[0]["UserName"].ToString();
+                    sispassword = dt.Rows[0]["Password"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+            //API Call
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            string accessToken = InitializeModule.CxPwd;
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/contacts/" + contactid + ""))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                    request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                    request.Content = new StringContent("{\n    \"customFields\": {\n        \"c\": {\n            \"registrationstatus\": {\n                \"lookupName\": \"" + registrationstatus + "\"\n            },\n            \"numberofregisteredcourses\": " + numberofregisteredcourses + ",\n            \"cgpa\": " + cgpa + ",\n            \"retention_status\": {\n                \"lookupName\": \"" + retention_status + "\"\n            },\n            \"ect_student_id\": \"" + ect_student_id + "\",\n            \"financialbalance\": \"" + financialbalance + "\",\n            \"sisusername\": \"" + sisusername + "\",\n            \"sispassword\": \"" + sispassword + "\",\n            \"ectemailpassword\": \"" + ectemailpassword + "\"\n        },\n        \"CO\": {\n            \"Major\": \"" + major + "\",\n            \"Credit_Completed\": " + Credit_Completed + "\n        }\n    }\n}");
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                    var task = httpClient.SendAsync(request);
+                    task.Wait();
+                    var response = task.Result;
+                    string s = response.Content.ReadAsStringAsync().Result;
+                    //If Status 200
+                    if (response.IsSuccessStatusCode == true)
+                    {
+                        //API Call-Update Registration Status-SUCCESS
+                    }
+
+                }
+            }
         }
         private void CopyQualification(int iOldSerial, int iNewSerial)
         {

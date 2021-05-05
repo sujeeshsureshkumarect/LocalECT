@@ -7764,6 +7764,7 @@
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
     <Content Include="Online_Payment_Tracking.aspx" />
+    <Content Include="Registered_Courses.aspx" />
     <Content Include="Registered_Tracking.aspx" />
     <Content Include="Semester_In_Out.aspx" />
     <Content Include="Student_GPAs.aspx" />
@@ -8978,6 +8979,13 @@
       <DependentUpon>Procurement_Supplier_Manager.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registered_Courses.aspx.cs">
+      <DependentUpon>Registered_Courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registered_Courses.aspx.designer.cs">
+      <DependentUpon>Registered_Courses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registered_Tracking.aspx.cs">
       <DependentUpon>Registered_Tracking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

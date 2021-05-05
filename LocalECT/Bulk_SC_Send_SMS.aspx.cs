@@ -142,11 +142,12 @@ namespace LocalECT
                             if (!string.IsNullOrEmpty(dt.Rows[i]["Mobile_Number"].ToString()) && !string.IsNullOrEmpty(dt.Rows[i]["SMS_Text"].ToString()))
                             {
                                 string mobile = dt.Rows[i]["Mobile_Number"].ToString();
-                                string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();                               
+                                string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();
+                                string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
                                 mobile = "+" + mobile;
                                 if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
                                 {
-                                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + SMS_Text + "\"\n},";
+                                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
                                     //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
                                     iEffected++;
                                 }
