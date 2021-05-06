@@ -71,7 +71,7 @@
                                         <div class="form-group">
                                             <label> Term</label>
                                             <div class="input-group">
-                                                <asp:DropDownList ID="ddlRegTerm" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlRegTerm" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlRegTerm_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
                                         </div>
                                     </div>

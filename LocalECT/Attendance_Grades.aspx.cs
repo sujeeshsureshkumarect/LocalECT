@@ -261,10 +261,88 @@ namespace LocalECT
       {
         sc.Close();
       }
-
-
-
-
     }
-  }
+
+        protected void ddlRegTerm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drp_Campus.SelectedItem.Text == "Males")
+            {
+                Campus = InitializeModule.EnumCampus.Males;
+            }
+            else
+            {
+                Campus = InitializeModule.EnumCampus.Females;
+            }            
+            int iRegTerm = Convert.ToInt32(ddlRegTerm.SelectedValue);
+            int iYear, iSem;
+            iYear = LibraryMOD.SeperateTerm(iRegTerm, out iSem);
+
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("SELECT intStudyYear, byteSemester, DATEADD(Day, 1, dateEndRegistration) AS AttendanceStart, DATEADD(Week, (CASE WHEN byteSemester < 3 THEN 14 ELSE 7 END), dateStartSemester) AS AttendanceEnd FROM Reg_Semesters where intStudyYear=@intStudyYear and byteSemester=@byteSemester", sc);
+            cmd.Parameters.AddWithValue("@intStudyYear", iYear);
+            cmd.Parameters.AddWithValue("@byteSemester", iSem);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if(dt.Rows.Count>0)
+                {
+
+                    if (dt.Rows[0]["AttendanceStart"] is DBNull || dt.Rows[0]["AttendanceStart"].ToString() == "")
+                    {
+                        fromDate.Text = "";
+                    }
+                    else
+                    {
+                        string dob = dt.Rows[0]["AttendanceStart"].ToString();
+                        DateTime date4;
+                        string dateString = dob;
+                        bool result = DateTime.TryParse(dateString, out date4);
+                        if (result == false)
+                        {
+                            fromDate.Text = "";
+                        }
+                        else if (result == true)
+                        {
+                            fromDate.Text = date4.ToString("yyyy-MM-dd");
+                        }
+                    }
+
+                    if (dt.Rows[0]["AttendanceEnd"] is DBNull || dt.Rows[0]["AttendanceEnd"].ToString() == "")
+                    {
+                        toDate.Text = "";
+                    }
+                    else
+                    {                       
+                        string dob1 = dt.Rows[0]["AttendanceEnd"].ToString();
+                        DateTime date41;
+                        string dateString1 = dob1;
+                        bool result1 = DateTime.TryParse(dateString1, out date41);
+                        if (result1 == false)
+                        {
+                            toDate.Text = "";
+                        }
+                        else if (result1 == true)
+                        {
+                            toDate.Text = date41.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+    }
 }
