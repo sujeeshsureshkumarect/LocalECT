@@ -20,7 +20,7 @@ namespace LocalECT
     {
         int RoleID = 0;
         int CurrentRole = 0;
-        int iCampus = 0;
+        int iCampus = 1;
         string sUserName = "";
         Grade_HeaderDAL myGrade_HeaderDAL = new Grade_HeaderDAL();
         InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
@@ -66,7 +66,7 @@ namespace LocalECT
                     }
                     else
                     {
-                        iCampus = 0;
+                        iCampus = 2;
                     }
                     //iCampus = Convert.ToInt32(Session["CurrentCampus"]);
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_GradesEdit,
@@ -109,7 +109,7 @@ namespace LocalECT
                     }
                     else
                     {
-                        iCampus = 0;
+                        iCampus = 2;
                     }
                     Session["CurrentCampus"] = iCampus;
                 }
@@ -581,7 +581,7 @@ namespace LocalECT
             {
                 LibraryMOD.ShowErrorMessage(ex);
                 //divMsg.InnerText = ex.Message;
-                lbl_Msg.Text = ex.Message;                
+                lbl_Msg.Text = ex.Message;
                 div_msg.Visible = true;
             }
             finally
@@ -782,15 +782,15 @@ namespace LocalECT
             sSQLGrades += " AND strGrade <> 'W'";
             sSQLGrades += " AND strGrade <> 'I'";
 
-            int iCampus = 0;
-            //iCampus = Convert.ToInt32(CampusCBO.SelectedValue);
+            int iCampus = 1;
+            Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
             if (Campus.ToString() == "Males")
             {
                 iCampus = 1;
             }
             else
             {
-                iCampus = 0;
+                iCampus = 2;
             }
 
             SqlCommand myCommand = new SqlCommand();

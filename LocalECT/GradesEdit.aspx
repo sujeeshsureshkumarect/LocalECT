@@ -244,7 +244,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <hr />
+                                                        <%--<hr />--%>
                                                               <table style="width:100%;">       
           <tr>
               <td >

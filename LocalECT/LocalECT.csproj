@@ -7766,6 +7766,7 @@
     <Content Include="Online_Payment_Tracking.aspx" />
     <Content Include="Registered_Courses.aspx" />
     <Content Include="Registered_Tracking.aspx" />
+    <Content Include="Registration_History.aspx" />
     <Content Include="Semester_In_Out.aspx" />
     <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Search_SMSSent.aspx" />
@@ -8999,6 +9000,13 @@
     </Compile>
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration_History.aspx.cs">
+      <DependentUpon>Registration_History.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration_History.aspx.designer.cs">
+      <DependentUpon>Registration_History.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\ACCBalance.cs">
       <AutoGen>True</AutoGen>
