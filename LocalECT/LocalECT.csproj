@@ -7764,6 +7764,7 @@
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
     <Content Include="Online_Payment_Tracking.aspx" />
+    <Content Include="PhonesExtensions.aspx" />
     <Content Include="Registered_Courses.aspx" />
     <Content Include="Registered_Tracking.aspx" />
     <Content Include="Registration_History.aspx" />
@@ -7771,6 +7772,7 @@
     <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Search_SMSSent.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
+    <Content Include="TimeTableViewer.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
       <SubType>Designer</SubType>
@@ -8936,6 +8938,13 @@
     </Compile>
     <Compile Include="Online_Payment_Tracking.aspx.designer.cs">
       <DependentUpon>Online_Payment_Tracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhonesExtensions.aspx.cs">
+      <DependentUpon>PhonesExtensions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhonesExtensions.aspx.designer.cs">
+      <DependentUpon>PhonesExtensions.aspx</DependentUpon>
     </Compile>
     <Compile Include="PlainPage.aspx.cs">
       <DependentUpon>PlainPage.aspx</DependentUpon>
@@ -10290,6 +10299,13 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeTableViewer.aspx.cs">
+      <DependentUpon>TimeTableViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TimeTableViewer.aspx.designer.cs">
+      <DependentUpon>TimeTableViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Track_Classes.aspx.cs">
       <DependentUpon>Track_Classes.aspx</DependentUpon>

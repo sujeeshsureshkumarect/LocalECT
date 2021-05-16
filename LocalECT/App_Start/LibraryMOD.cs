@@ -4997,8 +4997,13 @@ public class LibraryMOD
             sSQL = "SELECT isMilitaryService FROM Reg_Applications WHERE lngStudentNumber = '" + sSID + "'";
             
             SqlCommand cmd = new SqlCommand(sSQL, conn);
-
-            return Convert.ToBoolean(cmd.ExecuteScalar().ToString());
+            var booleans = cmd.ExecuteScalar();
+            bool mil = false;
+            if (booleans != null)
+            {
+                mil = Convert.ToBoolean(cmd.ExecuteScalar().ToString());
+            }
+            return mil;
         }
         catch (Exception ex)
         {
