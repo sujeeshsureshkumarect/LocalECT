@@ -1330,10 +1330,10 @@ namespace LocalECT
                 string sSQL = "INSERT INTO Reg_Applications";
                 sSQL += " (intStudyYear, byteSemester, strApplicationNumber, lngStudentNumber,sReference, dateApplication, lngSerial, strCollege, strDegree, strSpecialization, bAccepted,";
                 sSQL += " dateAccepted, strNotes, bActive, bContinue, bOtherCollege, intAdvisor, byteStudentType, strUserCreate, dateCreate, intRemind,";
-                sSQL += " WantedMajorID, strAccountNo, iEnrollmentSource, sEnrollmentNotes, iRegisteredThrough, iEnrollmentSource2, IsCompleteBAFromOtherInstitution,IsCompleteMasterFromOtherInstitution,WantedMajorID2, WantedMajorID3, sReferredBy,iContactID)";
+                sSQL += " WantedMajorID, strAccountNo, iEnrollmentSource, sEnrollmentNotes, iRegisteredThrough, iEnrollmentSource2, IsCompleteBAFromOtherInstitution,IsCompleteMasterFromOtherInstitution,WantedMajorID2, WantedMajorID3, sReferredBy,iContactID,iOpportunityID,iAcceptanceType,iAcceptanceCondition,iAdmissionStatus,isOpportunitySet)";
                 sSQL += " SELECT " + iYear + "," + iSem + ",'" + sNewId + "','" + sNewId + "','" + lblStudentNo.Text + "', GETDATE()," + iNewSerial + ",'" + sNCollege + "','" + sNDegree + "','" + sNMajor + "', 1,";
                 sSQL += " GETDATE(), '', 1, 1, 0, 1000," + iStudentType + ",'" + sUser + "', GETDATE(), " + iHours + ",";
-                sSQL += " WantedMajorID, strAccountNo, iEnrollmentSource, sEnrollmentNotes, iRegisteredThrough, iEnrollmentSource2, IsCompleteBAFromOtherInstitution,IsCompleteMasterFromOtherInstitution,WantedMajorID2, WantedMajorID3, sReferredBy,iContactID";
+                sSQL += " WantedMajorID, strAccountNo, iEnrollmentSource, sEnrollmentNotes, iRegisteredThrough, iEnrollmentSource2, IsCompleteBAFromOtherInstitution,IsCompleteMasterFromOtherInstitution,WantedMajorID2, WantedMajorID3, sReferredBy,iContactID,iOpportunityID,iAcceptanceType,iAcceptanceCondition,iAdmissionStatus,isOpportunitySet";
                 sSQL += " FROM Reg_Applications AS Src";
                 sSQL += " WHERE (Src.lngStudentNumber = '" + lblStudentNo.Text + "')";
 

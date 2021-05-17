@@ -50,7 +50,9 @@ public class Classes
     {
         public  int _iLecturer;
         public  string _sLecturer;
-        public  DateTime _dFrom;
+        //public int _iLecturer1;
+        //public string _sLecturer1;
+        public DateTime _dFrom;
         public DateTime _dTo;
         public int _iDays;
         public string _sDays;
@@ -563,6 +565,10 @@ public class TimeTableDAL
                 {
                     myTimes._iLecturer = 0;
                     myTimes._sLecturer = "";
+
+                    //myTimes._iLecturer1 = int.Parse(Rd["iLecturer"].ToString());
+                    //myTimes._sLecturer1 = Rd["sLecturer"].ToString();
+
                     //myTimes._sHall = "";
                     //myTimes._iDays = 0;
                     //myTimes._sDays = "";

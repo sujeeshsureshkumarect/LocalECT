@@ -363,6 +363,13 @@ namespace LocalECT
                 dt.Columns.Add(dc);
                 dc = new DataColumn("sLecturer", Type.GetType("System.String"));
                 dt.Columns.Add(dc);
+
+                //dc = new DataColumn("iLecturer1", Type.GetType("System.Int32"));
+                //dt.Columns.Add(dc);
+                //dc = new DataColumn("sLecturer1", Type.GetType("System.String"));
+                //dt.Columns.Add(dc);
+
+
                 dc = new DataColumn("iDay", Type.GetType("System.Int32"));
                 dt.Columns.Add(dc);
                 dc = new DataColumn("sDay", Type.GetType("System.String"));
@@ -401,8 +408,13 @@ namespace LocalECT
                     dr["sCollege"] = myTimeTable[i].sCollege;
                     dr["CommitteeID"] = myTimeTable[i].iCommitteeID;
                     //add Times
+
+
                     dr["iLecturer"] = myTimeTable[i].ClassTimes[0]._iLecturer;
                     dr["sLecturer"] = myTimeTable[i].ClassTimes[0]._sLecturer;
+
+                    //dr["iLecturer1"] = myTimeTable[i].ClassTimes[0]._iLecturer1;
+                    //dr["sLecturer1"] = myTimeTable[i].ClassTimes[0]._sLecturer1;
 
                     dr["sTFrom"] = myTimeTable[i].ClassTimes[0]._dFrom.ToShortTimeString();
                     dr["sTTo"] = myTimeTable[i].ClassTimes[0]._dTo.ToShortTimeString();
@@ -463,6 +475,9 @@ namespace LocalECT
 
                         dr["iLecturer"] = myTimeTable[i].ClassTimes[j]._iLecturer;
                         dr["sLecturer"] = myTimeTable[i].ClassTimes[j]._sLecturer;
+
+                        //dr["iLecturer1"] = myTimeTable[i].ClassTimes[j]._iLecturer1;
+                        //dr["sLecturer1"] = myTimeTable[i].ClassTimes[j]._sLecturer1;
 
                         if (myTimeTable[i].ClassTimes[j]._dFrom.ToShortTimeString() == "12:00 AM")
                         {
@@ -1368,7 +1383,7 @@ namespace LocalECT
                 //divMsg.InnerText = "Sorry you dont have permission to view the attendance details from here...";
                 lbl_Msg.Text = "Sorry you dont have permission to view the Grades details from here...";
                 div_msg.Visible = true;
-                //return;
+                return;
             }
 
             int iTerm = 0;
