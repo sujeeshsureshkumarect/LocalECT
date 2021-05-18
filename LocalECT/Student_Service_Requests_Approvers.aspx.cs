@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Security;
 using System.Web;
 using System.Web.UI;
@@ -17,6 +18,7 @@ namespace LocalECT
         int CurrentRole = 0;
         InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CurrentRole"] != null)
@@ -119,6 +121,10 @@ namespace LocalECT
         }
         public void bindmyrequests_finance(string studentemail)
         {
+            //ServicePointManager.Expect100Continue = true;
+            //ServicePointManager.DefaultConnectionLimit = 9999;
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
             string login = "ets.services.admin@ect.ac.ae"; //give your username here  
             string password = "Ser71ces@328"; //give your password  
             var securePassword = new SecureString();
@@ -163,6 +169,7 @@ namespace LocalECT
             // create a data table
             DataTable LDT = new DataTable();
             LDT.Columns.Add("ID");
+            LDT.Columns.Add("Status");
             LDT.Columns.Add("Title");
             LDT.Columns.Add("FinanceAction");
             LDT.Columns.Add("ServiceID");
@@ -178,7 +185,7 @@ namespace LocalECT
                 //clientContext.ExecuteQuery();
                 //string thisWillBeUsersLoginName = user.LoginName;
                 //string request = item["Request"].ToString();
-                LDT.Rows.Add(item["ID"], item["Title"], item["FinanceAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
+                LDT.Rows.Add(item["ID"], item["Status"], item["Title"], item["FinanceAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
             }
             LDT.DefaultView.Sort = "Created DESC";
             Repeater1.DataSource = LDT;
@@ -186,6 +193,10 @@ namespace LocalECT
         }
         public void bindmyrequests_host(string studentemail)
         {
+            //ServicePointManager.Expect100Continue = true;
+            //ServicePointManager.DefaultConnectionLimit = 9999;
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
             string login = "ets.services.admin@ect.ac.ae"; //give your username here  
             string password = "Ser71ces@328"; //give your password  
             var securePassword = new SecureString();
@@ -230,6 +241,7 @@ namespace LocalECT
             // create a data table
             DataTable LDT = new DataTable();
             LDT.Columns.Add("ID");
+            LDT.Columns.Add("Status");
             LDT.Columns.Add("Title");
             LDT.Columns.Add("HostAction");
             LDT.Columns.Add("ServiceID");
@@ -245,7 +257,7 @@ namespace LocalECT
                 //clientContext.ExecuteQuery();
                 //string thisWillBeUsersLoginName = user.LoginName;
                 //string request = item["Request"].ToString();
-                LDT.Rows.Add(item["ID"], item["Title"], item["HostAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
+                LDT.Rows.Add(item["ID"], item["Status"], item["Title"], item["HostAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
             }
             LDT.DefaultView.Sort = "Created DESC";
             Repeater2.DataSource = LDT;
@@ -297,6 +309,7 @@ namespace LocalECT
             // create a data table
             DataTable LDT = new DataTable();
             LDT.Columns.Add("ID");
+            LDT.Columns.Add("Status");
             LDT.Columns.Add("Title");
             LDT.Columns.Add("ProviderAction");
             LDT.Columns.Add("ServiceID");
@@ -312,7 +325,7 @@ namespace LocalECT
                 //clientContext.ExecuteQuery();
                 //string thisWillBeUsersLoginName = user.LoginName;
                 //string request = item["Request"].ToString();
-                LDT.Rows.Add(item["ID"], item["Title"], item["ProviderAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
+                LDT.Rows.Add(item["ID"], item["Status"], item["Title"], item["ProviderAction"], item["Request"], item["Requester"], Convert.ToDateTime(item["Created"]), show);
             }
             LDT.DefaultView.Sort = "Created DESC";
             Repeater3.DataSource = LDT;

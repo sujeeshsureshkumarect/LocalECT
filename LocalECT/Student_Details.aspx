@@ -119,6 +119,29 @@ td, th {
                             <div class="x_panel" id="student_Details">
                                                   <div id="divPlan" runat="server">
                                                 </div>
+
+                                <div id="setopportunity" style="display: flex;justify-content: center;">
+                                    <br /><br />
+                                   <div class="col-sm-6 col-md-6 col-xs-12 x_panel">  
+                                       <p style="color:red;text-align:center"><b>Note:</b> The default (Admission Payment Value) of AED 3500 is requested from the student if you set (Pending Payment) option.<br />Contact the Accoutant if you need to change the (Admission Payment Value) please.</p>
+                                       <div class="form-group row">
+                                                    <label class="col-form-label col-md-4 col-sm-4"><b>Current Opportunity</b></label>
+                                                    <div class="col-md-5 col-sm-5">
+                                                         <asp:DropDownList ID="drp_setstatus" runat="server" CssClass="form-control">
+                                               <asp:ListItem Text="Pending Payment" Value="0"></asp:ListItem>
+                                               <asp:ListItem Text="Payment Succeeded" Value="1"></asp:ListItem>
+                                           </asp:DropDownList>
+                                                    </div>
+                                           <div class="col-md-3 col-sm-3 ">
+                                               <asp:LinkButton ID="lnk_setOpportunity" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_setOpportunity_Click" OnClientClick="return confirm('Are you sure to you want to update the CX Opportunity Status?')"><i class="fa fa-save"></i> Set</asp:LinkButton>
+                                               </div>
+                                                </div>                                  
+                                </div> 
+                                </div>
+                                <asp:HiddenField ID="hdn_Acc" runat="server" Value="0"/>
+                                <asp:HiddenField ID="hdn_iOpportunityID" runat="server" value="0"/>
+                                <asp:HiddenField ID="hdn_Phone1" runat="server" value="0"/>
+
                                                 </div>
                            
                                 <table style="width:100%;">

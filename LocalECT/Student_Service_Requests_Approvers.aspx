@@ -87,6 +87,7 @@ white-space: nowrap;
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service Name</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Finance Action</th>
@@ -99,6 +100,7 @@ white-space: nowrap;
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
+                                                    <td><%#Eval("Status")%></td>
                                                     <td><%#Eval("ServiceID")%></td>                                                                                                         
                                                     <td><%#Eval("FinanceAction")%></td>                                                                                                        
                                                     <td><span style="display: none;"><%#Eval("Created","{0:yyyyMMdd}")%></span><%#Eval("Created","{0:dd/MM/yyyy hh:mm tt}")%></td>
@@ -135,6 +137,7 @@ white-space: nowrap;
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service Name</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Host Action</th>
@@ -147,6 +150,7 @@ white-space: nowrap;
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
+                                                    <td><%#Eval("Status")%></td>
                                                     <td><%#Eval("ServiceID")%></td>                                                                                                         
                                                     <td><%#Eval("HostAction")%></td>                                                                                                        
                                                     <td><span style="display: none;"><%#Eval("Created","{0:yyyyMMdd}")%></span><%#Eval("Created","{0:dd/MM/yyyy hh:mm tt}")%></td>
@@ -183,6 +187,7 @@ white-space: nowrap;
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Service Name</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Provider Action</th>
@@ -195,6 +200,7 @@ white-space: nowrap;
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
+                                                    <td><%#Eval("Status")%></td>
                                                     <td><%#Eval("ServiceID")%></td>                                                                                                         
                                                     <td><%#Eval("ProviderAction")%></td>                                                                                                        
                                                     <td><span style="display: none;"><%#Eval("Created","{0:yyyyMMdd}")%></span><%#Eval("Created","{0:dd/MM/yyyy hh:mm tt}")%></td>
@@ -220,12 +226,12 @@ white-space: nowrap;
        if (table != null) {
            for (var i = 1; i < table.rows.length; i++) {              
                //var status = table.rows[i].cells[2].textContent;          
-               var show = table.rows[i].cells[5].textContent;          
+               var show = table.rows[i].cells[6].textContent;          
                //if (status == "Completed") {
                //    table.rows[i].cells[2].innerHTML = '<span class="badge badge-success">Completed</span>';
                //}
                if (show == "N") {
-                   table.rows[i].cells[4].innerHTML = '&nbsp;';
+                   table.rows[i].cells[5].innerHTML = '&nbsp;';
                }
            }
        }
@@ -272,12 +278,12 @@ white-space: nowrap;
                                                    if (table != null) {
                                                        for (var i = 1; i < table.rows.length; i++) {
                                                            //var status = table.rows[i].cells[2].textContent;          
-                                                           var show = table.rows[i].cells[5].textContent;
+                                                           var show = table.rows[i].cells[6].textContent;
                                                            //if (status == "Completed") {
                                                            //    table.rows[i].cells[2].innerHTML = '<span class="badge badge-success">Completed</span>';
                                                            //}
                                                            if (show == "N") {
-                                                               table.rows[i].cells[4].innerHTML = '&nbsp;';
+                                                               table.rows[i].cells[5].innerHTML = '&nbsp;';
                                                            }
                                                        }
                                                    }
@@ -287,12 +293,12 @@ white-space: nowrap;
                                                   if (table != null) {
                                                       for (var i = 1; i < table.rows.length; i++) {
                                                           //var status = table.rows[i].cells[2].textContent;          
-                                                          var show = table.rows[i].cells[5].textContent;
+                                                          var show = table.rows[i].cells[6].textContent;
                                                           //if (status == "Completed") {
                                                           //    table.rows[i].cells[2].innerHTML = '<span class="badge badge-success">Completed</span>';
                                                           //}
                                                           if (show == "N") {
-                                                              table.rows[i].cells[4].innerHTML = '&nbsp;';
+                                                              table.rows[i].cells[5].innerHTML = '&nbsp;';
                                                           }
                                                       }
                                                   }

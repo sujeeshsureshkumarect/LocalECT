@@ -60,6 +60,51 @@ namespace LocalECT
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPlan;
 
         /// <summary>
+        /// drp_setstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_setstatus;
+
+        /// <summary>
+        /// lnk_setOpportunity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_setOpportunity;
+
+        /// <summary>
+        /// hdn_Acc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdn_Acc;
+
+        /// <summary>
+        /// hdn_iOpportunityID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdn_iOpportunityID;
+
+        /// <summary>
+        /// hdn_Phone1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdn_Phone1;
+
+        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>

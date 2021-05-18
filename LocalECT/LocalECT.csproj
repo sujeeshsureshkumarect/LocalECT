@@ -7763,6 +7763,7 @@
     <Content Include="Acc_Voucher.xsc">
       <DependentUpon>Acc_Voucher.xsd</DependentUpon>
     </Content>
+    <Content Include="MFiles_Scan_Mapping.aspx" />
     <Content Include="Online_Payment_Tracking.aspx" />
     <Content Include="PhonesExtensions.aspx" />
     <Content Include="Registered_Courses.aspx" />
@@ -8903,6 +8904,13 @@
     </Compile>
     <Compile Include="Manage_Users.aspx.designer.cs">
       <DependentUpon>Manage_Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MFiles_Scan_Mapping.aspx.cs">
+      <DependentUpon>MFiles_Scan_Mapping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MFiles_Scan_Mapping.aspx.designer.cs">
+      <DependentUpon>MFiles_Scan_Mapping.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>

@@ -23,6 +23,63 @@ using System.Net.Sockets;
 
 public class LibraryMOD
 {
+    public struct EmpData
+    {
+        public string EmployeeDisplayName;
+        public string EmployeeDesignation;
+        public string EmployeeDepartment;
+        public string EmployeeGender;
+        public string EmployeeGroup;
+        public string EmployeeEmail;
+        public string EmployeePhone;
+    }
+
+    public static EmpData GetEmployeeData(int EmployeeID)
+    {
+        EmpData emp = new EmpData();
+        Connection_StringCLS Connection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+        string sCon = Connection_String.Conn_string;
+        SqlConnection Con = new SqlConnection(sCon);
+        Con.Open();
+        try
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * from Hr_EmployeeProfileRpt where EmployeeID=" + EmployeeID, Con);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            da.Fill(dt);
+
+            if (dt.Rows.Count > 0)
+            {
+                emp.EmployeeDisplayName = dt.Rows[0]["EmployeeDisplayName"].ToString();
+                emp.EmployeeDesignation = dt.Rows[0]["JobTitleEn"].ToString();
+                emp.EmployeeDepartment = dt.Rows[0]["DepartmentDesc"].ToString();
+                if (dt.Rows[0]["Sex"].ToString() == "1")
+                {
+                    emp.EmployeeGender = "Male";
+                }
+                else
+                {
+                    emp.EmployeeGender = "Female";
+                }
+                emp.EmployeeGroup = dt.Rows[0]["EmpGroup"].ToString();
+                emp.EmployeePhone = dt.Rows[0]["Mobile"].ToString();
+                emp.EmployeeEmail = dt.Rows[0]["InternalEmail"].ToString();
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine("{0} Exception caught.", ex.Message);
+        }
+        finally
+        {
+            Con.Close();
+            Con.Dispose();
+        }
+        return emp;
+    }
+
     public static int ExecuteSqlStatement(string ConnectionString, string SqlStatement)
     {
         int AffectedRows = 0;
@@ -494,6 +551,56 @@ public class LibraryMOD
     //    return functionReturnValue;
     //}
 
+    //public static string NumberToDate(int pDate)
+    //{
+
+    //    int llngDateNumber = 0;
+    //    string sDate = "";
+    //    string lstrYear = null;
+    //    string lstrMonth = null;
+    //    string lstrDay = null;
+    //    try
+    //    {
+    //        llngDateNumber = pDate;
+    //        lstrYear = (llngDateNumber / 10000).ToString().Trim();
+    //        llngDateNumber -= int.Parse(lstrYear) * 10000;
+    //        lstrMonth = (llngDateNumber / 100).ToString().Trim();
+    //        llngDateNumber -= int.Parse(lstrMonth) * 100;
+    //        lstrDay = llngDateNumber.ToString().Trim();
+    //        //llngDateNumber = pDate;
+    //        if (llngDateNumber == 0) return "";
+
+    //        //lstrYear = Conversion.Str(llngDateNumber / 10000).Trim;
+    //        //llngDateNumber = llngDateNumber - Conversion.Val(lstrYear) * 10000;
+
+    //        //lstrMonth = Conversion.Str(llngDateNumber / 100);
+    //        //llngDateNumber = llngDateNumber - Conversion.Val(lstrMonth) * 100;
+
+    //        //lstrDay = Conversion.Str(llngDateNumber);
+    //        //sDate = String.Trim(lstrDay).PadLeft(2, "0") + "/" + String.Trim(lstrMonth).PadLeft(2, "0") + "/" + String.Trim(lstrYear);
+    //        sDate = lstrDay.PadLeft(2, '0') + "/" + lstrMonth.PadLeft(2, '0') + "/" + lstrYear;
+
+    //        //sDate = Strings.Trim(lstrDay).PadLeft(2, "0") + "/" + Strings.Trim(lstrMonth).PadLeft(2, "0") + "/" + Strings.Trim(lstrYear);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        ShowErrorMessage(ex.InnerException);
+    //    }
+    //    finally
+    //    {
+
+    //    }
+
+    //    //if (!Information.IsDate(sDate))
+    //    //{
+    //    //    string sNewDate = null;
+    //    //    sNewDate = pDate;
+
+    //    //    sDate = ValidateDate(sNewDate);
+    //    //}
+    //    return sDate;
+    //}
+
     public static string NumberToDate(int pDate)
     {
 
@@ -521,7 +628,8 @@ public class LibraryMOD
 
             //lstrDay = Conversion.Str(llngDateNumber);
             //sDate = String.Trim(lstrDay).PadLeft(2, "0") + "/" + String.Trim(lstrMonth).PadLeft(2, "0") + "/" + String.Trim(lstrYear);
-            sDate = lstrDay.PadLeft(2, '0') + "/" + lstrMonth.PadLeft(2, '0') + "/" + lstrYear;
+            //sDate = lstrDay.PadLeft(2, '0') + "/" + lstrMonth.PadLeft(2, '0') + "/" + lstrYear;
+            sDate = lstrYear + '-' + lstrMonth.PadLeft(2, '0') + '-' + lstrDay.PadLeft(2, '0');
 
             //sDate = Strings.Trim(lstrDay).PadLeft(2, "0") + "/" + Strings.Trim(lstrMonth).PadLeft(2, "0") + "/" + Strings.Trim(lstrYear);
         }
@@ -543,6 +651,7 @@ public class LibraryMOD
         //}
         return sDate;
     }
+
     public static string NumberToDate(int pDate, string sDateSeperator)
     {
 
@@ -3009,8 +3118,90 @@ public class LibraryMOD
         return dblVacation;
 }
 
-    public static double GetAnnualLeaveBalance(SqlConnection con, int iEmployeeID) 
-    {        
+    //    public static double GetAnnualLeaveBalance(SqlConnection con, int iEmployeeID) 
+    //    {        
+    //        //'step one
+    //        //'calc salary in day
+
+    //        //int iGrautityPerYear = 0;
+
+    //        //'Step tow
+    //        //'Calc the Period from Hire Date to End Date
+
+    //        int iDiff_Days = 0;
+
+    //        Double dResult = 0.000;
+
+    //        HRLibrary.EmployeeCls theEmployee =new HRLibrary.EmployeeCls();
+
+
+
+
+    //        System.Threading.Thread.CurrentThread.CurrentCulture =new CultureInfo("en-CA");
+    //        DateTime ToDate = DateTime.Parse(DateTime.Today.ToShortDateString ()  );
+    //        int iHireDate ;
+    //        iHireDate = theEmployee.GetHireDate( iEmployeeID, con);
+    //        DateTime DateHireDate =DateTime.Parse(LibraryMOD.NumberToDate(iHireDate));
+
+    //        TimeSpan ts = ToDate - DateHireDate;
+    //        iDiff_Days =Convert.ToInt32(ts.TotalDays);
+
+    //        int iYearDays= 365;
+
+    //        if (DateTime.IsLeapYear(DateTime.Today.Year) )
+    //        {
+    //            iYearDays = 366;
+    //        }
+
+    //        int iEmpGroup = 0;
+    //        DateTime CalcDate ;
+
+    //        HRLibrary.SystemOptionsCls theSystemOption = new HRLibrary.SystemOptionsCls();
+    //        CalcDate = Convert.ToDateTime(NumberToDate(theSystemOption.GetAnnualLeaveCalcDate(con)));
+    //        CalcDate = DateTime.Parse(NumberToDate(theSystemOption.GetAnnualLeaveCalcDate(con)));
+    //        iEmpGroup = theEmployee.GetEmployeeGroup(iEmployeeID, con);
+
+    //        if (iDiff_Days < 6*30 )
+    //        {
+    //            //'Less than Six Months (No Annual Leave)
+    //            return dResult;
+    //        }
+    //        if (iDiff_Days < iYearDays)
+    //        {
+    //            //'updated in 18/12/2011 dependes on meeting with HR & accounting (for all less than one year two days)
+    //            dResult = (iDiff_Days + 1) / Convert.ToDouble (iYearDays) * (12 * 2);
+    //        }
+    //        else
+    //        {
+    //         //'greater than or Equal 12 month
+    //                //'for old employees befor 31-8-2009 ( use hire date=31-8-2009)
+    //                //'for others after 31-8-2009 use employee hiring date in the system
+    //                if (iHireDate < 20090831 )
+    //                {
+    //                    ts = ToDate - CalcDate;
+    //                    iDiff_Days = Convert.ToInt32(ts.TotalDays);
+    //                }
+
+    //                switch (iEmpGroup)
+    //                {
+    //                    case (int)InitializeModule.EnumEmpGroup.Academic:
+    //                        dResult = (iDiff_Days + 1) / Convert.ToDouble (iYearDays ) * (12 * 3.1666);
+
+    //                        break ;
+    //                    case (int)InitializeModule.EnumEmpGroup.Administrative:
+    //                        dResult = (iDiff_Days + 1) / Convert.ToDouble (  iYearDays);
+    //                        dResult = dResult  *  12 * 2.5;
+
+    //                         break ;
+    //                }
+    //        }
+
+    //        return dResult;
+
+    //}
+
+    public static double GetAnnualLeaveBalance(SqlConnection con, int iEmployeeID)
+    {
         //'step one
         //'calc salary in day
 
@@ -3023,36 +3214,37 @@ public class LibraryMOD
 
         Double dResult = 0.000;
 
-        HRLibrary.EmployeeCls theEmployee =new HRLibrary.EmployeeCls();
+        HRLibrary.EmployeeCls theEmployee = new HRLibrary.EmployeeCls();
 
-      
-      
 
-        System.Threading.Thread.CurrentThread.CurrentCulture =new CultureInfo("en-CA");
-        DateTime ToDate = DateTime.Parse(DateTime.Today.ToShortDateString ()  );
-        int iHireDate ;
-        iHireDate = theEmployee.GetHireDate( iEmployeeID, con);
-        DateTime DateHireDate =DateTime.Parse(LibraryMOD.NumberToDate(iHireDate));
-     
+
+
+        System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-CA");
+        DateTime ToDate = DateTime.Parse(DateTime.Today.ToShortDateString());
+        int iHireDate;
+        iHireDate = theEmployee.GetHireDate(iEmployeeID, con);
+        string sDate = LibraryMOD.NumberToDate(iHireDate);
+        DateTime DateHireDate = Convert.ToDateTime(sDate);
+
         TimeSpan ts = ToDate - DateHireDate;
-        iDiff_Days =Convert.ToInt32(ts.TotalDays);
+        iDiff_Days = Convert.ToInt32(ts.TotalDays);
 
-        int iYearDays= 365;
+        int iYearDays = 365;
 
-        if (DateTime.IsLeapYear(DateTime.Today.Year) )
+        if (DateTime.IsLeapYear(DateTime.Today.Year))
         {
             iYearDays = 366;
         }
 
         int iEmpGroup = 0;
-        DateTime CalcDate ;
+        DateTime CalcDate;
 
         HRLibrary.SystemOptionsCls theSystemOption = new HRLibrary.SystemOptionsCls();
         CalcDate = Convert.ToDateTime(NumberToDate(theSystemOption.GetAnnualLeaveCalcDate(con)));
         CalcDate = DateTime.Parse(NumberToDate(theSystemOption.GetAnnualLeaveCalcDate(con)));
         iEmpGroup = theEmployee.GetEmployeeGroup(iEmployeeID, con);
-       
-        if (iDiff_Days < 6*30 )
+
+        if (iDiff_Days < 6 * 30)
         {
             //'Less than Six Months (No Annual Leave)
             return dResult;
@@ -3060,36 +3252,36 @@ public class LibraryMOD
         if (iDiff_Days < iYearDays)
         {
             //'updated in 18/12/2011 dependes on meeting with HR & accounting (for all less than one year two days)
-            dResult = (iDiff_Days + 1) / Convert.ToDouble (iYearDays) * (12 * 2);
+            dResult = (iDiff_Days + 1) / Convert.ToDouble(iYearDays) * (12 * 2);
         }
         else
         {
-         //'greater than or Equal 12 month
-                //'for old employees befor 31-8-2009 ( use hire date=31-8-2009)
-                //'for others after 31-8-2009 use employee hiring date in the system
-                if (iHireDate < 20090831 )
-                {
-                    ts = ToDate - CalcDate;
-                    iDiff_Days = Convert.ToInt32(ts.TotalDays);
-                }
+            //'greater than or Equal 12 month
+            //'for old employees befor 31-8-2009 ( use hire date=31-8-2009)
+            //'for others after 31-8-2009 use employee hiring date in the system
+            if (iHireDate < 20090831)
+            {
+                ts = ToDate - CalcDate;
+                iDiff_Days = Convert.ToInt32(ts.TotalDays);
+            }
 
-                switch (iEmpGroup)
-                {
-                    case (int)InitializeModule.EnumEmpGroup.Academic:
-                        dResult = (iDiff_Days + 1) / Convert.ToDouble (iYearDays ) * (12 * 3.1666);
+            switch (iEmpGroup)
+            {
+                case (int)InitializeModule.EnumEmpGroup.Academic:
+                    dResult = (iDiff_Days + 1) / Convert.ToDouble(iYearDays) * (12 * 3.1666);
 
-                        break ;
-                    case (int)InitializeModule.EnumEmpGroup.Administrative:
-                        dResult = (iDiff_Days + 1) / Convert.ToDouble (  iYearDays);
-                        dResult = dResult  *  12 * 2.5;
+                    break;
+                case (int)InitializeModule.EnumEmpGroup.Administrative:
+                    dResult = (iDiff_Days + 1) / Convert.ToDouble(iYearDays);
+                    dResult = dResult * 12 * 2.5;
 
-                         break ;
-                }
+                    break;
+            }
         }
 
         return dResult;
 
-}
+    }
 
     public static decimal GetClassMarksAVG(int iYear, byte bSem, byte bShift, string sCourse, byte bClass, InitializeModule.EnumCampus Camups)
     {

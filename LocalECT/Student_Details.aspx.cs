@@ -6,6 +6,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -277,13 +280,86 @@ namespace LocalECT
             {
                 Search1_ChangedEvent(null, null);
                 Get_Student_Advising();
-                System.Web.UI.WebControls.Table myTable;
-                List<MirrorCLS> myList = (List<MirrorCLS>)Session["myList"];
-                myTable = Create_Table(myList[0]);
-                divPlan.Controls.Clear();
-                divPlan.Controls.Add(myTable);
+                //System.Web.UI.WebControls.Table myTable;
+                //List<MirrorCLS> myList = (List<MirrorCLS>)Session["myList"];
+                //myTable = Create_Table(myList[0]);
+                //divPlan.Controls.Clear();
+                //divPlan.Controls.Add(myTable);
+                getopportunity(sNo);
+            }
+            System.Web.UI.WebControls.Table myTable;
+            List<MirrorCLS> myList = (List<MirrorCLS>)Session["myList"];
+            myTable = Create_Table(myList[0]);
+            divPlan.Controls.Clear();
+            divPlan.Controls.Add(myTable);
+        }
+
+        public void getopportunity(string sNo)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+            SqlCommand cmd = new SqlCommand("select * from Reg_Applications where lngStudentNumber=@lngStudentNumber", sc);
+            cmd.Parameters.AddWithValue("@lngStudentNumber",sNo);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if(dt.Rows.Count>0)
+                {
+                    hdn_iOpportunityID.Value = dt.Rows[0]["iOpportunityID"].ToString();
+                    //hdn_Serial.Value = dt.Rows[0]["lngSerial"].ToString();
+                    string isOpportunitySet = "0";
+                    if(dt.Rows[0]["isOpportunitySet"].ToString()=="True")
+                    {
+                        isOpportunitySet = "1";
+                        drp_setstatus.SelectedIndex = drp_setstatus.Items.IndexOf(drp_setstatus.Items.FindByValue(isOpportunitySet));
+                    }
+                    else
+                    {
+                        drp_setstatus.SelectedIndex = drp_setstatus.Items.IndexOf(drp_setstatus.Items.FindByValue(isOpportunitySet));
+                    }
+
+                    SqlCommand cmd1 = new SqlCommand("select strPhone1 from Reg_Students_Data where lngSerial=@lngSerial", sc);
+                    cmd1.Parameters.AddWithValue("@lngSerial", dt.Rows[0]["lngSerial"].ToString());
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                    try
+                    {
+                        sc.Open();
+                        da1.Fill(dt1);
+                        sc.Close();
+
+                        if(dt1.Rows.Count>0)
+                        {
+                            hdn_Phone1.Value = dt1.Rows[0]["strPhone1"].ToString();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
+
         private System.Web.UI.WebControls.Table Create_Table(MirrorCLS myMirror)
         {
             System.Web.UI.WebControls.Table MyTable = new System.Web.UI.WebControls.Table();
@@ -861,7 +937,7 @@ namespace LocalECT
                 SqlDataReader Rd = Cmd.ExecuteReader();
                 while (Rd.Read())
                 {
-                    //lblACC.Text = Rd["strAccountNo"].ToString();
+                    hdn_Acc.Value = Rd["strAccountNo"].ToString();
                     sSelectedValue.Value = Rd["lngStudentNumber"].ToString();
                     ddlACCType.SelectedValue = Rd["byteType"].ToString();
                     txtName.Text = Rd["strStudentName"].ToString();
@@ -3432,6 +3508,258 @@ namespace LocalECT
 
         }
 
+        protected void lnk_setOpportunity_Click(object sender, EventArgs e)
+        {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                     InitializeModule.enumPrivilege.UpdateCRMOpportunity, CurrentRole) != true)
+            {
+                lbl_Msg.Text = "Sorry you cannot update CRM Opportunity";
+                div_msg.Visible = true;
+                return;
+            }
 
+            if (drp_setstatus.SelectedItem.Text== "Pending Payment")
+            {
+                updateaccountpayemtpending(Convert.ToInt32(hdn_iOpportunityID.Value), hdn_Acc.Value, Request.QueryString["sid"].ToString());
+            }
+            else
+            {
+                updateopportunitypaymentsucceeded(Convert.ToInt32(hdn_iOpportunityID.Value), Request.QueryString["sid"].ToString());
+            }
+            getopportunity(sNo);
+        }
+        public void updateopportunitypaymentsucceeded(int iOpportunity,string sSID)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            if (iOpportunity > 0)
+            {
+                //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.DefaultConnectionLimit = 9999;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                string accessToken = InitializeModule.CxPwd;
+
+                using (var httpClient = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                    {
+                        request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                        request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                        request.Content = new StringContent("{\n\t\"customFields\": {\n\t\t\"c\": {\n\t\t\t\"paymentstatus\": {\n                \"id\": 1094,\n                \"lookupName\": \"Payment Succeeded\"\n            }\n\t\t}\n\t},\n\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 11\n        }\n    }\n}");
+                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                        var task = httpClient.SendAsync(request);
+                        task.Wait();
+                        var response = task.Result;
+                        string s = response.Content.ReadAsStringAsync().Result;
+                        //If Status 200
+                        if (response.IsSuccessStatusCode == true)
+                        {
+                            SetOpportunity(sSID,1);
+                            lbl_Msg.Text = "Opportunity Updated Successfully-Contact the Accountant to allow the Registration Process";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
+                        else
+                        {
+                            lbl_Msg.Text = "Error- " + s + "";
+                            div_msg.Visible = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                lbl_Msg.Text = "Invalid Opportunity ID";
+                div_msg.Visible = true;
+            }
+        }
+        public void updateaccountpayemtpending(int iOpportunity, string sAcc,string sSID)
+        {
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            if (iOpportunity > 0)
+            {
+                //this.ClientScript.RegisterStartupScript(this.GetType(), "test", "setOpportunity();", true);
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.DefaultConnectionLimit = 9999;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                string accessToken = InitializeModule.CxPwd;
+
+                using (var httpClient = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "https://ect.custhelp.com/services/rest/connect/v1.4/opportunities/" + iOpportunity + ""))
+                    {
+                        request.Headers.TryAddWithoutValidation("Authorization", accessToken);
+                        request.Headers.TryAddWithoutValidation("OSvC-CREST-Application-Context", "application/x-www-form-urlencoded");
+
+                        request.Content = new StringContent("{\n\t\t\"statusWithType\": {\n        \"status\": {\n            \"id\": 113\n        }\n    }\n}");
+                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                        var task = httpClient.SendAsync(request);
+                        task.Wait();
+                        var response = task.Result;
+                        string s = response.Content.ReadAsStringAsync().Result;
+                        //If Status 200
+                        if (response.IsSuccessStatusCode == true)
+                        {
+                            SetOpportunity(sSID, 0);
+                            SqlCommand cmd1 = new SqlCommand("update Reg_Student_Accounts set iAdmissionPaymentType=@iAdmissionPaymentType,cAdmissionPaymentValue=@cAdmissionPaymentValue where strAccountNo=@strAccountNo", Conn);
+                            cmd1.Parameters.AddWithValue("@iAdmissionPaymentType", "1");//Original Payment
+                            cmd1.Parameters.AddWithValue("@cAdmissionPaymentValue", "3500");
+                            cmd1.Parameters.AddWithValue("@strAccountNo", sAcc);
+                            try
+                            {
+                                Conn.Open();
+                                cmd1.ExecuteNonQuery();
+                                Conn.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                Conn.Close();
+                                Console.WriteLine(ex.Message);
+                            }
+                            finally
+                            {
+                                Conn.Close();
+                            }
+                            sentsms(hdn_Phone1.Value, sSID);//hdn_Phone1.Value
+
+                            lbl_Msg.Text = "Opportunity Updated Successfully-AED 3500 is requested from the student unless the Accoutant changed Admission Payment Value";
+                            div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            div_msg.Visible = true;
+                        }
+                        else
+                        {
+                            lbl_Msg.Text = "Error- "+ s + "";
+                            div_msg.Visible = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                lbl_Msg.Text = "Invalid Opportunity ID";
+                div_msg.Visible = true;
+            }
+        }
+        public static bool SetOpportunity(string sSID,int status)
+        {
+            bool isSet = false;
+            //U cannot use var from out of the scope. (Campus)
+            InitializeModule.EnumCampus campus = InitializeModule.EnumCampus.Males;
+            if (sSID.Contains("AF") || sSID.Contains("ESF"))
+            {
+                campus = InitializeModule.EnumCampus.Females;
+            }
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(campus);
+            SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+            Conn.Open();
+            try
+            {
+
+                string sSQL = "UPDATE Reg_Applications SET isOpportunitySet="+ status + "";
+                sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
+
+                SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+                isSet = (Cmd.ExecuteNonQuery() > 0);
+
+
+            }
+            catch (Exception ex)
+            {
+                LibraryMOD.ShowErrorMessage(ex);
+                //divMsg.InnerText = ex.Message;
+            }
+            finally
+            {
+                Conn.Close();
+                Conn.Dispose();
+            }
+            return isSet;
+        }
+        public void sentsms(string phone1, string sID)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            if (!string.IsNullOrEmpty(phone1))
+            {
+                phone1 = LibraryMOD.CleanPhone(phone1);
+                if (phone1.Substring(0, 1) == "0")
+                {
+                    phone1 = "+971" + phone1.Remove(0, 1);
+                }
+                phone1 = phone1.Trim();
+                string sisusername = sID;
+                string sispassword = "";
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+                SqlCommand cmd = new SqlCommand("SELECT  [UserNo],[UserName],[Password] FROM [localect].[ECTDataNew].[dbo].[Cmn_User] where UserNo in (SELECT intOnlineUser from [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber)", sc);
+                cmd.Parameters.AddWithValue("@lngStudentNumber", sID);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        sisusername = dt.Rows[0]["UserName"].ToString();
+                        sispassword = dt.Rows[0]["Password"].ToString();
+
+                        string txt = "Welcome to ECT\r\nKindly find the following ECT SIS Credentials:\r\nUser : " + sisusername + "\r\nPassword : " + sispassword + "\r\nLink : https://ectsis.ect.ac.ae/Balance";
+                        string textmessage = txt.Trim().Replace("\r\n", "\\r\\n");
+                        if (phone1.Trim().StartsWith("+971") && phone1.Substring(4, 1) == "5")
+                        {
+                            using (var httpClient = new HttpClient())
+                            {
+                                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://c-eu.linkmobility.io/sms/send"))
+                                {
+                                    request.Headers.TryAddWithoutValidation("Authorization", "Basic cE9UZ1oyTFc6R2NuMzU1MzJHcXc=");
+
+                                    request.Content = new StringContent("{\n    \"source\": \"AD-ECT\",\n    \"sourceTON\":\"ALPHANUMERIC\",\n    \"destination\": \"" + phone1.Trim() + "\",\n    \"userData\": \"" + textmessage + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false,\n    \"customParameters\": {\n\"replySmsCount\": \"true\"\n}\n}");
+                                    //request.Content = new StringContent("{\n    \"source\": \"LINK\",\n    \"destination\": \"" + txt_Mobile.Text.Trim() + "\",\n    \"userData\": \"" + txt_Text.Text.Trim() + "\",\n    \"platformId\": \"SMSC\",\n    \"platformPartnerId\": \"3759\",\n    \"useDeliveryReport\": false\n}");
+                                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                                    var task = httpClient.SendAsync(request);
+                                    task.Wait();
+                                    var response = task.Result;
+                                    string s = response.Content.ReadAsStringAsync().Result;
+                                    if (response.IsSuccessStatusCode == true)
+                                    {
+                                        //Success
+                                        //lbl_Msg.Text = "SMS Sent";
+                                        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                        //div_msg.Visible = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //lbl_Msg.Text = "Invalid Mobile Number";
+                            //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                            //return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+            }
+            else
+            {
+
+            }
+        }
     }
 }
