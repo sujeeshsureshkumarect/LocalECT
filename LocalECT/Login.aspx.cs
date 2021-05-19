@@ -17,7 +17,8 @@ namespace LocalECT
         {
             if (!IsPostBack)
             {
-                Session.RemoveAll();
+                //Session.RemoveAll();
+                ClearSession();
                 //lblNTUser.Text = LibraryMOD.GetCurrentNtUserName(); 
                 int iRSem = 0;
                 int iRYear = LibraryMOD.SeperateTerm(LibraryMOD.GetRegTerm(), out iRSem);
@@ -87,7 +88,18 @@ namespace LocalECT
                         }
                         else
                         {
-                            Response.Redirect("Home");
+                            //Response.Redirect("Home");
+                            //Added New on 19-05-2021
+                            if (Session["cpage"] != null)
+                            {
+                                Response.Redirect(Session["cpage"].ToString(), false);
+                                Context.ApplicationInstance.CompleteRequest(); // end response
+                            }
+                            else
+                            {
+                                Response.Redirect("Home", false);
+                                Context.ApplicationInstance.CompleteRequest(); // end response
+                            }
                         }
                     }
                     else
@@ -246,6 +258,35 @@ namespace LocalECT
                 myApplication.Clear();
             }
             return isIt;
+        }
+        public void ClearSession()
+        {
+            Session["EmployeeID"] = null;
+            Session["sCSemester"] = null;
+            Session["RegYear"] = null;
+            Session["RegSemester"] = null;
+            Session["CurrentYear"] = null;
+            Session["CurrentSemester"] = null;
+
+            Session["CurrentUserName"] = null;
+            Session["CurrentUserNo"] = null;           
+            Session["CurrentRole"] = null;
+            Session["CurrentSystem"] = null;
+            Session["CurrentSystemName"] = null;
+            Session["CurrentLecturer"] = null;
+            Session["MarkYear"] = null;
+            Session["MarkSemester"] = null;
+
+            //server name
+            Session["CurrentPCName"] = null;
+            Session["CurrentNetUserName"] = null;
+
+            Session["CurrentCampus"] = null;
+            Session["CurrentStudent"] = null;
+            Session["CurrentStudentName"] = null;
+            Session["CurrentYear"] = null;
+            Session["CurrentSemester"] = null;            
+            Session["CurrentMajorCampus"] = null;
         }
         private int add_log(string sUser, string sPCName, string sNtUser, int iUserID)
         {

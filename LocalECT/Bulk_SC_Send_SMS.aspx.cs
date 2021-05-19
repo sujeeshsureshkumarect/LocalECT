@@ -143,7 +143,11 @@ namespace LocalECT
                             {
                                 string mobile = dt.Rows[i]["Mobile_Number"].ToString();
                                 string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();
-                                string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
+                                //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n", "\\n");
+                                string textmessage = SMS_Text.Replace("\r", "\\r");
+                                textmessage = textmessage.Replace("\n", "\\n");
                                 mobile = "+" + mobile;
                                 if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
                                 {
@@ -159,10 +163,10 @@ namespace LocalECT
                         {
                             text_contents = text_contents.Remove(iLen1 - 1, 1);
                         }
-                        bulksms(text_contents);
-                        lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
-                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                        div_msg.Visible = true;
+                        bulksms(text_contents, iEffected);
+                        //lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
+                        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        //div_msg.Visible = true;
                         lnk_BulkUpdate.Visible = false;                        
                     }
                 }
@@ -208,6 +212,12 @@ namespace LocalECT
                             if (dt.Rows.Count > 0)
                             {
                                 string text_contents = "";
+                                string SMS_Text = txt_Text.Text.Trim();
+                                //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n", "\\n");
+                                string textmessage = SMS_Text.Replace("\r", "\\r");
+                                textmessage = textmessage.Replace("\n", "\\n");
                                 for (int i = 0; i < dt.Rows.Count; i++)
                                 {
                                     if (!string.IsNullOrEmpty(dt.Rows[i]["strPhone1"].ToString()))
@@ -220,7 +230,7 @@ namespace LocalECT
                                         }
                                         if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
                                         {
-                                            text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
+                                            text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
                                             //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
                                             iEffected++;
                                         }
@@ -232,11 +242,11 @@ namespace LocalECT
                                 {
                                     text_contents = text_contents.Remove(iLen1 - 1, 1);
                                 }
-                                bulksms(text_contents);
-                                lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
-                                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                                div_msg.Visible = true;
-                                lnk_BulkUpdate.Visible = false;
+                                bulksms(text_contents, iEffected);
+                                //lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
+                                //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                                //div_msg.Visible = true;
+                                //lnk_BulkUpdate.Visible = false;
                                 //Clear Cookies with selected Student ID's
                                 if (Session["sids"] != null)
                                 {
@@ -269,7 +279,7 @@ namespace LocalECT
                 }                
             }                                
         }
-        public void bulksms(string text_contents)
+        public void bulksms(string text_contents,int iEffected)
         {
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.DefaultConnectionLimit = 9999;
@@ -292,6 +302,15 @@ namespace LocalECT
                         //lbl_Msg.Text = "SMS Sent";
                         //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                         //div_msg.Visible = true;
+                        lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
+                        lnk_BulkUpdate.Visible = false;
+                    }
+                    else
+                    {
+                        lbl_Msg.Text = "Error-"+s+"";                        
+                        div_msg.Visible = true;
                     }
                 }
             }

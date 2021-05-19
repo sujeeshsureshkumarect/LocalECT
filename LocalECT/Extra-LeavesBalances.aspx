@@ -1,0 +1,218 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Extra-LeavesBalances.aspx.cs" Inherits="LocalECT.Extra_LeavesBalances"  MasterPageFile="~/LocalECT.Master"%>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3 class="breadcrumb">
+                        <a href="Home">Home /</a>
+                       
+                      <a href="Extra-LeavesBalances">&nbsp;Leave and Extra days Balance </a>
+                    </h3>
+                </div>
+                <style>
+                    .breadcrumb {
+                        padding: 8px 15px;
+                        margin-bottom: 20px;
+                        list-style: none;
+                        background-color: #ededed;
+                        border-radius: 4px;
+                        font-size: 13px;
+                    }
+
+                    .page-title .title_left {
+                        width: 100%;
+                        float: left;
+                        display: block;
+                    }
+
+                    
+                </style>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-user" ></i> Leave and Extra days Balance </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                              <div class="x_content bs-example-popovers" id="div_msg" runat="server" visible="false">
+                                <div class="alert alert-danger alert-dismissible" role="alert" runat="server" id="div_Alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <asp:Label ID="lbl_Msg" runat="server" Text="" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
+                                </div>
+                            </div>
+                           
+                                    <%--<div class="x_panel">   
+                                         <div class="x_title">
+                            <h2><i class="fa fa-info"></i> Choose your fields (Maximum 10 Fields)</h2>                         
+                            <div class="clearfix"></div>
+                        </div>                                   
+                                       
+                                        </div>--%>
+                            <div id="details">
+                          
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                   
+                                        
+                                        <table class ="table table-bordered" >
+                                          <tr>
+                                            <td style="font-size:large;text-align:center">Annual Leave</td>
+                                            <td>
+                                              <asp:TextBox runat="server" ID="lblAnnual" CssClass="form-control"  Width="30%" Font-Size="Large" ReadOnly="true"></asp:TextBox>
+                                            </td>
+                                          </tr>
+                                           <tr>
+                                            <td style="font-size:large;text-align:center">Extra Days</td>
+                                            <td>
+                                               <asp:TextBox runat="server" ID="lblExtra" CssClass="form-control"  Width="30%" ReadOnly="true" Font-Size="Large"></asp:TextBox>
+                                            </td>
+                                          </tr>
+                                        </table>
+
+                                        <div id="divResult" runat="server" class="table-responsive">
+                                             <asp:Literal ID="DynamicTable" runat="server"></asp:Literal>
+                                            </div>
+
+
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/jquery.dataTables.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/searchBuilder.dataTables.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/dataTables.dateTime.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/buttons.dataTables.min.css">
+
+                                        <script type="text/javascript" src="SearchBuilder/jquery-3.5.1.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/jquery.dataTables.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.searchBuilder.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.dateTime.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.buttons.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/jszip.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/pdfmake.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/vfs_fonts.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/buttons.print.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/buttons.html5.min.js"></script>
+
+                                            <script>
+                                                $.noConflict();  //Release the $ variable
+                                                jQuery(document).ready(function ($) {
+                                                    $('#example').DataTable({
+                                                        language: {
+                                                            searchBuilder: {
+                                                                title: {
+                                                                    0: 'Search Builder',
+                                                                    _: 'Search Builder (%d)'
+                                                                }
+                                                            }
+                                                        },
+                                                        dom: 'QlBfrtip',
+                                                        buttons: [
+                                                            'csv', 'excel', 'print'
+                                                        ]
+                                                    });
+                                                });
+    //$(document).ready(function () {
+    //    $('#example').DataTable({
+    //        dom: 'Qlfrtip',
+    //        searchBuilder: {
+    //            logic: 'OR'
+    //        }
+    //    });
+    //});
+                                            </script>
+                                        <style>
+                                            div.dtsb-searchBuilder button.dtsb-button{
+                                                font-size:12px !important;
+                                            }
+                                              .badge {
+            font-size: 100%;
+        }
+                                        </style>
+                                        
+                                                        
+                                    
+                                </div>
+                            </div>
+                        </div>        
+
+
+                                    </div>                              
+                                </div>
+                            <style>
+                               #ContentPlaceHolder1_chk_Fields label{
+                                    padding-left: 5px;
+    padding-right: 25px;
+    padding-top:14px;
+                                }
+                               thead input {
+        width: 100%;
+    }
+
+      .modal
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: black;
+        z-index: 99;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        -moz-opacity: 0.8;
+        min-height: 100%;
+        width: 100%;
+    }
+    .loading
+    {
+        font-family: Arial;
+        font-size: 10pt;
+        border: 5px solid #67CFF5;
+        width: 200px;
+        height: 100px;
+        display: none;
+        position: fixed;
+        background-color: White;
+        z-index: 999;
+    }
+                               </style>
+                          
+  <%--                         <div class="loading" align="center">
+    
+    <img src="C:\Users\abdul.shukkoor\Desktop\LocalECT\LocalECT\images\ajax-loader.gif/ajax-loader.gif" alt="" />
+</div>
+                          
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+  function ShowProgress() {
+    setTimeout(function () {
+      var modal = $('<div />');
+      modal.addClass("modal");
+      $('body').append(modal);
+      var loading = $(".loading");
+      loading.show();
+      var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+      var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+      loading.css({ top: top, left: left });
+    }, 200);
+  }
+  $('form').live("submit", function () {
+    ShowProgress();
+  });
+</script>--%>
+
+                                           
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+</asp:Content>

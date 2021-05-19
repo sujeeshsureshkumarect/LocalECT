@@ -192,11 +192,11 @@ namespace LocalECT
                         divMsg.InnerText = "Sorry you cannot create a new payment , Cash not set yet.";
                         New_Voucher_btn.Enabled = false;
                     }
-                    rbnCash.Enabled = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    rbnCash.Enabled = LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                             InitializeModule.enumPrivilege.ACCChangeCash, CurrentRole);
                     txtPrinter.Enabled = rbnCash.Enabled;
 
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                     InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                     {
                         Server.Transfer("Authorization.aspx");

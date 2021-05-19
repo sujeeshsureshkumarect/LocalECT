@@ -11,53 +11,26 @@ namespace LocalECT
 {
 
 
-    public partial class MFiles_Scan_Mapping
+    public partial class Extra_LeavesBalances
     {
 
         /// <summary>
-        /// txt_StudnetID control.
+        /// div_msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_StudnetID;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_msg;
 
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// div_Alert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-
-        /// <summary>
-        /// txt_Place control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Place;
-
-        /// <summary>
-        /// RequiredFieldValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-
-        /// <summary>
-        /// lnk_Save control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Save;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_Alert;
 
         /// <summary>
         /// lbl_Msg control.
@@ -69,21 +42,39 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// btnYes control.
+        /// lblAnnual control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnYes;
+        protected global::System.Web.UI.WebControls.TextBox lblAnnual;
 
         /// <summary>
-        /// btnNo control.
+        /// lblExtra control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNo;
+        protected global::System.Web.UI.WebControls.TextBox lblExtra;
+
+        /// <summary>
+        /// divResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divResult;
+
+        /// <summary>
+        /// DynamicTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal DynamicTable;
     }
 }

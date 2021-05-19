@@ -504,21 +504,21 @@ namespace LocalECT
             //checking that its first payment done by student or not
             Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-            SqlCommand cmd = new SqlCommand("SELECT count(strAccountNo) as Count FROM [ECTData].[dbo].[Acc_Voucher_Detail] where strAccountNo=@strAccountNo", sc);
-            cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
+            //SqlCommand cmd = new SqlCommand("SELECT count(strAccountNo) as Count FROM [ECTData].[dbo].[Acc_Voucher_Detail] where strAccountNo=@strAccountNo", sc);
+            //cmd.Parameters.AddWithValue("@strAccountNo", sAcc);
+            //DataTable dt = new DataTable();
+            //SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //try
+            //{
+            //    sc.Open();
+            //    da.Fill(dt);
+            //    sc.Close();
 
-                if (dt.Rows.Count > 0)
-                {
-                    int count = Convert.ToInt32(dt.Rows[0]["Count"]);
-                    if (count == 1)//First Payment
-                    {
+                //if (dt.Rows.Count > 0)
+                //{
+                    //int count = Convert.ToInt32(dt.Rows[0]["Count"]);
+                    //if (count == 1)//First Payment
+                    //{
                         int opportunityid = 0;
                         string sSID = ddlIDs.Text;
                         int iSerial = GetSerial(sSID);
@@ -554,19 +554,19 @@ namespace LocalECT
                             lnkOpportunity_Command(opportunityid);
                             updateuserole();
                         }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                lbl_Msg.Text = ex.Message;
-                div_msg.Visible = true;
-            }
-            finally
-            {
-                sc.Close();
-            }
+                    //}
+                //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    sc.Close();
+            //    lbl_Msg.Text = ex.Message;
+            //    div_msg.Visible = true;
+            //}
+            //finally
+            //{
+            //    sc.Close();
+            //}
         }
         public void updateuserole()
         {

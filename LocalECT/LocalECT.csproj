@@ -208,6 +208,7 @@
     <Content Include="ECTSystems_Home.aspx" />
     <Content Include="ECTSystems_Update.aspx" />
     <Content Include="EIDInterface.aspx" />
+    <Content Include="Extra-LeavesBalances.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gentelella-master\build\css\custom.css" />
@@ -8711,6 +8712,13 @@
     </Compile>
     <Compile Include="ECTSystems_Update.aspx.designer.cs">
       <DependentUpon>ECTSystems_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extra-LeavesBalances.aspx.cs">
+      <DependentUpon>Extra-LeavesBalances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extra-LeavesBalances.aspx.designer.cs">
+      <DependentUpon>Extra-LeavesBalances.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
