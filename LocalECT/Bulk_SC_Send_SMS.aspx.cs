@@ -32,6 +32,14 @@ namespace LocalECT
                         Server.Transfer("Authorization.aspx");
                     }
                     Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
+                    {
+                        lnk_Search.HRef = "StudentSearch.aspx";
+                    }
+                    else
+                    {
+                        lnk_Search.HRef = "Acc_Search.aspx";
+                    }
                     if (Session["sids"] != null)
                     {
                         string value = Session["sids"].ToString();

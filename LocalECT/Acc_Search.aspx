@@ -109,7 +109,7 @@ StudentID3"></asp:TextBox>
                         </div>
                                      </div>
 
-                                                          <script>
+                              <%--                            <script>
                                                               $(document).ready(function () {
                                                                   var table = $('#datatabless').DataTable({                                                                      
                                                                       'columnDefs': [{
@@ -176,8 +176,110 @@ StudentID3"></asp:TextBox>
                                                                       e.preventDefault();
                                                                   });
                                                               });
-                                                          </script>
+                                                          </script>--%>
 
+                                                                         <script>
+                                                                             $(document).ready(function () {
+                                                                                 $("#Bulk_Actions").hide();
+                                                                                 var table = $('#datatabless').DataTable({
+                                                                                     'columnDefs': [{
+                                                                                         'targets': 0,
+                                                                                         'searchable': false,
+                                                                                         'orderable': false,
+                                                                                         'className': 'dt-body-center'
+                                                                                         //'render': function (data, type, full, meta) {
+                                                                                         //    return '<input type="checkbox" class="individualCHK" name="id[]" value="'
+                                                                                         //        + $('<div/>').text(data).html() + '">';
+                                                                                         //}
+                                                                                     }],
+                                                                                     'order': [1, 'asc']
+                                                                                 });
+
+                                                                                 // Handle click on "Select all" control
+                                                                                 $('#example-select-all').on('click', function () {
+                                                                                     // Check/uncheck all checkboxes in the table
+                                                                                     var rows = table.rows({ 'search': 'applied' }).nodes();
+                                                                                     $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                                                                                     if ($('#example-select-all').is(':checked')) {
+                                                                                         //all selected
+                                                                                         //alert("all");
+                                                                                         //show actions
+                                                                                         $("#Bulk_Actions").show();
+                                                                                         selected();
+                                                                                     }
+                                                                                     else {
+                                                                                         $("#Bulk_Actions").hide();
+                                                                                         selected();
+                                                                                     }
+                                                                                 });
+
+                                                                                 $('.individualCHK').on('click', function () {
+                                                                                     // Check/uncheck all checkboxes in the table
+                                                                                     if ($('.individualCHK').is(':checked')) {
+
+                                                                                         //show actions
+                                                                                         $("#Bulk_Actions").show();
+                                                                                         selected();
+                                                                                     }
+                                                                                     else {
+                                                                                         $("#Bulk_Actions").hide();
+                                                                                         selected();
+                                                                                     }
+                                                                                 });
+
+                                                                                 // Handle click on checkbox to set state of "Select all" control
+                                                                                 $('#example tbody').on('change', 'input[type="checkbox"]', function () {
+                                                                                     // If checkbox is not checked
+                                                                                     if (!this.checked) {
+                                                                                         var el = $('#example-select-all').get(0);
+                                                                                         // If "Select all" control is checked and has 'indeterminate' property
+                                                                                         if (el && el.checked && ('indeterminate' in el)) {
+                                                                                             // Set visual state of "Select all" control 
+                                                                                             // as 'indeterminate'
+                                                                                             el.indeterminate = true;
+                                                                                         }
+                                                                                     }
+                                                                                 });
+
+                                                                                 function selected() {
+                                                                                     var form = this;
+                                                                                     var sid = "";
+                                                                                     // Iterate over all checkboxes in the table
+                                                                                     //$.each($('input[type="checkbox"]'), function () {
+                                                                                     table.$('input[type="checkbox"]').each(function () {
+                                                                                         // If checkbox doesn't exist in DOM                                                                 
+                                                                                         if ($.contains(document, this)) {
+                                                                                             // If checkbox is checked                                                                     
+                                                                                             if (this.checked) {
+                                                                                                 sid += this.value + ',';
+                                                                                             }
+                                                                                         }
+                                                                                         if (!$.contains(document, this)) {
+                                                                                             // If checkbox is checked                                                                     
+                                                                                             if (this.checked) {
+                                                                                                 sid += this.value + ',';
+                                                                                             }
+                                                                                         }
+                                                                                     });
+                                                                                     //alert(sid);
+                                                                                     setCookie("sids", sid, "1");
+                                                                                 }
+                                                                             });
+                                                                             function setCookie(cname, cvalue, exdays) {
+                                                                                 //var d = new Date();
+                                                                                 //d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                                                                                 //var expires = "expires=" + d.toUTCString();
+                                                                                 //document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                                                                                 document.getElementById("hdn_Selected_Sids").value = cvalue;
+                                                                             }
+                                                                         </script>
+                                                             <style>
+                                     .dropdown-menu.show{
+                                         overflow-y:scroll;
+                                         max-height:200px !important;
+                                     }
+                                 </style>
+ <asp:HiddenField ID="hdn_Selected_Sids" runat="server" ClientIDMode="Static"/>
                                  <div id="divResult" runat="server" class="table-responsive">
                                      <asp:Repeater ID="RepterDetails" runat="server">
                                          <HeaderTemplate>
@@ -198,7 +300,7 @@ StudentID3"></asp:TextBox>
                                          </HeaderTemplate>
                                          <ItemTemplate>
                                              <tr>
-                                                 <td></td>
+                                                <td><input type="checkbox" name="select_all" value=<%#Eval("sNo")%> class="individualCHK"></td>
                                                  <td align='center'><%# Container.ItemIndex+1 %></td>
                                                  <td><%#Eval("sNo")%></td>
                                                  <td><%#Eval("sName")%></td>
@@ -215,7 +317,8 @@ StudentID3"></asp:TextBox>
                                                              <a class="dropdown-item" href="Acc_Search_Edit?sAcc=<%#Eval("sAccount")%>">Edit</a>
                                                              <a class="dropdown-item" href="Acc_Search_Details?sAcc=<%#Eval("sAccount")%>">Details</a>
                                                              <a class="dropdown-item" href="Acc_Search_Fee_Payment?sAcc=<%#Eval("sAccount")%>">Receive Fees Payment</a>
-                                                             <a class="dropdown-item" href="Acc_Search_Other_Revenue_Payment?sAcc=<%#Eval("sAccount")%>">Receive Other Revenue Payment</a>                                                         
+                                                             <a class="dropdown-item" href="Acc_Search_Other_Revenue_Payment?sAcc=<%#Eval("sAccount")%>">Receive Other Revenue Payment</a>  
+                                                              <a class="dropdown-item" href="Student_Search_SMSSent?sid=<%#Eval("sNo")%>">SMS</a>
                                                          </div>
                                                      </div>
                                                  </td>
@@ -226,7 +329,31 @@ StudentID3"></asp:TextBox>
                                          </FooterTemplate>
                                      </asp:Repeater>
                                  </div>
-
+     <div class="col-md-12" id="Bulk_Actions">
+                                <hr />
+                                <asp:DropDownList ID="drp_Bulk" runat="server" CssClass="btn btn-secondary btn-sm" ValidationGroup="no1">
+                                    <asp:ListItem Text="Bulk Actions" Value="Bulk Actions" Selected="True"></asp:ListItem>                                  
+                                    <asp:ListItem Text="Send SMS" Value="Bulk_SC_Send_SMS"></asp:ListItem>
+                                    <asp:ListItem Text="Action 2" Value="#"></asp:ListItem>
+                                    <asp:ListItem Text="Action 3" Value="#"></asp:ListItem>
+                                    <asp:ListItem Text="Action 4" Value="#"></asp:ListItem>
+                                    <asp:ListItem Text="Action 5" Value="#"></asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator44" runat="server" ControlToValidate="drp_Bulk" ErrorMessage="*Select any bulk action" Display="Dynamic" ForeColor="Red" ValidationGroup="no1" InitialValue="Bulk Actions"/>
+                                <asp:LinkButton ID="lnk_Execute" runat="server" OnClick="lnk_Execute_Click" CssClass="btn btn-secondary btn-sm"  ValidationGroup="no1"><i class="fa fa-flash"></i> Execute</asp:LinkButton>
+                              <%--  <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Bulk Actions
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="Bulk_SC_Change_Status" id="change_status" target="_blank">Change Status</a>                                      
+                                        <a class="dropdown-item" href="#">Action 2</a>
+                                        <a class="dropdown-item" href="#">Action 3</a>
+                                        <a class="dropdown-item" href="#">Action 4</a>
+                                        <a class="dropdown-item" href="#">Action 5</a>
+                                    </div>
+                                </div>--%>
+                            </div>
                              </div>
                                            <%-- <asp:HiddenField ID="hdnMF" runat="server" />--%>
                                         </div>

@@ -238,5 +238,23 @@ namespace LocalECT
 
             return sCon;
         }
+
+        protected void lnk_Execute_Click(object sender, EventArgs e)
+        {
+            string sids = hdn_Selected_Sids.Value;
+            Session["sids"] = sids;
+            if (drp_Bulk.SelectedItem.Text == "Change Status")
+            {
+                Response.Redirect(drp_Bulk.SelectedItem.Value);
+            }
+            else if (drp_Bulk.SelectedItem.Text == "Send SMS")
+            {
+                Response.Redirect(drp_Bulk.SelectedItem.Value);
+            }
+            else
+            {
+
+            }
+        }
     }
 }

@@ -204,6 +204,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DMSMapping.aspx" />
     <Content Include="ECTSystems_Create.aspx" />
     <Content Include="ECTSystems_Home.aspx" />
     <Content Include="ECTSystems_Update.aspx" />
@@ -8691,6 +8692,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMSMapping.aspx.cs">
+      <DependentUpon>DMSMapping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMSMapping.aspx.designer.cs">
+      <DependentUpon>DMSMapping.aspx</DependentUpon>
     </Compile>
     <Compile Include="ECTSystems_Create.aspx.cs">
       <DependentUpon>ECTSystems_Create.aspx</DependentUpon>

@@ -40,6 +40,14 @@ namespace LocalECT
                 {
                     sid = Request.QueryString["sid"];
                     txt_SID.Text = sid.Trim();
+                    if(Request.UrlReferrer.ToString().Contains("StudentSearch"))
+                    {
+                        lnk_Search.HRef = "StudentSearch.aspx";
+                    }
+                    else
+                    {
+                        lnk_Search.HRef = "Acc_Search.aspx";
+                    }
                 }
                 else
                 {

@@ -5,22 +5,22 @@
                         <div class="">
                             <div class="page-title">
                                 <div class="title_left">
-                                   <h3 class="breadcrumb">
-                        <a href="Home">Home /</a>
+                                   <%--<h3 class="breadcrumb">--%>
+                        <%--<a href="Home">Home /</a>
                         <a href="#">&nbsp;Registration /</a>
                         <a href="StudentSearch">&nbsp;Student Search /</a>
-                        <a href="#">&nbsp;SMS</a>
-                    </h3>
+                        <a href="#">&nbsp;SMS</a>--%>
+                   <%-- </h3>--%>
                                 </div>
                                 <style>
-                                     .breadcrumb {
+                                    /* .breadcrumb {
                         padding: 8px 15px;
                         margin-bottom: 20px;
                         list-style: none;
                         background-color: #ededed;
                         border-radius: 4px;
                         font-size: 13px;
-                    }
+                    }*/
                                     .page-title .title_left {
                                         width: 100%;
                                         float: left;
@@ -35,7 +35,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-mobile-phone"></i> SMS</h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <a href="StudentSearch.aspx" class="btn btn-success btn-sm"><i class="fa fa-search"></i> Student Search</a>
+                                                <a href="StudentSearch.aspx" class="btn btn-success btn-sm" runat="server" id="lnk_Search"><i class="fa fa-search"></i> Search Again</a>                                                
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>

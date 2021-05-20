@@ -15,6 +15,15 @@ namespace LocalECT
     {
 
         /// <summary>
+        /// lnk_Search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnk_Search;
+
+        /// <summary>
         /// div_msg control.
         /// </summary>
         /// <remarks>

@@ -11,17 +11,8 @@ namespace LocalECT
 {
 
 
-    public partial class Student_Search_SMSSent
+    public partial class DMSMapping
     {
-
-        /// <summary>
-        /// lnk_Search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnk_Search;
 
         /// <summary>
         /// div_msg control.
@@ -51,57 +42,39 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// txt_SID control.
+        /// drp_Campus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_SID;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Campus;
 
         /// <summary>
-        /// txt_Mobile control.
+        /// lnk_FieldGenerate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Mobile;
+        protected global::System.Web.UI.WebControls.LinkButton lnk_FieldGenerate;
 
         /// <summary>
-        /// rdb_Lang control.
+        /// divResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdb_Lang;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divResult;
 
         /// <summary>
-        /// txt_Text control.
+        /// DynamicTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Text;
-
-        /// <summary>
-        /// lnk_Sent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Sent;
-
-        /// <summary>
-        /// lnk_Cancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Cancel;
+        protected global::System.Web.UI.WebControls.Literal DynamicTable;
     }
 }
