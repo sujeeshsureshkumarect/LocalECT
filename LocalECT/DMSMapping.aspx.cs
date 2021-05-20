@@ -52,7 +52,8 @@ namespace LocalECT
                
         Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
         SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-        string sSQL = "SELECT [iSerial] as Serial,[sSID] as SID,[iUnifiedID] as UID,[sName] as Name,[iPlace] as Storage,[isDBFound],[isScanned],[dAdded] as Added,[sAddedby] as [Added by],[sNote] as Note,[sMFilesLink] as [DMS Link] FROM [dbo].[ECT_MFiles_Scan_Mapping]";
+            //CONVERT(varchar(10), CONVERT(date, dAdded), 23) AS Added
+            string sSQL = "SELECT [iSerial] as Serial,[sSID] as SID,[iUnifiedID] as UID,[sName] as Name,[iPlace] as Storage,[isDBFound],[isScanned],CONVERT(varchar(10), CONVERT(date, dAdded), 23) AS Added,[sAddedby] as [Added by],[sNote] as Note,[sMFilesLink] as [DMS Link] FROM [dbo].[ECT_MFiles_Scan_Mapping]";
 
      
         SqlCommand cmd1 = new SqlCommand(sSQL, sc);
