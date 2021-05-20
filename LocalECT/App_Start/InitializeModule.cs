@@ -580,7 +580,10 @@ public class InitializeModule
         FetchRequest = 182,//new
         AddOnlinePayment = 183,//new
         CreateOnlineRequest = 184,//new
-        CreateAccount=185//New
+        CreateAccount=185,//New
+
+        DMSView=186,//New
+        SendNotification = 187//New
 
     }
 
@@ -867,7 +870,11 @@ public class InitializeModule
         //Services=1275,
         //News_Feed_Manager=1276,
         //My_Requests=1277,
-        Online_Payment_Tracking= 1289
+        Online_Payment_Tracking= 1289,
+
+        DMSMapping = 1293
+
+
     }
 
     public enum enumEmployeeGroups : int

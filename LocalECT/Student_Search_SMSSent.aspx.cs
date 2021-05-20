@@ -22,11 +22,25 @@ namespace LocalECT
             if (Session["CurrentRole"] != null)
             {
                 CurrentRole = (int)Session["CurrentRole"];
-                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                        InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
                 {
-                  Server.Transfer("Authorization.aspx");
+                    lnk_Search.HRef = "StudentSearch.aspx";
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                       InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+                    }
                 }
+                else
+                {
+                    lnk_Search.HRef = "Acc_Search.aspx";
+                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                       InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                    {
+                        Server.Transfer("Authorization.aspx");
+                    }
+                }
+               
                 if (Session["CurrentCampus"] != null)
                 {
                     Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
@@ -39,15 +53,7 @@ namespace LocalECT
                 if (Request.QueryString["sid"] != null && Request.QueryString["sid"] != "")
                 {
                     sid = Request.QueryString["sid"];
-                    txt_SID.Text = sid.Trim();
-                    if(Request.UrlReferrer.ToString().Contains("StudentSearch"))
-                    {
-                        lnk_Search.HRef = "StudentSearch.aspx";
-                    }
-                    else
-                    {
-                        lnk_Search.HRef = "Acc_Search.aspx";
-                    }
+                    txt_SID.Text = sid.Trim();                   
                 }
                 else
                 {

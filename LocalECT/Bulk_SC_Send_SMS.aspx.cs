@@ -26,20 +26,40 @@ namespace LocalECT
                 Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
                 if (!IsPostBack)
                 {
-                    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
-                   InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
-                    {
-                        Server.Transfer("Authorization.aspx");
-                    }
-                    Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    // if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                    //InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                    // {
+                    //     Server.Transfer("Authorization.aspx");
+                    // }
+
                     if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
                     {
                         lnk_Search.HRef = "StudentSearch.aspx";
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
+                           InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                     else
                     {
                         lnk_Search.HRef = "Acc_Search.aspx";
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
+                           InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
+
+                    Campus = (InitializeModule.EnumCampus)Session["CurrentCampus"];
+                    //if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
+                    //{
+                    //    lnk_Search.HRef = "StudentSearch.aspx";
+                    //}
+                    //else
+                    //{
+                    //    lnk_Search.HRef = "Acc_Search.aspx";
+                    //}
                     if (Session["sids"] != null)
                     {
                         string value = Session["sids"].ToString();

@@ -41,12 +41,12 @@
                                                      </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-form-label col-md-3 col-sm-3">Place<span style="color: red">*</span></label>
+                                                    <label class="col-form-label col-md-3 col-sm-3">Storage<span style="color: red">*</span></label>
                                                      <div class="col-md-9 col-sm-9 ">
                                                          <asp:TextBox ID="txt_Place" runat="server" CssClass="form-control" ValidationGroup="SD" TextMode="Number"></asp:TextBox>                                                         
                                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                                                             ControlToValidate="txt_StudnetID" ErrorMessage="Place is requied."
-                                                              SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Place is requied.</asp:RequiredFieldValidator>
+                                                             ControlToValidate="txt_Place" ErrorMessage="Storage is requied."
+                                                              SetFocusOnError="True" ValidationGroup="SD" Display="Dynamic" ForeColor="Red">*Storage is requied.</asp:RequiredFieldValidator>
                                                      </div>
                                                 </div>
                                                 <div><%--align="middle"--%>

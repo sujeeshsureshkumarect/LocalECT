@@ -32,44 +32,27 @@ namespace LocalECT
         }
         if (!IsPostBack)
         {
-
-          //string script = "$(document).ready(function () { $('[id*=btnSubmit]').click(); });";
-          //ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
-
-          if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Adjustments,
-              InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+          if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.DMSMapping,
+              InitializeModule.enumPrivilege.DMSView, CurrentRole) != true)
           {
             Server.Transfer("Authorization.aspx");
-
-          }
-         
-         
+          }                  
         }
-      }
-    
-      
-
+      }          
       protected void lnk_FieldGenerate_Click(object sender, EventArgs e)
       {
-
-       
-
         if (drp_Campus.SelectedItem.Text == "Males")
         {
-          Campus = InitializeModule.EnumCampus.Males;
-          
+          Campus = InitializeModule.EnumCampus.Males;          
         }
         else
         {
-          Campus = InitializeModule.EnumCampus.Females;
-          
+          Campus = InitializeModule.EnumCampus.Females;          
         }
-       
-        
-
+               
         Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
         SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
-        string sSQL = "SELECT [iSerial] ,[sSID] ,[iUnifiedID] ,[sName]  ,[iPlace]  ,[isDBFound]  ,[isScanned]  ,[dAdded]  ,[sAddedby]  ,[sNote] ,[sMFilesLink] as [DMS Link]  FROM [dbo].[ECT_MFiles_Scan_Mapping]";
+        string sSQL = "SELECT [iSerial] as Serial,[sSID] as SID,[iUnifiedID] as UID,[sName] as Name,[iPlace] as Storage,[isDBFound],[isScanned],[dAdded] as Added,[sAddedby] as [Added by],[sNote] as Note,[sMFilesLink] as [DMS Link] FROM [dbo].[ECT_MFiles_Scan_Mapping]";
 
      
         SqlCommand cmd1 = new SqlCommand(sSQL, sc);
