@@ -102,8 +102,9 @@ namespace LocalECT
                 //string textmessage = txt_Text.Text.Trim().Replace("\r\n", "\\r\\n");
                 //textmessage = textmessage.Replace("\n\n", "\\r\\n");
                 //textmessage = textmessage.Replace("\n", "\\n");
-                string textmessage = txt_Text.Text.Trim().Replace("\r", "\\r");
+                string textmessage = txt_Text.Text.Replace("\r", "\\r");
                 textmessage = textmessage.Replace("\n", "\\n");
+                textmessage = textmessage.Replace("\"", string.Empty);
 
                 if (txt_Mobile.Text.Trim().StartsWith("+971") && txt_Mobile.Text.Substring(4, 1) == "5")
                 {

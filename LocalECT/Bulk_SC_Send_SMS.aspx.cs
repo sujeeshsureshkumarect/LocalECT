@@ -18,6 +18,9 @@ namespace LocalECT
     {
         InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Females;
         string constr = ConfigurationManager.ConnectionStrings["ECTDataFemales"].ConnectionString;
+        string text_contents = "";
+        int iEffected = 0;
+        string a = "s";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CurrentRole"] != null)
@@ -35,6 +38,7 @@ namespace LocalECT
                     if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
                     {
                         lnk_Search.HRef = "StudentSearch.aspx";
+                        a = "s";
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                            InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
                         {
@@ -44,6 +48,7 @@ namespace LocalECT
                     else
                     {
                         lnk_Search.HRef = "Acc_Search.aspx";
+                        a = "a";
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                            InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
                         {
@@ -144,66 +149,67 @@ namespace LocalECT
             Connection_StringCLS connstr = new Connection_StringCLS(Campus);
             SqlConnection sc = new SqlConnection(connstr.Conn_string);
 
-            int iEffected = 0;
+            //int iEffected = 0;
 
-            if (flp_upload.HasFile==true)
+            if (Convert.ToInt32(hdn_iEffected.Value) > 0 && hdn_text_contents.Value != "")
             {
                 //Excel Reader
-                string filetype = Path.GetExtension(flp_upload.FileName);
-                if (filetype.ToLower() == ".xlsx"|| filetype.ToLower() == ".xls")
-                {
-                    //getting the path of the file   
-                    string path = Server.MapPath("~/Upload/" + flp_upload.FileName);
-                    //saving the file inside the MyFolder of the server  
-                    flp_upload.SaveAs(path);
-                    DataTable dt = READExcel(path);
-                    if (path != null)
-                    {
-                        string FileUrls = path;
-                        System.IO.File.Delete(FileUrls);
-                    }
-                    if (dt.Rows.Count > 0)
-                    {
-                        string text_contents = "";
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                        {
-                            if (!string.IsNullOrEmpty(dt.Rows[i]["Mobile_Number"].ToString()) && !string.IsNullOrEmpty(dt.Rows[i]["SMS_Text"].ToString()))
-                            {
-                                string mobile = dt.Rows[i]["Mobile_Number"].ToString();
-                                string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();
-                                //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
-                                //textmessage = textmessage.Replace("\n\n", "\\r\\n");
-                                //textmessage = textmessage.Replace("\n", "\\n");
-                                string textmessage = SMS_Text.Replace("\r", "\\r");
-                                textmessage = textmessage.Replace("\n", "\\n");
-                                mobile = "+" + mobile;
-                                if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
-                                {
-                                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
-                                    //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
-                                    iEffected++;
-                                }
-                            }
-                        }
-                        int iLen1 = text_contents.Length;
-                        string sLast1 = text_contents.Substring(iLen1 - 1, 1);
-                        if (sLast1 == ",")
-                        {
-                            text_contents = text_contents.Remove(iLen1 - 1, 1);
-                        }
-                        bulksms(text_contents, iEffected);
-                        //lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
-                        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
-                        //div_msg.Visible = true;
-                        lnk_BulkUpdate.Visible = false;                        
-                    }
-                }
-                else
-                {
-                    lbl_Msg.Text = "Only .xlsx,.xls files are allowed";
-                    div_msg.Visible = true;
-                    return;
-                }
+                //string filetype = Path.GetExtension(flp_upload.FileName);
+                //if (filetype.ToLower() == ".xlsx"|| filetype.ToLower() == ".xls")
+                //{
+                //    //getting the path of the file   
+                //    string path = Server.MapPath("~/Upload/" + flp_upload.FileName);
+                //    //saving the file inside the MyFolder of the server  
+                //    flp_upload.SaveAs(path);
+                //    DataTable dt = READExcel(path);
+                //    if (path != null)
+                //    {
+                //        string FileUrls = path;
+                //        System.IO.File.Delete(FileUrls);
+                //    }
+                //    if (dt.Rows.Count > 0)
+                //    {
+                //        string text_contents = "";
+                //        for (int i = 0; i < dt.Rows.Count; i++)
+                //        {
+                //            if (!string.IsNullOrEmpty(dt.Rows[i]["Mobile_Number"].ToString()) && !string.IsNullOrEmpty(dt.Rows[i]["SMS_Text"].ToString()))
+                //            {
+                //                string mobile = dt.Rows[i]["Mobile_Number"].ToString();
+                //                string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();
+                //                //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
+                //                //textmessage = textmessage.Replace("\n\n", "\\r\\n");
+                //                //textmessage = textmessage.Replace("\n", "\\n");
+                //                string textmessage = SMS_Text.Replace("\r", "\\r");
+                //                textmessage = textmessage.Replace("\n", "\\n");
+                //                mobile = "+" + mobile;
+                //                if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
+                //                {
+                //                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
+                //                    //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
+                //                    iEffected++;
+                //                }
+                //            }
+                //        }
+                //        int iLen1 = text_contents.Length;
+                //        string sLast1 = text_contents.Substring(iLen1 - 1, 1);
+                //        if (sLast1 == ",")
+                //        {
+                //            text_contents = text_contents.Remove(iLen1 - 1, 1);
+                //        }
+
+                //        //lbl_Msg.Text = "Bulk Operation (Send SMS) Completed Successfully-SMS sent to " + iEffected + " students.";
+                //        //div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                //        //div_msg.Visible = true;
+                //        lnk_BulkUpdate.Visible = false;                        
+                //    }
+                //}
+                //else
+                //{
+                //    lbl_Msg.Text = "Only .xlsx,.xls files are allowed";
+                //    div_msg.Visible = true;
+                //    return;
+                //}
+                bulksms(hdn_text_contents.Value,Convert.ToInt32(hdn_iEffected.Value));
             }
             else
             {
@@ -239,13 +245,14 @@ namespace LocalECT
 
                             if (dt.Rows.Count > 0)
                             {
-                                string text_contents = "";
+                                text_contents = "";
                                 string SMS_Text = txt_Text.Text.Trim();
                                 //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
                                 //textmessage = textmessage.Replace("\n\n", "\\r\\n");
                                 //textmessage = textmessage.Replace("\n", "\\n");
                                 string textmessage = SMS_Text.Replace("\r", "\\r");
                                 textmessage = textmessage.Replace("\n", "\\n");
+                                textmessage = textmessage.Replace("\"", string.Empty);
                                 for (int i = 0; i < dt.Rows.Count; i++)
                                 {
                                     if (!string.IsNullOrEmpty(dt.Rows[i]["strPhone1"].ToString()))
@@ -345,7 +352,92 @@ namespace LocalECT
         }
         protected void lnk_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("StudentSearch.aspx");
+            if(a=="s")
+            {
+                Response.Redirect("StudentSearch.aspx");
+            }
+            else
+            {
+                Response.Redirect("Acc_Search.aspx");                
+            }           
+        }
+
+        protected void lnk_Upload_Click(object sender, EventArgs e)
+        {
+            //int iEffected = 0;
+            if (flp_upload.HasFile == true)
+            {
+                //Excel Reader
+                string filetype = Path.GetExtension(flp_upload.FileName);
+                if (filetype.ToLower() == ".xlsx" || filetype.ToLower() == ".xls")
+                {
+                    //getting the path of the file   
+                    string path = Server.MapPath("~/Upload/" + flp_upload.FileName);
+                    //saving the file inside the MyFolder of the server  
+                    flp_upload.SaveAs(path);
+                    DataTable dt = READExcel(path);
+                    if (path != null)
+                    {
+                        string FileUrls = path;
+                        System.IO.File.Delete(FileUrls);
+                    }
+                    if (dt.Rows.Count > 0)
+                    {
+                        text_contents = "";
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (!string.IsNullOrEmpty(dt.Rows[i]["Mobile_Number"].ToString()) && !string.IsNullOrEmpty(dt.Rows[i]["SMS_Text"].ToString()))
+                            {
+                                string mobile = dt.Rows[i]["Mobile_Number"].ToString();
+                                string SMS_Text = dt.Rows[i]["SMS_Text"].ToString();
+                                //string textmessage = SMS_Text.Replace("\r\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n\n", "\\r\\n");
+                                //textmessage = textmessage.Replace("\n", "\\n");
+                                string textmessage = SMS_Text.Replace("\r", "\\r");
+                                textmessage = textmessage.Replace("\n", "\\n");
+                                textmessage = textmessage.Replace("\"", string.Empty);
+                                //textmessage = textmessage.Replace('"', ' ');
+                                mobile = "+" + mobile;
+                                if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
+                                {
+                                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
+                                    //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
+                                    iEffected++;
+                                }
+                            }
+                        }
+                        int iLen1 = text_contents.Length;
+                        string sLast1 = text_contents.Substring(iLen1 - 1, 1);
+                        if (sLast1 == ",")
+                        {
+                            text_contents = text_contents.Remove(iLen1 - 1, 1);
+                        }
+                        //bulksms(text_contents, iEffected);
+                        hdn_text_contents.Value = text_contents;
+                        hdn_iEffected.Value = iEffected.ToString();
+
+                        GridView1.DataSource = dt;
+                        GridView1.DataBind();
+
+                        //lnk_BulkUpdate.Visible = false;
+                        lbl_Msg.Text = "File Uploaded Successfully";
+                        div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
+                        div_msg.Visible = true;
+                    }
+                }
+                else
+                {
+                    lbl_Msg.Text = "Only .xlsx,.xls files are allowed";
+                    div_msg.Visible = true;
+                    return;
+                }
+            }
+            else
+            {
+                lbl_Msg.Text = "Please select any file to upload";
+                div_msg.Visible = true;
+                return;
+            }
         }
     }
 }

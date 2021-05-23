@@ -12,7 +12,7 @@
                                         width: 100%;
                                         float: left;
                                         display: block;
-                                    }                                  
+                                    }
                                 </style>
                             </div>
                             <div class="clearfix"></div>
@@ -47,7 +47,7 @@
                             
                         </div>
                                      </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-10">
                                                <div class="col-md-6 col-sm-6">
                                                     <div class="form-group">
                                                         <label>SMS Text&nbsp;&nbsp;</label> <asp:RadioButtonList ID="rdb_Lang" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
@@ -60,15 +60,32 @@
                                                             <p style="font-size:12px;color: crimson;"><span id="remaining">160 characters remaining,</span> <span id="messages">1 message(s)</span></p>
                                                     </div>
                                                    </div>
+                                                <asp:HiddenField ID="hdn_text_contents" runat="server" />
+                                                <asp:HiddenField ID="hdn_iEffected" runat="server" value="0"/>
                                                 <div class="col-md-6 col-sm-6">
-                                                     <div class="form-group">
+                                                    <%-- <div class="form-group">--%>
                                                        <%--<label>Custom SMS Messages per Student</label> --%>
-                                                        <div class="input-group">
-                                                            <asp:FileUpload ID="flp_upload" runat="server" />
-                                                        </div> 
+                                                        <%--<div class="input-group">--%>
+                                                            <asp:FileUpload ID="flp_upload" runat="server" Style="float:left;"/>
+                                                            <asp:LinkButton ID="lnk_Upload" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_Upload_Click"><i class="fa fa-upload"></i> Upload File</asp:LinkButton>
+                                                      <%--  </div> --%>
+                                                    <br /> <br />
                                                          <p style="font-size:12px;color: red;">(Only .xlsx,.xls files are allowed)</p>
                                                          <a href="Upload/Bulk%20SMS%20Sample.xlsx" target="_blank" style="color:blue"><u><i class="fa fa-download"></i> Sample Excel</u></a>
-                                                    </div>
+                                                   <%-- </div>--%>
+                                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false">
+                                                        <Columns>
+                                                            <asp:TemplateField>
+                                                                <HeaderTemplate>
+                                                                    SR No.
+                                                                </HeaderTemplate>
+                                                                <ItemTemplate>
+                                                                    <%# Container.DataItemIndex + 1 %>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField HeaderText="Mobile_Number" DataField="Mobile_Number" />
+                                                        </Columns>
+                                                    </asp:GridView>
                                                 </div>
                                             </div>
                                            
@@ -107,26 +124,26 @@
                                                         var remaining = messages * count - (chars % (messages * count) || messages * count);
                                                         $remaining.text(remaining + ' characters remaining,');
                                                         $messages.text(messages + ' message(s)');
-                                                    }                                                                                                        
+                                                    }
                                                 });
                                                 var $remaining = $('#remaining'),
                                                     $messages = $remaining.next();
 
                                                 $('#txt_Text').keyup(function () {
                                                     var chars = this.value.length;
-                                                    if (chars > 0) {                                                        
+                                                    if (chars > 0) {
                                                         var messages = Math.ceil(chars / count);
-                                                            var remaining = messages * count - (chars % (messages * count) || messages * count);
+                                                        var remaining = messages * count - (chars % (messages * count) || messages * count);
 
                                                         $remaining.text(remaining + ' characters remaining,');
                                                         $messages.text(messages + ' message(s)');
                                                     }
                                                     else {
-                                                       
+
                                                         $remaining.text(count + ' characters remaining,');
                                                         $messages.text(1 + ' message(s)');
                                                     }
-                                                    
+
                                                 });
                                             </script>
                                         </div>
