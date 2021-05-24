@@ -284,7 +284,7 @@ namespace LocalECT
                 TableCell TDFinance = new TableCell();
                 TableCell TDRemind = new TableCell();
 
-                DropDownList cbo = new DropDownList();
+                DropDownList cbo = new DropDownList();               
                 CheckBox chk = new CheckBox();
                 System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
 
@@ -313,6 +313,7 @@ namespace LocalECT
 
                     cbo = new DropDownList();
                     cbo.ID = "Status" + r;
+                    cbo.CssClass = "form-control";
 
                     //TDRemind.ID = "tdRemind" + r;
 

@@ -1278,7 +1278,7 @@ namespace LocalECT
             DataSet Ds = new DataSet();
             try
             {
-                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentCenter,
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Attendance,
                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                 {
                     //divMsg.InnerText = "Sorry you dont have permission to view the attendance details from here...";
@@ -1335,6 +1335,103 @@ namespace LocalECT
                 iPeriod = int.Parse(args[2]);
                 sPeriod = args[3];
 
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+                SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+
+                Connection_StringCLS myConnection_String1 = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
+                SqlConnection sc1 = new SqlConnection(myConnection_String1.Conn_string);
+
+                SqlCommand cmd = new SqlCommand("select MCampusID,FCampusID from [ECTDataNew].[dbo].[Reg_Lecturers] where LecturerID=@LecturerID", sc1);
+                cmd.Parameters.AddWithValue("@LecturerID", Session["CurrentLecturer"].ToString());
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc1.Open();
+                    da.Fill(dt);
+                    sc1.Close();
+
+                    if(dt.Rows.Count>0)
+                    {
+                        int MCampusID = Convert.ToInt32(dt.Rows[0]["MCampusID"]);//1425;
+                        int FCampusID = Convert.ToInt32(dt.Rows[0]["FCampusID"]);//1429;
+
+                        SqlCommand cmd1 = new SqlCommand("select intLecturer from Reg_CourseTime_Schedule where intStudyYear=@intStudyYear and byteSemester=@byteSemester and strCourse=@strCourse and byteClass=@byteClass and byteShift=@byteShift and intLecturer=@intLecturer", sc);
+                        cmd1.Parameters.AddWithValue("@intStudyYear", iYear);
+                        cmd1.Parameters.AddWithValue("@byteSemester", iSem);
+                        cmd1.Parameters.AddWithValue("@strCourse", sCourse);
+                        cmd1.Parameters.AddWithValue("@byteClass", iClass);
+                        cmd1.Parameters.AddWithValue("@byteShift", iPeriod);
+                        if(Campus.ToString()=="Males")
+                        {
+                            cmd1.Parameters.AddWithValue("@intLecturer", MCampusID);
+                        }
+                        else
+                        {
+                            cmd1.Parameters.AddWithValue("@intLecturer", FCampusID);
+                        }
+                        DataTable dt1 = new DataTable();
+                        SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                        try
+                        {
+                            sc.Open();
+                            da1.Fill(dt1);
+                            sc.Close();
+
+                            if(dt1.Rows.Count>0)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Session["CurrentRole"].ToString() == "91")
+                                {
+
+                                }
+                                else
+                                {
+                                    lbl_Msg.Text = "Sorry you dont have permission to view the attendance details from here...";
+                                    div_msg.Visible = true;
+                                    return;
+                                }
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (Session["CurrentRole"].ToString() == "91")
+                        {
+
+                        }
+                        else
+                        {
+                            lbl_Msg.Text = "Sorry you dont have permission to view the attendance details from here...";
+                            div_msg.Visible = true;
+                            return;
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+
+
                 //string sSQL = "SELECT L.strLecturers AS Lecturer, P.strShortcut AS Session, R.Course, R.Class, R.Student, SD.strLastDescEn AS Name, AT.Date, AT.StatusNo, AT.Status, AT.Factor,ISNULL(W_EW.strGrade,'-') AS [W/EW]";
                 //sSQL += " FROM (SELECT iYear, Sem, Shift, Course, Class, Student FROM Course_Balance_View AS CV";
                 //sSQL += " WHERE (iYear = " + iYear + ") AND (Sem =" + iSem + ") AND (Shift = " + iPeriod + ") AND (Course = N'" + sCourse + "') AND (Class =" + iClass + ")) AS R INNER JOIN";
@@ -1377,10 +1474,20 @@ namespace LocalECT
         }
         protected void SelectBTN_Command(object sender, CommandEventArgs e)
         {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_StudentCenter,
-                 InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+            //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_GradesView,
+            //     InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+            //{
+            //    //divMsg.InnerText = "Sorry you dont have permission to view the attendance details from here...";
+            //    lbl_Msg.Text = "Sorry you dont have permission to view the Grades details from here...";
+            //    div_msg.Visible = true;
+            //    return;
+            //}
+
+            if ((LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_GradesEntry,
+                   InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true) &&
+                   (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_GradesView,
+                   InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true))
             {
-                //divMsg.InnerText = "Sorry you dont have permission to view the attendance details from here...";
                 lbl_Msg.Text = "Sorry you dont have permission to view the Grades details from here...";
                 div_msg.Visible = true;
                 return;
@@ -1433,6 +1540,103 @@ namespace LocalECT
             iClass = int.Parse(args[1]);
             iPeriod = int.Parse(args[2]);
             sPeriod = args[3];
+
+
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+            SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
+
+            Connection_StringCLS myConnection_String1 = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
+            SqlConnection sc1 = new SqlConnection(myConnection_String1.Conn_string);
+
+            SqlCommand cmd = new SqlCommand("select MCampusID,FCampusID from [ECTDataNew].[dbo].[Reg_Lecturers] where LecturerID=@LecturerID", sc1);
+            cmd.Parameters.AddWithValue("@LecturerID", Session["CurrentLecturer"].ToString());
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc1.Open();
+                da.Fill(dt);
+                sc1.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    int MCampusID = Convert.ToInt32(dt.Rows[0]["MCampusID"]);//1425;
+                    int FCampusID = Convert.ToInt32(dt.Rows[0]["FCampusID"]);//1429;
+
+                    SqlCommand cmd1 = new SqlCommand("select intLecturer from Reg_CourseTime_Schedule where intStudyYear=@intStudyYear and byteSemester=@byteSemester and strCourse=@strCourse and byteClass=@byteClass and byteShift=@byteShift and intLecturer=@intLecturer", sc);
+                    cmd1.Parameters.AddWithValue("@intStudyYear", iYear);
+                    cmd1.Parameters.AddWithValue("@byteSemester", iSem);
+                    cmd1.Parameters.AddWithValue("@strCourse", sCourse);
+                    cmd1.Parameters.AddWithValue("@byteClass", iClass);
+                    cmd1.Parameters.AddWithValue("@byteShift", iPeriod);
+                    if (Campus.ToString() == "Males")
+                    {
+                        cmd1.Parameters.AddWithValue("@intLecturer", MCampusID);
+                    }
+                    else
+                    {
+                        cmd1.Parameters.AddWithValue("@intLecturer", FCampusID);
+                    }
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                    try
+                    {
+                        sc.Open();
+                        da1.Fill(dt1);
+                        sc.Close();
+
+                        if (dt1.Rows.Count > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            if (Session["CurrentRole"].ToString() == "91")
+                            {
+
+                            }
+                            else
+                            {
+                                lbl_Msg.Text = "Sorry you dont have permission to view the Grades details from here...";
+                                div_msg.Visible = true;
+                                return;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
+
+                }
+                else
+                {
+                    if (Session["CurrentRole"].ToString() == "91")
+                    {
+
+                    }
+                    else
+                    {
+                        lbl_Msg.Text = "Sorry you dont have permission to view the Grades details from here...";
+                        div_msg.Visible = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
 
             //CommandArgument = '<%# Eval("StudyYear") + ";" + Eval("Semester")+ ";" + Eval("Shift") + ";" + Eval("Course")+ ";" + Eval("AttClass") %>'
 

@@ -63,7 +63,7 @@
                                              <div class="x_panel">
                                                 <div class="col-md-12 col-sm-12">
  <div>
-        <table width="800px">
+        <table width="100%">
             <tr>
                 <td colspan="5"><div id="divMsg" runat="server" class="NoData"></div></td>
             </tr>
@@ -107,13 +107,13 @@
                         <asp:Label ID="Label3" runat="server" Text="Set all to" Font-Size="Small" 
                             style="text-align: center"></asp:Label>
 &nbsp;<asp:DropDownList ID="ddlChangeAllStatuses" runat="server" 
-                            Width="140px">
+                            Width="140px" Height="34px">
                             <asp:ListItem Value="-1">Select Status</asp:ListItem>
                             <asp:ListItem Value="5">Absent</asp:ListItem>
                             <asp:ListItem Value="1">Attended</asp:ListItem>
                         </asp:DropDownList>
-&nbsp;<asp:Button ID="btnChangeStatus" runat="server" CssClass="Command" onclick="btnChangeStatus_Click" 
-                            Text="Set" BorderStyle="Outset" BorderWidth="3px" />
+&nbsp;<asp:Button ID="btnChangeStatus" runat="server"  onclick="btnChangeStatus_Click" 
+                            Text="Set" CssClass="btn btn-success btn-sm"/>
                     </h4>
                 </td>
             </tr>
@@ -122,16 +122,20 @@
                 <td>&nbsp;</td>
                 <td>
                         <asp:Label ID="lblSaveNotification" runat="server" 
-                            style="font-family: 'Courier New', Courier, monospace; color: #0000FF" 
+                            style="color: #0000FF" 
                             Text="Please click Save button to save changes"></asp:Label>
                     </td>
                 <td>&nbsp;</td>
             </tr>
-            
+            <style>
+                #ContentPlaceHolder1_MyTable{
+                    width:100%;
+                }
+            </style>
             </table>
     </div>
     <div id="divDetail" runat="server" style="text-align:center; width: 100%;"></div>
-    <table width="100%" bgcolor="silver" >
+    <table width="100%" bgcolor="#f7f7f7">
         <tr>
                 <td colspan="5"><hr /></td>
             </tr>

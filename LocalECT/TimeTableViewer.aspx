@@ -254,12 +254,12 @@
                                         oncommand="BtnView_Command">List</asp:LinkButton>     
                                                              <asp:LinkButton ID="BtnAtt" runat="server" CssClass="dropdown-item"
                                                 CommandArgument='<%# Eval("sCourse")+ ";" + Eval("iClass")+";"+Eval("iPeriod")+";"+Eval("sPeriod") %>' 
-                                                oncommand="BtnAtt_Command" Enabled="false">Attendance</asp:LinkButton>
+                                                oncommand="BtnAtt_Command" Enabled="true">Attendance</asp:LinkButton>
                                        
                                                              
                                                              <asp:LinkButton ID="BtnGrades" runat="server" CssClass="dropdown-item"
                                                 CommandArgument='<%# Eval("sCourse")+ ";" + Eval("iClass")+";"+Eval("iPeriod")+";"+Eval("sPeriod") %>' 
-                                                oncommand="SelectBTN_Command" Enabled="false">Grades</asp:LinkButton>
+                                                oncommand="SelectBTN_Command" Enabled="true">Grades</asp:LinkButton>
                                                              <a class="dropdown-item" href="#">Send SMS</a>
                                                              <a class="dropdown-item" href="#">Send Email</a>                                                                                                                    
                                                          </div>

@@ -36,7 +36,7 @@ namespace LocalECT
           //string script = "$(document).ready(function () { $('[id*=btnSubmit]').click(); });";
           //ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
 
-          if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Reg_Balance,
+          if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_PhonesExtensions,
               InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
           {
             Server.Transfer("Authorization.aspx");

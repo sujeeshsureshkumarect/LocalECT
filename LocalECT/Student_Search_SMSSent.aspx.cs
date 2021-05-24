@@ -17,6 +17,7 @@ namespace LocalECT
     {
         int CurrentRole = 0;
         InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Males;
+        string a = "s";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CurrentRole"] != null)
@@ -25,6 +26,7 @@ namespace LocalECT
                 if (Request.UrlReferrer.ToString().Contains("StudentSearch"))
                 {
                     lnk_Search.HRef = "StudentSearch.aspx";
+                    a = "s";
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Student_Data,
                        InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
                     {
@@ -34,6 +36,7 @@ namespace LocalECT
                 else
                 {
                     lnk_Search.HRef = "Acc_Search.aspx";
+                    a = "a";
                     if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_ACC_Search,
                        InitializeModule.enumPrivilege.SendSMS, CurrentRole) != true)
                     {
@@ -153,7 +156,14 @@ namespace LocalECT
 
         protected void lnk_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("StudentSearch.aspx");
+            if (a == "s")
+            {
+                Response.Redirect("StudentSearch.aspx");
+            }
+            else
+            {
+                Response.Redirect("Acc_Search.aspx");
+            }
         }
     }
 }

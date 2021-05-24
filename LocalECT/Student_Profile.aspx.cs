@@ -2390,7 +2390,7 @@ namespace LocalECT
             catch (Exception ex)
             {
                 Con.Close();
-                throw ex;
+                Console.WriteLine(ex.Message);                
             }
             finally
             {
@@ -2416,7 +2416,7 @@ namespace LocalECT
             catch (Exception ex)
             {
                 Con.Close();
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -2446,14 +2446,14 @@ namespace LocalECT
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
 
             // Check if user object already exists in the AD
             UserPrincipal usr = UserPrincipal.FindByIdentity(principalContext, userLogonName);
             if (usr != null)
             {
-                //User Already Exists
+                //User Already Exists                   
             }
             else
             {
@@ -5304,7 +5304,7 @@ namespace LocalECT
             Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
             myItem["Title"] = Convert.ToInt32(ddlEnrollmentTerm.SelectedValue);//Term                     
             myItem["SID"] = lblStudentId.Text.Trim();//SID
-            myItem["Email"] = clientContext.Web.EnsureUser(emailAddress);//Student Email   
+            myItem["Email"] = emailAddress;//Student Email   
             //myItem["Email"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//Student Email  
             myItem["Password"] = SIS_PWD;//SIS Password
             myItem["Phone1"] = txtPhone1.Text.Trim();//Phone1
