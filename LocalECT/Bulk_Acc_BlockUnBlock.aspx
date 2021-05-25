@@ -69,11 +69,11 @@
                                                 <div class="input-group">
                                                     <asp:DropDownList ID="ddlOnlineStatus" runat="server" 
                                                          CssClass="form-control">
-                                                        <asp:ListItem Selected="True" Value="0">Inactive</asp:ListItem>
-                                                        <asp:ListItem Value="1">Active</asp:ListItem>
+                                                        <asp:ListItem  Value="0">Inactive</asp:ListItem>
+                                                        <asp:ListItem Selected="True" Value="1">Active</asp:ListItem>
                                                         <asp:ListItem Value="2">Fully Activated</asp:ListItem>
                                                     </asp:DropDownList>
-                                                    <asp:CheckBox ID="chk_Enable1" runat="server" Checked="true" style="padding-left:10px;"/>
+                                                    <asp:CheckBox ID="chk_Enable1" runat="server" Checked="false" style="padding-left:10px;"/>
                                                 </div>
                                             </div>
                                         </div>
