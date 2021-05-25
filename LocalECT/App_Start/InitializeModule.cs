@@ -583,7 +583,8 @@ public class InitializeModule
         CreateAccount=185,//New
 
         DMSView=186,//New
-        SendNotification = 187//New
+        SendNotification = 187,//New
+        BlockUnblockAccounts = 188//New
 
     }
 
@@ -872,7 +873,8 @@ public class InitializeModule
         //My_Requests=1277,
         Online_Payment_Tracking= 1289,
 
-        DMSMapping = 1293
+        DMSMapping = 1293,
+        AccBlockUnBlock = 1294
 
 
     }

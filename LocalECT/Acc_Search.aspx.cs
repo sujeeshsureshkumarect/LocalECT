@@ -243,7 +243,7 @@ namespace LocalECT
         {
             string sids = hdn_Selected_Sids.Value;
             Session["sids"] = sids;
-            if (drp_Bulk.SelectedItem.Text == "Change Status")
+            if (drp_Bulk.SelectedItem.Text == "Block/Unblock")
             {
                 Response.Redirect(drp_Bulk.SelectedItem.Value);
             }

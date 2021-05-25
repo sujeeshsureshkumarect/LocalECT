@@ -183,6 +183,7 @@
     <Content Include="Attendance_Grades.aspx" />
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
+    <Content Include="Bulk_Acc_BlockUnBlock.aspx" />
     <Content Include="Bulk_SC_Change_Status.aspx" />
     <Content Include="Bulk_SC_Send_SMS.aspx" />
     <Content Include="ChangeMajor.aspx" />
@@ -8579,6 +8580,13 @@
     </Compile>
     <Compile Include="Authorization.aspx.designer.cs">
       <DependentUpon>Authorization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bulk_Acc_BlockUnBlock.aspx.cs">
+      <DependentUpon>Bulk_Acc_BlockUnBlock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bulk_Acc_BlockUnBlock.aspx.designer.cs">
+      <DependentUpon>Bulk_Acc_BlockUnBlock.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bulk_SC_Change_Status.aspx.cs">
       <DependentUpon>Bulk_SC_Change_Status.aspx</DependentUpon>
