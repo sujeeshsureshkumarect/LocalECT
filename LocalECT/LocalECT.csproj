@@ -6599,6 +6599,9 @@
     <Content Include="js\jquery-1.8.2.js" />
     <Content Include="js\jquery-ui-1.9.0.js" />
     <Content Include="js\zfcomponent.js" />
+    <Content Include="Link_Manager_Create.aspx" />
+    <Content Include="Link_Manager_Home.aspx" />
+    <Content Include="Link_Manager_Update.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LocalECT.Master" />
     <Content Include="images\Icons\vssver2.scc" />
@@ -8888,6 +8891,27 @@
     </Compile>
     <Compile Include="HR_Services.aspx.designer.cs">
       <DependentUpon>HR_Services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Link_Manager_Create.aspx.cs">
+      <DependentUpon>Link_Manager_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Link_Manager_Create.aspx.designer.cs">
+      <DependentUpon>Link_Manager_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Link_Manager_Home.aspx.cs">
+      <DependentUpon>Link_Manager_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Link_Manager_Home.aspx.designer.cs">
+      <DependentUpon>Link_Manager_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Link_Manager_Update.aspx.cs">
+      <DependentUpon>Link_Manager_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Link_Manager_Update.aspx.designer.cs">
+      <DependentUpon>Link_Manager_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="LocalECT.Master.cs">
       <DependentUpon>LocalECT.Master</DependentUpon>
