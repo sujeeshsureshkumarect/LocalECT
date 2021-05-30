@@ -37,6 +37,15 @@ namespace LocalECT
 
                     iRegYear = (int)Session["RegYear"];
                     iRegSem = (int)Session["RegSemester"];
+
+                    if (!IsPostBack)
+                    {
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
+                        InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                        {
+                           Server.Transfer("Authorization.aspx");
+                        }
+                    }
                 }
                 else
                 {
@@ -143,6 +152,7 @@ namespace LocalECT
                     int boolInt = isActive ? 1 : 0;
                     drp_Status.SelectedIndex = drp_Status.Items.IndexOf(drp_Status.Items.FindByValue(boolInt.ToString()));
                     txt_ShortURL.Text = "https://ectsis.ect.ac.ae/link?q="+ dt.Rows[0]["sCode"].ToString() + "";
+                    hyp_Copy.NavigateUrl= "https://ectsis.ect.ac.ae/link?q=" + dt.Rows[0]["sCode"].ToString() + "";
                     hdn_sCode.Value = dt.Rows[0]["sCode"].ToString();
                     drp_Source.SelectedIndex = drp_Source.Items.IndexOf(drp_Source.Items.FindByText(dt.Rows[0]["sSource"].ToString()));
                     ddlRegTerm.SelectedIndex = ddlRegTerm.Items.IndexOf(ddlRegTerm.Items.FindByValue(dt.Rows[0]["iTerm"].ToString()));

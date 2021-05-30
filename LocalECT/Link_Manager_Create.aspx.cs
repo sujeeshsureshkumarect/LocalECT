@@ -36,6 +36,14 @@ namespace LocalECT
 
                     iRegYear = (int)Session["RegYear"];
                     iRegSem = (int)Session["RegSemester"];
+                    if (!IsPostBack)
+                    {
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
+                        InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
+                    }
                 }
                 else
                 {

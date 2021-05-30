@@ -1250,6 +1250,9 @@ namespace LocalECT
                         case "4":
                         case "5":
                         case "6":
+                        case "51":
+                        case "52":
+                        case "53":
                             isRequired = true;
                             break;
                     }

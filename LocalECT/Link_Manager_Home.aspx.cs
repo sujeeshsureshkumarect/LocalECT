@@ -35,15 +35,14 @@ namespace LocalECT
 
                     iRegYear = (int)Session["RegYear"];
                     iRegSem = (int)Session["RegSemester"];
-                    //if(CurrentRole == 165 || CurrentRole==91)
-                    //{
-
-                    //}
-                    //else
-                    //{
-                    //    Session["errMsg"] = "You don't have access to view this page. Please contact Administrator.";
-                    //    Response.Redirect("ErrPage.aspx");
-                    //}
+                    if (!IsPostBack)
+                    {
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                          Server.Transfer("Authorization.aspx");
+                        }
+                    }
                 }
                 else
                 {

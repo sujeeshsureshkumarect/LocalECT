@@ -874,7 +874,8 @@ public class InitializeModule
         Online_Payment_Tracking= 1289,
 
         DMSMapping = 1293,
-        AccBlockUnBlock = 1294
+        AccBlockUnBlock = 1294,
+        LinkManager = 1295
 
 
     }

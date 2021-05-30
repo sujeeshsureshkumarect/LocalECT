@@ -110,8 +110,19 @@
                                                     <td><%#Eval("sURL")%></td>
                                                      <td><span style="display: none;"><%#Eval("dExpiry","{0:yyyyMMdd}")%></span><%#Eval("dExpiry","{0:dd/MM/yyyy}")%></td>
                                                     <td><%#Eval("isActive")%></td>
-                                                    <td><%#Eval("sSource")%></td>                                                                                                       
-                                                    <td><a href="Link_Manager_Update.aspx?id=<%#Eval("iLink")%>" class="btn btn-success btn-sm">View/Edit</a></td>
+                                                    <td><%#Eval("sSource")%></td>     
+                                                     <td>
+                                                    <div class="btn-group">
+                                                         <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                             Actions
+                                                         </button>
+                                                         <div class="dropdown-menu">
+                                                             <a class="dropdown-item copy_text" href="https://ectsis.ect.ac.ae/link?q=<%#Eval("sCode")%>" data-toggle="tooltip" title="Copy to Clipboard">Copy Link</a>
+                                                             <a href="Link_Manager_Update.aspx?id=<%#Eval("iLink")%>" class="dropdown-item">Edit</a>
+                                                             <a class="dropdown-item" href="Link_Manager_Analysis.aspx?id=<%#Eval("iLink")%>">Analysis</a>                                                          
+                                                         </div>
+                                                     </div>
+                                                   </td>
                                                     <td><%#Eval("sAddedby")%></td>
                                                     <td><span style="display: none;"><%#Eval("dAdded","{0:yyyyMMdd}")%></span><%#Eval("dAdded","{0:dd/MM/yyyy}")%></td>
                                                 </tr>
@@ -123,7 +134,22 @@
                                         </asp:Repeater>                          
                             </div>
                         </div>
-                  
+                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                  <script>
+                      $('.copy_text').click(function (e) {
+                          e.preventDefault();
+                          var copyText = $(this).attr('href');
+
+                          document.addEventListener('copy', function (e) {
+                              e.clipboardData.setData('text/plain', copyText);
+                              e.preventDefault();
+                          }, true);
+
+                          document.execCommand('copy');
+                          console.log('copied text : ', copyText);
+                          alert('Text Copied to Clipboard \r\nCopied text: ' + copyText);
+                      });
+                  </script>
                     </div>
                         </div>
 

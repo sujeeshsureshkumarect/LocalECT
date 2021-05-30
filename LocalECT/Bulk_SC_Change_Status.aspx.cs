@@ -136,8 +136,8 @@ namespace LocalECT
             {
                 string sSQL = "SELECT byteReason, strReasonDesc AS Status";
                 sSQL += " FROM dbo.Lkp_Reasons AS S";
-                sSQL += " WHERE (byteReason <> 100 AND byteReason <> 9)";
-                sSQL += " ORDER BY byteReason";
+                sSQL += " WHERE (byteReason <> 9)";
+                sSQL += " ORDER BY Status";
                 SqlCommand Cmd = new SqlCommand(sSQL, Conn);
                 SqlDataReader Rd = Cmd.ExecuteReader();
 

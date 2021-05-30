@@ -114,6 +114,23 @@
                                                      <div class="form-group ">
                                                 <asp:Button id="btn_Create" runat="server" Text="Update" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click"/>
                                                 <asp:Button id="btn_Cancel" runat="server" Text="Cancel" CssClass="btn btn-warning btn-sm" OnClick="btn_Cancel_Click"/>
+                                                <asp:HyperLink ID="hyp_Copy" runat="server" CssClass="btn btn-success btn-sm copy_text" Text="Copy Link" ForeColor="White" Target="_blank"></asp:HyperLink>
+                                                          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                  <script>
+                      $('.copy_text').click(function (e) {
+                          e.preventDefault();
+                          var copyText = $(this).attr('href');
+
+                          document.addEventListener('copy', function (e) {
+                              e.clipboardData.setData('text/plain', copyText);
+                              e.preventDefault();
+                          }, true);
+
+                          document.execCommand('copy');
+                          console.log('copied text : ', copyText);
+                          alert('Text Copied to Clipboard \r\nCopied text: ' + copyText);
+                      });
+                  </script>
                                                     </div>
                                                     </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                                             </div>
