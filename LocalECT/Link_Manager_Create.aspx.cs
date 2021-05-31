@@ -130,7 +130,7 @@ namespace LocalECT
         public string Create16DigitString()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[10];
+            var stringChars = new char[5];
             var random = new Random();
             for (int i = 0; i < stringChars.Length; i++)
             {

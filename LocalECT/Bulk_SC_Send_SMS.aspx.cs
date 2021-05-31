@@ -227,6 +227,8 @@ namespace LocalECT
                         string s = sIDs;
                         sIDs = "'" + s.Replace(",", "','") + "'";
 
+
+                        
                         string sSQL = "SELECT  Reg_Students_Data.strPhone1 ";
                         sSQL += " FROM Reg_Applications INNER JOIN ";
                         sSQL += "  Reg_Students_Data ON Reg_Applications.lngSerial = Reg_Students_Data.lngSerial ";
@@ -253,6 +255,59 @@ namespace LocalECT
                                 string textmessage = SMS_Text.Replace("\r", "\\r");
                                 textmessage = textmessage.Replace("\n", "\\n");
                                 textmessage = textmessage.Replace("\"", string.Empty);
+
+                                Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+                                SqlConnection sc1 = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+                                string query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='AF'";
+                                if(lnk_Search.HRef == "StudentSearch.aspx")
+                                {                                    
+                                    query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='SAR'";
+                                }
+                                else
+                                {
+                                    query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='AF'";
+                                }
+                                SqlCommand cmd1= new SqlCommand(query, sc1);
+                                DataTable dt1 = new DataTable();
+                                SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                                try
+                                {
+                                    sc1.Open();
+                                    da1.Fill(dt1);
+                                    sc1.Close();
+
+                                    if(dt1.Rows.Count>0)
+                                    {
+                                        for (int j = 0; j < dt1.Rows.Count; j++)
+                                        {
+                                            if (!string.IsNullOrEmpty(dt1.Rows[j]["sMobile"].ToString()))
+                                            {
+                                                string mobile = dt1.Rows[j]["sMobile"].ToString();
+                                                mobile = "+" + mobile;
+                                                //if (mobile.Substring(0, 1) == "0")
+                                                //{
+                                                //    mobile = "+971" + mobile.Remove(0, 1);
+                                                //}
+                                                if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
+                                                {
+                                                    text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage + "\"\n},";
+                                                    //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
+                                                    iEffected++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                catch(Exception ex)
+                                {
+                                    sc1.Close();
+                                    Console.WriteLine(ex.Message);
+                                }
+                                finally
+                                {
+                                    sc1.Close();
+                                }
+
                                 for (int i = 0; i < dt.Rows.Count; i++)
                                 {
                                     if (!string.IsNullOrEmpty(dt.Rows[i]["strPhone1"].ToString()))
@@ -384,6 +439,64 @@ namespace LocalECT
                     if (dt.Rows.Count > 0)
                     {
                         text_contents = "";
+                        string SMS_Text1 = dt.Rows[0]["SMS_Text"].ToString();
+                        string textmessage1 = SMS_Text1.Replace("\r", "\\r");
+                        textmessage1 = textmessage1.Replace("\n", "\\n");
+                        textmessage1 = textmessage1.Replace("\"", string.Empty);
+
+                        Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+                        SqlConnection sc1 = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+                        string query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='AF'";
+                        if (lnk_Search.HRef == "StudentSearch.aspx")
+                        {
+                            query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='SAR'";
+                        }
+                        else
+                        {
+                            query = "SELECT [iSerial],[sSection],[sEmail],[sMobile] FROM [ECT_Default_Contact] where [sSection]='AF'";
+                        }
+                        SqlCommand cmd1 = new SqlCommand(query, sc1);
+                        DataTable dt1 = new DataTable();
+                        SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+                        try
+                        {
+                            sc1.Open();
+                            da1.Fill(dt1);
+                            sc1.Close();
+
+                            if (dt1.Rows.Count > 0)
+                            {
+                                for (int j = 0; j < dt1.Rows.Count; j++)
+                                {
+                                    if (!string.IsNullOrEmpty(dt1.Rows[j]["sMobile"].ToString()))
+                                    {
+                                        string mobile = dt1.Rows[j]["sMobile"].ToString();
+                                        mobile = "+" + mobile;
+                                        //if (mobile.Substring(0, 1) == "0")
+                                        //{
+                                        //    mobile = "+971" + mobile.Remove(0, 1);
+                                        //}
+                                        if (mobile.StartsWith("+971") && mobile.Substring(4, 1) == "5")
+                                        {
+                                            text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"" + mobile + "\",\n\"userData\": \"" + textmessage1 + "\"\n},";
+                                            //text_contents += "\n{\n\"source\": \"AD-ECT\",\n\"sourceTON\": \"ALPHANUMERIC\",\n\"destination\": \"+971558784117\",\n\"userData\": \"" + txt_Text.Text.Trim() + "\"\n},";
+                                            iEffected++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            sc1.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            sc1.Close();
+                        }
+
+
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
                             if (!string.IsNullOrEmpty(dt.Rows[i]["Mobile_Number"].ToString()) && !string.IsNullOrEmpty(dt.Rows[i]["SMS_Text"].ToString()))

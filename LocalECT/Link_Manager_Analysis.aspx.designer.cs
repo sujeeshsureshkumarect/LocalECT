@@ -15,6 +15,33 @@ namespace LocalECT
     {
 
         /// <summary>
+        /// lbl_Order control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList lbl_Order;
+
+        /// <summary>
+        /// txt_Start control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Start;
+
+        /// <summary>
+        /// txt_End control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_End;
+
+        /// <summary>
         /// ScriptManager control.
         /// </summary>
         /// <remarks>

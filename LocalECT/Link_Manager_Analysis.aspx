@@ -15,12 +15,52 @@
                     }
                 </style>
             </div>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            $j(function () {
+                $j("#txt_Start").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    maxDate: 0,
+                    onClose: function (selectedDate) {
+                        $j("#txt_End").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $j("#txt_End").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    maxDate: 0,
+                    onClose: function (selectedDate) {
+                        $j("#txt_Start").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+            });
+        </script>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-dashboard"></i> Analysis</h2>
+                            <h2><i class="fa fa-bar-chart"></i>  <asp:DropDownList ID="lbl_Order" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbl_Order_SelectedIndexChanged">
+                                <asp:ListItem Text="Last 7 days" Selected="True"></asp:ListItem>
+                                <asp:ListItem Text="Daily"></asp:ListItem>
+                                <asp:ListItem Text="Weekly"></asp:ListItem>
+                                <asp:ListItem Text="Monthly"></asp:ListItem>
+                                <asp:ListItem Text="Yearly"></asp:ListItem>
+                                                                         </asp:DropDownList> Analysis of Clicks</h2>
+                             <div class="col-md-2 col-sm-2">
+                                     <div class="form-group ">
+                                    <asp:TextBox ID="txt_Start" runat="server" CssClass="form-control" placeholder="Start Date" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="txt_Start_TextChanged"></asp:TextBox>
+</div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                     <div class="form-group ">
+                                    <asp:TextBox ID="txt_End" runat="server" CssClass="form-control" placeholder="End Date" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="txt_Start_TextChanged"></asp:TextBox>
+                                         </div>
+                                </div>
+
                             <ul class="nav navbar-right panel_toolbox">
                                  <a href="Link_Manager_Home.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="fa fa-globe"></i> Link Manager</a>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -74,7 +114,7 @@
                                 var data = google.visualization.arrayToDataTable(chartData);
 
                                 var options = {
-                                    title: "Click Analysis per Day (Last 7 days)",
+                                    title: "",
                                     pointSize: 5
                                 };
 
@@ -84,9 +124,26 @@
                             }
                         </script>
 
-                        <div id="divResult" runat="server" class="table-responsive">
+                        
+                            <div class="col-md-12 col-sm-12">
+                               <%-- <div class="col-md-2 col-sm-2">
+                                     <div class="form-group ">
+                                    Start Date<asp:TextBox ID="txt_Start" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                     <div class="form-group ">
+                                    End Date<asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                                         </div>
+                                </div>--%>
+                            
+                           
+                            <br />
+                            <div id="divResult" runat="server" class="table-responsive">
                                              <asp:Literal ID="DynamicTable" runat="server"></asp:Literal>
                                             </div>
+                        </div>
+                        
                         
                                         <link rel="stylesheet" type="text/css" href="SearchBuilder/jquery.dataTables.min.css">
                                         <link rel="stylesheet" type="text/css" href="SearchBuilder/searchBuilder.dataTables.min.css">
@@ -116,7 +173,7 @@
                                                                 }
                                                             }
                                                         },
-                                                        dom: 'QlBfrtip',
+                                                        dom: 'lBfrtip', /*QlBfrtip*/
                                                         buttons: [
                                                             'csv', 'excel', 'print'
                                                         ]

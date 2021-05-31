@@ -130,11 +130,11 @@
                                                         <label>Payment Way</label>
                                                         <div class="input-group">
                                                             <asp:DropDownList ID="ddlPaymentWay" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlPaymentWay_SelectedIndexChanged" AutoPostBack="true">                                                                
-                                                                <asp:ListItem Selected="True" Value="1">Cash</asp:ListItem>
+                                                                <asp:ListItem Value="1">Cash</asp:ListItem>
                                                                 <asp:ListItem Value="2">Credit Card</asp:ListItem>
                                                                 <asp:ListItem Value="3">Cheque</asp:ListItem>
                                                                 <asp:ListItem Value="4">Other</asp:ListItem>
-                                                                <asp:ListItem Value="5">Transfer</asp:ListItem>
+                                                                <asp:ListItem Value="5" Selected="True">Transfer</asp:ListItem>
                                                                 <asp:ListItem Value="6">Online</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
@@ -146,8 +146,8 @@
                                                         <div class="input-group">
                                                             <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
                                                                 <asp:ListItem Selected="True" Value="0">Entry</asp:ListItem>
-                                                                <%--<asp:ListItem Value="1">Paid</asp:ListItem>
-                                                                <asp:ListItem Value="2">Returned</asp:ListItem>
+                                                                <asp:ListItem Value="1">Paid</asp:ListItem>
+                                                                <%--<asp:ListItem Value="2">Returned</asp:ListItem>
                                                                 <asp:ListItem Value="3">Insurance</asp:ListItem>
                                                                 <asp:ListItem Value="4">Canceled</asp:ListItem>--%>
                                                             </asp:DropDownList>
