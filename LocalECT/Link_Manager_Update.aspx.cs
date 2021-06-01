@@ -151,8 +151,8 @@ namespace LocalECT
                     bool isActive = Convert.ToBoolean(dt.Rows[0]["isActive"]);
                     int boolInt = isActive ? 1 : 0;
                     drp_Status.SelectedIndex = drp_Status.Items.IndexOf(drp_Status.Items.FindByValue(boolInt.ToString()));
-                    txt_ShortURL.Text = "https://ectsis.ect.ac.ae/link?q="+ dt.Rows[0]["sCode"].ToString() + "";
-                    hyp_Copy.NavigateUrl= "https://ectsis.ect.ac.ae/link?q=" + dt.Rows[0]["sCode"].ToString() + "";
+                    txt_ShortURL.Text = "https://dt.ect.ac.ae/l?q=" + dt.Rows[0]["sCode"].ToString() + "";
+                    hyp_Copy.NavigateUrl= "https://dt.ect.ac.ae/l?q=" + dt.Rows[0]["sCode"].ToString() + "";
                     hdn_sCode.Value = dt.Rows[0]["sCode"].ToString();
                     drp_Source.SelectedIndex = drp_Source.Items.IndexOf(drp_Source.Items.FindByText(dt.Rows[0]["sSource"].ToString()));
                     ddlRegTerm.SelectedIndex = ddlRegTerm.Items.IndexOf(ddlRegTerm.Items.FindByValue(dt.Rows[0]["iTerm"].ToString()));

@@ -106,7 +106,7 @@
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                      <td><%#Eval("sDesc")%></td>
-                                                    <td><a href="https://ectsis.ect.ac.ae/link?q=<%#Eval("sCode")%>" target="_blank" style="color:blue"><u>https://ectsis.ect.ac.ae/link?q=<%#Eval("sCode")%></u></a></td>
+                                                    <td><a href="https://dt.ect.ac.ae/l?q=<%#Eval("sCode")%>" target="_blank" style="color:blue"><u>https://dt.ect.ac.ae/l?q=<%#Eval("sCode")%></u></a></td>
                                                     <td><%#Eval("sURL")%></td>
                                                      <td><span style="display: none;"><%#Eval("dExpiry","{0:yyyyMMdd}")%></span><%#Eval("dExpiry","{0:dd/MM/yyyy}")%></td>
                                                     <td><%#Eval("isActive")%></td>
@@ -117,7 +117,7 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">
-                                                             <a class="dropdown-item copy_text" href="https://ectsis.ect.ac.ae/link?q=<%#Eval("sCode")%>" data-toggle="tooltip" title="Copy to Clipboard">Copy Link</a>
+                                                             <a class="dropdown-item copy_text" href="https://dt.ect.ac.ae/l?q=<%#Eval("sCode")%>" data-toggle="tooltip" title="Copy to Clipboard">Copy Link</a>
                                                              <a href="Link_Manager_Update.aspx?id=<%#Eval("iLink")%>" class="dropdown-item">Edit</a>
                                                              <a class="dropdown-item" href="Link_Manager_Analysis.aspx?id=<%#Eval("iLink")%>">Analysis</a>                                                          
                                                          </div>

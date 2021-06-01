@@ -83,7 +83,7 @@ namespace LocalECT
                         //    sc.Close();
                         //}
 
-                        txt_ShortURL.Text = "https://ectsis.ect.ac.ae/link?q="+ hdn_sCode.Value + "";
+                        txt_ShortURL.Text = "https://dt.ect.ac.ae/l?q=" + hdn_sCode.Value + "";
                     }
                 }
             }
@@ -166,7 +166,7 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("insert into ECT_Link_Management values(@sDesc,@sURL,@sAlternativeURL,@sCode,@dExpiry,@isActive,@sSource,@sNote,@iTerm,@sAddedby,@dAdded)", sc);
+            SqlCommand cmd = new SqlCommand("insert into ECT_Link_Management values(@sDesc,@sURL,@sAlternativeURL,@sCode,@dExpiry,@isActive,@sSource,@sNote,@iTerm,@sAddedby,@dAdded,@dCodeCreated)", sc);
             cmd.Parameters.AddWithValue("@sDesc", txt_Description.Text.Trim());
             cmd.Parameters.AddWithValue("@sURL", txt_URL.Text.Trim());            
             cmd.Parameters.AddWithValue("@sAlternativeURL", txt_Alt_URL.Text.Trim());
@@ -179,6 +179,7 @@ namespace LocalECT
             cmd.Parameters.AddWithValue("@iTerm", ddlRegTerm.SelectedValue);
             cmd.Parameters.AddWithValue("@sAddedby", Session["CurrentUserName"].ToString());
             cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
+            cmd.Parameters.AddWithValue("@dCodeCreated", DateTime.Now);
             try
             {
                 sc.Open();
@@ -191,7 +192,7 @@ namespace LocalECT
                 txt_URL.Text = "";
                 txt_Alt_URL.Text = "https://ect.ac.ae/";
                 hdn_sCode.Value = Create16DigitString();
-                txt_ShortURL.Text = "https://ectsis.ect.ac.ae/link?q=" + hdn_sCode.Value + "";
+                txt_ShortURL.Text = "https://dt.ect.ac.ae/l?q=" + hdn_sCode.Value + "";
                 txt_Date.Text = "";
                 drp_Status.SelectedIndex = 0;
                 txt_Note.Text = "";
