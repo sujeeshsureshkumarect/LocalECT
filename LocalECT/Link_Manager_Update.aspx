@@ -67,6 +67,13 @@
                                                     </asp:DropDownList>                                                    
                                                 </div>
                                                      <div class="form-group ">
+                                                    <label>Target Language *</label>
+                                                    <asp:DropDownList ID="drp_Target" runat="server" CssClass="form-control">
+                                                         <asp:ListItem Text="Arabic"/>
+                                                         <asp:ListItem Text="English"  Selected/>
+                                                    </asp:DropDownList>                                                    
+                                                </div> 
+                                                     <div class="form-group ">
                                                     <label>Note *</label>                                                    
                                                     <asp:TextBox ID="txt_Note" runat="server" CssClass="form-control" TextMode="MultiLine" Height="100px" placeholder="Enter notes here..."></asp:TextBox>
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Note Required" ControlToValidate="txt_Note" ForeColor="Red" ValidationGroup="no">
@@ -105,10 +112,20 @@
                                                 </div>  
                                                        <div class="form-group ">
                                                     <label>Source *</label>
-                                                    <asp:DropDownList ID="drp_Source" runat="server" CssClass="form-control">
+                                                   <%-- <asp:DropDownList ID="drp_Source" runat="server" CssClass="form-control">
                                                          <asp:ListItem Text="Marketing Campaign" Selected/>
                                                          <asp:ListItem Text="ACC SMS"/>
                                                         <asp:ListItem Text="SAR SMS"/>
+                                                    </asp:DropDownList> --%>   
+                                                            <asp:TextBox ID="txt_Source" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Source Required" ControlToValidate="txt_Source" ForeColor="Red" ValidationGroup="no">
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                       <div class="form-group ">
+                                                    <label>Medium *</label>
+                                                    <asp:DropDownList ID="drp_Medium" runat="server" CssClass="form-control">
+                                                         <asp:ListItem Text="Email"  Selected/>
+                                                         <asp:ListItem Text="SMS"  />
                                                     </asp:DropDownList>                                                    
                                                 </div>
                                                      <div class="form-group ">

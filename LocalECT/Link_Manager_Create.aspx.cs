@@ -166,7 +166,7 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("insert into ECT_Link_Management values(@sDesc,@sURL,@sAlternativeURL,@sCode,@dExpiry,@isActive,@sSource,@sNote,@iTerm,@sAddedby,@dAdded,@dCodeCreated)", sc);
+            SqlCommand cmd = new SqlCommand("insert into ECT_Link_Management values(@sDesc,@sURL,@sAlternativeURL,@sCode,@dExpiry,@isActive,@sSource,@sNote,@iTerm,@sAddedby,@dAdded,@dCodeCreated,@sTargetLanguage,@sMedium)", sc);
             cmd.Parameters.AddWithValue("@sDesc", txt_Description.Text.Trim());
             cmd.Parameters.AddWithValue("@sURL", txt_URL.Text.Trim());            
             cmd.Parameters.AddWithValue("@sAlternativeURL", txt_Alt_URL.Text.Trim());
@@ -174,12 +174,14 @@ namespace LocalECT
             DateTime date = DateTime.ParseExact(txt_Date.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             cmd.Parameters.AddWithValue("@dExpiry", date);
             cmd.Parameters.AddWithValue("@isActive", drp_Status.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@sSource", drp_Source.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sSource", txt_Source.Text.Trim());
             cmd.Parameters.AddWithValue("@sNote", txt_Note.Text.Trim());
             cmd.Parameters.AddWithValue("@iTerm", ddlRegTerm.SelectedValue);
             cmd.Parameters.AddWithValue("@sAddedby", Session["CurrentUserName"].ToString());
             cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
             cmd.Parameters.AddWithValue("@dCodeCreated", DateTime.Now);
+            cmd.Parameters.AddWithValue("@sTargetLanguage", drp_Target.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sMedium", drp_Medium.SelectedItem.Text);
             try
             {
                 sc.Open();
@@ -203,6 +205,8 @@ namespace LocalECT
                 iSem = (int)Session["RegSemester"];
                 iTerm = iYear * 10 + iSem;
                 ddlRegTerm.SelectedValue = iTerm.ToString();
+                drp_Target.SelectedIndex = 0;
+                drp_Medium.SelectedIndex = 0;
                 
                 div_msg.Visible = true;
             }

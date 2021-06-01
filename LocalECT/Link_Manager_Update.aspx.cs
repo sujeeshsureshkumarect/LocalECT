@@ -154,8 +154,10 @@ namespace LocalECT
                     txt_ShortURL.Text = "https://dt.ect.ac.ae/l?q=" + dt.Rows[0]["sCode"].ToString() + "";
                     hyp_Copy.NavigateUrl= "https://dt.ect.ac.ae/l?q=" + dt.Rows[0]["sCode"].ToString() + "";
                     hdn_sCode.Value = dt.Rows[0]["sCode"].ToString();
-                    drp_Source.SelectedIndex = drp_Source.Items.IndexOf(drp_Source.Items.FindByText(dt.Rows[0]["sSource"].ToString()));
+                    txt_Source.Text = dt.Rows[0]["sSource"].ToString();
                     ddlRegTerm.SelectedIndex = ddlRegTerm.Items.IndexOf(ddlRegTerm.Items.FindByValue(dt.Rows[0]["iTerm"].ToString()));
+                    drp_Target.SelectedIndex = drp_Target.Items.IndexOf(drp_Target.Items.FindByText(dt.Rows[0]["sTargetLanguage"].ToString()));
+                    drp_Medium.SelectedIndex = drp_Medium.Items.IndexOf(drp_Medium.Items.FindByText(dt.Rows[0]["sMedium"].ToString()));
                     txt_Note.Text = dt.Rows[0]["sNote"].ToString();
                 }
             }
@@ -196,7 +198,7 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("update ECT_Link_Management set sDesc=@sDesc,sURL=@sURL,sAlternativeURL=@sAlternativeURL,dExpiry=@dExpiry,isActive=@isActive,sSource=@sSource,sNote=@sNote,iTerm=@iTerm,sAddedby=@sAddedby,dAdded=@dAdded where iLink=@iLink", sc);
+            SqlCommand cmd = new SqlCommand("update ECT_Link_Management set sDesc=@sDesc,sURL=@sURL,sAlternativeURL=@sAlternativeURL,dExpiry=@dExpiry,isActive=@isActive,sSource=@sSource,sNote=@sNote,iTerm=@iTerm,sAddedby=@sAddedby,dAdded=@dAdded,sTargetLanguage=@sTargetLanguage,sMedium=@sMedium where iLink=@iLink", sc);
             cmd.Parameters.AddWithValue("@sDesc", txt_Description.Text.Trim());
             cmd.Parameters.AddWithValue("@sURL", txt_URL.Text.Trim());
             cmd.Parameters.AddWithValue("@sAlternativeURL", txt_Alt_URL.Text.Trim());
@@ -204,11 +206,13 @@ namespace LocalECT
             DateTime date = DateTime.ParseExact(txt_Date.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             cmd.Parameters.AddWithValue("@dExpiry", date);
             cmd.Parameters.AddWithValue("@isActive", drp_Status.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@sSource", drp_Source.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sSource", txt_Source.Text.Trim());
             cmd.Parameters.AddWithValue("@sNote", txt_Note.Text.Trim());
             cmd.Parameters.AddWithValue("@iTerm", ddlRegTerm.SelectedValue);
             cmd.Parameters.AddWithValue("@sAddedby", Session["CurrentUserName"].ToString());
             cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
+            cmd.Parameters.AddWithValue("@sTargetLanguage", drp_Target.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sMedium", drp_Medium.SelectedItem.Text);
             cmd.Parameters.AddWithValue("@iLink", Request.QueryString["id"]);
             try
             {

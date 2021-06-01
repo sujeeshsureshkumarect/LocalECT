@@ -78,6 +78,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Status;
 
         /// <summary>
+        /// drp_Target control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Target;
+
+        /// <summary>
         /// txt_Note control.
         /// </summary>
         /// <remarks>
@@ -123,13 +132,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Date;
 
         /// <summary>
-        /// drp_Source control.
+        /// txt_Source control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Source;
+        protected global::System.Web.UI.WebControls.TextBox txt_Source;
+
+        /// <summary>
+        /// drp_Medium control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Medium;
 
         /// <summary>
         /// btn_Create control.
