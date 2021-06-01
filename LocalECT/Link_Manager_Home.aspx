@@ -79,13 +79,63 @@
                                             <div class="clearfix"></div>
                                              
                    <hr />
+
+                                                      <link rel="stylesheet" type="text/css" href="SearchBuilder/jquery.dataTables.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/searchBuilder.dataTables.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/dataTables.dateTime.min.css">
+                                        <link rel="stylesheet" type="text/css" href="SearchBuilder/buttons.dataTables.min.css">
+
+                                        <script type="text/javascript" src="SearchBuilder/jquery-3.5.1.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/jquery.dataTables.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.searchBuilder.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.dateTime.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/dataTables.buttons.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/jszip.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/pdfmake.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/vfs_fonts.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/buttons.print.min.js"></script>
+                                        <script type="text/javascript" src="SearchBuilder/buttons.html5.min.js"></script>
+
+                                            <script>
+                                                $.noConflict();  //Release the $ variable
+                                                jQuery(document).ready(function ($) {
+                                                    $('#example').DataTable({
+                                                        language: {
+                                                            searchBuilder: {
+                                                                title: {
+                                                                    0: 'Search Builder',
+                                                                    _: 'Search Builder (%d)'
+                                                                }
+                                                            }
+                                                        },
+                                                        dom: 'QlBfrtip',
+                                                        buttons: [
+                                                            'csv', 'excel', 'print'
+                                                        ]
+                                                    });
+                                                });
+    //$(document).ready(function () {
+    //    $('#example').DataTable({
+    //        dom: 'Qlfrtip',
+    //        searchBuilder: {
+    //            logic: 'OR'
+    //        }
+    //    });
+    //});
+                                            </script>
+                                        <style>
+                                            div.dtsb-searchBuilder button.dtsb-button{
+                                                font-size:12px !important;
+                                            }
+                                        </style>
+
                          <div id="datatable_wrapper" class="table-responsive">
                      
                         <div class="row">
                             <div class="col-sm-12">
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <HeaderTemplate>
-                                <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info" style='width: 100%'>
+                                <table id="example" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info" style='width: 100%'>
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
@@ -160,7 +210,7 @@
                         </div>
                     </div>
        <script>
-       var table = document.getElementById("datatable");
+           var table = document.getElementById("example");
        if (table != null) {
            for (var i = 1; i < table.rows.length; i++) {
                var link = table.rows[i].cells[3].textContent;

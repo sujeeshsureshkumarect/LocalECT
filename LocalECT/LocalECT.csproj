@@ -6599,6 +6599,7 @@
     <Content Include="js\jquery-1.8.2.js" />
     <Content Include="js\jquery-ui-1.9.0.js" />
     <Content Include="js\zfcomponent.js" />
+    <Content Include="Link_Creator.aspx" />
     <Content Include="Link_Manager_Analysis.aspx" />
     <Content Include="Link_Manager_Create.aspx" />
     <Content Include="Link_Manager_Home.aspx" />
@@ -8892,6 +8893,13 @@
     </Compile>
     <Compile Include="HR_Services.aspx.designer.cs">
       <DependentUpon>HR_Services.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Link_Creator.aspx.cs">
+      <DependentUpon>Link_Creator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Link_Creator.aspx.designer.cs">
+      <DependentUpon>Link_Creator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Link_Manager_Analysis.aspx.cs">
       <DependentUpon>Link_Manager_Analysis.aspx</DependentUpon>
