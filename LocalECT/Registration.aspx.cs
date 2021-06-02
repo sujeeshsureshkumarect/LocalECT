@@ -1936,7 +1936,7 @@ namespace LocalECT
             Microsoft.SharePoint.Client.ListItem myItem = myList.AddItem(itemInfo);
             myItem["Title"] = iTerm;//Term                     
             myItem["SID"] = sSelectedValue.Value;//SID
-            myItem["Email"] = clientContext.Web.EnsureUser(mailid);//Student Email   
+            myItem["Email"] = mailid;//Student Email  
             //myItem["Email"] = clientContext.Web.EnsureUser("sujeesh.sureshkumar@ect.ac.ae");//Student Email  
             myItem["Password"] = SIS_PWD;//SIS Password
             myItem["Phone1"] = dt1.Rows[0]["strPhone1"].ToString();//Phone1
