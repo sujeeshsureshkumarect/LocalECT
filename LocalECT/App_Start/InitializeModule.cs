@@ -584,7 +584,10 @@ public class InitializeModule
 
         DMSView=186,//New
         SendNotification = 187,//New
-        BlockUnblockAccounts = 188//New
+        BlockUnblockAccounts = 188,//New
+
+        CanUpdateServiceHost = 189,//New
+        CanUpdateServiceFinance = 190//New
 
     }
 

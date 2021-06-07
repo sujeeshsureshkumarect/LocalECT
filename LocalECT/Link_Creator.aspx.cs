@@ -39,11 +39,11 @@ namespace LocalECT
                     iRegSem = (int)Session["RegSemester"];
                     if (!IsPostBack)
                     {
-                        //getcode();
+                      //  getcode();
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
                         InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                         {
-                           // Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                         txt_Date.Text = DateTime.Now.AddYears(5).ToString("dd/MM/yyyy");
                     }
@@ -166,15 +166,43 @@ namespace LocalECT
                             stringChars[i] = chars[random.Next(chars.Length)];
                         }
                         var finalString = new String(stringChars);
-                        SqlCommand cmd1 = new SqlCommand("update ECT_Link_Management set sCode=@sCode,dCodeCreated=@dCodeCreated where iLink=@iLink", sc);
-                        cmd1.Parameters.AddWithValue("@sCode", finalString.ToString());
-                        cmd1.Parameters.AddWithValue("@dCodeCreated", DateTime.Now);
-                        cmd1.Parameters.AddWithValue("@iLink", dt.Rows[j]["iLink"].ToString());
+
+                        SqlCommand cmd2 = new SqlCommand("select * from ECT_Link_Management where sCode=@sCode", sc);
+                        cmd2.Parameters.AddWithValue("@sCode", finalString.ToString());
+                        DataTable dt2 = new DataTable();
+                        SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
                         try
                         {
                             sc.Open();
-                            cmd1.ExecuteNonQuery();
+                            da2.Fill(dt2);
                             sc.Close();
+
+                            if(dt2.Rows.Count>0)
+                            {
+                                //Duplicate
+                            }
+                            else
+                            {
+                                SqlCommand cmd1 = new SqlCommand("update ECT_Link_Management set sCode=@sCode,dCodeCreated=@dCodeCreated where iLink=@iLink", sc);
+                                cmd1.Parameters.AddWithValue("@sCode", finalString.ToString());
+                                cmd1.Parameters.AddWithValue("@dCodeCreated", DateTime.Now);
+                                cmd1.Parameters.AddWithValue("@iLink", dt.Rows[j]["iLink"].ToString());
+                                try
+                                {
+                                    sc.Open();
+                                    cmd1.ExecuteNonQuery();
+                                    sc.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    sc.Close();
+                                    Console.WriteLine(ex.Message);
+                                }
+                                finally
+                                {
+                                    sc.Close();
+                                }
+                            }
                         }
                         catch(Exception ex)
                         {
@@ -185,6 +213,8 @@ namespace LocalECT
                         {
                             sc.Close();
                         }
+
+                      
                     }                   
                 }
             }

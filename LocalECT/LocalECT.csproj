@@ -209,6 +209,8 @@
     <Content Include="ECTSystems_Create.aspx" />
     <Content Include="ECTSystems_Home.aspx" />
     <Content Include="ECTSystems_Update.aspx" />
+    <Content Include="ECT_Services_Management.aspx" />
+    <Content Include="ECT_Services_Update.aspx" />
     <Content Include="EIDInterface.aspx" />
     <Content Include="Extra-LeavesBalances.aspx" />
     <Content Include="favicon.ico" />
@@ -7778,6 +7780,11 @@
     <Content Include="Registered_Tracking.aspx" />
     <Content Include="Registration_History.aspx" />
     <Content Include="Semester_In_Out.aspx" />
+    <Content Include="Strategy_Department_Home.aspx" />
+    <Content Include="Strategy_Department_Manage_Sections.aspx" />
+    <Content Include="Strategy_Department_Update.aspx" />
+    <Content Include="Strategy_Section_Home.aspx" />
+    <Content Include="Strategy_Section_Update.aspx" />
     <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Search_SMSSent.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
@@ -8733,6 +8740,20 @@
     </Compile>
     <Compile Include="ECTSystems_Update.aspx.designer.cs">
       <DependentUpon>ECTSystems_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ECT_Services_Management.aspx.cs">
+      <DependentUpon>ECT_Services_Management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ECT_Services_Management.aspx.designer.cs">
+      <DependentUpon>ECT_Services_Management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ECT_Services_Update.aspx.cs">
+      <DependentUpon>ECT_Services_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ECT_Services_Update.aspx.designer.cs">
+      <DependentUpon>ECT_Services_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extra-LeavesBalances.aspx.cs">
       <DependentUpon>Extra-LeavesBalances.aspx</DependentUpon>
@@ -10301,6 +10322,41 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Department_Home.aspx.cs">
+      <DependentUpon>Strategy_Department_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Department_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Department_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Department_Manage_Sections.aspx.cs">
+      <DependentUpon>Strategy_Department_Manage_Sections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Department_Manage_Sections.aspx.designer.cs">
+      <DependentUpon>Strategy_Department_Manage_Sections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Department_Update.aspx.cs">
+      <DependentUpon>Strategy_Department_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Department_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Department_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Section_Home.aspx.cs">
+      <DependentUpon>Strategy_Section_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Section_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Section_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Section_Update.aspx.cs">
+      <DependentUpon>Strategy_Section_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Section_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Section_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentSearch.aspx.cs">
       <DependentUpon>StudentSearch.aspx</DependentUpon>

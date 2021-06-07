@@ -142,7 +142,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Description</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Short Link</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Detail</th>--%>                                            
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">URL</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="max-width:140px !important;">URL</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Expiry</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Active</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Source</th>  
@@ -159,8 +159,8 @@
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                      <td><%#Eval("sDesc")%></td>
                                                     <td><a href="https://dt.ect.ac.ae/l?q=<%#Eval("sCode")%>" target="_blank" style="color:blue"><u>https://dt.ect.ac.ae/l?q=<%#Eval("sCode")%></u></a></td>
-                                                    <td><%#Eval("sURL")%></td>
-                                                     <td><span style="display: none;"><%#Eval("dExpiry","{0:yyyyMMdd}")%></span><%#Eval("dExpiry","{0:dd/MM/yyyy}")%></td>
+                                                    <td style="max-width:140px !important;text-overflow:ellipsis;white-space: nowrap;overflow: hidden;" title=<%#Eval("sURL")%>><a href="<%#Eval("sURL")%>" target="_blank" style="color:blue"><u><%#Eval("sURL")%></u></a></td>
+                                                     <td><%#Eval("dExpiry","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("isActive")%></td>
                                                     <td><%#Eval("sSource")%></td>   
                                                     <td><%#Eval("sTargetLanguage")%></td>
@@ -178,7 +178,7 @@
                                                      </div>
                                                    </td>
                                                     <td><%#Eval("sAddedby")%></td>
-                                                    <td><span style="display: none;"><%#Eval("dAdded","{0:yyyyMMdd}")%></span><%#Eval("dAdded","{0:dd/MM/yyyy}")%></td>
+                                                    <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                 </tr>
                                         
                                    </ItemTemplate>
@@ -217,17 +217,17 @@
            var table = document.getElementById("example");
        if (table != null) {
            for (var i = 1; i < table.rows.length; i++) {
-               var link = table.rows[i].cells[3].textContent;
+               //var link = table.rows[i].cells[3].textContent;
                //var attachment = table.rows[i].cells[4].textContent;
                var status = table.rows[i].cells[5].textContent;
 
 
-               if (link == "") {
-                   table.rows[i].cells[3].innerHTML = '';
-               }
-               else {
-                   table.rows[i].cells[3].innerHTML = '<a href=' + link +' target="_blank"><i class="fa fa-globe"></i> <u>View</u></a>';
-               }  
+               //if (link == "") {
+               //    table.rows[i].cells[3].innerHTML = '';
+               //}
+               //else {
+               //    table.rows[i].cells[3].innerHTML = '<a href=' + link +' target="_blank"><i class="fa fa-globe"></i> <u>View</u></a>';
+               //}  
                //if (attachment == "") {
                //    table.rows[i].cells[4].innerHTML = '';
                //}
