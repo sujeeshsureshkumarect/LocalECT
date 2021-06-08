@@ -878,7 +878,8 @@ public class InitializeModule
 
         DMSMapping = 1293,
         AccBlockUnBlock = 1294,
-        LinkManager = 1295
+        LinkManager = 1295,
+        STDServicesManagement=1296
 
 
     }

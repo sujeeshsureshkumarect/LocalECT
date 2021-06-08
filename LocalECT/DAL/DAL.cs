@@ -22,7 +22,7 @@ namespace LocalECT.DAL
         }
         public DataTable gethrservices()
         {
-            DataTable dt = GetData("select * from ECT_Services where Audience in ('Staff & Faculty','Faculty') and RequestLink is not null ORDER BY ServiceID asc");
+            DataTable dt = GetData("select * from ECT_Services where Audience in ('Staff & Faculty','Faculty') and RequestLink is not null and isActive=1 ORDER BY ServiceID asc");
             return dt;
         }
         public DataTable GetStudentServicesbyID(string serviceid)

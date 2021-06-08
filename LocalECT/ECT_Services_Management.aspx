@@ -133,6 +133,26 @@
                         </div>   
                     </div>
                         </div>  
+       <script>
+           var table = document.getElementById("example");
+           if (table != null) {
+               for (var i = 1; i < table.rows.length; i++) {       
+                   var status = table.rows[i].cells[6].textContent;
+                   if (status == "True") {
+                       table.rows[i].cells[6].innerHTML = '<span class="badge badge-success">Active</span>';
+                   }
+                   else if (status == "False") {
+                       table.rows[i].cells[6].innerHTML = '<span class="badge badge-danger">Inactive</span>';
+                   }
+               }
+           }
+       </script>
+                                                    <style>
+                         .badge {
+            font-size: 100%;
+        }
+                                                        </style>
+
                                     </div>
                                 </div>
                             </div>

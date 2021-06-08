@@ -78,6 +78,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_ServiceDescEn;
 
         /// <summary>
+        /// txt_Host control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Host;
+
+        /// <summary>
         /// txt_Audience control.
         /// </summary>
         /// <remarks>
@@ -85,15 +94,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_Audience;
-
-        /// <summary>
-        /// txt_Finance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Finance;
 
         /// <summary>
         /// btn_Create control.
@@ -112,6 +112,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Cancel;
+
+        /// <summary>
+        /// UserEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField UserEmail;
 
         /// <summary>
         /// txt_ServiceAr control.
@@ -141,13 +150,13 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_ServiceDescAr;
 
         /// <summary>
-        /// txt_Host control.
+        /// txt_Finance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Host;
+        protected global::System.Web.UI.WebControls.TextBox txt_Finance;
 
         /// <summary>
         /// drp_Status control.

@@ -22,6 +22,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-edit"></i> Update Services (ID: <asp:Label id="lbl_ID" runat="server" ForeColor="#444444"></asp:Label>)</h2>
                                             <ul class="nav navbar-right panel_toolbox">
+                                                 <a href="ECT_Services_Management.aspx" class="btn btn-success btn-sm"><i class="fa fa-arrow-left"></i> Service Management</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -67,17 +68,18 @@
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                      <div class="form-group ">
+                                                    <label>Host *</label>                                                    
+                                                    <asp:TextBox ID="txt_Host" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Host Required" ControlToValidate="txt_Host" ForeColor="Red" ValidationGroup="no">
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                     <div class="form-group ">
                                                     <label>Audience *</label>                                                    
                                                     <asp:TextBox ID="txt_Audience" runat="server" CssClass="form-control"></asp:TextBox>
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Audience Required" ControlToValidate="txt_Audience" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
-                                                     <div class="form-group ">
-                                                    <label>Finance *</label>                                                    
-                                                    <asp:TextBox ID="txt_Finance" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*txt_Finance Required" ControlToValidate="txt_Finance" ForeColor="Red" ValidationGroup="no">
-                                                    </asp:RequiredFieldValidator>
-                                                </div>
+                                                   
                                                     <div class="form-group ">
                                                         <asp:Button ID="btn_Create" runat="server" Text="Update" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click" />
                                                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn btn-warning btn-sm" OnClick="btn_Cancel_Click" />
@@ -85,6 +87,7 @@
 
             
                                                     </div>
+                        <asp:HiddenField ID="UserEmail" runat="server" />
                                                  <div class="col-md-6 col-sm-6">
                                                                                         <div class="form-group ">
                                                     <label>Service Name (Ar) *</label>                                                    
@@ -104,12 +107,13 @@
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Service Description (Ar) Required" ControlToValidate="txt_ServiceDescAr" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
-                                                    <div class="form-group ">
-                                                    <label>Host *</label>                                                    
-                                                    <asp:TextBox ID="txt_Host" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Host Required" ControlToValidate="txt_Host" ForeColor="Red" ValidationGroup="no">
-                                                    </asp:RequiredFieldValidator>
+                                                       <div class="form-group ">
+                                                    <label>Finance *</label>                                                    
+                                                    <asp:TextBox ID="txt_Finance" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <%--<asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*txt_Finance Required" ControlToValidate="txt_Finance" ForeColor="Red" ValidationGroup="no">
+                                                    </asp:RequiredFieldValidator>--%>
                                                 </div>
+                                                   
                                                  <div class="form-group ">
                                                     <label>Is Active? *</label>
                                                     <asp:DropDownList ID="drp_Status" runat="server" CssClass="form-control">
