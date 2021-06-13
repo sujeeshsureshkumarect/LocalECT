@@ -89,7 +89,7 @@
                             <div class="clearfix"></div>
                         </div>
                                     <asp:CheckBoxList id="chk_Fields" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CellPadding="5">
-                                        <asp:ListItem Text="UID" Value="'M' + CONVERT(VARCHAR, SD.UID) AS UID"></asp:ListItem>
+                                        <asp:ListItem Text="UID" Value="UID"></asp:ListItem>
                                         <asp:ListItem Text="SID" Value="SD.SID"></asp:ListItem>
                                         <asp:ListItem Text="CXID" Value="SD.CXID"></asp:ListItem>
                                         <asp:ListItem Text="EID" Value="SD.EID"></asp:ListItem>
@@ -132,9 +132,9 @@
                                         <asp:ListItem Text="ENGSource" Value="SD.ENGSource"></asp:ListItem>
                                         <asp:ListItem Text="ENGYear" Value="SD.ENGYear"></asp:ListItem>
                                         <asp:ListItem Text="CGPA" Value="SD.CGPA"></asp:ListItem>
-                                        <asp:ListItem Text="ENGCenter" Value="SD.ENGCenter"></asp:ListItem>
+                                    <%--    <asp:ListItem Text="ENGCenter" Value="SD.ENGCenter"></asp:ListItem>
                                         <asp:ListItem Text="ENGScore" Value="SD.ENGScore"></asp:ListItem>
-                                        <asp:ListItem Text="CGPA" Value="SD.CGPA"></asp:ListItem>
+                                        <asp:ListItem Text="CGPA" Value="SD.CGPA"></asp:ListItem>--%>
                                         <asp:ListItem Text="MajorFaculty" Value="MF.FacultyName AS MajorFaculty"></asp:ListItem>
                                         <asp:ListItem Text="MajorPlan" Value="M.strMajor AS MajorPlan"></asp:ListItem>
                                         <asp:ListItem Text="MajorUnified" Value="M.sUnified AS MajorUnified"></asp:ListItem>

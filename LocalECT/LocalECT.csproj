@@ -7780,11 +7780,37 @@
     <Content Include="Registered_Tracking.aspx" />
     <Content Include="Registration_History.aspx" />
     <Content Include="Semester_In_Out.aspx" />
+    <Content Include="Strategy_Customer_Experience_Evidence_Category_Home.aspx" />
+    <Content Include="Strategy_Customer_Experience_Evidence_Category_Update.aspx" />
+    <Content Include="Strategy_Customer_Experience_Evidence_Sub_Category_Home.aspx" />
+    <Content Include="Strategy_Customer_Experience_Evidence_Sub_Category_Update.aspx" />
     <Content Include="Strategy_Department_Home.aspx" />
     <Content Include="Strategy_Department_Manage_Sections.aspx" />
     <Content Include="Strategy_Department_Update.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Domain_Home.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Domain_Update.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Guidelines_Home.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Guidelines_Update.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Indicator_Home.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Indicator_Update.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Standard_Home.aspx" />
+    <Content Include="Strategy_Inspection_Compliance_Standard_Update.aspx" />
+    <Content Include="Strategy_KPI_Level_Home.aspx" />
+    <Content Include="Strategy_KPI_Level_Update.aspx" />
+    <Content Include="Strategy_KPI_Sub_Level_Home.aspx" />
+    <Content Include="Strategy_KPI_Sub_Level_Update.aspx" />
     <Content Include="Strategy_Section_Home.aspx" />
     <Content Include="Strategy_Section_Update.aspx" />
+    <Content Include="Strategy_Stipulation_Home.aspx" />
+    <Content Include="Strategy_Stipulation_Update.aspx" />
+    <Content Include="Strategy_Strategic_Period_Home.aspx" />
+    <Content Include="Strategy_Strategic_Period_Update.aspx" />
+    <Content Include="Strategy_Strategic_Sub_Period_Home.aspx" />
+    <Content Include="Strategy_Strategic_Sub_Period_Update.aspx" />
+    <Content Include="Strategy_SubStipulation_Guidelines_Home.aspx" />
+    <Content Include="Strategy_SubStipulation_Guidelines_Update.aspx" />
+    <Content Include="Strategy_SubStipulation_Home.aspx" />
+    <Content Include="Strategy_SubStipulation_Update.aspx" />
     <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Search_SMSSent.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
@@ -10323,6 +10349,34 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Category_Home.aspx.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Category_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Category_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Category_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Category_Update.aspx.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Category_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Category_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Category_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Sub_Category_Home.aspx.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Sub_Category_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Sub_Category_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Sub_Category_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Sub_Category_Update.aspx.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Sub_Category_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Customer_Experience_Evidence_Sub_Category_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Customer_Experience_Evidence_Sub_Category_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Department_Home.aspx.cs">
       <DependentUpon>Strategy_Department_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10344,6 +10398,90 @@
     <Compile Include="Strategy_Department_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Department_Update.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Domain_Home.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Domain_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Domain_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Domain_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Domain_Update.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Domain_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Domain_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Domain_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Guidelines_Home.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Guidelines_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Guidelines_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Guidelines_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Guidelines_Update.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Guidelines_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Guidelines_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Guidelines_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Indicator_Home.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Indicator_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Indicator_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Indicator_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Indicator_Update.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Indicator_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Indicator_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Indicator_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Standard_Home.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Standard_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Standard_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Standard_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Standard_Update.aspx.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Standard_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Inspection_Compliance_Standard_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Inspection_Compliance_Standard_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Level_Home.aspx.cs">
+      <DependentUpon>Strategy_KPI_Level_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Level_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Level_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Level_Update.aspx.cs">
+      <DependentUpon>Strategy_KPI_Level_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Level_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Level_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Sub_Level_Home.aspx.cs">
+      <DependentUpon>Strategy_KPI_Sub_Level_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Sub_Level_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Sub_Level_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Sub_Level_Update.aspx.cs">
+      <DependentUpon>Strategy_KPI_Sub_Level_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Sub_Level_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Sub_Level_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Section_Home.aspx.cs">
       <DependentUpon>Strategy_Section_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10357,6 +10495,76 @@
     </Compile>
     <Compile Include="Strategy_Section_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Section_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Stipulation_Home.aspx.cs">
+      <DependentUpon>Strategy_Stipulation_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Stipulation_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Stipulation_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Stipulation_Update.aspx.cs">
+      <DependentUpon>Strategy_Stipulation_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Stipulation_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Stipulation_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Period_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Period_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Period_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Period_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Period_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Period_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Period_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Period_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Sub_Period_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Sub_Period_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Sub_Period_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Sub_Period_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Sub_Period_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Sub_Period_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Sub_Period_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Sub_Period_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Guidelines_Home.aspx.cs">
+      <DependentUpon>Strategy_SubStipulation_Guidelines_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Guidelines_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_SubStipulation_Guidelines_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Guidelines_Update.aspx.cs">
+      <DependentUpon>Strategy_SubStipulation_Guidelines_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Guidelines_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_SubStipulation_Guidelines_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Home.aspx.cs">
+      <DependentUpon>Strategy_SubStipulation_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_SubStipulation_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Update.aspx.cs">
+      <DependentUpon>Strategy_SubStipulation_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_SubStipulation_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_SubStipulation_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentSearch.aspx.cs">
       <DependentUpon>StudentSearch.aspx</DependentUpon>

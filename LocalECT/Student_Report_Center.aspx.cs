@@ -135,6 +135,17 @@ namespace LocalECT
                 if (chk_Fields.Items[i].Selected)
                 {
                     string value = chk_Fields.Items[i].Value;
+                    if(value== "UID")
+                    {
+                        if (drp_Campus.SelectedItem.Text == "Males")
+                        {
+                            value = "'M' + CONVERT(VARCHAR, SD.UID) AS UID";
+                        }
+                        else
+                        {
+                            value = "'F' + CONVERT(VARCHAR, SD.UID) AS UID";
+                        }
+                    }
                     if (value == "condition1")
                     {
                         //value = "dbo.GetCHEDSSTTypeNew("+ selectedYear + ", "+ selectedSemester + ", SD.SID) AS STtype";
@@ -147,7 +158,7 @@ namespace LocalECT
                         {
                             value = "dbo.Completed_Successfully(SD.SID, " + previousYear + ", " + previousSemestrer + ", SM.strDegree, SM.strMajor) AS Completed";
                         }
-                    }                        
+                    }                      
                     selectquery += value + ",";
                     selectcount++;
                 }
