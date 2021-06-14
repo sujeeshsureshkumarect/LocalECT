@@ -7803,10 +7803,18 @@
     <Content Include="Strategy_Section_Update.aspx" />
     <Content Include="Strategy_Stipulation_Home.aspx" />
     <Content Include="Strategy_Stipulation_Update.aspx" />
+    <Content Include="Strategy_Strategic_Goal_Home.aspx" />
+    <Content Include="Strategy_Strategic_Goal_Update.aspx" />
+    <Content Include="Strategy_Strategic_Objective_Home.aspx" />
+    <Content Include="Strategy_Strategic_Objective_Update.aspx" />
     <Content Include="Strategy_Strategic_Period_Home.aspx" />
     <Content Include="Strategy_Strategic_Period_Update.aspx" />
+    <Content Include="Strategy_Strategic_Project_Home.aspx" />
+    <Content Include="Strategy_Strategic_Project_Update.aspx" />
     <Content Include="Strategy_Strategic_Sub_Period_Home.aspx" />
     <Content Include="Strategy_Strategic_Sub_Period_Update.aspx" />
+    <Content Include="Strategy_Strategic_Theme_Home.aspx" />
+    <Content Include="Strategy_Strategic_Theme_Update.aspx" />
     <Content Include="Strategy_SubStipulation_Guidelines_Home.aspx" />
     <Content Include="Strategy_SubStipulation_Guidelines_Update.aspx" />
     <Content Include="Strategy_SubStipulation_Home.aspx" />
@@ -10510,6 +10518,34 @@
     <Compile Include="Strategy_Stipulation_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Stipulation_Update.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Strategic_Goal_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Goal_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Goal_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Goal_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Goal_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Goal_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Goal_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Goal_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Objective_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Objective_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Objective_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Objective_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Objective_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Objective_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Objective_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Objective_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Strategic_Period_Home.aspx.cs">
       <DependentUpon>Strategy_Strategic_Period_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10524,6 +10560,20 @@
     <Compile Include="Strategy_Strategic_Period_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Period_Update.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Strategic_Project_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Project_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Project_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Project_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Project_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Project_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Project_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Project_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Strategic_Sub_Period_Home.aspx.cs">
       <DependentUpon>Strategy_Strategic_Sub_Period_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10537,6 +10587,20 @@
     </Compile>
     <Compile Include="Strategy_Strategic_Sub_Period_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Sub_Period_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Theme_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Theme_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Theme_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Theme_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Theme_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Theme_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Theme_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Theme_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_SubStipulation_Guidelines_Home.aspx.cs">
       <DependentUpon>Strategy_SubStipulation_Guidelines_Home.aspx</DependentUpon>
@@ -10689,6 +10753,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="NewsFeed\" />
+    <Folder Include="Strategy\" />
     <Folder Include="Student_Files\Female\" />
     <Folder Include="Student_Files\Male\" />
     <Folder Include="Upload\" />

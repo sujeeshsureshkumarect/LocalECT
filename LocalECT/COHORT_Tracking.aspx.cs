@@ -29,6 +29,12 @@ namespace LocalECT
             }
             if (!IsPostBack)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Cohort_Tracking,
+            InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                {
+                    Server.Transfer("Authorization.aspx");
+
+                }
                 FillTerms();
             }
         }

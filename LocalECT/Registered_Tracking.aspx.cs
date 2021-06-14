@@ -35,7 +35,7 @@ namespace LocalECT
         string script = "$(document).ready(function () { $('[id*=btnSubmit]').click(); });";
         ClientScript.RegisterStartupScript(this.GetType(), "load", script, true);
 
-        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Reg_Balance,
+        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.ECT_Registration_Tracking,
             InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
         {
           Server.Transfer("Authorization.aspx");
@@ -131,10 +131,10 @@ namespace LocalECT
       sSQL += " Reg_Semesters AS RS ON RBS.iYear = RS.intStudyYear AND RBS.Sem = RS.byteSemester ON MEC.lngSerial = SD.lngSerial LEFT OUTER JOIN Reg_Course_Header AS CH ON RBS.iYear = CH.intStudyYear AND RBS.Sem = CH.byteSemester AND RBS.Student = CH.lngStudentNumber ON C.byteCountry = SD.byteHomeCountry AND ";
       sSQL += " C.byteCity = SD.byteHomeCity LEFT OUTER JOIN Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality LEFT OUTER JOIN Reg_Specializations AS RM RIGHT OUTER JOIN Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND ";
       sSQL += " RBS.Student = SM.lngStudentNumber LEFT OUTER JOIN (SELECT        A0.lngStudentNumber AS Ref, A0.intStudyYear * 10 + A0.byteSemester AS RIn, M0.strCaption AS RMajor, A0.intGraduationYear * 10 + A0.byteGraduationSemester AS ROut, S0.strReasonDesc AS RStatus  FROM   Reg_Applications AS A0 INNER JOIN  Reg_Specializations AS M0 ON A0.strCollege = M0.strCollege AND A0.strDegree = M0.strDegree AND A0.strSpecialization = M0.strSpecialization INNER JOIN ";
-      sSQL += " Lkp_Reasons AS S0 ON A0.byteCancelReason = S0.byteReason) AS R ON A.sReference = R.Ref LEFT OUTER JOIN  Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason WHERE(RBS.iYear * 10 + RBS.Sem BETWEEN "+ddlRegTermFrom.SelectedValue+" AND "+ddlRegTermTo.SelectedValue+") AND(ISNULL(RM.FacultyID, CM.FacultyID) = 1) "+Byshifts+" ORDER BY Name, RTerm ";
+      sSQL += " Lkp_Reasons AS S0 ON A0.byteCancelReason = S0.byteReason) AS R ON A.sReference = R.Ref LEFT OUTER JOIN  Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason WHERE(RBS.iYear * 10 + RBS.Sem BETWEEN "+ddlRegTermFrom.SelectedValue+" AND "+ddlRegTermTo.SelectedValue+") "+Byshifts+" ORDER BY Name, RTerm ";//AND (ISNULL(RM.FacultyID, CM.FacultyID) = 1) 
 
 
-      SqlCommand cmd1 = new SqlCommand(sSQL, sc);
+            SqlCommand cmd1 = new SqlCommand(sSQL, sc);
       cmd1.CommandTimeout = 180;
       DataTable dt1 = new DataTable();
       SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
