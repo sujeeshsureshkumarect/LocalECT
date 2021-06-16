@@ -77,18 +77,18 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Strategic Goal *</label>
-                                                        <asp:DropDownList ID="drp_StrategicGoal" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_StrategicGoal" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_StrategicGoal_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Strategy Version *</label>
+                                                        <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Order *</label>
                                                         <asp:TextBox ID="txt_Order" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Order Required" ControlToValidate="txt_Order" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <label>Strategy Version *</label>
-                                                        <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>                                                    
                                                     <div class="form-group ">
                                                         <label>Abbreviation *</label>
                                                         <asp:TextBox ID="txt_Abbreviation" runat="server" CssClass="form-control"></asp:TextBox>

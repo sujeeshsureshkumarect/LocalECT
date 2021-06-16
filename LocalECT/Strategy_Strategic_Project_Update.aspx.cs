@@ -53,7 +53,12 @@ namespace LocalECT
                         fillProjectOwner();
                         fillStrategicGoal();
                         fillStrategy_Version();
-                        fillMarketCompetitiveImplication();                   
+                        fillMarketCompetitiveImplication();
+
+                        if (!string.IsNullOrEmpty(drp_StrategicGoal.SelectedValue))
+                        {
+                            drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(getStrategy_Version(drp_StrategicGoal.SelectedItem.Value)));
+                        }
                         string id = Request.QueryString["id"];
                         string t = Request.QueryString["t"];
                         if (id != null)
@@ -94,7 +99,7 @@ namespace LocalECT
 
                                 drp_StrategicGoal.Enabled = true;
                                 txt_Order.Enabled = true;
-                                drp_StrategyVersion.Enabled = true;
+                                drp_StrategyVersion.Enabled = false;
                                 txt_Abbreviation.Enabled = true;
                                 drp_MarketCompetitiveImplication.Enabled = true;
                                 flp_Upload.Visible = true;
@@ -206,6 +211,35 @@ namespace LocalECT
             {
                 sc.Close();
             }
+        }
+        public string getStrategy_Version(string id)
+        {
+            string sid = "";
+            SqlCommand cmd = new SqlCommand("select iStrategyVersion from CS_Strategic_Goal where iSerial=@iSerial", sc);
+            cmd.Parameters.AddWithValue("@iSerial", id);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    sid = dt.Rows[0]["iStrategyVersion"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+            return sid;
         }
         public void fillStrategy_Version()
         {
@@ -445,6 +479,14 @@ namespace LocalECT
         protected void drp_ProjectOwner_SelectedIndexChanged(object sender, EventArgs e)
         {
             getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
+        }
+
+        protected void drp_StrategicGoal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(drp_StrategicGoal.SelectedValue))
+            {
+                drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(getStrategy_Version(drp_StrategicGoal.SelectedItem.Value)));
+            }
         }
     }
 }

@@ -96,6 +96,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Order;
 
         /// <summary>
+        /// drp_Theme control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Theme;
+
+        /// <summary>
         /// drp_StrategyVersion control.
         /// </summary>
         /// <remarks>
@@ -112,15 +121,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_Abbreviation;
-
-        /// <summary>
-        /// drp_Theme control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Theme;
 
         /// <summary>
         /// flp_Upload control.

@@ -67,19 +67,19 @@
                                                         </asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="form-group ">
+                                                        <label>Strategic Project *</label>
+                                                        <asp:DropDownList ID="drp_StrategicProject" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_StrategicProject_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
                                                         <label>Strategy Version *</label>
-                                                        <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Abbreviation *</label>
                                                         <asp:TextBox ID="txt_Abbreviation" runat="server" CssClass="form-control"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Abbreviation Required" ControlToValidate="txt_Abbreviation" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <label>Strategic Project *</label>
-                                                        <asp:DropDownList ID="drp_StrategicProject" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>                                                    
                                                      <div class="form-group ">
                                                         <label>Image Path *</label><br />
                                                         <asp:FileUpload ID="flp_Upload" runat="server"/>

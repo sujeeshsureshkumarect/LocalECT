@@ -5,7 +5,7 @@
                         <div class="">
                             <div class="page-title">
                                 <div class="title_left">
-                                     <%--<h3><i class="fa fa-globe"></i> Link Manager</h3>--%>
+                                    <h3><i class="fa fa-globe"></i> Corporate Strategy</h3>
                                 </div>
                                 <style>
                                     .page-title .title_left {

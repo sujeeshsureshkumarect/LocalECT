@@ -204,6 +204,63 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
+    <Content Include="Strategy_Digital_Transformation_Create.aspx" />
+    <Content Include="Strategy_Digital_Transformation_Edit.aspx" />
+    <Content Include="Strategy_Digital_Transformation_Program.aspx" />
+    <Content Include="Strategy_Digital_Use_Case.aspx" />
+    <Content Include="Strategy_Digital_Use_Case_Create.aspx" />
+    <Content Include="Strategy_Digital_Use_Case_Edit.aspx" />
+    <Content Include="Strategy_Enterprise_Model.aspx" />
+    <Content Include="Strategy_Enterprise_Model_Create.aspx" />
+    <Content Include="Strategy_Enterprise_Model_Edit.aspx" />
+    <Content Include="Strategy_Evidence_Type.aspx" />
+    <Content Include="Strategy_Evidence_Type_Create.aspx" />
+    <Content Include="Strategy_Evidence_Type_Edit.aspx" />
+    <Content Include="Strategy_Initiative_Maturity.aspx" />
+    <Content Include="Strategy_Initiative_Maturity_Create.aspx" />
+    <Content Include="Strategy_Initiative_Maturity_Edit.aspx" />
+    <Content Include="Strategy_Initiative_Priority.aspx" />
+    <Content Include="Strategy_Initiative_Priority_Create.aspx" />
+    <Content Include="Strategy_Initiative_Priority_Edit.aspx" />
+    <Content Include="Strategy_IRQA_Recommendation.aspx" />
+    <Content Include="Strategy_IRQA_Recommendation_Create.aspx" />
+    <Content Include="Strategy_IRQA_Recommendation_Edit.aspx" />
+    <Content Include="Strategy_KPI_Formula.aspx" />
+    <Content Include="Strategy_KPI_Formula_Create.aspx" />
+    <Content Include="Strategy_KPI_Formula_Edit.aspx" />
+    <Content Include="Strategy_KPI_Source.aspx" />
+    <Content Include="Strategy_KPI_Source_Create.aspx" />
+    <Content Include="Strategy_KPI_Source_Edit.aspx" />
+    <Content Include="Strategy_Market_Competitive_Implication.aspx" />
+    <Content Include="Strategy_Market_Competitive_Implication_Create.aspx" />
+    <Content Include="Strategy_Market_Competitive_Implication_Edit.aspx" />
+    <Content Include="Strategy_Market_Positioning_Pillars.aspx" />
+    <Content Include="Strategy_Market_Positioning_Pillars_Create.aspx" />
+    <Content Include="Strategy_Market_Positioning_Pillars_Edit.aspx" />
+    <Content Include="Strategy_MOE_Classification_Pillars.aspx" />
+    <Content Include="Strategy_MOE_Classification_Pillars_Create.aspx" />
+    <Content Include="Strategy_MOE_Classification_Pillars_Edit.aspx" />
+    <Content Include="Strategy_Risk_Management.aspx" />
+    <Content Include="Strategy_Risk_Management_Create.aspx" />
+    <Content Include="Strategy_Risk_Management_Edit.aspx" />
+    <Content Include="Strategy_Strategic_KPI_Status.aspx" />
+    <Content Include="Strategy_Strategic_KPI_Status_Create.aspx" />
+    <Content Include="Strategy_Strategic_KPI_Status_Edit.aspx" />
+    <Content Include="Strategy_Strategic_Task_Status.aspx" />
+    <Content Include="Strategy_Strategic_Task_Status_Create.aspx" />
+    <Content Include="Strategy_Strategic_Task_Status_Edit.aspx" />
+    <Content Include="Strategy_Strategy_Version.aspx" />
+    <Content Include="Strategy_Strategy_Version_Create.aspx" />
+    <Content Include="Strategy_Strategy_Version_Edit.aspx" />
+    <Content Include="Strategy_Survey_Form.aspx" />
+    <Content Include="Strategy_Survey_Form_Create.aspx" />
+    <Content Include="Strategy_Survey_Form_Edit.aspx" />
+    <Content Include="Strategy_University_Status.aspx" />
+    <Content Include="Strategy_University_Status_Create.aspx" />
+    <Content Include="Strategy_University_Status_Edit.aspx" />
+    <Content Include="Strategy_Value_Proposition_Impact.aspx" />
+    <Content Include="Strategy_Value_Proposition_Impact_Create.aspx" />
+    <Content Include="Strategy_Value_Proposition_Impact_Edit.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DMSMapping.aspx" />
     <Content Include="ECTSystems_Create.aspx" />
@@ -7787,6 +7844,8 @@
     <Content Include="Strategy_Department_Home.aspx" />
     <Content Include="Strategy_Department_Manage_Sections.aspx" />
     <Content Include="Strategy_Department_Update.aspx" />
+    <Content Include="Strategy_Initiative_Inspection_Compliance_Home.aspx" />
+    <Content Include="Strategy_Initiative_Inspection_Compliance_Update.aspx" />
     <Content Include="Strategy_Inspection_Compliance_Domain_Home.aspx" />
     <Content Include="Strategy_Inspection_Compliance_Domain_Update.aspx" />
     <Content Include="Strategy_Inspection_Compliance_Guidelines_Home.aspx" />
@@ -7805,6 +7864,8 @@
     <Content Include="Strategy_Stipulation_Update.aspx" />
     <Content Include="Strategy_Strategic_Goal_Home.aspx" />
     <Content Include="Strategy_Strategic_Goal_Update.aspx" />
+    <Content Include="Strategy_Strategic_Initiative_Home.aspx" />
+    <Content Include="Strategy_Strategic_Initiative_Update.aspx" />
     <Content Include="Strategy_Strategic_Objective_Home.aspx" />
     <Content Include="Strategy_Strategic_Objective_Update.aspx" />
     <Content Include="Strategy_Strategic_Period_Home.aspx" />
@@ -8738,6 +8799,405 @@
     </Compile>
     <Compile Include="CourseCalc.aspx.designer.cs">
       <DependentUpon>CourseCalc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Create.aspx.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Edit.aspx.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Program.aspx.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Program.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Transformation_Program.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Transformation_Program.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case.aspx.cs">
+      <DependentUpon>Strategy_Digital_Use_Case.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Use_Case.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case_Create.aspx.cs">
+      <DependentUpon>Strategy_Digital_Use_Case_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Use_Case_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case_Edit.aspx.cs">
+      <DependentUpon>Strategy_Digital_Use_Case_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Digital_Use_Case_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Digital_Use_Case_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model.aspx.cs">
+      <DependentUpon>Strategy_Enterprise_Model.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model.aspx.designer.cs">
+      <DependentUpon>Strategy_Enterprise_Model.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model_Create.aspx.cs">
+      <DependentUpon>Strategy_Enterprise_Model_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Enterprise_Model_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model_Edit.aspx.cs">
+      <DependentUpon>Strategy_Enterprise_Model_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Enterprise_Model_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Enterprise_Model_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type.aspx.cs">
+      <DependentUpon>Strategy_Evidence_Type.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type.aspx.designer.cs">
+      <DependentUpon>Strategy_Evidence_Type.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type_Create.aspx.cs">
+      <DependentUpon>Strategy_Evidence_Type_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Evidence_Type_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type_Edit.aspx.cs">
+      <DependentUpon>Strategy_Evidence_Type_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Evidence_Type_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Evidence_Type_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Maturity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Maturity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity_Create.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Maturity_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Maturity_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity_Edit.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Maturity_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Maturity_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Maturity_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Priority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Priority.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority_Create.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Priority_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Priority_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority_Edit.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Priority_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Priority_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Priority_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation.aspx.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation.aspx.designer.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Create.aspx.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Edit.aspx.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula.aspx.cs">
+      <DependentUpon>Strategy_KPI_Formula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Formula.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula_Create.aspx.cs">
+      <DependentUpon>Strategy_KPI_Formula_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Formula_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula_Edit.aspx.cs">
+      <DependentUpon>Strategy_KPI_Formula_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Formula_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Formula_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source.aspx.cs">
+      <DependentUpon>Strategy_KPI_Source.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Source.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source_Create.aspx.cs">
+      <DependentUpon>Strategy_KPI_Source_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Source_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source_Edit.aspx.cs">
+      <DependentUpon>Strategy_KPI_Source_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_KPI_Source_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_KPI_Source_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication.aspx.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication_Create.aspx.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication_Edit.aspx.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Competitive_Implication_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Competitive_Implication_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars.aspx.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars_Create.aspx.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars_Edit.aspx.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Market_Positioning_Pillars_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Market_Positioning_Pillars_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars.aspx.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars.aspx.designer.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars_Create.aspx.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars_Edit.aspx.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_MOE_Classification_Pillars_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_MOE_Classification_Pillars_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Create.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Edit.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status.aspx.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status_Create.aspx.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status_Edit.aspx.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Status_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Status_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status_Create.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status_Edit.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Status_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Status_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version.aspx.cs">
+      <DependentUpon>Strategy_Strategy_Version.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategy_Version.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version_Create.aspx.cs">
+      <DependentUpon>Strategy_Strategy_Version_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategy_Version_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version_Edit.aspx.cs">
+      <DependentUpon>Strategy_Strategy_Version_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategy_Version_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategy_Version_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form.aspx.cs">
+      <DependentUpon>Strategy_Survey_Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form.aspx.designer.cs">
+      <DependentUpon>Strategy_Survey_Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form_Create.aspx.cs">
+      <DependentUpon>Strategy_Survey_Form_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Survey_Form_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form_Edit.aspx.cs">
+      <DependentUpon>Strategy_Survey_Form_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Survey_Form_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Survey_Form_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_University_Status.aspx.cs">
+      <DependentUpon>Strategy_University_Status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_University_Status.aspx.designer.cs">
+      <DependentUpon>Strategy_University_Status.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_University_Status_Create.aspx.cs">
+      <DependentUpon>Strategy_University_Status_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_University_Status_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_University_Status_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_University_Status_Edit.aspx.cs">
+      <DependentUpon>Strategy_University_Status_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_University_Status_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_University_Status_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact.aspx.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact.aspx.designer.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact_Create.aspx.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact_Create.aspx.designer.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact_Edit.aspx.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Value_Proposition_Impact_Edit.aspx.designer.cs">
+      <DependentUpon>Strategy_Value_Proposition_Impact_Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="Default.aspx.cs">
@@ -10406,6 +10866,20 @@
     <Compile Include="Strategy_Department_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Department_Update.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Initiative_Inspection_Compliance_Home.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Inspection_Compliance_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Inspection_Compliance_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Inspection_Compliance_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Inspection_Compliance_Update.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Inspection_Compliance_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Inspection_Compliance_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Inspection_Compliance_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Inspection_Compliance_Domain_Home.aspx.cs">
       <DependentUpon>Strategy_Inspection_Compliance_Domain_Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -10531,6 +11005,20 @@
     </Compile>
     <Compile Include="Strategy_Strategic_Goal_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Goal_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Initiative_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Initiative_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Initiative_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Initiative_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Initiative_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Initiative_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Initiative_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Initiative_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Strategic_Objective_Home.aspx.cs">
       <DependentUpon>Strategy_Strategic_Objective_Home.aspx</DependentUpon>

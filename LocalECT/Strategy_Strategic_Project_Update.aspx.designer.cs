@@ -141,15 +141,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_StrategicGoal;
 
         /// <summary>
-        /// txt_Order control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Order;
-
-        /// <summary>
         /// drp_StrategyVersion control.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_StrategyVersion;
+
+        /// <summary>
+        /// txt_Order control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Order;
 
         /// <summary>
         /// txt_Abbreviation control.
