@@ -34,7 +34,7 @@
 
                                     <div class="alert alert-success alert-dismissible " role="alert" runat="server" id="div_Alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
+                                            <%--<span aria-hidden="true">×</span>--%>
                                         </button>
                                         <asp:Label ID="lbl_Msg" runat="server" Text="Risk Management Created Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                     </div>
@@ -44,12 +44,32 @@
                                                 
                                                 
                                                  <div class="col-md-6 col-sm-6">
+                                                     <div class="form-group ">
+                                                         <label>Risk Management*</label>
+                                                         <asp:TextBox ID="txt_Risk" runat="server" CssClass="form-control"></asp:TextBox>
+                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Risk Management Required" ControlToValidate="txt_Risk" ForeColor="Red" ValidationGroup="no">
+                                                         </asp:RequiredFieldValidator>
+                                                     </div>
+                                                     <div class="form-group ">
+                                                         <label>Statement*</label>
+                                                         <asp:TextBox ID="txt_Statement" runat="server" CssClass="form-control"></asp:TextBox>
+                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Statement Required" ControlToValidate="txt_Statement" ForeColor="Red" ValidationGroup="no">
+                                                         </asp:RequiredFieldValidator>
+                                                     </div>
                                                       <div class="form-group ">
-                                                    <label>Risk Management*</label>                                                    
-                                                    <asp:TextBox ID="txt_Risk" runat="server" CssClass="form-control" ></asp:TextBox>
-                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Risk Management Required" ControlToValidate="txt_Risk" ForeColor="Red" ValidationGroup="no">
-                                                    </asp:RequiredFieldValidator>
-                                                </div>
+                                                        <label>Risk Type *</label>
+                                                        <asp:DropDownList ID="drp_RiskType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                      <div class="form-group ">
+                                                        <label>MOE Licensure Stipulation Guidelines *</label>
+                                                        <asp:DropDownList ID="drp_StipulationGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                      <div class="form-group ">
+                                                        <label>Inspection Compliance Guidelines *</label>
+                                                        <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+
+
                                                     
                                                                                                   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">

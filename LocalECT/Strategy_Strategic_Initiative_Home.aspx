@@ -91,16 +91,15 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative ID</th>                                                                                        
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Desc</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative ID</th>                                                                                                                                    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">University Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Priority</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Maturity</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Transformation Program</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Use Case</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Enterprise Model</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Department</th>                                                                                        
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Section</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Principal Department</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Principal Section</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Theme</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Goal</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Project</th>
@@ -119,20 +118,19 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td><%#Eval("sInitiativeID")%></td>    
-                                                    <td><%#Eval("sInitiativeDesc")%></td>
+                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>                                                       
                                                     <td><%#Eval("sUniversityStatus")%></td>
                                                     <td><%#Eval("sInitiativePriority")%></td>
                                                     <td><%#Eval("sInitiativeMaturity")%></td>    
                                                     <td><%#Eval("sDigitalTransformationProgram")%></td>
                                                     <td><%#Eval("sDigitalUseCase")%></td>
                                                     <td><%#Eval("sEnterpriseModel")%></td>
-                                                    <td><%#Eval("DescEN")%></td>    
-                                                    <td><%#Eval("Expr1")%></td>
-                                                    <td><%#Eval("sThemeCode")%></td>
-                                                    <td><%#Eval("sStrategicGoalID")%></td>
-                                                    <td><%#Eval("sStrategicProjectID")%></td>
-                                                    <td><%#Eval("sStrategicObjectiveID")%></td>
+                                                    <td title="<%#Eval("Expr1")%>"><%#Eval("DepartmentAbbreviation")%></td>    
+                                                    <td title="<%#Eval("DescEN")%>"><%#Eval("SectionAbbreviation")%></td>
+                                                    <td title="<%#Eval("sThemeDesc")%>"><%#Eval("sThemeCode")%></td>
+                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%></td>
+                                                    <td title="<%#Eval("sStrategicProjectDesc")%>"><%#Eval("sStrategicProjectID")%></td>
+                                                    <td title="<%#Eval("sStrategicObjectiveDesc")%>"><%#Eval("sStrategicObjectiveID")%></td>
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 
@@ -148,7 +146,10 @@
                                                          <div class="dropdown-menu">                                                                                                                          
                                                              <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
                                                              <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>
-                                                             <a href="Strategy_Initiative_Inspection_Compliance_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Initiative Inspection Compliance</a>
+                                                             <a href="Strategy_Initiative_Dpartment_Section_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Support Department/Section</a>
+                                                             <a href="Strategy_Initiative_Inspection_Compliance_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Inspection Compliance</a>
+                                                             <a href="Strategy_Strategic_KPI_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">KPIs</a>
+                                                             <a href="Strategy_Strategic_Task_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Tasks</a>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

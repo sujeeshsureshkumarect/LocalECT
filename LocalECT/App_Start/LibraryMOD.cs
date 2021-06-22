@@ -5681,6 +5681,44 @@ public class LibraryMOD
         return cBalance;
     }
 
+    //public static decimal GetStudentBalanceBTS(string sSID, InitializeModule.EnumCampus Campus)
+    //{
+    //    decimal cBalance = 0;
+    //    Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+    //    SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+
+    //    try
+    //    {
+    //        Conn.Open();
+
+    //        string sSQL = "SELECT Debit-Credit+VAT AS Balance FROM AccBalanceSTBothSide";
+    //        sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
+
+    //        SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+    //        string sBalance=Cmd.ExecuteScalar().ToString();
+    //        if (sBalance != "")
+    //        {
+    //            cBalance = Convert.ToDecimal(sBalance);
+    //        }
+    //        else
+    //        {
+    //            cBalance = 0;
+    //        }
+
+    //    }
+    //    catch (Exception exp)
+    //    {
+    //        Console.WriteLine("{0} Exception caught.", exp);
+
+    //    }
+    //    finally
+    //    {
+    //        Conn.Close();
+    //        Conn.Dispose();
+
+    //    }
+    //    return cBalance;
+    //}
     public static decimal GetStudentBalanceBTS(string sSID, InitializeModule.EnumCampus Campus)
     {
         decimal cBalance = 0;
@@ -5695,8 +5733,9 @@ public class LibraryMOD
             sSQL += " WHERE (lngStudentNumber = '" + sSID + "')";
 
             SqlCommand Cmd = new SqlCommand(sSQL, Conn);
-            string sBalance=Cmd.ExecuteScalar().ToString();
-            if (sBalance != "")
+            object r = Cmd.ExecuteScalar();
+            string sBalance = "0";
+            if (r != null)
             {
                 cBalance = Convert.ToDecimal(sBalance);
             }
@@ -5704,6 +5743,17 @@ public class LibraryMOD
             {
                 cBalance = 0;
             }
+
+            //string sBalance = Cmd.ExecuteScalar().ToString();
+            //if (sBalance != "")
+            //{
+            //    cBalance = Convert.ToDecimal(sBalance);
+            //}
+            //else
+            //{
+            //    cBalance = 0;
+            //}
+
 
         }
         catch (Exception exp)
@@ -5719,7 +5769,6 @@ public class LibraryMOD
         }
         return cBalance;
     }
-
     public static int GetLTRBTS(string sSID, InitializeModule.EnumCampus Campus)
     {
         int iLTR = 0;

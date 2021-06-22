@@ -216,6 +216,8 @@
     <Content Include="Strategy_Evidence_Type.aspx" />
     <Content Include="Strategy_Evidence_Type_Create.aspx" />
     <Content Include="Strategy_Evidence_Type_Edit.aspx" />
+    <Content Include="Strategy_Initiative_Dpartment_Section_Home.aspx" />
+    <Content Include="Strategy_Initiative_Dpartment_Section_Update.aspx" />
     <Content Include="Strategy_Initiative_Maturity.aspx" />
     <Content Include="Strategy_Initiative_Maturity_Create.aspx" />
     <Content Include="Strategy_Initiative_Maturity_Edit.aspx" />
@@ -243,12 +245,18 @@
     <Content Include="Strategy_Risk_Management.aspx" />
     <Content Include="Strategy_Risk_Management_Create.aspx" />
     <Content Include="Strategy_Risk_Management_Edit.aspx" />
+    <Content Include="Strategy_Strategic_Evidence_Home.aspx" />
+    <Content Include="Strategy_Strategic_Evidence_Update.aspx" />
+    <Content Include="Strategy_Strategic_KPI_Home.aspx" />
     <Content Include="Strategy_Strategic_KPI_Status.aspx" />
     <Content Include="Strategy_Strategic_KPI_Status_Create.aspx" />
     <Content Include="Strategy_Strategic_KPI_Status_Edit.aspx" />
+    <Content Include="Strategy_Strategic_KPI_Update.aspx" />
+    <Content Include="Strategy_Strategic_Task_Home.aspx" />
     <Content Include="Strategy_Strategic_Task_Status.aspx" />
     <Content Include="Strategy_Strategic_Task_Status_Create.aspx" />
     <Content Include="Strategy_Strategic_Task_Status_Edit.aspx" />
+    <Content Include="Strategy_Strategic_Task_Update.aspx" />
     <Content Include="Strategy_Strategy_Version.aspx" />
     <Content Include="Strategy_Strategy_Version_Create.aspx" />
     <Content Include="Strategy_Strategy_Version_Edit.aspx" />
@@ -8884,6 +8892,20 @@
     <Compile Include="Strategy_Evidence_Type_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Evidence_Type_Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Initiative_Dpartment_Section_Home.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Dpartment_Section_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Dpartment_Section_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Dpartment_Section_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Dpartment_Section_Update.aspx.cs">
+      <DependentUpon>Strategy_Initiative_Dpartment_Section_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Initiative_Dpartment_Section_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Initiative_Dpartment_Section_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Initiative_Maturity.aspx.cs">
       <DependentUpon>Strategy_Initiative_Maturity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9073,6 +9095,27 @@
     <Compile Include="Strategy_Risk_Management_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Risk_Management_Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Strategic_KPI_Status.aspx.cs">
       <DependentUpon>Strategy_Strategic_KPI_Status.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9094,6 +9137,20 @@
     <Compile Include="Strategy_Strategic_KPI_Status_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_KPI_Status_Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_KPI_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_KPI_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_Strategic_Task_Status.aspx.cs">
       <DependentUpon>Strategy_Strategic_Task_Status.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9114,6 +9171,13 @@
     </Compile>
     <Compile Include="Strategy_Strategic_Task_Status_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Task_Status_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Strategy_Version.aspx.cs">
       <DependentUpon>Strategy_Strategy_Version.aspx</DependentUpon>

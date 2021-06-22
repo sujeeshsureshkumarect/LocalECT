@@ -96,7 +96,10 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>
-                                             
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Type</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Licensure Stipulation Guidelines</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Guidelines</th>                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
                               
                                         </tr>
@@ -105,9 +108,12 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                     <td><%#Eval("sRiskManagement")%></td>
-                                                   
-                                                     <td style="text-align:center">
+                                                    <td><%#Eval("sRiskManagement")%></td>
+                                                    <td><%#Eval("sStatement")%></td>
+                                                    <td><%#Eval("sRiskType")%></td>
+                                                    <td><%#Eval("sGuidelinesID")%></td>
+                                                    <td><%#Eval("sInspectionComplianceGuidelinesID")%></td>
+                                                    <td style="text-align:center">
                                                     <div class="btn-group" style="text-align:center">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                              Actions
@@ -137,42 +143,8 @@
                             </div>
                         </div>
                     </div>
-       <script>
-           var table = document.getElementById("example");
-       if (table != null) {
-           for (var i = 1; i < table.rows.length; i++) {
-               //var link = table.rows[i].cells[3].textContent;
-               //var attachment = table.rows[i].cells[4].textContent;
-               var status = table.rows[i].cells[5].textContent;
+      
 
-
-               //if (link == "") {
-               //    table.rows[i].cells[3].innerHTML = '';
-               //}
-               //else {
-               //    table.rows[i].cells[3].innerHTML = '<a href=' + link +' target="_blank"><i class="fa fa-globe"></i> <u>View</u></a>';
-               //}  
-               //if (attachment == "") {
-               //    table.rows[i].cells[4].innerHTML = '';
-               //}
-               //else {
-               //    table.rows[i].cells[4].innerHTML = '<a href=' + attachment + ' target="_blank"><i class="fa fa-paperclip"></i> <u>View</u></a>';
-               //} 
-               if (status == "True") {
-                   table.rows[i].cells[5].innerHTML = '<span class="badge badge-success">Active</span>';
-               }
-               else if (status == "False") {
-                   table.rows[i].cells[5].innerHTML = '<span class="badge badge-danger">Inactive</span>';
-               }  
-           }
-       }
-       </script>
-
-                    <style>
-                         .badge {
-            font-size: 100%;
-        }
-     
-    </style>
+                   
     </asp:Content>
 

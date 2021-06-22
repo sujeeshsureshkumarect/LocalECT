@@ -22,7 +22,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-plus"></i> <asp:Label ID="lbl_Header" runat="server" ForeColor="#444444"></asp:Label></h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <asp:LinkButton ID="lnk_Back" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Back_Click" ToolTip="Back"><i class="fa fa-arrow-circle-left"></i> Guidelines</asp:LinkButton>
+                                                <asp:LinkButton ID="lnk_Back" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Back_Click" ToolTip="Back"><i class="fa fa-arrow-circle-left"></i> MOE Re-licensure Stipulation Guidelines</asp:LinkButton>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -45,27 +45,27 @@
                                                 <div class="col-md-6 col-sm-6">
                                                   
                                                     <div class="form-group ">
-                                                    <label>Guidelines ID *</label>
+                                                    <label>MOE Re-licensure Stipulation Guidelines ID *</label>
                                                     <asp:TextBox ID="txt_Guidelines_ID" runat="server" CssClass="form-control"></asp:TextBox>
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Guidelines ID Required" ControlToValidate="txt_Guidelines_ID" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                     <div class="form-group ">
-                                                    <label>Guidelines Description *</label>
+                                                    <label>MOE Re-licensure Stipulation Guidelines Description *</label>
                                                     <asp:TextBox ID="txt_Guidelines_Desc" runat="server" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>  
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Guidelines Desc Required" ControlToValidate="txt_Guidelines_Desc" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                      <div class="form-group ">
-                                                    <label>Stipulation ID *</label>
+                                                    <label>MOE Re-licensure Stipulation ID *</label>
                                                     <asp:DropDownList ID="drp_Stipulation" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Stipulation_SelectedIndexChanged"></asp:DropDownList>
                                                 </div>
                                                      <div class="form-group ">
-                                                    <label>Sub Stipulation ID *</label>
+                                                    <label>MOE Re-licensure Sub Stipulation ID *</label>
                                                     <asp:DropDownList ID="drp_SubStipulation" runat="server" CssClass="form-control"></asp:DropDownList>
                                                 </div>
                                                      <div class="form-group ">
-                                                    <label>Guidelines Order *</label>
+                                                    <label>Order *</label>
                                                     <asp:TextBox ID="txt_Guidelines_Order" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Guidelines Order Required" ControlToValidate="txt_Guidelines_Order" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>

@@ -685,8 +685,30 @@ namespace LocalECT
                     cmd.ExecuteNonQuery();
                     sc.Close();
 
+
+                    SqlCommand cmd1 = new SqlCommand("update CS_Initiative_Dpartment_Section set iDepartment=@iDepartment,iSection=@iSection where (iInitiative=@iInitiative and isPrincipal=1)", sc);                    
+                    cmd1.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
+                    cmd1.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
+                    cmd1.Parameters.AddWithValue("@iInitiative", id);
+                    try
+                    {
+                        sc.Open();
+                        cmd1.ExecuteNonQuery();
+                        sc.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
+
                     div_msg.Visible = true;
                     lbl_Msg.Text = "Strategic Initiative Updated Successfully";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
 
                     bindStrategic_Initiative(id);
                 }
@@ -694,6 +716,10 @@ namespace LocalECT
                 {
                     sc.Close();
                     Console.WriteLine(ex.Message);
+
+                    div_msg.Visible = true;
+                    lbl_Msg.Text = ex.Message;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
                 }
                 finally
                 {
@@ -703,7 +729,7 @@ namespace LocalECT
             else
             {
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Initiative values (@sInitiativeID,@sInitiativeDesc,@iUniversityStatus,@iInitiativePriority,@iInitiativeMaturity,@iDigitalTransformationProgram,@iDigitalUseCase,@iEnterpriseModel,@iDepartment,@iSection,@iTheme,@iGoal,@iProject,@iObjective,@iOrder,@iStrategyVersion,@sAbbreviation,@sImagePath,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iValuePropositionImpact,@iLevel)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Initiative values (@sInitiativeID,@sInitiativeDesc,@iUniversityStatus,@iInitiativePriority,@iInitiativeMaturity,@iDigitalTransformationProgram,@iDigitalUseCase,@iEnterpriseModel,@iDepartment,@iSection,@iTheme,@iGoal,@iProject,@iObjective,@iOrder,@iStrategyVersion,@sAbbreviation,@sImagePath,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iValuePropositionImpact,@iLevel);select SCOPE_IDENTITY();", sc);
                 cmd.Parameters.AddWithValue("@sInitiativeID", txt_InitiativeID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sInitiativeDesc", txt_InitiativeDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iUniversityStatus", drp_UniversityStatus.SelectedItem.Value);
@@ -738,11 +764,34 @@ namespace LocalECT
                 try
                 {
                     sc.Open();
-                    cmd.ExecuteNonQuery();
+                    //cmd.ExecuteNonQuery();
+                    int Initiative_ID = Convert.ToInt32(cmd.ExecuteScalar());
                     sc.Close();
+
+                    SqlCommand cmd1 = new SqlCommand("insert into CS_Initiative_Dpartment_Section values (@iInitiative,@iDepartment,@iSection,@isPrincipal)", sc);
+                    cmd1.Parameters.AddWithValue("@iInitiative", Initiative_ID);
+                    cmd1.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
+                    cmd1.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
+                    cmd1.Parameters.AddWithValue("@isPrincipal", 1);
+                    try
+                    {
+                        sc.Open();
+                        cmd1.ExecuteNonQuery();
+                        sc.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        sc.Close();
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        sc.Close();
+                    }
 
                     div_msg.Visible = true;
                     lbl_Msg.Text = "Strategic Initiative Created Successfully";
+                    div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
 
                     txt_InitiativeID.Text = "";
                     txt_InitiativeDesc.Text = "";
@@ -755,6 +804,10 @@ namespace LocalECT
                 {
                     sc.Close();
                     Console.WriteLine(ex.Message);
+
+                    div_msg.Visible = true;
+                    lbl_Msg.Text = ex.Message;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
                 }
                 finally
                 {

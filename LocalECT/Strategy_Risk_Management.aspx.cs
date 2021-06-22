@@ -75,7 +75,7 @@ namespace LocalECT
       Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
       SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-      SqlCommand cmd = new SqlCommand("SELECT [iSerial],[sRiskManagement],[dAdded],[sAddedBy],[dUpdated] ,[sUpdatedBy] FROM [dbo].[CS_Risk_Management]", sc);
+      SqlCommand cmd = new SqlCommand("SELECT CS_Risk_Management.iSerial, CS_Risk_Management.sRiskManagement, CS_Risk_Management.dAdded, CS_Risk_Management.sAddedBy, CS_Risk_Management.dUpdated, CS_Risk_Management.sUpdatedBy, CS_Risk_Management.sStatement, CS_Risk_Management.iRiskType, CS_Risk_Management.iStipulationGuidelines, CS_Risk_Management.iInspectionComplianceGuidelines, CS_Stipulation_Guidelines.sGuidelinesID, CS_Risk_Type.sRiskType, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID FROM CS_Risk_Management INNER JOIN CS_Risk_Type ON CS_Risk_Management.iRiskType = CS_Risk_Type.iSerial INNER JOIN CS_Stipulation_Guidelines ON CS_Risk_Management.iStipulationGuidelines = CS_Stipulation_Guidelines.iSerial INNER JOIN CS_Inspection_Compliance_Guidelines ON CS_Risk_Management.iInspectionComplianceGuidelines = CS_Inspection_Compliance_Guidelines.iSerial", sc);
       DataTable dt = new DataTable();
       SqlDataAdapter da = new SqlDataAdapter(cmd);
       try

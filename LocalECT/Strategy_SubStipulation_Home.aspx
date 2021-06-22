@@ -20,11 +20,11 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-sitemap"></i> Sub Stipulation</h2>
+                                            <h2><i class="fa fa-sitemap"></i> MOE Re-licensure Sub Stipulation</h2>
                                             <ul class="nav navbar-right panel_toolbox">
                                                 <%--<a href="Strategy_SubStipulation_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Sub Stipulation</a>--%>
-                                                <asp:LinkButton ID="lnk_Create" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Click"><i class="glyphicon glyphicon-plus"></i> Create New Sub Stipulation</asp:LinkButton>
-                                                <a href="Strategy_Stipulation_Home.aspx" style="float:right;" class="btn btn-success btn-sm" title="Back"><i class="fa fa-arrow-circle-left"></i> Stipulation</a>
+                                                <asp:LinkButton ID="lnk_Create" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Click"><i class="glyphicon glyphicon-plus"></i> Create New MOE Re-licensure Sub Stipulation</asp:LinkButton>
+                                                <a href="Strategy_Stipulation_Home.aspx" style="float:right;" class="btn btn-success btn-sm" title="Back"><i class="fa fa-arrow-circle-left"></i> MOE Re-licensure Stipulation</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -93,9 +93,9 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Stipulation ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Sub Stipulation Description</th>                                                                                       
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Stipulation ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Sub Stipulation ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">MOE Re-licensure Sub Stipulation Description</th>                                                                                       
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Stipulation ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Order</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
@@ -119,7 +119,7 @@
                                                          </button>
                                                          <div class="dropdown-menu">                                                             
                                                              <a href="Strategy_SubStipulation_Update.aspx?id=<%#Eval("iStipulation")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Edit</a>
-                                                             <a class="dropdown-item" href="Strategy_SubStipulation_Guidelines_Home.aspx?id=<%#Eval("iStipulation")%>&sid=<%#Eval("iSerial")%>">Manage Guidelines</a>                                                          
+                                                             <a class="dropdown-item" href="Strategy_SubStipulation_Guidelines_Home.aspx?id=<%#Eval("iStipulation")%>&sid=<%#Eval("iSerial")%>">Manage MOE Re-licensure Stipulation Guidelines</a>                                                          
                                                          </div>
                                                      </div>
                                                    </td>                                                    

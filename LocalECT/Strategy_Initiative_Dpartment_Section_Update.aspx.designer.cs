@@ -11,8 +11,26 @@ namespace LocalECT
 {
 
 
-    public partial class CS_Risk_Management_Edit
+    public partial class Strategy_Initiative_Dpartment_Section_Update
     {
+
+        /// <summary>
+        /// lbl_Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Header;
+
+        /// <summary>
+        /// lnk_Create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_Create;
 
         /// <summary>
         /// div_msg control.
@@ -42,49 +60,49 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// txt_Risk control.
+        /// drp_iDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Risk;
+        protected global::System.Web.UI.WebControls.DropDownList drp_iDepartment;
 
         /// <summary>
-        /// txt_Statement control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Statement;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// drp_RiskType control.
+        /// drp_iSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_RiskType;
+        protected global::System.Web.UI.WebControls.DropDownList drp_iSection;
 
         /// <summary>
-        /// drp_StipulationGuidelines control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_StipulationGuidelines;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-        /// drp_InspectionComplianceGuidelines control.
+        /// hdn_Edit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceGuidelines;
+        protected global::System.Web.UI.WebControls.HiddenField hdn_Edit;
 
         /// <summary>
         /// btn_Create control.

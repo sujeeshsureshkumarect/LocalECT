@@ -264,5 +264,16 @@ namespace LocalECT
         {
             Response.Redirect("Strategy_Initiative_Inspection_Compliance_Home?id=" + Request.QueryString["id"] + "");
         }
+
+        protected void drp_iInspectionComplianceStandard_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filliInspectionComplianceDomain();
+            fillInspectionComplianceIndicator();
+        }
+
+        protected void drp_iInspectionComplianceDomain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillInspectionComplianceIndicator();
+        }
     }
 }

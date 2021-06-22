@@ -56,13 +56,13 @@ namespace LocalECT
                             bindstipulation(id);
                             btn_Create.Text = "Update";
                             txt_Stipulation_ID.Enabled = false;
-                            lbl_Header.Text = "Edit Stipulation";
+                            lbl_Header.Text = "Edit MOE Re-licensure Stipulation";
                         }
                         else
                         {
                             btn_Create.Text = "Create";
                             txt_Stipulation_ID.Enabled = true;
-                            lbl_Header.Text = "Create New Stipulation";
+                            lbl_Header.Text = "Create New MOE Re-licensure Stipulation";
                         }
                     }
                 }
@@ -125,7 +125,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Stipulation Updated Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Stipulation Updated Successfully";
 
                     bindstipulation(id);
                 }
@@ -157,7 +157,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Stipulation Created Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Stipulation Created Successfully";
 
                     txt_Stipulation_ID.Text = "";
                     txt_Stipulation_Desc.Text = "";

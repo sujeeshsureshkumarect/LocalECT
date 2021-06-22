@@ -59,13 +59,13 @@ namespace LocalECT
                             bindguidelines(GuidelineID);
                             btn_Create.Text = "Update";
                             txt_Guidelines_ID.Enabled = false;
-                            lbl_Header.Text = "Edit Guideline";
+                            lbl_Header.Text = "Edit MOE Re-licensure Stipulation Guidelines";
                         }
                         else
                         {
                             btn_Create.Text = "Create";
                             txt_Guidelines_ID.Enabled = true;
-                            lbl_Header.Text = "Create New Guideline";
+                            lbl_Header.Text = "Create New MOE Re-licensure Stipulation Guidelines";
                             drp_Stipulation.SelectedIndex = drp_Stipulation.Items.IndexOf(drp_Stipulation.Items.FindByValue(StipulationID));
                             fillsubStipulation();
                             drp_SubStipulation.SelectedIndex = drp_SubStipulation.Items.IndexOf(drp_SubStipulation.Items.FindByValue(SubStipulationID));
@@ -193,7 +193,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Guideline Updated Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Stipulation Guidelines Updated Successfully";
 
                     bindguidelines(GuidelineID);
                 }
@@ -227,7 +227,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Guideline Created Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Stipulation Guidelines Created Successfully";
 
                     txt_Guidelines_ID.Text = "";
                     txt_Guidelines_Desc.Text = "";

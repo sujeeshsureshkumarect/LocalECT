@@ -34,8 +34,7 @@
 
                                     <div class="alert alert-success alert-dismissible " role="alert" runat="server" id="div_Alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
+                                                                                    </button>
                                         <asp:Label ID="lbl_Msg" runat="server" Text="Risk Management Updated Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                     </div>
                                 </div>
@@ -49,6 +48,24 @@
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Market Risk Management" ControlToValidate="txt_Risk" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
+                                                      <div class="form-group ">
+                                                         <label>Statement*</label>
+                                                         <asp:TextBox ID="txt_Statement" runat="server" CssClass="form-control"></asp:TextBox>
+                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Statement Required" ControlToValidate="txt_Statement" ForeColor="Red" ValidationGroup="no">
+                                                         </asp:RequiredFieldValidator>
+                                                     </div>
+                                                      <div class="form-group ">
+                                                        <label>Risk Type *</label>
+                                                        <asp:DropDownList ID="drp_RiskType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                      <div class="form-group ">
+                                                        <label>MOE Licensure Stipulation Guidelines *</label>
+                                                        <asp:DropDownList ID="drp_StipulationGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                      <div class="form-group ">
+                                                        <label>Inspection Compliance Guidelines *</label>
+                                                        <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
                                             
                                                 
                                                      <div class="form-group ">

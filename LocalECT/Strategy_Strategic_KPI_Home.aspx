@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Strategy_Strategic_Goal_Home.aspx.cs" Inherits="LocalECT.Strategy_Strategic_Goal_Home" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Strategy_Strategic_KPI_Home.aspx.cs" Inherits="LocalECT.Strategy_Strategic_KPI_Home" MasterPageFile="~/LocalECT.Master"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -20,9 +20,10 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-sitemap"></i> Strategic Goal</h2>
-                                            <ul class="nav navbar-right panel_toolbox">
-                                                <a href="Strategy_Strategic_Goal_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Strategic Goal</a>
+                                            <h2><i class="fa fa-sitemap"></i> KPIs</h2>
+                                            <ul class="nav navbar-right panel_toolbox">                                                
+                                                <asp:LinkButton ID="lnk_Create" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Click"><i class="glyphicon glyphicon-plus"></i> Create New</asp:LinkButton>
+                                                <a href="Strategy_Strategic_Initiative_Home.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="fa fa-arrow-circle-left"></i> Strategic Initiative</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -91,15 +92,26 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Goal ID</th>                                                                                        
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Goal Desc</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Stipulation ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Standard ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI ID</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Period</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Formula</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Target KPI</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Min</th>     
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Max</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Overall KPI</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Source</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Level</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Sub Level</th>  
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Is Institutional Class</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Classification Pillars</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Market Positioning Pillars</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Department</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Section</th>                                                 
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Order</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Abbreviation</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Theme</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Level</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>   
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>   
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">IRQA Recommendation</th>   
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
@@ -109,15 +121,26 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td><%#Eval("sStrategicGoalID")%></td>    
-                                                    <td><%#Eval("sStrategicGoalDesc")%></td>
-                                                    <td><%#Eval("sStipulationID")%></td>
-                                                    <td><%#Eval("sInspectionComplianceStandardID")%></td>
+                                                    <td title="<%#Eval("sKPIDesc")%>"><%#Eval("sKPIID")%></td>    
+                                                    <td><%#Eval("sPeriod")%></td>
+                                                    <td><%#Eval("sKPIFormula")%></td>
+                                                    <td><%#Eval("cTargetKPI")%></td>
+                                                    <td><%#Eval("cMin")%></td>   
+                                                    <td><%#Eval("cMax")%></td>  
+                                                    <td><%#Eval("cOverallKPI")%></td> 
+                                                    <td><%#Eval("sKPISource")%></td> 
+                                                    <td><%#Eval("sKPILevel")%></td> 
+                                                    <td><%#Eval("sKPISubLevel")%></td>
+                                                    <td><%#Eval("IsInstitutionalClass")%></td>
+                                                    <td><%#Eval("sMOEClassificationPillars")%></td>
+                                                    <td><%#Eval("sMarketPositioningPillars")%></td>
+                                                    <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>
+                                                    <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>                                                   
+                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
-                                                    <td><%#Eval("sAbbreviation")%></td> 
-                                                    <td><%#Eval("sThemeCode")%></td>   
-                                                    <td><%#Eval("iLevel")%></td> 
+                                                    <td><%#Eval("sSurveyFormReference")%></td>
+                                                    <td><%#Eval("sIRQARecommendation")%></td>
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
                                                      <td>
@@ -126,8 +149,8 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_Goal_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_Goal_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>    
+                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>    
                                                          </div>
                                                      </div>
                                                    </td>                                                    

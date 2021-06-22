@@ -20,9 +20,9 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="x_panel">
                                         <div class="x_title">
-                                            <h2><i class="fa fa-sitemap"></i> Stipulation</h2>
+                                            <h2><i class="fa fa-sitemap"></i> MOE Re-licensure Stipulation</h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <a href="Strategy_Stipulation_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Stipulation</a>
+                                                <a href="Strategy_Stipulation_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New MOE Re-licensure Stipulation</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -91,8 +91,8 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Stipulation ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Stipulation Description</th>                                                                                       
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Stipulation ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">MOE Re-licensure Stipulation Description</th>                                                                                       
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Order</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
@@ -115,7 +115,7 @@
                                                          </button>
                                                          <div class="dropdown-menu">                                                             
                                                              <a href="Strategy_Stipulation_Update.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Edit</a>
-                                                             <a class="dropdown-item" href="Strategy_SubStipulation_Home.aspx?id=<%#Eval("iSerial")%>">Manage Sub Stipulation</a>                                                          
+                                                             <a class="dropdown-item" href="Strategy_SubStipulation_Home.aspx?id=<%#Eval("iSerial")%>">Manage MOE Re-licensure Sub Stipulation</a>                                                          
                                                          </div>
                                                      </div>
                                                    </td>                                                    

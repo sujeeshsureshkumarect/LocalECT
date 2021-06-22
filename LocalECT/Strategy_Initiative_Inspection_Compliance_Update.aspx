@@ -47,12 +47,12 @@
 
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Standard ID *</label>
-                                                        <asp:DropDownList ID="drp_iInspectionComplianceStandard" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_iInspectionComplianceStandard" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_iInspectionComplianceStandard_SelectedIndexChanged"></asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="drp_iInspectionComplianceStandard" InitialValue="0" ErrorMessage="*Inspection Compliance Standard ID Required" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Domain ID *</label>
-                                                        <asp:DropDownList ID="drp_iInspectionComplianceDomain" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_iInspectionComplianceDomain" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_iInspectionComplianceDomain_SelectedIndexChanged"></asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="drp_iInspectionComplianceDomain" InitialValue="0" ErrorMessage="*Inspection Compliance Domain ID Required" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                                     </div>
                                                     <div class="form-group ">

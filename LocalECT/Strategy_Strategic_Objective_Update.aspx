@@ -88,7 +88,7 @@
                                                         </asp:RequiredFieldValidator>--%>
                                                     </div>
                                                     <div class="form-group ">
-                                                        <label>Sub Stipulation ID *</label>
+                                                        <label>MOE Re-licensure Sub Stipulation ID *</label>
                                                         <asp:DropDownList ID="drp_SubStipulation" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">

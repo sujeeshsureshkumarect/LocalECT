@@ -58,13 +58,13 @@ namespace LocalECT
                             bindsubstipulation(SubStipulationID);
                             btn_Create.Text = "Update";
                             txt_SubStipulation_ID.Enabled = false;
-                            lbl_Header.Text = "Edit Sub Stipulation";
+                            lbl_Header.Text = "Edit MOE Re-licensure Sub Stipulation";
                         }
                         else
                         {
                             btn_Create.Text = "Create";
                             txt_SubStipulation_ID.Enabled = true;
-                            lbl_Header.Text = "Create New Sub Stipulation";
+                            lbl_Header.Text = "Create New MOE Re-licensure Sub Stipulation";
                             drp_Stipulation.SelectedIndex = drp_Stipulation.Items.IndexOf(drp_Stipulation.Items.FindByValue(StipulationID));
                             drp_Stipulation.Enabled = false;
                         }
@@ -157,7 +157,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Sub Stipulation Updated Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Sub Stipulation Updated Successfully";
 
                     bindsubstipulation(SubStipulationID);
                 }
@@ -190,7 +190,7 @@ namespace LocalECT
                     sc.Close();
 
                     div_msg.Visible = true;
-                    lbl_Msg.Text = "Sub Stipulation Created Successfully";
+                    lbl_Msg.Text = "MOE Re-licensure Sub Stipulation Created Successfully";
 
                     txt_SubStipulation_ID.Text = "";
                     txt_SubStipulation_Desc.Text = "";
