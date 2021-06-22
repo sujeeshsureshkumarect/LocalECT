@@ -87,6 +87,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Inspection_Compliance_Standard;
 
         /// <summary>
+        /// drp_Inspection_Compliance_Indicator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Inspection_Compliance_Indicator;
+
+        /// <summary>
         /// txt_Inspection_Compliance_Domain_Order control.
         /// </summary>
         /// <remarks>

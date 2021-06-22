@@ -56,7 +56,11 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Standard ID *</label>
-                                                        <asp:DropDownList ID="drp_Inspection_Compliance_Standard" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Inspection_Compliance_Standard" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Inspection Compliance Indicator ID *</label>
+                                                        <asp:DropDownList ID="drp_Inspection_Compliance_Indicator" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Domain Order *</label>

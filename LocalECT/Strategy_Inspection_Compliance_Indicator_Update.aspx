@@ -55,15 +55,7 @@
                                                     <asp:TextBox ID="txt_Inspection_Compliance_Indicator_Desc" runat="server" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>  
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Inspection Compliance Indicator Desc Required" ControlToValidate="txt_Inspection_Compliance_Indicator_Desc" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
-                                                </div>
-                                                     <div class="form-group ">
-                                                    <label>Inspection Compliance Standard ID *</label>
-                                                    <asp:DropDownList ID="drp_InspectionComplianceStandard" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceStandard_SelectedIndexChanged"></asp:DropDownList>
-                                                </div>
-                                                     <div class="form-group ">
-                                                    <label>Inspection Compliance Domain ID *</label>
-                                                    <asp:DropDownList ID="drp_InspectionComplianceDomain" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                </div>
+                                                </div>                                                
                                                      <div class="form-group ">
                                                     <label>Inspection Compliance Indicator Order *</label>
                                                     <asp:TextBox ID="txt_Inspection_Compliance_Indicator_Order" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>

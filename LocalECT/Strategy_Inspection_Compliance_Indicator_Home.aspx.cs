@@ -46,12 +46,7 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
-                        string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
-                        string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-                        if (InspectionComplianceStandardID != null && InspectionComplianceDomainID != null)
-                        {
-                            bindInspection_Compliance_Indicator(InspectionComplianceStandardID, InspectionComplianceDomainID);
-                        }
+                            bindInspection_Compliance_Indicator();                        
                     }
                 }
             }
@@ -65,14 +60,12 @@ namespace LocalECT
             }
         }
 
-        public void bindInspection_Compliance_Indicator(string InspectionComplianceStandardID, string InspectionComplianceDomainID)
+        public void bindInspection_Compliance_Indicator()
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Inspection_Compliance_Indicator.iSerial, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorID, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorDesc, CS_Inspection_Compliance_Indicator.iInspectionComplianceStandard, CS_Inspection_Compliance_Indicator.iInspectionComplianceDomain, CS_Inspection_Compliance_Indicator.iOrder, CS_Inspection_Compliance_Indicator.dAdded, CS_Inspection_Compliance_Indicator.sAddedBy, CS_Inspection_Compliance_Indicator.dUpdated, CS_Inspection_Compliance_Indicator.sUpdatedBy, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID FROM CS_Inspection_Compliance_Indicator INNER JOIN CS_Inspection_Compliance_Standard ON CS_Inspection_Compliance_Indicator.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial INNER JOIN CS_Inspection_Compliance_Domain ON CS_Inspection_Compliance_Indicator.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial where CS_Inspection_Compliance_Indicator.iInspectionComplianceStandard=@iInspectionComplianceStandard and CS_Inspection_Compliance_Indicator.iInspectionComplianceDomain=@iInspectionComplianceDomain", sc);
-            cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", InspectionComplianceStandardID);
-            cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", InspectionComplianceDomainID);
+            SqlCommand cmd = new SqlCommand("SELECT * from CS_Inspection_Compliance_Indicator", sc);            
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -97,15 +90,8 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
-            string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-            Response.Redirect("Strategy_Inspection_Compliance_Indicator_Update?sid=" + InspectionComplianceStandardID + "&did=" + InspectionComplianceDomainID + "");
-        }
-
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
-            string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
-            Response.Redirect("Strategy_Inspection_Compliance_Domain_Home?sid=" + InspectionComplianceStandardID + "");
-        }
+            //string Inspection_Compliance_Indicator = Request.QueryString["iid"];//Inspection_Compliance_Indicator
+            Response.Redirect("Strategy_Inspection_Compliance_Indicator_Update");
+        }       
     }
 }

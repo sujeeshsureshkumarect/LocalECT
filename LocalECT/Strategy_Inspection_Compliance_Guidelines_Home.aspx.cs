@@ -48,10 +48,10 @@ namespace LocalECT
                     {
                         string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
                         string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-                        string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
-                        if (InspectionComplianceStandardID != null && InspectionComplianceDomainID != null && InspectionComplianceIndicatorID != null)
+                        //string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
+                        if (InspectionComplianceStandardID != null && InspectionComplianceDomainID != null)
                         {
-                            bindInspection_Compliance_Guidelines(InspectionComplianceStandardID, InspectionComplianceDomainID, InspectionComplianceIndicatorID);
+                            bindInspection_Compliance_Guidelines(InspectionComplianceStandardID, InspectionComplianceDomainID);
                         }
                     }
                 }
@@ -66,15 +66,15 @@ namespace LocalECT
             }
         }
 
-        public void bindInspection_Compliance_Guidelines(string InspectionComplianceStandardID, string InspectionComplianceDomainID,string InspectionComplianceIndicatorID)
+        public void bindInspection_Compliance_Guidelines(string InspectionComplianceStandardID, string InspectionComplianceDomainID)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Inspection_Compliance_Guidelines.iSerial, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard, CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain, CS_Inspection_Compliance_Guidelines.iInspectionComplianceIndicator, CS_Inspection_Compliance_Guidelines.iOrder, CS_Inspection_Compliance_Guidelines.dAdded, CS_Inspection_Compliance_Guidelines.sAddedBy, CS_Inspection_Compliance_Guidelines.dUpdated, CS_Inspection_Compliance_Guidelines.sUpdatedBy, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID FROM CS_Inspection_Compliance_Guidelines INNER JOIN CS_Inspection_Compliance_Standard ON CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial INNER JOIN CS_Inspection_Compliance_Domain ON CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Inspection_Compliance_Indicator ON CS_Inspection_Compliance_Guidelines.iInspectionComplianceIndicator = CS_Inspection_Compliance_Indicator.iSerial where CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard=@iInspectionComplianceStandard and CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain=@iInspectionComplianceDomain and CS_Inspection_Compliance_Guidelines.iInspectionComplianceIndicator=@iInspectionComplianceIndicator", sc);
+            SqlCommand cmd = new SqlCommand("SELECT CS_Inspection_Compliance_Guidelines.iSerial, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard, CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain,  CS_Inspection_Compliance_Guidelines.iOrder, CS_Inspection_Compliance_Guidelines.dAdded, CS_Inspection_Compliance_Guidelines.sAddedBy, CS_Inspection_Compliance_Guidelines.dUpdated, CS_Inspection_Compliance_Guidelines.sUpdatedBy, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID FROM CS_Inspection_Compliance_Guidelines INNER JOIN CS_Inspection_Compliance_Standard ON CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial INNER JOIN CS_Inspection_Compliance_Domain ON CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial where CS_Inspection_Compliance_Guidelines.iInspectionComplianceStandard=@iInspectionComplianceStandard and CS_Inspection_Compliance_Guidelines.iInspectionComplianceDomain=@iInspectionComplianceDomain", sc);
             cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", InspectionComplianceStandardID);
             cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", InspectionComplianceDomainID);
-            cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", InspectionComplianceIndicatorID);
+            //cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", InspectionComplianceIndicatorID);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -101,15 +101,15 @@ namespace LocalECT
         {
             string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
             string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-            string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
-            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Update?sid=" + InspectionComplianceStandardID + "&did=" + InspectionComplianceDomainID + "&iid=" + InspectionComplianceIndicatorID + "");
+            //string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
+            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Update?sid=" + InspectionComplianceStandardID + "&did=" + InspectionComplianceDomainID + "");
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
-            string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-            Response.Redirect("Strategy_Inspection_Compliance_Indicator_Home?sid=" + InspectionComplianceStandardID + "&did=" + InspectionComplianceDomainID + "");
+            //string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
+            Response.Redirect("Strategy_Inspection_Compliance_Domain_Home?sid=" + InspectionComplianceStandardID + "");
         }
     }
 }

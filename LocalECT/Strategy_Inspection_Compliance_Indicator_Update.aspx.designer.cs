@@ -78,24 +78,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Inspection_Compliance_Indicator_Desc;
 
         /// <summary>
-        /// drp_InspectionComplianceStandard control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceStandard;
-
-        /// <summary>
-        /// drp_InspectionComplianceDomain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceDomain;
-
-        /// <summary>
         /// txt_Inspection_Compliance_Indicator_Order control.
         /// </summary>
         /// <remarks>

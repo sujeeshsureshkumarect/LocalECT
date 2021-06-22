@@ -5403,7 +5403,7 @@ namespace LocalECT
                 Cmd.ExecuteNonQuery();
 
 
-                SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", Conn);
+                SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= '"+ newAcc + "' where Reg_Applications.lngStudentNumber=@lngStudentNumber", Conn);
                 cmd11.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text.Trim());
                 try
                 {

@@ -96,6 +96,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Domain ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" width="300px">Inspection Compliance Domain Description</th>                                                                                       
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Standard ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Indicator ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Order</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
@@ -109,6 +110,7 @@
                                                      <td><%#Eval("sInspectionComplianceDomainID")%></td>                                                    
                                                     <td><%#Eval("sInspectionComplianceDomainDesc")%></td>
                                                     <td><%#Eval("sInspectionComplianceStandardID")%></td> 
+                                                    <td><%#Eval("sInspectionComplianceIndicatorID")%></td> 
                                                      <td><%#Eval("iOrder")%></td>  
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
@@ -119,7 +121,7 @@
                                                          </button>
                                                          <div class="dropdown-menu">                                                             
                                                              <a href="Strategy_Inspection_Compliance_Domain_Update.aspx?sid=<%#Eval("iInspectionComplianceStandard")%>&did=<%#Eval("iSerial")%>" class="dropdown-item">Edit</a>
-                                                             <a class="dropdown-item" href="Strategy_Inspection_Compliance_Indicator_Home.aspx?sid=<%#Eval("iInspectionComplianceStandard")%>&did=<%#Eval("iSerial")%>">Manage Inspection Compliance Indicator</a>                                                          
+                                                             <a class="dropdown-item" href="Strategy_Inspection_Compliance_Guidelines_Home.aspx?sid=<%#Eval("iInspectionComplianceStandard")%>&did=<%#Eval("iSerial")%>">Manage Inspection Compliance Guidelines</a>                                                          
                                                          </div>
                                                      </div>
                                                    </td>                                                    

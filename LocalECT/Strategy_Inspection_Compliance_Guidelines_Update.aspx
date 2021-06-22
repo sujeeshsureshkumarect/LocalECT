@@ -58,16 +58,16 @@
                                                 </div>
                                                      <div class="form-group ">
                                                     <label>Inspection Compliance Standard ID *</label>
-                                                    <asp:DropDownList ID="drp_InspectionComplianceStandard" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceStandard_SelectedIndexChanged"></asp:DropDownList>
+                                                    <asp:DropDownList ID="drp_InspectionComplianceStandard" runat="server" CssClass="form-control" Enabled="false" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceStandard_SelectedIndexChanged"></asp:DropDownList>
                                                 </div>
                                                      <div class="form-group ">
                                                     <label>Inspection Compliance Domain ID *</label>
-                                                    <asp:DropDownList ID="drp_InspectionComplianceDomain" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceDomain_SelectedIndexChanged"></asp:DropDownList>
+                                                    <asp:DropDownList ID="drp_InspectionComplianceDomain" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                 </div>
-                                                     <div class="form-group ">
+                                                    <%-- <div class="form-group ">
                                                     <label>Inspection Compliance Indicator ID *</label>
                                                     <asp:DropDownList ID="drp_InspectionComplianceIndicator" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                </div>
+                                                </div>--%>
                                                      <div class="form-group ">
                                                     <label>Inspection Compliance Guidelines Order *</label>
                                                     <asp:TextBox ID="txt_InspectionComplianceGuidelines_Order" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>

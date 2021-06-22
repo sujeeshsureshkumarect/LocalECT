@@ -52,7 +52,7 @@ namespace LocalECT
                     {
                         string InspectionComplianceStandardID = Request.QueryString["sid"];//InspectionComplianceStandardID
                         string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
-                        string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
+                        //string InspectionComplianceIndicatorID = Request.QueryString["iid"];//InspectionComplianceIndicatorID
                         string InspectionComplianceGuidelinesID = Request.QueryString["gid"];//InspectionComplianceIndicatorID
                         fillInspectionComplianceStandard();
                         fillInspectionComplianceDomain();
@@ -71,11 +71,11 @@ namespace LocalECT
                             drp_InspectionComplianceStandard.SelectedIndex = drp_InspectionComplianceStandard.Items.IndexOf(drp_InspectionComplianceStandard.Items.FindByValue(InspectionComplianceStandardID));
                             fillInspectionComplianceDomain();
                             drp_InspectionComplianceDomain.SelectedIndex = drp_InspectionComplianceDomain.Items.IndexOf(drp_InspectionComplianceDomain.Items.FindByValue(InspectionComplianceDomainID));
-                            fillInspectionComplianceIndicator();
-                            drp_InspectionComplianceIndicator.SelectedIndex = drp_InspectionComplianceIndicator.Items.IndexOf(drp_InspectionComplianceIndicator.Items.FindByValue(InspectionComplianceIndicatorID));
+                            //fillInspectionComplianceIndicator();
+                            //drp_InspectionComplianceIndicator.SelectedIndex = drp_InspectionComplianceIndicator.Items.IndexOf(drp_InspectionComplianceIndicator.Items.FindByValue(InspectionComplianceIndicatorID));
                             drp_InspectionComplianceStandard.Enabled = false;
                             drp_InspectionComplianceDomain.Enabled = false;
-                            drp_InspectionComplianceIndicator.Enabled = false;
+                            //drp_InspectionComplianceIndicator.Enabled = false;
                         }
                     }
                 }
@@ -160,10 +160,10 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
-                drp_InspectionComplianceIndicator.DataSource = dt;
-                drp_InspectionComplianceIndicator.DataTextField = "sInspectionComplianceIndicatorID";
-                drp_InspectionComplianceIndicator.DataValueField = "iSerial";
-                drp_InspectionComplianceIndicator.DataBind();
+                //drp_InspectionComplianceIndicator.DataSource = dt;
+                //drp_InspectionComplianceIndicator.DataTextField = "sInspectionComplianceIndicatorID";
+                //drp_InspectionComplianceIndicator.DataValueField = "iSerial";
+                //drp_InspectionComplianceIndicator.DataBind();
             }
             catch (Exception ex)
             {
@@ -195,8 +195,8 @@ namespace LocalECT
                     drp_InspectionComplianceStandard.SelectedIndex = drp_InspectionComplianceStandard.Items.IndexOf(drp_InspectionComplianceStandard.Items.FindByValue(dt.Rows[0]["iInspectionComplianceStandard"].ToString()));
                     fillInspectionComplianceDomain();
                     drp_InspectionComplianceDomain.SelectedIndex = drp_InspectionComplianceDomain.Items.IndexOf(drp_InspectionComplianceDomain.Items.FindByValue(dt.Rows[0]["iInspectionComplianceDomain"].ToString()));
-                    fillInspectionComplianceIndicator();
-                    drp_InspectionComplianceIndicator.SelectedIndex = drp_InspectionComplianceIndicator.Items.IndexOf(drp_InspectionComplianceIndicator.Items.FindByValue(dt.Rows[0]["iInspectionComplianceIndicator"].ToString()));
+                    //fillInspectionComplianceIndicator();
+                    //drp_InspectionComplianceIndicator.SelectedIndex = drp_InspectionComplianceIndicator.Items.IndexOf(drp_InspectionComplianceIndicator.Items.FindByValue(dt.Rows[0]["iInspectionComplianceIndicator"].ToString()));
                 }
             }
             catch (Exception ex)
@@ -215,12 +215,12 @@ namespace LocalECT
             if (InspectionComplianceGuidelinesID != null)
             {
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Inspection_Compliance_Guidelines set sInspectionComplianceGuidelinesID=@sInspectionComplianceGuidelinesID,sInspectionComplianceGuidelinesDesc=@sInspectionComplianceGuidelinesDesc,iInspectionComplianceStandard=@iInspectionComplianceStandard,iInspectionComplianceDomain=@iInspectionComplianceDomain,iInspectionComplianceIndicator=@iInspectionComplianceIndicator,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iOrder=@iOrder where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Inspection_Compliance_Guidelines set sInspectionComplianceGuidelinesID=@sInspectionComplianceGuidelinesID,sInspectionComplianceGuidelinesDesc=@sInspectionComplianceGuidelinesDesc,iInspectionComplianceStandard=@iInspectionComplianceStandard,iInspectionComplianceDomain=@iInspectionComplianceDomain,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iOrder=@iOrder where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sInspectionComplianceGuidelinesID", txt_InspectionComplianceGuidelines_ID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sInspectionComplianceGuidelinesDesc", txt_InspectionComplianceGuidelines_Desc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", drp_InspectionComplianceStandard.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_InspectionComplianceDomain.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@iOrder", txt_InspectionComplianceGuidelines_Order.Text.Trim());
@@ -249,12 +249,12 @@ namespace LocalECT
             else
             {
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Inspection_Compliance_Guidelines values (@sInspectionComplianceGuidelinesID,@sInspectionComplianceGuidelinesDesc,@iInspectionComplianceStandard,@iInspectionComplianceDomain,@iInspectionComplianceIndicator,@iOrder,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Inspection_Compliance_Guidelines values (@sInspectionComplianceGuidelinesID,@sInspectionComplianceGuidelinesDesc,@iInspectionComplianceStandard,@iInspectionComplianceDomain,@iOrder,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@sInspectionComplianceGuidelinesID", txt_InspectionComplianceGuidelines_ID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sInspectionComplianceGuidelinesDesc", txt_InspectionComplianceGuidelines_Desc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", drp_InspectionComplianceStandard.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_InspectionComplianceDomain.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iInspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sAddedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
@@ -287,12 +287,12 @@ namespace LocalECT
 
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Home?sid=" + Request.QueryString["sid"] + "&did=" + Request.QueryString["did"] + "&iid=" + Request.QueryString["iid"] + "");
+            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Home?sid=" + Request.QueryString["sid"] + "&did=" + Request.QueryString["did"] + "");
         }
 
         protected void lnk_Back_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Home?sid=" + Request.QueryString["sid"] + "&did=" + Request.QueryString["did"] + "&iid=" + Request.QueryString["iid"] + "");
+            Response.Redirect("Strategy_Inspection_Compliance_Guidelines_Home?sid=" + Request.QueryString["sid"] + "&did=" + Request.QueryString["did"] + "");
         }
 
         protected void drp_InspectionComplianceStandard_SelectedIndexChanged(object sender, EventArgs e)
