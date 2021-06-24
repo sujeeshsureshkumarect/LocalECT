@@ -29,11 +29,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Customer_Experience_Evidence_Category,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else

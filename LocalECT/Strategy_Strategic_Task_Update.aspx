@@ -106,21 +106,21 @@
                                                         </asp:RequiredFieldValidator>
                                                         <asp:HiddenField ID="hdn_InspectionComplianceDomain" runat="server" />
                                                     </div>  
-                                                     <div class="form-group ">
+                                                   <%--  <div class="form-group ">
                                                         <label>Inspection Compliance Indicator *</label>                                                        
                                                          <asp:TextBox ID="txt_InspectionComplianceIndicator" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Inspection Compliance Indicator Required" ControlToValidate="txt_InspectionComplianceIndicator" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
                                                          <asp:HiddenField ID="hdn_InspectionComplianceIndicator" runat="server" />
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Guidelines *</label>
                                                         <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceGuidelines_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>
-                                                    <div class="form-group ">
+                                                    <%--<div class="form-group ">
                                                         <label>Risk Management *</label>
                                                         <asp:DropDownList ID="drp_RiskManagement" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>--%>
                                                  <%--    <div class="form-group ">
                                                         <label>Survey Form Reference *</label>
                                                         <asp:DropDownList ID="drp_SurveyFormReference" runat="server" CssClass="form-control"></asp:DropDownList>

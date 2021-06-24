@@ -31,10 +31,10 @@ namespace LocalECT
           CurrentRole = (int)Session["CurrentRole"];
           if (!IsPostBack)
           {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Risk_Management,
             InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
             {
-              //Server.Transfer("Authorization.aspx");
+              Server.Transfer("Authorization.aspx");
             }
           }
         }
@@ -75,7 +75,7 @@ namespace LocalECT
       Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
       SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-      SqlCommand cmd = new SqlCommand("SELECT CS_Risk_Management.iSerial, CS_Risk_Management.sRiskManagement, CS_Risk_Management.dAdded, CS_Risk_Management.sAddedBy, CS_Risk_Management.dUpdated, CS_Risk_Management.sUpdatedBy, CS_Risk_Management.sStatement, CS_Risk_Management.iRiskType, CS_Risk_Management.iStipulationGuidelines, CS_Risk_Management.iInspectionComplianceGuidelines, CS_Stipulation_Guidelines.sGuidelinesID, CS_Risk_Type.sRiskType, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID FROM CS_Risk_Management INNER JOIN CS_Risk_Type ON CS_Risk_Management.iRiskType = CS_Risk_Type.iSerial INNER JOIN CS_Stipulation_Guidelines ON CS_Risk_Management.iStipulationGuidelines = CS_Stipulation_Guidelines.iSerial INNER JOIN CS_Inspection_Compliance_Guidelines ON CS_Risk_Management.iInspectionComplianceGuidelines = CS_Inspection_Compliance_Guidelines.iSerial", sc);
+      SqlCommand cmd = new SqlCommand("SELECT CS_Risk_Management.iSerial, CS_Risk_Management.sRiskManagement, CS_Risk_Management.sStatementSerialNo, CS_Risk_Management.sStatement, CS_Risk_Management.iFramework, CS_Risk_Management.iRegisatryFramework, CS_Risk_Management.iReLicensureGuideline, CS_Risk_Management.dAdded, CS_Risk_Management.sAddedBy, CS_Risk_Management.dUpdated, CS_Risk_Management.sUpdatedBy, CS_Risk_Management_Framework.sFramework, CS_Risk_Management_Registry_Framework.sRegistryFramework, CS_Stipulation_Guidelines.sGuidelinesID FROM CS_Risk_Management INNER JOIN CS_Risk_Management_Framework ON CS_Risk_Management.iFramework = CS_Risk_Management_Framework.iSerial INNER JOIN CS_Risk_Management_Registry_Framework ON CS_Risk_Management.iRegisatryFramework = CS_Risk_Management_Registry_Framework.iSerial INNER JOIN CS_Stipulation_Guidelines ON CS_Risk_Management.iReLicensureGuideline = CS_Stipulation_Guidelines.iSerial", sc);
       DataTable dt = new DataTable();
       SqlDataAdapter da = new SqlDataAdapter(cmd);
       try

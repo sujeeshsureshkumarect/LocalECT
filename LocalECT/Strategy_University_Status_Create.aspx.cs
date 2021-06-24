@@ -33,10 +33,10 @@ namespace LocalECT
           CurrentRole = (int)Session["CurrentRole"];
           if (!IsPostBack)
           {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-            InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.University_Status,
+            InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
             {
-              //Server.Transfer("Authorization.aspx");
+              Server.Transfer("Authorization.aspx");
             }
           }
         }
@@ -66,20 +66,6 @@ namespace LocalECT
 
       }
     }
-
-
-    public string Create16DigitString()
-    {
-      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var stringChars = new char[5];
-      var random = new Random((int)DateTime.Now.Ticks);
-      for (int i = 0; i < stringChars.Length; i++)
-      {
-        stringChars[i] = chars[random.Next(chars.Length)];
-      }
-      var finalString = new String(stringChars);
-      return finalString.ToString();
-    }
     public void ClearSession()
     {
       Session["CurrentUserName"] = null;
@@ -104,7 +90,16 @@ namespace LocalECT
 
     protected void btn_Create_Click(object sender, EventArgs e)
     {
-      SqlCommand cmd = new SqlCommand("insert into CS_University_Status values(@sProg,@dAdded,@sAddedby,@dUpdated,@sUpdatedby)", sc);
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.University_Status,
+                                      InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            {
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                lbl_Msg.Text = "Sorry-You cannot Add";
+                return;
+            }
+
+            SqlCommand cmd = new SqlCommand("insert into CS_University_Status values(@sProg,@dAdded,@sAddedby,@dUpdated,@sUpdatedby)", sc);
       cmd.Parameters.AddWithValue("@sProg", txt_Status.Text.Trim());
 
       cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);

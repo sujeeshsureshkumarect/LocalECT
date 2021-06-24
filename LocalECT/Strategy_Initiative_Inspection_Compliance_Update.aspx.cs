@@ -32,11 +32,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -52,7 +52,7 @@ namespace LocalECT
                         fillStrategy_Version();
                         filliInspectionComplianceStandard();
                         filliInspectionComplianceDomain();
-                        fillInspectionComplianceIndicator();
+                        //fillInspectionComplianceIndicator();
                         string id = Request.QueryString["id"];                        
                                                     
                             
@@ -188,46 +188,26 @@ namespace LocalECT
                 }
             }            
         }
-        public void fillInspectionComplianceIndicator()
-        {
-            if (!string.IsNullOrEmpty(drp_iInspectionComplianceDomain.SelectedValue))
-            {
-                SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceIndicatorID from CS_Inspection_Compliance_Indicator where iInspectionComplianceDomain=@iInspectionComplianceDomain", sc);
-                cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_iInspectionComplianceDomain.SelectedItem.Value);
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                try
-                {
-                    sc.Open();
-                    da.Fill(dt);
-                    sc.Close();
-
-                    drp_InspectionComplianceIndicator.DataSource = dt;
-                    drp_InspectionComplianceIndicator.DataTextField = "sInspectionComplianceIndicatorID";
-                    drp_InspectionComplianceIndicator.DataValueField = "iSerial";
-                    drp_InspectionComplianceIndicator.DataBind();
-                }
-                catch (Exception ex)
-                {
-                    sc.Close();
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    sc.Close();
-                }
-            }
-        }
+        
        
 
         protected void btn_Create_Click(object sender, EventArgs e)
         {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            {
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                lbl_Msg.Text = "Sorry-You cannot Add";
+                return;
+            }
+
             string id = Request.QueryString["id"];
             
-                SqlCommand cmd = new SqlCommand("insert into CS_Initiative_Inspection_Compliance values (@iInatiative,@iInspectionComplianceStandard,@iInspectionComplianceDomain,@InspectionComplianceIndicator,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Initiative_Inspection_Compliance values (@iInatiative,@iInspectionComplianceStandard,@iInspectionComplianceDomain,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", drp_iInspectionComplianceStandard.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_iInspectionComplianceDomain.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@InspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@InspectionComplianceIndicator", drp_InspectionComplianceIndicator.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sAddedBy", Session["CurrentUserName"].ToString());
@@ -267,13 +247,7 @@ namespace LocalECT
 
         protected void drp_iInspectionComplianceStandard_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filliInspectionComplianceDomain();
-            fillInspectionComplianceIndicator();
-        }
-
-        protected void drp_iInspectionComplianceDomain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            fillInspectionComplianceIndicator();
-        }
+            filliInspectionComplianceDomain();           
+        }        
     }
 }

@@ -186,24 +186,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.HiddenField hdn_InspectionComplianceDomain;
 
         /// <summary>
-        /// txt_InspectionComplianceIndicator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_InspectionComplianceIndicator;
-
-        /// <summary>
-        /// hdn_InspectionComplianceIndicator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_InspectionComplianceIndicator;
-
-        /// <summary>
         /// drp_InspectionComplianceGuidelines control.
         /// </summary>
         /// <remarks>
@@ -211,15 +193,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceGuidelines;
-
-        /// <summary>
-        /// drp_RiskManagement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_RiskManagement;
 
         /// <summary>
         /// drp_Evidence control.

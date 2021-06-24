@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Period,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -135,6 +135,14 @@ namespace LocalECT
             string id = Request.QueryString["id"];
             if (id != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Period,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Strategic_Period set sPeriod=@sPeriod,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sPeriod", txt_Strategic_Period.Text.Trim());
@@ -166,6 +174,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Period,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Period values (@sPeriod,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@sPeriod", txt_Strategic_Period.Text.Trim());

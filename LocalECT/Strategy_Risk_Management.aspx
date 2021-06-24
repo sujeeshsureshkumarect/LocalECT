@@ -96,10 +96,11 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement Serial No</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Type</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Licensure Stipulation Guidelines</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Guidelines</th>                                             
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Framework</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Registry Framework</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Licensure Stipulation Guidelines</th>                                            
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
                               
                                         </tr>
@@ -109,10 +110,11 @@
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                     <td><%#Eval("sRiskManagement")%></td>
+                                                    <td><%#Eval("sStatementSerialNo")%></td>
                                                     <td><%#Eval("sStatement")%></td>
-                                                    <td><%#Eval("sRiskType")%></td>
-                                                    <td><%#Eval("sGuidelinesID")%></td>
-                                                    <td><%#Eval("sInspectionComplianceGuidelinesID")%></td>
+                                                    <td><%#Eval("sFramework")%></td>
+                                                    <td><%#Eval("sRegistryFramework")%></td>
+                                                    <td><%#Eval("sGuidelinesID")%></td>                                                   
                                                     <td style="text-align:center">
                                                     <div class="btn-group" style="text-align:center">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

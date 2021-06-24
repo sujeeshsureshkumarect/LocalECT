@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Stipulation,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -172,10 +172,18 @@ namespace LocalECT
             }
         }
         protected void btn_Create_Click(object sender, EventArgs e)
-        {
+        {           
             string GuidelineID = Request.QueryString["gid"];//SubStipulationID
             if (GuidelineID != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Stipulation,
+                                InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Stipulation_Guidelines set sGuidelinesID=@sGuidelinesID,sGuidelinesDesc=@sGuidelinesDesc,iStipulation=@iStipulation,iSubStipulation=@iSubStipulation,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iOrder=@iOrder where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sGuidelinesID", txt_Guidelines_ID.Text.Trim());
@@ -209,6 +217,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Stipulation,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Stipulation_Guidelines values (@sGuidelinesID,@sGuidelinesDesc,@iStipulation,@iSubStipulation,@iOrder,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@sGuidelinesID", txt_Guidelines_ID.Text.Trim());

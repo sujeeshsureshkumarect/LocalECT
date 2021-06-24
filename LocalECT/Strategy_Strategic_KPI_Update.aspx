@@ -142,10 +142,15 @@
                                                         <asp:DropDownList ID="drp_SurveyFormReference" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                      <div class="form-group ">
-                                                        <label>IRQA Recommendation *</label>
-                                                        <asp:TextBox ID="txt_IRQARecommendation" runat="server" CssClass="form-control"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*IRQA Recommendation Required" ControlToValidate="txt_IRQARecommendation" ForeColor="Red" ValidationGroup="no">
-                                                        </asp:RequiredFieldValidator>
+                                                        <label>RiskManagement *</label>
+                                                        <asp:DropDownList ID="drp_RiskManagement" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Is QS World University Ranking *</label>
+                                                        <asp:DropDownList ID="drp_isQSWorldUniversityRanking" runat="server" CssClass="form-control">
+                                                            <asp:ListItem Value="1" Selected>Yes</asp:ListItem>
+                                                            <asp:ListItem Value="0">No</asp:ListItem>
+                                                        </asp:DropDownList>
                                                     </div>
                                                 <div class="form-group ">
                                                 <asp:Button id="btn_Create" runat="server" Text="Create" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click"/>

@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Customer_Experience_Evidence_Category,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -137,6 +137,14 @@ namespace LocalECT
             string CustomerExperienceEvidenceSubCategoryID = Request.QueryString["sid"];//CustomerExperienceEvidenceSubCategoryID
             if (CustomerExperienceEvidenceSubCategoryID != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Customer_Experience_Evidence_Category,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Customer_Experience_Evidence_Sub_Category set sCustomerExperienceEvidenceSubCategory=@sCustomerExperienceEvidenceSubCategory,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sCustomerExperienceEvidenceSubCategory", txt_CustomerExperienceEvidenceSubCategory.Text.Trim());
@@ -167,6 +175,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Customer_Experience_Evidence_Category,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Customer_Experience_Evidence_Sub_Category values (@sCustomerExperienceEvidenceSubCategory,@iCustomerExperienceEvidenceCategory,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@sCustomerExperienceEvidenceSubCategory", txt_CustomerExperienceEvidenceSubCategory.Text.Trim());

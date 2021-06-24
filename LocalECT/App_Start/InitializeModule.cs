@@ -587,8 +587,18 @@ public class InitializeModule
         BlockUnblockAccounts = 188,//New
 
         CanUpdateServiceHost = 189,//New
-        CanUpdateServiceFinance = 190//New
+        CanUpdateServiceFinance = 190,//New
 
+        //Coorporate Strategy
+        CS_Execute = 191,
+        CS_Manage_Task = 192,
+        CS_Manage_KPI = 193,
+        CS_Manage_Evidence = 194,
+        CS_ShowAll = 195,
+        CS_ShowAsDean = 196,
+        CS_ShowAsDeptHead = 197,
+        CS_ShowAsSectionHead = 198,
+        CS_Manage_IRQA_Recommendation = 199
     }
 
     public enum enumPrivilegeObjects : int
@@ -874,14 +884,45 @@ public class InitializeModule
         //Services=1275,
         //News_Feed_Manager=1276,
         //My_Requests=1277,
-        Online_Payment_Tracking= 1289,
+        Online_Payment_Tracking = 1289,
 
         DMSMapping = 1293,
         AccBlockUnBlock = 1294,
         LinkManager = 1295,
-        STDServicesManagement=1296
+        STDServicesManagement = 1296,
 
-
+        //Coorporate Strategy
+        Stipulation = 1300,
+        Compliance_Domain_Type = 1301,
+        Compliance_Standard = 1302,
+        Market_Competitive_Implication = 1303,
+        University_Status = 1304,
+        Initiative_Priority = 1305,
+        Initiative_Maturity = 1306,
+        Digital_Transformation_Program = 1307,
+        Enterprise_Model = 1308,
+        Value_Proposition_Impact = 1309,
+        Survey_Form = 1310,
+        Strategic_Task_Status = 1311,
+        Strategic_Evidence_Type = 1312,
+        Customer_Experience_Evidence_Category = 1313,
+        KPI_Formula = 1314,
+        KPI_Source = 1315,
+        KPI_Level = 1316,
+        MOE_Classification_Pillars = 1317,
+        Market_Positioning_Pillars = 1318,
+        Risk_Management_Framework = 1319,
+        Risk_Management = 1320,
+        Strategic_KPI_Status = 1321,
+        Strategy_Version = 1322,
+        Strategic_Period = 1323,
+        Manage_Department_Section = 1324,
+        Strategic_Theme = 1325,
+        Strategic_Goal = 1326,
+        Strategic_Project = 1327,
+        Strategic_Objective = 1328,
+        Strategic_Initiative = 1329,
+        Strategic_Evidence = 1330
     }
 
     public enum enumEmployeeGroups : int

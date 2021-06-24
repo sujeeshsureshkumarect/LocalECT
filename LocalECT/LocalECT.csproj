@@ -227,6 +227,8 @@
     <Content Include="Strategy_IRQA_Recommendation.aspx" />
     <Content Include="Strategy_IRQA_Recommendation_Create.aspx" />
     <Content Include="Strategy_IRQA_Recommendation_Edit.aspx" />
+    <Content Include="Strategy_IRQA_Recommendation_Home.aspx" />
+    <Content Include="Strategy_IRQA_Recommendation_Update.aspx" />
     <Content Include="Strategy_KPI_Formula.aspx" />
     <Content Include="Strategy_KPI_Formula_Create.aspx" />
     <Content Include="Strategy_KPI_Formula_Edit.aspx" />
@@ -245,6 +247,10 @@
     <Content Include="Strategy_Risk_Management.aspx" />
     <Content Include="Strategy_Risk_Management_Create.aspx" />
     <Content Include="Strategy_Risk_Management_Edit.aspx" />
+    <Content Include="Strategy_Risk_Management_Framework_Home.aspx" />
+    <Content Include="Strategy_Risk_Management_Framework_Update.aspx" />
+    <Content Include="Strategy_Risk_Management_Registry_Framework_Home.aspx" />
+    <Content Include="Strategy_Risk_Management_Registry_Framework_Update.aspx" />
     <Content Include="Strategy_Strategic_Evidence_Home.aspx" />
     <Content Include="Strategy_Strategic_Evidence_Update.aspx" />
     <Content Include="Strategy_Strategic_KPI_Home.aspx" />
@@ -8969,6 +8975,20 @@
     <Compile Include="Strategy_IRQA_Recommendation_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_IRQA_Recommendation_Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Home.aspx.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Update.aspx.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_IRQA_Recommendation_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_IRQA_Recommendation_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Strategy_KPI_Formula.aspx.cs">
       <DependentUpon>Strategy_KPI_Formula.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9094,6 +9114,34 @@
     </Compile>
     <Compile Include="Strategy_Risk_Management_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Risk_Management_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Framework_Home.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Framework_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Framework_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Framework_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Framework_Update.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Framework_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Framework_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Framework_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Registry_Framework_Home.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Registry_Framework_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Registry_Framework_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Registry_Framework_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Registry_Framework_Update.aspx.cs">
+      <DependentUpon>Strategy_Risk_Management_Registry_Framework_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Risk_Management_Registry_Framework_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Risk_Management_Registry_Framework_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Strategic_Evidence_Home.aspx.cs">
       <DependentUpon>Strategy_Strategic_Evidence_Home.aspx</DependentUpon>

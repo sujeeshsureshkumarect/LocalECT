@@ -31,10 +31,10 @@ namespace LocalECT
           CurrentRole = (int)Session["CurrentRole"];
           if (!IsPostBack)
           {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Digital_Transformation_Program,
             InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
             {
-              //Server.Transfer("Authorization.aspx");
+              Server.Transfer("Authorization.aspx");
             }
           }
         }

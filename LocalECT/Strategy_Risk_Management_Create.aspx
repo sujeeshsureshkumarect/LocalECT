@@ -22,6 +22,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-plus"></i> Create New Risk Management</h2>
                                             <ul class="nav navbar-right panel_toolbox">
+                                                <a href="Strategy_Risk_Management" style="float:right;" class="btn btn-success btn-sm" title="Back"><i class="fa fa-arrow-circle-left"></i> Risk Management</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -51,23 +52,29 @@
                                                          </asp:RequiredFieldValidator>
                                                      </div>
                                                      <div class="form-group ">
+                                                         <label>Statement Serial No*</label>
+                                                         <asp:TextBox ID="txt_StatementSerialNo" runat="server" CssClass="form-control"></asp:TextBox>
+                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*StatementSerialNo Required" ControlToValidate="txt_StatementSerialNo" ForeColor="Red" ValidationGroup="no">
+                                                         </asp:RequiredFieldValidator>
+                                                     </div>
+                                                     <div class="form-group ">
                                                          <label>Statement*</label>
                                                          <asp:TextBox ID="txt_Statement" runat="server" CssClass="form-control"></asp:TextBox>
                                                          <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Statement Required" ControlToValidate="txt_Statement" ForeColor="Red" ValidationGroup="no">
                                                          </asp:RequiredFieldValidator>
                                                      </div>
                                                       <div class="form-group ">
-                                                        <label>Risk Type *</label>
-                                                        <asp:DropDownList ID="drp_RiskType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <label>Framework *</label>
+                                                        <asp:DropDownList ID="drp_Framework" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Framework_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                     <div class="form-group ">
+                                                        <label>Registry Framework *</label>
+                                                        <asp:DropDownList ID="drp_RegisatryFramework" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                       <div class="form-group ">
                                                         <label>MOE Licensure Stipulation Guidelines *</label>
                                                         <asp:DropDownList ID="drp_StipulationGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
-                                                      <div class="form-group ">
-                                                        <label>Inspection Compliance Guidelines *</label>
-                                                        <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>                                     
 
 
                                                     

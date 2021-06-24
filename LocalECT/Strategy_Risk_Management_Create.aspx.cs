@@ -33,10 +33,10 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Risk_Management,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            //Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -50,9 +50,9 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
-                        fillRiskType();
+                        fillRisk_Management_Framework();
+                        fillRisk_Management_Registry_Framework();
                         fillStipulationGuidelines();
-                        fillInspectionComplianceGuidelines();
                     }
                 }
             }
@@ -65,9 +65,9 @@ namespace LocalECT
 
             }
         }
-        public void fillRiskType()
+        public void fillRisk_Management_Framework()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sRiskType from CS_Risk_Type", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sFramework from CS_Risk_Management_Framework", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -76,10 +76,10 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
-                drp_RiskType.DataSource = dt;
-                drp_RiskType.DataTextField = "sRiskType";
-                drp_RiskType.DataValueField = "iSerial";
-                drp_RiskType.DataBind();
+                drp_Framework.DataSource = dt;
+                drp_Framework.DataTextField = "sFramework";
+                drp_Framework.DataValueField = "iSerial";
+                drp_Framework.DataBind();
             }
             catch (Exception ex)
             {
@@ -89,6 +89,36 @@ namespace LocalECT
             finally
             {
                 sc.Close();
+            }
+        }
+        public void fillRisk_Management_Registry_Framework()
+        {
+            if (!string.IsNullOrEmpty(drp_Framework.SelectedValue))
+            {
+                SqlCommand cmd = new SqlCommand("select iSerial,sRegistryFramework from CS_Risk_Management_Registry_Framework where iFramework=@iFramework", sc);
+                cmd.Parameters.AddWithValue("@iFramework", drp_Framework.SelectedItem.Value);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+
+                    drp_RegisatryFramework.DataSource = dt;
+                    drp_RegisatryFramework.DataTextField = "sRegistryFramework";
+                    drp_RegisatryFramework.DataValueField = "iSerial";
+                    drp_RegisatryFramework.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
             }
         }
         public void fillStipulationGuidelines()
@@ -106,32 +136,6 @@ namespace LocalECT
                 drp_StipulationGuidelines.DataTextField = "sGuidelinesID";
                 drp_StipulationGuidelines.DataValueField = "iSerial";
                 drp_StipulationGuidelines.DataBind();
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
-            }
-        }
-        public void fillInspectionComplianceGuidelines()
-        {
-            SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceGuidelinesID from CS_Inspection_Compliance_Guidelines", sc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
-
-                drp_InspectionComplianceGuidelines.DataSource = dt;
-                drp_InspectionComplianceGuidelines.DataTextField = "sInspectionComplianceGuidelinesID";
-                drp_InspectionComplianceGuidelines.DataValueField = "iSerial";
-                drp_InspectionComplianceGuidelines.DataBind();
             }
             catch (Exception ex)
             {
@@ -167,12 +171,22 @@ namespace LocalECT
 
         protected void btn_Create_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("insert into CS_Risk_Management values(@sProg,@dAdded,@sAddedby,@dUpdated,@sUpdatedby,@sStatement,@iRiskType,@iStipulationGuidelines,@iInspectionComplianceGuidelines)", sc);
-            cmd.Parameters.AddWithValue("@sProg", txt_Risk.Text.Trim());
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Risk_Management,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            {
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                lbl_Msg.Text = "Sorry-You cannot Add";
+                return;
+            }
+
+            SqlCommand cmd = new SqlCommand("insert into CS_Risk_Management values (@sRiskManagement,@sStatementSerialNo,@sStatement,@iFramework,@iRegisatryFramework,@iReLicensureGuideline,@dAdded,@sAddedby,@dUpdated,@sUpdatedby)", sc);
+            cmd.Parameters.AddWithValue("@sRiskManagement", txt_Risk.Text.Trim());
+            cmd.Parameters.AddWithValue("@sStatementSerialNo", txt_StatementSerialNo.Text.Trim());
             cmd.Parameters.AddWithValue("@sStatement", txt_Statement.Text.Trim());
-            cmd.Parameters.AddWithValue("@iRiskType", drp_RiskType.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@iStipulationGuidelines", drp_StipulationGuidelines.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@iInspectionComplianceGuidelines", drp_InspectionComplianceGuidelines.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@iFramework", drp_Framework.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@iRegisatryFramework", drp_RegisatryFramework.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@iReLicensureGuideline", drp_StipulationGuidelines.SelectedItem.Value);
 
             cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
             cmd.Parameters.AddWithValue("@sAddedby", Session["CurrentUserName"].ToString());
@@ -190,6 +204,8 @@ namespace LocalECT
                 div_msg.Visible = true;
 
                 txt_Risk.Text = "";
+                txt_StatementSerialNo.Text = "";
+                txt_Statement.Text = "";
 
 
             }
@@ -207,6 +223,11 @@ namespace LocalECT
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Strategy_Risk_Management");
+        }
+
+        protected void drp_Framework_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillRisk_Management_Registry_Framework();
         }
     }
 }

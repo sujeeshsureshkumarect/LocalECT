@@ -30,11 +30,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -97,19 +97,69 @@ namespace LocalECT
             //sSQL += "                          CS_Strategy_Version ON CS_Strategic_Task.iStrategyVersion = CS_Strategy_Version.iSerial ON CS_Survey_Form.iSerial = CS_Strategic_Task.iSurveyFormReference INNER JOIN ";
             //sSQL += "                          CS_Strategic_Evidence ON CS_Strategic_Task.iEvidence = CS_Strategic_Evidence.iSerial ";
 
+            //sSQL  = " SELECT        CS_Strategic_Task.iSerial, CS_Strategic_Task.sTaskID, CS_Strategic_Task.sTaskDesc, CS_Strategic_Task.iPeriod, CS_Strategic_Task.dStart, CS_Strategic_Task.dEnd, CS_Strategic_Task.iDepartment,  ";
+            //sSQL += "                          CS_Strategic_Task.iSection, CS_Strategic_Task.iStipulation, CS_Strategic_Task.iSubStipulation, CS_Strategic_Task.iGuideline, CS_Strategic_Task.iInspectionComplianceStandard,  ";
+            //sSQL += "                          CS_Strategic_Task.iInspectionComplianceDomain, CS_Strategic_Task.iInspectionComplianceIndicator, CS_Strategic_Task.iInspectionComplianceGuidelines, CS_Strategic_Task.iRiskManagement,  ";
+            //sSQL += "       CS_Strategic_Task.iEvidence, CS_Strategic_Task.iInitiative, CS_Strategic_Task.iOrder, CS_Strategic_Task.iStrategyVersion,  ";
+            //sSQL += "                          CS_Strategic_Task.dAdded, CS_Strategic_Task.sAddedBy, CS_Strategic_Task.dUpdated, CS_Strategic_Task.sUpdatedBy, CS_Strategic_Period.sPeriod, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation,  ";
+            //sSQL += "                          Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Stipulation.sStipulationID, CS_Stipulation.sStipulationDesc, CS_Sub_Stipulation.sSubStipulationID, CS_Sub_Stipulation.sSubStipulationDesc,  ";
+            //sSQL += "                          CS_Stipulation_Guidelines.sGuidelinesID, CS_Stipulation_Guidelines.sGuidelinesDesc, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainDesc,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorID, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorDesc, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Risk_Management.sRiskManagement,  CS_Strategic_Initiative.sInitiativeID,  ";
+            //sSQL += "                          CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Evidence.sEvidenceTitle ";
+            //sSQL += " FROM            CS_Strategy_Version INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Domain INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Task INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Period ON CS_Strategic_Task.iPeriod = CS_Strategic_Period.iSerial INNER JOIN ";
+            //sSQL += "                          Lkp_Department ON CS_Strategic_Task.iDepartment = Lkp_Department.DepartmentID INNER JOIN ";
+            //sSQL += "                          Lkp_Section ON CS_Strategic_Task.iSection = Lkp_Section.SectionID INNER JOIN ";
+            //sSQL += "                          CS_Stipulation ON CS_Strategic_Task.iStipulation = CS_Stipulation.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Sub_Stipulation ON CS_Strategic_Task.iSubStipulation = CS_Sub_Stipulation.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Stipulation_Guidelines ON CS_Strategic_Task.iGuideline = CS_Stipulation_Guidelines.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Standard ON CS_Strategic_Task.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial ON  ";
+            //sSQL += "                          CS_Inspection_Compliance_Domain.iSerial = CS_Strategic_Task.iInspectionComplianceDomain INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Indicator ON CS_Strategic_Task.iInspectionComplianceIndicator = CS_Inspection_Compliance_Indicator.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Guidelines ON CS_Strategic_Task.iInspectionComplianceGuidelines = CS_Inspection_Compliance_Guidelines.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Risk_Management ON CS_Strategic_Task.iRiskManagement = CS_Risk_Management.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Initiative ON CS_Strategic_Task.iInitiative = CS_Strategic_Initiative.iSerial ON CS_Strategy_Version.iSerial = CS_Strategic_Task.iStrategyVersion INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Evidence ON CS_Strategic_Task.iEvidence = CS_Strategic_Evidence.iSerial ";
+            //sSQL  = " SELECT        CS_Strategic_Task.iSerial, CS_Strategic_Task.sTaskID, CS_Strategic_Task.sTaskDesc, CS_Strategic_Task.iPeriod, CS_Strategic_Task.dStart, CS_Strategic_Task.dEnd, CS_Strategic_Task.iDepartment,  ";
+            //sSQL += "                          CS_Strategic_Task.iSection, CS_Strategic_Task.iStipulation, CS_Strategic_Task.iSubStipulation, CS_Strategic_Task.iGuideline, CS_Strategic_Task.iInspectionComplianceStandard,  ";
+            //sSQL += "                          CS_Strategic_Task.iInspectionComplianceDomain, CS_Strategic_Task.iInspectionComplianceGuidelines, CS_Strategic_Task.iRiskManagement, CS_Strategic_Task.iEvidence,  ";
+            //sSQL += "                          CS_Strategic_Task.iInitiative, CS_Strategic_Task.iOrder, CS_Strategic_Task.iStrategyVersion, CS_Strategic_Task.dAdded, CS_Strategic_Task.sAddedBy, CS_Strategic_Task.dUpdated, CS_Strategic_Task.sUpdatedBy,  ";
+            //sSQL += "                          CS_Strategic_Period.sPeriod, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation, Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Stipulation.sStipulationID,  ";
+            //sSQL += "                          CS_Stipulation.sStipulationDesc, CS_Sub_Stipulation.sSubStipulationID, CS_Sub_Stipulation.sSubStipulationDesc, CS_Stipulation_Guidelines.sGuidelinesID, CS_Stipulation_Guidelines.sGuidelinesDesc,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Domain.sInspectionComplianceDomainDesc, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID,  ";
+            //sSQL += "                          CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Risk_Management.sRiskManagement, CS_Strategic_Initiative.sInitiativeID, CS_Strategic_Initiative.sInitiativeDesc,  ";
+            //sSQL += "                          CS_Strategy_Version.sStrategyVersion, CS_Strategic_Evidence.sEvidenceTitle ";
+            //sSQL += " FROM            CS_Strategic_Evidence INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Domain INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Task INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Period ON CS_Strategic_Task.iPeriod = CS_Strategic_Period.iSerial INNER JOIN ";
+            //sSQL += "                          Lkp_Department ON CS_Strategic_Task.iDepartment = Lkp_Department.DepartmentID INNER JOIN ";
+            //sSQL += "                          Lkp_Section ON CS_Strategic_Task.iSection = Lkp_Section.SectionID INNER JOIN ";
+            //sSQL += "                          CS_Stipulation ON CS_Strategic_Task.iStipulation = CS_Stipulation.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Sub_Stipulation ON CS_Strategic_Task.iSubStipulation = CS_Sub_Stipulation.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Stipulation_Guidelines ON CS_Strategic_Task.iGuideline = CS_Stipulation_Guidelines.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Standard ON CS_Strategic_Task.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial ON  ";
+            //sSQL += "                          CS_Inspection_Compliance_Domain.iSerial = CS_Strategic_Task.iInspectionComplianceDomain INNER JOIN ";
+            //sSQL += "                          CS_Inspection_Compliance_Guidelines ON CS_Strategic_Task.iInspectionComplianceGuidelines = CS_Inspection_Compliance_Guidelines.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Risk_Management ON CS_Strategic_Task.iRiskManagement = CS_Risk_Management.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Strategic_Initiative ON CS_Strategic_Task.iInitiative = CS_Strategic_Initiative.iSerial INNER JOIN ";
+            //sSQL += "                          CS_Strategy_Version ON CS_Strategic_Task.iStrategyVersion = CS_Strategy_Version.iSerial ON CS_Strategic_Evidence.iSerial = CS_Strategic_Task.iEvidence ";
             sSQL  = " SELECT        CS_Strategic_Task.iSerial, CS_Strategic_Task.sTaskID, CS_Strategic_Task.sTaskDesc, CS_Strategic_Task.iPeriod, CS_Strategic_Task.dStart, CS_Strategic_Task.dEnd, CS_Strategic_Task.iDepartment,  ";
             sSQL += "                          CS_Strategic_Task.iSection, CS_Strategic_Task.iStipulation, CS_Strategic_Task.iSubStipulation, CS_Strategic_Task.iGuideline, CS_Strategic_Task.iInspectionComplianceStandard,  ";
-            sSQL += "                          CS_Strategic_Task.iInspectionComplianceDomain, CS_Strategic_Task.iInspectionComplianceIndicator, CS_Strategic_Task.iInspectionComplianceGuidelines, CS_Strategic_Task.iRiskManagement,  ";
-            sSQL += "       CS_Strategic_Task.iEvidence, CS_Strategic_Task.iInitiative, CS_Strategic_Task.iOrder, CS_Strategic_Task.iStrategyVersion,  ";
-            sSQL += "                          CS_Strategic_Task.dAdded, CS_Strategic_Task.sAddedBy, CS_Strategic_Task.dUpdated, CS_Strategic_Task.sUpdatedBy, CS_Strategic_Period.sPeriod, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation,  ";
-            sSQL += "                          Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Stipulation.sStipulationID, CS_Stipulation.sStipulationDesc, CS_Sub_Stipulation.sSubStipulationID, CS_Sub_Stipulation.sSubStipulationDesc,  ";
-            sSQL += "                          CS_Stipulation_Guidelines.sGuidelinesID, CS_Stipulation_Guidelines.sGuidelinesDesc, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID,  ";
-            sSQL += "                          CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainDesc,  ";
-            sSQL += "                          CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorID, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorDesc, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID,  ";
-            sSQL += "                          CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Risk_Management.sRiskManagement,  CS_Strategic_Initiative.sInitiativeID,  ";
-            sSQL += "                          CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Evidence.sEvidenceTitle ";
-            sSQL += " FROM            CS_Strategy_Version INNER JOIN ";
-            sSQL += "                          CS_Inspection_Compliance_Domain INNER JOIN ";
+            sSQL += "                          CS_Strategic_Task.iInspectionComplianceDomain, CS_Strategic_Task.iInspectionComplianceGuidelines,  CS_Strategic_Task.iEvidence, CS_Strategic_Task.iInitiative,  ";
+            sSQL += "                          CS_Strategic_Task.iOrder, CS_Strategic_Task.iStrategyVersion, CS_Strategic_Task.dAdded, CS_Strategic_Task.sAddedBy, CS_Strategic_Task.dUpdated, CS_Strategic_Task.sUpdatedBy, CS_Strategic_Period.sPeriod,  ";
+            sSQL += "                          Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation, Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Stipulation.sStipulationID, CS_Stipulation.sStipulationDesc,  ";
+            sSQL += "                          CS_Sub_Stipulation.sSubStipulationID, CS_Sub_Stipulation.sSubStipulationDesc, CS_Stipulation_Guidelines.sGuidelinesID, CS_Stipulation_Guidelines.sGuidelinesDesc,  ";
+            sSQL += "                          CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID,  ";
+            sSQL += "                          CS_Inspection_Compliance_Domain.sInspectionComplianceDomainDesc, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID,  ";
+            sSQL += "                          CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Strategic_Initiative.sInitiativeID, CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion,  ";
+            sSQL += "                          CS_Strategic_Evidence.sEvidenceTitle ";
+            sSQL += " FROM            CS_Inspection_Compliance_Domain INNER JOIN ";
             sSQL += "                          CS_Strategic_Task INNER JOIN ";
             sSQL += "                          CS_Strategic_Period ON CS_Strategic_Task.iPeriod = CS_Strategic_Period.iSerial INNER JOIN ";
             sSQL += "                          Lkp_Department ON CS_Strategic_Task.iDepartment = Lkp_Department.DepartmentID INNER JOIN ";
@@ -119,10 +169,9 @@ namespace LocalECT
             sSQL += "                          CS_Stipulation_Guidelines ON CS_Strategic_Task.iGuideline = CS_Stipulation_Guidelines.iSerial INNER JOIN ";
             sSQL += "                          CS_Inspection_Compliance_Standard ON CS_Strategic_Task.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial ON  ";
             sSQL += "                          CS_Inspection_Compliance_Domain.iSerial = CS_Strategic_Task.iInspectionComplianceDomain INNER JOIN ";
-            sSQL += "                          CS_Inspection_Compliance_Indicator ON CS_Strategic_Task.iInspectionComplianceIndicator = CS_Inspection_Compliance_Indicator.iSerial INNER JOIN ";
             sSQL += "                          CS_Inspection_Compliance_Guidelines ON CS_Strategic_Task.iInspectionComplianceGuidelines = CS_Inspection_Compliance_Guidelines.iSerial INNER JOIN ";
-            sSQL += "                          CS_Risk_Management ON CS_Strategic_Task.iRiskManagement = CS_Risk_Management.iSerial INNER JOIN ";
-            sSQL += "                          CS_Strategic_Initiative ON CS_Strategic_Task.iInitiative = CS_Strategic_Initiative.iSerial ON CS_Strategy_Version.iSerial = CS_Strategic_Task.iStrategyVersion INNER JOIN ";
+            sSQL += "                          CS_Strategic_Initiative ON CS_Strategic_Task.iInitiative = CS_Strategic_Initiative.iSerial INNER JOIN ";
+            sSQL += "                          CS_Strategy_Version ON CS_Strategic_Task.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN ";
             sSQL += "                          CS_Strategic_Evidence ON CS_Strategic_Task.iEvidence = CS_Strategic_Evidence.iSerial ";
             sSQL += " where iInitiative=@iInitiative ";
 

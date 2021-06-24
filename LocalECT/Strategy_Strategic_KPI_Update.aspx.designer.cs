@@ -240,13 +240,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_SurveyFormReference;
 
         /// <summary>
-        /// txt_IRQARecommendation control.
+        /// drp_RiskManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_IRQARecommendation;
+        protected global::System.Web.UI.WebControls.DropDownList drp_RiskManagement;
+
+        /// <summary>
+        /// drp_isQSWorldUniversityRanking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_isQSWorldUniversityRanking;
 
         /// <summary>
         /// btn_Create control.

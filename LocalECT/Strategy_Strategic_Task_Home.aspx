@@ -103,9 +103,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Stipulation Guidelines</th>                                            
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Standard</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Domain</th>                                                                                        
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Indicator</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Indicator</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Guidelines</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>                                            
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>--%>                                            
 <%--                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>     
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">IRQA Recommendation</th>   --%>                                                                                     
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence</th>
@@ -132,9 +132,9 @@
                                                     <td title="<%#Eval("sGuidelinesDesc")%>"><%#Eval("sGuidelinesID")%></td> 
                                                     <td title="<%#Eval("sInspectionComplianceStandardDesc")%>"><%#Eval("sInspectionComplianceStandardID")%></td>
                                                     <td title="<%#Eval("sInspectionComplianceDomainDesc")%>"><%#Eval("sInspectionComplianceDomainID")%></td>
-                                                    <td title="<%#Eval("sInspectionComplianceIndicatorDesc")%>"><%#Eval("sInspectionComplianceIndicatorID")%></td>
+                                                    <%--<td title="<%#Eval("sInspectionComplianceIndicatorDesc")%>"><%#Eval("sInspectionComplianceIndicatorID")%></td>--%>
                                                     <td title="<%#Eval("sInspectionComplianceGuidelinesDesc")%>"><%#Eval("sInspectionComplianceGuidelinesID")%></td>
-                                                    <td><%#Eval("sRiskManagement")%></td>
+                                                   <%-- <td><%#Eval("sRiskManagement")%></td>--%>
                                                    <%-- <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
                                                     <td><%#Eval("sIRQARecommendation")%></td>--%>
                                                     <td><%#Eval("sEvidenceTitle")%></td>

@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -317,6 +317,14 @@ namespace LocalECT
             }
             if (id != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Strategic_Objective set sStrategicObjectiveID=@sStrategicObjectiveID,sStrategicObjectiveDesc=@sStrategicObjectiveDesc,iInspectionComplianceDomain=@iInspectionComplianceDomain,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iStrategicProject=@iStrategicProject,sImagePath=@sImagePath,iSubStipulation=@iSubStipulation,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveID", txt_StrategicObjectiveID.Text.Trim());
@@ -362,6 +370,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Objective values (@sStrategicObjectiveID,@sStrategicObjectiveDesc,@iInspectionComplianceDomain,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation,@iStrategicProject,@sImagePath,@iSubStipulation,@iLevel)", sc);
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveID", txt_StrategicObjectiveID.Text.Trim());

@@ -34,7 +34,7 @@
 
                                     <div class="alert alert-success alert-dismissible " role="alert" runat="server" id="div_Alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
+                                            <%--<span aria-hidden="true">×</span>--%>
                                         </button>
                                         <asp:Label ID="lbl_Msg" runat="server" Text="University Status Created Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
                                     </div>

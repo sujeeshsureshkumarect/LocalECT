@@ -51,6 +51,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Risk;
 
         /// <summary>
+        /// txt_StatementSerialNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_StatementSerialNo;
+
+        /// <summary>
         /// txt_Statement control.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Statement;
 
         /// <summary>
-        /// drp_RiskType control.
+        /// drp_Framework control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_RiskType;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Framework;
+
+        /// <summary>
+        /// drp_RegisatryFramework control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_RegisatryFramework;
 
         /// <summary>
         /// drp_StipulationGuidelines control.
@@ -76,15 +94,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_StipulationGuidelines;
-
-        /// <summary>
-        /// drp_InspectionComplianceGuidelines control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceGuidelines;
 
         /// <summary>
         /// btn_Create control.

@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Compliance_Standard,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -165,10 +165,18 @@ namespace LocalECT
             }
         }
         protected void btn_Create_Click(object sender, EventArgs e)
-        {
+        {            
             string InspectionComplianceDomainID = Request.QueryString["did"];//InspectionComplianceDomainID
             if (InspectionComplianceDomainID != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Compliance_Standard,
+                                 InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Inspection_Compliance_Domain set sInspectionComplianceDomainID=@sInspectionComplianceDomainID,sInspectionComplianceDomainDesc=@sInspectionComplianceDomainDesc,iInspectionComplianceStandard=@iInspectionComplianceStandard,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iOrder=@iOrder,iCompliance_Indicator=@iCompliance_Indicator where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sInspectionComplianceDomainID", txt_Inspection_Compliance_Domain_ID.Text.Trim());
@@ -202,6 +210,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Compliance_Standard,
+                                 InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Inspection_Compliance_Domain values (@sInspectionComplianceDomainID,@sInspectionComplianceDomainDesc,@iInspectionComplianceStandard,@iOrder,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iCompliance_Indicator)", sc);
                 cmd.Parameters.AddWithValue("@sInspectionComplianceDomainID", txt_Inspection_Compliance_Domain_ID.Text.Trim());

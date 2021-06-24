@@ -31,11 +31,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Manage_Department_Section,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -154,6 +154,15 @@ namespace LocalECT
         }
         protected void btn_Create_Click(object sender, EventArgs e)
         {
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Manage_Department_Section,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            {
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                lbl_Msg.Text = "Sorry-You cannot Edit";
+                return;
+            }
+
             SqlCommand cmd = new SqlCommand("update Lkp_Section set DescEN=@DescEN,ManagerID=@ManagerID,SectionAbbreviation=@SectionAbbreviation,LastUpdateDate=@LastUpdateDate,NetUserName=@NetUserName,PCName=@PCName,LastUpdateUserID=@LastUpdateUserID where SectionID=@SectionID", sc);
             cmd.Parameters.AddWithValue("@DescEN", txt_Sect_Name.Text.Trim());
             cmd.Parameters.AddWithValue("@ManagerID", drp_Manager.SelectedItem.Value);

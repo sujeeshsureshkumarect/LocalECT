@@ -34,10 +34,10 @@ namespace LocalECT
 
           if (!IsPostBack)
           {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-            InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Market_Competitive_Implication,
+            InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
             {
-              //Server.Transfer("Authorization.aspx");
+              Server.Transfer("Authorization.aspx");
             }
           }
         }
@@ -107,7 +107,16 @@ namespace LocalECT
 
     protected void btn_Create_Click(object sender, EventArgs e)
     {
-      Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Market_Competitive_Implication,
+                                      InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            {
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                lbl_Msg.Text = "Sorry-You cannot Edit";
+                return;
+            }
+
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
       SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
       SqlCommand cmd = new SqlCommand("update CS_Market_Competitive_Implication set sMarketCompetitiveImplication=@sProg,dUpdated=@dAdded,sUpdatedBy=@sAddedby where iSerial=@iLink", sc);

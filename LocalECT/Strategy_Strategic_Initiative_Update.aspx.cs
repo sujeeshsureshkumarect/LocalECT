@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -647,6 +647,14 @@ namespace LocalECT
             }
             if (id != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Strategic_Initiative set sInitiativeID=@sInitiativeID,sInitiativeDesc=@sInitiativeDesc,iUniversityStatus=@iUniversityStatus,iInitiativePriority=@iInitiativePriority,iInitiativeMaturity=@iInitiativeMaturity,iDigitalTransformationProgram=@iDigitalTransformationProgram,iDigitalUseCase=@iDigitalUseCase,iEnterpriseModel=@iEnterpriseModel,iDepartment=@iDepartment,iSection=@iSection,iTheme=@iTheme,iGoal=@iGoal,iProject=@iProject,iObjective=@iObjective,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iValuePropositionImpact=@iValuePropositionImpact,sImagePath=@sImagePath,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sInitiativeID", txt_InitiativeID.Text.Trim());
@@ -728,6 +736,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Initiative values (@sInitiativeID,@sInitiativeDesc,@iUniversityStatus,@iInitiativePriority,@iInitiativeMaturity,@iDigitalTransformationProgram,@iDigitalUseCase,@iEnterpriseModel,@iDepartment,@iSection,@iTheme,@iGoal,@iProject,@iObjective,@iOrder,@iStrategyVersion,@sAbbreviation,@sImagePath,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iValuePropositionImpact,@iLevel);select SCOPE_IDENTITY();", sc);
                 cmd.Parameters.AddWithValue("@sInitiativeID", txt_InitiativeID.Text.Trim());

@@ -29,11 +29,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -66,7 +66,7 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Initiative_Inspection_Compliance.iInatiative, CS_Initiative_Inspection_Compliance.iInspectionComplianceStandard, CS_Initiative_Inspection_Compliance.iInspectionComplianceDomain, CS_Initiative_Inspection_Compliance.InspectionComplianceIndicator, CS_Initiative_Inspection_Compliance.iStrategyVersion, CS_Initiative_Inspection_Compliance.dAdded, CS_Initiative_Inspection_Compliance.sAddedBy, CS_Initiative_Inspection_Compliance.dUpdated, CS_Initiative_Inspection_Compliance.sUpdatedBy, CS_Strategic_Initiative.sInitiativeID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Inspection_Compliance_Indicator.sInspectionComplianceIndicatorID, CS_Strategy_Version.sStrategyVersion FROM CS_Inspection_Compliance_Indicator INNER JOIN CS_Initiative_Inspection_Compliance INNER JOIN CS_Strategic_Initiative ON CS_Initiative_Inspection_Compliance.iInatiative = CS_Strategic_Initiative.iSerial INNER JOIN CS_Inspection_Compliance_Standard ON CS_Initiative_Inspection_Compliance.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial INNER JOIN CS_Inspection_Compliance_Domain ON CS_Initiative_Inspection_Compliance.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial ON CS_Inspection_Compliance_Indicator.iSerial = CS_Initiative_Inspection_Compliance.InspectionComplianceIndicator INNER JOIN CS_Strategy_Version ON CS_Initiative_Inspection_Compliance.iStrategyVersion = CS_Strategy_Version.iSerial where iInatiative=@iInatiative", sc);
+            SqlCommand cmd = new SqlCommand("SELECT CS_Initiative_Inspection_Compliance.iInatiative, CS_Initiative_Inspection_Compliance.iInspectionComplianceStandard, CS_Initiative_Inspection_Compliance.iInspectionComplianceDomain, CS_Initiative_Inspection_Compliance.iStrategyVersion, CS_Initiative_Inspection_Compliance.dAdded, CS_Initiative_Inspection_Compliance.sAddedBy, CS_Initiative_Inspection_Compliance.dUpdated, CS_Initiative_Inspection_Compliance.sUpdatedBy, CS_Strategic_Initiative.sInitiativeID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion FROM CS_Strategy_Version INNER JOIN CS_Initiative_Inspection_Compliance INNER JOIN CS_Strategic_Initiative ON CS_Initiative_Inspection_Compliance.iInatiative = CS_Strategic_Initiative.iSerial INNER JOIN CS_Inspection_Compliance_Standard ON CS_Initiative_Inspection_Compliance.iInspectionComplianceStandard = CS_Inspection_Compliance_Standard.iSerial INNER JOIN CS_Inspection_Compliance_Domain ON CS_Initiative_Inspection_Compliance.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial ON CS_Strategy_Version.iSerial = CS_Initiative_Inspection_Compliance.iStrategyVersion where iInatiative=@iInatiative", sc);
             cmd.Parameters.AddWithValue("@iInatiative", id);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);

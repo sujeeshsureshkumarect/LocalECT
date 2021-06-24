@@ -22,49 +22,49 @@ namespace LocalECT
     InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Females;
     int CurrentRole = 0;
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
-      try
-      {
-        if (Session["CurrentRole"] != null)
+        protected void Page_Load(object sender, EventArgs e)
         {
-          CurrentRole = (int)Session["CurrentRole"];
-          if (!IsPostBack)
-          {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-            InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+            try
             {
-              //Server.Transfer("Authorization.aspx");
+                if (Session["CurrentRole"] != null)
+                {
+                    CurrentRole = (int)Session["CurrentRole"];
+                    if (!IsPostBack)
+                    {
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Market_Competitive_Implication,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
+                    }
+                }
+                else
+                {
+                    //showErr("Session is expired, Login again please...");
+                    Session.RemoveAll();
+                    Response.Redirect("Login.aspx");
+
+                }
+                if (Session["CurrentUserName"] != null)
+                {
+                    if (!IsPostBack)
+                    {
+                        bindtotal();
+                    }
+                }
             }
-          }
-        }
-        else
-        {
-          //showErr("Session is expired, Login again please...");
-          Session.RemoveAll();
-          Response.Redirect("Login.aspx");
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+            }
+            finally
+            {
+
+            }
 
         }
-        if (Session["CurrentUserName"] != null)
-        {
-          if (!IsPostBack)
-          {
-            bindtotal();
-          }
-        }
-      }
-      catch (Exception exp)
-      {
-        Console.WriteLine("{0} Exception caught.", exp);
-      }
-      finally
-      {
 
-      }
-
-    }
-
-    private void showErr(string sMsg)
+        private void showErr(string sMsg)
     {
       Session["errMsg"] = sMsg;
       Response.Redirect("ErrPage.aspx");

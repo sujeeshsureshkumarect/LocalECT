@@ -52,14 +52,14 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Domain ID *</label>
-                                                        <asp:DropDownList ID="drp_iInspectionComplianceDomain" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_iInspectionComplianceDomain_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_iInspectionComplianceDomain" runat="server" CssClass="form-control"></asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="drp_iInspectionComplianceDomain" InitialValue="0" ErrorMessage="*Inspection Compliance Domain ID Required" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
                                                     </div>
-                                                    <div class="form-group ">
+                                                    <%--<div class="form-group ">
                                                         <label>Inspection Compliance Indicator ID *</label>
                                                         <asp:DropDownList ID="drp_InspectionComplianceIndicator" runat="server" CssClass="form-control"></asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="drp_InspectionComplianceIndicator" InitialValue="0" ErrorMessage="*Inspection Compliance Indicator ID Required" Display="Dynamic" ForeColor="Red" ValidationGroup="no"/>
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group ">
                                                         <label>Strategy Version *</label>
                                                         <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control"></asp:DropDownList>

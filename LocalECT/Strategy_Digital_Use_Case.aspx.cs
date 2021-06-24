@@ -36,10 +36,10 @@ namespace LocalECT
 
           if (!IsPostBack)
           {
-            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-            InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Digital_Transformation_Program,
+            InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
             {
-              //Server.Transfer("Authorization.aspx");
+              Server.Transfer("Authorization.aspx");
             }
           }
         }

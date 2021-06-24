@@ -52,7 +52,7 @@
                                                 </div>
                                                      <div class="form-group ">
                                                     <label>Customer Experience Evidence Category *</label>
-                                                    <asp:DropDownList ID="drp_CustomerExperienceEvidenceCategory" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    <asp:DropDownList ID="drp_CustomerExperienceEvidenceCategory" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                 </div>
                                                      <div class="form-group ">
                                                 <asp:Button id="btn_Create" runat="server" Text="Create" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click"/>

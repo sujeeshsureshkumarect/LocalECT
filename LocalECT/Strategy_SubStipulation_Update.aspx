@@ -58,7 +58,7 @@
                                                 </div>
                                                      <div class="form-group ">
                                                     <label>MOE Re-licensure Sub Stipulation ID *</label>
-                                                    <asp:DropDownList ID="drp_Stipulation" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    <asp:DropDownList ID="drp_Stipulation" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                 </div>
                                                      <div class="form-group ">
                                                     <label>Order *</label>

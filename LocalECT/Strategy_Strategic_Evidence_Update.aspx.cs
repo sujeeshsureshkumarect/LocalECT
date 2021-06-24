@@ -33,11 +33,11 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        //if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
-                        //InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
-                        //{
-                        //    Server.Transfer("Authorization.aspx");
-                        //}
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
+                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        {
+                            Server.Transfer("Authorization.aspx");
+                        }
                     }
                 }
                 else
@@ -338,6 +338,14 @@ namespace LocalECT
             string id = Request.QueryString["id"];
             if (id != null)
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
+                              InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Edit";
+                    return;
+                }
                 //Update
                 SqlCommand cmd = new SqlCommand("update CS_Strategic_Evidence set iEvidenceType=@iEvidenceType,sEvidenceTitle=@sEvidenceTitle,sEvidenceSerial=@sEvidenceSerial,iDepartment=@iDepartment,iSection=@iSection,sEvidenceRecored=@sEvidenceRecored,isIRQASurveyReportRequired=@isIRQASurveyReportRequired,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,iCustomerExperienceEvidenceSubCategory=@iCustomerExperienceEvidenceSubCategory,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
@@ -377,6 +385,14 @@ namespace LocalECT
             }
             else
             {
+                if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
+                             InitializeModule.enumPrivilege.EditUpdate, CurrentRole) != true)
+                {
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                    lbl_Msg.Text = "Sorry-You cannot Add";
+                    return;
+                }
                 //Insert
                 SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Evidence values (@iEvidenceType,@sEvidenceTitle,@sEvidenceSerial,@iDepartment,@iSection,@sEvidenceRecored,@isIRQASurveyReportRequired,@iCustomerExperienceEvidenceCategory,@iCustomerExperienceEvidenceSubCategory,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
