@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Section *</label>
-                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Section_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>
                                                      <div class="form-group ">
                                                         <label>MOE Re-licensure Stipulation *</label>

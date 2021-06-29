@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Configuration;
 using LocalECT.DAL;
@@ -17,11 +17,9 @@ using System.Drawing;
 
 namespace LocalECT
 {
-    public partial class CS_Risk_Management : System.Web.UI.Page
+    public partial class Strategy_Strategic_Objective_Sub_Stipulation_Home : System.Web.UI.Page
     {
-        InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.Females;
         int CurrentRole = 0;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -31,7 +29,7 @@ namespace LocalECT
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
                     {
-                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Risk_Management,
+                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
                             Server.Transfer("Authorization.aspx");
@@ -40,7 +38,6 @@ namespace LocalECT
                 }
                 else
                 {
-                    //showErr("Session is expired, Login again please...");
                     Session.RemoveAll();
                     Response.Redirect("Login.aspx");
 
@@ -49,7 +46,8 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
-                        bindtotal();
+                        string id = Request.QueryString["id"];//iStrategicObjective
+                        bindStrategic_Objective_Sub_Stipulation(id);
                     }
                 }
             }
@@ -61,22 +59,15 @@ namespace LocalECT
             {
 
             }
-
         }
 
-        private void showErr(string sMsg)
-        {
-            Session["errMsg"] = sMsg;
-            Response.Redirect("ErrPage.aspx");
-        }
-
-        public void bindtotal()
+        public void bindStrategic_Objective_Sub_Stipulation(string id)
         {
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Initiative_Risk.iSerial, CS_Initiative_Risk.iInitiative, CS_Initiative_Risk.iFramework, CS_Initiative_Risk.iRegistryFramework, CS_Initiative_Risk.sStatementSerialNo, CS_Initiative_Risk.sStatement, CS_Initiative_Risk.iReLicensureGuideline, CS_Initiative_Risk.dAdded, CS_Initiative_Risk.sAddedBy, CS_Initiative_Risk.dUpdated, CS_Initiative_Risk.sUpdatedBy, CS_Strategic_Initiative.sInitiativeID, CS_Risk_Management_Framework.sFramework, CS_Risk_Management_Registry_Framework.sRegistryFramework, CS_Stipulation_Guidelines.sGuidelinesID FROM CS_Risk_Management_Registry_Framework INNER JOIN CS_Strategic_Initiative INNER JOIN CS_Initiative_Risk ON CS_Strategic_Initiative.iSerial = CS_Initiative_Risk.iInitiative INNER JOIN CS_Risk_Management_Framework ON CS_Initiative_Risk.iFramework = CS_Risk_Management_Framework.iSerial ON CS_Risk_Management_Registry_Framework.iSerial = CS_Initiative_Risk.iRegistryFramework INNER JOIN CS_Stipulation_Guidelines ON CS_Initiative_Risk.iReLicensureGuideline = CS_Stipulation_Guidelines.iSerial where iInitiative=@iInitiative", sc);
-            cmd.Parameters.AddWithValue("@iInitiative", Request.QueryString["id"]);
+            SqlCommand cmd = new SqlCommand("SELECT CS_Strategic_Objective_Sub_Stipulation.iStrategicObjective, CS_Strategic_Objective_Sub_Stipulation.iSubStipulation, CS_Strategic_Objective_Sub_Stipulation.dAdded, CS_Strategic_Objective_Sub_Stipulation.sAddedBy, CS_Strategic_Objective_Sub_Stipulation.dUpdated, CS_Strategic_Objective_Sub_Stipulation.sUpdatedBy, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Sub_Stipulation.sSubStipulationID, CS_Sub_Stipulation.sSubStipulationDesc FROM CS_Strategic_Objective_Sub_Stipulation INNER JOIN CS_Strategic_Objective ON CS_Strategic_Objective_Sub_Stipulation.iStrategicObjective = CS_Strategic_Objective.iSerial INNER JOIN CS_Sub_Stipulation ON CS_Strategic_Objective_Sub_Stipulation.iSubStipulation = CS_Sub_Stipulation.iSerial where iStrategicObjective=@iStrategicObjective", sc);
+            cmd.Parameters.AddWithValue("@iStrategicObjective", id);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -101,8 +92,7 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            string id = Request.QueryString["id"];
-            Response.Redirect("Strategy_Risk_Management_Create?id=" + id + "");
+            Response.Redirect("Strategy_Strategic_Objective_Sub_Stipulation_Update?id=" + Request.QueryString["id"] + "");
         }
     }
 }

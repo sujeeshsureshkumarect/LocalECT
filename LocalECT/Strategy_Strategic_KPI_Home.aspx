@@ -111,7 +111,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Order</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>   
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>   
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>  
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>  --%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Is QS World University Ranking</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
@@ -141,7 +141,7 @@
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sSurveyFormReference")%></td>
-                                                    <td><%#Eval("sRiskManagement")%></td>
+                                                    <%--<td><%#Eval("sRiskManagement")%></td>--%>
                                                     <td><%#Eval("isQSWorldUniversityRanking")%></td>
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
@@ -152,7 +152,8 @@
                                                          </button>
                                                          <div class="dropdown-menu">                                                                                                                          
                                                              <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>  
+                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>
+                                                             <a href="Strategy_Strategic_KPI_Detail_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> 
                                                              <a href="Strategy_IRQA_Recommendation_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Manage IRQA Recommendation</a>   
                                                          </div>
                                                      </div>

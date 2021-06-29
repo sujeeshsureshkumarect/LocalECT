@@ -50,7 +50,13 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        //fillProjectOwner();
+
+                        fillDepartment();
+                        fillSection();
+
                         fillProjectOwner();
+
                         fillStrategicGoal();
                         fillStrategy_Version();
                         fillMarketCompetitiveImplication();
@@ -73,10 +79,10 @@ namespace LocalECT
                                 lbl_Header.Text = "View Strategic Project";
                                 txt_StrategicProjectID.Enabled = false;
                                 txt_StrategicProjectDesc.Enabled = false;
-                                drp_ProjectOwner.Enabled = false;
+                                txt_ProjectOwner.Enabled = false;
                                 txt_HierarchyProjectOwner.Enabled = false;
-                                txt_OwnerDepartment.Enabled = false;
-                                txt_OwnerSection.Enabled = false;
+                                drp_Department.Enabled = false;
+                                drp_Section.Enabled = false;
                                 drp_StrategicGoal.Enabled = false;
                                 txt_Order.Enabled = false;
                                 drp_StrategyVersion.Enabled = false;
@@ -91,11 +97,11 @@ namespace LocalECT
                                 lbl_Header.Text = "Edit Strategic Project";
                                 txt_StrategicProjectID.Enabled = true;
                                 txt_StrategicProjectDesc.Enabled = true;
-                                drp_ProjectOwner.Enabled = true;
+                                txt_ProjectOwner.Enabled = false;
 
                                 txt_HierarchyProjectOwner.Enabled = false;
-                                txt_OwnerDepartment.Enabled = false;
-                                txt_OwnerSection.Enabled = false;
+                                drp_Department.Enabled = true;
+                                drp_Section.Enabled = true;
 
                                 drp_StrategicGoal.Enabled = true;
                                 txt_Order.Enabled = true;
@@ -124,28 +130,84 @@ namespace LocalECT
 
             }
         }
-        public void getProjectOwner(string id)
+        public void fillDepartment()
         {
-            SqlCommand cmd = new SqlCommand("select EmployeeID,EmployeeDisplayName,JobTitleEn,JobTitleID,DepartmentDesc,DepartmentID,section,SectionID from HR_Employee_Academic_Admin_Managers where EmployeeID=@EmployeeID", sc);
-            cmd.Parameters.AddWithValue("@EmployeeID", id);
+            SqlCommand cmd = new SqlCommand("select DepartmentID,DescEN from Lkp_Department where (Lkp_Department.IsActive = 1) and (Lkp_Department.DepartmentID<>-1)", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
             {
                 sc.Open();
                 da.Fill(dt);
-                sc.Close();  
-                
-                if(dt.Rows.Count>0)
+                sc.Close();
+
+                drp_Department.DataSource = dt;
+                drp_Department.DataTextField = "DescEN";
+                drp_Department.DataValueField = "DepartmentID";
+                drp_Department.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+        public void fillSection()
+        {
+            if (!string.IsNullOrEmpty(drp_Department.SelectedValue))
+            {
+                SqlCommand cmd = new SqlCommand("select SectionID,DescEN from Lkp_Section where DepartmentID=@DepartmentID", sc);
+                cmd.Parameters.AddWithValue("@DepartmentID", drp_Department.SelectedItem.Value);               
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
                 {
-                    txt_HierarchyProjectOwner.Text = dt.Rows[0]["JobTitleEn"].ToString();
-                    hdn_iHierarchyProjectOwner.Value = dt.Rows[0]["JobTitleID"].ToString();
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
 
-                    txt_OwnerDepartment.Text = dt.Rows[0]["DepartmentDesc"].ToString();
-                    hdn_iOwnerDepartment.Value = dt.Rows[0]["DepartmentID"].ToString();
+                    drp_Section.DataSource = dt;
+                    drp_Section.DataTextField = "DescEN";
+                    drp_Section.DataValueField = "SectionID";
+                    drp_Section.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+            }
+        }
+        public void getProjectOwner(string userid,string jobid)
+        {
+            SqlCommand cmd = new SqlCommand("select EmployeeID,SurnameEn,FirstNameEn,FamilyNameEn from Hr_Employee where EmployeeID=@EmployeeID;select JobTitleID,JobTitleEn from Lkp_JobTitle where JobTitleID=@JobTitleID", sc);
+            cmd.Parameters.AddWithValue("@EmployeeID", userid);
+            cmd.Parameters.AddWithValue("@JobTitleID", jobid);
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(ds);
+                sc.Close();
 
-                    txt_OwnerSection.Text = dt.Rows[0]["section"].ToString();
-                    hdn_iOwnerSection.Value = dt.Rows[0]["SectionID"].ToString();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    txt_ProjectOwner.Text = ds.Tables[0].Rows[0]["EmployeeID"].ToString() + "_" + ds.Tables[0].Rows[0]["SurnameEn"].ToString() + " " + ds.Tables[0].Rows[0]["FirstNameEn"].ToString() + " " + ds.Tables[0].Rows[0]["FamilyNameEn"].ToString();
+                    hdn_ProjectOwner.Value = ds.Tables[0].Rows[0]["EmployeeID"].ToString();                                                       
+                }
+                if(ds.Tables[1].Rows.Count > 0)
+                {
+                    txt_HierarchyProjectOwner.Text = ds.Tables[1].Rows[0]["JobTitleID"].ToString() + "_" + ds.Tables[1].Rows[0]["JobTitleEn"].ToString();
+                    hdn_iHierarchyProjectOwner.Value = ds.Tables[1].Rows[0]["JobTitleID"].ToString();
                 }
             }
             catch (Exception ex)
@@ -160,7 +222,8 @@ namespace LocalECT
         }
         public void fillProjectOwner()
         {
-            SqlCommand cmd = new SqlCommand("select EmployeeID,EmployeeDisplayName from HR_Employee_Academic_Admin_Managers order by EmployeeDisplayName", sc);
+            SqlCommand cmd = new SqlCommand("SELECT Lkp_Section.ManagerID, Lkp_Section.JobIDofSectionManager, Lkp_JobTitle.JobTitleID,Lkp_JobTitle.JobTitleEn, Hr_Employee.EmployeeID, Hr_Employee.FirstNameEn, Hr_Employee.FamilyNameEn, Hr_Employee.SurnameEn FROM Lkp_Section INNER JOIN Hr_Employee ON Lkp_Section.ManagerID = Hr_Employee.EmployeeID INNER JOIN Lkp_JobTitle ON Lkp_Section.JobIDofSectionManager = Lkp_JobTitle.JobTitleID where Lkp_Section.SectionID=@SectionID", sc);
+            cmd.Parameters.AddWithValue("@SectionID", drp_Section.SelectedItem.Value);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -169,12 +232,18 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
-                drp_ProjectOwner.DataSource = dt;
-                drp_ProjectOwner.DataTextField = "EmployeeDisplayName";
-                drp_ProjectOwner.DataValueField = "EmployeeID";
-                drp_ProjectOwner.DataBind();
+                //drp_ProjectOwner.DataSource = dt;
+                //drp_ProjectOwner.DataTextField = "ManagerID";
+                //drp_ProjectOwner.DataValueField = "ManagerID";
+                //drp_ProjectOwner.DataBind();
 
-                getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
+                txt_ProjectOwner.Text = dt.Rows[0]["EmployeeID"].ToString()+"_"+dt.Rows[0]["SurnameEn"].ToString()+" "+ dt.Rows[0]["FirstNameEn"].ToString()+" "+ dt.Rows[0]["FamilyNameEn"].ToString();
+                hdn_ProjectOwner.Value = dt.Rows[0]["ManagerID"].ToString();
+
+                txt_HierarchyProjectOwner.Text = dt.Rows[0]["JobTitleID"].ToString() + "_" + dt.Rows[0]["JobTitleEn"].ToString();
+                hdn_iHierarchyProjectOwner.Value = dt.Rows[0]["JobIDofSectionManager"].ToString();
+
+                //getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
             }
             catch (Exception ex)
             {
@@ -309,8 +378,13 @@ namespace LocalECT
                 {
                     txt_StrategicProjectID.Text = dt.Rows[0]["sStrategicProjectID"].ToString();
                     txt_StrategicProjectDesc.Text = dt.Rows[0]["sStrategicProjectDesc"].ToString();
-                    drp_ProjectOwner.SelectedIndex = drp_ProjectOwner.Items.IndexOf(drp_ProjectOwner.Items.FindByValue(dt.Rows[0]["iProjectOwner"].ToString()));
-                    getProjectOwner(dt.Rows[0]["iProjectOwner"].ToString());
+                    //drp_ProjectOwner.SelectedIndex = drp_ProjectOwner.Items.IndexOf(drp_ProjectOwner.Items.FindByValue(dt.Rows[0]["iProjectOwner"].ToString()));
+                    //getProjectOwner(dt.Rows[0]["iProjectOwner"].ToString());
+                    drp_Department.SelectedIndex = drp_Department.Items.IndexOf(drp_Department.Items.FindByValue(dt.Rows[0]["iOwnerDepartment"].ToString()));
+                    fillSection();
+                    drp_Section.SelectedIndex = drp_Section.Items.IndexOf(drp_Section.Items.FindByValue(dt.Rows[0]["iOwnerSection"].ToString()));
+
+                    getProjectOwner(dt.Rows[0]["iProjectOwner"].ToString(), dt.Rows[0]["iHierarchyProjectOwner"].ToString());
                     drp_StrategicGoal.SelectedIndex = drp_StrategicGoal.Items.IndexOf(drp_StrategicGoal.Items.FindByValue(dt.Rows[0]["iStrategicGoal"].ToString()));
                     txt_Order.Text = dt.Rows[0]["iOrder"].ToString();
                     drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(dt.Rows[0]["iStrategyVersion"].ToString()));
@@ -374,7 +448,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sStrategicProjectID", txt_StrategicProjectID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sStrategicProjectDesc", txt_StrategicProjectDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iHierarchyProjectOwner", hdn_iHierarchyProjectOwner.Value);
-                cmd.Parameters.AddWithValue("@iProjectOwner", drp_ProjectOwner.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iProjectOwner", hdn_ProjectOwner.Value);
                 cmd.Parameters.AddWithValue("@iStrategicGoal", drp_StrategicGoal.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iOrder", txt_Order.Text.Trim());
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
@@ -388,8 +462,8 @@ namespace LocalECT
                     cmd.Parameters.AddWithValue("@sImagePath", Imagepath);
                 }
                 cmd.Parameters.AddWithValue("@iMarketCompetitiveImplication", drp_MarketCompetitiveImplication.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iOwnerDepartment", hdn_iOwnerDepartment.Value);
-                cmd.Parameters.AddWithValue("@iOwnerSection", hdn_iOwnerSection.Value);
+                cmd.Parameters.AddWithValue("@iOwnerDepartment", drp_Department.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iOwnerSection", drp_Section.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iLevel", txt_Level.Text.Trim());
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
@@ -430,7 +504,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sStrategicProjectID", txt_StrategicProjectID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sStrategicProjectDesc", txt_StrategicProjectDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iHierarchyProjectOwner", hdn_iHierarchyProjectOwner.Value);
-                cmd.Parameters.AddWithValue("@iProjectOwner", drp_ProjectOwner.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iProjectOwner", hdn_ProjectOwner.Value);
                 cmd.Parameters.AddWithValue("@iStrategicGoal", drp_StrategicGoal.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iOrder", txt_Order.Text.Trim());
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
@@ -448,8 +522,8 @@ namespace LocalECT
                     cmd.Parameters.AddWithValue("@sImagePath", Imagepath);
                 }
                 cmd.Parameters.AddWithValue("@iMarketCompetitiveImplication", drp_MarketCompetitiveImplication.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iOwnerDepartment", hdn_iOwnerDepartment.Value);
-                cmd.Parameters.AddWithValue("@iOwnerSection", hdn_iOwnerSection.Value);
+                cmd.Parameters.AddWithValue("@iOwnerDepartment", drp_Department.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iOwnerSection", drp_Section.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iLevel", txt_Level.Text.Trim());
                 try
                 {
@@ -467,13 +541,14 @@ namespace LocalECT
                     Imagepath = "";
                     txt_HierarchyProjectOwner.Text = "";
                     hdn_iHierarchyProjectOwner.Value = "";
-                    txt_OwnerDepartment.Text = "";
-                    hdn_iOwnerDepartment.Value = "";
-                    txt_OwnerSection.Text = "";
-                    hdn_iOwnerSection.Value = "";
+                    //txt_OwnerDepartment.Text = "";
+                    //hdn_iOwnerDepartment.Value = "";
+                    //txt_OwnerSection.Text = "";
+                    //hdn_iOwnerSection.Value = "";
                     txt_Level.Text = "";
-                    drp_ProjectOwner.SelectedIndex = 0;
-                    getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
+                    txt_ProjectOwner.Text = "";
+                    hdn_iHierarchyProjectOwner.Value = "";
+                    //getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
                 }
                 catch (Exception ex)
                 {
@@ -490,19 +565,24 @@ namespace LocalECT
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Strategy_Strategic_Project_Home");
-        }
-
-        protected void drp_ProjectOwner_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            getProjectOwner(drp_ProjectOwner.SelectedItem.Value);
-        }
-
+        }       
         protected void drp_StrategicGoal_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(drp_StrategicGoal.SelectedValue))
             {
                 drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(getStrategy_Version(drp_StrategicGoal.SelectedItem.Value)));
             }
+        }
+
+        protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillSection();
+            fillProjectOwner();
+        }
+
+        protected void drp_Section_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillProjectOwner();
         }
     }
 }

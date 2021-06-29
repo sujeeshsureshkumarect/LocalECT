@@ -52,13 +52,15 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        fillInitiative();
+                        drp_Initiative.SelectedIndex = drp_Initiative.Items.IndexOf(drp_Initiative.Items.FindByValue(Request.QueryString["id"]));
                         fillRisk_Management_Framework();
                         fillRisk_Management_Registry_Framework();
                         fillStipulationGuidelines();
-                        string id = Request.QueryString["id"];
-                        if (id != null)
+                        string rid = Request.QueryString["rid"];
+                        if (rid != null)
                         {
-                            bindlink(id);
+                            bindInitiative_Risk(rid);
                         }
                     }
                 }
@@ -70,6 +72,32 @@ namespace LocalECT
             finally
             {
 
+            }
+        }
+        public void fillInitiative()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID from CS_Strategic_Initiative", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_Initiative.DataSource = dt;
+                drp_Initiative.DataTextField = "sInitiativeID";
+                drp_Initiative.DataValueField = "iSerial";
+                drp_Initiative.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
         public void fillRisk_Management_Framework()
@@ -154,10 +182,10 @@ namespace LocalECT
                 sc.Close();
             }
         }
-        public void bindlink(string id)
+        public void bindInitiative_Risk(string rid)
         {
-            SqlCommand cmd = new SqlCommand("select * from CS_Risk_Management  where iSerial=@iLink", sc);
-            cmd.Parameters.AddWithValue("@iLink", id);
+            SqlCommand cmd = new SqlCommand("select * from CS_Initiative_Risk where iSerial=@iLink", sc);
+            cmd.Parameters.AddWithValue("@iLink", rid);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -168,12 +196,12 @@ namespace LocalECT
 
                 if (dt.Rows.Count > 0)
                 {
-                    txt_Risk.Text = dt.Rows[0]["sRiskManagement"].ToString();
-                    txt_StatementSerialNo.Text = dt.Rows[0]["sStatementSerialNo"].ToString();
-                    txt_Statement.Text = dt.Rows[0]["sStatement"].ToString();
+                    drp_Initiative.SelectedIndex = drp_Initiative.Items.IndexOf(drp_Initiative.Items.FindByValue(dt.Rows[0]["iInitiative"].ToString()));
                     drp_Framework.SelectedIndex = drp_Framework.Items.IndexOf(drp_Framework.Items.FindByValue(dt.Rows[0]["iFramework"].ToString()));
                     fillRisk_Management_Registry_Framework();
                     drp_RegisatryFramework.SelectedIndex = drp_RegisatryFramework.Items.IndexOf(drp_RegisatryFramework.Items.FindByValue(dt.Rows[0]["iRegisatryFramework"].ToString()));
+                    txt_StatementSerialNo.Text = dt.Rows[0]["sStatementSerialNo"].ToString();
+                    txt_Statement.Text = dt.Rows[0]["sStatement"].ToString();
                     drp_StipulationGuidelines.SelectedIndex = drp_StipulationGuidelines.Items.IndexOf(drp_StipulationGuidelines.Items.FindByValue(dt.Rows[0]["iReLicensureGuideline"].ToString()));
                 }
             }
@@ -208,19 +236,19 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("update CS_Risk_Management set sRiskManagement=@sRiskManagement,sStatementSerialNo=@sStatementSerialNo,sStatement=@sStatement,iFramework=@iFramework,iRegisatryFramework=@iRegisatryFramework,iReLicensureGuideline=@iReLicensureGuideline,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+            SqlCommand cmd = new SqlCommand("update CS_Initiative_Risk set iInitiative=@iInitiative,iFramework=@iFramework,iRegisatryFramework=@iRegisatryFramework,sStatementSerialNo=@sStatementSerialNo,sStatement=@sStatement,iReLicensureGuideline=@iReLicensureGuideline,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
 
-            cmd.Parameters.AddWithValue("@sRiskManagement", txt_Risk.Text.Trim());
-            cmd.Parameters.AddWithValue("@sStatementSerialNo", txt_StatementSerialNo.Text.Trim());
-            cmd.Parameters.AddWithValue("@sStatement", txt_Statement.Text.Trim());
+            cmd.Parameters.AddWithValue("@iInitiative", drp_Initiative.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@iFramework", drp_Framework.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@iRegisatryFramework", drp_RegisatryFramework.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@sStatementSerialNo", txt_StatementSerialNo.Text.Trim());
+            cmd.Parameters.AddWithValue("@sStatement", txt_Statement.Text.Trim());
             cmd.Parameters.AddWithValue("@iReLicensureGuideline", drp_StipulationGuidelines.SelectedItem.Value);
 
             cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
             cmd.Parameters.AddWithValue("@sUpdatedby", Session["CurrentUserName"].ToString());
 
-            cmd.Parameters.AddWithValue("@iSerial", Request.QueryString["id"]);
+            cmd.Parameters.AddWithValue("@iSerial", Request.QueryString["rid"]);
             try
             {
                 sc.Open();
@@ -242,11 +270,17 @@ namespace LocalECT
 
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Risk_Management");
+            string id = Request.QueryString["id"];
+            Response.Redirect("Strategy_Risk_Management?id=" + id + "");
         }
         protected void drp_Framework_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillRisk_Management_Registry_Framework();
+        }
+        protected void lnk_Create_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            Response.Redirect("Strategy_Risk_Management?id=" + id + "");
         }
     }
 }

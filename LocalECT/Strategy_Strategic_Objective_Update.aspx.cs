@@ -51,7 +51,7 @@ namespace LocalECT
                     if (!IsPostBack)
                     {
                         fillStrategy_Version();
-                        fillSubStipulation();
+                        //fillSubStipulation();
                         fillInspectionComplianceDomain();
                         fillStrategicProject();
 
@@ -80,7 +80,7 @@ namespace LocalECT
                                 txt_Abbreviation.Enabled = false;
                                 drp_StrategicProject.Enabled = false;
                                 flp_Upload.Visible = false;
-                                drp_SubStipulation.Enabled = false;
+                                //drp_SubStipulation.Enabled = false;
                                 txt_Level.Enabled = false;
                             }
                             else if (t == "e")//Edit
@@ -95,7 +95,7 @@ namespace LocalECT
                                 txt_Abbreviation.Enabled = true;
                                 drp_StrategicProject.Enabled = true;
                                 flp_Upload.Visible = true;
-                                drp_SubStipulation.Enabled = true;
+                                //drp_SubStipulation.Enabled = true;
                                 txt_Level.Enabled = true;
                             }
                         }
@@ -172,32 +172,32 @@ namespace LocalECT
                 sc.Close();
             }
         }
-        public void fillSubStipulation()
-        {
-            SqlCommand cmd = new SqlCommand("select iSerial,sSubStipulationID from CS_Sub_Stipulation", sc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
+        //public void fillSubStipulation()
+        //{
+        //    SqlCommand cmd = new SqlCommand("select iSerial,sSubStipulationID from CS_Sub_Stipulation", sc);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    try
+        //    {
+        //        sc.Open();
+        //        da.Fill(dt);
+        //        sc.Close();
 
-                drp_SubStipulation.DataSource = dt;
-                drp_SubStipulation.DataTextField = "sSubStipulationID";
-                drp_SubStipulation.DataValueField = "iSerial";
-                drp_SubStipulation.DataBind();
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
-            }
-        }
+        //        drp_SubStipulation.DataSource = dt;
+        //        drp_SubStipulation.DataTextField = "sSubStipulationID";
+        //        drp_SubStipulation.DataValueField = "iSerial";
+        //        drp_SubStipulation.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sc.Close();
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        sc.Close();
+        //    }
+        //}
         public void fillInspectionComplianceDomain()
         {
             SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceDomainID from CS_Inspection_Compliance_Domain", sc);
@@ -272,7 +272,7 @@ namespace LocalECT
                     txt_Abbreviation.Text = dt.Rows[0]["sAbbreviation"].ToString();
                     drp_StrategicProject.SelectedIndex = drp_StrategicProject.Items.IndexOf(drp_StrategicProject.Items.FindByValue(dt.Rows[0]["iStrategicProject"].ToString()));
                     hyp_ImagePath.NavigateUrl = dt.Rows[0]["sImagePath"].ToString();
-                    drp_SubStipulation.SelectedIndex = drp_SubStipulation.Items.IndexOf(drp_SubStipulation.Items.FindByValue(dt.Rows[0]["iSubStipulation"].ToString()));
+                    //drp_SubStipulation.SelectedIndex = drp_SubStipulation.Items.IndexOf(drp_SubStipulation.Items.FindByValue(dt.Rows[0]["iSubStipulation"].ToString()));
                     txt_Level.Text = dt.Rows[0]["iLevel"].ToString();
                 }
             }
@@ -326,7 +326,7 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_Objective set sStrategicObjectiveID=@sStrategicObjectiveID,sStrategicObjectiveDesc=@sStrategicObjectiveDesc,iInspectionComplianceDomain=@iInspectionComplianceDomain,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iStrategicProject=@iStrategicProject,sImagePath=@sImagePath,iSubStipulation=@iSubStipulation,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_Objective set sStrategicObjectiveID=@sStrategicObjectiveID,sStrategicObjectiveDesc=@sStrategicObjectiveDesc,iInspectionComplianceDomain=@iInspectionComplianceDomain,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iStrategicProject=@iStrategicProject,sImagePath=@sImagePath,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveID", txt_StrategicObjectiveID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveDesc", txt_StrategicObjectiveDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_InspectionComplianceDomainID.SelectedItem.Value);
@@ -342,7 +342,7 @@ namespace LocalECT
                 {
                     cmd.Parameters.AddWithValue("@sImagePath", Imagepath);
                 }
-                cmd.Parameters.AddWithValue("@iSubStipulation", drp_SubStipulation.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iSubStipulation", drp_SubStipulation.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iLevel", txt_Level.Text.Trim());
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
@@ -379,7 +379,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Objective values (@sStrategicObjectiveID,@sStrategicObjectiveDesc,@iInspectionComplianceDomain,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation,@iStrategicProject,@sImagePath,@iSubStipulation,@iLevel)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Objective values (@sStrategicObjectiveID,@sStrategicObjectiveDesc,@iInspectionComplianceDomain,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation,@iStrategicProject,@sImagePath,@iLevel)", sc);
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveID", txt_StrategicObjectiveID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sStrategicObjectiveDesc", txt_StrategicObjectiveDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_InspectionComplianceDomainID.SelectedItem.Value);
@@ -399,7 +399,7 @@ namespace LocalECT
                 {
                     cmd.Parameters.AddWithValue("@sImagePath", Imagepath);
                 }
-                cmd.Parameters.AddWithValue("@iSubStipulation", drp_SubStipulation.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iSubStipulation", drp_SubStipulation.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iLevel", txt_Level.Text.Trim());
                 try
                 {

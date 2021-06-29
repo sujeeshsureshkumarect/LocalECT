@@ -57,24 +57,28 @@
                                                         </asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="form-group ">
+                                                        <label>Owner Department *</label>
+                                                        <%--<asp:TextBox ID="txt_OwnerDepartment" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        <asp:HiddenField ID="hdn_iOwnerDepartment" runat="server" />--%>
+                                                        <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Owner Section *</label>
+                                                        <%--<asp:TextBox ID="txt_OwnerSection" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        <asp:HiddenField ID="hdn_iOwnerSection" runat="server" />--%>
+                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Section_SelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
                                                         <label>Project Owner *</label>
-                                                        <asp:DropDownList ID="drp_ProjectOwner" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_ProjectOwner_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:TextBox ID="txt_ProjectOwner" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        <asp:HiddenField ID="hdn_ProjectOwner" runat="server" />
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Hierarchy Project Owner *</label>
                                                         <asp:TextBox ID="txt_HierarchyProjectOwner" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         <asp:HiddenField ID="hdn_iHierarchyProjectOwner" runat="server" />
                                                     </div>
-                                                    <div class="form-group ">
-                                                        <label>Owner Department *</label>
-                                                        <asp:TextBox ID="txt_OwnerDepartment" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                                        <asp:HiddenField ID="hdn_iOwnerDepartment" runat="server" />
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <label>Owner Section *</label>
-                                                        <asp:TextBox ID="txt_OwnerSection" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                                        <asp:HiddenField ID="hdn_iOwnerSection" runat="server" />
-                                                    </div>
+                                                    
                                                     <div class="form-group ">
                                                         <label>Strategic Goal *</label>
                                                         <asp:DropDownList ID="drp_StrategicGoal" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_StrategicGoal_SelectedIndexChanged"></asp:DropDownList>

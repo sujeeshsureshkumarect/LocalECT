@@ -73,7 +73,7 @@ namespace LocalECT
 
                         fillSurveyFormReference();
 
-                        fillRiskManagement();
+                        //fillRiskManagement();
 
                         string id = Request.QueryString["id"];//Initiative ID
                         string sid = Request.QueryString["sid"];//Task ID
@@ -106,7 +106,7 @@ namespace LocalECT
                                 drp_Section.Enabled = false;
                                 txt_Order.Enabled = false;
                                 drp_SurveyFormReference.Enabled = false;
-                                drp_RiskManagement.Enabled = false;
+                                //drp_RiskManagement.Enabled = false;
                                 drp_isQSWorldUniversityRanking.Enabled = false;
                             }
                             else if (t == "e")//Edit
@@ -132,7 +132,7 @@ namespace LocalECT
                                 drp_Section.Enabled = true;
                                 txt_Order.Enabled = true;
                                 drp_SurveyFormReference.Enabled = true;
-                                drp_RiskManagement.Enabled = true;
+                                //drp_RiskManagement.Enabled = true;
                                 drp_isQSWorldUniversityRanking.Enabled = true;
                             }
                         }
@@ -508,32 +508,32 @@ namespace LocalECT
                 sc.Close();
             }
         }
-        public void fillRiskManagement()
-        {
-            SqlCommand cmd = new SqlCommand("select iSerial,sRiskManagement from CS_Risk_Management", sc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
+        //public void fillRiskManagement()
+        //{
+        //    SqlCommand cmd = new SqlCommand("select iSerial,sRiskManagement from CS_Risk_Management", sc);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    try
+        //    {
+        //        sc.Open();
+        //        da.Fill(dt);
+        //        sc.Close();
 
-                drp_RiskManagement.DataSource = dt;
-                drp_RiskManagement.DataTextField = "sRiskManagement";
-                drp_RiskManagement.DataValueField = "iSerial";
-                drp_RiskManagement.DataBind();
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
-            }
-        }
+        //        drp_RiskManagement.DataSource = dt;
+        //        drp_RiskManagement.DataTextField = "sRiskManagement";
+        //        drp_RiskManagement.DataValueField = "iSerial";
+        //        drp_RiskManagement.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sc.Close();
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        sc.Close();
+        //    }
+        //}
         public void bindStrategic_KPI(string sid)
         {
             SqlCommand cmd = new SqlCommand("select * from CS_Strategic_KPI where iSerial=@iSerial", sc);
@@ -585,7 +585,7 @@ namespace LocalECT
                     drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(dt.Rows[0]["iStrategyVersion"].ToString()));
                     txt_Order.Text = dt.Rows[0]["iOrder"].ToString();
                     drp_SurveyFormReference.SelectedIndex = drp_SurveyFormReference.Items.IndexOf(drp_SurveyFormReference.Items.FindByValue(dt.Rows[0]["iSurveyFormReference"].ToString()));
-                    drp_RiskManagement.SelectedIndex = drp_RiskManagement.Items.IndexOf(drp_RiskManagement.Items.FindByValue(dt.Rows[0]["iRiskManagement"].ToString()));
+                    //drp_RiskManagement.SelectedIndex = drp_RiskManagement.Items.IndexOf(drp_RiskManagement.Items.FindByValue(dt.Rows[0]["iRiskManagement"].ToString()));
                     string isQSWorldUniversityRanking = dt.Rows[0]["isQSWorldUniversityRanking"].ToString();
                     int j = 0;
                     if (isQSWorldUniversityRanking == "False")
@@ -628,7 +628,7 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,iRiskManagement=@iRiskManagement,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -648,7 +648,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@iInitiative", drp_Initiative.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iOrder", txt_Order.Text.Trim());
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iRiskManagement", drp_RiskManagement.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iRiskManagement", drp_RiskManagement.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@isQSWorldUniversityRanking", drp_isQSWorldUniversityRanking.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSurveyFormReference", drp_SurveyFormReference.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
@@ -691,7 +691,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@iRiskManagement,@isQSWorldUniversityRanking)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@isQSWorldUniversityRanking)", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -711,7 +711,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@iInitiative", drp_Initiative.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iOrder", txt_Order.Text.Trim());
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iRiskManagement", drp_RiskManagement.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iRiskManagement", drp_RiskManagement.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@isQSWorldUniversityRanking", drp_isQSWorldUniversityRanking.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSurveyFormReference", drp_SurveyFormReference.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);

@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class CS_Risk_Management
+    public partial class Strategy_Strategic_Objective_Sub_Stipulation_Home
     {
 
         /// <summary>

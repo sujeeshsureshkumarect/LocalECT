@@ -11,7 +11,7 @@ namespace LocalECT
 {
 
 
-    public partial class CS_Risk_Management
+    public partial class Strategy_Strategic_KPI_Detail_Home
     {
 
         /// <summary>
@@ -22,6 +22,15 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnk_Create;
+
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
         /// Repeater1 control.

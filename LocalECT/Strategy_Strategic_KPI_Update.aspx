@@ -141,10 +141,10 @@
                                                         <label>Survey Form Reference *</label>
                                                         <asp:DropDownList ID="drp_SurveyFormReference" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
-                                                     <div class="form-group ">
+                                                     <%--<div class="form-group ">
                                                         <label>RiskManagement *</label>
                                                         <asp:DropDownList ID="drp_RiskManagement" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group ">
                                                         <label>Is QS World University Ranking *</label>
                                                         <asp:DropDownList ID="drp_isQSWorldUniversityRanking" runat="server" CssClass="form-control">

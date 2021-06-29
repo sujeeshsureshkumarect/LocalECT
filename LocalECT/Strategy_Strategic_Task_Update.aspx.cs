@@ -484,8 +484,10 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_StrategyVersion.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sEvidenceTitle from CS_Strategic_Evidence where iStrategyVersion=@iStrategyVersion", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sEvidenceTitle from CS_Strategic_Evidence where iStrategyVersion=@iStrategyVersion and iDepartment=@iDepartment and iSection=@iSection", sc);
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 try
@@ -678,6 +680,7 @@ namespace LocalECT
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillSection();
+            fillEvidence();
         }
 
         protected void btn_Create_Click(object sender, EventArgs e)
@@ -841,6 +844,11 @@ namespace LocalECT
         protected void drp_InspectionComplianceGuidelines_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillInspectionCompliance();
+        }
+
+        protected void drp_Section_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillEvidence();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Strategy_Strategic_Evidence_Update.aspx.cs" Inherits="LocalECT.Strategy_Strategic_Evidence_Update" MasterPageFile="~/LocalECT.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Strategy_Strategic_Evidence_Update.aspx.cs" Inherits="LocalECT.Strategy_Strategic_Evidence_Update" MasterPageFile="~/LocalECT.Master" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="right_col" role="main">
@@ -90,7 +90,7 @@
                                                     </div>
                                                     <div class="form-group ">
                                                     <label>Order *</label>
-                                                    <asp:TextBox ID="txt_Order" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_Order" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Order Required" ControlToValidate="txt_Order" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>

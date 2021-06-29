@@ -50,6 +50,8 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        fillInitiative();
+                        drp_Initiative.SelectedIndex = drp_Initiative.Items.IndexOf(drp_Initiative.Items.FindByValue(Request.QueryString["id"]));
                         fillRisk_Management_Framework();
                         fillRisk_Management_Registry_Framework();
                         fillStipulationGuidelines();
@@ -63,6 +65,32 @@ namespace LocalECT
             finally
             {
 
+            }
+        }
+        public void fillInitiative()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID from CS_Strategic_Initiative", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_Initiative.DataSource = dt;
+                drp_Initiative.DataTextField = "sInitiativeID";
+                drp_Initiative.DataValueField = "iSerial";
+                drp_Initiative.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
         public void fillRisk_Management_Framework()
@@ -180,12 +208,12 @@ namespace LocalECT
                 return;
             }
 
-            SqlCommand cmd = new SqlCommand("insert into CS_Risk_Management values (@sRiskManagement,@sStatementSerialNo,@sStatement,@iFramework,@iRegisatryFramework,@iReLicensureGuideline,@dAdded,@sAddedby,@dUpdated,@sUpdatedby)", sc);
-            cmd.Parameters.AddWithValue("@sRiskManagement", txt_Risk.Text.Trim());
-            cmd.Parameters.AddWithValue("@sStatementSerialNo", txt_StatementSerialNo.Text.Trim());
-            cmd.Parameters.AddWithValue("@sStatement", txt_Statement.Text.Trim());
+            SqlCommand cmd = new SqlCommand("insert into CS_Initiative_Risk values (@iInitiative,@iFramework,@iRegisatryFramework,@sStatementSerialNo,@sStatement,@iReLicensureGuideline,@dAdded,@sAddedby,@dUpdated,@sUpdatedby)", sc);
+            cmd.Parameters.AddWithValue("@iInitiative", drp_Initiative.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@iFramework", drp_Framework.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@iRegisatryFramework", drp_RegisatryFramework.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@sStatementSerialNo", txt_StatementSerialNo.Text.Trim());
+            cmd.Parameters.AddWithValue("@sStatement", txt_Statement.Text.Trim());
             cmd.Parameters.AddWithValue("@iReLicensureGuideline", drp_StipulationGuidelines.SelectedItem.Value);
 
             cmd.Parameters.AddWithValue("@dAdded", DateTime.Now);
@@ -200,10 +228,10 @@ namespace LocalECT
                 cmd.ExecuteNonQuery();
                 sc.Close();
 
-                lbl_Msg.Text = "Risk Management Created Successfully ";
+                lbl_Msg.Text = "Risk Created Successfully ";
                 div_msg.Visible = true;
 
-                txt_Risk.Text = "";
+                //txt_Risk.Text = "";
                 txt_StatementSerialNo.Text = "";
                 txt_Statement.Text = "";
 
@@ -222,12 +250,19 @@ namespace LocalECT
 
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Risk_Management");
+            string id = Request.QueryString["id"];
+            Response.Redirect("Strategy_Risk_Management?id=" + id + "");
         }
 
         protected void drp_Framework_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillRisk_Management_Registry_Framework();
+        }
+
+        protected void lnk_Create_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            Response.Redirect("Strategy_Risk_Management?id=" + id + "");
         }
     }
 }

@@ -11,17 +11,26 @@ namespace LocalECT
 {
 
 
-    public partial class CS_Risk_Management_Edit
+    public partial class Strategy_Strategic_KPI_Detail_Update
     {
 
         /// <summary>
-        /// lnk_Create control.
+        /// lbl_Header control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_Create;
+        protected global::System.Web.UI.WebControls.Label lbl_Header;
+
+        /// <summary>
+        /// lnk_Back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_Back;
 
         /// <summary>
         /// div_msg control.
@@ -51,58 +60,85 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// drp_Initiative control.
+        /// drp_KPI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Initiative;
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPI;
 
         /// <summary>
-        /// drp_Framework control.
+        /// drp_Period control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Framework;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Period;
 
         /// <summary>
-        /// drp_RegisatryFramework control.
+        /// drp_SubPeriod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_RegisatryFramework;
+        protected global::System.Web.UI.WebControls.DropDownList drp_SubPeriod;
 
         /// <summary>
-        /// txt_StatementSerialNo control.
+        /// txt_Value control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_StatementSerialNo;
+        protected global::System.Web.UI.WebControls.TextBox txt_Value;
 
         /// <summary>
-        /// txt_Statement control.
+        /// drp_Department control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Statement;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Department;
 
         /// <summary>
-        /// drp_StipulationGuidelines control.
+        /// drp_Section control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_StipulationGuidelines;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Section;
+
+        /// <summary>
+        /// drp_KPIStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPIStatus;
+
+        /// <summary>
+        /// drp_StrategyVersion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_StrategyVersion;
+
+        /// <summary>
+        /// txt_Note control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Note;
 
         /// <summary>
         /// btn_Create control.

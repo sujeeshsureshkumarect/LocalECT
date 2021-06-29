@@ -22,7 +22,8 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-dashboard"></i> Risk Management</h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                               <a href="Strategy_Risk_Management_Create" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Risk Management</a>
+                                               <%--<a href="Strategy_Risk_Management_Create" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Risk Management</a>--%>
+                                                <asp:LinkButton ID="lnk_Create" runat="server" CssClass="btn btn-success btn-sm" style="float:right;" OnClick="lnk_Create_Click"><i class="glyphicon glyphicon-plus"></i> Create New Risk</asp:LinkButton>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -95,11 +96,11 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement Serial No</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Framework</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Registry Framework</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement Serial No</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Statement</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Licensure Stipulation Guidelines</th>                                            
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
                               
@@ -109,11 +110,11 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td><%#Eval("sRiskManagement")%></td>
-                                                    <td><%#Eval("sStatementSerialNo")%></td>
-                                                    <td><%#Eval("sStatement")%></td>
+                                                    <td><%#Eval("sInitiativeID")%></td>
                                                     <td><%#Eval("sFramework")%></td>
                                                     <td><%#Eval("sRegistryFramework")%></td>
+                                                    <td><%#Eval("sStatementSerialNo")%></td>
+                                                    <td><%#Eval("sStatement")%></td>                                                    
                                                     <td><%#Eval("sGuidelinesID")%></td>                                                   
                                                     <td style="text-align:center">
                                                     <div class="btn-group" style="text-align:center">
@@ -121,8 +122,7 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu" >                                                             
-                                                            <a href="Strategy_Risk_Management_Edit.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Edit</a>
-                                                           
+                                                            <a href="Strategy_Risk_Management_Edit.aspx?id=<%#Eval("iInitiative")%>&rid=<%#Eval("iSerial")%>" class="dropdown-item">Edit</a>                                                            
                                                          </div>
                                                      </div>
                                                    </td>

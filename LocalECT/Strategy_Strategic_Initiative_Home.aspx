@@ -147,7 +147,7 @@
                                                              <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
                                                              <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>
                                                              <a href="Strategy_Initiative_Dpartment_Section_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Support Department/Section</a>
-                                                             <a href="Strategy_Initiative_Inspection_Compliance_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Inspection Compliance</a>
+                                                             <a href="Strategy_Risk_Management.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Risks</a>
                                                              <a href="Strategy_Strategic_KPI_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">KPIs</a>
                                                              <a href="Strategy_Strategic_Task_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Tasks</a>
                                                          </div>

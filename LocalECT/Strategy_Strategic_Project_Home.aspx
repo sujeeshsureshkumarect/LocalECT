@@ -91,17 +91,16 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Project ID</th>                                                                                        
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Project Desc</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Hierarchy Project Owner</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Project ID</th>                                                                                                                                                                                
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Project Owner</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategic Goal</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Order</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Abbreviation</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Market Competitive Implication</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Hierarchy Project Owner</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Owner Department</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Owner Section</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategic Goal</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Abbreviation</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Market Competitive Implication</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Order</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Level</th>                                            
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
@@ -111,18 +110,17 @@
                                     </HeaderTemplate>
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%#Container.ItemIndex+1 %></td>
-                                                    <td><%#Eval("sStrategicProjectID")%></td>    
-                                                    <td><%#Eval("sStrategicProjectDesc")%></td>
-                                                    <td><%#Eval("JobTitleEn")%></td>
-                                                    <td><%#Eval("EmployeeDisplayName")%></td>
-                                                    <td><%#Eval("sStrategicGoalID")%></td>
-                                                    <td><%#Eval("iOrder")%></td>
+                                                    <td><%#Container.ItemIndex+1 %></td>                                                     
+                                                    <td title="<%#Eval("sStrategicProjectDesc")%>"><%#Eval("sStrategicProjectID")%></td>                                                    
+                                                    <td><%#Eval("EmployeeID")%>_<%#Eval("SurnameEn")%> <%#Eval("FirstNameEn")%> <%#Eval("FamilyNameEn")%></td>
+                                                    <td><%#Eval("JobTitleID")%>_<%#Eval("JobTitleEn")%></td>
+                                                    <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
+                                                    <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>  
+                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%></td>                                                       
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 
-                                                    <td><%#Eval("sMarketCompetitiveImplication")%></td>   
-                                                     <td><%#Eval("DepartmentDesc")%></td>
-                                                     <td><%#Eval("Section")%></td>
+                                                    <td><%#Eval("sMarketCompetitiveImplication")%></td> 
+                                                    <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("iLevel")%></td> 
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     

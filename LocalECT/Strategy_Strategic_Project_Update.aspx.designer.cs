@@ -69,13 +69,40 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_StrategicProjectDesc;
 
         /// <summary>
-        /// drp_ProjectOwner control.
+        /// drp_Department control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_ProjectOwner;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Department;
+
+        /// <summary>
+        /// drp_Section control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Section;
+
+        /// <summary>
+        /// txt_ProjectOwner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_ProjectOwner;
+
+        /// <summary>
+        /// hdn_ProjectOwner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdn_ProjectOwner;
 
         /// <summary>
         /// txt_HierarchyProjectOwner control.
@@ -94,42 +121,6 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdn_iHierarchyProjectOwner;
-
-        /// <summary>
-        /// txt_OwnerDepartment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_OwnerDepartment;
-
-        /// <summary>
-        /// hdn_iOwnerDepartment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_iOwnerDepartment;
-
-        /// <summary>
-        /// txt_OwnerSection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_OwnerSection;
-
-        /// <summary>
-        /// hdn_iOwnerSection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_iOwnerSection;
 
         /// <summary>
         /// drp_StrategicGoal control.

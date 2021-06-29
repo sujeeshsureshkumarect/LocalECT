@@ -15,6 +15,15 @@ namespace LocalECT
     {
 
         /// <summary>
+        /// lnk_Create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_Create;
+
+        /// <summary>
         /// div_msg control.
         /// </summary>
         /// <remarks>
@@ -42,31 +51,13 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// txt_Risk control.
+        /// drp_Initiative control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Risk;
-
-        /// <summary>
-        /// txt_StatementSerialNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_StatementSerialNo;
-
-        /// <summary>
-        /// txt_Statement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Statement;
+        protected global::System.Web.UI.WebControls.DropDownList drp_Initiative;
 
         /// <summary>
         /// drp_Framework control.
@@ -85,6 +76,24 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_RegisatryFramework;
+
+        /// <summary>
+        /// txt_StatementSerialNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_StatementSerialNo;
+
+        /// <summary>
+        /// txt_Statement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Statement;
 
         /// <summary>
         /// drp_StipulationGuidelines control.

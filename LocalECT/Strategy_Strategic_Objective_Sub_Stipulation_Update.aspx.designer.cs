@@ -11,8 +11,17 @@ namespace LocalECT
 {
 
 
-    public partial class CS_Risk_Management_Edit
+    public partial class Strategy_Strategic_Objective_Sub_Stipulation_Update
     {
+
+        /// <summary>
+        /// lbl_Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Header;
 
         /// <summary>
         /// lnk_Create control.
@@ -51,58 +60,49 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.Label lbl_Msg;
 
         /// <summary>
-        /// drp_Initiative control.
+        /// drp_StrategicObjective control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Initiative;
+        protected global::System.Web.UI.WebControls.DropDownList drp_StrategicObjective;
 
         /// <summary>
-        /// drp_Framework control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_Framework;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// drp_RegisatryFramework control.
+        /// drp_MOERelicensureSubStipulation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_RegisatryFramework;
+        protected global::System.Web.UI.WebControls.DropDownList drp_MOERelicensureSubStipulation;
 
         /// <summary>
-        /// txt_StatementSerialNo control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_StatementSerialNo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-        /// txt_Statement control.
+        /// hdn_Edit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Statement;
-
-        /// <summary>
-        /// drp_StipulationGuidelines control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_StipulationGuidelines;
+        protected global::System.Web.UI.WebControls.HiddenField hdn_Edit;
 
         /// <summary>
         /// btn_Create control.

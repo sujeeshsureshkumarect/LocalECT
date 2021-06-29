@@ -87,10 +87,10 @@
                                                         <%--<asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Image Path Required" ControlToValidate="flp_Upload" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>--%>
                                                     </div>
-                                                    <div class="form-group ">
+                                                  <%--  <div class="form-group ">
                                                         <label>MOE Re-licensure Sub Stipulation ID *</label>
                                                         <asp:DropDownList ID="drp_SubStipulation" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group ">
                                                         <label>Level *</label>
                                                         <asp:TextBox ID="txt_Level" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
