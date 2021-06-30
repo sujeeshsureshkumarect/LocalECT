@@ -96,7 +96,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Priority</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Maturity</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Transformation Program</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Use Case</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Use Case</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Enterprise Model</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Principal Department</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Principal Section</th>
@@ -123,7 +123,7 @@
                                                     <td><%#Eval("sInitiativePriority")%></td>
                                                     <td><%#Eval("sInitiativeMaturity")%></td>    
                                                     <td><%#Eval("sDigitalTransformationProgram")%></td>
-                                                    <td><%#Eval("sDigitalUseCase")%></td>
+                                                    <%--<td><%#Eval("sDigitalUseCase")%></td>--%>
                                                     <td><%#Eval("sEnterpriseModel")%></td>
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("DepartmentAbbreviation")%></td>    
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("SectionAbbreviation")%></td>

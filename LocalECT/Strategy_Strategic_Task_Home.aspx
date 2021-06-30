@@ -94,8 +94,8 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Task ID</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Period</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Start Date</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">End Date</th>                                            
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Start Date</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">End Date</th>    --%>                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Department</th>     
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Section</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">MOE Re-licensure Stipulation</th>
@@ -107,9 +107,15 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Inspection Compliance Guidelines</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>--%>                                            
 <%--                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>     
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">IRQA Recommendation</th>   --%>                                                                                     
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">IRQA Recommendation</th>   --%>  
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration</th> 
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration Value</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Transformation Program</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Use Case</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>                                            
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Order</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
@@ -123,8 +129,8 @@
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                     <td title="<%#Eval("sTaskDesc")%>"><%#Eval("sTaskID")%></td>    
                                                     <td><%#Eval("sPeriod")%></td>
-                                                    <td><%#Eval("dStart","{0:yyyy-MM-dd}")%></td>
-                                                    <td><%#Eval("dEnd","{0:yyyy-MM-dd}")%></td>
+                                                    <%--<td><%#Eval("dStart","{0:yyyy-MM-dd}")%></td>
+                                                    <td><%#Eval("dEnd","{0:yyyy-MM-dd}")%></td>--%>
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>  
                                                     <td title="<%#Eval("sStipulationDesc")%>"><%#Eval("sStipulationID")%></td> 
@@ -135,12 +141,18 @@
                                                     <%--<td title="<%#Eval("sInspectionComplianceIndicatorDesc")%>"><%#Eval("sInspectionComplianceIndicatorID")%></td>--%>
                                                     <td title="<%#Eval("sInspectionComplianceGuidelinesDesc")%>"><%#Eval("sInspectionComplianceGuidelinesID")%></td>
                                                    <%-- <td><%#Eval("sRiskManagement")%></td>--%>
-                                                   <%-- <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
+                                                   <%-- 
                                                     <td><%#Eval("sIRQARecommendation")%></td>--%>
+                                                    <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
                                                     <td><%#Eval("sEvidenceTitle")%></td>
-                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>                                                   
+                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>    
+                                                    <td><%#Eval("sDuration")%></td>
+                                                    <td><%#Eval("iDurationValue")%></td>
+                                                    <td><%#Eval("sEV")%></td>
+                                                    <td><%#Eval("sDigitalTransformationProgram")%></td>
+                                                    <td><%#Eval("sDigitalUseCase")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
-                                                     <td><%#Eval("iOrder")%></td>
+                                                    <td><%#Eval("iOrder")%></td>                                                    
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
                                                      <td>

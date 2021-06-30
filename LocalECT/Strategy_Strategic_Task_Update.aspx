@@ -60,7 +60,7 @@
                                                         <label>Period *</label>
                                                         <asp:DropDownList ID="drp_Period" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
-                                                    <div class="form-group ">
+                                                    <%--<div class="form-group ">
                                                         <label>Start Date *</label>
                                                         <asp:TextBox ID="txt_dStart" runat="server" CssClass="form-control" ClientIDMode="Static" placeholder="DD/MM/YYYY"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Start Date Required" ControlToValidate="txt_dStart" ForeColor="Red" ValidationGroup="no">
@@ -71,14 +71,14 @@
                                                         <asp:TextBox ID="txt_dEnd" runat="server" CssClass="form-control" ClientIDMode="Static" placeholder="DD/MM/YYYY"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*End Date Required" ControlToValidate="txt_dEnd" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
-                                                    </div>
+                                                    </div>--%>
                                                      <div class="form-group ">
                                                         <label>Department *</label>
-                                                        <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Section *</label>
-                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Section_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Section_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                                     </div>
                                                      <div class="form-group ">
                                                         <label>MOE Re-licensure Stipulation *</label>
@@ -94,17 +94,19 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Standard *</label>                                                        
-                                                        <asp:TextBox ID="txt_InspectionComplianceStandard" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                        <%--<asp:TextBox ID="txt_InspectionComplianceStandard" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Inspection Compliance Standard Required" ControlToValidate="txt_InspectionComplianceStandard" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
-                                                        <asp:HiddenField ID="hdn_InspectionComplianceStandard" runat="server" />
+                                                        <asp:HiddenField ID="hdn_InspectionComplianceStandard" runat="server" />--%>
+                                                        <asp:DropDownList ID="drp_InspectionComplianceStandard" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceStandard_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>    
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Domain *</label>                                                        
-                                                        <asp:TextBox ID="txt_InspectionComplianceDomain" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                      <%--  <asp:TextBox ID="txt_InspectionComplianceDomain" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Inspection Compliance Domain Required" ControlToValidate="txt_InspectionComplianceDomain" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>
-                                                        <asp:HiddenField ID="hdn_InspectionComplianceDomain" runat="server" />
+                                                        <asp:HiddenField ID="hdn_InspectionComplianceDomain" runat="server" />--%>
+                                                        <asp:DropDownList ID="drp_InspectionComplianceDomain" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceDomain_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>  
                                                    <%--  <div class="form-group ">
                                                         <label>Inspection Compliance Indicator *</label>                                                        
@@ -115,20 +117,31 @@
                                                     </div>--%>
                                                     <div class="form-group ">
                                                         <label>Inspection Compliance Guidelines *</label>
-                                                        <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_InspectionComplianceGuidelines_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_InspectionComplianceGuidelines" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                     <%--<div class="form-group ">
                                                         <label>Risk Management *</label>
                                                         <asp:DropDownList ID="drp_RiskManagement" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>--%>
-                                                 <%--    <div class="form-group ">
-                                                        <label>Survey Form Reference *</label>
-                                                        <asp:DropDownList ID="drp_SurveyFormReference" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                 <%--    
                                                     <div class="form-group ">
                                                         <label>IRQA Recommendation *</label>
                                                         <asp:DropDownList ID="drp_IRQARecommendation" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>--%>
+                                                    <div class="form-group ">
+                                                        <label>Survey Form Reference *</label>
+                                                        <asp:DropDownList ID="drp_SurveyFormReference" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Duration *</label>
+                                                        <asp:DropDownList ID="drp_Duration" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Duration Value *</label>                                                        
+                                                        <asp:TextBox ID="txt_DurationValue" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Duration Value Required" ControlToValidate="txt_DurationValue" ForeColor="Red" ValidationGroup="no">
+                                                        </asp:RequiredFieldValidator>                                                        
+                                                    </div>
                                                     <div class="form-group ">
                                                         <label>Evidence *</label>
                                                         <asp:DropDownList ID="drp_Evidence" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -137,7 +150,20 @@
                                                         <label>Initiative *</label>
                                                         <asp:DropDownList ID="drp_Initiative" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                     </div>
-
+                                                    <div class="form-group ">
+                                                        <label>EV *</label>                                                        
+                                                        <asp:TextBox ID="txt_EV" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*EV Required" ControlToValidate="txt_EV" ForeColor="Red" ValidationGroup="no">
+                                                        </asp:RequiredFieldValidator>                                                        
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Digital Transformation Program *</label>
+                                                        <asp:DropDownList ID="drp_DigitalTransformationProgram" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Digital Use Case *</label>
+                                                        <asp:DropDownList ID="drp_DigitalUseCase" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
                                                     <div class="form-group ">
                                                         <label>Strategy Version *</label>
                                                         <asp:DropDownList ID="drp_StrategyVersion" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>

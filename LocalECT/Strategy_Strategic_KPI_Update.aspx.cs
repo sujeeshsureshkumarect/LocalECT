@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -73,6 +73,7 @@ namespace LocalECT
 
                         fillSurveyFormReference();
 
+                        fillEvidence();
                         //fillRiskManagement();
 
                         string id = Request.QueryString["id"];//Initiative ID
@@ -102,12 +103,14 @@ namespace LocalECT
                                 drp_IsInstitutionalClass.Enabled = false;
                                 drp_MOEClassificationPillars.Enabled = false;
                                 drp_MarketPositioningPillars.Enabled = false;
-                                drp_Department.Enabled = false;
-                                drp_Section.Enabled = false;
+                                //drp_Department.Enabled = false;
+                                //drp_Section.Enabled = false;
                                 txt_Order.Enabled = false;
                                 drp_SurveyFormReference.Enabled = false;
                                 //drp_RiskManagement.Enabled = false;
                                 drp_isQSWorldUniversityRanking.Enabled = false;
+                                drp_Evidence.Enabled = false;
+                                txt_EV.Enabled = false;
                             }
                             else if (t == "e")//Edit
                             {
@@ -128,12 +131,14 @@ namespace LocalECT
                                 drp_IsInstitutionalClass.Enabled = true;
                                 drp_MOEClassificationPillars.Enabled = true;
                                 drp_MarketPositioningPillars.Enabled = true;
-                                drp_Department.Enabled = true;
-                                drp_Section.Enabled = true;
+                                //drp_Department.Enabled = true;
+                                //drp_Section.Enabled = true;
                                 txt_Order.Enabled = true;
                                 drp_SurveyFormReference.Enabled = true;
                                 //drp_RiskManagement.Enabled = true;
                                 drp_isQSWorldUniversityRanking.Enabled = true;
+                                drp_Evidence.Enabled = true;
+                                txt_EV.Enabled = true;
                             }
                         }
                         else
@@ -508,6 +513,38 @@ namespace LocalECT
                 sc.Close();
             }
         }
+        public void fillEvidence()
+        {
+            if (!string.IsNullOrEmpty(drp_StrategyVersion.SelectedValue))
+            {
+                SqlCommand cmd = new SqlCommand("select iSerial,sEvidenceTitle from CS_Strategic_Evidence where iStrategyVersion=@iStrategyVersion and iDepartment=@iDepartment and iSection=@iSection", sc);
+                cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(dt);
+                    sc.Close();
+
+                    drp_Evidence.DataSource = dt;
+                    drp_Evidence.DataTextField = "sEvidenceTitle";
+                    drp_Evidence.DataValueField = "iSerial";
+                    drp_Evidence.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+            }
+        }
         //public void fillRiskManagement()
         //{
         //    SqlCommand cmd = new SqlCommand("select iSerial,sRiskManagement from CS_Risk_Management", sc);
@@ -580,12 +617,14 @@ namespace LocalECT
                     drp_Department.SelectedIndex = drp_Department.Items.IndexOf(drp_Department.Items.FindByValue(dt.Rows[0]["iDepartment"].ToString()));
                     fillSection();
                     drp_Section.SelectedIndex = drp_Section.Items.IndexOf(drp_Section.Items.FindByValue(dt.Rows[0]["iSection"].ToString()));
-                   
+                    fillEvidence();
                     drp_Initiative.SelectedIndex = drp_Initiative.Items.IndexOf(drp_Initiative.Items.FindByValue(dt.Rows[0]["iInitiative"].ToString()));
                     drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(dt.Rows[0]["iStrategyVersion"].ToString()));
                     txt_Order.Text = dt.Rows[0]["iOrder"].ToString();
                     drp_SurveyFormReference.SelectedIndex = drp_SurveyFormReference.Items.IndexOf(drp_SurveyFormReference.Items.FindByValue(dt.Rows[0]["iSurveyFormReference"].ToString()));
                     //drp_RiskManagement.SelectedIndex = drp_RiskManagement.Items.IndexOf(drp_RiskManagement.Items.FindByValue(dt.Rows[0]["iRiskManagement"].ToString()));
+                    drp_Evidence.SelectedIndex = drp_Evidence.Items.IndexOf(drp_Evidence.Items.FindByValue(dt.Rows[0]["iEvidence"].ToString()));
+                    txt_EV.Text = dt.Rows[0]["sEV"].ToString();
                     string isQSWorldUniversityRanking = dt.Rows[0]["isQSWorldUniversityRanking"].ToString();
                     int j = 0;
                     if (isQSWorldUniversityRanking == "False")
@@ -628,7 +667,7 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iEvidence=@iEvidence,sEV=@sEV where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -653,6 +692,8 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@iSurveyFormReference", drp_SurveyFormReference.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
+                cmd.Parameters.AddWithValue("@iEvidence", drp_Evidence.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@sEV", txt_EV.Text.Trim());
                 cmd.Parameters.AddWithValue("@iSerial", sid);
                 try
                 {
@@ -691,7 +732,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@isQSWorldUniversityRanking)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@isQSWorldUniversityRanking,@iEvidence,@sEV)", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -718,6 +759,8 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sAddedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
+                cmd.Parameters.AddWithValue("@iEvidence", drp_Evidence.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@sEV", txt_EV.Text.Trim());
                 try
                 {
                     sc.Open();
@@ -735,6 +778,7 @@ namespace LocalECT
                     txt_OverallKPI.Text = "";
                     txt_TargetKPI.Text = "";
                     txt_Order.Text = "";
+                    txt_EV.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -761,12 +805,18 @@ namespace LocalECT
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillSection();
+            fillEvidence();
         }
 
         protected void lnk_Back_Click(object sender, EventArgs e)
         {
             string id = Request.QueryString["id"];
             Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+        }
+
+        protected void drp_Section_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillEvidence();
         }
     }
 }

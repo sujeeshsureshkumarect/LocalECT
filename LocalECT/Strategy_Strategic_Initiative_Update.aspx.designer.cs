@@ -105,15 +105,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_DigitalTransformationProgram;
 
         /// <summary>
-        /// drp_DigitalUseCase control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_DigitalUseCase;
-
-        /// <summary>
         /// drp_EnterpriseModel control.
         /// </summary>
         /// <remarks>

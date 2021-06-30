@@ -264,6 +264,8 @@
     <Content Include="Strategy_Strategic_Objective_Sub_Stipulation_Update.aspx" />
     <Content Include="Strategy_Strategic_Task_Detail_Home.aspx" />
     <Content Include="Strategy_Strategic_Task_Detail_Update.aspx" />
+    <Content Include="Strategy_Strategic_Task_Duration_Home.aspx" />
+    <Content Include="Strategy_Strategic_Task_Duration_Update.aspx" />
     <Content Include="Strategy_Strategic_Task_Home.aspx" />
     <Content Include="Strategy_Strategic_Task_Status.aspx" />
     <Content Include="Strategy_Strategic_Task_Status_Create.aspx" />
@@ -9239,6 +9241,20 @@
     </Compile>
     <Compile Include="Strategy_Strategic_Task_Detail_Update.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Task_Detail_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Duration_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Duration_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Duration_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Duration_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Duration_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Task_Duration_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Task_Duration_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Task_Duration_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Strategic_Task_Home.aspx.cs">
       <DependentUpon>Strategy_Strategic_Task_Home.aspx</DependentUpon>

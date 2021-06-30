@@ -87,24 +87,6 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Period;
 
         /// <summary>
-        /// txt_dStart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_dStart;
-
-        /// <summary>
-        /// txt_dEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_dEnd;
-
-        /// <summary>
         /// drp_Department control.
         /// </summary>
         /// <remarks>
@@ -150,40 +132,22 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Guideline;
 
         /// <summary>
-        /// txt_InspectionComplianceStandard control.
+        /// drp_InspectionComplianceStandard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_InspectionComplianceStandard;
+        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceStandard;
 
         /// <summary>
-        /// hdn_InspectionComplianceStandard control.
+        /// drp_InspectionComplianceDomain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_InspectionComplianceStandard;
-
-        /// <summary>
-        /// txt_InspectionComplianceDomain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_InspectionComplianceDomain;
-
-        /// <summary>
-        /// hdn_InspectionComplianceDomain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdn_InspectionComplianceDomain;
+        protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceDomain;
 
         /// <summary>
         /// drp_InspectionComplianceGuidelines control.
@@ -193,6 +157,33 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_InspectionComplianceGuidelines;
+
+        /// <summary>
+        /// drp_SurveyFormReference control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_SurveyFormReference;
+
+        /// <summary>
+        /// drp_Duration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Duration;
+
+        /// <summary>
+        /// txt_DurationValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_DurationValue;
 
         /// <summary>
         /// drp_Evidence control.
@@ -211,6 +202,33 @@ namespace LocalECT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drp_Initiative;
+
+        /// <summary>
+        /// txt_EV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_EV;
+
+        /// <summary>
+        /// drp_DigitalTransformationProgram control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_DigitalTransformationProgram;
+
+        /// <summary>
+        /// drp_DigitalUseCase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_DigitalUseCase;
 
         /// <summary>
         /// drp_StrategyVersion control.

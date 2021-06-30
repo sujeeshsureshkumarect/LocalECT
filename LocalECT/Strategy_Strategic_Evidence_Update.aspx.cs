@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -81,6 +81,7 @@ namespace LocalECT
                                 drp_CustomerExperienceEvidenceCategory.Enabled = false;
                                 drp_CustomerExperienceEvidenceSubCategory.Enabled = false;                                                              
                                 txt_Order.Enabled = false;
+                                txt_Abbreviation.Enabled = false;
                             }
                             else if (t == "e")//Edit
                             {
@@ -97,6 +98,7 @@ namespace LocalECT
                                 drp_CustomerExperienceEvidenceCategory.Enabled = true;
                                 drp_CustomerExperienceEvidenceSubCategory.Enabled = true;
                                 txt_Order.Enabled = true;
+                                txt_Abbreviation.Enabled = true;
                             }
                         }
                         else
@@ -321,6 +323,8 @@ namespace LocalECT
 
                     txt_Order.Text = dt.Rows[0]["iOrder"].ToString();
                     drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(dt.Rows[0]["iStrategyVersion"].ToString()));
+
+                    txt_Abbreviation.Text = dt.Rows[0]["sAbbreviation"].ToString();
                 }
             }
             catch (Exception ex)
@@ -347,7 +351,7 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_Evidence set iEvidenceType=@iEvidenceType,sEvidenceTitle=@sEvidenceTitle,sEvidenceSerial=@sEvidenceSerial,iDepartment=@iDepartment,iSection=@iSection,sEvidenceRecored=@sEvidenceRecored,isIRQASurveyReportRequired=@isIRQASurveyReportRequired,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,iCustomerExperienceEvidenceSubCategory=@iCustomerExperienceEvidenceSubCategory,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_Evidence set iEvidenceType=@iEvidenceType,sEvidenceTitle=@sEvidenceTitle,sEvidenceSerial=@sEvidenceSerial,iDepartment=@iDepartment,iSection=@iSection,sEvidenceRecored=@sEvidenceRecored,isIRQASurveyReportRequired=@isIRQASurveyReportRequired,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,iCustomerExperienceEvidenceSubCategory=@iCustomerExperienceEvidenceSubCategory,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,sAbbreviation=@sAbbreviation where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEvidenceTitle", txt_EvidenceTitle.Text.Trim());
                 cmd.Parameters.AddWithValue("@sEvidenceSerial", txt_EvidenceSerial.Text.Trim());
@@ -361,6 +365,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
+                cmd.Parameters.AddWithValue("@sAbbreviation", txt_Abbreviation.Text.Trim());
                 cmd.Parameters.AddWithValue("@iSerial", id);
                 try
                 {
@@ -394,7 +399,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Evidence values (@iEvidenceType,@sEvidenceTitle,@sEvidenceSerial,@iDepartment,@iSection,@sEvidenceRecored,@isIRQASurveyReportRequired,@iCustomerExperienceEvidenceCategory,@iCustomerExperienceEvidenceSubCategory,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Evidence values (@iEvidenceType,@sEvidenceTitle,@sEvidenceSerial,@iDepartment,@iSection,@sEvidenceRecored,@isIRQASurveyReportRequired,@iCustomerExperienceEvidenceCategory,@iCustomerExperienceEvidenceSubCategory,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation)", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEvidenceTitle", txt_EvidenceTitle.Text.Trim());
                 cmd.Parameters.AddWithValue("@sEvidenceSerial", txt_EvidenceSerial.Text.Trim());
@@ -410,6 +415,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sAddedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
+                cmd.Parameters.AddWithValue("@sAbbreviation", txt_Abbreviation.Text.Trim());
                 try
                 {
                     sc.Open();

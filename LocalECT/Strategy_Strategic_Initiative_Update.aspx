@@ -72,10 +72,10 @@
                                                         <label>Digital Transformation Program *</label>
                                                         <asp:DropDownList ID="drp_DigitalTransformationProgram" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
-                                                     <div class="form-group ">
+                                                    <%-- <div class="form-group ">
                                                         <label>Digital Use Case *</label>
                                                         <asp:DropDownList ID="drp_DigitalUseCase" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="form-group ">
                                                         <label>Enterprise Model *</label>
                                                         <asp:DropDownList ID="drp_EnterpriseModel" runat="server" CssClass="form-control"></asp:DropDownList>

@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -54,7 +54,7 @@ namespace LocalECT
                         fillInitiativePriority();
                         fillInitiativeMaturity();
                         fillDigitalTransformationProgram();
-                        fillDigitalUseCase();
+                        //fillDigitalUseCase();
                         fillEnterpriseModel();
                         fillStrategyVersion();
                         fillValuePropositionImpact();
@@ -90,7 +90,7 @@ namespace LocalECT
                                 drp_InitiativePriority.Enabled = false;
                                 drp_InitiativeMaturity.Enabled = false;
                                 drp_DigitalTransformationProgram.Enabled = false;
-                                drp_DigitalUseCase.Enabled = false;
+                                //drp_DigitalUseCase.Enabled = false;
                                 drp_EnterpriseModel.Enabled = false;
                                 drp_Department.Enabled = false;
                                 drp_Section.Enabled = false;
@@ -115,7 +115,7 @@ namespace LocalECT
                                 drp_InitiativePriority.Enabled = true;
                                 drp_InitiativeMaturity.Enabled = true;
                                 drp_DigitalTransformationProgram.Enabled = true;
-                                drp_DigitalUseCase.Enabled = true;
+                                //drp_DigitalUseCase.Enabled = true;
                                 drp_EnterpriseModel.Enabled = true;
                                 drp_Department.Enabled = true;
                                 drp_Section.Enabled = true;
@@ -253,32 +253,32 @@ namespace LocalECT
                 sc.Close();
             }
         }
-        public void fillDigitalUseCase()
-        {
-            SqlCommand cmd = new SqlCommand("select iSerial,sDigitalUseCase from CS_Digital_Use_Case", sc);
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            try
-            {
-                sc.Open();
-                da.Fill(dt);
-                sc.Close();
+        //public void fillDigitalUseCase()
+        //{
+        //    SqlCommand cmd = new SqlCommand("select iSerial,sDigitalUseCase from CS_Digital_Use_Case", sc);
+        //    DataTable dt = new DataTable();
+        //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //    try
+        //    {
+        //        sc.Open();
+        //        da.Fill(dt);
+        //        sc.Close();
 
-                drp_DigitalUseCase.DataSource = dt;
-                drp_DigitalUseCase.DataTextField = "sDigitalUseCase";
-                drp_DigitalUseCase.DataValueField = "iSerial";
-                drp_DigitalUseCase.DataBind();
-            }
-            catch (Exception ex)
-            {
-                sc.Close();
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sc.Close();
-            }
-        }
+        //        drp_DigitalUseCase.DataSource = dt;
+        //        drp_DigitalUseCase.DataTextField = "sDigitalUseCase";
+        //        drp_DigitalUseCase.DataValueField = "iSerial";
+        //        drp_DigitalUseCase.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sc.Close();
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        sc.Close();
+        //    }
+        //}
         public void fillEnterpriseModel()
         {
             SqlCommand cmd = new SqlCommand("select iSerial,sEnterpriseModel from CS_Enterprise_Model", sc);
@@ -586,7 +586,7 @@ namespace LocalECT
                     drp_InitiativePriority.SelectedIndex = drp_InitiativePriority.Items.IndexOf(drp_InitiativePriority.Items.FindByValue(dt.Rows[0]["iInitiativePriority"].ToString()));
                     drp_InitiativeMaturity.SelectedIndex = drp_InitiativeMaturity.Items.IndexOf(drp_InitiativeMaturity.Items.FindByValue(dt.Rows[0]["iInitiativeMaturity"].ToString()));
                     drp_DigitalTransformationProgram.SelectedIndex = drp_DigitalTransformationProgram.Items.IndexOf(drp_DigitalTransformationProgram.Items.FindByValue(dt.Rows[0]["iDigitalTransformationProgram"].ToString()));
-                    drp_DigitalUseCase.SelectedIndex = drp_DigitalUseCase.Items.IndexOf(drp_DigitalUseCase.Items.FindByValue(dt.Rows[0]["iDigitalUseCase"].ToString()));
+                    //drp_DigitalUseCase.SelectedIndex = drp_DigitalUseCase.Items.IndexOf(drp_DigitalUseCase.Items.FindByValue(dt.Rows[0]["iDigitalUseCase"].ToString()));
                     drp_EnterpriseModel.SelectedIndex = drp_EnterpriseModel.Items.IndexOf(drp_EnterpriseModel.Items.FindByValue(dt.Rows[0]["iEnterpriseModel"].ToString()));
                     drp_Department.SelectedIndex = drp_Department.Items.IndexOf(drp_Department.Items.FindByValue(dt.Rows[0]["iDepartment"].ToString()));
                     fillSection();
@@ -656,14 +656,14 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_Initiative set sInitiativeID=@sInitiativeID,sInitiativeDesc=@sInitiativeDesc,iUniversityStatus=@iUniversityStatus,iInitiativePriority=@iInitiativePriority,iInitiativeMaturity=@iInitiativeMaturity,iDigitalTransformationProgram=@iDigitalTransformationProgram,iDigitalUseCase=@iDigitalUseCase,iEnterpriseModel=@iEnterpriseModel,iDepartment=@iDepartment,iSection=@iSection,iTheme=@iTheme,iGoal=@iGoal,iProject=@iProject,iObjective=@iObjective,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iValuePropositionImpact=@iValuePropositionImpact,sImagePath=@sImagePath,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_Initiative set sInitiativeID=@sInitiativeID,sInitiativeDesc=@sInitiativeDesc,iUniversityStatus=@iUniversityStatus,iInitiativePriority=@iInitiativePriority,iInitiativeMaturity=@iInitiativeMaturity,iDigitalTransformationProgram=@iDigitalTransformationProgram,iEnterpriseModel=@iEnterpriseModel,iDepartment=@iDepartment,iSection=@iSection,iTheme=@iTheme,iGoal=@iGoal,iProject=@iProject,iObjective=@iObjective,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,sAbbreviation=@sAbbreviation,iValuePropositionImpact=@iValuePropositionImpact,sImagePath=@sImagePath,iLevel=@iLevel,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sInitiativeID", txt_InitiativeID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sInitiativeDesc", txt_InitiativeDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iUniversityStatus", drp_UniversityStatus.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInitiativePriority", drp_InitiativePriority.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInitiativeMaturity", drp_InitiativeMaturity.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iDigitalTransformationProgram", drp_DigitalTransformationProgram.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iDigitalUseCase", drp_DigitalUseCase.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iDigitalUseCase", drp_DigitalUseCase.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iEnterpriseModel", drp_EnterpriseModel.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
@@ -745,14 +745,14 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Initiative values (@sInitiativeID,@sInitiativeDesc,@iUniversityStatus,@iInitiativePriority,@iInitiativeMaturity,@iDigitalTransformationProgram,@iDigitalUseCase,@iEnterpriseModel,@iDepartment,@iSection,@iTheme,@iGoal,@iProject,@iObjective,@iOrder,@iStrategyVersion,@sAbbreviation,@sImagePath,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iValuePropositionImpact,@iLevel);select SCOPE_IDENTITY();", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Initiative values (@sInitiativeID,@sInitiativeDesc,@iUniversityStatus,@iInitiativePriority,@iInitiativeMaturity,@iDigitalTransformationProgram,@iEnterpriseModel,@iDepartment,@iSection,@iTheme,@iGoal,@iProject,@iObjective,@iOrder,@iStrategyVersion,@sAbbreviation,@sImagePath,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iValuePropositionImpact,@iLevel);select SCOPE_IDENTITY();", sc);
                 cmd.Parameters.AddWithValue("@sInitiativeID", txt_InitiativeID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sInitiativeDesc", txt_InitiativeDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iUniversityStatus", drp_UniversityStatus.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInitiativePriority", drp_InitiativePriority.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iInitiativeMaturity", drp_InitiativeMaturity.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iDigitalTransformationProgram", drp_DigitalTransformationProgram.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@iDigitalUseCase", drp_DigitalUseCase.SelectedItem.Value);
+                //cmd.Parameters.AddWithValue("@iDigitalUseCase", drp_DigitalUseCase.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iEnterpriseModel", drp_EnterpriseModel.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);

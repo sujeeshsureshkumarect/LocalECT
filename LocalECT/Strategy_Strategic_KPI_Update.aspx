@@ -117,11 +117,11 @@
                                                     </div>
                                                      <div class="form-group ">
                                                         <label>Department *</label>
-                                                        <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
                                                         <label>Section *</label>
-                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Section_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                                     </div>                                                    
                                                     <div class="form-group ">
                                                         <label>Initiative *</label>
@@ -151,6 +151,16 @@
                                                             <asp:ListItem Value="1" Selected>Yes</asp:ListItem>
                                                             <asp:ListItem Value="0">No</asp:ListItem>
                                                         </asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Evidence *</label>
+                                                        <asp:DropDownList ID="drp_Evidence" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                     <div class="form-group ">
+                                                        <label>EV *</label>                                                        
+                                                        <asp:TextBox ID="txt_EV" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*EV Required" ControlToValidate="txt_EV" ForeColor="Red" ValidationGroup="no">
+                                                        </asp:RequiredFieldValidator>                                                        
                                                     </div>
                                                 <div class="form-group ">
                                                 <asp:Button id="btn_Create" runat="server" Text="Create" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click"/>

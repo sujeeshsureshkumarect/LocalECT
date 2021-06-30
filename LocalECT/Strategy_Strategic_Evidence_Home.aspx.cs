@@ -32,7 +32,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -66,7 +66,7 @@ namespace LocalECT
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
             string sSQL = "";
-            sSQL  = " SELECT CS_Strategic_Evidence.iSerial, CS_Strategic_Evidence.iEvidenceType, CS_Strategic_Evidence.sEvidenceTitle, CS_Strategic_Evidence.sEvidenceSerial, CS_Strategic_Evidence.iDepartment,  ";
+            sSQL  = " SELECT CS_Strategic_Evidence.iSerial, CS_Strategic_Evidence.iEvidenceType, CS_Strategic_Evidence.sEvidenceTitle, CS_Strategic_Evidence.sAbbreviation, CS_Strategic_Evidence.sEvidenceSerial, CS_Strategic_Evidence.iDepartment,  ";
             sSQL += " CS_Strategic_Evidence.iSection, CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_Evidence.isIRQASurveyReportRequired, CS_Strategic_Evidence.iCustomerExperienceEvidenceCategory,  ";
             sSQL += " CS_Strategic_Evidence.iCustomerExperienceEvidenceSubCategory, CS_Strategic_Evidence.iOrder, CS_Strategic_Evidence.iStrategyVersion, CS_Strategic_Evidence.dAdded, CS_Strategic_Evidence.sAddedBy,  ";
             sSQL += " CS_Strategic_Evidence.dUpdated, CS_Strategic_Evidence.sUpdatedBy, CS_Evidence_Type.sEvidenceType, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation, Lkp_Section.SectionAbbreviation,  ";

@@ -53,6 +53,12 @@
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Evidence Title Required" ControlToValidate="txt_EvidenceTitle" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div> 
+                                                    <div class="form-group ">
+                                                    <label>Abbreviation *</label>
+                                                    <asp:TextBox ID="txt_Abbreviation" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Abbreviation Required" ControlToValidate="txt_Abbreviation" ForeColor="Red" ValidationGroup="no">
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
                                                      <div class="form-group ">
                                                     <label>Evidence Serial *</label>
                                                     <asp:TextBox ID="txt_EvidenceSerial" runat="server" CssClass="form-control"></asp:TextBox>
@@ -68,9 +74,9 @@
                                                         <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
                                                      <div class="form-group ">
-                                                    <label>Evidence Recored *</label>
+                                                    <label>Evidence Record *</label>
                                                     <asp:TextBox ID="txt_EvidenceRecored" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Evidence Recored Required" ControlToValidate="txt_EvidenceRecored" ForeColor="Red" ValidationGroup="no">
+                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Evidence Record Required" ControlToValidate="txt_EvidenceRecored" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                     <div class="form-group ">
