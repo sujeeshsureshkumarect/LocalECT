@@ -903,6 +903,281 @@ public class RoleDAL : _Role
         return results;
 
     }
+
+    public List<PrivilegeObjects> GetSCAllMenu()
+    {
+
+        InitializeModule.EnumCampus iCampus = InitializeModule.EnumCampus.ECTNew;
+        //iCampus = InitializeModule.EnumCampus.ECTNew;
+        Connection_StringCLS sConn = new Connection_StringCLS(iCampus);
+
+        string sSQL = "";
+        sSQL  = " SELECT        ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel, SUM(Privilege) AS [Privileges] ";
+        sSQL += " FROM            (SELECT        TH.iSerial AS ObjectID, TH.sThemeDesc AS ObjectNameEn, TH.sThemeCode AS DisplayObjectName, TH.iOrder AS ShowOrder, 14 AS SystemID, 1299 AS ParentID, 'Strategy_Strategic_Theme_Home.aspx?id=' + CONVERT(varchar, TH.iSerial)  ";
+        sSQL += "                                                     AS sURL, TH.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                     ) AS C INNER JOIN ";
+        sSQL += "                                                     CS_Strategic_Theme AS TH ON C.iTheme = TH.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SG.iSerial * 10 AS ObjectID,CONVERT(varchar(100),SG.sStrategicGoalDesc) AS ObjectNameEn, SG.sAbbreviation AS DisplayObjectName, SG.iOrder AS ShowOrder, 14 AS SystemID, C_4.iTheme AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Goal_Home.aspx?id=' + CONVERT(varchar, SG.iSerial) AS sURL, SG.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                    ) AS C_4 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Goal AS SG ON C_4.iGoal = SG.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SP.iSerial * 100 AS ObjectID, CONVERT(varchar(100),SP.sStrategicProjectDesc) AS ObjectNameEn, SP.sAbbreviation AS DisplayObjectName, SP.iOrder, 14 AS SystemID, C_3.iGoal * 10 AS ParentID, 'Strategy_Strategic_Project_Home.aspx?id=' + CONVERT(varchar,  ";
+        sSQL += "                                                    SP.iSerial) AS sURL, SP.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                     ) AS C_3 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Project AS SP ON C_3.iProject = SP.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SO.iSerial * 1000 AS ObjectID, CONVERT(varchar(100),SO.sStrategicObjectiveDesc) AS ObjectNameEn, SO.sAbbreviation AS DisplayObjectName, SO.iOrder, 14 AS SystemID, C_2.iProject * 100 AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Objective_Home.aspx?id=' + CONVERT(varchar, SO.iSerial) AS sURL, SO.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                     ) AS C_2 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Objective AS SO ON C_2.iObjective = SO.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SInit.iSerial * 10000 AS ObjectID, CONVERT(varchar(150),SInit.sInitiativeDesc) AS ObjectNameEn, SInit.sAbbreviation AS DisplayObjectName, SInit.iOrder, 14 AS SystemID, C_1.iObjective * 1000 AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Initiative_Home.aspx?id=' + CONVERT(varchar, SInit.iSerial) AS sURL, SInit.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                    ) AS C_1 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Initiative AS SInit ON C_1.SIID = SInit.iSerial) AS MNU ";
+        sSQL += " GROUP BY ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel ";
+        sSQL += " order by iLevel desc,ShowOrder desc";
+
+
+        SqlConnection Conn = new SqlConnection(sConn.Conn_string.ToString());
+
+        SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+        Conn.Open();
+        SqlDataReader Rd = Cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        List<PrivilegeObjects> results = new List<PrivilegeObjects>();
+
+        //int i = 0;
+        try
+        {
+            PrivilegeObjects MyMap1 = new PrivilegeObjects();
+            MyMap1.ObjectID = 1299;
+            MyMap1.ObjectNameEn = "CS Execution";
+            MyMap1.DisplayObjectName = "CS Execution";
+            MyMap1.ShowOrder = 0;
+            MyMap1.SystemID = 14;
+            MyMap1.ParentID = 1299;
+            MyMap1.sURL = "";
+            MyMap1.iLevel = 0;
+            results.Add(MyMap1);
+
+            while (Rd.Read())
+            {
+                PrivilegeObjects MyMap = new PrivilegeObjects();
+                MyMap.ObjectID = int.Parse(Rd["ObjectID"].ToString());
+                MyMap.ObjectNameEn = Rd["ObjectNameEn"].ToString();
+                MyMap.DisplayObjectName = Rd["DisplayObjectName"].ToString();
+                MyMap.ShowOrder = int.Parse(Rd["ShowOrder"].ToString());
+                MyMap.SystemID = int.Parse(Rd["SystemID"].ToString());
+
+                if (Rd["ParentID"].Equals(DBNull.Value))
+                {
+                    MyMap.ParentID = MyMap.ObjectID;
+                }
+                else
+                {
+                    MyMap.ParentID = int.Parse(Rd["ParentID"].ToString()); 
+                }
+
+                if (Rd["sURL"].Equals(DBNull.Value))
+                {
+                    MyMap.sURL = MyMap.ObjectNameEn;
+                }
+                else
+                {
+                    MyMap.sURL = Rd["sURL"].ToString();
+                }
+
+                if (Rd["iLevel"].Equals(DBNull.Value))
+                {
+                    MyMap.iLevel = 0;
+                }
+                else
+                {
+                    MyMap.iLevel = int.Parse(Rd["iLevel"].ToString());
+                }
+
+                results.Add(MyMap);
+                //i += 1;
+
+            }
+        }
+        catch (Exception ex)
+        {
+            LibraryMOD.ShowErrorMessage(ex);
+        }
+        finally
+        {
+            //'Response.Write(ex.Message) 
+
+            Rd.Close();
+            Rd.Dispose();
+            Conn.Close();
+            Conn.Dispose();
+        }
+        //myStatus.Clear()        
+        return results;
+
+    }
+
+    public List<PrivilegeObjects> GetSCAllMenu_ID(string ID)
+    {
+
+        InitializeModule.EnumCampus iCampus = InitializeModule.EnumCampus.ECTNew;
+        //iCampus = InitializeModule.EnumCampus.ECTNew;
+        Connection_StringCLS sConn = new Connection_StringCLS(iCampus);
+
+        string sSQL = "";
+        sSQL = " SELECT        ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel, SUM(Privilege) AS [Privileges] ";
+        sSQL += " FROM            (SELECT        TH.iSerial AS ObjectID, TH.sThemeDesc AS ObjectNameEn, TH.sThemeCode AS DisplayObjectName, TH.iOrder AS ShowOrder, 14 AS SystemID, 1299 AS ParentID, 'Strategy_Strategic_Theme_Home.aspx?id=' + CONVERT(varchar, TH.iSerial)  ";
+        sSQL += "                                                     AS sURL, TH.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                 WHERE        (ES.EmployeeID = "+ID+")    ) AS C INNER JOIN ";
+        sSQL += "                                                     CS_Strategic_Theme AS TH ON C.iTheme = TH.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SG.iSerial * 10 AS ObjectID,CONVERT(varchar(100),SG.sStrategicGoalDesc) AS ObjectNameEn, SG.sAbbreviation AS DisplayObjectName, SG.iOrder AS ShowOrder, 14 AS SystemID, C_4.iTheme AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Goal_Home.aspx?id=' + CONVERT(varchar, SG.iSerial) AS sURL, SG.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                   WHERE        (ES.EmployeeID = " + ID + ")      ) AS C_4 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Goal AS SG ON C_4.iGoal = SG.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SP.iSerial * 100 AS ObjectID, CONVERT(varchar(100),SP.sStrategicProjectDesc) AS ObjectNameEn, SP.sAbbreviation AS DisplayObjectName, SP.iOrder, 14 AS SystemID, C_3.iGoal * 10 AS ParentID, 'Strategy_Strategic_Project_Home.aspx?id=' + CONVERT(varchar,  ";
+        sSQL += "                                                    SP.iSerial) AS sURL, SP.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                     WHERE        (ES.EmployeeID = " + ID + ")     ) AS C_3 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Project AS SP ON C_3.iProject = SP.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SO.iSerial * 1000 AS ObjectID, CONVERT(varchar(100),SO.sStrategicObjectiveDesc) AS ObjectNameEn, SO.sAbbreviation AS DisplayObjectName, SO.iOrder, 14 AS SystemID, C_2.iProject * 100 AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Objective_Home.aspx?id=' + CONVERT(varchar, SO.iSerial) AS sURL, SO.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                WHERE        (ES.EmployeeID = " + ID + ")          ) AS C_2 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Objective AS SO ON C_2.iObjective = SO.iSerial ";
+        sSQL += "                           UNION ALL ";
+        sSQL += "                           SELECT        SInit.iSerial * 10000 AS ObjectID, CONVERT(varchar(150),SInit.sInitiativeDesc) AS ObjectNameEn, SInit.sAbbreviation AS DisplayObjectName, SInit.iOrder, 14 AS SystemID, C_1.iObjective * 1000 AS ParentID,  ";
+        sSQL += "                                                    'Strategy_Strategic_Initiative_Home.aspx?id=' + CONVERT(varchar, SInit.iSerial) AS sURL, SInit.iLevel + 1 AS iLevel, 1 AS Privilege ";
+        sSQL += "                           FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal ";
+        sSQL += "                                                     FROM            CS_Strategic_Initiative AS SI INNER JOIN ";
+        sSQL += "                                                                               CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN ";
+        sSQL += "                                                                               CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID ";
+        sSQL += "                                                 WHERE        (ES.EmployeeID = " + ID + ")        ) AS C_1 INNER JOIN ";
+        sSQL += "                                                    CS_Strategic_Initiative AS SInit ON C_1.SIID = SInit.iSerial) AS MNU ";
+        sSQL += " GROUP BY ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel ";
+        sSQL += " order by iLevel desc,ShowOrder desc";
+
+
+        SqlConnection Conn = new SqlConnection(sConn.Conn_string.ToString());
+
+        SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+        Conn.Open();
+        SqlDataReader Rd = Cmd.ExecuteReader(CommandBehavior.CloseConnection);
+        List<PrivilegeObjects> results = new List<PrivilegeObjects>();
+
+        //int i = 0;
+        try
+        {
+            PrivilegeObjects MyMap1 = new PrivilegeObjects();
+            MyMap1.ObjectID = 1299;
+            MyMap1.ObjectNameEn = "CS Execution";
+            MyMap1.DisplayObjectName = "CS Execution";
+            MyMap1.ShowOrder = 0;
+            MyMap1.SystemID = 14;
+            MyMap1.ParentID = 1299;
+            MyMap1.sURL = "";
+            MyMap1.iLevel = 0;
+            results.Add(MyMap1);
+
+            while (Rd.Read())
+            {
+                PrivilegeObjects MyMap = new PrivilegeObjects();
+                MyMap.ObjectID = int.Parse(Rd["ObjectID"].ToString());
+                MyMap.ObjectNameEn = Rd["ObjectNameEn"].ToString();
+                MyMap.DisplayObjectName = Rd["DisplayObjectName"].ToString();
+                MyMap.ShowOrder = int.Parse(Rd["ShowOrder"].ToString());
+                MyMap.SystemID = int.Parse(Rd["SystemID"].ToString());
+
+                if (Rd["ParentID"].Equals(DBNull.Value))
+                {
+                    MyMap.ParentID = MyMap.ObjectID;
+                }
+                else
+                {
+                    MyMap.ParentID = int.Parse(Rd["ParentID"].ToString());
+                }
+
+                if (Rd["sURL"].Equals(DBNull.Value))
+                {
+                    MyMap.sURL = MyMap.ObjectNameEn;
+                }
+                else
+                {
+                    MyMap.sURL = Rd["sURL"].ToString();
+                }
+
+                if (Rd["iLevel"].Equals(DBNull.Value))
+                {
+                    MyMap.iLevel = 0;
+                }
+                else
+                {
+                    MyMap.iLevel = int.Parse(Rd["iLevel"].ToString());
+                }
+
+                results.Add(MyMap);
+                //i += 1;
+
+            }
+        }
+        catch (Exception ex)
+        {
+            LibraryMOD.ShowErrorMessage(ex);
+        }
+        finally
+        {
+            //'Response.Write(ex.Message) 
+
+            Rd.Close();
+            Rd.Dispose();
+            Conn.Close();
+            Conn.Dispose();
+        }
+        //myStatus.Clear()        
+        return results;
+
+    }
+
     public List<Privilege> GetRoleObjPermissions(int ObjectID, int RoleID)
     {
 

@@ -105,8 +105,8 @@ namespace LocalECT
                     }
 
                     //Finance
-                    if (UserEmail.Value == txt_Finance.Text)
-                    {
+                    //if (UserEmail.Value == txt_Finance.Text)
+                    //{
                         //Permission Check
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.STDServicesManagement,
                         InitializeModule.enumPrivilege.CanUpdateServiceFinance, CurrentRole) != true)
@@ -117,11 +117,11 @@ namespace LocalECT
                         {                           
                             txt_Finance.Enabled = true;//Only by Finance                            
                         }
-                    }
-                    else
-                    {                        
-                        txt_Finance.Enabled = false;                        
-                    }
+                    //}
+                    //else
+                    //{                        
+                    //    txt_Finance.Enabled = false;                        
+                    //}
                     if (Session["CurrentRole"].ToString() == "91")//SIS Admin
                     {
                         txt_ServiceEn.Enabled = true;

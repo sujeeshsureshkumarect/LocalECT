@@ -88,6 +88,18 @@
                                     <li><a href="https://ect.ac.ae/en/contact-us/" target="_blank"><i class="fa fa-phone"></i>Contact Us</a></li>
                                     <li><a href="Conditions"><i class="fa fa-file-text-o"></i>Terms & Conditions</a></li>--%>
                                 </ul>
+                                <ul class="nav side-menu">
+                                     <asp:TreeView ID="TVMain" runat="server" 
+                                Height="100%" Width="164px" ImageSet="Arrows" ExpandDepth="1" 
+                                CssClass="TVMain" ShowExpandCollapse="true" Visible="false">
+                                <ParentNodeStyle Font-Bold="False" />
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#ffffff" />
+                                <SelectedNodeStyle Font-Underline="True" ForeColor="White" 
+                                    HorizontalPadding="0px" VerticalPadding="0px" BackColor="White" />
+                                <NodeStyle Font-Size="10pt" ForeColor="#ffffff" 
+                                    HorizontalPadding="5px" NodeSpacing="5px" VerticalPadding="0px" />
+                            </asp:TreeView>
+                                </ul>
                             </div>
 
 
@@ -99,7 +111,11 @@
                         <!-- /menu footer buttons -->
                     </div>
                 </div>
-
+                <style>
+                    .TVMain_0:hover{
+                        color:#ffffff !important;
+                    }
+                </style>
                 <!-- top navigation -->
                 <div class="top_nav">
                     <div class="nav_menu">
@@ -324,8 +340,7 @@
     <script src="gentelella-master/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="gentelella-master/vendors/pdfmake/build/vfs_fonts.js"></script>
         <!-- Custom Theme Scripts -->
-        <script src="gentelella-master/build/js/custom.min.js"></script>
-
+        <script src="gentelella-master/build/js/custom.js"></script>        
          <!-- jQuery custom content scroller -->
     <script src="gentelella-master/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     </form>

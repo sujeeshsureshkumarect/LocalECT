@@ -598,7 +598,8 @@ public class InitializeModule
         CS_ShowAsDean = 196,
         CS_ShowAsDeptHead = 197,
         CS_ShowAsSectionHead = 198,
-        CS_Manage_IRQA_Recommendation = 199
+        CS_Manage_IRQA_Recommendation = 199,
+        CS_ShowAsSectionMember = 200
     }
 
     public enum enumPrivilegeObjects : int
@@ -892,6 +893,9 @@ public class InitializeModule
         STDServicesManagement = 1296,
 
         //Coorporate Strategy
+        CS_Lookups = 1297,
+        CS_Setup = 1298,
+        CS_Execution = 1299,
         Stipulation = 1300,
         Compliance_Domain_Type = 1301,
         Compliance_Standard = 1302,
