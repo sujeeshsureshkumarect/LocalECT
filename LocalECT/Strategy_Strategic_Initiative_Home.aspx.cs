@@ -46,6 +46,8 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        string id = Request.QueryString["id"];
+                        string f = Request.QueryString["f"];
                         bindStrategic_Initiative();
                     }
                 }
@@ -62,6 +64,22 @@ namespace LocalECT
 
         public void bindStrategic_Initiative()
         {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            string where = "";
+            if (id != null && f != null)
+            {
+                lnk_Create.Visible = false;
+                Img_Header.Visible = true;
+                row1.Style.Add("margin-top", "190px !important");
+                where = " where CS_Strategic_Initiative.iSerial=" + id + " ";
+            }
+            else
+            {
+                row1.Style.Add("margin-top", "0px !important");
+                where = "";
+            }
+
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
             string sSQL = "";
@@ -116,6 +134,8 @@ namespace LocalECT
             sSQL += "                          CS_Strategic_Project ON CS_Strategic_Initiative.iProject = CS_Strategic_Project.iSerial INNER JOIN ";
             sSQL += "                          CS_Strategic_Objective ON CS_Strategic_Initiative.iObjective = CS_Strategic_Objective.iSerial INNER JOIN ";
             sSQL += "                          CS_Strategy_Version ON CS_Strategic_Initiative.iStrategyVersion = CS_Strategy_Version.iSerial ON CS_Value_Proposition_Impact.iSerial = CS_Strategic_Initiative.iValuePropositionImpact ";
+            sSQL += where;
+            sSQL += " order by CS_Strategic_Initiative.iOrder ";
             SqlCommand cmd = new SqlCommand(sSQL, sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -136,6 +156,88 @@ namespace LocalECT
             finally
             {
                 sc.Close();
+            }
+        }
+        protected void lnk_View_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?f=m&id=" + id + "&t=v");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + id + "&t=v");
+            }
+        }
+
+        protected void lnk_Edit_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?f=m&id=" + id + "&t=e");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + id + "&t=e");
+            }
+        }
+        protected void lnk_1_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Initiative_Dpartment_Section_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Initiative_Dpartment_Section_Home.aspx?id=" + id + "");
+            }
+        }
+
+        protected void lnk_2_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Risk_Management.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Risk_Management.aspx?id=" + id + "");
+            }
+        }
+
+        protected void lnk_3_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            }
+        }
+
+        protected void lnk_4_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Home.aspx?id=" + id + "");
             }
         }
     }

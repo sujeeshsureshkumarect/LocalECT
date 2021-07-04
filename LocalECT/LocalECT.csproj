@@ -204,6 +204,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
+    <Content Include="Strategy\CS_Header1.jpg" />
     <Content Include="Strategy_Digital_Transformation_Create.aspx" />
     <Content Include="Strategy_Digital_Transformation_Edit.aspx" />
     <Content Include="Strategy_Digital_Transformation_Program.aspx" />
@@ -11417,7 +11418,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="NewsFeed\" />
-    <Folder Include="Strategy\" />
     <Folder Include="Student_Files\Female\" />
     <Folder Include="Student_Files\Male\" />
     <Folder Include="Upload\" />

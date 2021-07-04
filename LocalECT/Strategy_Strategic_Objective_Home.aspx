@@ -22,7 +22,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-sitemap"></i> Strategic Objective</h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <a href="Strategy_Strategic_Objective_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Strategic Objective</a>
+                                                <a href="Strategy_Strategic_Objective_Update.aspx" style="float:right;" class="btn btn-success btn-sm" runat="server" id="lnk_Create"><i class="glyphicon glyphicon-plus"></i> Create New Strategic Objective</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -79,11 +79,18 @@
                                             div.dtsb-searchBuilder button.dtsb-button{
                                                 font-size:12px !important;
                                             }
+                                            .responsive {
+  width: 100%;
+  height: auto;
+  z-index:10;
+  top:0px;
+  position: absolute;
+}
                                         </style>
 
                          <div id="datatable_wrapper" class="table-responsive">
-                     
-                        <div class="row">
+                     <img src="Strategy/CS_Header1.jpg" alt="Nature" class="responsive" runat="server" id="Img_Header" visible="false">
+                        <div class="row" runat="server" id="row1">
                             <div class="col-sm-12">
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <HeaderTemplate>
@@ -126,9 +133,12 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>    
-                                                             <a href="Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage MOE Re-licensure Sub Stipulation</a>
+                                                             <%--<a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+                                                             <a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a> --%>
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click">View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click">Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Substipulation" runat="server" class="dropdown-item" OnClick="lnk_Substipulation_Click">Manage MOE Re-licensure Sub Stipulation</asp:LinkButton>
+                                                             <%--<a href="Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage MOE Re-licensure Sub Stipulation</a>--%>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

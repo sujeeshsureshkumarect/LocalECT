@@ -46,6 +46,8 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        string id = Request.QueryString["id"];
+                        string f = Request.QueryString["f"];                        
                         bindStrategic_Theme();
                     }
                 }
@@ -62,10 +64,24 @@ namespace LocalECT
 
         public void bindStrategic_Theme()
         {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            string sSQL = "SELECT CS_Strategic_Theme.iSerial, CS_Strategic_Theme.sThemeCode, CS_Strategic_Theme.sThemeDesc, CS_Strategic_Theme.iOrder, CS_Strategic_Theme.dAdded, CS_Strategic_Theme.sAddedBy, CS_Strategic_Theme.dUpdated, CS_Strategic_Theme.sUpdatedBy, CS_Strategic_Theme.iStrategyVersion, CS_Strategic_Theme.sAbbreviation, CS_Strategic_Theme.sImagePath, CS_Strategic_Theme.iLevel, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version ON CS_Strategic_Theme.iStrategyVersion = CS_Strategy_Version.iSerial order by CS_Strategic_Theme.iOrder";
+            if (id != null && f!=null)
+            {
+                lnk_Create.Visible = false;
+                Img_Header.Visible = true;
+                row1.Style.Add("margin-top", "190px !important");
+                sSQL = "SELECT CS_Strategic_Theme.iSerial, CS_Strategic_Theme.sThemeCode, CS_Strategic_Theme.sThemeDesc, CS_Strategic_Theme.iOrder, CS_Strategic_Theme.dAdded, CS_Strategic_Theme.sAddedBy, CS_Strategic_Theme.dUpdated, CS_Strategic_Theme.sUpdatedBy, CS_Strategic_Theme.iStrategyVersion, CS_Strategic_Theme.sAbbreviation, CS_Strategic_Theme.sImagePath, CS_Strategic_Theme.iLevel, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version ON CS_Strategic_Theme.iStrategyVersion = CS_Strategy_Version.iSerial where CS_Strategic_Theme.iSerial="+id+ " order by CS_Strategic_Theme.iOrder";
+            }
+            else
+            {
+                row1.Style.Add("margin-top", "0px !important");
+            }
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Strategic_Theme.iSerial, CS_Strategic_Theme.sThemeCode, CS_Strategic_Theme.sThemeDesc, CS_Strategic_Theme.iOrder, CS_Strategic_Theme.dAdded, CS_Strategic_Theme.sAddedBy, CS_Strategic_Theme.dUpdated, CS_Strategic_Theme.sUpdatedBy, CS_Strategic_Theme.iStrategyVersion, CS_Strategic_Theme.sAbbreviation, CS_Strategic_Theme.sImagePath, CS_Strategic_Theme.iLevel, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version ON CS_Strategic_Theme.iStrategyVersion = CS_Strategy_Version.iSerial", sc);
+            SqlCommand cmd = new SqlCommand(sSQL, sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -85,6 +101,34 @@ namespace LocalECT
             finally
             {
                 sc.Close();
+            }
+        }
+
+        protected void lnk_View_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?f=m&id="+ id + "&t=v");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + id + "&t=v");
+            }
+        }
+
+        protected void lnk_Edit_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?f=m&id=" + id + "&t=e");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + id + "&t=e");
             }
         }
     }

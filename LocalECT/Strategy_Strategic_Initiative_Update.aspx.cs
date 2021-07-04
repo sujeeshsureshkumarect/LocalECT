@@ -830,13 +830,35 @@ namespace LocalECT
                     sc.Close();
                 }
             }
-        }
-
+        }       
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_Initiative_Home");
+            //Response.Redirect("Strategy_Strategic_Initiative_Home");
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home");
+            }
         }
 
+        protected void lnk_Back_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home");
+            }
+        }
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillSection();

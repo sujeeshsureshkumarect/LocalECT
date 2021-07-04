@@ -22,7 +22,8 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-plus"></i> <asp:Label ID="lbl_Header" runat="server" ForeColor="#444444"></asp:Label></h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <a href="Strategy_Strategic_Project_Home.aspx" style="float:right;" class="btn btn-success btn-sm" title="Back"><i class="fa fa-arrow-circle-left"></i> Strategic Project</a>
+                                                <%--<a href="Strategy_Strategic_Project_Home.aspx" style="float:right;" class="btn btn-success btn-sm" title="Back"><i class="fa fa-arrow-circle-left"></i> Strategic Project</a>--%>
+                                                <asp:LinkButton ID="lnk_Back" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" title="Back" OnClick="lnk_Back_Click"><i class="fa fa-arrow-circle-left"></i> Strategic Project</asp:LinkButton>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>

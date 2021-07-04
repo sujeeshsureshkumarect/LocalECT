@@ -32,7 +32,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -46,6 +46,8 @@ namespace LocalECT
                 {
                     if (!IsPostBack)
                     {
+                        string id = Request.QueryString["id"];
+                        string f = Request.QueryString["f"];
                         bindStrategic_Objective();
                     }
                 }
@@ -62,10 +64,25 @@ namespace LocalECT
 
         public void bindStrategic_Objective()
         {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            string sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial order by CS_Strategic_Objective.iOrder";
+            if (id != null && f != null)
+            {
+                lnk_Create.Visible = false;
+                Img_Header.Visible = true;
+                row1.Style.Add("margin-top", "190px !important");
+                sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial where CS_Strategic_Objective.iSerial="+id+" order by CS_Strategic_Objective.iOrder";
+            }
+            else
+            {
+                row1.Style.Add("margin-top", "0px !important");
+                sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial order by CS_Strategic_Objective.iOrder";
+            }
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial", sc);
+            SqlCommand cmd = new SqlCommand(sSQL, sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -85,6 +102,47 @@ namespace LocalECT
             finally
             {
                 sc.Close();
+            }
+        }
+        protected void lnk_View_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?f=m&id=" + id + "&t=v");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + id + "&t=v");
+            }
+        }
+
+        protected void lnk_Edit_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?f=m&id=" + id + "&t=e");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + id + "&t=e");
+            }
+        }
+
+        protected void lnk_Substipulation_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=" + id + "");
             }
         }
     }

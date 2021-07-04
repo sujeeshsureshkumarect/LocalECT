@@ -22,7 +22,7 @@
                                         <div class="x_title">
                                             <h2><i class="fa fa-sitemap"></i> Strategic Initiative</h2>
                                             <ul class="nav navbar-right panel_toolbox">
-                                                <a href="Strategy_Strategic_Initiative_Update.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i> Create New Strategic Initiative</a>
+                                                <a href="Strategy_Strategic_Initiative_Update.aspx" style="float:right;" class="btn btn-success btn-sm" runat="server" id="lnk_Create"><i class="glyphicon glyphicon-plus"></i> Create New Strategic Initiative</a>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -79,11 +79,18 @@
                                             div.dtsb-searchBuilder button.dtsb-button{
                                                 font-size:12px !important;
                                             }
+                                            .responsive {
+  width: 100%;
+  height: auto;
+  z-index:10;
+  top:0px;
+  position: absolute;
+}
                                         </style>
 
                          <div id="datatable_wrapper" class="table-responsive">
-                     
-                        <div class="row">
+                     <img src="Strategy/CS_Header1.jpg" alt="Nature" class="responsive" runat="server" id="Img_Header" visible="false">
+                        <div class="row" runat="server" id="row1">
                             <div class="col-sm-12">
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <HeaderTemplate>
@@ -144,12 +151,19 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>
-                                                             <a href="Strategy_Initiative_Dpartment_Section_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Support Department/Section</a>
+                                                             <%--<a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+                                                             <a href="Strategy_Strategic_Initiative_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>--%>
+                                                             <%--<a href="Strategy_Initiative_Dpartment_Section_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Support Department/Section</a>
                                                              <a href="Strategy_Risk_Management.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage Risks</a>
                                                              <a href="Strategy_Strategic_KPI_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">KPIs</a>
-                                                             <a href="Strategy_Strategic_Task_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Tasks</a>
+                                                             <a href="Strategy_Strategic_Task_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Tasks</a>--%>
+
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click">View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click">Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_1" runat="server" class="dropdown-item" OnClick="lnk_1_Click">Manage Support Department/Section</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_2" runat="server" class="dropdown-item" OnClick="lnk_2_Click">Manage Risks</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_3" runat="server" class="dropdown-item" OnClick="lnk_3_Click">KPIs</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_4" runat="server" class="dropdown-item" OnClick="lnk_4_Click">Tasks</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

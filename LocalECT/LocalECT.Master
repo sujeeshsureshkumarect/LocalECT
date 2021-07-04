@@ -88,10 +88,28 @@
                                     <li><a href="https://ect.ac.ae/en/contact-us/" target="_blank"><i class="fa fa-phone"></i>Contact Us</a></li>
                                     <li><a href="Conditions"><i class="fa fa-file-text-o"></i>Terms & Conditions</a></li>--%>
                                 </ul>
+                                     <asp:HiddenField ID="HiddenScrollTop" runat="server" Value="0" ClientIDMode="Static"/>                       
+                        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+                         <script>
+                             $(function () {
+                                 //recover the scroll postion                                 
+                                 if ($("#HiddenScrollTop").val() > 0) {
+                                     $("#ContentPlaceHolder1_TVMain").scrollTop($("#HiddenScrollTop").val());
+                                 }
+
+                             })
+                             $(function () {
+                                 //save the scroll position
+                                 $("#ContentPlaceHolder1_TVMain").scroll(function () {
+                                     $("#HiddenScrollTop").val($(this).scrollTop());
+                                 });
+                             })
+                         </script>
+
                                 <ul class="nav side-menu">
                                      <asp:TreeView ID="TVMain" runat="server" 
-                                Height="100%" Width="164px" ImageSet="Arrows" ExpandDepth="1" 
-                                CssClass="TVMain" ShowExpandCollapse="true" Visible="false">
+                                Height="100%" Width="164px" ImageSet="Arrows" ExpandDepth="0" 
+                                CssClass="TVMain" ShowExpandCollapse="true" Visible="false" ViewStateMode="Enabled">
                                 <ParentNodeStyle Font-Bold="False" />
                                 <HoverNodeStyle Font-Underline="True" ForeColor="#ffffff" />
                                 <SelectedNodeStyle Font-Underline="True" ForeColor="White" 

@@ -18,6 +18,7 @@ namespace LocalECT
         DataTable Menus = new DataTable();
         InitializeModule.EnumCampus Campus = InitializeModule.EnumCampus.ECTNew;
         TreeNode myRoot = new TreeNode();
+        string myValuePath = "";
         struct myNode
         {
             public TreeNode tn;
@@ -37,9 +38,14 @@ namespace LocalECT
                     {
                         myRoot = (TreeNode)Session["MainRoot"];
                     }
+                    if (Session["myValuePath"] != null)
+                    {
+                        myValuePath = Session["myValuePath"].ToString();
+                        //myTree.FindNode(myValuePath).Select();
+                    }
                     int r = Show_Data();
                     //TVMain.CollapseAll();
-                    //TVMain.Nodes[0].Expand();
+                    //TVMain.Nodes[0].Expand();                                          
                 }
             }
             else
@@ -486,15 +492,15 @@ namespace LocalECT
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.CS_Execution,
                         InitializeModule.enumPrivilege.CS_ShowAll, RoleId) != true)
                 {
+                    myObjects = myRoleDAL.GetSCAllMenu_ID(Session["EmployeeID"].ToString());
+                }
+                else
+                {                    
                     //Show all initiatives
                     myObjects = myRoleDAL.GetSCAllMenu();
                     //myObjects = myRoleDAL.GetSCAllMenu_ID(Session["EmployeeID"].ToString());
                 }
-                else
-                {
-                    myObjects = myRoleDAL.GetSCAllMenu_ID(Session["EmployeeID"].ToString());
-                }
-                
+
                 myNodes = new myNode[myObjects.Count];
                 //Collect Nodes
                 for (int i = 0; i < myObjects.Count; i++)
@@ -567,5 +573,12 @@ namespace LocalECT
             }
 
         }
+
+        //protected void TVMain_SelectedNodeChanged(object sender, EventArgs e)
+        //{
+        //    Session["myValuePath"] = TVMain.SelectedNode.ValuePath;
+
+        //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "selectNode", "var elem = document.getElementById('" + TVMain.ClientID + "_SelectedNode');var node = document.getElementById(elem.value);node.scrollIntoView(true);elem.scrollLeft=0;", true);
+        //}       
     }
 }

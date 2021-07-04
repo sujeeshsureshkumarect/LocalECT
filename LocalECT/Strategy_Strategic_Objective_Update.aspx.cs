@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -428,12 +428,34 @@ namespace LocalECT
                 }
             }
         }
-
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_Objective_Home");
+            //Response.Redirect("Strategy_Strategic_Objective_Home");
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Home");
+            }
         }
 
+        protected void lnk_Back_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Objective_Home");
+            }
+        }
         protected void drp_StrategicProject_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(drp_StrategicProject.SelectedValue))
