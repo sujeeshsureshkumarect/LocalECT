@@ -99,7 +99,10 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Dept Abrv.</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Manager ID</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Manager Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Designation</th>                                            
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Approver ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Approver Name</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Job ID of Dept Head</th> 
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Job Title of Dept Head</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
                                         </tr>
                                     </thead>
@@ -110,9 +113,12 @@
                                                      <td><%#Eval("DepartmentID")%></td>                                                    
                                                     <td><%#Eval("DescEN")%></td>
                                                     <td><%#Eval("DepartmentAbbreviation")%></td>   
-                                                    <td><%#Eval("EmployeeID")%></td>
+                                                    <td><%#Eval("ManagerID")%></td>
                                                     <td><%#Eval("Manager_Name")%></td>
-                                                    <td><%#Eval("Designation")%></td>
+                                                    <td><%#Eval("ApproverID")%></td>
+                                                    <td><%#Eval("Approver_Name")%></td>
+                                                    <td><%#Eval("JobIDofDeptHead")%></td>
+                                                    <td><%#Eval("JobTitleEn")%></td>
                                                      <td>
                                                     <div class="btn-group">
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

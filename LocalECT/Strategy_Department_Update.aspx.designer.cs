@@ -78,12 +78,31 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Manager;
 
         /// <summary>
-        /// btn_Create control.
+        /// drp_JobTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_Approver;
+
+        /// <summary>
+        /// drp_Approver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_JobTitle;
+
+        /// <summary>
+        /// drp_Approver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+     
         protected global::System.Web.UI.WebControls.Button btn_Create;
 
         /// <summary>

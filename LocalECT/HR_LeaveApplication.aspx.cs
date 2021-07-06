@@ -100,17 +100,24 @@ namespace LocalECT
 
         protected void Leave_EndDate_TextChanged(object sender, EventArgs e)
         {
-            DateTime StartDate = DateTime.ParseExact(Leave_StartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime EndDate = DateTime.ParseExact(Leave_EndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            String TotalDays = (EndDate - StartDate).TotalDays.ToString();
-            int NoOfDays = int.Parse(TotalDays) + 1;
-            if (NoOfDays < 0)
+            if((!string.IsNullOrEmpty(Leave_StartDate.Text))&&(!string.IsNullOrEmpty(Leave_EndDate.Text)))
             {
-                Response.Write("<script>alert('End date must be after start date');</script>");
+                DateTime StartDate = DateTime.ParseExact(Leave_StartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime EndDate = DateTime.ParseExact(Leave_EndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                String TotalDays = (EndDate - StartDate).TotalDays.ToString();
+                int NoOfDays = int.Parse(TotalDays) + 1;
+                if (NoOfDays < 0)
+                {
+                    Response.Write("<script>alert('End date must be after start date');</script>");
+                }
+                else
+                {
+                    Total_Days.Text = NoOfDays.ToString();
+                }
             }
             else
             {
-                Total_Days.Text = NoOfDays.ToString();
+                Total_Days.Text = "0";
             }
         }
         public void sentdatatoSPLIst()
@@ -369,6 +376,29 @@ namespace LocalECT
                 sc.Close();
             }
 
+        }
+
+        protected void Leave_StartDate_TextChanged(object sender, EventArgs e)
+        {
+            if((!string.IsNullOrEmpty(Leave_StartDate.Text))&&(!string.IsNullOrEmpty(Leave_EndDate.Text)))
+            {
+                DateTime StartDate = DateTime.ParseExact(Leave_StartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime EndDate = DateTime.ParseExact(Leave_EndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                String TotalDays = (EndDate - StartDate).TotalDays.ToString();
+                int NoOfDays = int.Parse(TotalDays) + 1;
+                if (NoOfDays < 0)
+                {
+                    Response.Write("<script>alert('End date must be after start date');</script>");
+                }
+                else
+                {
+                    Total_Days.Text = NoOfDays.ToString();
+                }
+            } 
+            else
+            {
+                Total_Days.Text = "0";
+            }
         }
     }
 }

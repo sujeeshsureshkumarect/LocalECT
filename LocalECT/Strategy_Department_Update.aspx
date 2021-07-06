@@ -64,6 +64,16 @@
                                                         </asp:DropDownList>
                                                     </div>
                                                     <div class="form-group ">
+                                                        <label>Job Title of Department Head *</label>
+                                                        <asp:DropDownList ID="drp_JobTitle" runat="server" CssClass="form-control">
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Approver Name *</label>
+                                                        <asp:DropDownList ID="drp_Approver" runat="server" CssClass="form-control">
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
                                                         <asp:Button ID="btn_Create" runat="server" Text="Update" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click" />
                                                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn btn-warning btn-sm" OnClick="btn_Cancel_Click" />
                                                     </div>

@@ -218,8 +218,8 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style6">
                                             <b>Leave Starts on<span style="color: red">*</span></b></td>
                                         <td align="center" class="auto-style7">
-                                            <asp:TextBox ID="Leave_StartDate" runat="server" CssClass="form-control"   Placeholder="dd/mm/yyyy" ClientIDMode="Static"></asp:TextBox>
-                                          <asp:RequiredFieldValidator ID="Leave_StartDate_Validator" runat="server" ErrorMessage="-Please select leave start date" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="Leave_StartDate"></asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="Leave_StartDate" runat="server" CssClass="form-control"   Placeholder="dd/mm/yyyy" ClientIDMode="Static" AutoPostBack="true" OnTextChanged="Leave_StartDate_TextChanged"></asp:TextBox>
+                                          <asp:RequiredFieldValidator ID="Leave_StartDate_Validator" runat="server" ErrorMessage="*Please select leave start date" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="Leave_StartDate"></asp:RequiredFieldValidator>
                                             </td>
                                         
                                             <td align="center" style="background-color: #f2f2f2;" class="auto-style7">

@@ -34,7 +34,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Manage_Department_Section,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            Server.Transfer("Authorization.aspx");
+                            //Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -49,6 +49,8 @@ namespace LocalECT
                     if (!IsPostBack)
                     {
                         bindemployee();
+                        bindapprover();
+                        bindjobtitle();
                         string id = Request.QueryString["id"];
                         if (id != null)
                         {
@@ -84,6 +86,8 @@ namespace LocalECT
                     txt_Dept_Name.Text = dt.Rows[0]["DescEN"].ToString();
                     txt_Dept_Abrv.Text = dt.Rows[0]["DepartmentAbbreviation"].ToString();
                     drp_Manager.SelectedIndex = drp_Manager.Items.IndexOf(drp_Manager.Items.FindByValue(dt.Rows[0]["ManagerID"].ToString()));
+                    drp_Approver.SelectedIndex = drp_Approver.Items.IndexOf(drp_Approver.Items.FindByValue(dt.Rows[0]["ApproverID"].ToString()));
+                    drp_JobTitle.SelectedIndex = drp_JobTitle.Items.IndexOf(drp_JobTitle.Items.FindByValue(dt.Rows[0]["JobIDofDeptHead"].ToString()));
                 }
             }
             catch(Exception ex)
@@ -124,6 +128,60 @@ namespace LocalECT
                 sc.Close();
             }
         }
+        public void bindapprover()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT [EmployeeID],[FirstNameEn]+' '+[FamilyNameEn] as Manager_Name,[IsActive]FROM [ECTDataNew].[dbo].[Hr_Employee] where IsActive=1 order by Manager_Name", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_Approver.DataSource = dt;
+                drp_Approver.DataTextField = "Manager_Name";
+                drp_Approver.DataValueField = "EmployeeID";
+                drp_Approver.DataBind();
+
+                drp_Approver.Items.Insert(0, new ListItem("-- Select Approver --", "-1"));
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+        public void bindjobtitle()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT [JobTitleID],[JobTitleEn],[IsActive]FROM [ECTDataNew].[dbo].[Lkp_JobTitle] where IsActive=1", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_JobTitle.DataSource = dt;
+                drp_JobTitle.DataTextField = "JobTitleEn";
+                drp_JobTitle.DataValueField = "JobTitleID";
+                drp_JobTitle.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
         protected void btn_Create_Click(object sender, EventArgs e)
         {
             if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Manage_Department_Section,
@@ -134,9 +192,11 @@ namespace LocalECT
                 lbl_Msg.Text = "Sorry-You cannot Edit";
                 return;
             }
-            SqlCommand cmd = new SqlCommand("update Lkp_Department set DescEN=@DescEN,ManagerID=@ManagerID,DepartmentAbbreviation=@DepartmentAbbreviation,LastUpdateDate=@LastUpdateDate,NetUserName=@NetUserName,PCName=@PCName,LastUpdateUserID=@LastUpdateUserID where DepartmentID=@DepartmentID", sc);
+            SqlCommand cmd = new SqlCommand("update Lkp_Department set DescEN=@DescEN,ManagerID=@ManagerID,ApproverID=@ApproverID,JobIDofDeptHead=@JobIDofDeptHead,DepartmentAbbreviation=@DepartmentAbbreviation,LastUpdateDate=@LastUpdateDate,NetUserName=@NetUserName,PCName=@PCName,LastUpdateUserID=@LastUpdateUserID where DepartmentID=@DepartmentID", sc);
             cmd.Parameters.AddWithValue("@DescEN", txt_Dept_Name.Text.Trim());
             cmd.Parameters.AddWithValue("@ManagerID", drp_Manager.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@ApproverID", drp_Approver.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@JobIDofDeptHead", drp_JobTitle.SelectedItem.Value);
             cmd.Parameters.AddWithValue("@DepartmentAbbreviation", txt_Dept_Abrv.Text.Trim());
             cmd.Parameters.AddWithValue("@LastUpdateDate", DateTime.Now);
             cmd.Parameters.AddWithValue("@NetUserName", Session["CurrentUserName"].ToString());
