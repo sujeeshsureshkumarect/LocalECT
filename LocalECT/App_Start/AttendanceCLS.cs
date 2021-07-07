@@ -269,11 +269,22 @@ public class AttendanceDAL
         //sSQL += " CB.Course = Q.strCourse AND CB.Sem = Q.byteSemester AND CB.iYear = Q.intStudyYear ON AP.lngStudentNumber = CB.Student INNER JOIN dbo.Available_Loads AS AL ON CB.iYear = AL.intStudyYear AND CB.Sem = AL.byteSemester AND CB.Shift = AL.byteShift AND ";
         //sSQL += " CB.Course = AL.strCourse AND CB.Class = AL.byteClass";
 
+        //string sSQL = "SELECT CB.iYear AS intStudyYear, CB.Sem AS byteSemester, CB.Shift AS byteShift, CB.Course AS strCourse, CB.Class AS byteClass, ";
+        //sSQL += " CB.Student AS lngStudentNumber, SD.strLastDescEn AS sName, Att.dateAttendance, Att.byteAttStatus, AL.byteDay, AL.cLoad AS curHours,AP.bOtherCollege as bFainance,AP.intRemind";
+        //sSQL += " FROM Reg_Applications AS AP INNER JOIN Reg_Students_Data AS SD ON AP.lngSerial = SD.lngSerial INNER JOIN";
+        //sSQL += " Registration_Balance AS CB ON AP.lngStudentNumber = CB.Student INNER JOIN Available_Loads AS AL ON CB.iYear = AL.intStudyYear AND CB.Sem = AL.byteSemester AND CB.Shift = AL.byteShift AND CB.Course = AL.strCourse AND";
+        //sSQL += " CB.Class = AL.byteClass LEFT OUTER JOIN dbo.GetAtt('"+sUDate+"') AS Att ON CB.Student = Att.lngStudentNumber COLLATE Arabic_CI_AS AND CB.Class = Att.byteClass AND ";
+        //sSQL += " CB.Course = Att.strCourse COLLATE Arabic_CI_AS AND CB.Shift = Att.byteShift AND CB.iYear = Att.intStudyYear AND CB.Sem = Att.byteSemester";
+
+        //sSQL += " Where AL.byteDay=" + bDay;
+
         string sSQL = "SELECT CB.iYear AS intStudyYear, CB.Sem AS byteSemester, CB.Shift AS byteShift, CB.Course AS strCourse, CB.Class AS byteClass, ";
         sSQL += " CB.Student AS lngStudentNumber, SD.strLastDescEn AS sName, Att.dateAttendance, Att.byteAttStatus, AL.byteDay, AL.cLoad AS curHours,AP.bOtherCollege as bFainance,AP.intRemind";
         sSQL += " FROM Reg_Applications AS AP INNER JOIN Reg_Students_Data AS SD ON AP.lngSerial = SD.lngSerial INNER JOIN";
         sSQL += " Registration_Balance AS CB ON AP.lngStudentNumber = CB.Student INNER JOIN Available_Loads AS AL ON CB.iYear = AL.intStudyYear AND CB.Sem = AL.byteSemester AND CB.Shift = AL.byteShift AND CB.Course = AL.strCourse AND";
-        sSQL += " CB.Class = AL.byteClass LEFT OUTER JOIN dbo.GetAtt('"+sUDate+"') AS Att ON CB.Student = Att.lngStudentNumber COLLATE Arabic_CI_AS AND CB.Class = Att.byteClass AND ";
+        sSQL += " CB.Class = AL.byteClass INNER JOIN Reg_Courses AS C ON CB.Course = C.strCourse ";
+
+        sSQL += " LEFT OUTER JOIN dbo.GetAtt('" + sUDate + "') AS Att ON CB.Student = Att.lngStudentNumber COLLATE Arabic_CI_AS AND CB.Class = Att.byteClass AND ";
         sSQL += " CB.Course = Att.strCourse COLLATE Arabic_CI_AS AND CB.Shift = Att.byteShift AND CB.iYear = Att.intStudyYear AND CB.Sem = Att.byteSemester";
 
         sSQL += " Where AL.byteDay=" + bDay;

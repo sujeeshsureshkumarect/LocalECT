@@ -79,6 +79,74 @@ public class LibraryMOD
         }
         return emp;
     }
+    public static int GetCurrentAdmissionRequirmentsID(int iRegTerm)
+    {
+        Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
+        SqlConnection conn = new SqlConnection(myConnection_String.Conn_string);
+        conn.Open();
+        try
+        {
+            string sSQL = "SELECT iAdmisionRequirmentsID, iAppliedFromTerm, iAppliedToTerm";
+            sSQL += " FROM Reg_SpecilaizationAdmissionRequirmentsByYear AS SAR";
+            sSQL += " WHERE " + iRegTerm + " >= iAppliedFromTerm";
+            sSQL += " AND " + iRegTerm + " <= iAppliedToTerm";
+
+
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            SqlDataReader rd = cmd.ExecuteReader();
+            string sValue = "0";
+            while (rd.Read())
+            {
+                sValue = rd["iAdmisionRequirmentsID"].ToString();
+            }
+            rd.Close();
+
+            return Convert.ToInt32(sValue);
+        }
+        catch (Exception ex)
+        {
+            return 0;
+        }
+        finally
+        {
+            conn.Close();
+            conn.Dispose();
+        }
+    }
+    public static int GetAdmissionRequirmentsID(int iTerm, InitializeModule.EnumCampus Campus)
+    {
+        Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+        SqlConnection conn = new SqlConnection(myConnection_String.Conn_string);
+        conn.Open();
+        try
+        {
+            string sSQL = "SELECT iAdmisionRequirmentsID, iAppliedFromTerm, iAppliedToTerm";
+            sSQL += " FROM Reg_SpecilaizationAdmissionRequirmentsByYear AS SAR";
+            sSQL += " WHERE " + iTerm + " >= iAppliedFromTerm";
+            sSQL += " AND " + iTerm + " <= iAppliedToTerm";
+            sSQL += " AND iIsActive = 1";
+
+            SqlCommand cmd = new SqlCommand(sSQL, conn);
+            SqlDataReader rd = cmd.ExecuteReader();
+            string sValue = "0";
+            while (rd.Read())
+            {
+                sValue = rd["iAdmisionRequirmentsID"].ToString();
+            }
+            rd.Close();
+
+            return Convert.ToInt32(sValue);
+        }
+        catch (Exception ex)
+        {
+            return 0;
+        }
+        finally
+        {
+            conn.Close();
+            conn.Dispose();
+        }
+    }
 
     public static int ExecuteSqlStatement(string ConnectionString, string SqlStatement)
     {
@@ -6160,7 +6228,45 @@ public class LibraryMOD
         FName = sFName;
         return functionReturnValue;
     }
-    
+    public static int GetStudentTerm(InitializeModule.EnumCampus Campus, string sStudentID)
+    {
+        int functionReturnValue = 0;
+
+        Connection_StringCLS myConnection_String = new Connection_StringCLS(Campus);
+        SqlConnection Conn = new SqlConnection(myConnection_String.Conn_string);
+        Conn.Open();
+
+
+        try
+        {
+            string sSQL = null;
+
+            sSQL = "SELECT  (A.intStudyYear*10 + A.byteSemester) AS iTerm ";
+            sSQL += " FROM Reg_Applications AS A";
+            sSQL += " WHERE A.lngStudentNumber = '" + sStudentID + "'";
+
+
+            SqlCommand Cmd = new SqlCommand(sSQL, Conn);
+            SqlDataReader rd = Cmd.ExecuteReader();
+
+
+            while (rd.Read())
+            {
+                functionReturnValue = int.Parse("0" + rd["iTerm"].ToString());
+            }
+            rd.Close();
+
+        }
+        catch (Exception ex)
+        {
+            ShowErrorMessage(ex);
+        }
+        finally
+        {
+
+        }
+        return functionReturnValue;
+    }
     public static int GetStudentTerm(InitializeModule.EnumCampus Campus, int iSerialNo )
     {
         int functionReturnValue = 0;

@@ -7906,6 +7906,7 @@
     <Content Include="Student_GPAs.aspx" />
     <Content Include="Student_Search_SMSSent.aspx" />
     <Content Include="Student_Service_Requests_Approvers.aspx" />
+    <Content Include="Testimonies_Printing.aspx" />
     <Content Include="TimeTableViewer.aspx" />
     <Content Include="WebForm1test.aspx" />
     <None Include="Acc_Voucher.xsd">
@@ -11364,6 +11365,13 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Testimonies_Printing.aspx.cs">
+      <DependentUpon>Testimonies_Printing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Testimonies_Printing.aspx.designer.cs">
+      <DependentUpon>Testimonies_Printing.aspx</DependentUpon>
     </Compile>
     <Compile Include="TimeTableViewer.aspx.cs">
       <DependentUpon>TimeTableViewer.aspx</DependentUpon>

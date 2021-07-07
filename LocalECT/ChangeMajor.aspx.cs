@@ -400,8 +400,12 @@ namespace LocalECT
                 bool IsCHEM001Required = false;
                 bool IsBIOL001Required = false;
                 bool IsPHYS001Required = false;
+                bool Is_EmSAT_Arabic_Required = false;
+                bool Is_EmSAT_Math_Required = false;
+                bool Is_EmSAT_Physics_Required = false;
 
                 double CGPA = 0;
+                int iCurrentRegTerm = (iRegYear * 10) + iRegSem;
 
                 if (sNDegree != "2" && sNMajor != "99")
                 {
@@ -413,11 +417,65 @@ namespace LocalECT
                         return;
                     }
                 }
-                if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, sOldID, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+                //if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, sOldID, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+                //{
+
+                //    if (IsMTH001Required)
+                //    {
+                //        lbl_Msg.Text = "Mathematics score (HS certificate or MTH001) is lower than the admission requirement …!";
+                //        div_msg.Visible = true;
+                //        return;
+                //    }
+
+                //    if (IsCHEM001Required)
+                //    {
+                //        lbl_Msg.Text = "Chemistry score (HS certificate or CHEM001) is lower than the admission requirement …!";
+                //        div_msg.Visible = true;
+                //        return;
+                //    }
+
+                //    if (IsBIOL001Required)
+                //    {
+                //        lbl_Msg.Text = "Biology score (HS certificate or BIOL001) is lower than the admission requirement …!";
+                //        div_msg.Visible = true;
+                //        return;
+                //    }
+
+                //    if (IsPHYS001Required)
+                //    {                        
+                //        lbl_Msg.Text = "Physics score (HS certificate or PHYS001) is lower than the admission requirement …!";
+                //        div_msg.Visible = true;
+                //        return;
+                //    }
+                //}
+                if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, iCurrentRegTerm, sOldID, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required, out Is_EmSAT_Arabic_Required, out Is_EmSAT_Math_Required, out Is_EmSAT_Physics_Required))
                 {
+
+                    if (Is_EmSAT_Arabic_Required)
+                    {
+                        //divMsg.InnerText = "EmSAT Arabic Score doesn’t meet the major requirement …!";
+                        lbl_Msg.Text = "EmSAT Arabic Score doesn’t meet the major requirement …!";
+                        div_msg.Visible = true;
+                        return;
+                    }
+                    if (Is_EmSAT_Math_Required)
+                    {
+                        //divMsg.InnerText = "EmSAT math Score doesn’t meet the major requirement …!";
+                        lbl_Msg.Text = "EmSAT math Score doesn’t meet the major requirement …!";
+                        div_msg.Visible = true;
+                        return;
+                    }
+                    if (Is_EmSAT_Physics_Required)
+                    {
+                        //divMsg.InnerText = "EmSAT Physics Score doesn’t meet the major requirement …!";
+                        lbl_Msg.Text = "EmSAT Physics Score doesn’t meet the major requirement …!";
+                        div_msg.Visible = true;
+                        return;
+                    }
 
                     if (IsMTH001Required)
                     {
+                        //divMsg.InnerText = "Mathematics score (HS certificate or MTH001) is lower than the admission requirement …!";
                         lbl_Msg.Text = "Mathematics score (HS certificate or MTH001) is lower than the admission requirement …!";
                         div_msg.Visible = true;
                         return;
@@ -425,6 +483,7 @@ namespace LocalECT
 
                     if (IsCHEM001Required)
                     {
+                        //divMsg.InnerText = "Chemistry score (HS certificate or CHEM001) is lower than the admission requirement …!";
                         lbl_Msg.Text = "Chemistry score (HS certificate or CHEM001) is lower than the admission requirement …!";
                         div_msg.Visible = true;
                         return;
@@ -432,17 +491,20 @@ namespace LocalECT
 
                     if (IsBIOL001Required)
                     {
+                        //divMsg.InnerText = "Biology score (HS certificate or BIOL001) is lower than the admission requirement …!";
                         lbl_Msg.Text = "Biology score (HS certificate or BIOL001) is lower than the admission requirement …!";
                         div_msg.Visible = true;
                         return;
                     }
 
                     if (IsPHYS001Required)
-                    {                        
+                    {
+                        //divMsg.InnerText = "Physics score (HS certificate or PHYS001) is lower than the admission requirement …!";
                         lbl_Msg.Text = "Physics score (HS certificate or PHYS001) is lower than the admission requirement …!";
                         div_msg.Visible = true;
                         return;
                     }
+
                 }
                 //if (chkNoOnly.Checked == true)
                 //{

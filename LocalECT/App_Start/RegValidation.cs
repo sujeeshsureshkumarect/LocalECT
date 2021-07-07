@@ -101,10 +101,70 @@ public class RegValidation
         bool IsCHEM001Required = false;
         bool IsBIOL001Required = false;
         bool IsPHYS001Required = false;
+        bool Is_EmSAT_Arabic_Required = false;
+        bool Is_EmSAT_Math_Required = false;
+        bool Is_EmSAT_Physics_Required = false;
+
         string sFndCourse = "";
+        int iCurrentRegTerm = (iRegYear * 10) + iRegSem;
         //if (isFNDCoursesRequired(myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
-        if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+        //if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+        //{
+        //    sFndCourse = "MTH001";
+        //    if (!isMTH001 && IsMTH001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Math less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "CHEM001";
+        //    if (!isCHEM001 && IsCHEM001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Chemistry less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "BIOL001";
+        //    if (!isBIOL001 && IsBIOL001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Biology less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "PHYS001";
+        //    if (!isPHYS001 && IsPHYS001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Physics less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //}
+        if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, iCurrentRegTerm, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required, out Is_EmSAT_Arabic_Required, out Is_EmSAT_Math_Required, out Is_EmSAT_Physics_Required))
         {
+            if (Is_EmSAT_Arabic_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Arabic score doesn’t meet the major requirement …!";
+            }
+            if (Is_EmSAT_Math_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Math score doesn’t meet the major requirement …!";
+            }
+            if (Is_EmSAT_Physics_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Physics score doesn’t meet the major requirement …!";
+            }
+
             sFndCourse = "MTH001";
             if (!isMTH001 && IsMTH001Required)
             {
@@ -147,7 +207,7 @@ public class RegValidation
         //    sCourse = sCourse.Substring(0, 6);
         //}
 
-       
+
 
         int iSelectedCourseCR = 0;
         double iRegisteredCoursesCR = LibraryMOD.GetStudentRegisteredCredit(this.iStudyYear, iSemester, this.myMirror.StudentNumber, (int)this.Campus);
@@ -1817,12 +1877,72 @@ public class RegValidation
         bool IsCHEM001Required = false;
         bool IsBIOL001Required = false;
         bool IsPHYS001Required = false;
+        bool Is_EmSAT_Arabic_Required = false;
+        bool Is_EmSAT_Math_Required = false;
+        bool Is_EmSAT_Physics_Required = false;
+
         string sFndCourse = "";
-        
-         
+
+        int iCurrentRegTerm = (iRegYear * 10) + iRegSem;
+
+
         //if (isFNDCoursesRequired(myMirror.StudentNumber,out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
-        if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+        //if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required))
+        //{
+        //    sFndCourse = "MTH001";
+        //    if (!isMTH001 && IsMTH001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Math less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "CHEM001";
+        //    if (!isCHEM001 && IsCHEM001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Chemistry less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "BIOL001";
+        //    if (!isBIOL001 && IsBIOL001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Biology less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //    sFndCourse = "PHYS001";
+        //    if (!isPHYS001 && IsPHYS001Required)
+        //    {
+        //        if (!isFndCourseRegistered(sFndCourse) && !isFndCoursePassed(sFndCourse))
+        //        {
+        //            iErrorCounter++;
+        //            this.ErrorMessage += "<br />*Your score in Physics less than admission requirment, You must register " + sFndCourse + " first";
+        //        }
+        //    }
+        //}
+        if (AdmissionRequirments.IsFulfilledAdmissionRequirements(Campus, iCurrentRegTerm, myMirror.StudentNumber, out IsMTH001Required, out IsCHEM001Required, out IsBIOL001Required, out IsPHYS001Required, out Is_EmSAT_Arabic_Required, out Is_EmSAT_Math_Required, out Is_EmSAT_Physics_Required))
         {
+            if (Is_EmSAT_Arabic_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Arabic score doesn’t meet the major requirement …!";
+            }
+            if (Is_EmSAT_Math_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Math score doesn’t meet the major requirement …!";
+            }
+            if (Is_EmSAT_Physics_Required)
+            {
+                iErrorCounter++;
+                this.ErrorMessage += "<br />*EmSAT Physics score doesn’t meet the major requirement …!";
+            }
             sFndCourse = "MTH001";
             if (!isMTH001 && IsMTH001Required)
             {
@@ -1860,7 +1980,7 @@ public class RegValidation
                 }
             }
         }
-       
+
         int iSelectedCourseCR = 0;
         double iRegisteredCoursesCR = LibraryMOD.GetStudentRegisteredCredit(this.iStudyYear, iSemester, this.myMirror.StudentNumber, (int)this.Campus);
 
