@@ -243,7 +243,7 @@
                                             <td align="center" style="background-color: #f2f2f2;">
                                                 <b><span>Contact No.:<span style="color: red">*</span> </span></b>&nbsp;</td>
                                         <td align="center" colspan="3">
-                                            <asp:TextBox ID="ContactNo" runat="server" CssClass="form-control" TextMode="Phone" placeholder="0505005500"></asp:TextBox>
+                                            <asp:TextBox ID="ContactNo" runat="server" CssClass="form-control" TextMode="Phone" placeholder="05XXXXXXXX"></asp:TextBox>
                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Please  enter mobile no" Display="Dynamic" ForeColor="Red" ValidationGroup="no" ControlToValidate="ContactNo"></asp:RequiredFieldValidator>
 
                                             </td>
@@ -253,7 +253,7 @@
                                         <td align="center" style="background-color: #f2f2f2;" class="auto-style5">
                                             <b><span>Signature </span></b></td>
                                         <td align="center">
-                                            <asp:TextBox ID="Sig" runat="server" CssClass="form-control"  Font-Names="Vladimir Script" Font-Size="Large"></asp:TextBox>
+                                            <asp:TextBox ID="Sig" runat="server" CssClass="form-control"  Font-Names="Vladimir Script" Font-Size="Large" ReadOnly="true"></asp:TextBox>
                                             </td>
                                         
                                             <td align="center" style="background-color: #f2f2f2;">

@@ -13,6 +13,7 @@ using DataTable = System.Data.DataTable;
 using System.Security;
 using System.IO;
 using System.Text;
+using System.Net;
 
 namespace LocalECT
 {
@@ -125,6 +126,9 @@ namespace LocalECT
         }
         public void sentdatatoSPLIst()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             String refno = Create16DigitString();
 

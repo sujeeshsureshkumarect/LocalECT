@@ -13,6 +13,8 @@ using DataTable = System.Data.DataTable;
 using System.Security;
 using System.IO;
 using System.Text;
+using System.Net;
+
 namespace LocalECT
 {
     public partial class HR_Employee_Leaving_Clearance_Form : System.Web.UI.Page
@@ -91,6 +93,9 @@ namespace LocalECT
         }
         public void sentdatatoSPLIst()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             String refno = Create16DigitString();
 
