@@ -249,6 +249,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.FileUpload EvidenceDocumetFile;
 
         /// <summary>
+        /// txt_Substitute control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Substitute;
+
+        /// <summary>
         /// UserEmail control.
         /// </summary>
         /// <remarks>

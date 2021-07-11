@@ -264,11 +264,18 @@
                                                            </td>
                                         
                                     </tr>
-                                       <tr>
+                                       <tr>                                            
                                          <td align="center" style="background-color: #f2f2f2;"><b>Upload Document</b></td>
                                          <td>
                                         <asp:FileUpload ID="EvidenceDocumetFile" runat="server" />
                                          </td>
+
+                                           <td align="center" style="background-color: #f2f2f2;">
+                                               
+                                               <b> Substitute Employee(s) </b><td align="center" colspan="3">
+                                            <asp:TextBox ID="txt_Substitute" runat="server" CssClass="form-control"></asp:TextBox>
+
+                                                           </td>
                                        </tr>
                                 </table>
                                 <asp:HiddenField ID="UserEmail" runat="server" />

@@ -45,11 +45,56 @@ namespace LocalECT
         }
         protected void lnk_Generate_Click(object sender, EventArgs e)
         {
+            //Substitute Employee(s) 
+            SqlCommand cmd = new SqlCommand("select * from HR_Employee_Academic_Admin_Managers where EmployeeID='" + Session["EmployeeID"].ToString() + "'", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    string mymail = dt.Rows[0]["EmployeeEmail"].ToString();
+                    string hodmail = dt.Rows[0]["HOD_Email"].ToString();
+                    string deanmail = dt.Rows[0]["Dean_Email"].ToString();
+                    if (mymail == hodmail || mymail==deanmail)
+                    {
+                        if(string.IsNullOrEmpty(txt_Substitute.Text))
+                        {
+                            lbl_Msg.Text = "Please fill Substitute Employee(s)";
+                            lbl_Msg.Visible = true;
+                            div_msg.Visible = true;
+                            div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                            return;
+                        }                                                
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine("{0} Exception caught.", ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+
+
             if (LeaveType.SelectedIndex == 3 || LeaveType.SelectedIndex == 4)
             {
                 if (EvidenceDocumetFile.HasFile != true)
                 {
-                    Response.Write("<script>alert('Please upload supporing Document');</script>");
+                    //Response.Write("<script>alert('Please upload supporing Document');</script>");
+                    lbl_Msg.Text = "Please upload supporing Document";
+                    lbl_Msg.Visible = true;
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
                 }
                 else
                 {
@@ -101,7 +146,7 @@ namespace LocalECT
 
         protected void Leave_EndDate_TextChanged(object sender, EventArgs e)
         {
-            if((!string.IsNullOrEmpty(Leave_StartDate.Text))&&(!string.IsNullOrEmpty(Leave_EndDate.Text)))
+            if ((!string.IsNullOrEmpty(Leave_StartDate.Text)) && (!string.IsNullOrEmpty(Leave_EndDate.Text)))
             {
                 DateTime StartDate = DateTime.ParseExact(Leave_StartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime EndDate = DateTime.ParseExact(Leave_EndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -109,7 +154,11 @@ namespace LocalECT
                 int NoOfDays = int.Parse(TotalDays) + 1;
                 if (NoOfDays < 0)
                 {
-                    Response.Write("<script>alert('End date must be after start date');</script>");
+                    //Response.Write("<script>alert('End date must be after start date');</script>");
+                    lbl_Msg.Text = "End date must be after start date";
+                    lbl_Msg.Visible = true;
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
                 }
                 else
                 {
@@ -122,7 +171,7 @@ namespace LocalECT
             }
         }
         public void sentdatatoSPLIst()
-        {   
+        {
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.DefaultConnectionLimit = 9999;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
@@ -164,6 +213,7 @@ namespace LocalECT
             myItem["ApprovalNeeded"] = ApprovalsList;
             myItem["ApprovalStatus"] = "--";
             myItem["RequestNote"] = "--";
+            myItem["Substitute_x0020_Employee"] = txt_Substitute.Text.Trim();
             //  myItem["Finance"] = clientContext.Web.EnsureUser(Session["FinanceEmail"].ToString());
             //   myItem["FinanceAction"] = "Initiate";
             //myItem["FinanceNote"] = "";
@@ -209,11 +259,16 @@ namespace LocalECT
                 lbl_Msg.Text = "Request (ID# " + refno + ") Generated Successfully";
                 lbl_Msg.Visible = true;
                 div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-success alert-dismissible");
                 lnk_Generate.Enabled = false;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Response.Write("<script>alert(e.Message);</script>");
+                Console.WriteLine(ex.Message);
+                lbl_Msg.Text = ex.Message;
+                lbl_Msg.Visible = true;
+                div_msg.Visible = true;
+                div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
             }
             //Console.ReadLine();
         }
@@ -244,7 +299,7 @@ namespace LocalECT
                 da1.Fill(dt1);
                 sc.Close();
 
-                if(dt1.Rows.Count>0)
+                if (dt1.Rows.Count > 0)
                 {
                     hostdesc = "HR Representative Approval";
                     hostmail = dt1.Rows[0]["Host"].ToString();
@@ -255,7 +310,7 @@ namespace LocalECT
                     hostmail = "hr@ect.ac.ae";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 sc.Close();
                 Console.WriteLine(ex.Message);
@@ -280,9 +335,9 @@ namespace LocalECT
                 if (dt.Rows.Count > 0)
                 {
 
-                    string mymail= dt.Rows[0]["EmployeeEmail"].ToString();
-                    string hodmail= dt.Rows[0]["HOD_Email"].ToString();
-                    string deanmail= dt.Rows[0]["Dean_Email"].ToString();
+                    string mymail = dt.Rows[0]["EmployeeEmail"].ToString();
+                    string hodmail = dt.Rows[0]["HOD_Email"].ToString();
+                    string deanmail = dt.Rows[0]["Dean_Email"].ToString();
                     string provostmail = "provost@ect.ac.ae";
                     string presidentmail = "president@ect.ac.ae";
 
@@ -334,9 +389,9 @@ namespace LocalECT
                                 Approvals.Value = "Dean Approval,Provost Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                             }
                             else
-                            {                                                                
-                                    Approvers.Value = dt.Rows[0]["Dean_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
-                                    Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";                                                              
+                            {
+                                Approvers.Value = dt.Rows[0]["Dean_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                                Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                             }
                         }
                     }
@@ -353,7 +408,7 @@ namespace LocalECT
                         {
                             //Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
                             //Approvals.Value = "Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
-                            Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + ","  + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                            Approvers.Value = dt.Rows[0]["HOD_Email"].ToString() + "," + dt.Rows[0]["Dean_Email"].ToString() + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
                             Approvals.Value = "Section Head Approval,Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                         }
                     }
@@ -384,7 +439,7 @@ namespace LocalECT
 
         protected void Leave_StartDate_TextChanged(object sender, EventArgs e)
         {
-            if((!string.IsNullOrEmpty(Leave_StartDate.Text))&&(!string.IsNullOrEmpty(Leave_EndDate.Text)))
+            if ((!string.IsNullOrEmpty(Leave_StartDate.Text)) && (!string.IsNullOrEmpty(Leave_EndDate.Text)))
             {
                 DateTime StartDate = DateTime.ParseExact(Leave_StartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime EndDate = DateTime.ParseExact(Leave_EndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -392,13 +447,17 @@ namespace LocalECT
                 int NoOfDays = int.Parse(TotalDays) + 1;
                 if (NoOfDays < 0)
                 {
-                    Response.Write("<script>alert('End date must be after start date');</script>");
+                    //Response.Write("<script>alert('End date must be after start date');</script>");
+                    lbl_Msg.Text = "End date must be after start date";
+                    lbl_Msg.Visible = true;
+                    div_msg.Visible = true;
+                    div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
                 }
                 else
                 {
                     Total_Days.Text = NoOfDays.ToString();
                 }
-            } 
+            }
             else
             {
                 Total_Days.Text = "0";
