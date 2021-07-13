@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using Microsoft.SharePoint.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,18 @@ using System.Data;
 using System.Data.SqlClient;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security;
+using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static ClsMoodleAPI;
 
 namespace LocalECT
 {
@@ -995,6 +1000,54 @@ namespace LocalECT
                 grdTimeTable.DataBind();
                 grdTimeTable.DataBind();
 
+                //Enroll Course in Moodle by sujeesh on 05-07-2021
+                Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+                SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+                SqlCommand cmd = new SqlCommand("select UpdateMoodleEnrollment from [ECTDataNew].[dbo].[Cmn_Firm];select strShiftEn,strShortcut from [ECTData].[dbo].[Reg_Shifts] where byteShift=@byteShift", sc);
+                cmd.Parameters.AddWithValue("@byteShift", bShift);
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    sc.Open();
+                    da.Fill(ds);
+                    sc.Close();
+
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["UpdateMoodleEnrollment"].ToString() == "1")
+                        {
+                            string studentid = Request.QueryString["sid"];
+                            var services = new DAL.DAL();
+                            Connection_StringCLS connstr = new Connection_StringCLS(Campus);
+                            DataTable dtStudentServices = services.GetStudentDetailsID(studentid, connstr.Conn_string);
+                            string emailid = dtStudentServices.Rows[0]["sECTemail"].ToString();
+                            //UnEnroll in Moodle                                        
+                            CoursesCls CoursesClss = new CoursesCls();
+                            string cousreshortcode = CoursesClss.GetUnifiedCourseCode(sCourse);
+                            cousreshortcode = cousreshortcode + "_" + iRegYear + "" + iRegSem;//Like MAN101_20204
+                            int Moodle_CourseNo = GetCourseNumber(cousreshortcode);
+                            int roleid = 5;//Students
+                            string groupname = ds.Tables[1].Rows[0]["strShortcut"].ToString() + "_" + bClass + "_" + iRegYear + "_" + iRegSem;
+                            string sSID = studentid;
+                            if (UnEnrollStudentinMoodleCourses_CourseCode(emailid, sSID, cousreshortcode, Moodle_CourseNo, roleid, groupname) == InitializeModule.SUCCESS_RET)
+                            {
+                                //UnEnrolled in Moodle Courses
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sc.Close();
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    sc.Close();
+                }
+
+
                 //Update Registration Status-CX API if no courses Found
                 if (grdTimeTable.Rows.Count <= 0)
                 {
@@ -1025,6 +1078,352 @@ namespace LocalECT
 
 
             }
+        }
+        private DataSet InitiateCourseGroups()
+        {
+            DataTable dt = new DataTable();
+            DataRow dr;
+            DataSet ds = new DataSet();
+            Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.Males);
+            SqlConnection conn = new SqlConnection(myConnection_String.Conn_string);
+            conn.Open();
+            try
+            {
+                DataColumn dc;
+
+                dc = new DataColumn("course1", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("group1", Type.GetType("System.String"));
+                dt.Columns.Add(dc);
+                dc = new DataColumn("iGroupID", Type.GetType("System.Int32"));
+                dt.Columns.Add(dc);
+
+                string sSQL = "SELECT  idnumber, groupname";
+                sSQL += " FROM Moodle_Import_Groups_M_F_Step2";
+
+                SqlCommand cmd = new SqlCommand(sSQL, conn);
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read())
+                {
+                    dr = dt.NewRow();
+
+                    dr["course1"] = rd["idnumber"].ToString();
+                    dr["group1"] = rd["groupname"].ToString();
+                    dr["iGroupID"] = 0;
+
+                    dt.Rows.Add(dr);
+                }
+
+                dt.TableName = "CourseGroups";
+                dt.AcceptChanges();
+                ds.Tables.Add(dt);
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("{0} Exception caught.", exp);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+
+            }
+            return ds;
+        }
+        public int UnEnrollStudentinMoodleCourses_CourseCode(string sEmail, string sStudentID, string cousreshortcode, int Moodle_CourseNo, int roleid, string groupname)
+        {
+            int iResult = InitializeModule.FAIL_RET;
+
+            int iYear = 0;
+            int iSemester = 0;
+            iSemester = Convert.ToInt32(Session["RegSemester"].ToString());
+            iYear = Convert.ToInt32(Session["RegYear"].ToString());
+
+            ClsMoodleAPI.MoodleManualEnrol enroluser = new ClsMoodleAPI.MoodleManualEnrol();
+
+            //int iSuspend = 0;
+            int iUserID = 0;
+            string sUsername = "";
+            string sCourse = "";
+            int iCourseID = 0;
+            string sGroupName = "";
+            int iGroupID = 0;
+            ///iSuspend = Convert.ToInt32("0" + txt_Suspend.Text);
+
+            DataSet dsGroups = new DataSet();
+            dsGroups = InitiateCourseGroups();
+            DataRow[] drAry = null;
+
+            string sCourseCode = "";
+
+
+            enroluser.roleid = roleid;//Convert.ToInt32(dsUser.Tables["User"].Rows[i]["role1"].ToString());
+                                      //get userid from username
+
+            sUsername = sEmail;
+            sCourse = cousreshortcode;
+            sGroupName = groupname;
+            iUserID = 0;
+
+            //sStudentID = LibraryMOD.GetStudentIDFromEmail(sUsername, iYear, iSemester);
+            iUserID = LibraryMOD.GetStudentMoodleUserNo(sStudentID);
+
+            //iUserID = Convert.ToInt32("0" + dsUser.Tables["User"].Rows[i]["MoodleUserNo"].ToString());
+
+            iCourseID = Moodle_CourseNo;
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            //Start Check if user exists or not
+            if (iUserID == 0)
+            {
+                //get user number from moodle
+                string get_users = core_user_get_users("username", sUsername.Trim());
+                // Deserialize
+
+                if (get_users.Contains("exception"))
+                {
+                    // Error
+                    ClsMoodleAPI.MoodleException moodleError = serializer.Deserialize<ClsMoodleAPI.MoodleException>(get_users);
+                    //lbl_results.Text += " - Error in get user " + sUsername + " / " + get_users;
+                }
+                else
+                {
+                    // Good
+                    ClsMoodleAPI.ListOfUsers myDeserializedClass = JsonConvert.DeserializeObject<ClsMoodleAPI.ListOfUsers>(get_users);
+                    if (myDeserializedClass.users.Count > 0)
+                    {
+                        iUserID = myDeserializedClass.users[0].id;
+                        //update MoodleuserNo
+                        //save Moodle user number in ECT database
+                        //UpdateMoodleUserNo(iUserNo, iUserID);
+                    }
+                }
+            }
+
+
+            ////get Courseid from coursename
+
+
+            sCourseCode = sCourse.Trim().Substring(0, sCourse.Trim().Length - 6);
+            if (iCourseID == 0)
+            {
+                iCourseID = LibraryMOD.GetMoodleCourseNo(sCourseCode, iYear, iSemester);
+            }
+            //get Moodle course number if not saved in ECT DB
+            if (iCourseID == 0)
+            {
+                iCourseID = GetCourseNumber(sCourse.Trim());
+                ClsMoodleAPI.UpdateMoodleCourseNo(iYear, iSemester, sCourse.Trim().Substring(0, sCourse.Trim().Length - 6), iCourseID);
+            }
+
+
+            // Deserialize
+            string contents = "";
+            serializer = new JavaScriptSerializer();
+            //if (contents.Contains("exception"))
+            //{
+            //    // Error
+            //    ClsMoodleAPI.MoodleException moodleError = serializer.Deserialize<ClsMoodleAPI.MoodleException>(contents);
+            //    //lbl_results.Text += "Error in enrolling user in course: " + enroluser.courseid + " / " + contents;
+            //}
+            //else
+            //{
+            // Good
+            //List<string> newGroups = serializer.Deserialize<List<string>>(contents);
+
+
+            drAry = dsGroups.Tables["CourseGroups"].Select("course1='" + sCourse.Trim() + "' AND group1='" + sGroupName.Trim() + "'");
+            if (drAry.Length > 0)
+            {
+                iGroupID = Convert.ToInt32(drAry[0]["iGroupID"].ToString());
+            }
+            if (iGroupID == 0)
+            {
+                //get group no from moodle
+                string Token = "1b4cb9114197a84985695b19b1164d0a";
+                iGroupID = ClsMoodleAPI.GetGroupIDFromGroupName(Token, iCourseID, sGroupName.Trim());
+                //save droup no in dataset
+                // drAry[0]["iGroupID"] = iGroupID;
+            }
+
+
+            //delete from group
+            contents = core_group_delete_group_members(iGroupID, iUserID);
+            // Deserialize
+            serializer = new JavaScriptSerializer();
+            if (contents.Contains("exception"))
+            {
+                // Error
+                ClsMoodleAPI.MoodleException moodleError = serializer.Deserialize<ClsMoodleAPI.MoodleException>(contents);
+                //lbl_results.Text += "Error in deleting member from the group:" + sGroupName + "in course:" + sCourse + " / " + contents;
+            }
+            else
+            {
+                bool isRegistered = false;
+
+                isRegistered = LibraryMOD.isCourseRegistered(iYear, iSemester, sStudentID, sCourseCode, InitializeModule.EnumCampus.Males);
+                if (isRegistered == false)
+                {
+                    isRegistered = LibraryMOD.isCourseRegistered(iYear, iSemester, sStudentID, sCourseCode, InitializeModule.EnumCampus.Females);
+                }
+
+                if (isRegistered == false)
+                {
+                    contents = enrol_manual_unenrol_users(iUserID, iCourseID, 5);
+                }
+                // Good
+                iResult = InitializeModule.SUCCESS_RET;
+                //List<string> newGroups = serializer.Deserialize<List<string>>(contents);
+                // lbl_results.Text += "Member Added Successfuly";
+            }
+            //}                      
+            //for
+            return iResult;
+        }
+        public string enrol_manual_unenrol_users(int userid, int courseid, int roleid)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            String token = "1b4cb9114197a84985695b19b1164d0a";
+
+            ClsMoodleAPI.MoodleManualUnEnrol Unenrol = new ClsMoodleAPI.MoodleManualUnEnrol();
+            Unenrol.userid = userid;// HttpUtility.UrlEncode(userid);
+            Unenrol.courseid = courseid;//HttpUtility.UrlEncode(courseid);
+            Unenrol.roleid = roleid;// HttpUtility.UrlEncode(roleid);
+
+            List<ClsMoodleAPI.MoodleManualUnEnrol> groupsList = new List<ClsMoodleAPI.MoodleManualUnEnrol>();
+            groupsList.Add(Unenrol);
+
+            Array arrGroups = groupsList.ToArray();
+
+            String postData = String.Format("enrolments[0][userid]={0}&enrolments[0][courseid]={1}&enrolments[0][roleid]={2}", Unenrol.userid, Unenrol.courseid, Unenrol.roleid);
+            string createRequest = string.Format("https://lms.ectmoodle.ae/webservice/rest/server.php?wstoken={0}&wsfunction={1}&moodlewsrestformat=json", token, "enrol_manual_unenrol_users");
+            // Call Moodle REST Service
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(createRequest);
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            // Encode the parameters as form data:
+            byte[] formData =
+                UTF8Encoding.UTF8.GetBytes(postData);
+            req.ContentLength = formData.Length;
+
+            // Write out the form Data to the request:
+            using (Stream post = req.GetRequestStream())
+            {
+                post.Write(formData, 0, formData.Length);
+            }
+
+            // Get the Response
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream resStream = resp.GetResponseStream();
+            StreamReader reader = new StreamReader(resStream);
+            string contents = reader.ReadToEnd();
+            return contents;
+        }
+        public string core_group_delete_group_members(int groupid, int userid)
+        {
+            //members[0][groupid]= int
+            //members[0][userid]= int
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            //===========
+            //to fix the following error:
+            //The underlying connection was closed: A connection that was expected to be kept alive was closed by the server.
+            ServicePointManager.DefaultConnectionLimit = 100;
+            ServicePointManager.MaxServicePointIdleTime = 200000;
+
+            //req.KeepAlive = false;
+            //=====================
+
+            String token = "1b4cb9114197a84985695b19b1164d0a";
+
+            ClsMoodleAPI.MoodleGroupsAddMember groups = new ClsMoodleAPI.MoodleGroupsAddMember();
+            groups.groupid = groupid;
+            groups.userid = userid;//HttpUtility.UrlEncode(userid)
+
+            List<ClsMoodleAPI.MoodleGroupsAddMember> groupsList = new List<ClsMoodleAPI.MoodleGroupsAddMember>();
+            groupsList.Add(groups);
+
+            Array arrGroups = groupsList.ToArray();
+
+            String postData = String.Format("members[0][groupid]={0}&members[0][userid]={1}", groups.groupid, groups.userid);
+            string createRequest = string.Format("https://lms.ectmoodle.ae/webservice/rest/server.php?wstoken={0}&wsfunction={1}&moodlewsrestformat=json", token, "core_group_delete_group_members");
+            // Call Moodle REST Service
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(createRequest);
+            req.Timeout = 200000;  //added by bahaa to solve reqImport.GetResponse() timeout error
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            // Encode the parameters as form data:
+            byte[] formData =
+                UTF8Encoding.UTF8.GetBytes(postData);
+            req.ContentLength = formData.Length;
+
+            // Write out the form Data to the request:
+            using (Stream post = req.GetRequestStream())
+            {
+                post.Write(formData, 0, formData.Length);
+            }
+
+            // Get the Response
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream resStream = resp.GetResponseStream();
+            StreamReader reader = new StreamReader(resStream);
+            string contents = reader.ReadToEnd();
+            return contents;
+        }
+        public string core_user_get_users(string key, string value)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            String token = "1b4cb9114197a84985695b19b1164d0a";
+
+            ClsMoodleAPI.MoodleGetUSer getusers = new ClsMoodleAPI.MoodleGetUSer();
+            getusers.key = HttpUtility.UrlEncode(key);
+            getusers.value = HttpUtility.UrlEncode(value);
+
+            List<ClsMoodleAPI.MoodleGetUSer> groupsList = new List<ClsMoodleAPI.MoodleGetUSer>();
+            groupsList.Add(getusers);
+
+            Array arrGroups = groupsList.ToArray();
+
+            //String postData = String.Format("field={0}&values[0]={1}", getusers.key, getusers.value);
+            //string createRequest = string.Format("https://lms.ectmoodle.ae/webservice/rest/server.php?wstoken={0}&wsfunction={1}&moodlewsrestformat=json", token, "core_user_get_users_by_field");
+
+            String postData = String.Format("criteria[0][key]={0}&criteria[0][value]={1}", getusers.key, getusers.value);
+            string createRequest = string.Format("https://lms.ectmoodle.ae/webservice/rest/server.php?wstoken={0}&wsfunction={1}&moodlewsrestformat=json", token, "core_user_get_users");
+            // Call Moodle REST Service
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(createRequest);
+            req.Timeout = 200000;  //added by bahaa to solve reqImport.GetResponse() timeout error
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.KeepAlive = false;   //The underlying connection was closed: A connection that was expected to be kept alive was closed by the server.
+            // Encode the parameters as form data:
+            byte[] formData =
+                UTF8Encoding.UTF8.GetBytes(postData);
+            req.ContentLength = formData.Length;
+
+            // Write out the form Data to the request:
+            using (Stream post = req.GetRequestStream())
+            {
+                post.Write(formData, 0, formData.Length);
+            }
+
+            // Get the Response
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream resStream = resp.GetResponseStream();
+            StreamReader reader = new StreamReader(resStream);
+            string contents = reader.ReadToEnd();
+            return contents;
         }
 
 
@@ -1563,6 +1962,55 @@ namespace LocalECT
                     if (emailid != "" && emailid != null)
                     {
                         //Don't Call Email Creation function
+                        int iYear = iRegYear;
+                        int iSemester = iRegSem;
+                        //int iSelectedIndex = grdCourses.SelectedIndex;
+                        //string sCourse = grdCourses.DataKeys[iSelectedIndex].Values["Course"].ToString();
+                        //int iClass = int.Parse(grdCourses.DataKeys[iSelectedIndex].Values["Class"].ToString());
+                        //int iShift = int.Parse(grdCourses.DataKeys[iSelectedIndex].Values["byteShift"].ToString());
+
+                        //Enroll Course in Moodle by sujeesh on 05-07-2021
+                        Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
+                        SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
+                        SqlCommand cmd = new SqlCommand("select UpdateMoodleEnrollment from [ECTDataNew].[dbo].[Cmn_Firm];select strShiftEn,strShortcut from [ECTData].[dbo].[Reg_Shifts] where byteShift=@byteShift", sc);
+                        cmd.Parameters.AddWithValue("@byteShift", bShift);
+                        DataSet ds = new DataSet();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        try
+                        {
+                            sc.Open();
+                            da.Fill(ds);
+                            sc.Close();
+
+                            if (ds.Tables[0].Rows.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows[0]["UpdateMoodleEnrollment"].ToString() == "1")
+                                {
+                                    //Enroll in Moodle                                        
+                                    CoursesCls CoursesClss = new CoursesCls();
+                                    string cousreshortcode = CoursesClss.GetUnifiedCourseCode(sCourse);
+                                    cousreshortcode = cousreshortcode + "_" + iYear + "" + iSemester;//Like MAN101_20204
+                                    int Moodle_CourseNo = GetCourseNumber(cousreshortcode);
+                                    int roleid = 5;//Students
+                                    string groupname = ds.Tables[1].Rows[0]["strShortcut"].ToString() + "_" + bClass + "_" + iYear + "_" + iSemester;
+                                    string sSID = studentid;//Session["CurrentStudent"].ToString();
+                                    if (ClsMoodleAPI.EnrollStudentinMoodleCourses_CourseCode(emailid, sSID, cousreshortcode, Moodle_CourseNo, roleid, groupname) == InitializeModule.SUCCESS_RET)
+                                    {
+                                        //Enrolled in Moodle Courses
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            sc.Close();
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            sc.Close();
+                        }
+
                     }
                     else
                     {
@@ -1631,6 +2079,94 @@ namespace LocalECT
                 Conn.Dispose();
             }
             return iAdded;
+        }
+        public int GetCourseNumber(string sShortName)
+        {
+            int iCourseNo = 0;
+            string contentsimport = core_course_get_courses_by_field("shortname", sShortName.Trim());
+            JavaScriptSerializer serializer1 = new JavaScriptSerializer();
+            if (contentsimport.Contains("exception"))
+            {
+                // Error
+                MoodleException moodleError = serializer1.Deserialize<MoodleException>(contentsimport);
+                // lblFailResults.Text += "Error in geting course number " + sShortName + " -- " + contentsimport;
+                iCourseNo = -1;
+            }
+            else
+            {
+                //get course number
+                string[] courseinfo = contentsimport.Split(new Char[] { ':' });
+
+                string[] courseidnumber = courseinfo[2].ToString().Split(new Char[] { ',' });
+                if (courseidnumber[0].ToString().Trim().Length > 3)
+                {
+                    iCourseNo = Convert.ToInt32("0" + courseidnumber[0].ToString());
+                }
+                else
+                {
+                    iCourseNo = -1;
+                }
+            }
+            return iCourseNo;
+
+        }
+        public string core_course_get_courses_by_field(string field, string value)
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            //===========
+            //to fix the following error:
+            //The underlying connection was closed: A connection that was expected to be kept alive was closed by the server.
+            ServicePointManager.DefaultConnectionLimit = 100;
+            ServicePointManager.MaxServicePointIdleTime = 200000;
+
+            //req.KeepAlive = false;
+            //=====================
+            String token = "1b4cb9114197a84985695b19b1164d0a";
+
+
+            course_get_courses courses = new course_get_courses();
+            courses.field = HttpUtility.UrlEncode(field);
+            courses.value = HttpUtility.UrlEncode(value);
+
+            List<course_get_courses> coursesList = new List<course_get_courses>();
+            coursesList.Add(courses);
+
+            Array arrCourses = coursesList.ToArray();
+
+            String postData = String.Format("field={0}&value={1}", courses.field, courses.value);
+
+            string createRequest = string.Format("https://lms.ectmoodle.ae/webservice/rest/server.php?wstoken={0}&wsfunction={1}&moodlewsrestformat=json", token, "core_course_get_courses_by_field");
+
+            // Call Moodle REST Service
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(createRequest);
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            // Encode the parameters as form data:
+            byte[] formData =
+                UTF8Encoding.UTF8.GetBytes(postData);
+            req.ContentLength = formData.Length;
+
+            // Write out the form Data to the request:
+            using (Stream post = req.GetRequestStream())
+            {
+                post.Write(formData, 0, formData.Length);
+            }
+
+
+            // Get the Response
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream resStream = resp.GetResponseStream();
+            StreamReader reader = new StreamReader(resStream);
+            string contents = reader.ReadToEnd();
+            return contents;
+        }
+        public class course_get_courses
+        {
+            public string field { get; set; }
+            public string value { get; set; }
         }
         private int GetSerial(string sNumber)
         {
@@ -2233,7 +2769,7 @@ namespace LocalECT
             {
                 string sServer = "SQL_SERVER.ECTData.dbo.";
 
-                sSQL = "SELECT 'Females' AS sCampus,P.strShiftEn AS Session, TT.strCourse AS Course";
+                sSQL = "SELECT 'Females' AS sCampus,P.strShiftEn AS Session, TT.strCourse AS Course, TT.byteShift AS byteShift";
                 sSQL += " , TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo";
                 sSQL += " , TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri";
                 sSQL += " , TT.Sat, TT.Hall, CB.Shift AS iSession, AL.strAlternativeTo AS sAL";
@@ -2251,7 +2787,7 @@ namespace LocalECT
                 sServer = "LOCALECT.ECTData.dbo.";
 
                 sSQL += " UNION ";
-                sSQL += "SELECT 'Males' AS sCampus,P.strShiftEn AS Session, TT.strCourse AS Course";
+                sSQL += "SELECT 'Males' AS sCampus,P.strShiftEn AS Session, TT.strCourse AS Course, TT.byteShift AS byteShift";
                 sSQL += " , TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo";
                 sSQL += " , TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri";
                 sSQL += " , TT.Sat, TT.Hall, CB.Shift AS iSession, AL.strAlternativeTo AS sAL";

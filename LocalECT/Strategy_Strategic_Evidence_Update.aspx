@@ -65,6 +65,12 @@
                                                     <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Evidence Serial Required" ControlToValidate="txt_EvidenceSerial" ForeColor="Red" ValidationGroup="no">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
+                                                      <div class="form-group ">
+                                                    <label>Revision No *</label>
+                                                    <asp:TextBox ID="txt_RevisionNo" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Revision No. Required" ControlToValidate="txt_RevisionNo" ForeColor="Red" ValidationGroup="no">
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
                                                      <div class="form-group ">
                                                         <label>Department *</label>
                                                         <asp:DropDownList ID="drp_Department" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="drp_Department_SelectedIndexChanged"></asp:DropDownList>

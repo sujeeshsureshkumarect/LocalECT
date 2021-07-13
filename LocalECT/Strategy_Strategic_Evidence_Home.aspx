@@ -94,7 +94,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Type</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Title</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Abbreviation</th> 
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Serial</th>   
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Serial</th> 
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Revision No.</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Department</th>   
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Section</th>   
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Recored</th>   
@@ -116,6 +117,7 @@
                                                     <td><%#Eval("sEvidenceTitle")%></td> 
                                                     <td><%#Eval("sAbbreviation")%></td>
                                                     <td><%#Eval("sEvidenceSerial")%></td> 
+                                                    <td><%#Eval("sRevisionNo")%></td> 
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>  
                                                     <td><%#Eval("sEvidenceRecored")%></td> 

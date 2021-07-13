@@ -215,6 +215,7 @@
                                                             <asp:GridView ID="grdCourses" runat="server" AutoGenerateColumns="False"
                                                                 Caption="Available Courses" CaptionAlign="Top" CellPadding="4"
                                                                 DataSourceID="CTMDS" ForeColor="#333333" GridLines="None"
+                                                                 DataKeyNames="Course,Class,byteShift"
                                                                 Width="100%">
                                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                 <RowStyle BackColor="#ededed"/>
@@ -330,6 +331,7 @@
                                                         <td>
                                                             <asp:GridView ID="grdTimeTable" runat="server" AutoGenerateColumns="False"
                                                                 CellPadding="4" DataSourceID="TMDS" ForeColor="#333333" GridLines="None"
+                                                                  DataKeyNames="Course,Class,byteShift"
                                                                 Width="100%" Caption="Registered Courses" CaptionAlign="Top">
                                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                                                 <RowStyle BackColor="#ededed"/>
@@ -497,7 +499,7 @@
 
                                 <asp:SqlDataSource ID="CTMDS" runat="server"
                                     ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>"
-                                    SelectCommand="SELECT TT.byteShift, P.strShiftEn AS Session, TT.strCourse AS Course, TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo, TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri, TT.Sat, TT.Hall, ISNULL(CC.RegCapacity, 0) AS RegCapacity, CONVERT (int, FLOOR(TT.intMaxSeats * TT.cSharedFactor)) AS MaxSeats FROM Reg_Shifts AS P INNER JOIN Time_Table_Times AS TT ON P.byteShift = TT.byteShift INNER JOIN Reg_Courses AS C ON TT.strCourse = C.strCourse LEFT OUTER JOIN ClassCapacity AS CC ON TT.intStudyYear = CC.iYear AND TT.byteSemester = CC.Sem AND TT.byteShift = CC.Shift AND TT.strCourse = CC.Course AND TT.byteClass = CC.Class WHERE (TT.strCourse LIKE N'%' + @Course + N'%') AND (TT.intStudyYear = @iYear) AND (TT.byteSemester = @iSem) AND (TT.byteShift &lt;&gt; 11) AND (TT.byteClass &lt; 100) ORDER BY Course, TT.byteShift, Class, TT.TimeFrom">
+                                    SelectCommand="SELECT TT.byteShift AS byteShift, P.strShiftEn AS Session, TT.strCourse AS Course, TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo, TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri, TT.Sat, TT.Hall, ISNULL(CC.RegCapacity, 0) AS RegCapacity, CONVERT (int, FLOOR(TT.intMaxSeats * TT.cSharedFactor)) AS MaxSeats FROM Reg_Shifts AS P INNER JOIN Time_Table_Times AS TT ON P.byteShift = TT.byteShift INNER JOIN Reg_Courses AS C ON TT.strCourse = C.strCourse LEFT OUTER JOIN ClassCapacity AS CC ON TT.intStudyYear = CC.iYear AND TT.byteSemester = CC.Sem AND TT.byteShift = CC.Shift AND TT.strCourse = CC.Course AND TT.byteClass = CC.Class WHERE (TT.strCourse LIKE N'%' + @Course + N'%') AND (TT.intStudyYear = @iYear) AND (TT.byteSemester = @iSem) AND (TT.byteShift &lt;&gt; 11) AND (TT.byteClass &lt; 100) ORDER BY Course, TT.byteShift, Class, TT.TimeFrom">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID="txtCourse" DefaultValue="-" Name="Course"
                                             PropertyName="Text" />
@@ -508,7 +510,7 @@
 
                                 <asp:SqlDataSource ID="TMDS" runat="server"
                                     ConnectionString="<%$ ConnectionStrings:ECTDataFemales %>"
-                                    SelectCommand="SELECT P.strShiftEn AS Session, TT.strCourse AS Course, TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo, TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri, TT.Sat, TT.Hall, CB.Shift AS iSession, AL.strAlternativeTo AS sAL FROM Course_Balance_View AS CB INNER JOIN Time_Table_Times AS TT ON CB.Shift = TT.byteShift AND CB.Course = TT.strCourse AND CB.Class = TT.byteClass AND CB.iYear = TT.intStudyYear AND CB.Sem = TT.byteSemester INNER JOIN Reg_Shifts AS P ON TT.byteShift = P.byteShift LEFT OUTER JOIN Reg_Course_Alternative AS AL ON CB.iYear = AL.intStudyYear AND CB.Sem = AL.byteSemester AND CB.Student = AL.lngStudentNumber AND CB.Course = AL.strAlternative WHERE (CB.Student = @Student) AND (CB.iYear = @iYear) AND (CB.Sem = @iSem) ORDER BY Course, TT.TimeFrom">
+                                    SelectCommand="SELECT P.strShiftEn AS Session, TT.byteShift AS byteShift, TT.strCourse AS Course, TT.byteClass AS Class, TT.Lecturer, TT.TimeFrom, TT.TimeTo, TT.Sun, TT.Mon, TT.Tus, TT.Wed, TT.Thu, TT.Fri, TT.Sat, TT.Hall, CB.Shift AS iSession, AL.strAlternativeTo AS sAL FROM Course_Balance_View AS CB INNER JOIN Time_Table_Times AS TT ON CB.Shift = TT.byteShift AND CB.Course = TT.strCourse AND CB.Class = TT.byteClass AND CB.iYear = TT.intStudyYear AND CB.Sem = TT.byteSemester INNER JOIN Reg_Shifts AS P ON TT.byteShift = P.byteShift LEFT OUTER JOIN Reg_Course_Alternative AS AL ON CB.iYear = AL.intStudyYear AND CB.Sem = AL.byteSemester AND CB.Student = AL.lngStudentNumber AND CB.Course = AL.strAlternative WHERE (CB.Student = @Student) AND (CB.iYear = @iYear) AND (CB.Sem = @iSem) ORDER BY Course, TT.TimeFrom">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID="sSelectedValue" DefaultValue="-"
                                             Name="Student" PropertyName="Value" />
