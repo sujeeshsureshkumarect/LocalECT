@@ -180,7 +180,10 @@
     <Content Include="ACC_STD_Balance.aspx" />
     <Content Include="Applicants_Tracking.aspx" />
     <Content Include="App_Start\vbcode\BarCodeCls.vb" />
+    <Content Include="Attendace_Warning_Management.aspx" />
     <Content Include="Attendance_Grades.aspx" />
+    <Content Include="Attendance_Management.aspx" />
+    <Content Include="Attendance_Management_Update.aspx" />
     <Content Include="Attendance_Warning.aspx" />
     <Content Include="Authorization.aspx" />
     <Content Include="Bulk_Acc_BlockUnBlock.aspx" />
@@ -8691,12 +8694,33 @@
     <Compile Include="App_Start\UserCls.cs" />
     <Compile Include="App_Start\Work_PlacesCls.cs" />
     <Compile Include="App_Start\XLS.cs" />
+    <Compile Include="Attendace_Warning_Management.aspx.cs">
+      <DependentUpon>Attendace_Warning_Management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendace_Warning_Management.aspx.designer.cs">
+      <DependentUpon>Attendace_Warning_Management.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Attendance_Grades.aspx.cs">
       <DependentUpon>Attendance_Grades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Attendance_Grades.aspx.designer.cs">
       <DependentUpon>Attendance_Grades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Attendance_Management.aspx.cs">
+      <DependentUpon>Attendance_Management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendance_Management.aspx.designer.cs">
+      <DependentUpon>Attendance_Management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Attendance_Management_Update.aspx.cs">
+      <DependentUpon>Attendance_Management_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendance_Management_Update.aspx.designer.cs">
+      <DependentUpon>Attendance_Management_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Attendance_Warning.aspx.cs">
       <DependentUpon>Attendance_Warning.aspx</DependentUpon>
