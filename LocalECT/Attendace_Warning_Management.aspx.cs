@@ -63,23 +63,48 @@ namespace LocalECT
         }
         private void FillTerms()
         {
+            //List<Semesters> myTerms = new List<Semesters>();
+            //SemesterDAL myTermsDAL = new SemesterDAL();
+            //try
+            //{
+            //    myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
+            //    for (int i = 0; i < myTerms.Count; i++)
+            //    {
+            //        ddlTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
+
+            //    }
+            //    int iYear = 0;
+            //    int iSem = 0;
+            //    int iTerm = 0;
+            //    iYear = (int)Session["CurrentYear"];
+            //    iSem = (int)Session["CurrentSemester"];
+            //    iTerm = iYear * 10 + iSem;
+            //    ddlTerm.SelectedValue = iTerm.ToString();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LibraryMOD.ShowErrorMessage(ex);
+            //    lbl_Msg.Text = ex.Message;
+            //    div_msg.Visible = true;
+            //}
+            //finally
+            //{
+            //    myTerms.Clear();
+            //}
             List<Semesters> myTerms = new List<Semesters>();
             SemesterDAL myTermsDAL = new SemesterDAL();
             try
             {
-                myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, "", true);
-                for (int i = 0; i < myTerms.Count; i++)
+                int iTerm = 0;
+
+                iTerm = LibraryMOD.GetCurrentTerm();
+                myTerms = myTermsDAL.GetTerms(InitializeModule.EnumCampus.ECTNew, " Where Term<=" + iTerm, true);
+                for (int i = 0; i < 3; i++)
                 {
                     ddlTerm.Items.Add(new ListItem(myTerms[i].ShortDesc, myTerms[i].Term.ToString()));
-
                 }
-                int iYear = 0;
-                int iSem = 0;
-                int iTerm = 0;
-                iYear = (int)Session["CurrentYear"];
-                iSem = (int)Session["CurrentSemester"];
-                iTerm = iYear * 10 + iSem;
                 ddlTerm.SelectedValue = iTerm.ToString();
+
             }
             catch (Exception ex)
             {
@@ -90,6 +115,7 @@ namespace LocalECT
             finally
             {
                 myTerms.Clear();
+
             }
         }
         //Delete

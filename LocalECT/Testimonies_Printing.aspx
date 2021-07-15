@@ -155,7 +155,8 @@
                                                 Text="Print Header &amp; Footer" Checked="True" ForeColor="#0066FF" CssClass="form-control" />
                                         </div>
                                     </div>
-                                    <asp:LinkButton ID="Print_btn" runat="server" CssClass="btn btn-success btn-sm" OnClick="Print_btn_Click"><i class="fa fa-print"></i> Print</asp:LinkButton>
+                                    <asp:LinkButton ID="Print_btn" runat="server" CssClass="btn btn-success btn-sm" OnClick="Print_btn_Click"><i class="fa fa-file-pdf-o"></i> Print PDF</asp:LinkButton>
+                                    <asp:LinkButton ID="Word_btn" runat="server" CssClass="btn btn-success btn-sm" OnClick="Word_btn_Click"><i class="fa fa-file-word-o"></i> Print Word</asp:LinkButton>
                                     <asp:HiddenField ID="hfText1" runat="server" />
                                                     <asp:HiddenField ID="hfText2" runat="server" />
                                     <asp:HiddenField ID="hfText4" runat="server" />

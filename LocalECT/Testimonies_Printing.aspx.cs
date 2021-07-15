@@ -1597,5 +1597,10 @@ namespace LocalECT
                 myReport.Dispose();
             }
         }
+
+        protected void Word_btn_Click(object sender, EventArgs e)
+        {
+            PrintTestimony("Word_btn");
+        }
     }
 }
