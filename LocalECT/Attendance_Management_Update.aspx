@@ -49,6 +49,7 @@
                             <ul class="nav navbar-right panel_toolbox">
                                 <%--<a href="Student_Profile.aspx" class="btn btn-success btn-sm" id="lnk_add" runat="server"><i class="glyphicon glyphicon-plus"></i> Create New Student</a>--%>
                                <%-- <asp:LinkButton ID="lnk_add" runat="server" CssClass="btn btn-success btn-sm" OnClick="lnk_add_Click"><i class="glyphicon glyphicon-plus"></i> Create New Student</asp:LinkButton>--%>
+                                <a href="Attendance_Management.aspx" class="btn btn-success btn-sm"><i class="fa fa-calendar"></i> Attendance Management</a>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>

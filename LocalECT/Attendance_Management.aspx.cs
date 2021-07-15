@@ -204,17 +204,17 @@ namespace LocalECT
             byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(text);
             string encrypted = Convert.ToBase64String(b);
 
-            //Response.Redirect("Attendance_Management_Update?i="+ encrypted + "");
+            Response.Redirect("Attendance_Management_Update?i="+ encrypted + "");
 
-            string url = "Attendance_Management_Update?i=" + encrypted + "";
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<script type = 'text/javascript'>");
-            sb.Append("window.open('");
-            sb.Append(url);
-            sb.Append("','_blank');");
-            sb.Append("</script>");
-            ClientScript.RegisterStartupScript(this.GetType(),
-                    "script", sb.ToString());
+            //string url = "Attendance_Management_Update?i=" + encrypted + "";
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append("<script type = 'text/javascript'>");
+            //sb.Append("window.open('");
+            //sb.Append(url);
+            //sb.Append("','_blank');");
+            //sb.Append("</script>");
+            //ClientScript.RegisterStartupScript(this.GetType(),
+            //        "script", sb.ToString());
 
             //Response.Write("<script>");
             //Response.Write("window.open('Attendance_Management_Update?i=" + encrypted + "','_blank')");
