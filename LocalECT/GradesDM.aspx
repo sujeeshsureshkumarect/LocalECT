@@ -417,7 +417,7 @@
         
             <asp:HiddenField ID="txtUpdates" runat="server" 
                 onvaluechanged="txtUpdates_ValueChanged" />
-            <asp:HiddenField ID="hdnTerm" runat="server" />
+            <asp:HiddenField ID="hdnTerm" runat="server" ClientIDMode="Static"/>
             
         </p>
         <asp:Label ID="lblEffectedRecords" runat="server" Visible="False"></asp:Label>
