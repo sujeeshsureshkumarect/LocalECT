@@ -4599,7 +4599,7 @@ namespace LocalECT
                                     {
                                         //Reference Found-Update Existing Student Account 
                                         string sAcc = "";
-                                        SqlCommand cmd1 = new SqlCommand("SELECT [strAccountNo] FROM [ECTData].[dbo].[Reg_Student_Accounts] where lngStudentNumber=@lngStudentNumber", sc);
+                                        SqlCommand cmd1 = new SqlCommand("SELECT strAccountNo FROM Reg_Student_Accounts where lngStudentNumber=@lngStudentNumber", sc);
                                         cmd1.Parameters.AddWithValue("@lngStudentNumber", lblReference.Text);
                                         DataTable dt1 = new DataTable();
                                         SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
@@ -4633,7 +4633,8 @@ namespace LocalECT
                                                     sc.Close();
 
 
-                                                    SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", sc);
+                                                    //SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= AC.strAccountNo FROM Reg_Applications INNER JOIN Reg_Student_Accounts AS AC ON Reg_Applications.lngStudentNumber = AC.lngStudentNumber where Reg_Applications.lngStudentNumber=@lngStudentNumber", sc);
+                                                    SqlCommand cmd11 = new SqlCommand("UPDATE Reg_Applications SET strAccountNo= '" + sAcc + "' where Reg_Applications.lngStudentNumber=@lngStudentNumber", sc);                                                    
                                                     cmd11.Parameters.AddWithValue("@lngStudentNumber", lblStudentId.Text.Trim());
                                                     try
                                                     {
