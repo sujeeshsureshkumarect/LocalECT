@@ -378,6 +378,17 @@ namespace LocalECT
                             Approvals.Value = "Section Head Approval,Dept Head Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
                         }
                     }
+
+                    if (Session["EmployeeID"].ToString() == "10100")//Exception-Mr. Mohannad Taher Mohammad Al Shayeb    Director - Student Affairs and Enrollment
+                    {
+                        Approvers.Value = "wesam.alanqar@ect.ac.ae" + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                        Approvals.Value = "Dean Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                    }
+                    if (Session["EmployeeID"].ToString() == "10046" || Session["EmployeeID"].ToString() == "10028")//Exception-Mr. Moustafa Sobhy Moustafa Sabbah    Manager - Student Affairs & Mr.  Suhib Ahmad Hussein Alamereyyeh    Manager - Student Registration
+                    {
+                        Approvers.Value = "mohannad.alshayeb@ect.ac.ae" + "," + "wesam.alanqar@ect.ac.ae" + "," + hostmail + "," + dt.Rows[0]["HRManagerEmail"].ToString() + "," + dt.Rows[0]["CheifFincialAdminEmail"].ToString();
+                        Approvals.Value = "Dept Head Approval,Dean Approval,HR Representative Approval,HR Head Approval,Finance and Admin Approval";
+                    }
                 }
             }
             catch (Exception ex)
