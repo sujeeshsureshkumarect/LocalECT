@@ -71,7 +71,7 @@ namespace LocalECT
             {
                 lnk_Create.Visible = false;
                 Img_Header.Visible = true;
-                row1.Style.Add("margin-top", "190px !important");
+                row1.Style.Add("margin-top", "18% !important");
                 where = " where CS_Strategic_Project.iSerial=" + id + " ";                
             }
             else

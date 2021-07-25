@@ -71,7 +71,7 @@ namespace LocalECT
             {
                 lnk_Create.Visible = false;
                 Img_Header.Visible = true;
-                row1.Style.Add("margin-top", "190px !important");
+                row1.Style.Add("margin-top", "18% !important");
                 sSQL = "SELECT CS_Strategic_Theme.iSerial, CS_Strategic_Theme.sThemeCode, CS_Strategic_Theme.sThemeDesc, CS_Strategic_Theme.iOrder, CS_Strategic_Theme.dAdded, CS_Strategic_Theme.sAddedBy, CS_Strategic_Theme.dUpdated, CS_Strategic_Theme.sUpdatedBy, CS_Strategic_Theme.iStrategyVersion, CS_Strategic_Theme.sAbbreviation, CS_Strategic_Theme.sImagePath, CS_Strategic_Theme.iLevel, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version ON CS_Strategic_Theme.iStrategyVersion = CS_Strategy_Version.iSerial where CS_Strategic_Theme.iSerial="+id+ " order by CS_Strategic_Theme.iOrder";
             }
             else
