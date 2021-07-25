@@ -132,9 +132,9 @@
                                             <b>Service Name</b>
                                         </td>
                                         <td align="center">
-                                            <asp:Label ID="lbl_ServiceNameAr" runat="server" Style="text-transform: capitalize;">طلب خطاب رسمي</asp:Label>
+                                            <asp:Label ID="lbl_ServiceNameAr" runat="server" Style="text-transform: capitalize;">نموذج رجوع للعمل بعد الإجازة</asp:Label>
                                             <br />
-                                            <span class="auto-style9"> <asp:Label ID="lbl_ServiceNameEn" runat="server" Style="text-transform: capitalize;">Resumtion to Duty Form</asp:Label></span></td>
+                                            <span class="auto-style9"> <asp:Label ID="lbl_ServiceNameEn" runat="server" Style="text-transform: capitalize;">Resumption to Duty Form</asp:Label></span></td>
                                     </tr>
                                    
                                 </table>
