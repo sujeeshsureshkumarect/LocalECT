@@ -207,6 +207,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
+    <Content Include="LinkedIn_frmGetDataFromAPI.aspx" />
     <Content Include="Strategy\CS_Header1.jpg" />
     <Content Include="Strategy\dttable.css" />
     <Content Include="Strategy_Digital_Transformation_Create.aspx" />
@@ -8550,6 +8551,8 @@
     <Compile Include="App_Start\CertificatesCls.cs" />
     <Compile Include="App_Start\CitiesCls.cs" />
     <Compile Include="App_Start\ClassesCLS.cs" />
+    <Compile Include="App_Start\ClsLinkedInActivityRepAPI.cs" />
+    <Compile Include="App_Start\ClsLinkedInAPI.cs" />
     <Compile Include="App_Start\ClsMoodleAPI.cs" />
     <Compile Include="App_Start\CollegesCls.cs" />
     <Compile Include="App_Start\CommitteeCls.cs" />
@@ -8575,6 +8578,7 @@
     <Compile Include="App_Start\EctNewTitlesCls.cs" />
     <Compile Include="App_Start\Emails.cs" />
     <Compile Include="App_Start\EmoloyeeSkillsCls.cs" />
+    <Compile Include="App_Start\EmployeeAllLinkedInCoursesCls.cs" />
     <Compile Include="App_Start\EmployeeCls.cs" />
     <Compile Include="App_Start\EmployeeExperiencesCls.cs" />
     <Compile Include="App_Start\EmployeeGradesCls.cs" />
@@ -8848,6 +8852,13 @@
     </Compile>
     <Compile Include="CourseCalc.aspx.designer.cs">
       <DependentUpon>CourseCalc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LinkedIn_frmGetDataFromAPI.aspx.cs">
+      <DependentUpon>LinkedIn_frmGetDataFromAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LinkedIn_frmGetDataFromAPI.aspx.designer.cs">
+      <DependentUpon>LinkedIn_frmGetDataFromAPI.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Digital_Transformation_Create.aspx.cs">
       <DependentUpon>Strategy_Digital_Transformation_Create.aspx</DependentUpon>

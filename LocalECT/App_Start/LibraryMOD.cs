@@ -75,6 +75,19 @@ public class LibraryMOD
         return isReg;
 
     }
+    public static long ToUnixTimestamp(DateTime target)
+    {
+        var date = new DateTime(1970, 1, 1, 0, 0, 0, target.Kind);
+        var unixTimestamp = System.Convert.ToInt64((target - date).TotalSeconds);
+
+        return unixTimestamp * 1000;
+    }
+    private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0,
+                                                         DateTimeKind.Utc);
+    public static DateTime FromMillisecondsSinceUnixEpoch(long milliseconds)
+    {
+        return UnixEpoch.AddMilliseconds(milliseconds);
+    }
     public static int GetMoodleCourseNo(string sCourse, int iAcademicYear, int iSemesterID)
     {
 
