@@ -208,6 +208,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
     <Content Include="Strategy\CS_Header1.jpg" />
+    <Content Include="Strategy\dttable.css" />
     <Content Include="Strategy_Digital_Transformation_Create.aspx" />
     <Content Include="Strategy_Digital_Transformation_Edit.aspx" />
     <Content Include="Strategy_Digital_Transformation_Program.aspx" />

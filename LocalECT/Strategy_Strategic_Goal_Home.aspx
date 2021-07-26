@@ -82,9 +82,9 @@
                                             .responsive {
   width: 100%;
   height: auto;
-  z-index:10;
+ /* z-index:10;
   top:0px;
-  position: absolute;
+  position: absolute;*/
 }
                                         </style>
 

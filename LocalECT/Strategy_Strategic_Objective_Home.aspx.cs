@@ -71,12 +71,13 @@ namespace LocalECT
             {
                 lnk_Create.Visible = false;
                 Img_Header.Visible = true;
-                row1.Style.Add("margin-top", "18% !important");
+                //row1.Style.Add("margin-top", "18% !important");
+                Page.Header.Controls.Add(new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/Strategy/dttable.css") + "\" />"));
                 sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial where CS_Strategic_Objective.iSerial="+id+" order by CS_Strategic_Objective.iOrder";
             }
             else
             {
-                row1.Style.Add("margin-top", "0px !important");
+                //row1.Style.Add("margin-top", "0px !important");
                 sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial order by CS_Strategic_Objective.iOrder";
             }
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);

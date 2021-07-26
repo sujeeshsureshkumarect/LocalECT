@@ -71,14 +71,15 @@ namespace LocalECT
             {
                 lnk_Create.Visible = false;
                 Img_Header.Visible = true;
-                row1.Style.Add("margin-top", "18% !important");
+                //row1.Style.Add("margin-top", "18% !important");
+                Page.Header.Controls.Add(new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/Strategy/dttable.css") + "\" />"));
                 where = " where CS_Strategic_Project.iSerial=" + id + " ";                
             }
-            else
-            {
-                row1.Style.Add("margin-top", "0px !important");
-                where = "";
-            }
+            //else
+            //{
+            //    row1.Style.Add("margin-top", "0px !important");
+            //    where = "";
+            //}
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
