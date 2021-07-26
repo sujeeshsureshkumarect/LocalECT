@@ -111,6 +111,11 @@ namespace LocalECT
                 da.Fill(dt);
                 sc.Close();
 
+                if (id != null && f != null)
+                {
+                    Img_Header.Src = dt.Rows[0]["sImagePath"].ToString();
+                }
+
                 Repeater1.DataSource = dt;
                 Repeater1.DataBind();
             }
