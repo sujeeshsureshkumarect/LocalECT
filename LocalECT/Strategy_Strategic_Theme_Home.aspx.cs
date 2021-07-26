@@ -70,7 +70,7 @@ namespace LocalECT
             if (id != null && f!=null)
             {
                 lnk_Create.Visible = false;
-                Img_Header.Visible = true;
+                Img_Header.Visible = true;                
                 //row1.Style.Add("margin-top", "18% !important");
                 Page.Header.Controls.Add(new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/Strategy/dttable.css") + "\" />"));
                 sSQL = "SELECT CS_Strategic_Theme.iSerial, CS_Strategic_Theme.sThemeCode, CS_Strategic_Theme.sThemeDesc, CS_Strategic_Theme.iOrder, CS_Strategic_Theme.dAdded, CS_Strategic_Theme.sAddedBy, CS_Strategic_Theme.dUpdated, CS_Strategic_Theme.sUpdatedBy, CS_Strategic_Theme.iStrategyVersion, CS_Strategic_Theme.sAbbreviation, CS_Strategic_Theme.sImagePath, CS_Strategic_Theme.iLevel, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version ON CS_Strategic_Theme.iStrategyVersion = CS_Strategy_Version.iSerial where CS_Strategic_Theme.iSerial="+id+ " order by CS_Strategic_Theme.iOrder";
@@ -90,6 +90,11 @@ namespace LocalECT
                 sc.Open();
                 da.Fill(dt);
                 sc.Close();
+
+                if (id != null && f != null)
+                {
+                    Img_Header.Src = dt.Rows[0]["sImagePath"].ToString();
+                }
 
                 Repeater1.DataSource = dt;
                 Repeater1.DataBind();
@@ -115,7 +120,11 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + id + "&t=v");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+                //Get the command argument
+                string dateWarning = button.CommandArgument;//dateWarning
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + dateWarning + "&t=v");
             }
         }
 
@@ -128,8 +137,11 @@ namespace LocalECT
                 Response.Redirect("Strategy_Strategic_Theme_Update.aspx?f=m&id=" + id + "&t=e");
             }
             else
-            {
-                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + id + "&t=e");
+            {   //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+                //Get the command argument
+                string dateWarning = button.CommandArgument;//dateWarning
+                Response.Redirect("Strategy_Strategic_Theme_Update.aspx?id=" + dateWarning + "&t=e");
             }
         }
     }
