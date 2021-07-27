@@ -121,6 +121,8 @@
                                                     <asp:DropDownList ID="drp_Medium" runat="server" CssClass="form-control">
                                                          <asp:ListItem Text="Email"  Selected/>
                                                          <asp:ListItem Text="SMS"  />
+                                                         <asp:ListItem Text="Website"  />
+                                                         <asp:ListItem Text="Social Media"  />
                                                     </asp:DropDownList>                                                    
                                                 </div>
                                                      <div class="form-group ">
