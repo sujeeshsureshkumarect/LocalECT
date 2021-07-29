@@ -98,7 +98,8 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative ID</th>                                                                                                                                    
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative ID</th>  
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Description</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">University Status</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Priority</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative Maturity</th>                                                                                        
@@ -125,7 +126,8 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>                                                       
+                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>   
+                                                    <td><%#Eval("sInitiativeDesc")%></td>
                                                     <td><%#Eval("sUniversityStatus")%></td>
                                                     <td><%#Eval("sInitiativePriority")%></td>
                                                     <td><%#Eval("sInitiativeMaturity")%></td>    

@@ -92,7 +92,8 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI ID</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI ID</th>  
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Description</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Period</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Formula</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Target KPI</th>                                            
@@ -124,7 +125,8 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td title="<%#Eval("sKPIDesc")%>"><%#Eval("sKPIID")%></td>    
+                                                    <td title="<%#Eval("sKPIDesc")%>"><%#Eval("sKPIID")%></td>   
+                                                    <td><%#Eval("sKPIDesc")%></td>   
                                                     <td><%#Eval("sPeriod")%></td>
                                                     <td><%#Eval("sKPIFormula")%></td>
                                                     <td><%#Eval("cTargetKPI")%></td>

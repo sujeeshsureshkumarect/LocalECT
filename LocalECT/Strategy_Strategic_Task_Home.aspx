@@ -92,7 +92,8 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Task ID</th>                                                                                        
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Task ID</th> 
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Task Description</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Period</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Start Date</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">End Date</th>    --%>                                        
@@ -127,7 +128,8 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Container.ItemIndex+1 %></td>
-                                                    <td title="<%#Eval("sTaskDesc")%>"><%#Eval("sTaskID")%></td>    
+                                                    <td title="<%#Eval("sTaskDesc")%>"><%#Eval("sTaskID")%></td>  
+                                                    <td><%#Eval("sTaskDesc")%></td>
                                                     <td><%#Eval("sPeriod")%></td>
                                                     <%--<td><%#Eval("dStart","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("dEnd","{0:yyyy-MM-dd}")%></td>--%>
