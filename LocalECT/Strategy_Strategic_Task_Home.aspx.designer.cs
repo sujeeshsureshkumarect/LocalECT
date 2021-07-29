@@ -24,6 +24,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.LinkButton lnk_Create;
 
         /// <summary>
+        /// lnk_Back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnk_Back;
+
+        /// <summary>
         /// Repeater1 control.
         /// </summary>
         /// <remarks>

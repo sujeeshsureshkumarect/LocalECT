@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            //Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -798,8 +798,16 @@ namespace LocalECT
 
         protected void btn_Cancel_Click(object sender, EventArgs e)
         {
-            string id = Request.QueryString["id"];
-            Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            string id = Request.QueryString["id"];            
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            }
         }
 
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
@@ -810,8 +818,18 @@ namespace LocalECT
 
         protected void lnk_Back_Click(object sender, EventArgs e)
         {
+            //string id = Request.QueryString["id"];
+            //Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
             string id = Request.QueryString["id"];
-            Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            }
         }
 
         protected void drp_Section_SelectedIndexChanged(object sender, EventArgs e)

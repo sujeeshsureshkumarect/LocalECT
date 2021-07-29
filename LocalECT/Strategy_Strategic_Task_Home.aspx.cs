@@ -33,7 +33,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            //Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -256,7 +256,33 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_Task_Update?id=" + Request.QueryString["id"] + "");
+            //Response.Redirect("Strategy_Strategic_Task_Update?id=" + Request.QueryString["id"] + "");
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                //Response.Redirect("Strategy_Strategic_Initiative_Home.aspx?f=m&id=" + id + "");
+                Response.Redirect("Strategy_Strategic_Task_Update?f=m&id=" + Request.QueryString["id"] + "");
+            }
+            else
+            {
+                //Response.Redirect("Strategy_Strategic_Initiative_Home");
+                Response.Redirect("Strategy_Strategic_Task_Update?id=" + Request.QueryString["id"] + "");
+            }
+        }
+
+        protected void lnk_Back_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Initiative_Home");
+            }
         }
     }
 }

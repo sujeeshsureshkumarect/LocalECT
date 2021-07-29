@@ -23,7 +23,8 @@
                                             <h2><i class="fa fa-sitemap"></i> KPIs</h2>
                                             <ul class="nav navbar-right panel_toolbox">                                                
                                                 <asp:LinkButton ID="lnk_Create" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" OnClick="lnk_Create_Click"><i class="glyphicon glyphicon-plus"></i> Create New</asp:LinkButton>
-                                                <a href="Strategy_Strategic_Initiative_Home.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="fa fa-arrow-circle-left"></i> Strategic Initiative</a>
+                                                <%--<a href="Strategy_Strategic_Initiative_Home.aspx" style="float:right;" class="btn btn-success btn-sm"><i class="fa fa-arrow-circle-left"></i> Strategic Initiative</a>--%>
+                                                <asp:LinkButton ID="lnk_Back" runat="server" style="float:right;" CssClass="btn btn-success btn-sm" title="Back" OnClick="lnk_Back_Click"><i class="fa fa-arrow-circle-left"></i> Strategic Initiative</asp:LinkButton>
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                                 </li>                                              
                                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
