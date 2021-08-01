@@ -534,7 +534,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_StrategyVersion.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sEvidenceTitle from CS_Strategic_Evidence where iStrategyVersion=@iStrategyVersion and iDepartment=@iDepartment and iSection=@iSection", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sEvidenceRecored from CS_Strategic_Evidence where iStrategyVersion=@iStrategyVersion and iDepartment=@iDepartment and iSection=@iSection", sc);
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
@@ -547,7 +547,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_Evidence.DataSource = dt;
-                    drp_Evidence.DataTextField = "sEvidenceTitle";
+                    drp_Evidence.DataTextField = "sEvidenceRecored";
                     drp_Evidence.DataValueField = "iSerial";
                     drp_Evidence.DataBind();
                 }
