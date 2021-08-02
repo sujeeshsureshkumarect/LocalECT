@@ -114,6 +114,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.DropDownList drp_Section;
 
         /// <summary>
+        /// drp_StrategicProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_StrategicProject;
+
+        /// <summary>
         /// txt_EvidenceRecored control.
         /// </summary>
         /// <remarks>

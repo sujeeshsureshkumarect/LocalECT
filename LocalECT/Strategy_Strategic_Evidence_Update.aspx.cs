@@ -36,7 +36,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Evidence,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            //Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                     }
                 }
@@ -55,6 +55,8 @@ namespace LocalECT
 
                         fillDepartment();
                         fillSection();
+
+                        fillStrategicProject();
 
                         fillCustomerExperienceEvidenceCategory();
                         fillCustomerExperienceEvidenceSubCategory();
@@ -76,6 +78,7 @@ namespace LocalECT
                                 txt_EvidenceSerial.Enabled = false;
                                 drp_Department.Enabled = false;
                                 drp_Section.Enabled = false;
+                                drp_StrategicProject.Enabled = false;
                                 txt_EvidenceRecored.Enabled = false;
                                 drp_isIRQASurveyReportRequired.Enabled = false;
                                 drp_CustomerExperienceEvidenceCategory.Enabled = false;
@@ -94,6 +97,7 @@ namespace LocalECT
                                 txt_EvidenceSerial.Enabled = true;
                                 drp_Department.Enabled = true;
                                 drp_Section.Enabled = true;
+                                drp_StrategicProject.Enabled = true;
                                 txt_EvidenceRecored.Enabled = true;
                                 drp_isIRQASurveyReportRequired.Enabled = true;
                                 drp_CustomerExperienceEvidenceCategory.Enabled = true;
@@ -118,6 +122,32 @@ namespace LocalECT
             finally
             {
 
+            }
+        }
+        public void fillStrategicProject()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sStrategicProjectID from CS_Strategic_Project", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_StrategicProject.DataSource = dt;
+                drp_StrategicProject.DataTextField = "sStrategicProjectID";
+                drp_StrategicProject.DataValueField = "iSerial";
+                drp_StrategicProject.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
             }
         }
         public void fillEvidenceType()
@@ -305,6 +335,9 @@ namespace LocalECT
                     drp_Department.SelectedIndex = drp_Department.Items.IndexOf(drp_Department.Items.FindByValue(dt.Rows[0]["iDepartment"].ToString()));
                     fillSection();
                     drp_Section.SelectedIndex = drp_Section.Items.IndexOf(drp_Section.Items.FindByValue(dt.Rows[0]["iSection"].ToString()));
+
+                    drp_StrategicProject.SelectedIndex = drp_StrategicProject.Items.IndexOf(drp_StrategicProject.Items.FindByValue(dt.Rows[0]["iProject"].ToString()));
+
                     txt_EvidenceRecored.Text = dt.Rows[0]["sEvidenceRecored"].ToString();
 
                     string isIRQASurveyReportRequired = dt.Rows[0]["isIRQASurveyReportRequired"].ToString();
@@ -354,12 +387,13 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_Evidence set iEvidenceType=@iEvidenceType,sEvidenceTitle=@sEvidenceTitle,sEvidenceSerial=@sEvidenceSerial,iDepartment=@iDepartment,iSection=@iSection,sEvidenceRecored=@sEvidenceRecored,isIRQASurveyReportRequired=@isIRQASurveyReportRequired,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,iCustomerExperienceEvidenceSubCategory=@iCustomerExperienceEvidenceSubCategory,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,sAbbreviation=@sAbbreviation,sRevisionNo=@sRevisionNo where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_Evidence set iEvidenceType=@iEvidenceType,sEvidenceTitle=@sEvidenceTitle,sEvidenceSerial=@sEvidenceSerial,iDepartment=@iDepartment,iSection=@iSection,iProject=@iProject,sEvidenceRecored=@sEvidenceRecored,isIRQASurveyReportRequired=@isIRQASurveyReportRequired,iCustomerExperienceEvidenceCategory=@iCustomerExperienceEvidenceCategory,iCustomerExperienceEvidenceSubCategory=@iCustomerExperienceEvidenceSubCategory,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,sAbbreviation=@sAbbreviation,sRevisionNo=@sRevisionNo where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEvidenceTitle", txt_EvidenceTitle.Text.Trim());
                 cmd.Parameters.AddWithValue("@sEvidenceSerial", txt_EvidenceSerial.Text.Trim());
                 cmd.Parameters.AddWithValue("@iDepartment", drp_Department.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSection", drp_Section.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iProject", drp_StrategicProject.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEvidenceRecored", txt_EvidenceRecored.Text.Trim());
                 cmd.Parameters.AddWithValue("@isIRQASurveyReportRequired", drp_isIRQASurveyReportRequired.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iCustomerExperienceEvidenceCategory", drp_CustomerExperienceEvidenceCategory.SelectedItem.Value);
@@ -403,7 +437,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Evidence values (@iEvidenceType,@sEvidenceTitle,@sEvidenceSerial,@iDepartment,@iSection,@sEvidenceRecored,@isIRQASurveyReportRequired,@iCustomerExperienceEvidenceCategory,@iCustomerExperienceEvidenceSubCategory,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation,@isDuplicate,@iDuplicationSource,@sRevisionNo)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_Evidence values (@iEvidenceType,@sEvidenceTitle,@sEvidenceSerial,@iDepartment,@iSection,@sEvidenceRecored,@isIRQASurveyReportRequired,@iCustomerExperienceEvidenceCategory,@iCustomerExperienceEvidenceSubCategory,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@sAbbreviation,@isDuplicate,@iDuplicationSource,@sRevisionNo,@iProject)", sc);
                 cmd.Parameters.AddWithValue("@iEvidenceType", drp_EvidenceType.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEvidenceTitle", txt_EvidenceTitle.Text.Trim());
                 cmd.Parameters.AddWithValue("@sEvidenceSerial", txt_EvidenceSerial.Text.Trim());
@@ -423,6 +457,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@isDuplicate", 0);
                 cmd.Parameters.AddWithValue("@iDuplicationSource", 0);
                 cmd.Parameters.AddWithValue("@sRevisionNo", txt_RevisionNo.Text.Trim());
+                cmd.Parameters.AddWithValue("@iProject", drp_StrategicProject.SelectedItem.Value);
                 try
                 {
                     sc.Open();

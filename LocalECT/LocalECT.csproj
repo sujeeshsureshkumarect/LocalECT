@@ -258,6 +258,8 @@
     <Content Include="Strategy_Risk_Management_Registry_Framework_Home.aspx" />
     <Content Include="Strategy_Risk_Management_Registry_Framework_Update.aspx" />
     <Content Include="Strategy_Strategic_Evidence_Home.aspx" />
+    <Content Include="Strategy_Strategic_Evidence_Submission_Home.aspx" />
+    <Content Include="Strategy_Strategic_Evidence_Submission_Update.aspx" />
     <Content Include="Strategy_Strategic_Evidence_Update.aspx" />
     <Content Include="Strategy_Strategic_KPI_Detail_Home.aspx" />
     <Content Include="Strategy_Strategic_KPI_Detail_Update.aspx" />
@@ -9195,6 +9197,20 @@
     </Compile>
     <Compile Include="Strategy_Strategic_Evidence_Home.aspx.designer.cs">
       <DependentUpon>Strategy_Strategic_Evidence_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Submission_Home.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Submission_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Submission_Home.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Submission_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Submission_Update.aspx.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Submission_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Strategic_Evidence_Submission_Update.aspx.designer.cs">
+      <DependentUpon>Strategy_Strategic_Evidence_Submission_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Strategic_Evidence_Update.aspx.cs">
       <DependentUpon>Strategy_Strategic_Evidence_Update.aspx</DependentUpon>

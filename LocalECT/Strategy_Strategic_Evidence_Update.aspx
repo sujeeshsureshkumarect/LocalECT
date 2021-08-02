@@ -79,6 +79,10 @@
                                                         <label>Section *</label>
                                                         <asp:DropDownList ID="drp_Section" runat="server" CssClass="form-control"></asp:DropDownList>
                                                     </div>
+                                                    <div class="form-group ">
+                                                        <label>Strategic Project *</label>
+                                                        <asp:DropDownList ID="drp_StrategicProject" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
                                                      <div class="form-group ">
                                                     <label>Evidence Record *</label>
                                                     <asp:TextBox ID="txt_EvidenceRecored" runat="server" CssClass="form-control"></asp:TextBox>
