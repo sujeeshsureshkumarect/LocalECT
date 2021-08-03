@@ -118,12 +118,12 @@
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                     <td><%#Eval("sStrategicGoalID")%></td>    
                                                     <td><%#Eval("sStrategicGoalDesc")%></td>
-                                                    <td><%#Eval("sStipulationID")%></td>
-                                                    <td><%#Eval("sInspectionComplianceStandardID")%></td>
+                                                    <td><%#Eval("sStipulationDesc")%></td>
+                                                    <td><%#Eval("sInspectionComplianceStandardDesc")%></td>
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 
-                                                    <td><%#Eval("sThemeCode")%></td>   
+                                                    <td><%#Eval("sThemeCode")%> <%#Eval("sThemeDesc")%></td>   
                                                     <td><%#Eval("iLevel")%></td> 
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     

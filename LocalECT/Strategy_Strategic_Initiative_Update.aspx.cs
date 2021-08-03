@@ -365,7 +365,7 @@ namespace LocalECT
         }
         public void fillTheme()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sThemeCode from CS_Strategic_Theme", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sThemeCode+' '+sThemeDesc as sThemeDesc from CS_Strategic_Theme", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -375,7 +375,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_Theme.DataSource = dt;
-                drp_Theme.DataTextField = "sThemeCode";
+                drp_Theme.DataTextField = "sThemeDesc";
                 drp_Theme.DataValueField = "iSerial";
                 drp_Theme.DataBind();
 
@@ -395,7 +395,7 @@ namespace LocalECT
         {
             if(!string.IsNullOrEmpty(drp_Theme.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicGoalID from CS_Strategic_Goal where iTheme=@iTheme", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicGoalID+' '+CONVERT(VARCHAR, sStrategicGoalDesc) as sStrategicGoalDesc from CS_Strategic_Goal where iTheme=@iTheme", sc);
                 cmd.Parameters.AddWithValue("@iTheme", drp_Theme.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -406,7 +406,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_Goal.DataSource = dt;
-                    drp_Goal.DataTextField = "sStrategicGoalID";
+                    drp_Goal.DataTextField = "sStrategicGoalDesc";
                     drp_Goal.DataValueField = "iSerial";
                     drp_Goal.DataBind();
 
@@ -427,7 +427,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_Goal.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicProjectID from CS_Strategic_Project where iStrategicGoal=@iStrategicGoal", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicProjectID,sStrategicProjectDesc from CS_Strategic_Project where iStrategicGoal=@iStrategicGoal", sc);
                 cmd.Parameters.AddWithValue("@iStrategicGoal", drp_Goal.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -438,7 +438,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_Project.DataSource = dt;
-                    drp_Project.DataTextField = "sStrategicProjectID";
+                    drp_Project.DataTextField = "sStrategicProjectDesc";
                     drp_Project.DataValueField = "iSerial";
                     drp_Project.DataBind();
 
@@ -459,7 +459,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_Project.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicObjectiveID from CS_Strategic_Objective where iStrategicProject=@iStrategicProject", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sStrategicObjectiveID+' '+CONVERT(VARCHAR, sStrategicObjectiveDesc) as sStrategicObjectiveDesc from CS_Strategic_Objective where iStrategicProject=@iStrategicProject", sc);
                 cmd.Parameters.AddWithValue("@iStrategicProject", drp_Project.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -470,7 +470,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_Objective.DataSource = dt;
-                    drp_Objective.DataTextField = "sStrategicObjectiveID";
+                    drp_Objective.DataTextField = "sStrategicObjectiveDesc";
                     drp_Objective.DataValueField = "iSerial";
                     drp_Objective.DataBind();
                 }

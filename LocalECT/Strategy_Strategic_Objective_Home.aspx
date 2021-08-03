@@ -122,7 +122,7 @@
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 
-                                                    <td><%#Eval("sStrategicProjectID")%></td>   
+                                                    <td><%#Eval("sStrategicProjectDesc")%></td>   
                                                     <%--<td><%#Eval("sSubStipulationID")%></td>  --%>
                                                     <td><%#Eval("iLevel")%></td> 
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>

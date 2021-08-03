@@ -226,7 +226,7 @@ namespace LocalECT
         }
         public void fillStrategicProject()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sStrategicProjectID from CS_Strategic_Project", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sStrategicProjectID,sStrategicProjectDesc from CS_Strategic_Project", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -236,7 +236,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_StrategicProject.DataSource = dt;
-                drp_StrategicProject.DataTextField = "sStrategicProjectID";
+                drp_StrategicProject.DataTextField = "sStrategicProjectDesc";
                 drp_StrategicProject.DataValueField = "iSerial";
                 drp_StrategicProject.DataBind();
             }

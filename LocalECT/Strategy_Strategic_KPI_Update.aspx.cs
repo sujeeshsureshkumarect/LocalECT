@@ -160,7 +160,7 @@ namespace LocalECT
         }
         public void fillInitiative()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID from CS_Strategic_Initiative", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID+' '+sInitiativeDesc as sInitiativeDesc from CS_Strategic_Initiative", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -170,7 +170,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_Initiative.DataSource = dt;
-                drp_Initiative.DataTextField = "sInitiativeID";
+                drp_Initiative.DataTextField = "sInitiativeDesc";
                 drp_Initiative.DataValueField = "iSerial";
                 drp_Initiative.DataBind();
             }

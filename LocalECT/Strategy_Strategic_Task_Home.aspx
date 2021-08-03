@@ -134,21 +134,21 @@
                                                     <td><%#Eval("sPeriod")%></td>
                                                     <%--<td><%#Eval("dStart","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("dEnd","{0:yyyy-MM-dd}")%></td>--%>
-                                                    <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
-                                                    <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>  
-                                                    <td title="<%#Eval("sStipulationDesc")%>"><%#Eval("sStipulationID")%></td> 
-                                                    <td title="<%#Eval("sSubStipulationDesc")%>"><%#Eval("sSubStipulationID")%></td> 
-                                                    <td title="<%#Eval("sGuidelinesDesc")%>"><%#Eval("sGuidelinesID")%></td> 
-                                                    <td title="<%#Eval("sInspectionComplianceStandardDesc")%>"><%#Eval("sInspectionComplianceStandardID")%></td>
-                                                    <td title="<%#Eval("sInspectionComplianceDomainDesc")%>"><%#Eval("sInspectionComplianceDomainID")%></td>
+                                                    <td ><%#Eval("DepartmentAbbreviation")%></td>   
+                                                    <td ><%#Eval("SectionAbbreviation")%></td>  
+                                                    <td ><%#Eval("sStipulationDesc")%></td> 
+                                                    <td ><%#Eval("sSubStipulationDesc")%></td> 
+                                                    <td ><%#Eval("sGuidelinesDesc")%></td> 
+                                                    <td ><%#Eval("sInspectionComplianceStandardDesc")%></td>
+                                                    <td ><%#Eval("sInspectionComplianceDomainDesc")%></td>
                                                     <%--<td title="<%#Eval("sInspectionComplianceIndicatorDesc")%>"><%#Eval("sInspectionComplianceIndicatorID")%></td>--%>
-                                                    <td title="<%#Eval("sInspectionComplianceGuidelinesDesc")%>"><%#Eval("sInspectionComplianceGuidelinesID")%></td>
+                                                    <td ><%#Eval("sInspectionComplianceGuidelinesDesc")%></td>
                                                    <%-- <td><%#Eval("sRiskManagement")%></td>--%>
                                                    <%-- 
                                                     <td><%#Eval("sIRQARecommendation")%></td>--%>
                                                     <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
                                                     <td><%#Eval("sEvidenceTitle")%></td>
-                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>    
+                                                    <td ><%#Eval("sInitiativeID")%> <%#Eval("sInitiativeDesc")%></td>    
                                                     <td><%#Eval("sDuration")%></td>
                                                     <td><%#Eval("iDurationValue")%></td>
                                                     <td><%#Eval("sEV")%></td>
@@ -163,10 +163,14 @@
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                              Actions
                                                          </button>
-                                                         <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_Task_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+                                                         <div class="dropdown-menu">  
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click" CommandArgument=<%#Eval("iSerial")%>>View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click" CommandArgument=<%#Eval("iSerial")%>>Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="LinkButton1" runat="server" class="dropdown-item" OnClick="LinkButton1_Click" CommandArgument=<%#Eval("iSerial")%>>Execute</asp:LinkButton>
+
+                                                             <%--<a href="Strategy_Strategic_Task_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
                                                              <a href="Strategy_Strategic_Task_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a> 
-                                                             <a href="Strategy_Strategic_Task_Detail_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> 
+                                                             <a href="Strategy_Strategic_Task_Detail_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> --%>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

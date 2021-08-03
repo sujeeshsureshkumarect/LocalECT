@@ -136,10 +136,10 @@
                                                     <td><%#Eval("sEnterpriseModel")%></td>
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("DepartmentAbbreviation")%></td>    
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("SectionAbbreviation")%></td>
-                                                    <td title="<%#Eval("sThemeDesc")%>"><%#Eval("sThemeCode")%></td>
-                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%></td>
-                                                    <td title="<%#Eval("sStrategicProjectDesc")%>"><%#Eval("sStrategicProjectID")%></td>
-                                                    <td title="<%#Eval("sStrategicObjectiveDesc")%>"><%#Eval("sStrategicObjectiveID")%></td>
+                                                    <td title="<%#Eval("sThemeDesc")%>"><%#Eval("sThemeCode")%> <%#Eval("sThemeDesc")%></td>
+                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%> <%#Eval("sStrategicGoalDesc")%></td>
+                                                    <td title="<%#Eval("sStrategicProjectDesc")%>"><%#Eval("sStrategicProjectDesc")%></td>
+                                                    <td title="<%#Eval("sStrategicObjectiveDesc")%>"><%#Eval("sStrategicObjectiveID")%> <%#Eval("sStrategicObjectiveDesc")%></td>
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 

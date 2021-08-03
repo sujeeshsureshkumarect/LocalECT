@@ -284,5 +284,68 @@ namespace LocalECT
                 Response.Redirect("Strategy_Strategic_Initiative_Home");
             }
         }
+
+        protected void lnk_View_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Update.aspx?f=m&id=" + id + "&sid=" + commandArgument + "&t=v");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Update.aspx?id=" + id + "&sid=" + commandArgument + "&t=v");
+            }
+        }
+
+        protected void lnk_Edit_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Update.aspx?f=m&id=" + id + "&sid=" + commandArgument + "&t=e");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Update.aspx?id=" + id + "&sid=" + commandArgument + "&t=e");
+            }
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            string id = Request.QueryString["id"];
+            string f = Request.QueryString["f"];
+
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+
+            if (id != null && f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?f=m&id=" + id + "&sid=" + commandArgument + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?id=" + id + "&sid=" + commandArgument + "");
+            }
+        }
     }
 }

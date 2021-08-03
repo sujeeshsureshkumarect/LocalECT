@@ -142,7 +142,7 @@
                                                     <td><%#Eval("sMarketPositioningPillars")%></td>
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>                                                   
-                                                    <td title="<%#Eval("sInitiativeDesc")%>"><%#Eval("sInitiativeID")%></td>
+                                                    <td ><%#Eval("sInitiativeID")%> <%#Eval("sInitiativeDesc")%></td>
                                                     <td><%#Eval("iOrder")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sSurveyFormReference")%></td>
@@ -157,11 +157,16 @@
                                                          <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                              Actions
                                                          </button>
-                                                         <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>
-                                                             <a href="Strategy_Strategic_KPI_Detail_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> 
-                                                             <a href="Strategy_IRQA_Recommendation_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Manage IRQA Recommendation</a>   
+                                                         <div class="dropdown-menu">       
+                                                              <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click" CommandArgument=<%#Eval("iSerial")%>>View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click" CommandArgument=<%#Eval("iSerial")%>>Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="LinkButton1" runat="server" class="dropdown-item" OnClick="LinkButton1_Click" CommandArgument=<%#Eval("iSerial")%>>Execute</asp:LinkButton>
+                                                             <asp:LinkButton ID="LinkButton2" runat="server" class="dropdown-item" OnClick="LinkButton2_Click" CommandArgument=<%#Eval("iSerial")%>>Manage IRQA Recommendation</asp:LinkButton>
+
+                                                             <%--<a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> --%>
+                                                             <%--<a href="Strategy_Strategic_KPI_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>--%>
+                                                             <%--<a href="Strategy_Strategic_KPI_Detail_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> --%>
+                                                             <%--<a href="Strategy_IRQA_Recommendation_Home.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iSerial")%>" class="dropdown-item">Manage IRQA Recommendation</a> --%>  
                                                          </div>
                                                      </div>
                                                    </td>                                                    

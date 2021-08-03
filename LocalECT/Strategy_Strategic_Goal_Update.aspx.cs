@@ -176,7 +176,7 @@ namespace LocalECT
         }
         public void fillStipulation()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sStipulationID from CS_Stipulation", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sStipulationDesc from CS_Stipulation", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -186,7 +186,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_StipulationID.DataSource = dt;
-                drp_StipulationID.DataTextField = "sStipulationID";
+                drp_StipulationID.DataTextField = "sStipulationDesc";
                 drp_StipulationID.DataValueField = "iSerial";
                 drp_StipulationID.DataBind();
             }
@@ -202,7 +202,7 @@ namespace LocalECT
         }
         public void fillInspectionComplianceStandard()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceStandardID from CS_Inspection_Compliance_Standard", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceStandardDesc from CS_Inspection_Compliance_Standard", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -212,7 +212,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_InspectionComplianceStandardID.DataSource = dt;
-                drp_InspectionComplianceStandardID.DataTextField = "sInspectionComplianceStandardID";
+                drp_InspectionComplianceStandardID.DataTextField = "sInspectionComplianceStandardDesc";
                 drp_InspectionComplianceStandardID.DataValueField = "iSerial";
                 drp_InspectionComplianceStandardID.DataBind();
             }
@@ -228,7 +228,7 @@ namespace LocalECT
         }
         public void fillStrategic_Theme()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sThemeCode from CS_Strategic_Theme", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sThemeCode+' '+sThemeDesc as sThemeDesc from CS_Strategic_Theme", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -238,7 +238,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_Theme.DataSource = dt;
-                drp_Theme.DataTextField = "sThemeCode";
+                drp_Theme.DataTextField = "sThemeDesc";
                 drp_Theme.DataValueField = "iSerial";
                 drp_Theme.DataBind();
             }

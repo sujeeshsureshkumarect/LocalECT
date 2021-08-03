@@ -123,7 +123,7 @@
                                                     <td><%#Eval("JobTitleID")%>_<%#Eval("JobTitleEn")%></td>
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
                                                     <td title="<%#Eval("Expr1")%>"><%#Eval("SectionAbbreviation")%></td>  
-                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%></td>                                                       
+                                                    <td title="<%#Eval("sStrategicGoalDesc")%>"><%#Eval("sStrategicGoalID")%> <%#Eval("sStrategicGoalDesc")%></td>                                                       
                                                     <td><%#Eval("sStrategyVersion")%></td>
                                                     <td><%#Eval("sAbbreviation")%></td> 
                                                     <td><%#Eval("sMarketCompetitiveImplication")%></td> 

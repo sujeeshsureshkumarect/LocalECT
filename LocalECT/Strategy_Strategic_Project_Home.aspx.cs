@@ -32,7 +32,7 @@ namespace LocalECT
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Project,
                         InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
                         {
-                            //Server.Transfer("Authorization.aspx");
+                            Server.Transfer("Authorization.aspx");
                         }
                     }
                 }

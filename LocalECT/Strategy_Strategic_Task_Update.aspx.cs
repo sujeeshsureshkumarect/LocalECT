@@ -170,7 +170,7 @@ namespace LocalECT
         }
         public void fillInitiative()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID from CS_Strategic_Initiative", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sInitiativeID+' '+sInitiativeDesc as sInitiativeDesc from CS_Strategic_Initiative", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -180,7 +180,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_Initiative.DataSource = dt;
-                drp_Initiative.DataTextField = "sInitiativeID";
+                drp_Initiative.DataTextField = "sInitiativeDesc";
                 drp_Initiative.DataValueField = "iSerial";
                 drp_Initiative.DataBind();                
             }
@@ -368,7 +368,7 @@ namespace LocalECT
         }
         public void fillStipulation()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sStipulationID from CS_Stipulation", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sStipulationDesc from CS_Stipulation", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -378,7 +378,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_Stipulation.DataSource = dt;
-                drp_Stipulation.DataTextField = "sStipulationID";
+                drp_Stipulation.DataTextField = "sStipulationDesc";
                 drp_Stipulation.DataValueField = "iSerial";
                 drp_Stipulation.DataBind();
             }
@@ -396,7 +396,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_Stipulation.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sSubStipulationID from CS_Sub_Stipulation where iStipulation=@iStipulation", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sSubStipulationDesc from CS_Sub_Stipulation where iStipulation=@iStipulation", sc);
                 cmd.Parameters.AddWithValue("@iStipulation", drp_Stipulation.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -407,7 +407,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_SubStipulation.DataSource = dt;
-                    drp_SubStipulation.DataTextField = "sSubStipulationID";
+                    drp_SubStipulation.DataTextField = "sSubStipulationDesc";
                     drp_SubStipulation.DataValueField = "iSerial";
                     drp_SubStipulation.DataBind();
                 }
@@ -426,7 +426,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_SubStipulation.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sGuidelinesID from CS_Stipulation_Guidelines where iSubStipulation=@iSubStipulation", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sGuidelinesDesc from CS_Stipulation_Guidelines where iSubStipulation=@iSubStipulation", sc);
                 cmd.Parameters.AddWithValue("@iSubStipulation", drp_SubStipulation.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -437,7 +437,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_Guideline.DataSource = dt;
-                    drp_Guideline.DataTextField = "sGuidelinesID";
+                    drp_Guideline.DataTextField = "sGuidelinesDesc";
                     drp_Guideline.DataValueField = "iSerial";
                     drp_Guideline.DataBind();
                 }
@@ -754,7 +754,7 @@ namespace LocalECT
 
         public void fillInspection_Compliance_Standard()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceStandardID from CS_Inspection_Compliance_Standard", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceStandardDesc from CS_Inspection_Compliance_Standard", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -764,7 +764,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_InspectionComplianceStandard.DataSource = dt;
-                drp_InspectionComplianceStandard.DataTextField = "sInspectionComplianceStandardID";
+                drp_InspectionComplianceStandard.DataTextField = "sInspectionComplianceStandardDesc";
                 drp_InspectionComplianceStandard.DataValueField = "iSerial";
                 drp_InspectionComplianceStandard.DataBind();
             }
@@ -782,7 +782,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_InspectionComplianceStandard.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceDomainID from CS_Inspection_Compliance_Domain where iInspectionComplianceStandard=@iInspectionComplianceStandard", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceDomainDesc from CS_Inspection_Compliance_Domain where iInspectionComplianceStandard=@iInspectionComplianceStandard", sc);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceStandard", drp_InspectionComplianceStandard.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -793,7 +793,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_InspectionComplianceDomain.DataSource = dt;
-                    drp_InspectionComplianceDomain.DataTextField = "sInspectionComplianceDomainID";
+                    drp_InspectionComplianceDomain.DataTextField = "sInspectionComplianceDomainDesc";
                     drp_InspectionComplianceDomain.DataValueField = "iSerial";
                     drp_InspectionComplianceDomain.DataBind();
                 }
@@ -812,7 +812,7 @@ namespace LocalECT
         {
             if (!string.IsNullOrEmpty(drp_InspectionComplianceDomain.SelectedValue))
             {
-                SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceGuidelinesID from CS_Inspection_Compliance_Guidelines where iInspectionComplianceDomain=@iInspectionComplianceDomain", sc);
+                SqlCommand cmd = new SqlCommand("select iSerial,sInspectionComplianceGuidelinesDesc from CS_Inspection_Compliance_Guidelines where iInspectionComplianceDomain=@iInspectionComplianceDomain", sc);
                 cmd.Parameters.AddWithValue("@iInspectionComplianceDomain", drp_InspectionComplianceDomain.SelectedItem.Value);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -823,7 +823,7 @@ namespace LocalECT
                     sc.Close();
 
                     drp_InspectionComplianceGuidelines.DataSource = dt;
-                    drp_InspectionComplianceGuidelines.DataTextField = "sInspectionComplianceGuidelinesID";
+                    drp_InspectionComplianceGuidelines.DataTextField = "sInspectionComplianceGuidelinesDesc";
                     drp_InspectionComplianceGuidelines.DataValueField = "iSerial";
                     drp_InspectionComplianceGuidelines.DataBind();
                 }

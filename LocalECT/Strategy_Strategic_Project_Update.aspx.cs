@@ -257,7 +257,7 @@ namespace LocalECT
         }
         public void fillStrategicGoal()
         {
-            SqlCommand cmd = new SqlCommand("select iSerial,sStrategicGoalID from CS_Strategic_Goal", sc);
+            SqlCommand cmd = new SqlCommand("select iSerial,sStrategicGoalID+' '+CONVERT(VARCHAR, sStrategicGoalDesc) as sStrategicGoalDesc from CS_Strategic_Goal", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -267,7 +267,7 @@ namespace LocalECT
                 sc.Close();
 
                 drp_StrategicGoal.DataSource = dt;
-                drp_StrategicGoal.DataTextField = "sStrategicGoalID";
+                drp_StrategicGoal.DataTextField = "sStrategicGoalDesc";
                 drp_StrategicGoal.DataValueField = "iSerial";
                 drp_StrategicGoal.DataBind();
             }
