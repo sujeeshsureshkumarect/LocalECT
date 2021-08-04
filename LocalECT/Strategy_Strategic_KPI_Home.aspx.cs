@@ -145,13 +145,15 @@ namespace LocalECT
             //sSQL += "                         Lkp_Department ON CS_Strategic_KPI.iDepartment = Lkp_Department.DepartmentID ON Lkp_Section.SectionID = CS_Strategic_KPI.iSection INNER JOIN ";
             //sSQL += "                         CS_Strategic_Initiative ON CS_Strategic_KPI.iInitiative = CS_Strategic_Initiative.iSerial ON CS_Strategy_Version.iSerial = CS_Strategic_KPI.iStrategyVersion INNER JOIN ";
             //sSQL += "                         CS_Survey_Form ON CS_Strategic_KPI.iSurveyFormReference = CS_Survey_Form.iSerial ";
-            sSQL  = " SELECT        CS_Strategic_KPI.iSerial, CS_Strategic_KPI.sKPIID, CS_Strategic_KPI.sKPIDesc, CS_Strategic_KPI.iPeriod, CS_Strategic_KPI.iFormula, CS_Strategic_KPI.cTargetKPI, CS_Strategic_KPI.cMin, CS_Strategic_KPI.cMax,  ";
+            sSQL += " SELECT        CS_Strategic_KPI.iSerial, CS_Strategic_KPI.sKPIID, CS_Strategic_KPI.sKPIDesc, CS_Strategic_KPI.iPeriod, CS_Strategic_KPI.iFormula, CS_Strategic_KPI.cTargetKPI, CS_Strategic_KPI.cMin, CS_Strategic_KPI.cMax,  ";
             sSQL += "                          CS_Strategic_KPI.cOverallKPI, CS_Strategic_KPI.iKPISource, CS_Strategic_KPI.iKPILevel, CS_Strategic_KPI.iKPISubLevel, CS_Strategic_KPI.IsInstitutionalClass, CS_Strategic_KPI.iMOEClassificationPillars,  ";
             sSQL += "                          CS_Strategic_KPI.iMarketPositioningPillars, CS_Strategic_KPI.iDepartment, CS_Strategic_KPI.iSection, CS_Strategic_KPI.iInitiative, CS_Strategic_KPI.iOrder, CS_Strategic_KPI.iStrategyVersion, CS_Strategic_KPI.dAdded,  ";
             sSQL += "                          CS_Strategic_KPI.sAddedBy, CS_Strategic_KPI.dUpdated, CS_Strategic_KPI.sUpdatedBy, CS_Strategic_Period.sPeriod, CS_KPI_Formula.sKPIFormula, CS_KPI_Source.sKPISource, CS_KPI_Level.sKPILevel,  ";
             sSQL += "                          CS_KPI_Sub_Level.sKPISubLevel, CS_MOE_Classification_Pillars.sMOEClassificationPillars, CS_Market_Positioning_Pillars.sMarketPositioningPillars, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation,  ";
             sSQL += "                          Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Strategic_Initiative.sInitiativeID, CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion, CS_Strategic_KPI.iSurveyFormReference,  ";
-            sSQL += "                          CS_Survey_Form.sSurveyFormReference, CS_Strategic_KPI.isQSWorldUniversityRanking, CS_Strategic_KPI.iEvidence, CS_Strategic_KPI.sEV, CS_Strategic_Evidence.sEvidenceTitle ";
+            sSQL += "                          CS_Survey_Form.sSurveyFormReference, CS_Strategic_KPI.isQSWorldUniversityRanking, CS_Strategic_KPI.iEvidence, CS_Strategic_KPI.sEV, CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_KPI.isDuplicate,  ";
+            sSQL += "                          CS_Strategic_KPI.iDuplicationSource, CS_KPI_Value_Type.sKPIValueType, CS_Strategic_KPI.iKPIValueType, CS_KPI_Management_Practice_Type.sManagementPracticeType,  ";
+            sSQL += "                          CS_KPI_Management_Practice_Sub_Type.sManagementPracticeSubType, CS_KPI_Outcome.sKPIOutcome ";
             sSQL += " FROM            CS_Strategy_Version INNER JOIN ";
             sSQL += "                          Lkp_Section INNER JOIN ";
             sSQL += "                          CS_KPI_Sub_Level INNER JOIN ";
@@ -165,7 +167,11 @@ namespace LocalECT
             sSQL += "                          Lkp_Department ON CS_Strategic_KPI.iDepartment = Lkp_Department.DepartmentID ON Lkp_Section.SectionID = CS_Strategic_KPI.iSection INNER JOIN ";
             sSQL += "                          CS_Strategic_Initiative ON CS_Strategic_KPI.iInitiative = CS_Strategic_Initiative.iSerial ON CS_Strategy_Version.iSerial = CS_Strategic_KPI.iStrategyVersion INNER JOIN ";
             sSQL += "                          CS_Survey_Form ON CS_Strategic_KPI.iSurveyFormReference = CS_Survey_Form.iSerial INNER JOIN ";
-            sSQL += "                          CS_Strategic_Evidence ON CS_Strategic_KPI.iEvidence = CS_Strategic_Evidence.iSerial ";
+            sSQL += "                          CS_Strategic_Evidence ON CS_Strategic_KPI.iEvidence = CS_Strategic_Evidence.iSerial INNER JOIN ";
+            sSQL += "                          CS_KPI_Value_Type ON CS_Strategic_KPI.iKPIValueType = CS_KPI_Value_Type.iSerial INNER JOIN ";
+            sSQL += "                          CS_KPI_Management_Practice_Type ON CS_Strategic_KPI.iKPIManagementPracticeType = CS_KPI_Management_Practice_Type.iSerial INNER JOIN ";
+            sSQL += "                          CS_KPI_Management_Practice_Sub_Type ON CS_Strategic_KPI.iKPIManagementPracticeSubType = CS_KPI_Management_Practice_Sub_Type.iSerial INNER JOIN ";
+            sSQL += "                          CS_KPI_Outcome ON CS_Strategic_KPI.iKPIOutcome = CS_KPI_Outcome.iSerial ";
             sSQL += " where iInitiative=@iInitiative ";
 
             SqlCommand cmd = new SqlCommand(sSQL, sc);

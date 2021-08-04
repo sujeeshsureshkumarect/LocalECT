@@ -162,6 +162,35 @@
                                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*EV Required" ControlToValidate="txt_EV" ForeColor="Red" ValidationGroup="no">
                                                         </asp:RequiredFieldValidator>                                                        
                                                     </div>
+                                                    <div class="form-group ">
+                                                        <label>KPI Value Type *</label>
+                                                        <asp:DropDownList ID="drp_KPIValueType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>KPI Management Practice Type *</label>
+                                                        <asp:DropDownList ID="drp_KPIManagementPracticeType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>KPI Management Practice SubType *</label>
+                                                        <asp:DropDownList ID="drp_KPIManagementPracticeSubType" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>KPI Outcome *</label>
+                                                        <asp:DropDownList ID="drp_KPIOutcome" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Is Duplicate *</label>
+                                                        <asp:DropDownList ID="drp_isDuplicate" runat="server" CssClass="form-control">
+                                                            <asp:ListItem Value="1" Selected>Yes</asp:ListItem>
+                                                            <asp:ListItem Value="0">No</asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label>Duplication Source *</label>                                                        
+                                                        <asp:TextBox ID="txt_DuplicationSource" runat="server" CssClass="form-control"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Duplication Source Required" ControlToValidate="txt_DuplicationSource" ForeColor="Red" ValidationGroup="no">
+                                                        </asp:RequiredFieldValidator>                                                        
+                                                    </div>
                                                 <div class="form-group ">
                                                 <asp:Button id="btn_Create" runat="server" Text="Create" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click"/>
                                                 <asp:Button id="btn_Cancel" runat="server" Text="Cancel" CssClass="btn btn-warning btn-sm" OnClick="btn_Cancel_Click"/>

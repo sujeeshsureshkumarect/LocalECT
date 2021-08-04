@@ -267,6 +267,60 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_EV;
 
         /// <summary>
+        /// drp_KPIValueType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPIValueType;
+
+        /// <summary>
+        /// drp_KPIManagementPracticeType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPIManagementPracticeType;
+
+        /// <summary>
+        /// drp_KPIManagementPracticeSubType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPIManagementPracticeSubType;
+
+        /// <summary>
+        /// drp_KPIOutcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_KPIOutcome;
+
+        /// <summary>
+        /// drp_isDuplicate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_isDuplicate;
+
+        /// <summary>
+        /// txt_DuplicationSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_DuplicationSource;
+
+        /// <summary>
         /// btn_Create control.
         /// </summary>
         /// <remarks>

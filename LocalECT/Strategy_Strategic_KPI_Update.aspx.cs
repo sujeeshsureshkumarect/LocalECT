@@ -51,6 +51,11 @@ namespace LocalECT
                     if (!IsPostBack)
                     {
                         fillInitiative();
+                        fillKPIValueType();
+                        fillKPIManagementPracticeType();
+                        fillKPIManagementPracticeSubType();
+                        fillKPIOutcome();
+
                         drp_Initiative.SelectedIndex = drp_Initiative.Items.IndexOf(drp_Initiative.Items.FindByValue(Request.QueryString["id"]));
                         fillStrategyVersion();
                         if (!string.IsNullOrEmpty(drp_Initiative.SelectedValue))
@@ -111,6 +116,13 @@ namespace LocalECT
                                 drp_isQSWorldUniversityRanking.Enabled = false;
                                 drp_Evidence.Enabled = false;
                                 txt_EV.Enabled = false;
+
+                                drp_KPIValueType.Enabled = false;
+                                drp_KPIManagementPracticeType.Enabled = false;
+                                drp_KPIManagementPracticeSubType.Enabled = false;
+                                drp_KPIOutcome.Enabled = false;
+                                drp_isDuplicate.Enabled = false;
+                                txt_DuplicationSource.Enabled = false;
                             }
                             else if (t == "e")//Edit
                             {
@@ -139,6 +151,13 @@ namespace LocalECT
                                 drp_isQSWorldUniversityRanking.Enabled = true;
                                 drp_Evidence.Enabled = true;
                                 txt_EV.Enabled = true;
+
+                                drp_KPIValueType.Enabled = true;
+                                drp_KPIManagementPracticeType.Enabled = true;
+                                drp_KPIManagementPracticeSubType.Enabled = true;
+                                drp_KPIOutcome.Enabled = true;
+                                drp_isDuplicate.Enabled = true;
+                                txt_DuplicationSource.Enabled = true;
                             }
                         }
                         else
@@ -184,6 +203,115 @@ namespace LocalECT
                 sc.Close();
             }
         }
+
+        public void fillKPIValueType()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sKPIValueType from CS_KPI_Value_Type", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_KPIValueType.DataSource = dt;
+                drp_KPIValueType.DataTextField = "sKPIValueType";
+                drp_KPIValueType.DataValueField = "iSerial";
+                drp_KPIValueType.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
+        public void fillKPIManagementPracticeType()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sManagementPracticeType from CS_KPI_Management_Practice_Type", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_KPIManagementPracticeType.DataSource = dt;
+                drp_KPIManagementPracticeType.DataTextField = "sManagementPracticeType";
+                drp_KPIManagementPracticeType.DataValueField = "iSerial";
+                drp_KPIManagementPracticeType.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
+        public void fillKPIManagementPracticeSubType()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sManagementPracticeSubType from CS_KPI_Management_Practice_Sub_Type", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_KPIManagementPracticeSubType.DataSource = dt;
+                drp_KPIManagementPracticeSubType.DataTextField = "sManagementPracticeSubType";
+                drp_KPIManagementPracticeSubType.DataValueField = "iSerial";
+                drp_KPIManagementPracticeSubType.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
+        public void fillKPIOutcome()
+        {
+            SqlCommand cmd = new SqlCommand("select iSerial,sKPIOutcome from CS_KPI_Outcome", sc);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            try
+            {
+                sc.Open();
+                da.Fill(dt);
+                sc.Close();
+
+                drp_KPIOutcome.DataSource = dt;
+                drp_KPIOutcome.DataTextField = "sKPIOutcome";
+                drp_KPIOutcome.DataValueField = "iSerial";
+                drp_KPIOutcome.DataBind();
+            }
+            catch (Exception ex)
+            {
+                sc.Close();
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sc.Close();
+            }
+        }
+
         public void fillStrategyVersion()
         {
             SqlCommand cmd = new SqlCommand("select iSerial,sStrategyVersion from CS_Strategy_Version", sc);
@@ -636,6 +764,25 @@ namespace LocalECT
                         j = 1;
                     }
                     drp_isQSWorldUniversityRanking.SelectedIndex = drp_isQSWorldUniversityRanking.Items.IndexOf(drp_isQSWorldUniversityRanking.Items.FindByValue(j.ToString()));
+
+                    drp_KPIValueType.SelectedIndex = drp_KPIValueType.Items.IndexOf(drp_KPIValueType.Items.FindByValue(dt.Rows[0]["iKPIValueType"].ToString()));
+                    drp_KPIManagementPracticeType.SelectedIndex = drp_KPIManagementPracticeType.Items.IndexOf(drp_KPIManagementPracticeType.Items.FindByValue(dt.Rows[0]["iKPIManagementPracticeType"].ToString()));
+                    drp_KPIManagementPracticeSubType.SelectedIndex = drp_KPIManagementPracticeSubType.Items.IndexOf(drp_KPIManagementPracticeSubType.Items.FindByValue(dt.Rows[0]["iKPIManagementPracticeSubType"].ToString()));
+                    drp_KPIOutcome.SelectedIndex = drp_KPIOutcome.Items.IndexOf(drp_KPIOutcome.Items.FindByValue(dt.Rows[0]["iKPIOutcome"].ToString()));
+
+                    string isDuplicate = dt.Rows[0]["isDuplicate"].ToString();
+                    int k = 0;
+                    if (isDuplicate == "False")
+                    {
+                        k = 0;
+                    }
+                    else
+                    {
+                        k = 1;
+                    }
+                    drp_isDuplicate.SelectedIndex = drp_isDuplicate.Items.IndexOf(drp_isDuplicate.Items.FindByValue(k.ToString()));
+
+                    txt_DuplicationSource.Text = dt.Rows[0]["iDuplicationSource"].ToString();
                 }
             }
             catch (Exception ex)
@@ -667,7 +814,7 @@ namespace LocalECT
                     return;
                 }
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iEvidence=@iEvidence,sEV=@sEV where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI set sKPIID=@sKPIID,sKPIDesc=@sKPIDesc,iPeriod=@iPeriod,iFormula=@iFormula,cTargetKPI=@cTargetKPI,cMin=@cMin,cMax=@cMax,cOverallKPI=@cOverallKPI,iKPISource=@iKPISource,iKPILevel=@iKPILevel,iKPISubLevel=@iKPISubLevel,IsInstitutionalClass=@IsInstitutionalClass,iMOEClassificationPillars=@iMOEClassificationPillars,iMarketPositioningPillars=@iMarketPositioningPillars,iDepartment=@iDepartment,iSection=@iSection,iInitiative=@iInitiative,iOrder=@iOrder,iStrategyVersion=@iStrategyVersion,iSurveyFormReference=@iSurveyFormReference,isQSWorldUniversityRanking=@isQSWorldUniversityRanking,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,iEvidence=@iEvidence,sEV=@sEV,iKPIValueType=@iKPIValueType,iKPIManagementPracticeType=@iKPIManagementPracticeType,iKPIManagementPracticeSubType=@iKPIManagementPracticeSubType,iKPIOutcome=@iKPIOutcome,isDuplicate=@isDuplicate,iDuplicationSource=@iDuplicationSource where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -694,6 +841,14 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@iEvidence", drp_Evidence.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEV", txt_EV.Text.Trim());
+
+                cmd.Parameters.AddWithValue("@iKPIValueType", drp_KPIValueType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIManagementPracticeType", drp_KPIManagementPracticeType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIManagementPracticeSubType", drp_KPIManagementPracticeSubType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIOutcome", drp_KPIOutcome.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@isDuplicate", drp_isDuplicate.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iDuplicationSource", txt_DuplicationSource.Text.Trim());
+
                 cmd.Parameters.AddWithValue("@iSerial", sid);
                 try
                 {
@@ -732,7 +887,7 @@ namespace LocalECT
                     return;
                 }
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@isQSWorldUniversityRanking,@iEvidence,@sEV)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI values (@sKPIID,@sKPIDesc,@iPeriod,@iFormula,@cTargetKPI,@cMin,@cMax,@cOverallKPI,@iKPISource,@iKPILevel,@iKPISubLevel,@IsInstitutionalClass,@iMOEClassificationPillars,@iMarketPositioningPillars,@iDepartment,@iSection,@iInitiative,@iOrder,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iSurveyFormReference,@isQSWorldUniversityRanking,@iEvidence,@sEV,@iKPIValueType,@iKPIManagementPracticeType,@iKPIManagementPracticeSubType,@iKPIOutcome,@isDuplicate,@iDuplicationSource)", sc);
                 cmd.Parameters.AddWithValue("@sKPIID", txt_KPIID.Text.Trim());
                 cmd.Parameters.AddWithValue("@sKPIDesc", txt_KPIDesc.Text.Trim());
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
@@ -761,6 +916,12 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@iEvidence", drp_Evidence.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sEV", txt_EV.Text.Trim());
+                cmd.Parameters.AddWithValue("@iKPIValueType", drp_KPIValueType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIManagementPracticeType", drp_KPIManagementPracticeType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIManagementPracticeSubType", drp_KPIManagementPracticeSubType.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iKPIOutcome", drp_KPIOutcome.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@isDuplicate", drp_isDuplicate.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@iDuplicationSource", txt_DuplicationSource.Text.Trim());
                 try
                 {
                     sc.Open();

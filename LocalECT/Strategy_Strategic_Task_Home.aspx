@@ -115,7 +115,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration Value</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Transformation Program</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Digital Use Case</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>                                            
@@ -147,11 +147,11 @@
                                                    <%-- 
                                                     <td><%#Eval("sIRQARecommendation")%></td>--%>
                                                     <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
-                                                    <td><%#Eval("sEvidenceTitle")%></td>
+                                                    <td><%#Eval("sEvidenceRecored")%></td>
                                                     <td ><%#Eval("sInitiativeID")%> <%#Eval("sInitiativeDesc")%></td>    
                                                     <td><%#Eval("sDuration")%></td>
                                                     <td><%#Eval("iDurationValue")%></td>
-                                                    <td><%#Eval("sEV")%></td>
+                                                    <%--<td><%#Eval("sEV")%></td>--%>
                                                     <td><%#Eval("sDigitalTransformationProgram")%></td>
                                                     <td><%#Eval("sDigitalUseCase")%></td>
                                                     <td><%#Eval("sStrategyVersion")%></td>

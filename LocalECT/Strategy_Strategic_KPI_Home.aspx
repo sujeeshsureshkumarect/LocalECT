@@ -116,7 +116,13 @@
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>  --%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Is QS World University Ranking</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>--%>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Value Type</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Management Practice Type</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Management Practice SubType</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Outcome</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Is Duplicate</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duplication Source</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
@@ -148,8 +154,15 @@
                                                     <td><%#Eval("sSurveyFormReference")%></td>
                                                     <%--<td><%#Eval("sRiskManagement")%></td>--%>
                                                     <td><%#Eval("isQSWorldUniversityRanking")%></td>
-                                                    <td><%#Eval("sEvidenceTitle")%></td>
-                                                    <td><%#Eval("sEV")%></td>
+                                                    <td><%#Eval("sEvidenceRecored")%></td>
+                                                   <%-- <td><%#Eval("sEV")%></td>--%>
+                                                    <td><%#Eval("sKPIValueType")%></td>
+                                                    <td><%#Eval("sManagementPracticeType")%></td>
+                                                    <td><%#Eval("sManagementPracticeSubType")%></td>
+                                                    <td><%#Eval("sKPIOutcome")%></td>
+                                                    <td><%#Eval("isDuplicate")%></td>
+                                                    <td><%#Eval("iDuplicationSource")%></td>
+
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
                                                      <td>
