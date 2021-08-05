@@ -84,6 +84,7 @@
     </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="QRCoder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\QRCoder.dll</HintPath>
@@ -216,6 +217,7 @@
     <Content Include="Strategy_Digital_Use_Case.aspx" />
     <Content Include="Strategy_Digital_Use_Case_Create.aspx" />
     <Content Include="Strategy_Digital_Use_Case_Edit.aspx" />
+    <Content Include="Strategy_Download_Template.aspx" />
     <Content Include="Strategy_Enterprise_Model.aspx" />
     <Content Include="Strategy_Enterprise_Model_Create.aspx" />
     <Content Include="Strategy_Enterprise_Model_Edit.aspx" />
@@ -8903,6 +8905,13 @@
     </Compile>
     <Compile Include="Strategy_Digital_Use_Case_Edit.aspx.designer.cs">
       <DependentUpon>Strategy_Digital_Use_Case_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Strategy_Download_Template.aspx.cs">
+      <DependentUpon>Strategy_Download_Template.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Strategy_Download_Template.aspx.designer.cs">
+      <DependentUpon>Strategy_Download_Template.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Enterprise_Model.aspx.cs">
       <DependentUpon>Strategy_Enterprise_Model.aspx</DependentUpon>
