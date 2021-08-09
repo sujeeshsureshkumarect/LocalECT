@@ -151,7 +151,7 @@ namespace LocalECT
             sSQL += "                          CS_Strategic_KPI.sAddedBy, CS_Strategic_KPI.dUpdated, CS_Strategic_KPI.sUpdatedBy, CS_Strategic_Period.sPeriod, CS_KPI_Formula.sKPIFormula, CS_KPI_Source.sKPISource, CS_KPI_Level.sKPILevel,  ";
             sSQL += "                          CS_KPI_Sub_Level.sKPISubLevel, CS_MOE_Classification_Pillars.sMOEClassificationPillars, CS_Market_Positioning_Pillars.sMarketPositioningPillars, Lkp_Department.DescEN, Lkp_Department.DepartmentAbbreviation,  ";
             sSQL += "                          Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Strategic_Initiative.sInitiativeID, CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion, CS_Strategic_KPI.iSurveyFormReference,  ";
-            sSQL += "                          CS_Survey_Form.sSurveyFormReference, CS_Strategic_KPI.isQSWorldUniversityRanking, CS_Strategic_KPI.iEvidence, CS_Strategic_KPI.sEV, CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_KPI.isDuplicate,  ";
+            sSQL += "                          CS_Survey_Form.sSurveyFormReference, CS_Strategic_KPI.isQSWorldUniversityRanking, CS_Strategic_KPI.iEvidence, CS_Strategic_KPI.sEV, CS_Strategic_Evidence.iSerial as iSerial1,CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_KPI.isDuplicate,  ";
             sSQL += "                          CS_Strategic_KPI.iDuplicationSource, CS_KPI_Value_Type.sKPIValueType, CS_Strategic_KPI.iKPIValueType, CS_KPI_Management_Practice_Type.sManagementPracticeType,  ";
             sSQL += "                          CS_KPI_Management_Practice_Sub_Type.sManagementPracticeSubType, CS_KPI_Outcome.sKPIOutcome ";
             sSQL += " FROM            CS_Strategy_Version INNER JOIN ";

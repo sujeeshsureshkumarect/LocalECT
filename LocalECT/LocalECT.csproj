@@ -192,6 +192,7 @@
     <Content Include="Bulk_SC_Send_SMS.aspx" />
     <Content Include="ChangeMajor.aspx" />
     <Content Include="ChangePwd.aspx" />
+    <Content Include="Change_Status.aspx" />
     <Content Include="CHEDS_Enrollment.aspx" />
     <Content Include="CHEDS_New_Applicants.aspx" />
     <Content Include="CHEDS_New_Attrition.aspx" />
@@ -8779,6 +8780,13 @@
     </Compile>
     <Compile Include="ChangePwd.aspx.designer.cs">
       <DependentUpon>ChangePwd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Change_Status.aspx.cs">
+      <DependentUpon>Change_Status.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Change_Status.aspx.designer.cs">
+      <DependentUpon>Change_Status.aspx</DependentUpon>
     </Compile>
     <Compile Include="CHEDS_Enrollment.aspx.cs">
       <DependentUpon>CHEDS_Enrollment.aspx</DependentUpon>

@@ -207,7 +207,7 @@ namespace LocalECT
             sSQL += "                          CS_Stipulation_Guidelines.sGuidelinesDesc, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardID, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc,  ";
             sSQL += "                          CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainDesc, CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesID,  ";
             sSQL += "                          CS_Inspection_Compliance_Guidelines.sInspectionComplianceGuidelinesDesc, CS_Strategic_Initiative.sInitiativeID, CS_Strategic_Initiative.sInitiativeDesc, CS_Strategy_Version.sStrategyVersion,  ";
-            sSQL += "                          CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_Task.iSurveyFormReference, CS_Strategic_Task.iDuration, CS_Strategic_Task.iDurationValue, CS_Strategic_Task_Duration.sDuration,  ";
+            sSQL += "                          CS_Strategic_Evidence.iSerial as iSerial1, CS_Strategic_Evidence.sEvidenceRecored, CS_Strategic_Task.iSurveyFormReference, CS_Strategic_Task.iDuration, CS_Strategic_Task.iDurationValue, CS_Strategic_Task_Duration.sDuration,  ";
             sSQL += "                          CS_Survey_Form.sSurveyFormReference, CS_Survey_Form.sSurveyName, CS_Strategic_Task.sEV, CS_Strategic_Task.iDigitalTransformationProgram, CS_Strategic_Task.iDigitalUseCase,  ";
             sSQL += "                          CS_Digital_Transformation_Program.sDigitalTransformationProgram, CS_Digital_Use_Case.sDigitalUseCase ";
             sSQL += " FROM            CS_Inspection_Compliance_Domain INNER JOIN ";

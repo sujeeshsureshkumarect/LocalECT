@@ -71,6 +71,8 @@ namespace LocalECT
 
         public void bindStrategic_Evidence()
         {
+            string id = Request.QueryString["id"];
+
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
@@ -92,7 +94,10 @@ namespace LocalECT
             sSQL += "                          CS_Customer_Experience_Evidence_Category.iSerial = CS_Strategic_Evidence.iCustomerExperienceEvidenceCategory ON  ";
             sSQL += "                          CS_Customer_Experience_Evidence_Sub_Category.iSerial = CS_Strategic_Evidence.iCustomerExperienceEvidenceSubCategory ON CS_Strategy_Version.iSerial = CS_Strategic_Evidence.iStrategyVersion INNER JOIN ";
             sSQL += "                          CS_Strategic_Project ON CS_Strategic_Evidence.iProject = CS_Strategic_Project.iSerial ";
-
+            if (id != null)
+            {
+                sSQL += " where CS_Strategic_Evidence.iSerial=" + id + "";
+            }
             SqlCommand cmd = new SqlCommand(sSQL, sc);
             System.Data.DataTable dt = new System.Data.DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -507,6 +512,9 @@ namespace LocalECT
                         else
                         {
                             Response.Write("This file does not exist.");
+                            div_msg.Visible = true;
+                            div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
+                            lbl_Msg.Text = "This file does not exist.";
                         }
                     }
 

@@ -111,7 +111,7 @@
 <%--                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>     
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">IRQA Recommendation</th>   --%>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th> 
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Record</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Initiative</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration</th> 
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Duration Value</th>
@@ -147,7 +147,8 @@
                                                    <%-- 
                                                     <td><%#Eval("sIRQARecommendation")%></td>--%>
                                                     <td title="<%#Eval("sSurveyName")%>"><%#Eval("sSurveyFormReference")%></td>
-                                                    <td><%#Eval("sEvidenceRecored")%></td>
+                                                    <%--<td><%#Eval("sEvidenceRecored")%></td>--%>
+                                                    <td><a href="Strategy_Strategic_Evidence_Home?id=<%#Eval("iSerial1")%>" style="color:blue;" target="_blank"><u><%#Eval("sEvidenceRecored")%></u></a></td>
                                                     <td ><%#Eval("sInitiativeID")%> <%#Eval("sInitiativeDesc")%></td>    
                                                     <td><%#Eval("sDuration")%></td>
                                                     <td><%#Eval("iDurationValue")%></td>

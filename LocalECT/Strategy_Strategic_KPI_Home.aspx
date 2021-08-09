@@ -115,7 +115,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Survey Form Reference</th>   
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Risk Management</th>  --%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Is QS World University Ranking</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Evidence Record</th>
                                             <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">EV</th>--%>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Value Type</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Management Practice Type</th>
@@ -154,7 +154,7 @@
                                                     <td><%#Eval("sSurveyFormReference")%></td>
                                                     <%--<td><%#Eval("sRiskManagement")%></td>--%>
                                                     <td><%#Eval("isQSWorldUniversityRanking")%></td>
-                                                    <td><%#Eval("sEvidenceRecored")%></td>
+                                                    <td><a href="Strategy_Strategic_Evidence_Home?id=<%#Eval("iSerial1")%>" style="color:blue;" target="_blank"><u><%#Eval("sEvidenceRecored")%></u></a></td>
                                                    <%-- <td><%#Eval("sEV")%></td>--%>
                                                     <td><%#Eval("sKPIValueType")%></td>
                                                     <td><%#Eval("sManagementPracticeType")%></td>

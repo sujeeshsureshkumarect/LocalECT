@@ -279,6 +279,7 @@ StudentID3"></asp:TextBox>
                                                               <a class="dropdown-item" href="Students_Advising?sid=<%#Eval("sNo")%>">Advising</a>
                                                              <a class="dropdown-item" href="Registration?sid=<%#Eval("sNo")%>">Registration</a>
                                                              <a class="dropdown-item" href="ChangeMajor?sid=<%#Eval("sNo")%>">Change Major</a>
+                                                             <a class="dropdown-item" href="Change_Status?sid=<%#Eval("sNo")%>">Change Status</a>
                                                              <a class="dropdown-item" href="CourseCalc?sid=<%#Eval("sNo")%>">Course Calc</a>
                                                              <a class="dropdown-item" href="GradesEdit_Alt?sid=<%#Eval("sNo")%>">Alternative Setup</a>
                                                              <a class="dropdown-item" href="GradesEdit?sid=<%#Eval("sNo")%>">Grades Edit</a>
