@@ -135,9 +135,9 @@
                                                          <div class="dropdown-menu">                                                                                                                          
                                                              <%--<a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
                                                              <a href="Strategy_Strategic_Objective_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a> --%>
-                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click">View</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click">Edit</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_Substipulation" runat="server" class="dropdown-item" OnClick="lnk_Substipulation_Click">Manage MOE Re-licensure Sub Stipulation</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click" CommandArgument=<%#Eval("iSerial")%>>View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click" CommandArgument=<%#Eval("iSerial")%>>Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Substipulation" runat="server" class="dropdown-item" OnClick="lnk_Substipulation_Click" CommandArgument=<%#Eval("iSerial")%>>Manage MOE Re-licensure Sub Stipulation</asp:LinkButton>
                                                              <%--<a href="Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Manage MOE Re-licensure Sub Stipulation</a>--%>
                                                          </div>
                                                      </div>

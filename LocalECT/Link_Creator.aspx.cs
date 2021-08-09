@@ -39,7 +39,7 @@ namespace LocalECT
                     iRegSem = (int)Session["RegSemester"];
                     if (!IsPostBack)
                     {
-                      //  getcode();
+                        //getcode();
                         if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.LinkManager,
                         InitializeModule.enumPrivilege.AddNew, CurrentRole) != true)
                         {
@@ -145,7 +145,7 @@ namespace LocalECT
             Connection_StringCLS myConnection_String = new Connection_StringCLS(InitializeModule.EnumCampus.ECTNew);
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
 
-            SqlCommand cmd = new SqlCommand("select * from ECT_Link_Management where sCode is null", sc);
+            SqlCommand cmd = new SqlCommand("select * from ECT_Link_Management where sCode=''", sc);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try

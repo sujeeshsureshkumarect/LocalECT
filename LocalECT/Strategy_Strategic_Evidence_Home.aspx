@@ -30,7 +30,17 @@
                                             </ul>
                                             <div class="clearfix"></div>
                                         </div>
-                                        <div class="x_content">                                                                                              
+                                        <div class="x_content">   
+                                                         <div class="x_content bs-example-popovers" id="div_msg" runat="server" visible="false">
+
+                                    <div class="alert alert-success alert-dismissible " role="alert" runat="server" id="div_Alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <asp:Label ID="lbl_Msg" runat="server" Text="Strategic Evidence Created Successfully" Visible="true" Font-Bold="true" Font-Size="16px"></asp:Label>
+                                    </div>
+                                </div>
+
                                             <div class="clearfix"></div>
                                             <link rel="stylesheet" type="text/css" href="SearchBuilder/jquery.dataTables.min.css">
                                             <link rel="stylesheet" type="text/css" href="SearchBuilder/searchBuilder.dataTables.min.css">
@@ -139,6 +149,8 @@
                                                              <a href="Strategy_Strategic_Evidence_Update.aspx?id=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
                                                              <a href="Strategy_Strategic_Evidence_Update.aspx?id=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a> 
                                                              <a href="Strategy_Strategic_Evidence_Submission_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Execute</a> 
+                                                             <%--<a href="Strategy_Strategic_Evidence_Submission_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Download Template</a>--%>
+                                                             <asp:LinkButton ID="lnk_Download" runat="server" CssClass="dropdown-item" CommandArgument=<%#Eval("iSerial")%> OnClick="lnk_Download_Click">Download Template</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

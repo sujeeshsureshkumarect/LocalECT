@@ -174,7 +174,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + id + "&t=v");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + commandArgument + "&t=v");
             }
         }
 
@@ -188,7 +193,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + id + "&t=e");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Initiative_Update.aspx?id=" + commandArgument + "&t=e");
             }
         }
         protected void lnk_1_Click(object sender, EventArgs e)
@@ -200,8 +210,12 @@ namespace LocalECT
                 Response.Redirect("Strategy_Initiative_Dpartment_Section_Home.aspx?f=m&id=" + id + "");
             }
             else
-            {
-                Response.Redirect("Strategy_Initiative_Dpartment_Section_Home.aspx?id=" + id + "");
+            {  //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Initiative_Dpartment_Section_Home.aspx?id=" + commandArgument + "");
             }
         }
 
@@ -215,7 +229,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Risk_Management.aspx?id=" + id + "");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Risk_Management.aspx?id=" + commandArgument + "");
             }
         }
 
@@ -229,7 +248,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + commandArgument + "");
             }
         }
 
@@ -243,7 +267,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Task_Home.aspx?id=" + id + "");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Task_Home.aspx?id=" + commandArgument + "");
             }
         }
     }

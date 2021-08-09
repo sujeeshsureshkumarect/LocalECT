@@ -120,7 +120,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + id + "&t=v");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + commandArgument + "&t=v");
             }
         }
 
@@ -134,7 +139,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + id + "&t=e");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Objective_Update.aspx?id=" + commandArgument + "&t=e");
             }
         }
 
@@ -148,7 +158,12 @@ namespace LocalECT
             }
             else
             {
-                Response.Redirect("Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=" + id + "");
+                //Get the reference of the clicked button.
+                LinkButton button = (sender as LinkButton);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                Response.Redirect("Strategy_Strategic_Objective_Sub_Stipulation_Home.aspx?id=" + commandArgument + "");
             }
         }
     }

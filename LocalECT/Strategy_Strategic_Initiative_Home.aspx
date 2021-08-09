@@ -160,12 +160,12 @@
                                                              <a href="Strategy_Strategic_KPI_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">KPIs</a>
                                                              <a href="Strategy_Strategic_Task_Home.aspx?id=<%#Eval("iSerial")%>" class="dropdown-item">Tasks</a>--%>
 
-                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click">View</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click">Edit</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_1" runat="server" class="dropdown-item" OnClick="lnk_1_Click">Manage Support Department/Section</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_2" runat="server" class="dropdown-item" OnClick="lnk_2_Click">Manage Risks</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_3" runat="server" class="dropdown-item" OnClick="lnk_3_Click">KPIs</asp:LinkButton>
-                                                             <asp:LinkButton ID="lnk_4" runat="server" class="dropdown-item" OnClick="lnk_4_Click">Tasks</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click" CommandArgument=<%#Eval("iSerial")%>>View</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_Edit" runat="server" class="dropdown-item" OnClick="lnk_Edit_Click" CommandArgument=<%#Eval("iSerial")%>>Edit</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_1" runat="server" class="dropdown-item" OnClick="lnk_1_Click" CommandArgument=<%#Eval("iSerial")%>>Manage Support Department/Section</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_2" runat="server" class="dropdown-item" OnClick="lnk_2_Click" CommandArgument=<%#Eval("iSerial")%>>Manage Risks</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_3" runat="server" class="dropdown-item" OnClick="lnk_3_Click" CommandArgument=<%#Eval("iSerial")%>>KPIs</asp:LinkButton>
+                                                             <asp:LinkButton ID="lnk_4" runat="server" class="dropdown-item" OnClick="lnk_4_Click" CommandArgument=<%#Eval("iSerial")%>>Tasks</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                    </td>                                                    
