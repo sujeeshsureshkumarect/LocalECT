@@ -57,6 +57,12 @@
                                         <asp:DropDownList ID="drp_SubPeriod" runat="server" CssClass="form-control"></asp:DropDownList>
                                     </div>
                                     <div class="form-group ">
+                                        <label>Sub Period Target *</label>
+                                        <asp:TextBox ID="txt_SubPeriodTarget" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Sub Period Target Required" ControlToValidate="txt_SubPeriodTarget" ForeColor="Red" ValidationGroup="no">
+                                        </asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="form-group ">
                                         <label>Value *</label>
                                         <asp:TextBox ID="txt_Value" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Value Required" ControlToValidate="txt_Value" ForeColor="Red" ValidationGroup="no">
@@ -83,13 +89,7 @@
                                         <asp:TextBox ID="txt_Note" runat="server" CssClass="form-control" TextMode="MultiLine" Height="100px"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Note Required" ControlToValidate="txt_Note" ForeColor="Red" ValidationGroup="no">
                                         </asp:RequiredFieldValidator>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Sub Period Target *</label>
-                                        <asp:TextBox ID="txt_SubPeriodTarget" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                                        <asp:RequiredFieldValidator runat="server" Display="Dynamic" ErrorMessage="*Sub Period Target Required" ControlToValidate="txt_SubPeriodTarget" ForeColor="Red" ValidationGroup="no">
-                                        </asp:RequiredFieldValidator>
-                                    </div>
+                                    </div>                                    
                                     <div class="form-group ">
                                         <asp:Button ID="btn_Create" runat="server" Text="Create" CssClass="btn btn-success btn-sm" ValidationGroup="no" OnClick="btn_Create_Click" />
                                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CssClass="btn btn-warning btn-sm" OnClick="btn_Cancel_Click" />

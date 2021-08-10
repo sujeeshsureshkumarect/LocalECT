@@ -94,6 +94,7 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" width="50px">SR No.</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Period</th>                                                                                        
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Period</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Period Target</th>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Value</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI ID</th>                                                                                           
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Department</th>                                                                                        
@@ -101,7 +102,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Status</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Note</th>   
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Period Target</th>   
+                                            <%--<th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Period Target</th> --%>  
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
@@ -113,6 +114,7 @@
                                                     <td><%#Container.ItemIndex+1 %></td>
                                                     <td><%#Eval("sPeriod")%></td>
                                                     <td><%#Eval("sSubPeriod")%></td>
+                                                    <td><%#Eval("cSubPeriodTarget")%></td> 
                                                     <td><%#Eval("cValue")%></td>
                                                     <td title="<%#Eval("sKPIDesc")%>"><%#Eval("sKPIID")%></td>                                                                                                            
                                                     <td title="<%#Eval("DescEN")%>"><%#Eval("DepartmentAbbreviation")%></td>   
@@ -120,7 +122,7 @@
                                                     <td><%#Eval("sStrategyVersion")%></td>                                                    
                                                     <td><%#Eval("sKPIStatus")%></td>   
                                                     <td><%#Eval("sNote")%></td>   
-                                                    <td><%#Eval("cSubPeriodTarget")%></td> 
+                                                    
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
                                                      <td>

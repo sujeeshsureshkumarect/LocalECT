@@ -599,7 +599,8 @@ public class InitializeModule
         CS_ShowAsDeptHead = 197,
         CS_ShowAsSectionHead = 198,
         CS_Manage_IRQA_Recommendation = 199,
-        CS_ShowAsSectionMember = 200
+        CS_ShowAsSectionMember = 200,
+        CS_UpdateTarget = 201
     }
 
     public enum enumPrivilegeObjects : int

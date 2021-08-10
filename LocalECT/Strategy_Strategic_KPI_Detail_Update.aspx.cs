@@ -95,7 +95,7 @@ namespace LocalECT
 
                         if (did != null)
                         {
-                            bindStrategic_KPI_Detail(did);
+                            bindStrategic_KPI_Detail(did);                            
                             btn_Create.Text = "Update";
                             lbl_Header.Text = "Edit KPI Detail-Execute";
                             if (t == "v")//View
@@ -119,6 +119,11 @@ namespace LocalECT
                                 drp_KPIStatus.Enabled = true;
                                 txt_Note.Enabled = true;
                                 txt_SubPeriodTarget.Enabled = true;
+                            }
+                            if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
+                        InitializeModule.enumPrivilege.CS_UpdateTarget, CurrentRole) != true)
+                            {
+                                txt_SubPeriodTarget.Enabled = false;
                             }
                         }
                         else
