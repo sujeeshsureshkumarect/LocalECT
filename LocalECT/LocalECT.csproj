@@ -210,6 +210,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CourseCalc.aspx" />
     <Content Include="LinkedIn_frmGetDataFromAPI.aspx" />
+    <Content Include="Loginas.aspx" />
     <Content Include="Strategy\CS_Header1.jpg" />
     <Content Include="Strategy\dttable.css" />
     <Content Include="Strategy_Digital_Transformation_Create.aspx" />
@@ -8871,6 +8872,13 @@
     </Compile>
     <Compile Include="LinkedIn_frmGetDataFromAPI.aspx.designer.cs">
       <DependentUpon>LinkedIn_frmGetDataFromAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loginas.aspx.cs">
+      <DependentUpon>Loginas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loginas.aspx.designer.cs">
+      <DependentUpon>Loginas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Strategy_Digital_Transformation_Create.aspx.cs">
       <DependentUpon>Strategy_Digital_Transformation_Create.aspx</DependentUpon>
