@@ -26,6 +26,15 @@ namespace LocalECT
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
@@ -587,7 +596,15 @@ namespace LocalECT
             string id = Request.QueryString["id"];//iInitiative
             string sid = Request.QueryString["sid"];//TaskID           
             string did = Request.QueryString["did"];//DetailsID   
-            Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?id=" + id + "&sid="+sid+"");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?f=m&id=" + id + "&sid=" + sid + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            }               
         }
 
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
@@ -722,7 +739,15 @@ namespace LocalECT
             string id = Request.QueryString["id"];//iInitiative
             string sid = Request.QueryString["sid"];//TaskID           
             string did = Request.QueryString["did"];//DetailsID   
-            Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?f=m&id=" + id + "&sid=" + sid + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            }                
         }
     }
 }

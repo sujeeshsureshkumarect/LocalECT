@@ -22,18 +22,35 @@ namespace LocalECT
         int CurrentRole = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
                 {
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
-                    {
-                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
-                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {                       
+                        string f = Request.QueryString["f"];
+                        if (f == "m")
                         {
-                            Server.Transfer("Authorization.aspx");
+
                         }
+                        //else
+                        //{
+                        //    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
+                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        //    {
+                        //        Server.Transfer("Authorization.aspx");
+                        //    }
+                        //}
                     }
                 }
                 else
@@ -75,6 +92,62 @@ namespace LocalECT
                 Page.Header.Controls.Add(new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/Strategy/dttable.css") + "\" />"));
                 sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID,CS_Strategic_Project.sStrategicProjectDesc FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial where CS_Strategic_Objective.iSerial=" + id+" order by CS_Strategic_Objective.iOrder";
             }
+            else if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Objective,
+                        InitializeModule.enumPrivilege.ShowAll, CurrentRole) != true)
+            {
+                sSQL = "SELECT CS_Strategic_Objective.iSerial, CS_Strategic_Objective.sStrategicObjectiveID, CS_Strategic_Objective.sStrategicObjectiveDesc, CS_Strategic_Objective.iInspectionComplianceDomain, CS_Strategic_Objective.iOrder, CS_Strategic_Objective.iStrategyVersion, CS_Strategic_Objective.dAdded, CS_Strategic_Objective.sAddedBy, CS_Strategic_Objective.dUpdated, CS_Strategic_Objective.sUpdatedBy, CS_Strategic_Objective.sAbbreviation, CS_Strategic_Objective.iStrategicProject, CS_Strategic_Objective.sImagePath,  CS_Strategic_Objective.iLevel, CS_Inspection_Compliance_Domain.sInspectionComplianceDomainID, CS_Strategy_Version.sStrategyVersion, CS_Strategic_Project.sStrategicProjectID,CS_Strategic_Project.sStrategicProjectDesc FROM CS_Strategic_Objective INNER JOIN CS_Inspection_Compliance_Domain ON CS_Strategic_Objective.iInspectionComplianceDomain = CS_Inspection_Compliance_Domain.iSerial INNER JOIN CS_Strategy_Version ON CS_Strategic_Objective.iStrategyVersion = CS_Strategy_Version.iSerial INNER JOIN CS_Strategic_Project ON CS_Strategic_Objective.iStrategicProject = CS_Strategic_Project.iSerial where CS_Strategic_Objective.iSerial in (";
+
+                sSQL += " SELECT        ObjectID ";
+                sSQL += "        FROM            (SELECT        TH.iSerial AS ObjectID, TH.sThemeDesc AS ObjectNameEn, TH.sThemeCode AS DisplayObjectName, TH.iOrder AS ShowOrder, 14 AS SystemID, 1299 AS ParentID, 'Strategy_Strategic_Theme_Home.aspx?f=m&id=' + CONVERT(varchar, TH.iSerial)   ";
+                sSQL += "                                                            AS sURL, TH.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL += "                                                        WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")    ) AS C INNER JOIN  ";
+                sSQL += "                                                            CS_Strategic_Theme AS TH ON C.iTheme = TH.iSerial  ";
+                sSQL += "                                  UNION ALL  ";
+                sSQL += "                                  SELECT        SG.iSerial as ObjectID,CONVERT(varchar(100),SG.sStrategicGoalDesc) AS ObjectNameEn, SG.sAbbreviation AS DisplayObjectName, SG.iOrder AS ShowOrder, 14 AS SystemID, C_4.iTheme AS ParentID,   ";
+                sSQL += "                                                           'Strategy_Strategic_Goal_Home.aspx?f=m&id=' + CONVERT(varchar, SG.iSerial) AS sURL, SG.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL += "                                                          WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")      ) AS C_4 INNER JOIN  ";
+                sSQL += "                                                           CS_Strategic_Goal AS SG ON C_4.iGoal = SG.iSerial  ";
+                sSQL += "                                  UNION ALL  ";
+                sSQL += "                                  SELECT        SP.iSerial as ObjectID, CONVERT(varchar(100),SP.sStrategicProjectDesc) AS ObjectNameEn, SP.sAbbreviation AS DisplayObjectName, SP.iOrder, 14 AS SystemID, C_3.iGoal * 10 AS ParentID, 'Strategy_Strategic_Project_Home.aspx?f=m&id=' + CONVERT(varchar,   ";
+                sSQL += "                                                           SP.iSerial) AS sURL, SP.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL += "                                                            WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")     ) AS C_3 INNER JOIN  ";
+                sSQL += "                                                           CS_Strategic_Project AS SP ON C_3.iProject = SP.iSerial  ";
+                sSQL += "                                  UNION ALL  ";
+                sSQL += "                                  SELECT        SO.iSerial AS ObjectID, CONVERT(varchar(100),SO.sStrategicObjectiveDesc) AS ObjectNameEn, SO.sAbbreviation AS DisplayObjectName, SO.iOrder, 14 AS SystemID, C_2.iProject * 100 AS ParentID,   ";
+                sSQL += "                                                           'Strategy_Strategic_Objective_Home.aspx?f=m&id=' + CONVERT(varchar, SO.iSerial) AS sURL, SO.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL += "                                                       WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")          ) AS C_2 INNER JOIN  ";
+                sSQL += "                                                           CS_Strategic_Objective AS SO ON C_2.iObjective = SO.iSerial  ";
+                sSQL += "                                  UNION ALL  ";
+                sSQL += "                                  SELECT        SInit.iSerial  AS ObjectID, CONVERT(varchar(150),SInit.sInitiativeDesc) AS ObjectNameEn, SInit.sAbbreviation AS DisplayObjectName, SInit.iOrder, 14 AS SystemID, C_1.iObjective * 1000 AS ParentID,   ";
+                sSQL += "                                                           'Strategy_Strategic_Initiative_Home.aspx?f=m&id=' + CONVERT(varchar, SInit.iSerial) AS sURL, SInit.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL += "                                                        WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")        ) AS C_1 INNER JOIN  ";
+                sSQL += "                                                           CS_Strategic_Initiative AS SInit ON C_1.SIID = SInit.iSerial) AS MNU  ";
+                sSQL += " 														  where iLevel=5 ";
+                sSQL += "        GROUP BY ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel  ";
+                //sSQL += "        order by ObjectID ";
+
+                sSQL += ") order by CS_Strategic_Objective.iOrder";
+            }            
             else
             {
                 //row1.Style.Add("margin-top", "0px !important");

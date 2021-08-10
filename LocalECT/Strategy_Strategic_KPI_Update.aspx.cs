@@ -26,6 +26,15 @@ namespace LocalECT
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)

@@ -100,7 +100,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Section</th>                                                                                                                                                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Strategy Version</th>    
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">KPI Status</th>    
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Note</th>    
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Note</th>   
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Sub Period Target</th>   
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added On</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending">Added By</th>                                                                                                                             
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Action</th>
@@ -119,6 +120,7 @@
                                                     <td><%#Eval("sStrategyVersion")%></td>                                                    
                                                     <td><%#Eval("sKPIStatus")%></td>   
                                                     <td><%#Eval("sNote")%></td>   
+                                                    <td><%#Eval("cSubPeriodTarget")%></td> 
                                                     <td><%#Eval("dAdded","{0:yyyy-MM-dd}")%></td>
                                                     <td><%#Eval("sAddedBy")%></td>                                                                                                     
                                                      <td>
@@ -127,8 +129,11 @@
                                                              Actions
                                                          </button>
                                                          <div class="dropdown-menu">                                                                                                                          
-                                                             <a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
-                                                             <a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a>                                                              
+                                                             <%--<a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+                                                             <a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=e" class="dropdown-item">Edit</a> --%>                                                             
+
+                                                             <asp:LinkButton ID="lnk_View" runat="server" class="dropdown-item" OnClick="lnk_View_Click" CommandArgument=<%#Eval("iSerial")%> CommandName=<%#Eval("iInitiative")%> ToolTip=<%#Eval("iKPI")%>>View</asp:LinkButton>
+                                                             <asp:LinkButton ID="LinkButton2" runat="server" class="dropdown-item" OnClick="LinkButton2_Click" CommandArgument=<%#Eval("iSerial")%> CommandName=<%#Eval("iInitiative")%> ToolTip=<%#Eval("iKPI")%>>Edit</asp:LinkButton>
                                                          </div>
                                                      </div>
                                                    </td>                                                    

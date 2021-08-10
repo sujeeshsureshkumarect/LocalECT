@@ -103,13 +103,30 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_IRQA_Recommendation_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            string f = Request.QueryString["f"];
+            //Response.Redirect("Strategy_IRQA_Recommendation_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            if(f!=null)
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Update?f=m&id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+           else
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
         }
 
         protected void lnk_Back_Click(object sender, EventArgs e)
         {            
             string id = Request.QueryString["id"];
-            Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            string f = Request.QueryString["f"];
+            if(f!=null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?f=m&id=" + id + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home.aspx?id=" + id + "");
+            }            
         }
     }
 }

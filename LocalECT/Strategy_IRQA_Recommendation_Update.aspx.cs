@@ -270,13 +270,31 @@ namespace LocalECT
         }
 
         protected void btn_Cancel_Click(object sender, EventArgs e)
-        {            
-            Response.Redirect("Strategy_IRQA_Recommendation_Home?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+        {
+            string f = Request.QueryString["f"];            
+            if(f!=null)
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Home?f=m&id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Home?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+
         }
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_IRQA_Recommendation_Home?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            string f = Request.QueryString["f"];
+            if(f!=null)
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Home?f=m&id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_IRQA_Recommendation_Home?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+            
         }
     }
 }

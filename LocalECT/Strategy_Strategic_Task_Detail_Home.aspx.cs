@@ -22,6 +22,15 @@ namespace LocalECT
         int CurrentRole = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
@@ -111,12 +120,29 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_Task_Detail_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Update?f=m&id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Detail_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+                
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_Task_Home?id=" + Request.QueryString["id"] + "");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_Task_Home?f=m&id=" + Request.QueryString["id"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_Task_Home?id=" + Request.QueryString["id"] + "");
+            }               
         }
     }
 }

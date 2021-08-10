@@ -22,18 +22,35 @@ namespace LocalECT
         int CurrentRole = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
                 {
                     CurrentRole = (int)Session["CurrentRole"];
                     if (!IsPostBack)
-                    {
-                        if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Project,
-                        InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                    {                       
+                        string f = Request.QueryString["f"];
+                        if (f == "m")
                         {
-                            Server.Transfer("Authorization.aspx");
+
                         }
+                        //else
+                        //{
+                        //    if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Project,
+                        //InitializeModule.enumPrivilege.ShowBrowse, CurrentRole) != true)
+                        //    {
+                        //        Server.Transfer("Authorization.aspx");
+                        //    }
+                        //}
                     }
                 }
                 else
@@ -74,6 +91,67 @@ namespace LocalECT
                 //row1.Style.Add("margin-top", "18% !important");
                 Page.Header.Controls.Add(new System.Web.UI.LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + ResolveUrl("~/Strategy/dttable.css") + "\" />"));
                 where = " where CS_Strategic_Project.iSerial=" + id + " ";                
+            }
+            else if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Project,
+                        InitializeModule.enumPrivilege.ShowAll, CurrentRole) != true)
+            {
+                where = "where CS_Strategic_Project.iSerial in (";
+                //string sSQL1 = "SELECT CS_Strategic_Goal.iSerial, CS_Strategic_Goal.sStrategicGoalID, CS_Strategic_Goal.sStrategicGoalDesc, CS_Strategic_Goal.iStipulation, CS_Strategic_Goal.iInspectioncomplianceStandard, CS_Strategic_Goal.iOrder, CS_Strategic_Goal.iStrategyVersion, CS_Strategic_Goal.dAdded, CS_Strategic_Goal.sAddedBy, CS_Strategic_Goal.dUpdated, CS_Strategic_Goal.sUpdatedBy, CS_Strategic_Goal.sAbbreviation, CS_Strategic_Goal.iTheme, CS_Strategic_Goal.sImagePath, CS_Strategic_Goal.iLevel, CS_Inspection_Compliance_Standard.sInspectionComplianceStandardDesc, CS_Stipulation.sStipulationDesc, CS_Strategic_Theme.sThemeCode,CS_Strategic_Theme.sThemeDesc, CS_Strategy_Version.sStrategyVersion FROM CS_Strategic_Theme INNER JOIN CS_Strategy_Version INNER JOIN CS_Stipulation INNER JOIN CS_Strategic_Goal ON CS_Stipulation.iSerial = CS_Strategic_Goal.iStipulation INNER JOIN CS_Inspection_Compliance_Standard ON CS_Strategic_Goal.iInspectioncomplianceStandard = CS_Inspection_Compliance_Standard.iSerial ON CS_Strategy_Version.iSerial = CS_Strategic_Goal.iStrategyVersion ON CS_Strategic_Theme.iSerial = CS_Strategic_Goal.iTheme where CS_Strategic_Goal.iSerial in (";
+
+                string sSQL1 = " SELECT        ObjectID ";
+                sSQL1 += "        FROM            (SELECT        TH.iSerial AS ObjectID, TH.sThemeDesc AS ObjectNameEn, TH.sThemeCode AS DisplayObjectName, TH.iOrder AS ShowOrder, 14 AS SystemID, 1299 AS ParentID, 'Strategy_Strategic_Theme_Home.aspx?f=m&id=' + CONVERT(varchar, TH.iSerial)   ";
+                sSQL1 += "                                                            AS sURL, TH.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL1 += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL1 += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL1 += "                                                        WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")    ) AS C INNER JOIN  ";
+                sSQL1 += "                                                            CS_Strategic_Theme AS TH ON C.iTheme = TH.iSerial  ";
+                sSQL1 += "                                  UNION ALL  ";
+                sSQL1 += "                                  SELECT        SG.iSerial as ObjectID,CONVERT(varchar(100),SG.sStrategicGoalDesc) AS ObjectNameEn, SG.sAbbreviation AS DisplayObjectName, SG.iOrder AS ShowOrder, 14 AS SystemID, C_4.iTheme AS ParentID,   ";
+                sSQL1 += "                                                           'Strategy_Strategic_Goal_Home.aspx?f=m&id=' + CONVERT(varchar, SG.iSerial) AS sURL, SG.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL1 += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL1 += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL1 += "                                                          WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")      ) AS C_4 INNER JOIN  ";
+                sSQL1 += "                                                           CS_Strategic_Goal AS SG ON C_4.iGoal = SG.iSerial  ";
+                sSQL1 += "                                  UNION ALL  ";
+                sSQL1 += "                                  SELECT        SP.iSerial as ObjectID, CONVERT(varchar(100),SP.sStrategicProjectDesc) AS ObjectNameEn, SP.sAbbreviation AS DisplayObjectName, SP.iOrder, 14 AS SystemID, C_3.iGoal * 10 AS ParentID, 'Strategy_Strategic_Project_Home.aspx?f=m&id=' + CONVERT(varchar,   ";
+                sSQL1 += "                                                           SP.iSerial) AS sURL, SP.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL1 += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL1 += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL1 += "                                                            WHERE        (ES.EmployeeID = "+ Session["EmployeeID"].ToString() + ")     ) AS C_3 INNER JOIN  ";
+                sSQL1 += "                                                           CS_Strategic_Project AS SP ON C_3.iProject = SP.iSerial  ";
+                sSQL1 += "                                  UNION ALL  ";
+                sSQL1 += "                                  SELECT        SO.iSerial AS ObjectID, CONVERT(varchar(100),SO.sStrategicObjectiveDesc) AS ObjectNameEn, SO.sAbbreviation AS DisplayObjectName, SO.iOrder, 14 AS SystemID, C_2.iProject * 100 AS ParentID,   ";
+                sSQL1 += "                                                           'Strategy_Strategic_Objective_Home.aspx?f=m&id=' + CONVERT(varchar, SO.iSerial) AS sURL, SO.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL1 += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL1 += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL1 += "                                                       WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")          ) AS C_2 INNER JOIN  ";
+                sSQL1 += "                                                           CS_Strategic_Objective AS SO ON C_2.iObjective = SO.iSerial  ";
+                sSQL1 += "                                  UNION ALL  ";
+                sSQL1 += "                                  SELECT        SInit.iSerial  AS ObjectID, CONVERT(varchar(150),SInit.sInitiativeDesc) AS ObjectNameEn, SInit.sAbbreviation AS DisplayObjectName, SInit.iOrder, 14 AS SystemID, C_1.iObjective * 1000 AS ParentID,   ";
+                sSQL1 += "                                                           'Strategy_Strategic_Initiative_Home.aspx?f=m&id=' + CONVERT(varchar, SInit.iSerial) AS sURL, SInit.iLevel + 1 AS iLevel, 1 AS Privilege  ";
+                sSQL1 += "                                  FROM            (SELECT        ES.EmployeeID, SI.iSerial AS SIID, SI.iTheme, SI.iGoal, SI.iProject, SI.iObjective, SI.iOrder, SIDS.isPrincipal  ";
+                sSQL1 += "                                                            FROM            CS_Strategic_Initiative AS SI INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Initiative_Dpartment_Section AS SIDS ON SI.iSerial = SIDS.iInitiative INNER JOIN  ";
+                sSQL1 += "                                                                                      CS_Employees_Sections AS ES ON SIDS.iDepartment = ES.DepartmentID AND SIDS.iSection = ES.SectionID  ";
+                sSQL1 += "                                                        WHERE        (ES.EmployeeID = " + Session["EmployeeID"].ToString() + ")        ) AS C_1 INNER JOIN  ";
+                sSQL1 += "                                                           CS_Strategic_Initiative AS SInit ON C_1.SIID = SInit.iSerial) AS MNU  ";
+                sSQL1 += " 														  where iLevel=4 ";
+                sSQL1 += "        GROUP BY ObjectID, ObjectNameEn, DisplayObjectName, ShowOrder, SystemID, ParentID, sURL, iLevel  )";
+                //sSQL += "        order by ObjectID ";
+                where = where + sSQL1;
+                //sSQL1 += ") order by CS_Strategic_Goal.iOrder";
+            }
+            else
+            {
+                where = "";
             }
             //else
             //{

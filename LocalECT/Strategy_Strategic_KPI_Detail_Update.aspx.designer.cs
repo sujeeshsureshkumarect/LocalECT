@@ -141,6 +141,15 @@ namespace LocalECT
         protected global::System.Web.UI.WebControls.TextBox txt_Note;
 
         /// <summary>
+        /// txt_SubPeriodTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_SubPeriodTarget;
+
+        /// <summary>
         /// btn_Create control.
         /// </summary>
         /// <remarks>

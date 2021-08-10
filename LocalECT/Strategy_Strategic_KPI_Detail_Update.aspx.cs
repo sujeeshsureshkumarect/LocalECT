@@ -26,6 +26,15 @@ namespace LocalECT
         SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
@@ -98,6 +107,7 @@ namespace LocalECT
                                 txt_Value.Enabled = false;
                                 drp_KPIStatus.Enabled = false;
                                 txt_Note.Enabled = false;
+                                txt_SubPeriodTarget.Enabled = false;
                             }
                             else if (t == "e")//Edit
                             {
@@ -108,6 +118,7 @@ namespace LocalECT
                                 txt_Value.Enabled = true;
                                 drp_KPIStatus.Enabled = true;
                                 txt_Note.Enabled = true;
+                                txt_SubPeriodTarget.Enabled = true;
                             }
                         }
                         else
@@ -466,6 +477,7 @@ namespace LocalECT
                     drp_KPIStatus.SelectedIndex = drp_KPIStatus.Items.IndexOf(drp_KPIStatus.Items.FindByValue(dt.Rows[0]["iKPIStatus"].ToString()));                    
                     drp_StrategyVersion.SelectedIndex = drp_StrategyVersion.Items.IndexOf(drp_StrategyVersion.Items.FindByValue(dt.Rows[0]["iStrategyVersion"].ToString()));
                     txt_Note.Text = dt.Rows[0]["sNote"].ToString();
+                    txt_SubPeriodTarget.Text= dt.Rows[0]["cSubPeriodTarget"].ToString();
                 }
             }
             catch (Exception ex)
@@ -485,7 +497,17 @@ namespace LocalECT
             string id = Request.QueryString["id"];//iInitiative
             string sid = Request.QueryString["sid"];//KPIID           
             string did = Request.QueryString["did"];//DetailsID   
-            Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            
+
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?f=m&id=" + id + "&sid=" + sid + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            }
         }
 
         protected void drp_Department_SelectedIndexChanged(object sender, EventArgs e)
@@ -499,7 +521,7 @@ namespace LocalECT
             if (did != null)
             {
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
-                              InitializeModule.enumPrivilege.CS_Manage_KPI, CurrentRole) != true)
+                              InitializeModule.enumPrivilege.CS_Execute, CurrentRole) != true)
                 {
                     div_msg.Visible = true;
                     div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
@@ -508,7 +530,7 @@ namespace LocalECT
                 }
 
                 //Update
-                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI_Detail set iPeriod=@iPeriod,iSubPeriod=@iSubPeriod,cValue=@cValue,iKPI=@iKPI,dStart=@dStart,dEnd=@dEnd,iDepartment=@iDepartment,iSection=@iSection,iKPIStatus=@iKPIStatus,sNote=@sNote,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy where iSerial=@iSerial", sc);
+                SqlCommand cmd = new SqlCommand("update CS_Strategic_KPI_Detail set iPeriod=@iPeriod,iSubPeriod=@iSubPeriod,cValue=@cValue,iKPI=@iKPI,dStart=@dStart,dEnd=@dEnd,iDepartment=@iDepartment,iSection=@iSection,iKPIStatus=@iKPIStatus,sNote=@sNote,iStrategyVersion=@iStrategyVersion,dUpdated=@dUpdated,sUpdatedBy=@sUpdatedBy,cSubPeriodTarget=@cSubPeriodTarget where iSerial=@iSerial", sc);
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSubPeriod", drp_SubPeriod.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@cValue", txt_Value.Text.Trim());
@@ -520,6 +542,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@iStrategyVersion", drp_StrategyVersion.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@dUpdated", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
+                cmd.Parameters.AddWithValue("@cSubPeriodTarget", txt_SubPeriodTarget.Text.Trim());
                 cmd.Parameters.AddWithValue("@iSerial", did);
                 try
                 {
@@ -550,7 +573,7 @@ namespace LocalECT
             else
             {
                 if (LibraryMOD.isRoleAuthorized(InitializeModule.enumPrivilegeObjects.Strategic_Initiative,
-                             InitializeModule.enumPrivilege.CS_Manage_KPI, CurrentRole) != true)
+                             InitializeModule.enumPrivilege.CS_Execute, CurrentRole) != true)
                 {
                     div_msg.Visible = true;
                     div_Alert.Attributes.Add("class", "alert alert-danger alert-dismissible");
@@ -559,7 +582,7 @@ namespace LocalECT
                 }
 
                 //Insert
-                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI_Detail values (@iPeriod,@iSubPeriod,@cValue,@iTask,@iDepartment,@iSection,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iKPIStatus,@sNote)", sc);
+                SqlCommand cmd = new SqlCommand("insert into CS_Strategic_KPI_Detail values (@iPeriod,@iSubPeriod,@cValue,@iKPI,@iDepartment,@iSection,@iStrategyVersion,@dAdded,@sAddedBy,@dUpdated,@sUpdatedBy,@iKPIStatus,@sNote,@cSubPeriodTarget)", sc);
                 cmd.Parameters.AddWithValue("@iPeriod", drp_Period.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@iSubPeriod", drp_SubPeriod.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@cValue", txt_Value.Text.Trim());
@@ -573,6 +596,7 @@ namespace LocalECT
                 cmd.Parameters.AddWithValue("@sUpdatedBy", Session["CurrentUserName"].ToString());
                 cmd.Parameters.AddWithValue("@iKPIStatus", drp_KPIStatus.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@sNote", txt_Note.Text.Trim());
+                cmd.Parameters.AddWithValue("@cSubPeriodTarget", txt_SubPeriodTarget.Text.Trim());
                 try
                 {
                     sc.Open();
@@ -585,6 +609,7 @@ namespace LocalECT
 
                     txt_Value.Text = "";
                     txt_Note.Text = "";
+                    txt_SubPeriodTarget.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -607,7 +632,17 @@ namespace LocalECT
             string id = Request.QueryString["id"];//iInitiative
             string sid = Request.QueryString["sid"];//KPIID           
             string did = Request.QueryString["did"];//DetailsID   
-            Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            //Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?f=m&id=" + id + "&sid=" + sid + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Home.aspx?id=" + id + "&sid=" + sid + "");
+            }
         }
     }
 }

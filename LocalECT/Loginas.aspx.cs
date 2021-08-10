@@ -34,7 +34,7 @@ namespace LocalECT
                     }
                     else
                     {
-                        Server.Transfer("Authorization.aspx");
+                        //Server.Transfer("Authorization.aspx");
                     }
 
                     bindusers();

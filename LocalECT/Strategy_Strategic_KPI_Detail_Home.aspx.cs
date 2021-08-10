@@ -22,6 +22,15 @@ namespace LocalECT
         int CurrentRole = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string strRefPage = "";
+            if (Request.UrlReferrer != null)
+            {
+                strRefPage = Request.UrlReferrer.Segments[Request.UrlReferrer.Segments.Length - 1];
+            }
+            else
+            {
+                Server.Transfer("Authorization.aspx");
+            }
             try
             {
                 if (Session["CurrentRole"] != null)
@@ -68,7 +77,7 @@ namespace LocalECT
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["ECTDataNew"].ConnectionString);
             string sSQL = "";
 
-            sSQL = " SELECT         CS_Strategic_KPI_Detail.iSerial, CS_Strategic_KPI_Detail.iPeriod, CS_Strategic_KPI_Detail.iSubPeriod, CS_Strategic_KPI_Detail.cValue, CS_Strategic_KPI_Detail.iKPI, CS_Strategic_KPI_Detail.iDepartment,  ";
+            sSQL = " SELECT         CS_Strategic_KPI_Detail.cSubPeriodTarget,CS_Strategic_KPI_Detail.iSerial, CS_Strategic_KPI_Detail.iPeriod, CS_Strategic_KPI_Detail.iSubPeriod, CS_Strategic_KPI_Detail.cValue, CS_Strategic_KPI_Detail.iKPI, CS_Strategic_KPI_Detail.iDepartment,  ";
             sSQL += "                          CS_Strategic_KPI_Detail.iSection, CS_Strategic_KPI_Detail.iStrategyVersion, CS_Strategic_KPI_Detail.dAdded, CS_Strategic_KPI_Detail.sAddedBy, CS_Strategic_KPI_Detail.dUpdated, CS_Strategic_KPI_Detail.sUpdatedBy,  ";
             sSQL += "                          CS_Strategic_KPI_Detail.iKPIStatus, CS_Strategic_KPI_Detail.sNote, CS_Strategic_Period.sPeriod, CS_Strategic_Sub_Period.sSubPeriod, CS_Strategic_KPI.sKPIID, CS_Strategic_KPI.sKPIDesc, CS_Strategic_KPI.iInitiative, Lkp_Department.DescEN,  ";
             sSQL += "                          Lkp_Department.DepartmentAbbreviation, Lkp_Section.SectionAbbreviation, Lkp_Section.DescEN AS Expr1, CS_Strategy_Version.sStrategyVersion, CS_Strategic_KPI_Status.sKPIStatus ";
@@ -85,7 +94,7 @@ namespace LocalECT
             sSQL += " where iKPI=@iKPI ";
 
             SqlCommand cmd = new SqlCommand(sSQL, sc);
-            cmd.Parameters.AddWithValue("@iTask", sid);
+            cmd.Parameters.AddWithValue("@iKPI", sid);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             try
@@ -110,12 +119,72 @@ namespace LocalECT
 
         protected void lnk_Create_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_KPI_Detail_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            //Response.Redirect("Strategy_Strategic_KPI_Detail_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {               
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update?f=m&id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update?id=" + Request.QueryString["id"] + "&sid=" + Request.QueryString["sid"] + "");
+            }
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Strategy_Strategic_KPI_Home?id=" + Request.QueryString["id"] + "");
+            //Response.Redirect("Strategy_Strategic_KPI_Home?id=" + Request.QueryString["id"] + "");
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {                
+                Response.Redirect("Strategy_Strategic_KPI_Home?f=m&id=" + Request.QueryString["id"] + "");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Home?id=" + Request.QueryString["id"] + "");
+            }
+        }
+
+        protected void lnk_View_Click(object sender, EventArgs e)
+        {
+            //<a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+            string CommandName = button.CommandName;
+            string tooltip = button.ToolTip;
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update.aspx?f=m&id="+ CommandName + "&sid="+ tooltip + "&did="+ commandArgument + "&t=v");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update.aspx?id=" + CommandName + "&sid=" + tooltip + "&did=" + commandArgument + "&t=v");
+            }            
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            //<a href="Strategy_Strategic_KPI_Detail_Update.aspx?id=<%#Eval("iInitiative")%>&sid=<%#Eval("iKPI")%>&did=<%#Eval("iSerial")%>&t=v" class="dropdown-item">View</a> 
+            //Get the reference of the clicked button.
+            LinkButton button = (sender as LinkButton);
+
+            //Get the command argument
+            string commandArgument = button.CommandArgument;
+            string CommandName = button.CommandName;
+            string tooltip = button.ToolTip;
+            string f = Request.QueryString["f"];
+            if (f != null)
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update.aspx?f=m&id=" + CommandName + "&sid=" + tooltip + "&did=" + commandArgument + "&t=e");
+            }
+            else
+            {
+                Response.Redirect("Strategy_Strategic_KPI_Detail_Update.aspx?id=" + CommandName + "&sid=" + tooltip + "&did=" + commandArgument + "&t=e");
+            }
         }
     }
 }
