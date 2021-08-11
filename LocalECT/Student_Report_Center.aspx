@@ -117,7 +117,7 @@
                                         
                                         <asp:ListItem Text="STType" Value="condition1"></asp:ListItem>                                     
                                         <asp:ListItem Text="Joined" Value="SD.Joined"></asp:ListItem>
-                                        <asp:ListItem Text="FTR" Value="FT.FTR"></asp:ListItem>
+                                        <asp:ListItem Text="FTR" Value="ISNULL(SD.FTR,0) AS FTR"></asp:ListItem>
                                         <asp:ListItem Text="LTR" Value="LT.LTR"></asp:ListItem>
                                         <asp:ListItem Text="DirectRef" Value="SD.DirectRef"></asp:ListItem>
                                         <asp:ListItem Text="RefHistory" Value="dbo.GetREFs(SD.SID) AS RefHistory"></asp:ListItem>

@@ -121,18 +121,50 @@ namespace LocalECT
       SqlConnection sc = new SqlConnection(myConnection_String.Conn_string);
       string sSQL = "";
 
-      sSQL = " SELECT DISTINCT  RBS.iYear * 10 + RBS.Sem AS RTerm, A.intStudyYear * 10 + A.byteSemester AS InTerm, dbo.GetStType(RBS.iYear * 10 + RBS.Sem, A.intStudyYear * 10 + A.byteSemester, R.RIn, R.RStatus) AS STType, ";
-      sSQL += " '"+GenderExt+"' + CONVERT(VARCHAR, SD.iUnifiedID) AS UID, A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, '" + Gender+"' AS Gender, N.strNationalityDescEn AS Nationality, C.strCityDescEn AS City, E.strEmirateEn AS Emirate, DATEDIFF(year, SD.dateBirth, RS.dateStartSemester) ";
-      sSQL += " AS AGE, SD.isWorking, CM.strCaption AS CMajor, ISNULL(RM.strCaption, CM.strCaption) AS RTMajor, RBS.MCRS, RBS.FCRS, RBS.MHRS, RBS.FHRS, A.intGraduationYear * 10 + A.byteGraduationSemester AS OTerm, ";
-      sSQL += " S.strReasonDesc AS OStatus, R.Ref, R.RIn, R.RMajor, R.ROut, R.RStatus, MEC.strCert, MEC.Mark, Q.strCertificateSource AS CertSource, CONVERT(VARCHAR, DAY(Q.dateENG)) + '-' + CONVERT(VARCHAR, MONTH(Q.dateENG)) ";
-      sSQL += " + '-' + CONVERT(VARCHAR, YEAR(Q.dateENG)) AS CertDate, CONVERT(VARCHAR, DAY(CH.dateCreate)) +'-' + CONVERT(VARCHAR, MONTH(CH.dateCreate)) + '-' + CONVERT(VARCHAR, YEAR(CH.dateCreate)) AS RegDate, ";
-      sSQL += " ISNULL(RM.FacultyID, CM.FacultyID) AS Faculty FROM Lkp_Cities AS C INNER JOIN Lkp_Emirates AS E ON C.byteEmirate = E.byteEmirate RIGHT OUTER JOIN Reg_Student_Qualifications AS Q RIGHT OUTER JOIN MaxEngCertMark AS MEC ON Q.lngSerial = MEC.lngSerial AND Q.sngGrade = MEC.Mark RIGHT OUTER JOIN ";
-      sSQL += " Reg_Both_Side AS RBS INNER JOIN Reg_Students_Data AS SD INNER JOIN Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN  Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON RBS.Student = A.lngStudentNumber INNER JOIN  ";
-      sSQL += " Reg_Semesters AS RS ON RBS.iYear = RS.intStudyYear AND RBS.Sem = RS.byteSemester ON MEC.lngSerial = SD.lngSerial LEFT OUTER JOIN Reg_Course_Header AS CH ON RBS.iYear = CH.intStudyYear AND RBS.Sem = CH.byteSemester AND RBS.Student = CH.lngStudentNumber ON C.byteCountry = SD.byteHomeCountry AND ";
-      sSQL += " C.byteCity = SD.byteHomeCity LEFT OUTER JOIN Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality LEFT OUTER JOIN Reg_Specializations AS RM RIGHT OUTER JOIN Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND ";
-      sSQL += " RBS.Student = SM.lngStudentNumber LEFT OUTER JOIN (SELECT        A0.lngStudentNumber AS Ref, A0.intStudyYear * 10 + A0.byteSemester AS RIn, M0.strCaption AS RMajor, A0.intGraduationYear * 10 + A0.byteGraduationSemester AS ROut, S0.strReasonDesc AS RStatus  FROM   Reg_Applications AS A0 INNER JOIN  Reg_Specializations AS M0 ON A0.strCollege = M0.strCollege AND A0.strDegree = M0.strDegree AND A0.strSpecialization = M0.strSpecialization INNER JOIN ";
-      sSQL += " Lkp_Reasons AS S0 ON A0.byteCancelReason = S0.byteReason) AS R ON A.sReference = R.Ref LEFT OUTER JOIN  Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason WHERE(RBS.iYear * 10 + RBS.Sem BETWEEN "+ddlRegTermFrom.SelectedValue+" AND "+ddlRegTermTo.SelectedValue+") "+Byshifts+" ORDER BY Name, RTerm ";//AND (ISNULL(RM.FacultyID, CM.FacultyID) = 1) 
+            //sSQL = " SELECT DISTINCT  RBS.iYear * 10 + RBS.Sem AS RTerm, A.intStudyYear * 10 + A.byteSemester AS InTerm, dbo.GetStType(RBS.iYear * 10 + RBS.Sem, A.intStudyYear * 10 + A.byteSemester, R.RIn, R.RStatus) AS STType, ";
+            //sSQL += " '" + GenderExt + "' + CONVERT(VARCHAR, SD.iUnifiedID) AS UID, A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, '" + Gender + "' AS Gender, N.strNationalityDescEn AS Nationality, C.strCityDescEn AS City, E.strEmirateEn AS Emirate, DATEDIFF(year, SD.dateBirth, RS.dateStartSemester) ";
+            //sSQL += " AS AGE, SD.isWorking, CM.strCaption AS CMajor, ISNULL(RM.strCaption, CM.strCaption) AS RTMajor, RBS.MCRS, RBS.FCRS, RBS.MHRS, RBS.FHRS, A.intGraduationYear * 10 + A.byteGraduationSemester AS OTerm, ";
+            //sSQL += " S.strReasonDesc AS OStatus, R.Ref, R.RIn, R.RMajor, R.ROut, R.RStatus, MEC.strCert, MEC.Mark, Q.strCertificateSource AS CertSource, CONVERT(VARCHAR, DAY(Q.dateENG)) + '-' + CONVERT(VARCHAR, MONTH(Q.dateENG)) ";
+            //sSQL += " + '-' + CONVERT(VARCHAR, YEAR(Q.dateENG)) AS CertDate, CONVERT(VARCHAR, DAY(CH.dateCreate)) +'-' + CONVERT(VARCHAR, MONTH(CH.dateCreate)) + '-' + CONVERT(VARCHAR, YEAR(CH.dateCreate)) AS RegDate, ";
+            //sSQL += " ISNULL(RM.FacultyID, CM.FacultyID) AS Faculty FROM Lkp_Cities AS C INNER JOIN Lkp_Emirates AS E ON C.byteEmirate = E.byteEmirate RIGHT OUTER JOIN Reg_Student_Qualifications AS Q RIGHT OUTER JOIN MaxEngCertMark AS MEC ON Q.lngSerial = MEC.lngSerial AND Q.sngGrade = MEC.Mark RIGHT OUTER JOIN ";
+            //sSQL += " Reg_Both_Side AS RBS INNER JOIN Reg_Students_Data AS SD INNER JOIN Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN  Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON RBS.Student = A.lngStudentNumber INNER JOIN  ";
+            //sSQL += " Reg_Semesters AS RS ON RBS.iYear = RS.intStudyYear AND RBS.Sem = RS.byteSemester ON MEC.lngSerial = SD.lngSerial LEFT OUTER JOIN Reg_Course_Header AS CH ON RBS.iYear = CH.intStudyYear AND RBS.Sem = CH.byteSemester AND RBS.Student = CH.lngStudentNumber ON C.byteCountry = SD.byteHomeCountry AND ";
+            //sSQL += " C.byteCity = SD.byteHomeCity LEFT OUTER JOIN Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality LEFT OUTER JOIN Reg_Specializations AS RM RIGHT OUTER JOIN Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND ";
+            //sSQL += " RBS.Student = SM.lngStudentNumber LEFT OUTER JOIN (SELECT        A0.lngStudentNumber AS Ref, A0.intStudyYear * 10 + A0.byteSemester AS RIn, M0.strCaption AS RMajor, A0.intGraduationYear * 10 + A0.byteGraduationSemester AS ROut, S0.strReasonDesc AS RStatus  FROM   Reg_Applications AS A0 INNER JOIN  Reg_Specializations AS M0 ON A0.strCollege = M0.strCollege AND A0.strDegree = M0.strDegree AND A0.strSpecialization = M0.strSpecialization INNER JOIN ";
+            //sSQL += " Lkp_Reasons AS S0 ON A0.byteCancelReason = S0.byteReason) AS R ON A.sReference = R.Ref LEFT OUTER JOIN  Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason WHERE(RBS.iYear * 10 + RBS.Sem BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ") " + Byshifts + " ORDER BY Name, RTerm ";//AND (ISNULL(RM.FacultyID, CM.FacultyID) = 1) 
 
+
+            sSQL += " SELECT DISTINCT ";
+            sSQL += "                          RBS.iYear * 10 + RBS.Sem AS RTerm, A.intStudyYear * 10 + A.byteSemester AS InTerm, ISNULL(FT.MinYear, 0) AS FTR, (CASE WHEN ISNULL(FT.MinYear, 0) ";
+            sSQL += "                          = RBS.iYear * 10 + RBS.Sem THEN 'New' ELSE dbo.GetStType(ISNULL(RBS.iYear * 10 + RBS.Sem, A.intStudyYear * 10 + A.byteSemester), A.intStudyYear * 10 + A.byteSemester, R.RIn, R.RStatus) END) AS STType, ";
+            sSQL += "                          '" + GenderExt + "' + CONVERT(VARCHAR, SD.iUnifiedID) AS UID, A.lngStudentNumber AS SID, SD.strLastDescEn AS Name, '" + Gender + "' AS Gender, N.strNationalityDescEn AS Nationality, C.strCityDescEn AS City, E.strEmirateEn AS Emirate, ";
+            sSQL += "                          DATEDIFF(year, SD.dateBirth, RS.dateStartSemester) AS AGE, SD.isWorking, CM.strCaption AS CMajor, ISNULL(RM.strCaption, CM.strCaption) AS RTMajor, RBS.MCRS, RBS.FCRS, RBS.MHRS, RBS.FHRS, ";
+            sSQL += "                          A.intGraduationYear * 10 + A.byteGraduationSemester AS OTerm, S.strReasonDesc AS OStatus, R.Ref, R.RIn, R.RMajor, R.ROut, R.RStatus, MEC.strCert, MEC.Mark, Q.strCertificateSource AS CertSource, CONVERT(VARCHAR, ";
+            sSQL += "                          DAY(Q.dateENG)) + '-' + CONVERT(VARCHAR, MONTH(Q.dateENG)) + '-' + CONVERT(VARCHAR, YEAR(Q.dateENG)) AS CertDate, CONVERT(VARCHAR, DAY(CH.dateCreate)) + '-' + CONVERT(VARCHAR, MONTH(CH.dateCreate)) ";
+            sSQL += "                          + '-' + CONVERT(VARCHAR, YEAR(CH.dateCreate)) AS RegDate, ISNULL(RM.FacultyID, CM.FacultyID) AS Faculty ";
+            sSQL += " FROM            Reg_Course_Header AS CH RIGHT OUTER JOIN ";
+            sSQL += "                          First_Time_Registered AS FT RIGHT OUTER JOIN ";
+            sSQL += "                          Reg_Both_Side AS RBS INNER JOIN ";
+            sSQL += "                          Reg_Students_Data AS SD INNER JOIN ";
+            sSQL += "                          Reg_Applications AS A ON SD.lngSerial = A.lngSerial INNER JOIN ";
+            sSQL += "                          Reg_Specializations AS CM ON A.strCollege = CM.strCollege AND A.strDegree = CM.strDegree AND A.strSpecialization = CM.strSpecialization ON RBS.Student = A.lngStudentNumber INNER JOIN ";
+            sSQL += "                          Reg_Semesters AS RS ON RBS.iYear = RS.intStudyYear AND RBS.Sem = RS.byteSemester ON FT.Student = A.lngStudentNumber LEFT OUTER JOIN ";
+            sSQL += "                          Reg_Student_Qualifications AS Q RIGHT OUTER JOIN ";
+            sSQL += "                          MaxEngCertMark AS MEC ON Q.lngSerial = MEC.lngSerial AND Q.sngGrade = MEC.Mark ON SD.lngSerial = MEC.lngSerial ON CH.intStudyYear = RBS.iYear AND CH.byteSemester = RBS.Sem AND ";
+            sSQL += "                          CH.lngStudentNumber = RBS.Student LEFT OUTER JOIN ";
+            sSQL += "                          Lkp_Cities AS C INNER JOIN ";
+            sSQL += "                          Lkp_Emirates AS E ON C.byteEmirate = E.byteEmirate ON SD.byteHomeCountry = C.byteCountry AND SD.byteHomeCity = C.byteCity LEFT OUTER JOIN ";
+            sSQL += "                          Lkp_Nationalities AS N ON SD.byteNationality = N.byteNationality LEFT OUTER JOIN ";
+            sSQL += "                          Reg_Specializations AS RM RIGHT OUTER JOIN ";
+            sSQL += "                          Reg_Student_Majors AS SM ON RM.strDegree = SM.strDegree AND RM.strSpecialization = SM.strMajor ON RBS.iYear = SM.intStudyYear AND RBS.Sem = SM.byteSemester AND ";
+            sSQL += "                          RBS.Student = SM.lngStudentNumber LEFT OUTER JOIN ";
+            sSQL += "                              (SELECT        A0.lngStudentNumber AS Ref, A0.intStudyYear * 10 + A0.byteSemester AS RIn, M0.strCaption AS RMajor, A0.intGraduationYear * 10 + A0.byteGraduationSemester AS ROut, S0.strReasonDesc AS RStatus ";
+            sSQL += "                                FROM            Reg_Applications AS A0 INNER JOIN ";
+            sSQL += "                                                          Reg_Specializations AS M0 ON A0.strCollege = M0.strCollege AND A0.strDegree = M0.strDegree AND A0.strSpecialization = M0.strSpecialization INNER JOIN ";
+            sSQL += "                                                          Lkp_Reasons AS S0 ON A0.byteCancelReason = S0.byteReason) AS R ON A.sReference = R.Ref LEFT OUTER JOIN ";
+            sSQL += "                          Lkp_Reasons AS S ON A.byteCancelReason = S.byteReason ";
+            sSQL += " WHERE(RBS.iYear * 10 + RBS.Sem BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ") " + Byshifts + "  ";
+            sSQL += " ORDER BY Name, RTerm ";
 
             SqlCommand cmd1 = new SqlCommand(sSQL, sc);
       cmd1.CommandTimeout = 180;
