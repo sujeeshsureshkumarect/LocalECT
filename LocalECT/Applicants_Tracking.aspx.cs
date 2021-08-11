@@ -135,7 +135,7 @@ namespace LocalECT
       if (ddlfaculty.SelectedValue == "0")
       {
 
-        sSQL = "SELECT        UID,Accepted, InTerm, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
+        sSQL = "SELECT        UID,Accepted, InTerm,FTR, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
         sSQL += "  CertDate, RegDate, ExamcenterName, SchoolName, G12, G12_StreamDesc, HSScore, HSYear, Faculty, UserCreate_A, DateCreated_A, UserCreate_SD, DateCreated_SD   ";
         sSQL += "FROM    Applicants_Tracking AS T   WHERE (intStudyYear * 10 + byteSemester BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ")  ";
 
@@ -143,7 +143,7 @@ namespace LocalECT
       else
       {
 
-        sSQL = "SELECT        UID,Accepted, InTerm, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
+        sSQL = "SELECT        UID,Accepted,InTerm,FTR, RTerm, STType, SID, Name, Gender, Nationality, City, Emirate, AGE, isWorking, WMajor, Major, MCRS, FCRS, MHRS, FHRS, OTerm, OStatus, Ref, RIn, RMajor, ROut, RStatus, strCert, Mark, CertSource,   ";
         sSQL += "  CertDate, RegDate, ExamcenterName, SchoolName, G12, G12_StreamDesc, HSScore, HSYear, Faculty, UserCreate_A, DateCreated_A, UserCreate_SD, DateCreated_SD   ";
         sSQL += "FROM    Applicants_Tracking AS T   WHERE (intStudyYear * 10 + byteSemester BETWEEN " + ddlRegTermFrom.SelectedValue + " AND " + ddlRegTermTo.SelectedValue + ") AND T.Faculty = "+ddlfaculty.SelectedValue+" ";
 
