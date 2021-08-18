@@ -139,7 +139,7 @@
                             CausesValidation="False" CommandName="Cancel" Text="Cancel" />
                     </InsertItemTemplate>
                     <ItemTemplate>
-                        <table class="style7">
+                        <table class="style7" style="width:100% !important;">
                             <tr>
                                 <th>
                                     <asp:Label ID="Label6" runat="server" Text="Session"></asp:Label>
@@ -447,9 +447,9 @@
                             </tr>
                             <tr class="Command">
                                 <td align="left" colspan="3" >
-                                    <asp:LinkButton ID="Back_LNK" runat="server" onclick="Back_LNK_Click">&lt;&lt;Back</asp:LinkButton>
+                                    <asp:LinkButton ID="Back_LNK" runat="server" onclick="Back_LNK_Click" CssClass="btn btn-success btn-sm">&lt;&lt;Back</asp:LinkButton>
                                     &nbsp;&nbsp;&nbsp;
-                                    <asp:LinkButton ID="Add_LNK" runat="server" onclick="Add_LNK_Click">Add&gt;&gt;</asp:LinkButton>
+                                    <asp:LinkButton ID="Add_LNK" runat="server" onclick="Add_LNK_Click" CssClass="btn btn-success btn-sm">Add&gt;&gt;</asp:LinkButton>
                                 </td>
                             </tr>
                         </table>
